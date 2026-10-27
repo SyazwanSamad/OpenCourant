@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -36,6 +43,7 @@
 #include <string>
 #include <fstream>
 #include <string.h>
+#include <exception>
 #include <dll_settings.h>
 
 
@@ -91,6 +99,7 @@ sdiString GetFileNameFromPath(const sdiString& filePath)
 
 bool ReadDynaAndConvert(const char *modelfilename, const char *outfilename)
 {
+    GlobalModelSDISetModel(nullptr);
     bool isOk = true;
     std::string str_error;
     int ret_val;
@@ -101,6 +110,7 @@ bool ReadDynaAndConvert(const char *modelfilename, const char *outfilename)
         //printf("Reading Dyna... %s\n",modelfilename);
         printf(" .. READING LS-DYNA INPUT FORMAT MODEL\n");
         pDynaModelViewSDI = DynakeyReadModel(modelfilename);
+        if(!pDynaModelViewSDI) return false;
         fflush(stdout);
     }
     catch(...)
@@ -116,6 +126,11 @@ bool ReadDynaAndConvert(const char *modelfilename, const char *outfilename)
 
         // Create empty Radioss model
         pRadiossModelViewSDI = RadiossblkNewModel();
+        if(!pRadiossModelViewSDI)
+        {
+            fprintf(stderr, "OpenReader: could not initialize the Radioss model for LS-DYNA conversion\n");
+            return false;
+        }
 
         // Convertor error messages initialization
         DynakeyMessages& messages = DynakeyGetMessages();
@@ -162,15 +177,9 @@ bool ReadDynaAndConvert(const char *modelfilename, const char *outfilename)
 //
         d2RObj.GetConversionLog(g_conversionLog);
 
-        if(nullptr == pRadiossModelViewSDI) // only happens if environment isn't ok
-        {
-            RadiossblkApplyOffsets(pRadiossModelViewSDI);
-            const hwReaderMessageList& messages = RadiossblkGetMessages();
-            isOk = false;
-            return isOk;
-        }
 //
         GlobalModelSDISetModel(pRadiossModelViewSDI);
+        GlobalModelSDISetDynaIncludeModel(pDynaModelViewSDI);
 
 //      Fill the Radioss2dyna mapping
         BuildMapping(g_conversionLog,pDynaModelViewSDI);
@@ -201,6 +210,7 @@ CDECL void cpp_read_dyna_and_convert_(char *name, int *size, int *res,char *name
     
     cname_len = *size + 1;
     cname=(char*) malloc(sizeof(char)*cname_len);
+    if(!cname) { *res = 1; return; }
     for(i=0;i<*size;i++){ cname[i] = name[i];}
     cname[*size]='\0';
 
@@ -209,9 +219,28 @@ CDECL void cpp_read_dyna_and_convert_(char *name, int *size, int *res,char *name
     
     cname_len1 = *size1 + 1;
     cname1=(char*) malloc(sizeof(char)*cname_len1);
+    if(!cname1) { free(cname); *res = 1; return; }
     for(i=0;i<*size1;i++){ cname1[i] = name1[i];}
     cname1[*size1]='\0';
-    ReadDynaAndConvert(cname,cname1);
+    *res = 1;
+    try {
+        *res = ReadDynaAndConvert(cname,cname1) ? 0 : 1;
+    }
+    catch(const std::exception& error) {
+        fprintf(stderr, "OpenReader: %s: %s\n", cname, error.what());
+    }
+    catch(const std::string& error) {
+        fprintf(stderr, "OpenReader: %s: %s\n", cname, error.c_str());
+    }
+    catch(const char* error) {
+        fprintf(stderr, "OpenReader: %s: %s\n", cname, error);
+    }
+    catch(...) {
+        fprintf(stderr, "OpenReader: %s: unknown LS-DYNA conversion error\n", cname);
+    }
+    if(*res != 0) GlobalModelSDISetModel(nullptr);
+    free(cname1);
+    free(cname);
 }
 
 CDECL void CPP_READ_DYNA_AND_CONVERT(char *name, int *size, int *res,char *name1, int *size1)

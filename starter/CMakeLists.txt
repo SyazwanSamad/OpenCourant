@@ -5,30 +5,33 @@
 cmake_minimum_required (VERSION 3.15)
 project (Radioss_Starter)
 
-# The v82 readers (build 20260918_f907fe76, see reader_components in
-# EXTLIB_VERSION.json) provide the full selection API; the legacy
-# compatibility fallbacks below default OFF. Enable them when building
-# against an older recovered reader (v70 era or earlier).
+# The bundled v82 reader provides these APIs. Keep its compatibility
+# options OFF by default; older external readers can enable them explicitly.
 option(HM_READER_LEGACY_INCLUDE_API
        "Enumerate model includes through the legacy reader selection API" OFF)
+option(HM_READER_LEGACY_PART_API
+       "Count elements in the selected part with the legacy reader API" OFF)
+option(HM_READER_NO_RBODIES_FROM_RIGID_PARTS
+       "Disable /PART Irigid RBODY conversion when the reader lacks the rigid-part APIs" OFF)
+
+# OpenReader mode 2 still needs implementation before removing the rigid-part bypass.
+# Override the effective settings even in a build directory configured with
+# the bundled reader, without changing the cached external-reader options.
+if(USE_OPEN_READER STREQUAL "1")
+   set(HM_READER_NO_RBODIES_FROM_RIGID_PARTS ON)
+   message(STATUS "OpenReader: disabling /PART Irigid RBODY conversion pending mode-2 validation")
+endif()
+
 if(HM_READER_LEGACY_INCLUDE_API)
    set_property(SOURCE source/devtools/hm_reader/write_include_files_list.F90
                 APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_LEGACY_INCLUDE_API)
 endif()
 
-# The v70 readers on all three platforms (build 20260710_d899773e, see
-# reader_components in EXTLIB_VERSION.json) export cpp_is_part_with_elements
-# and the rigid-part APIs, so these fallbacks default to OFF. Enable them
-# when building against an older reader or the in-tree open reader.
-option(HM_READER_LEGACY_PART_API
-       "Count elements in the selected part with the legacy reader API" OFF)
 if(HM_READER_LEGACY_PART_API)
    set_property(SOURCE source/devtools/hm_reader/hm_is_part_with_elements.F90
                 APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_LEGACY_PART_API)
 endif()
 
-option(HM_READER_NO_RBODIES_FROM_RIGID_PARTS
-       "Disable /PART Irigid RBODY conversion when the reader lacks the rigid-part APIs" OFF)
 if(HM_READER_NO_RBODIES_FROM_RIGID_PARTS)
    set_property(SOURCE source/devtools/hm_reader/hm_create_rbodies_from_rigid_parts.F90
                        source/devtools/hm_reader/hm_evaluate_rbodies_from_rigid_parts.F90

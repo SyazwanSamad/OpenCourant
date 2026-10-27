@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -680,7 +687,7 @@ double loc_convert_memory_info(const string &info) {
 
 int  MV_comp_radioss_version(string vers1, string vers2)
 {
-   static std::vector<std::string> versions = { "radioss2026", "radioss2025", "radioss2024", "radioss2023", "radioss2022", "radioss2021","radioss2020","radioss2019","radioss2018", "radioss2017","radioss2016","radioss2015","radioss140","radioss130", "radioss120", "radioss110", "radioss100", "radioss90", "radioss52","radioss51", "radioss50","radioss48", "radioss44", "radioss43", "radioss42", "radioss41" };
+   static std::vector<std::string> versions = { "radioss2612", "radioss2026", "radioss2025", "radioss2024", "radioss2023", "radioss2022", "radioss2021","radioss2020","radioss2019","radioss2018", "radioss2017","radioss2016","radioss2015","radioss140","radioss130", "radioss120", "radioss110", "radioss100", "radioss90", "radioss52","radioss51", "radioss50","radioss48", "radioss44", "radioss43", "radioss42", "radioss41" };
 
    static int    nb_vers = static_cast<int> (versions.size());
    int    i, i1=-1, i2=-1 ;

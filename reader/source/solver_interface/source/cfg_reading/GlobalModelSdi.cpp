@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -33,10 +40,17 @@
 #include <HCDI/hcdi_mec_pre_object.h>
 #include <HCDI/hcdi_mv_descriptor.h>
 #include <radiossblk.h>
+#include <stdexcept>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <algorithm>
+#include <new>
 
 using namespace sdi;
 
 ModelViewEdit *g_pModelViewSDI = NULL;
+static ModelViewEdit *g_pDynaIncludeModel = NULL;
 
 static SelectionRead *g_pSelection = NULL; // pointer to current selection
 static const EntityRead *g_pEntity = NULL; // pointer to current entity
@@ -59,7 +73,14 @@ ModelViewEdit * Get_ModelViewSDI(){
 
 void GlobalModelSDISetModel(void *pModelView)
 {
+    GlobalModelSDIResetRigidParts();
+    delete g_pSelection;
+    g_pSelection = NULL;
+    g_EntityHandles.clear();
+    delete g_pEntity_single;
+    g_pEntity_single = NULL;
     g_pModelViewSDI = (ModelViewEdit *) pModelView;
+    g_pDynaIncludeModel = NULL;
     g_pEntity = NULL;
     g_vpDescr.resize(0);
 }
@@ -104,7 +125,7 @@ void GlobalModelSDISelectionNext(bool *pIsOk)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void GlobalModelSDISelectionType(int *valueType)
 {
-     const sdiString& keyword = (*g_pSelection)->GetKeyword();
+     const sdiString& keyword = g_pEntity->GetKeyword();
      if (keyword.compare(0,5,"/PART") == 0) *valueType = 3;
      else if (keyword.compare(0,4,"/MAT") == 0) *valueType = 4;
      else if (keyword.compare(0,5,"/PROP") == 0) *valueType = 5;
@@ -562,7 +583,7 @@ void GlobalDebugModelCloseFile()
 
 void GlobalModelSDISelectionStartList(const sdiString& keyword)
 {
-
+    g_EntityHandles.clear();
     SelectionRead entities(g_pModelViewSDI, keyword);
     unsigned int nbentities = entities.Count();
     g_EntityHandles.reserve(nbentities+1);
@@ -588,9 +609,15 @@ void GlobalModelSDISelectionClearList()
 
 void GlobalModelPositionSelection(int pos)
 {
+     if(pos < 1 || static_cast<size_t>(pos) >= g_EntityHandles.size())
+     {
+         fprintf(stderr, "OpenReader: selection position %d is out of bounds\n", pos);
+         exit(EXIT_FAILURE);
+     }
      if (g_pEntity_single != NULL) delete g_pEntity_single ;
      g_pEntity_single = new EntityRead(g_pModelViewSDI, g_EntityHandles[pos] );
      g_pEntity = g_pEntity_single ;
+     g_vpDescr.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2628,67 +2655,67 @@ void GlobalModelSDIUnapplyOffsets()
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Count include files in global model
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-void GlobalModelSDICountIncludeFiles(int *nbIncludes)
+void GlobalModelSDISetDynaIncludeModel(void *pModelView)
 {
-    SelectionRead entities(g_pModelViewSDI, "#include");
-    // ...
+    g_pDynaIncludeModel = static_cast<ModelViewEdit *>(pModelView);
+}
 
-    while(entities.Next())
+void GlobalModelSDICountIncludeFiles(int isDyna, int *nbIncludes)
+{
+    *nbIncludes = 0;
+    ModelViewEdit *model = isDyna ? g_pDynaIncludeModel : g_pModelViewSDI;
+    if(model) *nbIncludes = SelectionRead(model, isDyna ? "*INCLUDE" : "#include").Count();
+}
+
+void GlobalModelSDIGetIncludeFile(int isDyna, int index, char *buffer, int size)
+{
+    if(size <= 0) return;
+    std::fill_n(buffer, size, ' ');
+    ModelViewEdit *model = isDyna ? g_pDynaIncludeModel : g_pModelViewSDI;
+    if(!model || index <= 0) return;
+    SelectionRead includes(model, isDyna ? "*INCLUDE" : "#include");
+    for(int current = 1; includes.Next(); ++current)
     {
-        unsigned int id = entities->GetId();
-        const sdiString &solverkeyword = entities->GetKeyword();
-        unsigned int parentId = 0;
-        HandleRead hInclude = entities->GetInclude();
-        if(hInclude.IsValid())
-        {
-            parentId = hInclude.GetId(g_pModelViewSDI);
-        }
+        if(current != index) continue;
+        sdiString name;
         sdiValue value;
-        unsigned int submodelId=0;
-        value.GetValue(submodelId);
-        if(submodelId != 0)
-        {
-            HandleRead hSubmodel;
-            entities->GetEntityHandle(sdiIdentifier("shadow_submodel"), hSubmodel);
-        }
-        else
-        {
-            *nbIncludes = *nbIncludes + 1;
-        }
+        if(includes->GetValue(sdiIdentifier("fullfilepath"), value)) value.GetValue(name);
+        std::copy_n(name.data(), std::min(name.size(), static_cast<size_t>(size)), buffer);
+        return;
     }
+}
+
+void GlobalModelSDIIsPartWithElements(int id, bool *isFilled)
+{
+    *isFilled = false;
+    if(!g_pModelViewSDI || id <= 0) return;
+    HandleRead handle;
+    if(!g_pModelViewSDI->FindById("/PART", id, handle)) return;
+    EntityRead part(g_pModelViewSDI, handle);
+    *isFilled = SelectionElementRead(part).Count() > 0;
+}
+
+[[noreturn]] void GlobalModelSDIQueryFailure()
+{
+    try { throw; }
+    catch(const std::exception& error) { fprintf(stderr, "OpenReader model query failed: %s\n", error.what()); }
+    catch(...) { fprintf(stderr, "OpenReader model query failed: unknown exception\n"); }
+    std::exit(EXIT_FAILURE);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Find includes in global model
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void GlobalModelSDIGetIncludesList(char **includeFiles)
 {
-    int cptIncludeFiles=0;
-    SelectionRead entities(g_pModelViewSDI, "#include");
-    // ...
-    while(entities.Next())
+    if(!g_pModelViewSDI) return;
+    int index = 0;
+    SelectionRead includes(g_pModelViewSDI, "#include");
+    while(includes.Next())
     {
-        unsigned int id = entities->GetId();
-        const sdiString &solverkeyword = entities->GetKeyword();
-        unsigned int parentId = 0;
-        HandleRead hInclude = entities->GetInclude();
-        if(hInclude.IsValid())
-        {
-            parentId = hInclude.GetId(g_pModelViewSDI);
-        }
-        sdiValue value;
-        unsigned int submodelId=0;
-        value.GetValue(submodelId);
-        if(submodelId != 0)
-        {
-            HandleRead hSubmodel;
-            entities->GetEntityHandle(sdiIdentifier("shadow_submodel"), hSubmodel);
-        }
-        else
-        {
-            includeFiles[cptIncludeFiles] =(char*)malloc(sizeof(char*)* sizeof(entities->GetName().c_str()) );
-            strcpy(includeFiles[cptIncludeFiles], entities->GetName().c_str());
-            cptIncludeFiles = cptIncludeFiles + 1;
-        }
+        const sdiString &name = includes->GetName();
+        includeFiles[index] = static_cast<char *>(malloc(name.size() + 1));
+        if(!includeFiles[index]) throw std::bad_alloc();
+        std::memcpy(includeFiles[index++], name.c_str(), name.size() + 1);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2714,28 +2741,42 @@ void GlobalEntitySDIdeleteEntity()
 // Create main node in /RBODY when MAIN node is empty
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void GlobalEntitySDIRbodiesCreateMainNode(int *addedNodeId)
-{    
-    EntityType radNodeType = g_pModelViewSDI->GetEntityType("/NODE");
-    sdiValueEntity node1;
-    sdiValue tempVal(node1);
-     bool found =  g_pEntity->GetValue(sdiIdentifier("RBID"), tempVal);        
-    if(found) tempVal.GetValue(node1);
+{
+    if(!addedNodeId || !g_pModelViewSDI || !g_pEntity)
+        throw std::runtime_error("main-node creation requires a selected rigid body");
+    *addedNodeId = 0;
+    sdiValue value;
+    sdiValueEntity node;
+    // node_ID is the solver alias shared by ordinary and LAGMUL rigid bodies.
+    if(!g_pEntity->GetValue(sdiIdentifier("node_ID"), value) || !value.GetValue(node))
+        throw std::runtime_error("cannot read rigid-body main node");
+    if(node.GetId() != 0) return;
 
-    if(node1.GetId() == 0 || !found)
+    HandleRead previous = g_pModelViewSDI->SetCurrentCollector(g_pEntity->GetInclude());
+    HandleEdit nodeHandle;
+    try
     {
-        HandleEdit radNodeHEdit;
-        g_pModelViewSDI->CreateEntity(radNodeHEdit, "/NODE");
-        EntityEdit radNodeEdit(g_pModelViewSDI, radNodeHEdit);
-        radNodeEdit.SetValue(sdiIdentifier("X"), sdiValue(0.0));
-        radNodeEdit.SetValue(sdiIdentifier("Y"), sdiValue(0.0));
-        radNodeEdit.SetValue(sdiIdentifier("Z"), sdiValue(0.0));
-        *addedNodeId = radNodeHEdit.GetId(g_pModelViewSDI);
-
-        HandleRead rbodyHRead = g_pEntity->GetHandle();
-        HandleEdit rbodyHEdit(rbodyHRead.GetType(), rbodyHRead.GetPointer());
-        EntityEdit rbodyEdit(g_pModelViewSDI, rbodyHEdit);
-        rbodyEdit.SetValue(sdiIdentifier("independentnode"), sdiValue(sdiValueEntity(radNodeType, *addedNodeId)));
+        if(!g_pModelViewSDI->CreateEntity(nodeHandle, "/NODE"))
+            throw std::runtime_error("cannot create rigid-body main node");
+        unsigned int id = nodeHandle.GetId(g_pModelViewSDI);
+        if(id > INT_MAX) throw std::runtime_error("main-node ID exceeds the Starter integer range");
+        EntityEdit nodeEdit(g_pModelViewSDI, nodeHandle);
+        HandleRead bodyHandle = g_pEntity->GetHandle();
+        EntityEdit body(g_pModelViewSDI, HandleEdit(bodyHandle.GetType(), bodyHandle.GetPointer()));
+        if(!nodeEdit.SetValue(sdiIdentifier("X"), sdiValue(0.0)) ||
+           !nodeEdit.SetValue(sdiIdentifier("Y"), sdiValue(0.0)) ||
+           !nodeEdit.SetValue(sdiIdentifier("Z"), sdiValue(0.0)) ||
+           !body.SetValue(sdiIdentifier("node_ID"), sdiValue(sdiValueEntity(nodeHandle.GetType(), id))))
+            throw std::runtime_error("cannot assign rigid-body main node");
+        *addedNodeId = static_cast<int>(id);
     }
+    catch(...)
+    {
+        if(nodeHandle.IsValid()) g_pModelViewSDI->Delete(nodeHandle);
+        g_pModelViewSDI->SetCurrentCollector(previous);
+        throw;
+    }
+    g_pModelViewSDI->SetCurrentCollector(previous);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

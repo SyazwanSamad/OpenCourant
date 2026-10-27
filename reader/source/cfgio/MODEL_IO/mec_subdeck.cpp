@@ -15,9 +15,17 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
+#include <boost/filesystem.hpp>
 #include <UTILS/win32_utils.h>
 #include <string>
 #include <UTILS/mv_stl_various.h>
@@ -92,7 +100,7 @@ mydeckFormat(deckformat)
                   string filemname_skey = GetAttribNameFromDrawable(pdescrp, cdr::g_AttribFileName);
                   myPreObject->AddStringValue(filemname_skey.c_str(), name.c_str());
                   filemname_skey = GetAttribNameFromDrawable(pdescrp, cdr::g_AttribFullFileName);
-                  myPreObject->AddStringValue(filemname_skey.c_str(), name.c_str());
+                  myPreObject->AddStringValue(filemname_skey.c_str(), boost::filesystem::absolute(name).string().c_str());
 
               }
           }

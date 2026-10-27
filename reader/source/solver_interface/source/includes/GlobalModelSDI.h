@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -40,6 +47,8 @@ sdi::ModelViewEdit * Get_ModelViewSDI();
 extern sdi::ModelViewEdit *g_pModelViewSDI;
 
 void GlobalModelSDISetModel(void *pModelView);
+void GlobalModelSDIResetRigidParts();
+[[noreturn]] void GlobalModelSDIConversionFailure();
 
 void GlobalModelSDISelectionStart(const sdiString& keyword);
 void GlobalModelSDISelectionCount(unsigned int *pCount);
@@ -95,7 +104,11 @@ void GlobalModelSDIEntityReferencesNumber(char *type, int *id, int *refNumber);
 void GlobalModelSDIApplyOffsets();
 void GlobalModelSDIUnapplyOffsets();
 
-void GlobalModelSDICountIncludeFiles(int *nbIncludes);
+void GlobalModelSDISetDynaIncludeModel(void *pModelView);
+void GlobalModelSDICountIncludeFiles(int isDyna, int *nbIncludes);
+void GlobalModelSDIGetIncludeFile(int isDyna, int index, char *buffer, int size);
+void GlobalModelSDIIsPartWithElements(int id, bool *isFilled);
+[[noreturn]] void GlobalModelSDIQueryFailure();
 void GlobalModelSDIGetIncludesList(char **includeFiles);
 void GlobalModelSDIIsGroupUsed(char *type,int *id, bool *isUsed);
 

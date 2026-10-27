@@ -31,7 +31,14 @@
 !||    starter0                                   ../starter/source/starter/starter0.F
 !||====================================================================
       module hm_evaluate_rbodies_from_rigid_parts_mod
+        use, intrinsic :: iso_c_binding, only : c_int
         implicit none
+        interface
+          subroutine evaluate_rigid_parts(counts) bind(C, name='cpp_evaluate_rbodies_number_from_rigid_parts')
+            import c_int
+            integer(c_int), intent(out) :: counts(*)
+          end subroutine
+        end interface
       contains
 ! ======================================================================================================================
 !                                                   procedures
@@ -48,6 +55,9 @@
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Modules
 ! ----------------------------------------------------------------------------------------------------------------------
+#ifdef HM_READER_NO_RBODIES_FROM_RIGID_PARTS
+          use, intrinsic :: iso_c_binding, only : c_bool
+#endif
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Implicit none
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -56,18 +66,34 @@
 !                                                   Arguments
 ! ----------------------------------------------------------------------------------------------------------------------
           integer, intent(in) :: NPART
-          integer, dimension(NPART), intent(out) :: NBRBODIES_PER_PART
+          integer(c_int), dimension(NPART), intent(out) :: NBRBODIES_PER_PART
+#ifdef HM_READER_NO_RBODIES_FROM_RIGID_PARTS
+          integer :: i, irigid, part_id, sub_id, value_type
+          logical(c_bool) :: available
+          external :: cpp_option_start, cpp_option_next, cpp_get_intv, arret
+#endif
 ! ----------------------------------------------------------------------------------------------------------------------
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Body
 ! ----------------------------------------------------------------------------------------------------------------------
 #ifdef HM_READER_NO_RBODIES_FROM_RIGID_PARTS
-          ! This compatibility reader lacks cpp_evaluate_rbodies_number_from_rigid_parts;
-          ! /PART Irigid to /RBODY conversion is unavailable and counts are forced to zero.
-          write(*,'(A)') ' WARNING: /PART Irigid RBODY conversion is not supported by this input reader'
+          ! shortcut: rigid-part conversion is bypassed, enable after integration and numerical validation.
           NBRBODIES_PER_PART(1:NPART) = 0
+          call cpp_option_start('PART', 4)
+          do i = 1, NPART
+            call cpp_option_next()
+            irigid = 0
+            call cpp_get_intv('IRIGID', 6, irigid, sub_id, available, value_type)
+            if (available .and. irigid /= 0) then
+              call cpp_get_intv('id', 2, part_id, sub_id, available, value_type)
+              write(*,'(A,I0,A,I0,A,I0,A)') 'ERROR: /PART ', part_id, ' (submodel ', sub_id, &
+                ') requests IRIGID=', irigid, ', but this reader cannot convert rigid parts to /RBODY.'
+              call arret(2)
+              return
+            endif
+          enddo
 #else
-          call cpp_evaluate_rbodies_number_from_rigid_parts(NBRBODIES_PER_PART)
+          call evaluate_rigid_parts(NBRBODIES_PER_PART)
 #endif
 ! ----------------------------------------------------------------------------------------------------------------------
         end subroutine hm_evaluate_rbodies_from_rigid_parts

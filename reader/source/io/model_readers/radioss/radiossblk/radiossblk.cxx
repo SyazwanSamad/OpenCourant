@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -26,12 +33,16 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 #include <set>
+#include <climits>
+#include <stdexcept>
 
 #include <HCDI/hcdi_utils.h>
 #include <HCDI/hcdi_mv_descriptor.h>
+#include <HCDI/hcdi_drawableinf_pre_object.h>
 #include <HCDI/hcdi_multicfgkernelmgr.h>
 
 static void GetCurrentRadiossStrVersion(int version, std::string& rad_version)
@@ -362,9 +373,34 @@ SDIIdManagerRadiossblk::SDIIdManagerRadiossblk(const SDIModelViewRadiossblk& mv)
 
 void SDIIdManagerRadiossblk::GetOffsets(unsigned int includeId, std::vector<int>& offsets)
 {
-    // no offsets in main, nothing to do, so return:
-    if(0 == includeId) return;
-
+    std::fill(offsets.begin(), offsets.end(), 0);
+    const SDIModelViewRadiossblk& model = static_cast<const SDIModelViewRadiossblk&>(p_mv);
+    HandleRead include;
+    std::set<unsigned int> visited;
+    while(includeId != 0 && model.FindById("#include", includeId, include))
+    {
+        if(!visited.insert(includeId).second) throw std::runtime_error("Cyclic include hierarchy");
+        const IMECPreObject *object = static_cast<const IMECPreObject*>(include.GetPointer());
+        const IDescriptor *descriptor = HCDI_GetDescriptorHandle(object->GetKernelFullType());
+        if(descriptor)
+        {
+            hwCFGDrawableInfPreObject drawableInfo(object, descriptor);
+            const MvDrawable_t *defaultDrawable = descriptor->getDrawablePtr("_DEFAULT_IDOFFSET");
+            int defaultOffset = defaultDrawable ? static_cast<int>(defaultDrawable->evaluate(&drawableInfo)) : 0;
+            for(EntityType type = 1; type < offsets.size(); ++type)
+            {
+                const std::string name = "_" + MV_get_type(static_cast<obj_type_e>(model.GetCFGType(type))) + "_IDOFFSET";
+                const MvDrawable_t *drawable = descriptor->getDrawablePtr(name);
+                int offset = drawable ? static_cast<int>(drawable->evaluate(&drawableInfo)) : defaultOffset;
+                long long total = static_cast<long long>(offsets[type]) + offset;
+                if(total < INT_MIN || total >= INT_MAX)
+                    throw std::runtime_error("Submodel ID offset exceeds the Starter integer range");
+                offsets[type] = static_cast<int>(total);
+            }
+        }
+        HandleRead parent = EntityRead(&model, include).GetInclude();
+        includeId = parent.GetId(&model);
+    }
 }
 
 
@@ -420,8 +456,8 @@ static void RadiossblkMovePreobjects(
     pre_obj_lst[source_type].resize(i_new);
 }
 
-static unsigned int sUserProfileLoadedVersion = 2026;
-static string rad_version("radioss2026");
+static unsigned int sUserProfileLoadedVersion = 2612;
+static string rad_version("radioss2612");
 
 extern "C" RADIOSSBLK_DECLS
 void RadiossblkSetUserProfileVersion(unsigned int version)
@@ -452,9 +488,11 @@ static bool RadiossblkInitCFGKernel()
 
     vector<string>  allowable_vec{ "HM_SUPPORTED" };
     std::string str_error;
-    MultiCFGKernelMgr::getInstance().InitCFGKernel("", "", rad_version, "", false, allowable_vec, str_error);
-    if(str_error.size() > 0)
+    const CFGKernel* kernel = MultiCFGKernelMgr::getInstance().InitCFGKernel("", "", rad_version, "", false, allowable_vec, str_error);
+    if(!kernel || !str_error.empty())
     {
+        if(str_error.empty()) str_error = "Could not initialize configuration profile " + rad_version;
+        fprintf(stderr, "OpenReader: %s\n", str_error.c_str());
         radiossblkmessages.Add(9001, 3, "", 0, str_error.c_str());
         return false;
     }
@@ -462,6 +500,7 @@ static bool RadiossblkInitCFGKernel()
 }
 
 static std::vector<IMECPreObject *> pre_obj_lst[HCDI_OBJ_TYPE_HC_MAX];
+static set<pair<sdi::EntityType, unsigned int>> usedGroups;
 
 #include <MODEL_IO/solverCDR.h>
 #include <MODEL_IO/cfgio_model_factory_reader_po_exprtk.h>
@@ -469,8 +508,19 @@ static std::vector<IMECPreObject *> pre_obj_lst[HCDI_OBJ_TYPE_HC_MAX];
 extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
 {
+    usedGroups.clear();
     RadiossblkReadMessageFile();
     if(!RadiossblkInitCFGKernel()) return nullptr;
+
+    FILE* input = fopen(filename, "rb");
+    if(!input)
+    {
+        const std::string error = std::string("Cannot open input file ") + filename + ": " + strerror(errno);
+        radiossblkmessages.Add(9001, 3, filename, 0, error.c_str());
+        fprintf(stderr, "OpenReader: %s\n", error.c_str());
+        return nullptr;
+    }
+    fclose(input);
  
     // read file
     SolverSyntaxInfos syntaxSolverInfos;
@@ -478,6 +528,12 @@ sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
     ModelFactoryReaderPOExprTk* model = new ModelFactoryReaderPOExprTk();
     CommonDataReaderCFG reader(model, "radioss", rad_version, "", true);
 
+    // This reader exposes one current model; reloading must replace its entities.
+    for(auto& objects : pre_obj_lst)
+    {
+        for(IMECPreObject *object : objects) delete object;
+        objects.clear();
+    }
     reader.ReadModel(filename, pre_obj_lst);
 
     //Apply id offsets (of includes and submodels)
@@ -494,6 +550,7 @@ sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
         new sdi::SDIModelViewRadiossblk(pre_obj_lst);
     /* Radioss AQA requires this: */
     pModelView->SetSelectionSortMethod(sdi::SDIModelViewRadiossblk::SortByFileAndId);
+    pModelView->GetIdManager()->Init();
 
     int back = 0;
     bool isDir = false;
@@ -550,6 +607,7 @@ sdi::ModelViewEdit* RadiossblkReadModelSDI(const char *filename)
 extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkNewModel()
 {
+    usedGroups.clear();
     RadiossblkReadMessageFile(); // in case there is a problem in InitCFGKernel
     if(!RadiossblkInitCFGKernel()) return nullptr;
 
@@ -746,11 +804,12 @@ bool RadiossblkGetValueDouble(
 }
 
 
-static bool P_SDIGetGroupType(sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossblk,
+static bool P_SDIGetGroupTypes(sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossblk,
     IMECPreObject* pObj,
-    const IDescriptor* pDescr, int ikwd, const string& skwd, sdi::EntityType& type)
+    const IDescriptor* pDescr, int ikwd, const string& skwd, vector<sdi::EntityType>& types)
 {
-    type = sdi::ENTITY_TYPE_NONE; // init to "not a group"
+    types.clear();
+    sdi::EntityType type = sdi::ENTITY_TYPE_NONE;
 
     // if it's neither set nor multiobject it's not a group
     obj_type_e cfgType = pDescr->getObjectType(ikwd);
@@ -776,13 +835,13 @@ static bool P_SDIGetGroupType(sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossb
             keyword.resize(keyword.size() - 7);
         }
         type = pSDIModelViewRadiossblk->GetEntityType(keyword);
-        if(sdi::ENTITY_TYPE_NONE != type) return true;
+        if(sdi::ENTITY_TYPE_NONE != type) { types.push_back(type); return true; }
 
         // if we get here, it's a set but we cannot determine the subtype
         return false;
     }
 
-    // second trial: check whether there is one possible /SETS subtype in the attribute
+    // Generic sets must be retained for every group subtype allowed by the attribute.
     bool isOk = false;
     // this is a bit of a hack into hcdi "private" stuff, a clean API would be better
     const descriptor_t* cdescr_p = pDescr->getDescriptorPtr();
@@ -795,11 +854,6 @@ static bool P_SDIGetGroupType(sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossb
             nullptr != objdescr_p->subtypes[i] &&
             strlen(objdescr_p->subtypes[i]) > 0)
         {
-            if(isOk) // this is already the second one => not usable
-            {
-                isOk = false;
-                break;
-            }
             isOk = true;
             sdiString keyword(sdiString("/") + objdescr_p->subtypes[i]);
             if(keyword.size() > 7 && keyword.compare(keyword.size() - 7, 7, "_IDPOOL") == 0)
@@ -809,6 +863,7 @@ static bool P_SDIGetGroupType(sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossb
             type = pSDIModelViewRadiossblk->GetEntityType(keyword);
             assert(sdi::ENTITY_TYPE_NONE != type);
             if(sdi::ENTITY_TYPE_NONE == type) return false; // shouldn't happen
+            types.push_back(type);
         }
         else if(HCDI_OBJ_TYPE_SETS == objdescr_p->allowed_types[i])
         {
@@ -844,25 +899,29 @@ static void P_PopulateUsedGroups(IMECPreObject* pObj,
         if(0 > index) // value not present in pObj => continue
         {ikwd = pDescr->getNextIKeyword(ikwd); continue;}
 
-        sdi::EntityType type = sdi::ENTITY_TYPE_NONE;
-        bool isOk = P_SDIGetGroupType(pSDIModelViewRadiossblk,
-            pObj, pDescr, ikwd, skwd, type);
+        vector<sdi::EntityType> types;
+        bool isOk = P_SDIGetGroupTypes(pSDIModelViewRadiossblk,
+            pObj, pDescr, ikwd, skwd, types);
+        if(!isOk) types.assign(1, sdi::ENTITY_TYPE_NONE);
 
-        if(isOk && sdi::ENTITY_TYPE_NONE == type) // not a group => continue
+        if(types.empty()) // not a group => continue
         {ikwd = pDescr->getNextIKeyword(ikwd); continue;}
 
-        if(IMECPreObject::ATY_SINGLE == atype)
+        for(sdi::EntityType type : types)
         {
-            unsigned int id = (unsigned int) pObj->GetObjectId(index);
-            usedGroups.insert(make_pair(type, id));
-        }
-        else if(IMECPreObject::ATY_ARRAY == atype)
-        {
-            int nbObjs = pObj->GetNbValues(IMECPreObject::VTY_OBJECT, index);
-            for(int i = 0; i < nbObjs; ++i)
+            if(IMECPreObject::ATY_SINGLE == atype)
             {
-                unsigned int id = (unsigned int) pObj->GetObjectId(index, i);
+                unsigned int id = (unsigned int) pObj->GetObjectId(index);
                 usedGroups.insert(make_pair(type, id));
+            }
+            else if(IMECPreObject::ATY_ARRAY == atype)
+            {
+                int nbObjs = pObj->GetNbValues(IMECPreObject::VTY_OBJECT, index);
+                for(int i = 0; i < nbObjs; ++i)
+                {
+                    unsigned int id = (unsigned int) pObj->GetObjectId(index, i);
+                    usedGroups.insert(make_pair(type, id));
+                }
             }
         }
 
@@ -882,10 +941,7 @@ RADIOSSBLK_DECLS
 bool RadiossblkIsGroupUsed(
     sdi::ModelViewRead *pModelView, const sdi::EntityType type, const unsigned int id)
 {
-    static set<pair<sdi::EntityType, unsigned int>> usedGroups;
-
     // populate if necessary
-    // NB: we have no possibility to clean and repopulate, to be added when needed!
     if(usedGroups.empty())
     {
         sdi::SDIModelViewRadiossblk* pSDIModelViewRadiossblk = 

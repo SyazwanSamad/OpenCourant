@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -449,8 +456,13 @@ C------------------------------------------------
       CALL STARTIME(15,1)
 
       NB_DYNA_INCLUDE = 0
+      EDI_RES = 0
       IF(IS_DYNA == 1) THEN
         CALL CPP_READ_DYNA_AND_CONVERT(FNAME, LFNAME,EDI_RES,FILNAM,ROOTLEN+9+OUTFILE_NAME_LEN)
+        IF(EDI_RES /= 0) THEN
+          WRITE(ISTDO,'(A)') 'ERROR: Input reader failed to load the model. Check reader diagnostics.'
+          CALL MY_EXIT(2)
+        ENDIF
       ENDIF
       CALL STOPTIME(15,1)
 C----------------------------------------------------------------------
@@ -697,6 +709,11 @@ C
         LEN_CWD = LEN_TRIM(CWD)
 c
         CALL CPP_BUILD_MODEL_INC(FNAME,LFNAME,EDI_RES,NB_DYNA_INCLUDE,GLOBAL_PATH,LEN_TRIM(GLOBAL_PATH) )
+        IF(EDI_RES /= 0) THEN
+          WRITE(ISTDO,'(A)') 'ERROR: Input reader failed to load the model. Check reader diagnostics.'
+          WRITE(IOUT ,'(A)') 'ERROR: Input reader failed to load the model. Check reader diagnostics.'
+          CALL ARRET(2)
+        ENDIF
 c
         IF(NB_DYNA_INCLUDE .NE. 0) THEN
           DYNA_MESSAGE=1
@@ -876,7 +893,7 @@ C--------------------------------------------------
      .       MULTI_FVM                   ,LSUBMODEL         ,IS_DYNA          ,DETONATORS   ,EBCS_TAB,
      .       SEATBELT_CONVERTED_ELEMENTS ,NB_SEATBELT_SHELLS,NB_DYNA_INCLUDE  ,USER_WINDOWS ,OUTPUT  ,
      .       MAT_ELEM,NAMES_AND_TITLES,DEFAULTS,glob_therm,PBLAST,SENSOR_USER_STRUCT,CHECK_USED,
-     .       NB_NEWRBODIES,NEW_RBODY_TO_PART,input_modification)
+     .       NB_NEWRBODIES,NEW_RBODY_TO_PART,NEW_RBODY_ID,input_modification)
 
 c       stop CPU timer for lectur
         CALL STOPTIME(2,1)

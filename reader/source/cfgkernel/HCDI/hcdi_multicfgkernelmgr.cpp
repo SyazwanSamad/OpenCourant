@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -110,8 +117,12 @@ CFGKernel* MultiCFGKernelMgr::GetCFGKernel(int index)
 const CFGKernel* MultiCFGKernelMgr::InitCFGKernel(const string &path_home, const string &profile, const string &version, const string& filename,
                                                   bool reload, const vector<string> &allowed_flags, string& str_error)
 {
+    str_error.clear();
     if (version=="")
+    {
+        str_error = "Configuration profile is empty";
         return nullptr;
+    }
 
     CFGKernel* a_cfgkernel = nullptr;
     MvFileFormat_e ff_id = MV_get_file_format(version);
@@ -194,6 +205,7 @@ const CFGKernel* MultiCFGKernelMgr::InitCFGKernel(const string &path_home, const
 
     if (ff_id <= FF_UNKNOWN || ff_id >= FF_LAST)
     {
+        str_error = "Unsupported configuration profile: " + version;
         MultiCFGKernelMgr::getInstance().SetActiveUserProfile(FF_UNKNOWN);
         return nullptr; /*Invalid sub-profile, No yet supported*/
         //throw MvError_t("Invalid sub-profile. Please check");
@@ -205,23 +217,28 @@ const CFGKernel* MultiCFGKernelMgr::InitCFGKernel(const string &path_home, const
         if (a_cfgkernel)
         {
             MultiCFGKernelMgr::getInstance().DeleteCFGKernel(ff_id);
+            a_cfgkernel = nullptr;
         }
         try {
             a_cfgkernel = new CFGKernel(path_home, profile, version, allowed_flags, filename);
         }
         catch (MvError_t& a_error) {
             str_error = a_error.GetMessage();
-            delete MultiCFGKernelMgr::getInstance().GetCFGKernel(ff_id);
-            MultiCFGKernelMgr::getInstance().SetActiveUserProfile(ff_id);
-            a_cfgkernel = nullptr;
-            MultiCFGKernelMgr::getInstance().SetCFGKernel(ff_id, a_cfgkernel);
-            return nullptr;
+        }
+        catch (const std::exception& error) {
+            str_error = error.what();
+        }
+        catch (const std::string& error) {
+            str_error = error;
+        }
+        catch (const char* error) {
+            str_error = error;
         }
         catch (...) {
-            delete MultiCFGKernelMgr::getInstance().GetCFGKernel(ff_id);
-            MultiCFGKernelMgr::getInstance().SetActiveUserProfile(ff_id);
-            a_cfgkernel = nullptr;
-            MultiCFGKernelMgr::getInstance().SetCFGKernel(ff_id, a_cfgkernel);
+            str_error = "Could not initialize configuration profile " + version;
+        }
+        if (!a_cfgkernel) {
+            MultiCFGKernelMgr::getInstance().SetActiveUserProfile(FF_UNKNOWN);
             return nullptr;
         }
         MultiCFGKernelMgr::getInstance().SetCFGKernel(ff_id, a_cfgkernel);

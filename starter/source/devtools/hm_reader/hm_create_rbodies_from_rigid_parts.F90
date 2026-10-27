@@ -31,7 +31,14 @@
 !||    starter0                                 ../starter/source/starter/starter0.F
 !||====================================================================
       module hm_create_rbodies_from_rigid_parts_mod
+        use, intrinsic :: iso_c_binding, only : c_int
         implicit none
+        interface
+          subroutine create_rigid_parts(mapping, ids) bind(C, name='cpp_create_rbodies_from_rigid_parts')
+            import c_int
+            integer(c_int), intent(out) :: mapping(*), ids(*)
+          end subroutine
+        end interface
       contains
 ! ======================================================================================================================
 !                                                   procedures
@@ -56,8 +63,8 @@
 !                                                   Arguments
 ! ----------------------------------------------------------------------------------------------------------------------
           integer, intent(in) :: NB_NEWRBODIES
-          integer, dimension(NB_NEWRBODIES), intent(out) :: NEW_RBODY_TO_PART
-          integer, dimension(NB_NEWRBODIES), intent(out) :: NEW_RBODY_ID
+          integer(c_int), dimension(NB_NEWRBODIES), intent(out) :: NEW_RBODY_TO_PART
+          integer(c_int), dimension(NB_NEWRBODIES), intent(out) :: NEW_RBODY_ID
 ! ----------------------------------------------------------------------------------------------------------------------
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Body
@@ -73,8 +80,36 @@
           NEW_RBODY_TO_PART(1:NB_NEWRBODIES) = 0
           NEW_RBODY_ID(1:NB_NEWRBODIES) = 0
 #else
-          call cpp_create_rbodies_from_rigid_parts(NEW_RBODY_TO_PART,NEW_RBODY_ID)
+          call create_rigid_parts(NEW_RBODY_TO_PART,NEW_RBODY_ID)
 #endif
 ! ----------------------------------------------------------------------------------------------------------------------
         end subroutine hm_create_rbodies_from_rigid_parts
+
+        subroutine hm_rbody_read_order(nbody, nnew, body_ids, new_ids, order)
+          integer, intent(in) :: nbody, nnew, body_ids(nbody), new_ids(nnew)
+          integer, intent(out) :: order(nbody)
+          integer :: i, j, count, positions(nnew)
+          positions = 0
+          order = 0
+          count = 0
+          do i = 1, nbody
+            do j = 1, nnew
+              if (body_ids(i) == new_ids(j)) exit
+            enddo
+            if (j <= nnew) then
+              if (positions(j) /= 0) exit
+              positions(j) = i
+            else
+              count = count + 1
+              order(count) = i
+            endif
+          enddo
+          if (i <= nbody .or. count /= nbody-nnew .or. any(positions == 0)) then
+            write(*,'(A)') 'ERROR: rigid-body IDs do not match the rigid-part conversion mapping.'
+            call arret(2)
+            return
+          endif
+          ! Include order can interleave explicit bodies with generated bodies.
+          order(count+1:nbody) = positions
+        end subroutine hm_rbody_read_order
       end module hm_create_rbodies_from_rigid_parts_mod

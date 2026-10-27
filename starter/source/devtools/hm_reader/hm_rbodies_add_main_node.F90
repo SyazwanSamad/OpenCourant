@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -24,6 +31,7 @@
 !||    starter0                       ../starter/source/starter/starter0.F
 !||====================================================================
       module hm_rbodies_add_main_node_mod
+        use, intrinsic :: iso_c_binding, only : c_int
         implicit none
         
         interface
@@ -78,7 +86,7 @@
           integer :: nbrbodies ! number of rbodies
           integer :: rbodyid   ! rbody identifier
           integer :: m_id      ! initial main node id
-          integer :: addednodeid ! main node identifier added
+          integer(c_int) :: addednodeid ! main node identifier added
           character(len=nchartitle) :: rbodyidTitle ! rbody title
           logical :: is_available
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -93,6 +101,7 @@
                                     option_titr = rbodyidtitle)
             call hm_get_intv('node_ID',m_id,is_available,lsubmodel)
             if(m_id == 0 )  then
+              addednodeid = 0
               call add_rbody_main_node(addednodeid)
               if(addednodeid > 0)  call ancmsg(msgid=3122,      &
                                              msgtype=msgwarning,&

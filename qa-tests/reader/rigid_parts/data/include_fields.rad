@@ -1,0 +1,15 @@
+#RADIOSS STARTER
+# OpenCourant reader regression fixture; AGPL-3.0-or-later.
+/BEGIN
+explicit_fields
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+/UNIT/7
+kg mm s
+                  kg                  mm                   s
+#include common.inc
+/SHELL/10
+         1         1         2         3         4
+#include rigid_fields.inc
+/END

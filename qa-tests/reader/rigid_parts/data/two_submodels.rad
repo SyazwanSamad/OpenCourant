@@ -1,0 +1,26 @@
+#RADIOSS STARTER
+# OpenCourant reader regression fixture; AGPL-3.0-or-later.
+/BEGIN
+explicit_fields
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+//SUBMODEL/2/0
+offset rigid part
+      1000         0         0         0         0         0         0
+/UNIT/7
+kilograms millimetres seconds
+                  kg                  mm                   s
+#include common.inc
+#include rigid_fields.inc
+//ENDSUB
+//SUBMODEL/3/0
+offset rigid part
+     10000         0         0         0         0         0         0
+/UNIT/7
+kilograms millimetres seconds
+                  kg                  mm                   s
+#include common.inc
+#include rigid_fields.inc
+//ENDSUB
+/END

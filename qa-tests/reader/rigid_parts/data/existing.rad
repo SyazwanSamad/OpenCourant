@@ -1,0 +1,34 @@
+#RADIOSS STARTER
+# OpenCourant reader regression fixture; AGPL-3.0-or-later.
+/BEGIN
+existing
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+#include common.inc
+/SHELL/10
+         1         1         2         3         4
+/SHELL/30
+         2         5         6         7         8
+/PART/30
+part 30
+         1         1         0                   0         1
+         0         0                   0                   0
+                   0                   0                   0
+                   0                   0                   0
+/PART/10
+part 10
+         1         1         0                   0         1
+         0         0                   0                   0
+                   0                   0                   0
+                   0                   0                   0
+/GRNOD/NODE/50
+existing nodes
+         5         6         7         8
+/RBODY/100
+existing body
+         9         0         0         2                   0        50         0         1         0
+                   0                   0                   0
+                   0                   0                   0
+         0         2
+/END

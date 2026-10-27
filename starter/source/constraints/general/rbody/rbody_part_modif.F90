@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -116,7 +123,9 @@
                 nsn_i = nsn_i + 1
                 isl_copy(nsn_i) = npby(1,j)
                 id_j = npby(6,j)
-                if (itagm(parent_of(j))==1) itagm(parent_of(j))=0
+                if (parent_of(j) > 0) then
+                  if (itagm(parent_of(j))==1) itagm(parent_of(j))=0
+                endif
                 parent_of(irb) = j
                 call ancmsg(msgid=3142,                      &
                   msgtype=msgwarning,              &

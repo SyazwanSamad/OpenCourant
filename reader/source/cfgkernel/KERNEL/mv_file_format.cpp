@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -171,6 +178,7 @@ void MvFileFormatMap_t::InitStrFileFormatMap() {
   myStrFileFormatMap["radioss2024"] = FF_D00_2024;
   myStrFileFormatMap["radioss2025"] = FF_D00_2025;
   myStrFileFormatMap["radioss2026"] = FF_D00_2026;
+  myStrFileFormatMap["radioss2612"] = FF_D00_2612;
   myStrFileFormatMap["D00_LAST"]   = FF_D00_LAST;
   myStrFileFormatMap["DYNA"]       = FF_DYNA;
   myStrFileFormatMap["Keyword970"]    = FF_971R4; 
@@ -239,6 +247,7 @@ void MvFileFormatMap_t::InitFormat2VersionMap() {
   myFormat2VersionMap[FF_D00_2024]   = "radioss2024";
   myFormat2VersionMap[FF_D00_2025]   = "radioss2025";
   myFormat2VersionMap[FF_D00_2026]   = "radioss2026";
+  myFormat2VersionMap[FF_D00_2612]   = "radioss2612";
 }
 
 
@@ -272,6 +281,7 @@ void MvFileFormatMap_t::InitVersion2FormatMap() {
   myVersion2FormatMap["radioss2024"] = FF_D00_2024;
   myVersion2FormatMap["radioss2025"] = FF_D00_2025;
   myVersion2FormatMap["radioss2026"] = FF_D00_2026;
+  myVersion2FormatMap["radioss2612"] = FF_D00_2612;
 }
 
 

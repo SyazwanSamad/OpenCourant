@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -52,7 +59,7 @@ Copyright>        copyright and attribution statement.
      3                         SENSORS   ,IMERGE  ,UNITAB  ,ISKN     ,NOM_OPT  ,
      4                         NUMSL     ,KNOD2ELS,KNOD2ELC,KNOD2ELTG,KNOD2EL1D,
      5                         KNOD2ELQ  ,ITAGND  ,ICDNS10 ,LSUBMODEL,ICFIELD  ,
-     6                         LCFIELD   ,SLRBODY ,N_NRBODY,NRBODY_TO_PART,IPART)
+     6                         LCFIELD   ,SLRBODY ,N_NRBODY,NRBODY_TO_PART,NEW_RBODY_ID,IPART)
 C-------------------------------------
 C     READING STRUCTURE RIGIDES 
 C-----------------------------------------------
@@ -68,6 +75,7 @@ C-----------------------------------------------
       USE SENSOR_MOD
       USE NAMES_AND_TITLES_MOD , ONLY : NCHARTITLE, NCHARKEY
       USE rbody_part_modif_mod, ONLY : rbody_part_modif
+      USE hm_create_rbodies_from_rigid_parts_mod, ONLY : hm_rbody_read_order
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
 C-----------------------------------------------
@@ -93,6 +101,7 @@ C-----------------------------------------------
       TYPE (UNIT_TYPE_),INTENT(IN) ::UNITAB 
       INTEGER ,INTENT(IN) :: N_NRBODY,SLRBODY
       INTEGER , DIMENSION(N_NRBODY), INTENT(IN) :: NRBODY_TO_PART
+      INTEGER , DIMENSION(N_NRBODY), INTENT(IN) :: NEW_RBODY_ID
       INTEGER NPBY(NNPBY,*), LPBY(SLRBODY), ITAB(*), ITABM1(*)
       INTEGER IBFV(NIFV,*)
       INTEGER IGRV(NIGRV,*),IBGR(*),IMERGE(*),
@@ -116,6 +125,8 @@ C-----------------------------------------------
      .   IFAIL,NRB_R2R,PART_ID,NP
       INTEGER IDSURF, ISU, NN, IAD, M, IOPT, IEXPAMS, NEL
       INTEGER PARENT_OF(NRBODY),NRBYKIN0
+      INTEGER NBODY_INPUT,ORDER_INDEX,READ_POS,READER_POS,NEW_INDEX
+      INTEGER, ALLOCATABLE :: BODY_ORDER(:),BODY_IDS(:)
       CHARACTER MESS*40
       CHARACTER(LEN=NCHARTITLE)::TITR,TITR1
       CHARACTER(LEN=NCHARKEY)::KEY
@@ -179,7 +190,20 @@ C--------------------------------------------------
 C START BROWSING MODEL RBODY
 C--------------------------------------------------
       IS_AVAILABLE = .FALSE.
-      CALL HM_OPTION_START('/RBODY')
+      IF(N_NRBODY > 0) THEN
+        CALL HM_OPTION_COUNT('/RBODY',NBODY_INPUT)
+        CALL MY_ALLOC(BODY_IDS,NBODY_INPUT,"BODY_IDS")
+        CALL MY_ALLOC(BODY_ORDER,NBODY_INPUT,"BODY_ORDER")
+        CALL HM_OPTION_START('/RBODY')
+        DO N=1,NBODY_INPUT
+          CALL HM_OPTION_READ_KEY(LSUBMODEL,OPTION_ID=BODY_IDS(N))
+        ENDDO
+        READER_POS=NBODY_INPUT
+        CALL HM_RBODY_READ_ORDER(NBODY_INPUT,N_NRBODY,BODY_IDS,NEW_RBODY_ID,BODY_ORDER)
+        CALL MY_DEALLOC(BODY_IDS)
+      ELSE
+        CALL HM_OPTION_START('/RBODY')
+      ENDIF
 C
       CALL MY_ALLOC(ITAG,NUMNOD,"ITAG")
       ITAG(1:NUMNOD) = 0
@@ -189,6 +213,13 @@ C
       NRB_R2R=0
       PARENT_OF=0
       NRBYKIN0 = NRBYKIN-N_NRBODY
+      ORDER_INDEX = 0
+      IF(N_NRBODY > 0 .AND. NSUBDOM > 0) THEN
+        NRBYKIN0 = NRBYKIN
+        DO I=NBODY_INPUT-N_NRBODY+1,NBODY_INPUT
+          IF(TAGRBY(BODY_ORDER(I)) /= 0) NRBYKIN0=NRBYKIN0-1
+        ENDDO
+      ENDIF
 C
       DO N=1,NRBODY
 C
@@ -196,9 +227,37 @@ C--------------------------------------------------
 C EXTRACT DATAS OF /RBODY/... LINE
 C--------------------------------------------------
 C
-       NRB_R2R = NRB_R2R + 1     
-       IF (NSUBDOM > 0) THEN
-         IF(TAGRBY(NRB_R2R) == 0) CALL HM_SZ_R2R(TAGRBY,NRB_R2R,LSUBMODEL)
+       READ_POS = 0
+       NEW_INDEX = 0
+       IF(N_NRBODY > 0) THEN
+         DO
+           ORDER_INDEX = ORDER_INDEX+1
+           IF(ORDER_INDEX > NBODY_INPUT) THEN
+             WRITE(*,'(A)') 'ERROR: rigid-body domain tags exceed the reader selection.'
+             CALL ARRET(2)
+             RETURN
+           ENDIF
+           READ_POS = BODY_ORDER(ORDER_INDEX)
+           IF(NSUBDOM == 0) EXIT
+           IF(TAGRBY(READ_POS) /= 0) EXIT
+         ENDDO
+         NRB_R2R = READ_POS
+         NEW_INDEX = MAX(0,ORDER_INDEX-(NBODY_INPUT-N_NRBODY))
+C        The bundled reader appends indexed lists; replay the ordinary selection.
+         IF(READ_POS <= READER_POS) THEN
+           CALL HM_OPTION_START('/RBODY')
+           READER_POS=0
+         ENDIF
+         DO WHILE(READER_POS+1 < READ_POS)
+           CALL HM_OPTION_READ_KEY(LSUBMODEL)
+           READER_POS=READER_POS+1
+         ENDDO
+         READER_POS=READ_POS
+       ELSE
+         NRB_R2R = NRB_R2R + 1
+         IF (NSUBDOM > 0) THEN
+           IF(TAGRBY(NRB_R2R) == 0) CALL HM_SZ_R2R(TAGRBY,NRB_R2R,LSUBMODEL)
+         ENDIF
        ENDIF
 C
        KEY=''
@@ -315,12 +374,19 @@ C
         NPBY(6,NRB)=ID
         M = NPBY(1,NRB)
         NSL = 0
-        IF (IGU>0) NSL = NODGRNR6(M,IGU,IGS,LPBY(K+1),IGRNOD,ITABM1,MESS,ID)
-        IF (NRB>NRBYKIN0) THEN
+        IF (IGU>0) THEN
+          IF(K>=SLRBODY) THEN
+            WRITE(*,'(A,I0,A)') 'ERROR: rigid body ',ID,' has no secondary-node storage (empty group).'
+            CALL ARRET(2)
+            RETURN
+          ENDIF
+          NSL = NODGRNR6(M,IGU,IGS,LPBY(K+1),IGRNOD,ITABM1,MESS,ID)
+        ENDIF
+        IF (NEW_INDEX>0) THEN
           CALL RBODY_PART_MODIF(NRBYKIN ,NNPBY ,NPBY  ,SLRBODY ,LPBY  ,          
      .                           NUMNOD ,NRB   ,NSL   ,LPBY(K+1:K+NSL),
      .                           NRBYKIN0,PARENT_OF)
-          PART_ID = NRBODY_TO_PART(NRB-NRBYKIN0)
+          PART_ID = NRBODY_TO_PART(NEW_INDEX)
           NP = 0  
           DO J=1,NPART
             IF(PART_ID == IPART(4,J)) THEN
@@ -328,6 +394,11 @@ C
               EXIT
             ENDIF
           END DO
+          IF(NP == 0) THEN
+            WRITE(*,'(A,I0,A,I0)') 'ERROR: generated rigid body ',ID,' references missing part ',PART_ID
+            CALL ARRET(2)
+            RETURN
+          ENDIF
           NPBY(21,NRB)= NP 
         ELSE
           NPBY(21,NRB)= 0 
@@ -521,6 +592,7 @@ C
 C------------------------------------
       IF(ALLOCATED(ITAG)) CALL MY_DEALLOC(ITAG)
       IF(ALLOCATED(TABSL))CALL MY_DEALLOC(TABSL)
+      IF(ALLOCATED(BODY_ORDER))CALL MY_DEALLOC(BODY_ORDER)
 C------------------------------------
       RETURN
 C

@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -29,6 +36,7 @@ into neutral objects.
 ************************************************************************************/
 
 #include <UTILS/win32_utils.h>
+#include <boost/filesystem.hpp>
 #include <UTILS/mv_cstring.h>
 #include <UTILS/mv_string.h>
 #include <UTILS/mv_stl_various.h>
@@ -1592,6 +1600,11 @@ MECComponent* HWCFGReader::ManageComponent(const char* buffer, bool& continue_fl
                 }
                 my_dir_restore_current_path(last_current_path);
 
+                if(a_pre_object_p)
+                {
+                    string attribute = GetAttribNameFromDrawable(a_descr_p, cdr::g_AttribFullFileName);
+                    a_pre_object_p->AddStringValue(attribute.c_str(), boost::filesystem::absolute(a_full_name).string().c_str());
+                }
                 int a_find_index = SearchFile(a_full_name.c_str());
                 if (a_find_index == -1)
                 {

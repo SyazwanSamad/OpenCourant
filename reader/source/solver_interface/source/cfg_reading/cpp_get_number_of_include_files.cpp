@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -26,19 +33,20 @@
 extern "C" 
 {
 
-void CDECL cpp_get_number_of_include_files_(int *nbIncludes)
+void CDECL cpp_get_number_of_include_files_(int *isDyna, int *nbIncludes)
 {
-    GlobalModelSDICountIncludeFiles(nbIncludes);
+    try { GlobalModelSDICountIncludeFiles(*isDyna, nbIncludes); }
+    catch(...) { GlobalModelSDIQueryFailure(); }
 }
 
-void CDECL CPP_GET_NUMBER_OF_INCLUDE_FILES(int *nbIncludes)
-{cpp_get_number_of_include_files_ (nbIncludes);}
+void CDECL CPP_GET_NUMBER_OF_INCLUDE_FILES(int *isDyna, int *nbIncludes)
+{cpp_get_number_of_include_files_ (isDyna, nbIncludes);}
 
-void CDECL cpp_get_number_of_include_files__(int *nbIncludes)
-{cpp_get_number_of_include_files_ (nbIncludes);}
+void CDECL cpp_get_number_of_include_files__(int *isDyna, int *nbIncludes)
+{cpp_get_number_of_include_files_ (isDyna, nbIncludes);}
 
-void CDECL cpp_get_number_of_include_files(int *nbIncludes)
-{cpp_get_number_of_include_files_ (nbIncludes);}
+void CDECL cpp_get_number_of_include_files(int *isDyna, int *nbIncludes)
+{cpp_get_number_of_include_files_ (isDyna, nbIncludes);}
 
 
 }

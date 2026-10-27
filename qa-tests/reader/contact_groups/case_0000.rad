@@ -1,0 +1,10 @@
+#RADIOSS STARTER
+# OpenCourant reader regression fixture; AGPL-3.0-or-later.
+/BEGIN
+case
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+/INCLUDE_LS-DYNA
+contact.key
+/END

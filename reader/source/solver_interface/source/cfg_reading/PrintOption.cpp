@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -49,7 +56,7 @@ void PrintPreObject(const IMECPreObject *pPreObject, MECDataWriter &datawriter,
         return;
     }
 
-    const fileformat_t *a_format_p =     a_format_p=descr_p->getRadiossFileFormatPtr(FF_D00_2026);
+    const fileformat_t *a_format_p = descr_p->getRadiossFileFormatPtr(FF_D00_2612);
 
     datawriter.WriteObjectData(a_format_p, *pPreObject, descr_p, &a_model_scanner);
 }
@@ -63,7 +70,7 @@ void PrintEntity(
 
     MECSingleFileWriter filewriter(file, 100);
     MECDataWriter datawriter(&filewriter, 100);
-    datawriter.setFormatId(FF_D00_2026);
+    datawriter.setFormatId(FF_D00_2612);
 
     datawriter.setCompressDouble(1);
     datawriter.setRoundDouble(0);

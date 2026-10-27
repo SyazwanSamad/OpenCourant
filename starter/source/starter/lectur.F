@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -561,7 +568,7 @@ Copyright>        copyright and attribution statement.
       SUBROUTINE LECTUR(MULTI_FVM                   ,LSUBMODEL          ,IS_DYNA         ,DETONATORS   ,EBCS_TAB,
      .                  SEATBELT_CONVERTED_ELEMENTS ,NB_SEATBELT_SHELLS ,NB_DYNA_INCLUDE ,USER_WINDOWS ,OUTPUT  ,
      .                  MAT_ELEM,NAMES_AND_TITLES,DEFAULTS,glob_therm,pblast,
-     .                  SENSOR_USER_STRUCT,CHECK_USED,N_NRBODY,NRBODY_TO_PART,input_modification)
+     .                  SENSOR_USER_STRUCT,CHECK_USED,N_NRBODY,NRBODY_TO_PART,NEW_RBODY_ID,input_modification)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -710,6 +717,7 @@ C-----------------------------------------------
       INTEGER,INTENT(IN)                     :: CHECK_USED                          !< Flag to check if node is used
       INTEGER,INTENT(IN)                     :: N_NRBODY                            !< Number of rigid bodies by part
       INTEGER,DIMENSION(N_NRBODY),INTENT(IN) :: NRBODY_TO_PART                      !< rigid body to part mapping
+      INTEGER,DIMENSION(N_NRBODY),INTENT(IN) :: NEW_RBODY_ID
       type(input_modif_), intent(inout) :: input_modification !< input modification data structure 
 C-----------------------------------------------
 C   G l o b a l   P a r a m e t e r s
@@ -7579,7 +7587,7 @@ C
      3       SENSORS   ,IMERGE  ,UNITAB  ,ISKWN   ,NOM_OPT   ,
      4       SLRBODY   ,KNOD2ELS,KNOD2ELC,KNOD2ELTG,KNOD2EL1D,
      5       KNOD2ELQ  ,ITAGND  ,ICNDS10 ,LSUBMODEL,ICFIELD  ,
-     6       LCFIELD   ,SLRBODY ,N_NRBODY,NRBODY_TO_PART,IPART)
+     6       LCFIELD   ,SLRBODY ,N_NRBODY,NRBODY_TO_PART,NEW_RBODY_ID,IPART)
         ENDIF
 C--------------------------------------------
 C     Reading rigid body merges

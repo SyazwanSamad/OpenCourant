@@ -782,6 +782,44 @@ To build Starter with Open_Reader, add: **-open_reader** to build command line:
 The built library will be copied in exec directory.
 Starter is linked against this library
 
+With `USE_OPEN_READER=1` (set by `-open_reader`), Starter uses the indexed
+include and part-element APIs by default. The legacy include/part CMake options
+remain available for older external readers. OpenReader still automatically
+disables `/PART` Irigid-to-RBODY conversion pending mode-2 implementation and
+validation, including when reusing an existing build directory. This does not
+change cached compatibility options for external readers.
+
+While rigid-part conversion is disabled, a detected nonzero `/PART` `IRIGID`
+value stops Starter with an error identifying the part and submodel. Ordinary
+parts continue without conversion. The reader-level reference contract and
+guard checks are documented in [the Irigid regression tests](qa-tests/reader/rigid_parts/README.md).
+
+OpenReader supports the current `2612` configuration profile. The Windows x64
+accelerometer Starter smoke test completes and generates a restart file.
+Configuration and model-loading failures return an error before Starter queries
+the model. Reproducible loading checks are documented in
+[the reader tests](qa-tests/reader/README.md).
+
+OpenReader now implements the rigid-part count/create APIs. The Windows reader
+tests cover the v82 conversion contract, includes, submodel offsets, explicit unit
+context, repeated calls, and model reload. Stage 4 validates `IRIGID=1` through
+bounds-checked Starter runs against v82, including mixed explicit/generated bodies
+and LAGMUL. Corrected fixtures show that v82 also supports connected-region
+conversion for `IRIGID=2`; OpenReader explicitly rejects that unimplemented mode.
+Stage 5 validates mode-1 mass/inertia, rigid motion, forces, sensor release, energy,
+submodel offsets, and alternate units with the Windows double-precision SMP Engine.
+The reproducible [numerical checks](qa-tests/reader/README.md#numerical-validation-stage-5)
+compare both readers, explicit bodies, and analytic expectations. The automatic
+conversion bypass remains enabled pending mode-2 and rollout work.
+
+Stage 6 aligns the include-count ABI with the bundled reader, adds indexed
+include and part-element queries, and preserves original keyword include paths.
+The [API checks and Windows CI](qa-tests/reader/README.md#api-alignment-and-rollout-stage-6)
+cover these replacements. Linux/ARM validation remains outstanding.
+
+Rigid-part conversion and broader model coverage still require validation. Use
+the default bundled reader for simulations that require `/PART` `IRIGID`.
+
 To execute Starter with Open_Reader set PATH (for Windows) or  LD_LIBRARY (for Linux):
 
 * On Linux
