@@ -30,16 +30,12 @@ Copyright>        copyright and attribution statement.
 !||    get_u_sens_value      ../engine/source/user_interface/usensor.F
 !||    set_u_sens_value      ../engine/source/user_interface/usensor.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    python_funct_mod      ../common_source/modules/python_mod.F90
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||    th_surf_mod           ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE PFLUID(ILOADP     ,RLOAD      ,NPC    ,TF     ,A          ,
-     2                  V          ,X          ,XFRAME ,MS     ,       
-     3                  NSENSOR    ,SENSOR_TAB ,WFEXC  ,WFEXT  ,IADC       ,
-     4                  FSKY       ,FSKYV      ,LLOADP ,FEXT   ,H3D_DATA   ,
-     5                  TH_SURF    ,PYTHON )
+      SUBROUTINE PFLUID(ILOADP, RLOAD, NPC, TF, A, V, X, XFRAME, MS, NSENSOR, SENSOR_TAB, WFEXC, WFEXT, IADC, FSKY,
+     . FSKYV, LLOADP, FEXT, TH_SURF, PYTHON)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C----------------------------------------------- 
@@ -78,7 +74,6 @@ C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE PYTHON_FUNCT_MOD
-      USE H3D_MOD 
       USE SENSOR_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_
 C-----------------------------------------------
@@ -115,7 +110,6 @@ C-----------------------------------------------
       my_real RLOAD(LFACLOAD,NLOADP), TF(STF), A(3,NUMNOD), V(3,NUMNOD),
      .        X(3,NUMNOD), XFRAME(NXFRAME,NUMFRAM+1),WFEXC,
      .        FSKY(8,SFSKY/8), FSKYV(SFSKY/8,8),FEXT(3,NUMNOD)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
       TYPE(PYTHON_) :: PYTHON
@@ -143,7 +137,7 @@ C-----------------------------------------------
       N_OLD  = 0
       X_OLD  = ZERO
       NSEGPL = 0
-      IANIM  = ANIM_V(5)+OUTP_V(5) + H3D_DATA%N_VECT_FINT + ANIM_V(6)+OUTP_V(6) + H3D_DATA%N_VECT_FEXT
+      IANIM  =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 
 C---------------------------------------
 C PART-1. PARITH/OFF

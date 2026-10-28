@@ -25,7 +25,6 @@
 !||    biquad_upd                ../starter/source/materials/fail/biquad/biquad_upd.F90
 !||    brokmann_random           ../starter/source/materials/fail/windshield_alter/brokmann_random.F90
 !||    check_swift_failure       ../starter/source/materials/fail/check_swift_failure.F90
-!||    dam_fld_sol               ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    delm01law                 ../engine/source/properties/composite_options/stack/delm01law.F
 !||    delm02law                 ../engine/source/properties/composite_options/stack/delm02law.F
 !||    delm24law                 ../engine/source/properties/composite_options/stack/delm24law.F
@@ -65,7 +64,6 @@
 !||    fail_tensstrain_c         ../engine/source/materials/fail/tensstrain/fail_tensstrain_c.F
 !||    fail_tensstrain_ib        ../engine/source/materials/fail/tensstrain/fail_tensstrain_ib.F
 !||    fail_tensstrain_s         ../engine/source/materials/fail/tensstrain/fail_tensstrain_s.F
-!||    h3d_fld_tsh               ../engine/source/output/h3d/h3d_results/h3d_fld_tsh.F
 !||    hm_read_fail_alter        ../starter/source/materials/fail/windshield_alter/hm_read_fail_alter.F
 !||    hm_read_fail_biquad       ../starter/source/materials/fail/biquad/hm_read_fail_biquad.F
 !||    hm_read_fail_chang        ../starter/source/materials/fail/changchang/hm_read_fail_chang.F90
@@ -109,7 +107,6 @@
 !||    hm_read_fail_wilkins      ../starter/source/materials/fail/wilkins/hm_read_fail_wilkins.F
 !||    hm_read_fractal_dmg       ../starter/source/materials/fail/fractal/hm_read_fractal_dmg.F90
 !||    hm_read_mullins_or        ../starter/source/materials/fail/mullins_or/hm_read_fail_mullins_or.F
-!||    idx_fld_sol               ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    mat_hardening_to_fail     ../starter/source/materials/mat/mat_hardening_to_fail.F90
 !||    matparam_def_mod          ../common_source/modules/mat_elem/matparam_def_mod.F90
 !||    mmain                     ../engine/source/materials/mat_share/mmain.F90

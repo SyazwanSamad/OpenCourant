@@ -704,16 +704,13 @@
 !||    resol                ../engine/source/engine/resol.F
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    my_alloc_mod         ../common_source/tools/memory/my_alloc.F90
 !||    precision_mod        ../common_source/modules/precision_mod.F90
 !||====================================================================
-        subroutine resol_alloc_phase8(nadmesh,numelc,numeltg,numnod,levelmax,iparit,istatcnd,anim_n, &
-          h3d_data,iroddl,lsh4act,lsh4kin,psh4act,psh4kin,lsh3act,lsh3kin, &
-          psh3act,psh3kin,msh4sky,msh3sky,ilevnod,lsh4upl,lsh3upl,psh4upl,psh3upl,&
-          acnd,arcnd,stcnd,strcnd,stifr_tmp,stifn_tmp,nthread)
+      subroutine resol_alloc_phase8(nadmesh, numelc, numeltg, numnod, levelmax, iparit, istatcnd, anim_n, iroddl, &
+     & lsh4act, lsh4kin, psh4act, psh4kin, lsh3act, lsh3kin, psh3act, psh3kin, msh4sky, msh3sky, ilevnod, lsh4upl, &
+     & lsh3upl, psh4upl, psh3upl, acnd, arcnd, stcnd, strcnd, stifr_tmp, stifn_tmp, nthread)
           use precision_mod, only : wp
-          use h3d_mod, only : h3d_database
           use my_alloc_mod
           implicit none
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -728,7 +725,6 @@
           integer, intent(in) :: istatcnd
           integer, intent(in) :: nthread
           integer, intent(in) :: anim_n(*)
-          type(h3d_database), intent(in) :: h3d_data
           integer, intent(in) :: iroddl
           integer, allocatable, intent(inout) :: lsh4act(:)
           integer, allocatable, intent(inout) :: lsh4kin(:)
@@ -788,12 +784,12 @@
             call my_alloc(stcnd, 0, "stcnd")
             call my_alloc(strcnd, 0, "strcnd")
           end if
-          if( (anim_n(18) /= 0 .or. h3d_data%n_scal_stifr /= 0) .and. iroddl /= 0) then
+      if((anim_n(18)/=0).AND.iroddl/=0) then
             call my_alloc(stifr_tmp, numnod, "stifr_tmp")
           else
             call my_alloc(stifr_tmp, 0, "stifr_tmp")
           endif
-          if( anim_n(19) /= 0 .or. h3d_data%n_scal_stifn /= 0) then
+      if(anim_n(19)/=0) then
             call my_alloc(stifn_tmp, numnod, "stifn_tmp")
           else
             call my_alloc(stifn_tmp, 0, "stifn_tmp")
@@ -808,18 +804,14 @@
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
 !||    constant_mod         ../common_source/modules/constant_mod.F
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    my_alloc_mod         ../common_source/tools/memory/my_alloc.F90
 !||    precision_mod        ../common_source/modules/precision_mod.F90
 !||====================================================================
-        subroutine resol_alloc_phase9(ANIM_CE,NUMELC,NUMELTG,NUMNOD,IADMERRT,H3D_DATA, &
-          INTER_ITHKNOD,ERR_THK_SH4,ERR_THK_SH3,THKSH4,THKSH3,THKNOD, &
-          AREA_SH4,AREA_SH3,AREA_NOD,THICK_SH4,THICK_SH3,THICK_NOD, &
-          admerr_AREA_SH4,admerr_AREA_SH3,admerr_AREA_NOD, &
-          admerr_THICK_SH4,admerr_THICK_SH3,admerr_THICK_NOD)
+      subroutine resol_alloc_phase9(ANIM_CE, NUMELC, NUMELTG, NUMNOD, IADMERRT, INTER_ITHKNOD, ERR_THK_SH4, &
+     & ERR_THK_SH3, THKSH4, THKSH3, THKNOD, AREA_SH4, AREA_SH3, AREA_NOD, THICK_SH4, THICK_SH3, THICK_NOD, &
+     & admerr_AREA_SH4, admerr_AREA_SH3, admerr_AREA_NOD, admerr_THICK_SH4, admerr_THICK_SH3, admerr_THICK_NOD)
           use precision_mod, only : wp
           use constant_mod, only : ZERO
-          use H3D_MOD, only : H3D_DATABASE
           use my_alloc_mod
           implicit none
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -831,7 +823,6 @@
           integer, intent(in) :: IADMERRT
           integer, intent(in) :: INTER_ITHKNOD
           integer, intent(in) :: ANIM_CE(*)
-          type(H3D_DATABASE), intent(in) :: H3D_DATA
           real(kind=wp), allocatable, intent(inout) :: ERR_THK_SH4(:)
           real(kind=wp), allocatable, intent(inout) :: ERR_THK_SH3(:)
           real(kind=wp), allocatable, intent(inout) :: THKSH4(:)
@@ -850,7 +841,7 @@
           real(kind=wp), allocatable, intent(inout) :: admerr_THICK_SH3(:)
           real(kind=wp), allocatable, intent(inout) :: admerr_THICK_NOD(:)
 ! ----------------------------------------------------------------------------------------------------------------------
-          IF(ANIM_CE(2156)/=0 .OR. IADMERRT/=0 .OR. H3D_DATA%SH_SCAL_ERR_THK /= 0)THEN
+      IF(ANIM_CE(2156)/=0.OR.IADMERRT/=0)THEN
             call my_alloc(ERR_THK_SH4, NUMELC, "ERR_THK_SH4")
             call my_alloc(ERR_THK_SH3, NUMELTG, "ERR_THK_SH3")
             ERR_THK_SH4(1:NUMELC) = ZERO
@@ -868,7 +859,7 @@
             call my_alloc(THKSH3, 0, "THKSH3")
             call my_alloc(THKNOD, 0, "THKNOD")
           END IF
-          IF( ANIM_CE(2156)/=0 .OR. H3D_DATA%SH_SCAL_ERR_THK /=0) THEN
+      IF(ANIM_CE(2156)/=0) THEN
             call my_alloc(AREA_SH4, NUMELC, "AREA_SH4")
             call my_alloc(AREA_SH3, NUMELTG, "AREA_SH3")
             call my_alloc(AREA_NOD, NUMNOD, "AREA_NOD")
@@ -1423,7 +1414,7 @@
             NUMGEO, NUMELC, NUMELTG, NUMELS, NUMELQ, NUMMAT, NUMNOD, &
             NPARG, NPROPG, NPROPM, NPROPMI, NPROPGI, &
             SNERCVOIS, SNESDVOIS, SLERCVOIS, SLESDVOIS, &
-            STHKE, SEANI, NPART, &
+            STHKE, SEANI, &
             ELBUF_TAB   ,IPARG       ,GEO        , &
             ELEMENT%SHELL%IXC ,IXTG, IXS, IXQ, PM,BUFMAT, &
             EANI, &
@@ -1431,7 +1422,6 @@
             NODES                  ,W           ,ALE_CONNECTIVITY,  &
             NERCVOIS    ,NESDVOIS  ,LERCVOIS    ,LESDVOIS, &
             M51_N0PHAS, M51_NVPHAS, STACK,&
-            IPART(K3:K4-1),IPART(K1:K2-1),IPART(K8:K9-1), IPART(K2:K3-1), &
             MULTI_FVM , &
             MAT_ELEM%MAT_PARAM , OUTPUT%DATA%FANI_CELL,GLOB_THERM%ITHERM)
 

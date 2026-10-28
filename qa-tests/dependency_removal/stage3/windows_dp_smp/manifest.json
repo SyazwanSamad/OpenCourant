@@ -1,0 +1,142 @@
+{
+  "commit": "d0a844f7270ae3c0666c1360700be42708a7694b",
+  "working_tree_dirty": true,
+  "scope": "Windows x64, double precision, SMP; integration conversion enabled",
+  "reader_build_ids": {
+    "open_reader_win64.dll": "or_20261028105100_d0a844f7"
+  },
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "suite_pass_lines": 148,
+  "reader_api_families": 84,
+  "api_export_spellings_per_family": 4,
+  "local_calls": 11,
+  "mode1_engine_runs": 19,
+  "mode2_engine_runs": 6,
+  "frozen_baseline_models": 5,
+  "baseline_comparison_engine_runs": 4,
+  "failed_input_checks": 2,
+  "restart_cases": 2,
+  "hm_reader_directory_absent": true,
+  "root_cmake_both_configured": true,
+  "root_batch_dispatch_mock_checked": true,
+  "linux_shell_syntax_checked": true,
+  "workflow_yaml_parsed": true,
+  "binaries": [
+    {
+      "path": "exec\\open_reader_win64.dll",
+      "bytes": 17494016,
+      "sha256": "b85e69ab38319f47c1107eeb051b18a7e1d562d1df8b3929bb3b7d7fdafbae27"
+    },
+    {
+      "path": "exec\\starter_win64.exe",
+      "bytes": 45913600,
+      "sha256": "80655820cf48e7df36903838672333535b478c797cdcb755d989972becc1bf0b"
+    },
+    {
+      "path": "exec\\engine_win64.exe",
+      "bytes": 136658944,
+      "sha256": "2a0baa77fbb3d9c4ececec76cac8294a196cd18ef0d11c6d0e95a2e60945b7db"
+    },
+    {
+      "path": "extlib\\h3d\\lib\\win64\\h3dreader.dll",
+      "bytes": 804208,
+      "sha256": "b3de1e636d2c290a8c2e95f50a6dff7036af03cb8dfae62522f986d994e01836"
+    },
+    {
+      "path": "extlib\\h3d\\lib\\win64\\h3dwriter.dll",
+      "bytes": 672384,
+      "sha256": "cbe2ef4362095e1d952d17b69c0f6a023c830500595ce00d137365f7f741e483"
+    },
+    {
+      "path": "cbuild_dependency_stage3\\binaries\\driver-openreader.exe",
+      "bytes": 1182208,
+      "sha256": "546d136a68ae0982ac8c967847a759412a27d8517fcb2fc44881f73f8aa66133"
+    },
+    {
+      "path": "cbuild_dependency_stage3\\binaries\\starter-openreader.exe",
+      "bytes": 46057984,
+      "sha256": "0740fac347b2a45072168ca978345fbca7f1849db80174e437e2c249458b5a49"
+    }
+  ],
+  "unverified": [
+    "Linux x64/ARM64 runtime/linking",
+    "single precision",
+    "MPI/R2R",
+    "hosted CI",
+    "containers/release packages",
+    "full miniqa",
+    "all element formulations",
+    "large-model performance"
+  ],
+  "unsupported": [
+    "structured-ALE mesh generation"
+  ],
+  "pending_delivery": "Pinned upstream archive still contains excluded HM Reader bytes; replacement and stale-cache cleanup are Stage 6 gates.",
+  "files": [
+    {
+      "path": "api_audit.json",
+      "bytes": 10056,
+      "sha256": "6194d782f348894fd6bc50e8c06f52c82b8b586e3e085d7182583112d585ab37"
+    },
+    {
+      "path": "dependency_inspection.json",
+      "bytes": 1822,
+      "sha256": "0cbcefcf02b762a994f1eb8d738ee918b3130d2697eb7cd84e5c5c6a0f7b497e"
+    },
+    {
+      "path": "generated_input_manifest.json.gz",
+      "bytes": 4571,
+      "sha256": "81a50abb2b77fc6d392e99a9811ed65a926ef38b924e3791d5eedcbd260134d8"
+    },
+    {
+      "path": "input_manifest.json.gz",
+      "bytes": 174496,
+      "sha256": "5fbc4fc25e180202464fe21cb6717ebb1156818b08086b3d902e4146ce0aedca"
+    },
+    {
+      "path": "logs.zip",
+      "bytes": 648503,
+      "sha256": "50274c6fabbca63f62e24017d1467488771e75d505cdcf949e5dae803be445c1"
+    },
+    {
+      "path": "mode2_histories.zip",
+      "bytes": 41893,
+      "sha256": "091f4c0f91cc8999184da734a33171a57e88066510383b7a011ab28c9876b119"
+    },
+    {
+      "path": "mode2_inputs.zip",
+      "bytes": 6647,
+      "sha256": "62818d1eea180c86f614125ef69fc08064b6cf46c550458ee0367165bf6045a8"
+    },
+    {
+      "path": "mode2_report.json",
+      "bytes": 5942,
+      "sha256": "b9c22f2105eb96c00ef5063bdc72447279378f24869caffee6922469cdbc923a"
+    },
+    {
+      "path": "models_report.json",
+      "bytes": 21147,
+      "sha256": "9db93668a80cecf3116d75a6e81b88f43c4a6501af5b4b06f9795752fce7c048"
+    },
+    {
+      "path": "numerical_report.json",
+      "bytes": 20888,
+      "sha256": "a68f4c2af91086fd5a5b0c3fb65d8a94fbf7ef58a06f88d3cf7278e8e12c5c13"
+    },
+    {
+      "path": "reader_snapshots.json",
+      "bytes": 12201,
+      "sha256": "8df4a69987b4e64c5dd44dcd0b0ca17aaa5ea82ef83a6020a6cbe6bb91b6cac1"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 133571,
+      "sha256": "38480ef8246590fa2f80252fef9bbef2d2d48ee627320d250a03d50a99ed9f71"
+    },
+    {
+      "path": "suite_report.json",
+      "bytes": 28988,
+      "sha256": "bb0ccbd5b75ed63ac3d27200f96f4929192dadf39b45c14e9b2020da5547b979"
+    }
+  ]
+}

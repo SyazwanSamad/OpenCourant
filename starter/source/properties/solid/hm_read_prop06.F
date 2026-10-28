@@ -25,9 +25,9 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    arret                    ../starter/source/system/arret.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    istr                     ../starter/source/tools/univ/istr.F
 !||    subrotvect               ../starter/source/model/submodel/subrot.F
 !||--- uses       -----------------------------------------------------

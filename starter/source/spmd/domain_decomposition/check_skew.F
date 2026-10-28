@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    domdec2                      ../starter/source/spmd/domdec2.F
 !||--- calls      -----------------------------------------------------
-!||    hm_entity_reference_number   ../starter/source/devtools/hm_reader/hm_entity_reference_number.F
+!||    hm_entity_reference_number   ../starter/source/devtools/reader/hm_entity_reference_number.F
 !||    ifrontplus                   ../starter/source/spmd/node/frontplus.F
 !||--- uses       -----------------------------------------------------
 !||    submodel_mod                 ../starter/share/modules1/submodel_mod.F

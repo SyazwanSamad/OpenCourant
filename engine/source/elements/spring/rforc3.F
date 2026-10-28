@@ -74,7 +74,6 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod        ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    message_mod         ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod        ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod      ../common_source/tools/memory/my_dealloc.F90
@@ -83,25 +82,11 @@ Copyright>        copyright and attribution statement.
 !||    sensor_mod          ../common_source/modules/sensor_mod.F90
 !||    table_mod           ../engine/share/modules/table_mod.F
 !||====================================================================
-      SUBROUTINE RFORC3(PYTHON,
-     1   ELBUF_STR, JFT,       JLT,       NEL,
-     2   MTN,       IGEO,      GEO,       IXR,
-     3   X,         TABLE,     XDP,       F,
-     4   NPF,       TF,        SKEW,      FLG_KJ2,
-     5   VR,        AR,        V,         DT2T,
-     6   NELTST,    ITYPTST,   STIFN,     STIFR,
-     7   MS,        IN,        FSKY,      IADR,
-     8   SENSORS,   OFFSET,    ANIM,      PARTSAV,
-     9   IPARTR,    TANI,      FR_WAVE,   BUFMAT,
-     A   BUFGEO,    PM,        RBY,       FX1,
-     B   FX2,       FY1,       FY2,       FZ1,
-     C   FZ2,       MX1,       MX2,       MY1,
-     D   MY2,       MZ1,       MZ2,       GRESAV,
-     E   GRTH,      IGRTH,     MSRT,      DMELRT,
-     F   ITASK,     H3D_DATA,  JSMS,      NFT,
-     G   IAD,       IGRE,      PRELD1,    STF_F,
-     H   STF,       SANIN,     IRESP,     IMPL_S,
-     I   IDYNA,     SNPC,      FLG_SPR_DT)
+      SUBROUTINE RFORC3(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, SENSORS, OFFSET, ANIM, PARTSAV,
+     . IPARTR, TANI, FR_WAVE, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2,
+     . GRESAV, GRTH, IGRTH, MSRT, DMELRT, ITASK, JSMS, NFT, IAD, IGRE, PRELD1, STF_F, STF, SANIN, IRESP, IMPL_S, IDYNA,
+     . SNPC, FLG_SPR_DT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -109,7 +94,6 @@ C-----------------------------------------------
       USE ELBUFDEF_MOD
       USE TABLE_MOD
       USE SENSOR_MOD
-      USE H3D_MOD
       USE MESSAGE_MOD
       USE PRELOAD_AXIAL_MOD
       use element_mod , only : nixr
@@ -165,7 +149,6 @@ C-----------------------------------------------
       TYPE(TTABLE) TABLE(*)
 C
       TYPE (ELBUF_STRUCT_), TARGET :: ELBUF_STR
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSORS_) , INTENT(INOUT) :: SENSORS
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -284,8 +267,7 @@ C
      3   GRTH,              IGRTH,             GBUF%OFF,          NC1,
      4   NC2,               X,                 VR,                ITASK,
      5   NEL,               IGRE,              SENSORS)
-        CALL R1TORS(
-     1   GBUF%FOR(II(1)),TANI,           H3D_DATA,       NEL)
+      CALL R1TORS(GBUF%FOR(II(1)), TANI, NEL)
 !        
         IF (PRELD1>ZERO) THEN
            DO I=JFT,JLT
@@ -360,8 +342,7 @@ C
      3   GRTH,              IGRTH,             GBUF%OFF,          NC1,
      4   NC2,               X,                 VR,                ITASK,
      5   NEL,               IGRE,              SENSORS)
-        CALL R1TORS(
-     1   GBUF%FOR(II(1)),TANI,           H3D_DATA,       NEL)
+      CALL R1TORS(GBUF%FOR(II(1)), TANI, NEL)
 !        
         IF (IPARIT == 0) THEN
           CALL R1CUM3(
@@ -425,8 +406,7 @@ C
      3   GRTH,              IGRTH,             GBUF%OFF,          NC1,
      4   NC2,               X,                 VR,                ITASK,
      5   NEL,               IGRE,              SENSORS)
-        CALL R1TORS(
-     1   GBUF%FOR(II(1)),TANI,           H3D_DATA,       NEL)
+      CALL R1TORS(GBUF%FOR(II(1)), TANI, NEL)
 !        
         IF (IPARIT == 0) THEN
           CALL R1CUM3(
@@ -519,10 +499,8 @@ C
      3   GRTH,     IGRTH,    GBUF%OFF, NC1,
      4   NC2,      X,        VR,       ITASK,
      5   NEL,      IGRE,SENSORS)
-        CALL R2TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           H3D_DATA,
-     3   NEL)
+      CALL R2TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, NEL)
         IF (IPARIT == 0) THEN
           CALL R2CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -603,9 +581,7 @@ c
      3   GRTH,              IGRTH,             NC1,               NC2,
      4   NC3,               X,                 VR,                ITASK,
      5   NEL,               IGRE,SENSORS)
-        CALL R3TORS(
-     1   GBUF%FOR(II(1)),DF,             TANI,           H3D_DATA,
-     2   NEL)
+      CALL R3TORS(GBUF%FOR(II(1)), DF, TANI, NEL)
         IF (IPARIT == 0) THEN
           CALL R3CUM3(
      1   F,              GBUF%FOR(II(1)),STI,            STIFN,
@@ -705,10 +681,8 @@ C
      3   GRTH,              IGRTH,             GBUF%OFF,          NC1,
      4   NC2,               X,                 VR,                ITASK,
      5   NEL,               IGRE,SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
 ! preloading
         IF (PRELD1>ZERO) THEN
            DO I=JFT,JLT
@@ -827,10 +801,8 @@ C
      3   GRTH,              IGRTH,             GBUF%OFF,          NC1,
      4   NC2,               X,                 VR,                ITASK,
      5   NEL,               IGRE,              SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R4CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -1025,10 +997,8 @@ C
      3   VR,       GRESAV,   GRTH,     IGRTH,
      4   NC1,      NC2,      ITASK,    IAD,
      5   IGRE,     NFT,      NEL,SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R5CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -1125,10 +1095,8 @@ C
      3   VR,       GRESAV,   GRTH,     IGRTH,
      4   NC1,      NC2,      ITASK,    IAD,
      5   IGRE,     NFT,      NEL,      SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)     
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R4CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -1159,25 +1127,12 @@ C=======================================================================
 C
         NUVAR  = NINT(GEO(25,I0))
                  IF (IGTYP == 45) FLG_KJ2 = 1
-        CALL RGJOINT(
-     1   JFT,                JLT,                IPARTR,             NEL,
-     2   NUVAR,              IOUT,               I0,                 IADR,
-     3   FSKY,               FSKY,               GBUF%OFF,           GBUF%FOR(II(1)),
-     4   GBUF%FOR(II(2)),    GBUF%FOR(II(3)),    GBUF%EINT,          GBUF%TOTDEPL(II(1)),
-     5   GBUF%TOTDEPL(II(2)),GBUF%TOTDEPL(II(3)),GBUF%TOTROT(II(1)), GBUF%TOTROT(II(2)),
-     6   GBUF%TOTROT(II(3)), GBUF%MOM(II(1)),    GBUF%MOM(II(2)),    GBUF%MOM(II(3)),
-     7   GBUF%VAR,           STIFN,              STIFR,              IXR,
-     8   TANI,               RBY,                X,                  V,
-     9   VR,                 STI,                STIR,               MS,
-     A   IN,                 PARTSAV,            DT1,                DT2T,
-     B   F,                  AR,                 FX1,                FX2,
-     C   FY1,                FY2,                FZ1,                FZ2,
-     D   MX1,                MX2,                MY1,                MY2,
-     E   MZ1,                MZ2,                GRESAV,             GRTH,
-     F   IGRTH,              MSRT,               DMELRT,             NELTST,
-     G   ITYPTST,            IGTYP,              SENSORS%SENSOR_TAB, NC1,
-     H   NC2,                XDP,                GBUF%LENGTH_ERR,    H3D_DATA,
-     I   JSMS,               IGRE,               NFT,                NSENSOR )
+      CALL RGJOINT(JFT, JLT, IPARTR, NEL, NUVAR, IOUT, I0, IADR, FSKY, FSKY, GBUF%OFF, GBUF%FOR(II(1)), GBUF%FOR(II(2))
+     . , GBUF%FOR(II(3)), GBUF%EINT, GBUF%TOTDEPL(II(1)), GBUF%TOTDEPL(II(2)), GBUF%TOTDEPL(II(3)), GBUF%TOTROT(II(1)),
+     . GBUF%TOTROT(II(2)), GBUF%TOTROT(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)), GBUF%VAR, STIFN,
+     . STIFR, IXR, TANI, RBY, X, V, VR, STI, STIR, MS, IN, PARTSAV, DT1, DT2T, F, AR, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1,
+     . MX2, MY1, MY2, MZ1, MZ2, GRESAV, GRTH, IGRTH, MSRT, DMELRT, NELTST, ITYPTST, IGTYP, SENSORS%SENSOR_TAB, NC1, NC2,
+     . XDP, GBUF%LENGTH_ERR, JSMS, IGRE, NFT, NSENSOR)
 C=======================================================================
       ELSEIF (IGTYP == 35 .OR. IGTYP == 36) THEN
 C=======================================================================
@@ -1257,10 +1212,8 @@ C
      3   VR,       GRESAV,   GRTH,     IGRTH,
      4   NC1,      NC2,      ITASK,    IAD,
      5   IGRE,     NFT,      NEL,      SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R5CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -1355,10 +1308,8 @@ C
      3   VR,       GRESAV,   GRTH,     IGRTH,
      4   NC1,      NC2,      ITASK,    IAD,
      5   IGRE,     NFT,      NEL,SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R5CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),
@@ -1453,10 +1404,8 @@ C
      3   VR,       GRESAV,   GRTH,     IGRTH,
      4   NC1,      NC2,      ITASK,    IAD,
      5   IGRE,     NFT,      NEL,SENSORS)
-        CALL R4TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           AL,
-     3   H3D_DATA,       NEL)
+      CALL R4TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, AL, NEL)
         IF (IPARIT == 0) THEN
           CALL R5CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),

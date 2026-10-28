@@ -27,7 +27,6 @@ Copyright>        copyright and attribution statement.
 !||    compaction_tab_init            ../common_source/eos/compaction_tab.F90
 !||    condamage                      ../engine/source/materials/mat/mat190/condamage.F
 !||    conversion                     ../engine/source/materials/mat/mat190/conversion.F
-!||    dam_fld_sol                    ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    elasticity_plas_isotropic      ../engine/source/materials/mat/mat131/elasticity/elasticity_plas_isotropic.F90
 !||    elasticity_temp_isotropic      ../engine/source/materials/mat/mat131/elasticity/elasticity_temp_isotropic.F90
 !||    elasticity_viscous_isotropic   ../engine/source/materials/mat/mat131/elasticity/elasticity_viscous_isotropic.F90
@@ -64,7 +63,6 @@ Copyright>        copyright and attribution statement.
 !||    fail_tensstrain_ib             ../engine/source/materials/fail/tensstrain/fail_tensstrain_ib.F
 !||    fail_tensstrain_s              ../engine/source/materials/fail/tensstrain/fail_tensstrain_s.F
 !||    granular51                     ../engine/source/materials/mat/mat051/granular51.F90
-!||    idx_fld_sol                    ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    mat87c_tabulated               ../engine/source/materials/mat/mat087/mat87c_tabulated.F90
 !||    mat87c_tabulated_3dir_ortho    ../engine/source/materials/mat/mat087/mat87c_tabulated_3dir_ortho.F90
 !||    no_asso_lplas76c               ../engine/source/materials/mat/mat076/no_asso_lplas76c.F

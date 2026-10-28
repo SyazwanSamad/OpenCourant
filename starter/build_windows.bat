@@ -16,8 +16,6 @@ set jobsv=1
 set debug_suffix=
 set build_type=
 set cbuild=0
-set use_openreader=0
-set orb=
 
 IF (%1) == () GOTO ERROR
 
@@ -56,7 +54,6 @@ IF (%1) == () GOTO END_ARG_LOOP
        set dc="-DCOM=1"
        set dc_suf=_c
        set cbuild=1
-       set orb=-c
    )
 
    IF %1==-nt (
@@ -64,9 +61,6 @@ IF (%1) == () GOTO END_ARG_LOOP
        set jobsv=%2
        )
 
-   IF %1==-open_reader (
-       set use_openreader=1
-   )
 
 SHIFT
 GOTO ARG_LOOP
@@ -130,10 +124,6 @@ echo  arch =                      : %arch%
 echo  precision =                 : %prec%
 echo  debug =                     : %debug%
 echo  static_link =               : %static_link%
-if %use_openreader%==1 (
-echo.
-echo  Using open_reader
-)
 
 echo.
 echo  Running on             : %jobsv% Threads
@@ -143,24 +133,6 @@ echo.
 echo  Build directory        : %build_directory%
 echo.
 
-:: OpenReader Build
-if %use_openreader%==1 (
-  echo.
-  echo Build OpenReader
-  echo ----------------
-  echo.
-  cd ..\reader
-  call build_windows.bat -arch=%arch% -nt=%jobsv% -debug=%debug% %orb%
-  if errorLevel=1 (
-    echo.
-    echo.
-    echo Errors in OpenReader build !!!
-    echo.
-    exit /b 1
-  )
-  echo OpenReader build done
-  cd ..\starter
-)
 
 if exist %build_directory% (
 
@@ -186,7 +158,7 @@ if %debug%==0 (
     set build_type=Debug
 )
 
-cmake -G Ninja -DVS_BUILD=1 %dc% -DEXEC_NAME=%starter% -Darch=%arch% -Dprecision=%prec% -Ddebug=%debug%  -Dstatic_link=%static% -DCMAKE_BUILD_TYPE=%build_type% -DCMAKE_Fortran_COMPILER=%Fortran_comp% -DCMAKE_C_COMPILER=%C_comp% -DCMAKE_CPP_COMPILER=%CPP_comp% -DCMAKE_CXX_COMPILER=%CXX_comp% -DUSE_OPEN_READER=%use_openreader% ..
+cmake -G Ninja -DVS_BUILD=1 %dc% -DEXEC_NAME=%starter% -Darch=%arch% -Dprecision=%prec% -Ddebug=%debug%  -Dstatic_link=%static% -DCMAKE_BUILD_TYPE=%build_type% -DCMAKE_Fortran_COMPILER=%Fortran_comp% -DCMAKE_C_COMPILER=%C_comp% -DCMAKE_CPP_COMPILER=%CPP_comp% -DCMAKE_CXX_COMPILER=%CXX_comp% ..
 
 if errorLevel=1 (
   echo.
@@ -242,7 +214,6 @@ GOTO END_STARTER
   echo                                              0 no debug flags (default)
   echo                                              1 usual debug flags
   echo                                              chkb Check bounds build
-  echo     -open_reader                        : link with open_reader
   echo     -release                            : set build for release (optimized)
   echo.
   echo Execution control 

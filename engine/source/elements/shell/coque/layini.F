@@ -27,7 +27,6 @@ Copyright>        copyright and attribution statement.
 !||    cncoefort          ../engine/source/elements/sh3n/coquedk/cncoef3.F
 !||    dynain_c_strag     ../engine/source/output/dynain/dynain_c_strag.F
 !||    dynain_c_strsg     ../engine/source/output/dynain/dynain_c_strsg.F
-!||    h3d_shell_tensor   ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
 !||    stat_c_strafg      ../engine/source/output/sta/stat_c_strafg.F
 !||    stat_c_strsfg      ../engine/source/output/sta/stat_c_strsfg.F
 !||    tensorc            ../engine/source/output/anim/generate/tensorc.F

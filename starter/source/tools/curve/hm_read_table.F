@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lectur                 ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_option_count        ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count        ../starter/source/devtools/reader/hm_option_count.F
 !||    hm_read_table1_0       ../starter/source/tools/curve/hm_read_table1_0.F
 !||    hm_read_table1_1       ../starter/source/tools/curve/hm_read_table1_1.F
 !||--- uses       -----------------------------------------------------
@@ -114,7 +114,7 @@ C-----------------------------------------------------------------
 !||--- called by ------------------------------------------------------
 !||    lectur                 ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_option_count        ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count        ../starter/source/devtools/reader/hm_option_count.F
 !||    hm_read_table2_0       ../starter/source/tools/curve/hm_read_table2_0.F
 !||    hm_read_table2_1       ../starter/source/tools/curve/hm_read_table2_1.F
 !||    udouble                ../starter/source/system/sysfus.F

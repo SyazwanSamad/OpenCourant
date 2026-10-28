@@ -25,22 +25,13 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    finter       ../engine/source/tools/curve/finter.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I6ASS3(OUTPUT  ,E       ,MSR     ,NSV     ,ES      ,
-     2                  EM      ,NPC     ,TF      ,ANSMX   ,
-     3                  FMX     ,FMY     ,FMZ     ,XMAS    ,
-     4                  IFUNC   ,V       ,NOINT   ,NSN     ,
-     5                  NMN     ,FSAV    ,DT2T    ,NELTST  ,
-     6                  ITYPTST ,FFAC    ,FSKYI   ,ISKY    ,
-     7                  FCONT   ,FACX    ,FAC2    ,STIFF   ,
-     8                  HFLAG   ,IFUN2   ,ICOR    ,PENI    ,
-     9                  ANSMX0  ,FF0     ,H3D_DATA)
+      SUBROUTINE I6ASS3(OUTPUT, E, MSR, NSV, ES, EM, NPC, TF, ANSMX, FMX, FMY, FMZ, XMAS, IFUNC, V, NOINT, NSN, NMN,
+     . FSAV, DT2T, NELTST, ITYPTST, FFAC, FSKYI, ISKY, FCONT, FACX, FAC2, STIFF, HFLAG, IFUN2, ICOR, PENI, ANSMX0, FF0)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD, ONLY: OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -70,10 +61,6 @@ C     REAL
       my_real
      .   E(*),ES(*),EM(*),TF(*),V(*),FSAV(*),FSKYI(LSKYI,NFSKYI),
      .   FCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER  IL, IG, IG3, IG2, IG1, IL3, IL2, IL1, NISKYL
 C     REAL
       my_real
@@ -251,9 +238,8 @@ C
           ENDIF
         ENDIF
 C-------  parith      
-        IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.                      
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.                     
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN                   
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"                                         
            DO IL=1,NSN                                        
             IL3=3*IL                                          

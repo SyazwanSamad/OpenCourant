@@ -28,22 +28,16 @@ Copyright>        copyright and attribution statement.
 !||    ibcoff              ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
 !||    debug_mod           ../engine/share/modules/debug_mod.F
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    message_mod         ../engine/share/message_module/message_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD25E_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR   ,NSV     ,FSKYI,
-     2       ISKY   ,IBC    ,ISECIN ,NOINT   ,IBAG ,
-     3       ICODT  ,SECFCUM,NSTRF  ,ICONTACT,FCONT,
-     4       INACTI ,IADM   ,INTTH  ,FTHESKYI,CONDNSKYI,
-     5       H3D_DATA,LEDGE ,SEDGE  ,NEDGE   ,NIN  ,
-     6       TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER)
+      SUBROUTINE SPMD_FIADD25E_PON(OUTPUT, NB, LEN, BUFR, NSV, FSKYI, ISKY, IBC, ISECIN, NOINT, IBAG, ICODT, SECFCUM,
+     . NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHESKYI, CONDNSKYI, LEDGE, SEDGE, NEDGE, NIN, TAGNCONT,
+     . KLOADPINTER, LOADPINTER, LOADP_HYD_INTER)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE DEBUG_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
@@ -78,10 +72,6 @@ C-----------------------------------------------
      .        BUFR(LEN,*),
      .        FSKYI(LSKYI,NFSKYI), SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHESKYI(LSKYI),CONDNSKYI(LSKYI)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, IBCS, IBCM, NBINTER,
      .        NISKY_SAV,NOD1,NOD2,PP,PPL
       INTEGER NB_EDGE
@@ -166,10 +156,8 @@ C        ENDIF
 C
 C continuation of i7for3 and i10for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15)))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB_EDGE
           N = NINT(BUFR(1,I))

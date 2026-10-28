@@ -45,18 +45,13 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    check_sorting_criteria_mod   ../engine/source/interfaces/intsort/check_sorting_criteria.F90
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod                  ../engine/share/message_module/message_mod.F
 !||    timer_mod                    ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I20MAIN_TRI(TIMERS,
-     1                  IPARI   ,X       ,V       ,
-     2                  MS      ,NIN     ,ITASK   ,MWAG    ,WEIGHT  ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM ,
-     4                  ITAB    ,KINET   ,TEMP    ,NRTM_T  ,RENUM   ,
-     5                  NSNFIOLD,ESHIFT  ,NUM_IMP ,IND_IMP ,DIAG_SMS,
-     6                  NODNX_SMS,INTBUF_TAB,H3D_DATA,GLOB_THERM)
+      SUBROUTINE I20MAIN_TRI(TIMERS, IPARI, X, V, MS, NIN, ITASK, MWAG, WEIGHT, ISENDTO, IRCVFROM, RETRI, IAD_ELEM,
+     . FR_ELEM, ITAB, KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP, IND_IMP, DIAG_SMS, NODNX_SMS, INTBUF_TAB,
+     . GLOB_THERM)
 C============================================================================
 C-----------------------------------------------
 C   M o d u l e s
@@ -64,7 +59,6 @@ C-----------------------------------------------
       USE TIMER_MOD
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       use check_sorting_criteria_mod , only : check_sorting_criteria
       use glob_therm_mod 
 C-----------------------------------------------
@@ -103,7 +97,6 @@ C     REAL
      .   X(*), V(*), MS(*),TEMP(*),DIAG_SMS(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       type (glob_therm_) ,INTENT(IN) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -407,10 +400,8 @@ C mono tache
         IF (IMONM > 0) CALL STARTIME(TIMERS,26)
         INTBUF_TAB%VARIABLES(5) = -INTBUF_TAB%VARIABLES(5)
 
-        CALL SPMD_TRI20GAT(
-     1    RESULT       ,NSN ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2    IGAP         ,NSNR,MULTIMP    ,NTY        ,IPARI(47,NIN),
-     3    IPARI(22,NIN),H3D_DATA  )
+      CALL SPMD_TRI20GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IGAP, NSNR, MULTIMP, NTY, IPARI(47,
+     . NIN), IPARI(22,NIN))
         IPARI(24,NIN) = NSNR
 
         IF (NUM_IMP>0) 

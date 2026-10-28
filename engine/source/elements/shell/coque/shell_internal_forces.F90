@@ -562,7 +562,6 @@
                 write(700,"(A,I6,A,I6,A,I6)") " [GPU-GROUP] NG=", NG, "  IPLA=",   IPARG(29,NG), "  previous=", IPARG_PREVIOUS(29)
               ENDIF
               IPARG_PREVIOUS = IPARG(:,NG)
-              IF(.TRUE.) THEN
                 LFT   = 1
                 LLT   = MIN(128,NEL)
                 MTN   = MLW
@@ -579,8 +578,6 @@
                     end if
                   end do
                 end do
-              ENDIF
-!----6---------------------------------------------------------------7---------8
             ENDIF
           END DO
 

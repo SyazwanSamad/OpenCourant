@@ -188,7 +188,6 @@ Copyright>        copyright and attribution statement.
 !||    fvbag_mod                    ../engine/share/modules/fvbag_mod.F
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod                 ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    inoutfile_mod                ../common_source/modules/inoutfile_mod.F
 !||    matparam_def_mod             ../common_source/modules/mat_elem/matparam_def_mod.F90
 !||    message_mod                  ../engine/share/message_module/message_mod.F
@@ -199,43 +198,19 @@ Copyright>        copyright and attribution statement.
 !||    plyxfem_mod                  ../engine/share/modules/plyxfem_mod.F
 !||    stack_mod                    ../engine/share/modules/stack_mod.F
 !||====================================================================
-      SUBROUTINE GENANI(X        ,D        ,V           ,A           ,BUFEL    ,
-     2                  IXS      ,IXQ      ,IXC         ,IXT         ,IXP      ,
-     3                  IXR      ,IXTG     ,SWAFT       ,SMAS        ,SXNORM   ,
-     4                  SIAD     ,IPARG    ,PM          ,GEO         ,MS       ,
-     5                  SINVERT  ,CONT     ,SMATER      ,ICUT        ,SKEW     ,
-     6                  XCUT     ,FINT     ,ITAB        ,SEL2FA      ,FEXT     ,
-     7                  FOPT     ,LPBY        ,NPBY        ,NSTRF    ,
-     8                  RWBUF    ,NPRW     ,TANI        ,ELBUF_TAB   ,MAT_PARAM,
-     A                  DD_IAD   ,WEIGHT   ,EANI        ,IPART       ,CLUSTER  ,
-     B                  IPARTS   ,IPARTQ   ,IPARTC      ,IPARTT      ,IPARTP   ,
-     C                  IPARTR   ,IPARTUR  ,IPARTTG     ,
-     D                  RBY      ,SWA4     ,TORS        ,NOM_OPT     ,IGRSURF  ,
-     E                  BUFSF    ,IDATA    ,RDATA       ,SIADG       ,BUFMAT   ,
-     F                  BUFGEO   ,KXX      ,IXX         ,IPARTX      ,SUIX     ,
-     G                  SXUSR    ,SNFACPTX ,SIXEDGE     ,SIXFACET    ,SIXSOLID ,
-     H                  SNUMX1   ,SNUMX2   ,SNUMX3      ,SOFFX1      ,SOFFX2   ,
-     I                  SOFFX3   ,SMASS1   ,SMASS2      ,SMASS3      ,SFUNC1   ,
-     J                  SFUNC2   ,SFUNC3   ,KXSP        ,IXSP        ,NOD2SP   ,
-     K                  IPARTSP  ,SPBUF    ,IXS10       ,IXS20       ,IXS16    ,
-     L                  VR       ,MONVOL   ,VOLMON      ,IPM         ,IGEO     ,NODGLOB,
-     M                  IAD_ELEM ,FR_ELEM  ,FR_SEC      ,FR_RBY2     ,IAD_RBY2 ,
-     N                  FR_WALL  ,IFLOW    ,RFLOW       ,FNCONT      ,FTCONT   ,
-     O                  TEMP     ,THKE     ,ERR_THK_SH4 ,ERR_THK_SH3 ,DIAG_SMS ,
-     P                  IPARI    ,FNCONT2  ,DR          ,ALE_CONNECTIVITY       ,
-     Q                  IRBE2    ,IRBE3    ,LRBE2       ,LRBE3       ,FR_RBE2,
-     R                  FR_RBE3M ,IAD_RBE2 ,DXANCG      ,NOD_PXFEM   ,IEL_PXFEM,
-     S                  ZI_PLY   ,VGAZ     ,FCONTG      ,FNCONTG     ,FTCONTG  ,
-     T                  FANREAC  ,INOD_CRK ,IEL_CRK     ,ELCUTC      ,IADC_CRK ,
-     U                  PDAMA2   ,RES_SMS  ,WEIGHT_MD   ,NODGLOBXFE  ,NODEDGE  ,
-     V                  FCLUSTER ,MCLUSTER ,XFEM_TAB    ,W           ,
-     W                  NV46     ,IPARTIG3D,KXIG3D      ,IXIG3D      ,SIG3DSOLID,
-     X                  KNOT     ,WIGE     ,NERCVOIS    ,NESDVOIS    ,LERCVOIS  ,
-     Y                  LESDVOIS ,CRKEDGE  ,INDX_CRK    ,XEDGE4N     ,XEDGE3N   ,
-     Z                  STACK    ,SPH2SOL  ,STIFN       ,STIFR       ,IGRNOD    ,
-     1                  H3D_DATA ,SUBSET   ,MULTI_FVM   ,KNOTLOCPC   ,KNOTLOCEL ,
-     2                  FCONT_MAX,FNCONTP2 ,FTCONTP2    ,GLOB_THERM  ,
-     .                  DRAPE_SH4N, DRAPE_SH3N, DRAPEG,OUTPUT    )
+      SUBROUTINE GENANI(X, D, V, A, BUFEL, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG, SWAFT, SMAS, SXNORM, SIAD, IPARG, PM,
+     . GEO, MS, SINVERT, CONT, SMATER, ICUT, SKEW, XCUT, FINT, ITAB, SEL2FA, FEXT, FOPT, LPBY, NPBY, NSTRF, RWBUF, NPRW,
+     . TANI, ELBUF_TAB, MAT_PARAM, DD_IAD, WEIGHT, EANI, IPART, CLUSTER, IPARTS, IPARTQ, IPARTC, IPARTT, IPARTP, IPARTR,
+     . IPARTUR, IPARTTG, RBY, SWA4, TORS, NOM_OPT, IGRSURF, BUFSF, IDATA, RDATA, SIADG, BUFMAT, BUFGEO, KXX, IXX,
+     . IPARTX, SUIX, SXUSR, SNFACPTX, SIXEDGE, SIXFACET, SIXSOLID, SNUMX1, SNUMX2, SNUMX3, SOFFX1, SOFFX2, SOFFX3,
+     . SMASS1, SMASS2, SMASS3, SFUNC1, SFUNC2, SFUNC3, KXSP, IXSP, NOD2SP, IPARTSP, SPBUF, IXS10, IXS20, IXS16, VR,
+     . MONVOL, VOLMON, IPM, IGEO, NODGLOB, IAD_ELEM, FR_ELEM, FR_SEC, FR_RBY2, IAD_RBY2, FR_WALL, IFLOW, RFLOW, FNCONT,
+     . FTCONT, TEMP, THKE, ERR_THK_SH4, ERR_THK_SH3, DIAG_SMS, IPARI, FNCONT2, DR, ALE_CONNECTIVITY, IRBE2, IRBE3,
+     . LRBE2, LRBE3, FR_RBE2, FR_RBE3M, IAD_RBE2, DXANCG, NOD_PXFEM, IEL_PXFEM, ZI_PLY, VGAZ, FCONTG, FNCONTG, FTCONTG,
+     . FANREAC, INOD_CRK, IEL_CRK, ELCUTC, IADC_CRK, PDAMA2, RES_SMS, WEIGHT_MD, NODGLOBXFE, NODEDGE, FCLUSTER,
+     . MCLUSTER, XFEM_TAB, W, NV46, IPARTIG3D, KXIG3D, IXIG3D, SIG3DSOLID, KNOT, WIGE, NERCVOIS, NESDVOIS, LERCVOIS,
+     . LESDVOIS, CRKEDGE, INDX_CRK, XEDGE4N, XEDGE3N, STACK, SPH2SOL, STIFN, STIFR, IGRNOD, SUBSET, MULTI_FVM,
+     . KNOTLOCPC, KNOTLOCEL, FCONT_MAX, FNCONTP2, FTCONTP2, GLOB_THERM, DRAPE_SH4N, DRAPE_SH3N, DRAPEG, OUTPUT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -248,7 +223,6 @@ C-----------------------------------------------
         USE CLUSTER_MOD
         USE STACK_MOD
         USE ALEANIM_MOD
-        USE H3D_MOD
         USE GROUPDEF_MOD
         USE MULTI_FVM_MOD
         USE INOUTFILE_MOD
@@ -346,7 +320,6 @@ C-----------------------------------------------
         TYPE (CLUSTER_) ,DIMENSION(NCLUSTER)    :: CLUSTER
         TYPE (XFEM_EDGE_)   , DIMENSION(*) :: CRKEDGE
         TYPE (STACK_PLY) :: STACK
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE (SUBSET_) , DIMENSION(NSUBS) :: SUBSET
 !
         TYPE (GROUP_)  , DIMENSION(NGRNOD) :: IGRNOD
@@ -480,7 +453,7 @@ C
 
         INTEGER :: LEN_TMP_NAME
         CHARACTER(len=2048),TARGET :: TMP_NAME
-        INTEGER :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_IN_H3D)
+        INTEGER :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_VIS)
         INTEGER,DIMENSION(:),ALLOCATABLE :: IS_WRITTEN_NODE
         INTEGER :: DEFAULT_OUTPUT
 C=======================================================================
@@ -498,7 +471,7 @@ C=======================================================================
 
         call my_alloc(WA4, SWA4, "WA4")
         call my_alloc(MAS4, SMAS, "MAS4")
-        call my_alloc(WA4_FVM, AIRBAGS_TOTAL_FVM_IN_H3D, "WA4_FVM")
+        call my_alloc(WA4_FVM, AIRBAGS_TOTAL_FVM_VIS, "WA4_FVM")
 
         call my_alloc(VFLU, 3, NUMNOD, "VFLU")
         call my_alloc(VVAR1, 3, NUMNOD, "VVAR1")
@@ -3254,9 +3227,7 @@ C
 C-----------------------------------------------
 C   ELEMENT FUNC (quad+coque)
 C-----------------------------------------------
-        NDMA2= NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT)
-     .                +MIN(1,ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS)
-     .                +MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER))
+      NDMA2=NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1))+MIN(1,ANIM_N(2)+OUTP_N(2))+MIN(1,ANIM_N(12)+OUTP_N(3)))
 C Monoproc Equivalent Treatment
         IF (NSPMD == 1 .AND. NFVTR>0) THEN
           call my_alloc(FVMASS, NFVTR, "FVMASS")
@@ -4864,9 +4835,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   ELEMENT FUNC (brick)
 C-----------------------------------------------
-        NDMA2= NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT)
-     .                +MIN(1,ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS)
-     .                +MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER))
+      NDMA2=NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1))+MIN(1,ANIM_N(2)+OUTP_N(2))+MIN(1,ANIM_N(12)+OUTP_N(3)))
         NNN = NUMELS+ISPH3D*(NUMSPH+MAXPJET)+3*NUMELS16+27*NUMELIG3D
         DO I = 1,MX_ANI
           IFUNC = I
@@ -5352,9 +5321,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   ELEMENT FUNC (truss+..)
 C-----------------------------------------------
-        NDMA2= NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT)
-     .                +MIN(1,ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS)
-     .                +MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER))
+      NDMA2=NUMNOD*(MIN(1,ANIM_N(1)+OUTP_N(1))+MIN(1,ANIM_N(2)+OUTP_N(2))+MIN(1,ANIM_N(12)+OUTP_N(3)))
         DO I = 1,MX_ANI
           IFUNC = I
           IF(ANIM_FE(I)==1) THEN

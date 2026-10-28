@@ -25,8 +25,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    fretitl2                 ../starter/source/starter/freform.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||    hm_thvarc                ../starter/source/output/th/hm_read_thvarc.F
 !||    hord                     ../starter/source/output/th/hord.F
 !||    r2r_exist                ../starter/source/coupling/rad2rad/routines_r2r.F

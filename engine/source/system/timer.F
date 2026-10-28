@@ -272,29 +272,6 @@ C
 
           ENDIF
 
-          IF(.FALSE.) THEN
-          NFIELDS = 0 
-          IF(TABTIME(MACRO_TIMER_MONVOL,1) > 0) THEN
-            NFIELDS = NFIELDS + 1 
-            FIELDS(NFIELDS) = MACRO_TIMER_MONVOL  
-            TITLES(MACRO_TIMER_MONVOL) = 'UP' 
-          ENDIF
-          IF(TABTIME(MACRO_TIMER_FVMBAG,1) > 0) THEN
-            NFIELDS = NFIELDS + 1 
-            FIELDS(NFIELDS) = MACRO_TIMER_FVMBAG  
-            TITLES(MACRO_TIMER_FVMBAG) = 'FVMESH' 
-          ENDIF
-          IF(TABTIME(MACRO_TIMER_FVMBAG,1) > 0) THEN
-            NFIELDS = NFIELDS + 1 
-            FIELDS(NFIELDS) = MACRO_TIMER_FVMBAG1  
-            TITLES(MACRO_TIMER_FVMBAG1) = 'FVBAG' 
-          ENDIF
-          IF(NFIELDS > 0) CALL PRINT_BLOCK("** AIRBAGS **",TABTIME,NTIMAX,
-     .                      FLAG,OUT_ID,NFIELDS,FIELDS,TITLES)
-          ENDIF
-
-
-C /INTER/TYPE25 25
           NFIELDS = 0
           J = MACRO_TIMER_T25SLIDING
           IF(TABTIME(J,1) > 0) THEN
@@ -376,22 +353,6 @@ C /INTER/TYPE25 25
             CALL PRINT_BLOCK("** SPH TIME **",TABTIME,NTIMAX,
      .                      FLAG,OUT_ID,NFIELDS,FIELDS,TITLES)
           ENDIF
-          IF(TABTIME(MACRO_TIMER_GENH3D,1) > 0 ) THEN
-          
-            FIELDS(1 )=MACRO_TIMER_GENH3D ; TITLES(FIELDS(1 ))= 'TOTAL'         
-            FIELDS(2 )=MACRO_TIMER_SPMDH3D; TITLES(FIELDS(2 ))= 'SPMD'      
-            FIELDS(3 )=MACRO_TIMER_LIBH3D ; TITLES(FIELDS(3 ))= 'H3DLIB'       
-            FIELDS(4 )=MACRO_TIMER_GENH3D1; TITLES(FIELDS(4 ))= 'GPSTMAX'      
-c           FIELDS(5 )=MACRO_TIMER_GENH3D2; TITLES(FIELDS(5 ))= 'WRITE'       
-
-            NFIELDS = 4
-
-            CALL PRINT_BLOCK("** H3D ANIMATIONS **",TABTIME,NTIMAX,
-     .                      FLAG,OUT_ID,NFIELDS,FIELDS,TITLES)
-          ENDIF
-C
-
-          
           IF (IMONM == 2) THEN
             FIELDS(1 )=56    ; TITLES(FIELDS(1 )) = 'BEG_CRIT'         
             FIELDS(2 )=57    ; TITLES(FIELDS(2 )) = 'EOF_CRIT'        

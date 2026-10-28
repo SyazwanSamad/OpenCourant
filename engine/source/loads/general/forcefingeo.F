@@ -26,22 +26,19 @@ Copyright>        copyright and attribution statement.
 !||    finter                        ../engine/source/tools/curve/finter.F
 !||    finter_smooth                 ../engine/source/tools/curve/finter_smooth.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                       ../engine/share/modules/h3d_mod.F
 !||    nodal_arrays_mod              ../common_source/modules/nodal_arrays.F90
 !||    python_call_funct_cload_mod   ../engine/source/loads/general/python_call_funct_cload.F90
 !||    python_funct_mod              ../common_source/modules/python_mod.F90
 !||    sensor_mod                    ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE FORCEFINGEO(IBFV  ,NPC    ,TF     ,A     ,V    ,X     ,
-     2                       VEL   ,SENSOR_TAB,FSKY  ,FEXT ,ITABM1,
-     3                       H3D_DATA,NSENSOR, PYTHON,WFEXT,NODES)
+      SUBROUTINE FORCEFINGEO(IBFV, NPC, TF, A, V, X, VEL, SENSOR_TAB, FSKY, FEXT, ITABM1, NSENSOR, PYTHON, WFEXT,
+     . NODES)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE nodal_arrays_mod
       USE PYTHON_FUNCT_MOD
       use python_call_funct_cload_mod
-      USE H3D_MOD 
       USE SENSOR_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -74,7 +71,6 @@ C-----------------------------------------------
       INTEGER ITABM1(*)
       my_real TF(*), A(3,*), V(3,*), X(3,*),
      .   VEL(LFXVELR,*),FSKY(8,LSKY),FEXT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
 C-----------------------------------------------
@@ -163,9 +159,7 @@ C
         A(2,N2) = A(2,N2)+SKEW2*AA
         A(3,N2) = A(3,N2)+SKEW3*AA
 C
-        IF( ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .      ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT > 0 
-     .           .AND.IMPL_S==0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0.AND.IMPL_S==0) THEN
           FEXT(1,N2) = FEXT(1,N2)+SKEW1*AA
           FEXT(2,N2) = FEXT(2,N2)+SKEW2*AA
           FEXT(3,N2) = FEXT(3,N2)+SKEW3*AA

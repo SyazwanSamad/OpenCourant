@@ -28,29 +28,21 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    crackxfem_mod          ../engine/share/modules/crackxfem_mod.F
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    heat_mod               ../engine/share/modules/heat_mod.F
 !||    interfaces_mod         ../common_source/modules/interfaces/interfaces_mod.F90
 !||    my_alloc_mod           ../common_source/tools/memory/my_alloc.F90
 !||    plyxfem_mod            ../engine/share/modules/plyxfem_mod.F
 !||    spmd_mod               ../engine/source/mpi/spmd_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_EXCH2_A_PON(INTERFACES,
-     1   IAD_ELEM,FR_ELEM,ADDCNE,PROCNE,FR_NBCC,
-     2   SIZE    ,LENR   ,LENS  ,FSKY  ,FSKYV  ,
-     3   FSKYM   ,IFSUBM ,SIZI  ,LENI  ,IADSDP ,
-     4   IADRCP  ,ISENDP ,IRECVP,FFSKY ,PROCNE_PXFEM,
-     5   FR_NBCC1,IADSDP_PXFEM,IADRCP_PXFEM, ISENDP_PXFEM,
-     6   IRECVP_PXFEM,LENR1  ,LENS1 ,IADSDP_CRK,IADRCP_CRK,
-     7   ISENDP_CRK,IRECVP_CRK, FSKYD,CRKNODIAD,CRKSKY,
-     8   FORNEQSKY,NFACNIT  ,LENC  ,FCONT   ,H3D_DATA,
-     9   FNCONT   ,FTCONT   ,GLOB_THERM)
+      SUBROUTINE SPMD_EXCH2_A_PON(INTERFACES, IAD_ELEM, FR_ELEM, ADDCNE, PROCNE, FR_NBCC, SIZE, LENR, LENS, FSKY,
+     . FSKYV, FSKYM, IFSUBM, SIZI, LENI, IADSDP, IADRCP, ISENDP, IRECVP, FFSKY, PROCNE_PXFEM, FR_NBCC1, IADSDP_PXFEM,
+     . IADRCP_PXFEM, ISENDP_PXFEM, IRECVP_PXFEM, LENR1, LENS1, IADSDP_CRK, IADRCP_CRK, ISENDP_CRK, IRECVP_CRK, FSKYD,
+     . CRKNODIAD, CRKSKY, FORNEQSKY, NFACNIT, LENC, FCONT, FNCONT, FTCONT, GLOB_THERM)
 C--------------------------------------
         USE PLYXFEM_MOD
         USE CRACKXFEM_MOD
         USE PLYXFEM_MOD
         USE HEAT_MOD
-        USE H3D_MOD
         USE GLOB_THERM_MOD
         USE INTERFACES_MOD
         use my_alloc_mod
@@ -97,7 +89,6 @@ C-----------------------------------------------
         my_real  , INTENT(INOUT) :: FCONT(3,NUMNOD),FNCONT(3,NUMNOD),
      .          FTCONT(3,NUMNOD)
         TYPE(XFEM_SKY_), DIMENSION(*) :: CRKSKY
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE(GLOB_THERM_) ,INTENT(IN) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -167,8 +158,7 @@ C
             IF(ICRACK3D > 0) SIZ = SIZ +
      .                        (17*NLEVMAX+1)*FR_NBCC1(2,I)
             SIZ = SIZ + 3*NFACNIT*FR_NBCC(2,I)               !NITSCHE METHOD
-            IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0)
-     .           SIZ = SIZ + 3*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))    !Output max contact forces
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) SIZ = SIZ + 3*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))
             IF(LENC>=6*LENI)
      .           SIZ = SIZ + 6*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))    !Output Pcont&Pcont_max
             MSGTYP = MSGOFF
@@ -1088,7 +1078,7 @@ C
             ENDIF
 
 C --- /CONT/MAX output
-            IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
 #include      "vectorize.inc"
               DO J=IAD_ELEM(1,I),IAD_ELEM(1,I+1)-1
                 NOD = FR_ELEM(J)
@@ -1144,8 +1134,7 @@ C
      .                                       (17*NLEVMAX+1)   + 1
             ENDIF
             SIZ = SIZ + (IADSDP(I+1)-IADSDP(I))*3*NFACNIT
-            IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0)
-     .             SIZ = SIZ + 3*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))    !Output max contact forces
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) SIZ = SIZ + 3*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))
             IF(LENC>=6*LENI)
      .             SIZ = SIZ + 6*(IAD_ELEM(1,I+1)-IAD_ELEM(1,I))    !Output max contact forces
 C
@@ -1706,7 +1695,7 @@ C
           ENDIF
 
 C --- /CONT/MAX output
-          IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
 #include      "vectorize.inc"
             DO J=IAD_ELEM(1,I),IAD_ELEM(1,I+1)-1
               NOD = FR_ELEM(J)

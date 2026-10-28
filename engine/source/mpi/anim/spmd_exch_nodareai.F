@@ -23,9 +23,6 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    genani                ../engine/source/output/anim/generate/genani.F
 !||    gpstra_solid          ../engine/source/output/outmaxsubr.F
-!||    h3d_nodal_tensor      ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
-!||    h3d_sol_skin_scalar   ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
-!||    h3d_sol_skin_tensor   ../engine/source/output/h3d/h3d_results/h3d_sol_skin_tensor.F
 !||    inter_sh_offset_ini   ../engine/source/interfaces/shell_offset/inter_offset_ini.F90
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------

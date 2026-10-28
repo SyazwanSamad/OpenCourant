@@ -24,9 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_inter_struct   ../starter/source/interfaces/reader/hm_read_inter_struct.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_floatv_dim      ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_floatv_dim      ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
 !||    inter_dcod_friction    ../starter/source/interfaces/reader/inter_dcod_friction.F
 !||    inter_dcod_function    ../starter/source/interfaces/reader/inter_dcod_function.F
 !||    inter_dcod_sensor      ../starter/source/interfaces/reader/inter_dcod_sensor.F
@@ -229,6 +229,11 @@ C
       CALL HM_GET_FLOATV('STMIN',STMIN,IS_AVAILABLE,LSUBMODEL,UNITAB)
       CALL HM_GET_FLOATV('STMAX',STMAX,IS_AVAILABLE,LSUBMODEL,UNITAB)
       CALL HM_GET_FLOATV('Pskid',PSKID,IS_AVAILABLE,LSUBMODEL,UNITAB)
+      IF(PSKID /= ZERO)THEN
+        WRITE(ISTDO,*) 'ERROR: /INTER/TYPE21 Pskid H3D output has been removed; set Pskid to zero.'
+        WRITE(IOUT,*) 'ERROR: /INTER/TYPE21 Pskid H3D output has been removed; set Pskid to zero.'
+        CALL ARRET(2)
+      ENDIF
 C
       CALL HM_GET_FLOATV('STFAC',STFAC,IS_AVAILABLE,LSUBMODEL,UNITAB)
       CALL HM_GET_FLOATV('FRIC',FRIC,IS_AVAILABLE,LSUBMODEL,UNITAB)

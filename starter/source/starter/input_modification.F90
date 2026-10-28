@@ -22,7 +22,7 @@
 !||    input_modification_mod   ../starter/source/starter/input_modification.F90
 !||--- called by ------------------------------------------------------
 !||    contrl                   ../starter/source/starter/contrl.F
-!||    hm_s_ale                 ../starter/source/devtools/hm_reader/hm_s_ale.F90
+!||    hm_s_ale                 ../starter/source/devtools/reader/hm_s_ale.F90
 !||    lectur                   ../starter/source/starter/lectur.F
 !||    s_ale_message            ../starter/source/ale/s_ale_message.F90
 !||    starter0                 ../starter/source/starter/starter0.F

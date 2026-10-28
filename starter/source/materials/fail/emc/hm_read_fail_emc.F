@@ -23,8 +23,8 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_fail             ../starter/source/materials/fail/hm_read_fail.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod             ../starter/share/modules1/submodel_mod.F

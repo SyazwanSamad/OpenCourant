@@ -53,7 +53,6 @@ def main():
                          f'-I"{previous_modules}"', command)
         command = re.sub(r'/Fo\S+', f'/Fo"{target.as_posix()}"', command)
         command = re.sub(r'/Fd\S+', '', command)
-        command = command.replace('-DHM_READER_NO_RBODIES_FROM_RIGID_PARTS', '')
         command += ' /Od /check:bounds /traceback'
         subprocess.run(command, cwd=entry['directory'], check=True)
         replacements[entry['output']] = target
@@ -66,10 +65,9 @@ def main():
     response = args.output / 'starter-objects.rsp'
     response.write_text('\n'.join('"' + str(replacements.get(obj, args.starter_build / obj)) + '"'
                                    for obj in objects) + '\n' + libraries + '\n')
-    readers = [('openreader', ROOT / 'exec/open_reader_win64.lib'),
-               ('v82', ROOT / 'extlib/hm_reader/win64/hm_reader_win64.lib')]
+    readers = [('openreader', ROOT / 'exec/open_reader_win64.lib')]
     for name, library in readers:
-        link_flags = re.sub(r'\S*open_reader_win64\.lib', '"' + library.as_posix() + '"', flags)
+        link_flags = flags
         executable = args.output / f'starter-{name}.exe'
         subprocess.run(f'{compiler} /nologo @"{response}" {link_flags} /link /out:"{executable}"',
                        cwd=args.starter_build, check=True)

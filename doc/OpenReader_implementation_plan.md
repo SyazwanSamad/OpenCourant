@@ -1,11 +1,21 @@
 # OpenReader implementation plan
 
-Status: Stages 1-5 implemented for `IRIGID=1` and verified on Windows x64 (serial
-Starter and double-precision SMP Engine). Stage 4 corrected the earlier `IRIGID=2`
-reference results; that mode requires a follow-up implementation and is explicitly
-rejected. Stage 6 API alignment and Windows CI are implemented; hosted CI,
-cross-platform validation, and mode-2 rollout remain outstanding. The default
-rigid-part bypass stays enabled.
+Current status: dependency-removal Stage 3 makes OpenReader the sole Starter
+reader after Windows x64 DP SMP validation. Both rigid modes remain supported;
+the reader selector, compatibility branches, and live vendor-reader test oracle
+are retired. Dependency-removal Stage 5 removes H3D functionality while retaining
+shared results, native outputs, and old serial checkpoint continuation. Focused
+element/contact cases also pass with two Intel MPI ranks. See
+[the current report](../qa-tests/dependency_removal/STAGE5.md) and
+[current test commands](../qa-tests/reader/README.md). Structured-ALE generation
+remains unsupported and fails explicitly during native loading, with a defensive
+Starter check as well. Hosted CI, Linux/ARM, SP, and broader MPI/R2R execution
+remain unverified.
+
+The numbered stages below are the historical OpenReader rollout record, before
+dependency-removal Stages 2-3. Their former mode-2 rejection, automatic bypass, and
+check counts are superseded by the current report. They are separate from the
+[dependency-removal stages](Remove_HMReader_H3D_plan.md).
 
 ## Objective
 
@@ -17,7 +27,7 @@ Reuse the existing SDI model, entity creation helpers, reader export conventions
 and Starter conversion sequence. Do not add a dependency or a parallel conversion
 framework.
 
-## Current findings
+## Findings during the original rollout
 
 - OpenReader builds on Windows x64 with Intel oneAPI 2025.2 and MSVC 19.44.
 - Starter's original OpenReader build fails at linking because four reader APIs
@@ -341,15 +351,10 @@ that `IRIGID=2` needs connected-region conversion. Mode-1 numerical success does
 not implement that mode. The automatic rigid-part bypass and structured-ALE
 restriction remain until their respective missing behavior is validated.
 
-A subsequent R66 production-deck Starter comparison exposed a separate generic
-contact-set classification defect: TYPE25's converted set was retained as a line
-but omitted as a surface. Group-use classification now retains all allowed
-subtypes and clears its cached references on model read/creation. The unchanged
-deck generates eight restarts with zero errors; printed rigid-body properties and
-membership match both default-reader controls. Six focused contact/reload checks
-are included in Windows CI. Details and single-run timing observations are in
-the [R66 benchmark](OpenReader_R66_benchmark.md); production Engine dynamics remain
-unverified.
+The TYPE25 contact regression checks converted sets used as both lines and
+surfaces. Group-use classification retains all allowed subtypes and clears its
+cached references on model read/creation. Six focused contact/reload checks are
+included in Windows CI.
 
 Keep structured ALE and unrelated reader features outside this repair unless they
 block the focused regression cases. Preserve the existing restriction until those

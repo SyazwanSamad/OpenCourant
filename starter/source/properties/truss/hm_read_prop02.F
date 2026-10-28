@@ -24,7 +24,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_properties     ../starter/source/properties/hm_read_properties.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod           ../starter/share/modules1/elbuftag_mod.F
 !||    message_mod            ../starter/share/message_module/message_mod.F

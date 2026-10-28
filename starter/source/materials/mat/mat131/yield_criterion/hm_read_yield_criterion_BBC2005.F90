@@ -36,8 +36,8 @@
 !||    hm_read_yield_criterion           ../starter/source/materials/mat/mat131/yield_criterion/hm_read_yield_criterion.F90
 !||--- calls      -----------------------------------------------------
 !||    bbc2005_calcul_coeffs             ../starter/source/materials/mat/mat131/yield_criterion/bbc2005_calcul_coeffs.F90
-!||    hm_get_float_array_index          ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_int_array_index            ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_float_array_index          ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_int_array_index            ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    bbc2005_calcul_coeffs_mod         ../starter/source/materials/mat/mat131/yield_criterion/bbc2005_calcul_coeffs.F90
 !||    hm_option_read_mod                ../starter/share/modules1/hm_option_read_mod.F

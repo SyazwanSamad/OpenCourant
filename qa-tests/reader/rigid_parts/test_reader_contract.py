@@ -163,6 +163,9 @@ class Reader:
             sets.append({'id': self.integer('id'), 'clauses': self.integer('clausesmax'),
                          'key': self.string_at('KEY_type', 1),
                          'items': self.integer('idsmax', 1), 'part': self.integer('ids', 1, 1)})
+            if metadata and sets[-1]['key'] == 'NODE':
+                sets[-1]['nodes'] = [self.integer('ids', 1, index)
+                                    for index in range(1, sets[-1]['items'] + 1)]
         added_nodes = []
         self.select(b'/RBODY')
         for _ in bodies:
@@ -191,8 +194,6 @@ class Reader:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', type=Path, required=True)
-    parser.add_argument('--openreader', action='store_true', help='Require explicit rejection of unimplemented IRIGID=2')
-    parser.add_argument('--guard', type=Path, help='Optional compiled guard_driver executable')
     parser.add_argument('--case', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--output', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -212,28 +213,14 @@ def main():
             command = [sys.executable, str(Path(__file__).resolve()), '--reader', str(args.reader),
                        '--case', str(fixture), '--output', str(output)]
             result = subprocess.run(command, capture_output=True, text=True, timeout=30, cwd=temporary)
-            rejection = case.get('openreader_error') if args.openreader else None
-            if rejection:
-                assert result.returncode == 1 and rejection in result.stderr, (name, result.stdout, result.stderr)
-            elif result.returncode:
+            if result.returncode:
                 raise RuntimeError(f'{name}: reader failed ({result.returncode})\n{result.stdout}{result.stderr}')
             else:
                 actual = json.loads(output.read_text(encoding='utf-8'))
                 if actual != case['snapshot']:
                     raise AssertionError(f'{name}: reference mismatch\n{json.dumps(actual, indent=2)}')
-            if args.guard:
-                result = subprocess.run([str(args.guard.resolve()), str(fixture)], env=environment,
-                                        capture_output=True, text=True, timeout=30, cwd=temporary)
-                required = case['guard_error']
-                if result.returncode != (2 if required else 0):
-                    raise AssertionError(f'{name}: unexpected guard exit {result.returncode}\n'
-                                         f'{result.stdout}{result.stderr}')
-                if required and required not in result.stdout:
-                    raise AssertionError(f'{name}: missing part diagnostic\n{result.stdout}')
-                if not required and 'guard accepted ordinary parts' not in result.stdout:
-                    raise AssertionError(f'{name}: ordinary-part path was not reached')
-            label = 'unsupported mode rejected' if rejection else 'reference'
-            print(f'PASS {name} ({label}' + (' + guard)' if args.guard else ')'))
+            print(f'PASS {name} (frozen reference)')
+
 
 
 if __name__ == '__main__':

@@ -25,8 +25,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    arret                  ../starter/source/system/arret.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string_index    ../starter/source/devtools/hm_reader/hm_get_string_index.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string_index    ../starter/source/devtools/reader/hm_get_string_index.F
 !||    user_output            ../starter/source/user_interface/user_output.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod           ../starter/share/modules1/elbuftag_mod.F

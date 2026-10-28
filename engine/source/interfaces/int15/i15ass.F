@@ -24,18 +24,13 @@ Copyright>        copyright and attribution statement.
 !||    i15cmp         ../engine/source/interfaces/int15/i15cmp.F
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod   ../common_source/modules/groupdef_mod.F
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    output_mod     ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I15ASS(OUTPUT,AF    ,X     ,V    ,KSURF ,IGRSURF ,
-     2                  BUFSF ,STIFN ,FS   ,FCONT ,FSKYI ,
-     3                  ISKY  ,DE    ,WNF  ,WTF   ,WNS   ,
-     4                  FNORMX ,FNORMY ,FNORMZ ,FTANGX ,FTANGY ,
-     5                  FTANGZ ,NNC    ,KNC    ,H3D_DATA)
+      SUBROUTINE I15ASS(OUTPUT, AF, X, V, KSURF, IGRSURF, BUFSF, STIFN, FS, FCONT, FSKYI, ISKY, DE, WNF, WTF, WNS,
+     . FNORMX, FNORMY, FNORMZ, FTANGX, FTANGY, FTANGZ, NNC, KNC)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE OUTPUT_MOD, ONLY : OUTPUT_ 
 C-----------------------------------------------
@@ -66,7 +61,6 @@ C-----------------------------------------------
      .  FCONT(3,*),FSKYI(LSKYI,NFSKYI), DE,
      .  WNF(3,*) ,WTF(3,*) ,WNS(*) ,
      .  FNORMX,FNORMY,FNORMZ,FTANGX,FTANGY,FTANGZ
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SURF_)   , DIMENSION(NSURF)   :: IGRSURF
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -194,9 +188,8 @@ C---------------------------------
 C------------------------------------------------------------
 C     animation (contact forces)
 C------------------------------------------------------------
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
 #include "vectorize.inc"
         DO 400 I=1,NNC

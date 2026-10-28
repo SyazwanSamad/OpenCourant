@@ -38,33 +38,17 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod           ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod            ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    multi_fvm_mod          ../common_source/modules/ale/multi_fvm_mod.F90
 !||    output_mod             ../common_source/modules/output/output_mod.F90
 !||    tri7box                ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I18FOR3(OUTPUT, JLT      ,A          ,V         ,IBCC      ,ICODT         ,
-     2                  FSAV      ,GAP        ,FRIC      ,MS        ,VISC          ,
-     3                  VISCF     ,NOINT      ,STFN      ,ITAB      ,CN_LOC        ,
-     4                  STFVAL    ,STIFN      ,STIF      ,FSKYI     ,ISKY          ,
-     6                  NX1       ,NX2        ,NX3       ,NX4       ,NY1           ,
-     7                  NY2       ,NY3        ,NY4       ,NZ1       ,NZ2           ,
-     8                  NZ3       ,NZ4        ,LB1       ,LB2       ,LB3           ,
-     9                  LB4       ,LC1        ,LC2       ,LC3       ,LC4           ,
-     A                  P1        ,P2         ,P3        ,P4        ,FCONT         ,
-     B                  IX1       ,IX2        ,IX3       ,IX4       ,NSVG          ,
-     C                  IVIS2     ,NELTST     ,ITYPTST   ,DT2T      ,IXS           ,
-     D                  GAPV      ,CAND_P     ,INDEX     ,NISKYFI   ,
-     E                  KINET     ,NEWFRONT   ,ISECIN    ,NSTRF     ,SECFCUM       ,
-     F                  X         ,IRECT      ,CE_LOC    ,MFROT     ,IFQ           ,
-     G                  FROT_P    ,CAND_FX    ,CAND_FY   ,CAND_FZ   ,
-     H                  IFPEN     ,ICONTACT   ,IGROUPS   ,IPARG     ,
-     J                  VISCN     ,VXI        ,VYI       ,VZI       ,MSI           ,
-     K                  KINI      ,NIN        ,NISUB     ,LISUB     ,ADDSUBS       ,
-     L                  ADDSUBM   ,LISUBS     ,LISUBM    ,FSAVSUB   ,CAND_N        ,
-     M                  ILAGM     ,ICURV      ,FNCONT    ,MS0           ,
-     N                  JTASK     ,ISENSINT   ,FSAVPARIT ,NFT       ,MULTI_FVM     ,
-     O                  H3D_DATA  ,ELBUF_TAB  ,IDIR      )
+      SUBROUTINE I18FOR3(OUTPUT, JLT, A, V, IBCC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, STFN, ITAB, CN_LOC,
+     . STFVAL, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4,
+     . LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, NSVG, IVIS2, NELTST, ITYPTST, DT2T, IXS, GAPV,
+     . CAND_P, INDEX, NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF, SECFCUM, X, IRECT, CE_LOC, MFROT, IFQ, FROT_P, CAND_FX,
+     . CAND_FY, CAND_FZ, IFPEN, ICONTACT, IGROUPS, IPARG, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB, LISUB, ADDSUBS,
+     . ADDSUBM, LISUBS, LISUBM, FSAVSUB, CAND_N, ILAGM, ICURV, FNCONT, MS0, JTASK, ISENSINT, FSAVPARIT, NFT, MULTI_FVM,
+     . ELBUF_TAB, IDIR)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -80,7 +64,6 @@ C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE ELBUFDEF_MOD   
       USE OUTPUT_MOD    
       use element_mod , only : nixs
@@ -143,10 +126,6 @@ C-----------------------------------------------
      .     VISCN(*),
      .     VXI(MVSIZ),VYI(MVSIZ),VZI(MVSIZ),MSI(2*MVSIZ)
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, JG, K0, NBINTER, K1S, K, IE, NN, NI
       my_real
      .   FXI(MVSIZ), FYI(MVSIZ), FZI(MVSIZ), FNI(MVSIZ),
@@ -730,7 +709,7 @@ C---------------------------------
      A           IBID  ,IBID  )
          ENDIF
       ENDIF
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT  > 0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
 #include "lockon.inc"
             !---REACTION FORCE ON THE SOLID SURFACE            
             !   /H3D/NODA/CONT  (STAGGERED SCHEME) 
@@ -751,16 +730,6 @@ C---------------------------------
            !---REACTION FORCE ON THE FLUID SIDE                                         
            !   /H3D/ELEM/VECT/CONT WITH LAW151 (COLOCATED SCHEME)                       
            IF (MULTI_FVM%IS_USED) THEN 
-             IF(H3D_DATA%N_VECT_CONT  > 0)THEN                                                 
-               DO I=1,JLT
-                 JG=NSVG(I)-NUMNOD
-                 IF(JG>0) THEN ! local cell
-                    OUTPUT%DATA%FANI_CELL%F18(1,JG)=OUTPUT%DATA%FANI_CELL%F18(1,JG)-FXI(I)
-                    OUTPUT%DATA%FANI_CELL%F18(2,JG)=OUTPUT%DATA%FANI_CELL%F18(2,JG)-FYI(I)
-                    OUTPUT%DATA%FANI_CELL%F18(3,JG)=OUTPUT%DATA%FANI_CELL%F18(3,JG)-FZI(I)
-                  ENDIF
-               ENDDO     
-             ENDIF                                                                 
            ELSE                                                                         
            !/H3D/NODA/CONT  (STAGGERED SCHEME)                                          
              DO I=1,JLT                                                               
@@ -775,10 +744,8 @@ C---------------------------------
            ENDIF                                                                        
 #include "lockoff.inc"
       ENDIF
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT > 0 .AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP) .OR.
-     .    (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D /= 0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
 #include "lockon.inc"
            DO I=1,JLT
             FNCONT(1,IX1(I)) =FNCONT(1,IX1(I)) + FXI(I)*H1(I)

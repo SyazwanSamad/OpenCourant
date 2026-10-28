@@ -23,19 +23,13 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    i2for27p       ../engine/source/interfaces/interf/i2for27p.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    outmax_mod     ../common_source/modules/outmax_mod.F
 !||====================================================================
-      SUBROUTINE I2MOM27P_CIN(NSN  ,NMN  ,AR    ,IRECT,CRST  ,
-     2                    MSR  ,NSV  ,IRTL  ,IN   ,MS    ,
-     3                    A    ,X    ,WEIGHT,STIFR,FSKYI2,
-     4                    STIFN,IADI2,I0    ,NIR  ,I2SIZE,
-     5                    IDEL2,SMASS,SINER ,MINER,ADI   ,
-     6                    INDXC,IADX ,H3D_DATA,MSEGTYP2,CSTS_BIS)
+      SUBROUTINE I2MOM27P_CIN(NSN, NMN, AR, IRECT, CRST, MSR, NSV, IRTL, IN, MS, A, X, WEIGHT, STIFR, FSKYI2, STIFN,
+     . IADI2, I0, NIR, I2SIZE, IDEL2, SMASS, SINER, MINER, ADI, INDXC, IADX, MSEGTYP2, CSTS_BIS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTMAX_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -52,10 +46,6 @@ C     REAL
      .        A(3,*), AR(3,*),CRST(2,*), MS(*),
      .        X(3,*),IN(*),STIFR(*), FSKYI2(I2SIZE,*), STIFN(*),
      .        SMASS(*), SINER(*), MINER(*), ADI(*), CSTS_BIS(2,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
 C-----------------------------------------------
@@ -71,7 +61,7 @@ C     REAL
 C=======================================================================
       I0BASE = I0
 C     MINER(II) initialise a MS(J) in resol_init
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
         DO II=1,NMN
           J=MSR(II)
           ADI(J) = ADI(J)*MINER(II)
@@ -157,7 +147,7 @@ C
          INS = IN(I) + AA * MS(I)
          STF = STIFR(I) + AA * STIFN(I)
 C
-         IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
            AI=AA * MS(I)
            ADI(IRECT(1,L))=ADI(IRECT(1,L))+AI*H(1)
            ADI(IRECT(2,L))=ADI(IRECT(2,L))+AI*H(2)
@@ -172,18 +162,6 @@ C
          MXI = AR(1,I) + YC0 * FZI - ZC0 * FYI
          MYI = AR(2,I) + ZC0 * FXI - XC0 * FZI
          MZI = AR(3,I) + XC0 * FYI - YC0 * FXI
-C
-         IF ((H3D_DATA%N_VECT_CONT2M > 0).AND.(MSEGTYP2(L) == 1)) THEN
-           MCONT2(1,I) =  -AR(1,I)*WEIGHT(I)
-           MCONT2(2,I) =  -AR(2,I)*WEIGHT(I)
-           MCONT2(3,I) =  -AR(3,I)*WEIGHT(I)
-           DO J=1,NIR
-             JJ = IRECT(J,L)
-             MCONT2(1,JJ) = MCONT2(1,JJ) + MXI*H(J)
-             MCONT2(2,JJ) = MCONT2(2,JJ) + MYI*H(J)
-             MCONT2(3,JJ) = MCONT2(3,JJ) + MZI*H(J)
-           ENDDO
-         ENDIF         
 C
          I0 = I0BASE + IADX(K)
          DO J = 1,NIR
@@ -244,7 +222,7 @@ C       zero storage for nodes deleted by idel2
        ENDIF
       ENDDO
 C
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
 #include "vectorize.inc"
         DO II=1,NMN
           J=MSR(II)

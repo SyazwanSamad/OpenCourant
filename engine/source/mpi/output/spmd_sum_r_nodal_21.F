@@ -1,0 +1,83 @@
+Copyright>        OpenRadioss
+Copyright>        Copyright (C) 2026 Siemens
+Copyright>
+Copyright>        This program is free software: you can redistribute it and/or modify
+Copyright>        it under the terms of the GNU Affero General Public License as published by
+Copyright>        the Free Software Foundation, either version 3 of the License, or
+Copyright>        (at your option) any later version.
+Copyright>
+Copyright>        This program is distributed in the hope that it will be useful,
+Copyright>        but WITHOUT ANY WARRANTY; without even the implied warranty of
+Copyright>        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+Copyright>        GNU Affero General Public License for more details.
+Copyright>
+Copyright>        You should have received a copy of the GNU Affero General Public License
+Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
+Copyright>
+Copyright>
+Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
+Copyright>        See COPYRIGHT.md at the root of the repository for the full
+Copyright>        copyright and attribution statement.
+       SUBROUTINE SPMD_SUM_R_NODAL_21(NODGLOB,V,LEN,VP0,LENP0,VG21)
+C-----------------------------------------------
+C   I m p l i c i t   T y p e s
+C-----------------------------------------------
+        USE SPMD_COMM_WORLD_MOD, ONLY : SPMD_COMM_WORLD
+      use my_alloc_mod
+      use my_dealloc_mod, only : my_dealloc
+#include      "implicit_f.inc"
+#include "spmd.inc"
+C-----------------------------------------------
+C   C o m m o n   B l o c k s
+C-----------------------------------------------
+#include      "task_c.inc"
+C-----------------------------------------------
+C   D u m m y   A r g u m e n t s
+C-----------------------------------------------
+       INTEGER LEN,LENP0, NODGLOB(*)
+       my_real
+     .   V(LEN),VP0(LENP0),VG21(LENP0)
+       my_real
+     .       , DIMENSION(:), ALLOCATABLE ::  V_TMP,VP0_TMP
+C-----------------------------------------------
+C   L O C A L   V A R I A B L E S
+C-----------------------------------------------
+       INTEGER K
+#ifdef MPI
+      INTEGER IERROR,I
+
+
+        call my_alloc(V_TMP, LENP0, "V_TMP")
+        call my_alloc(VP0_TMP, LENP0, "VP0_TMP")
+
+        DO I=1,LENP0
+           VP0_TMP(I)=VG21(I)
+           V_TMP(I) = ZERO
+        ENDDO
+
+        DO K=1,LEN/3
+           I=NODGLOB(K)
+           VP0_TMP(3*(I-1)+1)=V(3*(K-1)+1)
+           VP0_TMP(3*(I-1)+2)=V(3*(K-1)+2)
+           VP0_TMP(3*(I-1)+3)=V(3*(K-1)+3)
+        ENDDO
+
+       IF (LENP0 > 0) THEN
+        CALL MPI_REDUCE(VP0_TMP,V_TMP,LENP0,
+     .                  REAL,MPI_SUM,IT_SPMD(1),
+     .                  SPMD_COMM_WORLD,IERROR)
+
+       ENDIF
+       IF (ISPMD==0) THEN
+         DO I=1,LENP0
+          VP0(I) = V_TMP(I)
+         END DO
+       ENDIF
+
+       call my_dealloc(V_TMP)
+       call my_dealloc(VP0_TMP)
+
+
+#endif
+       RETURN
+       END

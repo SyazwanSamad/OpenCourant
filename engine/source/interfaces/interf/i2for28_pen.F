@@ -28,22 +28,12 @@ Copyright>        copyright and attribution statement.
 !||    i2rep         ../common_source/interf/i2rep.F
 !||    i2sms28       ../engine/source/interfaces/interf/i2sms28.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR28_PEN(X       ,V       ,VR      ,A       ,AR      ,
-     .                   MS_PENA ,IN      ,STIFN   ,STIFR   ,WEIGHT  ,
-     .                   NSV     ,IRTL    ,CRST    ,SKEW    ,DX      ,
-     .                   DR      ,FINI    ,FSAV    ,FNCONT  ,NSN     ,
-     .                   STFN    ,STFR    ,VISC    ,PENFLAG ,IROT    ,
-     .                   NOINT   ,NODNX_SMS,DMINT2 ,SAV_FOR_PENA,IRECT,
-     .                   DT2T    ,NELTST  ,ITYPTST ,INDXP   ,SAV_INER_POFF,
-     .                   H3D_DATA,FNCONTP ,FTCONTP)
+      SUBROUTINE I2FOR28_PEN(X, V, VR, A, AR, MS_PENA, IN, STIFN, STIFR, WEIGHT, NSV, IRTL, CRST, SKEW, DX, DR, FINI,
+     . FSAV, FNCONT, NSN, STFN, STFR, VISC, PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2, SAV_FOR_PENA, IRECT, DT2T, NELTST,
+     . ITYPTST, INDXP, SAV_INER_POFF, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
@@ -67,10 +57,6 @@ C     REAL
      .   DMINT2(4,*),SAV_FOR_PENA(8,*),FNCONTP(3,*)   ,FTCONTP(3,*) 
       my_real
      .   SAV_INER_POFF(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "com06_c.inc"
 #include      "com08_c.inc"
@@ -594,9 +580,7 @@ C------------------------------------------------
 C         n/t components of the nodal force -> output
 C------------------------------------------------           
           HL(1:4) = H(1:4,K)       
-          CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                  IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                  FTCONTP ,WEIGHT ,H3D_DATA,I      ,HL)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, HL)
 C----------
         ELSE  ! desactivated secnd node
           NSVG(K)= -I

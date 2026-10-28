@@ -33,7 +33,7 @@
 !||--- called by ------------------------------------------------------
 !||    hm_read_kinematic_hardening            ../starter/source/materials/mat/mat131/kinematic_hardening/hm_read_kinematic_hardening.F90
 !||--- calls      -----------------------------------------------------
-!||    hm_get_float_array_index               ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
+!||    hm_get_float_array_index               ../starter/source/devtools/reader/hm_get_float_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod                           ../starter/share/modules1/elbuftag_mod.F
 !||    hm_option_read_mod                     ../starter/share/modules1/hm_option_read_mod.F

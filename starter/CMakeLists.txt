@@ -5,40 +5,6 @@
 cmake_minimum_required (VERSION 3.15)
 project (Radioss_Starter)
 
-# The bundled v82 reader provides these APIs. Keep its compatibility
-# options OFF by default; older external readers can enable them explicitly.
-option(HM_READER_LEGACY_INCLUDE_API
-       "Enumerate model includes through the legacy reader selection API" OFF)
-option(HM_READER_LEGACY_PART_API
-       "Count elements in the selected part with the legacy reader API" OFF)
-option(HM_READER_NO_RBODIES_FROM_RIGID_PARTS
-       "Disable /PART Irigid RBODY conversion when the reader lacks the rigid-part APIs" OFF)
-
-# OpenReader mode 2 still needs implementation before removing the rigid-part bypass.
-# Override the effective settings even in a build directory configured with
-# the bundled reader, without changing the cached external-reader options.
-if(USE_OPEN_READER STREQUAL "1")
-   set(HM_READER_NO_RBODIES_FROM_RIGID_PARTS ON)
-   message(STATUS "OpenReader: disabling /PART Irigid RBODY conversion pending mode-2 validation")
-endif()
-
-if(HM_READER_LEGACY_INCLUDE_API)
-   set_property(SOURCE source/devtools/hm_reader/write_include_files_list.F90
-                APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_LEGACY_INCLUDE_API)
-endif()
-
-if(HM_READER_LEGACY_PART_API)
-   set_property(SOURCE source/devtools/hm_reader/hm_is_part_with_elements.F90
-                APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_LEGACY_PART_API)
-endif()
-
-if(HM_READER_NO_RBODIES_FROM_RIGID_PARTS)
-   set_property(SOURCE source/devtools/hm_reader/hm_create_rbodies_from_rigid_parts.F90
-                       source/devtools/hm_reader/hm_evaluate_rbodies_from_rigid_parts.F90
-                APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_NO_RBODIES_FROM_RIGID_PARTS)
-   message(WARNING "This reader compatibility build does not support /PART Irigid RBODY conversion")
-endif()
-
 # Verbose
 # -------
 # set (CMAKE_VERBOSE_MAKEFILE on)
@@ -220,11 +186,7 @@ list(APPEND include_dir_list ${Build_includes_directory} )
 message (" dir : ${Build_includes_directory} added")
 
 # Load external libraries
-add_custom_target(
-    extlib ALL
-    COMMAND ${PYTHON_EXEC} ${source_directory}/../Compiling_tools/script/load_extlib.py
-    COMMENT "Loading extlib libraries"
-)
+add_subdirectory(${source_directory}/../reader ${CMAKE_CURRENT_BINARY_DIR}/open_reader)
 
 #include generated with a text files
 add_custom_command(    
@@ -273,19 +235,6 @@ endif (NOT CMAKE_BUILD_TYPE)
 
 
 
-# Default ON: the v70 readers export cpp_sale_mesh_create, but a Windows
-# trial with this reader build produced invalid node coordinates and no QA
-# reference exists to validate the generated meshes (see reader_components
-# in EXTLIB_VERSION.json). Set to OFF only with a validated reader from
-# extlib v76 or later.
-option(HM_READER_NO_STRUCTURED_ALE
-       "Reject /ALE/STRUCTURED_MESH when the input reader lacks its generator" ON)
-if(HM_READER_NO_STRUCTURED_ALE)
-   set_property(SOURCE ${source_directory}/source/devtools/hm_reader/hm_s_ale.F90
-                APPEND PROPERTY COMPILE_DEFINITIONS HM_READER_NO_STRUCTURED_ALE)
-   message(WARNING "This reader compatibility build does not support /ALE/STRUCTURED_MESH")
-endif()
-
 add_executable (${EXEC_NAME} ${source_files} ${c_source_files} ${cpp_source_files} ${Build_includes_directory}/starter_message_description.inc ${Build_includes_directory}/__foo.inc)
 
 add_dependencies(${EXEC_NAME} extlib)
@@ -298,7 +247,8 @@ add_custom_command(TARGET ${EXEC_NAME}
 
 
 target_include_directories(${EXEC_NAME} PRIVATE ${include_dir_list}  )
-target_link_libraries(${EXEC_NAME} ${LINK} )
+target_link_libraries(${EXEC_NAME} ${OPEN_READER_TARGET} ${LINK})
+set_target_properties(${EXEC_NAME} PROPERTIES BUILD_RPATH "$ORIGIN" INSTALL_RPATH "$ORIGIN")
 
 # Fortran to link
 set_property(TARGET ${EXEC_NAME} PROPERTY LINKER_LANGUAGE Fortran)

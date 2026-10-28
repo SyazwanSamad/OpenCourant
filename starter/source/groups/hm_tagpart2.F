@@ -26,8 +26,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    groups_get_elem_list     ../starter/source/groups/groups_get_elem_list.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||    set_usrtos               ../starter/source/model/sets/ipartm1.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F

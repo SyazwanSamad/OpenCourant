@@ -23,11 +23,11 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lectur                     ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_float_array_index   ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_int_array_index     ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv                ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key         ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start            ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_float_array_index   ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_int_array_index     ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv                ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key         ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start            ../starter/source/devtools/reader/hm_option_start.F
 !||    udouble_igr                ../starter/source/system/sysfus.F
 !||    usr2sys                    ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

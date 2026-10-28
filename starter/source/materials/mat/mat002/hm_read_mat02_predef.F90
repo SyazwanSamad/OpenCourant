@@ -39,8 +39,8 @@
 !||    hm_read_mat              ../starter/source/materials/mat/hm_read_mat.F90
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_string            ../starter/source/devtools/hm_reader/hm_get_string.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_string            ../starter/source/devtools/reader/hm_get_string.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    init_mat_keyword         ../starter/source/materials/mat/init_mat_keyword.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod             ../starter/share/modules1/elbuftag_mod.F

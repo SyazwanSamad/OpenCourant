@@ -30,33 +30,17 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod       ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    mat_elem_mod       ../common_source/modules/mat_elem/mat_elem_mod.F90
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    r23law135_mod      ../engine/source/elements/spring/r23law135.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||    table_mod          ../engine/share/modules/table_mod.F
 !||====================================================================
-      SUBROUTINE R23FORC3(PYTHON,
-     1   ELBUF_STR,            JFT,                  JLT,                  NEL,
-     2   MTN,                  IGEO,                 GEO,                  IPM,
-     3   IXR,                  X,                    TABLE,                XDP,
-     4   F,                    NPF,                  TF,                   SKEW,
-     5   FLG_KJ2,              VR,                   AR,                   V,
-     6   DT2T,                 NELTST,               ITYPTST,              STIFN,
-     7   STIFR,                MS,                   IN,                   FSKY,
-     8   IADR,                 SENSORS   ,           OFFSET,               ANIM,
-     9   PARTSAV,              IPARTR,               TANI,                 FR_WAVE,
-     A   BUFMAT,               BUFGEO,               PM,                   RBY,
-     B   FX1,                  FX2,                  FY1,                  FY2,
-     C   FZ1,                  FZ2,                  MX1,                  MX2,
-     D   MY1,                  MY2,                  MZ1,                  MZ2,
-     E   GRESAV,               GRTH,                 IGRTH,                MSRT,
-     F   DMELRT,               FLAG_SLIPRING_UPDATE, FLAG_RETRACTOR_UPDATE,H3D_DATA,
-     G   JSMS,                 IGRE,                 NFT,                  PRELD1,
-     H   STF_F,                STF,                  SANIN,                IRESP,
-     I   SNPC ,                mat_elem,             NGRTH,                NELEM,
-     J   FLG_SPR_DT)
+      SUBROUTINE R23FORC3(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IPM, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, SENSORS, OFFSET, ANIM, PARTSAV,
+     . IPARTR, TANI, FR_WAVE, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2,
+     . GRESAV, GRTH, IGRTH, MSRT, DMELRT, FLAG_SLIPRING_UPDATE, FLAG_RETRACTOR_UPDATE, JSMS, IGRE, NFT, PRELD1, STF_F,
+     . STF, SANIN, IRESP, SNPC, mat_elem, NGRTH, NELEM, FLG_SPR_DT)
 
 C-----------------------------------------------
 C   M o d u l e s
@@ -64,7 +48,6 @@ C-----------------------------------------------
       USE python_funct_mod
       USE ELBUFDEF_MOD
       USE TABLE_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       use element_mod , only : nixr
       use mat_elem_mod
@@ -123,7 +106,6 @@ C-----------------------------------------------
       TYPE(TTABLE) TABLE(*)
 C
       TYPE (ELBUF_STRUCT_), TARGET :: ELBUF_STR
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSORS_) , INTENT(IN) :: SENSORS
       type (mat_elem_) ,intent(inout) ,target :: mat_elem
       
@@ -138,86 +120,32 @@ C=======================================================================
 !
        IF(MTN  == 108) THEN
          ! Like type08 spring
-         CALL R23LAW108(PYTHON,
-     1   ELBUF_STR, JFT,       JLT,       NEL,
-     2   MTN,       IGEO,      GEO,       IPM,
-     3   IXR,       X,         TABLE,     XDP,
-     4   F,         NPF,       TF,        SKEW,
-     5   FLG_KJ2,   VR,        AR,        V,
-     6   DT2T,      NELTST,    ITYPTST,   STIFN,
-     7   STIFR,     MS,        IN,        FSKY,
-     8   IADR,      NSENSOR,SENSORS%SENSOR_TAB,OFFSET,    ANIM,
-     9   PARTSAV,   IPARTR,    TANI,      
-     A   BUFMAT,    BUFGEO,    PM,        RBY,
-     B   FX1,       FX2,       FY1,       FY2,
-     C   FZ1,       FZ2,       MX1,       MX2,
-     D   MY1,       MY2,       MZ1,       MZ2,
-     E   GRESAV,    GRTH,      IGRTH,     MSRT,
-     F   DMELRT,    H3D_DATA,  JSMS,      IGRE,
-     G   NFT,       STF,       SANIN,     IRESP,
-     H   SNPC,      FLG_SPR_DT)
+      CALL R23LAW108(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IPM, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, NSENSOR, SENSORS%SENSOR_TAB, OFFSET,
+     . ANIM, PARTSAV, IPARTR, TANI, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2,
+     . GRESAV, GRTH, IGRTH, MSRT, DMELRT, JSMS, IGRE, NFT, STF, SANIN, IRESP, SNPC, FLG_SPR_DT)
        
        ELSEIF(MTN == 113) THEN
          ! Like type13 spring
-         CALL R23LAW113(PYTHON,
-     1   ELBUF_STR, JFT,       JLT,       NEL,
-     2   MTN,       IGEO,      GEO,       IPM,
-     3   IXR,       X,         TABLE,     XDP,
-     4   F,         NPF,       TF,        SKEW,
-     5   FLG_KJ2,   VR,        AR,        V,
-     6   DT2T,      NELTST,    ITYPTST,   STIFN,
-     7   STIFR,     MS,        IN,        FSKY,
-     8   IADR,      NSENSOR,SENSORS%SENSOR_TAB,OFFSET,    ANIM,
-     9   PARTSAV,   IPARTR,    TANI,      FR_WAVE,
-     A   BUFMAT,    BUFGEO,    PM,        RBY,
-     B   FX1,       FX2,       FY1,       FY2,
-     C   FZ1,       FZ2,       MX1,       MX2,
-     D   MY1,       MY2,       MZ1,       MZ2,
-     E   GRESAV,    GRTH,      IGRTH,     MSRT,
-     F   DMELRT,    H3D_DATA,  JSMS,      IGRE,
-     G   NFT,       PRELD1,    STF_F,     STF,
-     H   SANIN,     IRESP,     SNPC,      FLG_SPR_DT)
+      CALL R23LAW113(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IPM, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, NSENSOR, SENSORS%SENSOR_TAB, OFFSET,
+     . ANIM, PARTSAV, IPARTR, TANI, FR_WAVE, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2,
+     . MZ1, MZ2, GRESAV, GRTH, IGRTH, MSRT, DMELRT, JSMS, IGRE, NFT, PRELD1, STF_F, STF, SANIN, IRESP, SNPC, FLG_SPR_DT)
+     .
 
        ELSEIF(MTN == 114) THEN
          ! seatbelt_element
-         CALL R23LAW114(PYTHON,
-     1   ELBUF_STR,            JFT,                  JLT,                  NEL,
-     2   MTN,                  IGEO,                 GEO,                  IPM,
-     3   IXR,                  X,                    TABLE,                XDP,
-     4   F,                    NPF,                  TF,                   SKEW,
-     5   FLG_KJ2,              VR,                   AR,                   V,
-     6   DT2T,                 NELTST,               ITYPTST,              STIFN,
-     7   STIFR,                MS,                   IN,                   FSKY,
-     8   IADR,                 SENSORS%SENSOR_TAB,   OFFSET,               ANIM,
-     9   PARTSAV,              IPARTR,               TANI,                 FR_WAVE,
-     A   BUFMAT,               BUFGEO,               PM,                   RBY,
-     B   FX1,                  FX2,                  FY1,                  FY2,
-     C   FZ1,                  FZ2,                  MX1,                  MX2,
-     D   MY1,                  MY2,                  MZ1,                  MZ2,
-     E   GRESAV,               GRTH,                 IGRTH,                MSRT,
-     F   DMELRT,               FLAG_SLIPRING_UPDATE, FLAG_RETRACTOR_UPDATE,H3D_DATA,
-     G   JSMS,                 IGRE,                 NFT,                  NSENSOR,
-     H   STF,                  SANIN,                IRESP,                SNPC ,
-     I   FLG_SPR_DT)
+      CALL R23LAW114(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IPM, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, SENSORS%SENSOR_TAB, OFFSET, ANIM,
+     . PARTSAV, IPARTR, TANI, FR_WAVE, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1,
+     . MZ2, GRESAV, GRTH, IGRTH, MSRT, DMELRT, FLAG_SLIPRING_UPDATE, FLAG_RETRACTOR_UPDATE, JSMS, IGRE, NFT, NSENSOR,
+     . STF, SANIN, IRESP, SNPC, FLG_SPR_DT)
        ELSEIF(MTN == 135) THEN
          FLG_KJ2 =1
-         CALL R23LAW135(
-     A   ELBUF_STR, NEL,       IGEO,      GEO,
-     B   IPM,       IXR,       X,         XDP,
-     C   F,         SKEW,      VR,        AR,
-     D   V,         STIFN,     STIFR,     FSKY,
-     E   IADR,      NSENSOR,   SENSORS%SENSOR_TAB,  PARTSAV,
-     F   IPARTR,    TANI,      FX1,       FX2,
-     G   FY1,       FY2,       FZ1,       FZ2,
-     H   MX1,       MX2,       MY1,       MY2,
-     I   MZ1,       MZ2,       GRESAV,    GRTH,
-     J   IGRTH,     H3D_DATA,  IGRE,      NFT,
-     K   MAT_ELEM,  NPROPG,    LSKEW,     IPARIT,
-     L   INISPRI,   SCODVER,   ISMDISP,   NUMELR,
-     M   TT,        DT1,       ANIM_FE,   MTN,
-     N   NGRTH,     NELEM,     NUMGEO,    NUMMAT,
-     O   NUMNOD,    NPSAV,     NGPE,      NTHREAD,
-     P   NUMSKW,    LSKY)
+      CALL R23LAW135(ELBUF_STR, NEL, IGEO, GEO, IPM, IXR, X, XDP, F, SKEW, VR, AR, V, STIFN, STIFR, FSKY, IADR,
+     . NSENSOR, SENSORS%SENSOR_TAB, PARTSAV, IPARTR, TANI, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2,
+     . GRESAV, GRTH, IGRTH, IGRE, NFT, MAT_ELEM, NPROPG, LSKEW, IPARIT, INISPRI, SCODVER, ISMDISP, NUMELR, TT, DT1,
+     . ANIM_FE, MTN, NGRTH, NELEM, NUMGEO, NUMMAT, NUMNOD, NPSAV, NGPE, NTHREAD, NUMSKW, LSKY)
      
  
        ENDIF

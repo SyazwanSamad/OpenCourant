@@ -30,41 +30,21 @@ Copyright>        copyright and attribution statement.
 !||    i25sms0e    ../engine/source/interfaces/int25/i25smse.F
 !||    i25sms2e    ../engine/source/interfaces/int25/i25smse.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod     ../engine/share/modules/h3d_mod.F
 !||    tri25ebox   ../engine/share/modules/tri25ebox.F
 !||    tri7box     ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I25FOR3E(
-     1                  JLT    ,A      ,V      ,IBC     ,ICODT  ,
-     2                  FSAV   ,GAP    ,FRIC   ,MS      ,VISC   ,
-     3                  VISCF  ,NOINT  ,ITAB   ,CS_LOC  ,CM_LOC ,
-     4                  STIGLO ,STIFN  ,STIF   ,FSKYI   ,ISKY   ,
-     5                  FCONT  ,DT2T   ,IBM    ,HS1     ,
-     6                  HS2    ,HM1    ,HM2    ,N1      ,N2     ,
-     7                  M1     ,M2     ,IVIS2  ,NELTST  ,ITYPTST,
-     8                  NX     ,NY     ,NZ     ,GAPVE   ,INACTI ,
-     9                  INDEX  ,CAND_P ,NISKYFIE,NEWFRONT,ISECIN ,
-     A                  NSTRF  ,SECFCUM,VISCN  ,NEDGE   ,MS1    ,
-     B                  MS2    ,MM1    ,MM2    ,VXS1    ,VYS1   ,
-     C                  VZS1   ,VXS2   ,VYS2   ,VZS2    ,VXM1   ,
-     D                  VYM1   ,VZM1   ,VXM2   ,VYM2    ,VZM2   ,
-     E                  NIN    ,NISUB   ,LISUB ,ADDSUBE ,LISUBE ,
-     F                  INFLG_SUBE ,FSAVSUB,MSKYI_SMS,ISKYI_SMS,NSMS,
-     G                  JTASK  ,ISENSINT, FSAVPARIT  ,NFT  ,H3D_DATA,
-     H                  ILEV   ,EBINFLG ,EDGE_ID,FRICC  ,IFQ    ,
-     I                  CAND_FX  ,CAND_FY,CAND_FZ ,IFPEN,
-     J                  TAGNCONT ,KLOADPINTER,LOADPINTER ,LOADP_HYD_INTER,TYPSUB   ,
-     K                  STARTT ,NINLOADP  ,DGAPLOADINT,S_LOADPINTER,PENE_OLD_E,
-     L                  STIF_OLD_E,SIZ)
+      SUBROUTINE I25FOR3E(JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, ITAB, CS_LOC, CM_LOC, STIGLO,
+     . STIFN, STIF, FSKYI, ISKY, FCONT, DT2T, IBM, HS1, HS2, HM1, HM2, N1, N2, M1, M2, IVIS2, NELTST, ITYPTST, NX, NY,
+     . NZ, GAPVE, INACTI, INDEX, CAND_P, NISKYFIE, NEWFRONT, ISECIN, NSTRF, SECFCUM, VISCN, NEDGE, MS1, MS2, MM1, MM2,
+     . VXS1, VYS1, VZS1, VXS2, VYS2, VZS2, VXM1, VYM1, VZM1, VXM2, VYM2, VZM2, NIN, NISUB, LISUB, ADDSUBE, LISUBE,
+     . INFLG_SUBE, FSAVSUB, MSKYI_SMS, ISKYI_SMS, NSMS, JTASK, ISENSINT, FSAVPARIT, NFT, ILEV, EBINFLG, EDGE_ID, FRICC,
+     . IFQ, CAND_FX, CAND_FY, CAND_FZ, IFPEN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, TYPSUB, STARTT,
+     . NINLOADP, DGAPLOADINT, S_LOADPINTER, PENE_OLD_E, STIF_OLD_E, SIZ)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE TRI25EBOX
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
 #include      "assert.inc"
@@ -121,7 +101,6 @@ C-----------------------------------------------
      .   VYM2(MVSIZ),VZM2(MVSIZ),FSAVPARIT(NISUB+1,11,*),FRICC(MVSIZ),
      .   CAND_FX(*),CAND_FY(*),CAND_FZ(*)
       my_real  , INTENT(IN) :: DGAPLOADINT(S_LOADPINTER)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER , INTENT(IN) :: SIZ
       my_real , INTENT(INOUT) :: PENE_OLD_E(SIZ),STIF_OLD_E(SIZ)
 C-----------------------------------------------
@@ -1893,7 +1872,7 @@ ctmp+1 mic only
       ENDIF
 C
 
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
 #include "lockon.inc"
 c         goto 1234
         DO I=1,JLT

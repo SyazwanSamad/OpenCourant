@@ -38,7 +38,6 @@ Copyright>        copyright and attribution statement.
 !||    spmd_i25_slide_gat       ../engine/source/mpi/interfaces/spmd_i25slide.F
 !||    upgrade_cand_opt         ../common_source/interf/upgrade_multimp.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                  ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod            ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod              ../engine/share/message_module/message_mod.F
 !||    mpi_commod               ../engine/share/modules/mpi_comm_mod.F
@@ -48,14 +47,9 @@ Copyright>        copyright and attribution statement.
 !||    sensor_mod               ../common_source/modules/sensor_mod.F90
 !||    tri7box                  ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I25MAIN_SLID(
-     1       IPARI    ,IAD_ELEM ,FR_ELEM  ,ITAB     ,SENSOR_TAB,
-     2       NSENSOR  ,INTLIST25,INTBUF_TAB ,IAD_FRNOR,FR_NOR ,
-     3       X        ,V       ,MS      ,TEMP   ,KINET   ,
-     4       NODNX_SMS,JTASK   ,NB_DST2, MAIN_PROC,
-     5       NEWFRONT ,ISENDTO ,IRCVFROM ,NBINTC,
-     6       INTLIST ,ISLEN7   ,IRLEN7  ,IRLEN7T  ,ISLEN7T,
-     7       NB_DST1 ,H3D_DATA,   ICODT, ISKEW,PARAMETERS,NODADT_THERM)
+      SUBROUTINE I25MAIN_SLID(IPARI, IAD_ELEM, FR_ELEM, ITAB, SENSOR_TAB, NSENSOR, INTLIST25, INTBUF_TAB, IAD_FRNOR,
+     . FR_NOR, X, V, MS, TEMP, KINET, NODNX_SMS, JTASK, NB_DST2, MAIN_PROC, NEWFRONT, ISENDTO, IRCVFROM, NBINTC,
+     . INTLIST, ISLEN7, IRLEN7, IRLEN7T, ISLEN7T, NB_DST1, ICODT, ISKEW, PARAMETERS, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -63,7 +57,6 @@ C-----------------------------------------------
       USE TRI7BOX
       USE INTBUFDEF_MOD  
       USE MPI_COMMOD  
-      USE H3D_MOD
       USE SENSOR_MOD
       USE PARAMETERS_MOD
 C-----------------------------------------------
@@ -98,7 +91,6 @@ C-----------------------------------------------
      .        IRLEN7T,ISLEN7T,
      .        NEWFRONT(*), INTLIST(*),
      .        ISENDTO(NINTER+1,*) ,IRCVFROM(NINTER+1,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
@@ -468,11 +460,8 @@ C===============================================================================
 C : we do not change nsnr in iPari since SPMD_I25_Slide_gat, so nsnr is no longer the size
 C of fi structures
 C
-             CALL SPMD_I25_SLIDE_GAT(NSN  ,NIN, NI25,
-     2                               IGAP  ,NSNR   ,INTTH   ,ILEV, INTBUF_TAB(NIN), 
-     3                               FR_NOR,IAD_FRNOR, SIZBUFS, ITAB, H3D_DATA    ,
-     4                               INTFRIC,FLAGREMN,LREMNORMAX,NRTM,IVIS2       ,
-     5                               ISTIF_MSDT,IFSUB_CAREA,NODADT_THERM)
+      CALL SPMD_I25_SLIDE_GAT(NSN, NIN, NI25, IGAP, NSNR, INTTH, ILEV, INTBUF_TAB(NIN), FR_NOR, IAD_FRNOR, SIZBUFS,
+     . ITAB, INTFRIC, FLAGREMN, LREMNORMAX, NRTM, IVIS2, ISTIF_MSDT, IFSUB_CAREA, NODADT_THERM)
         ! Passer intbuftab(nin)
 C nodes that slide from p0 to p1 and are local to p1 are found when
 C even in the boundary structure *fi(nin)%p at the position of proc p1

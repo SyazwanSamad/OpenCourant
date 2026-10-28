@@ -1,0 +1,75 @@
+{
+  "commit": "d0a844f7270ae3c0666c1360700be42708a7694b",
+  "scope": "Windows x64, double precision, SMP; integration conversion enabled",
+  "configuration_files": 2495,
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "suite_pass_lines": 157,
+  "paired_models": 5,
+  "paired_engine_runs": 8,
+  "failed_input_checks": 4,
+  "restart_cases": 4,
+  "inventory_counts": {
+    "text_reference": 273,
+    "mixed_card_review": 1
+  },
+  "source_scripts": {
+    "capture_baseline.py": "f31eb675ac0d6ed3203908f8aea2f9f042c7cd488cb89f7064ad3ff5c501521d",
+    "compare_decks.py": "7ae85aa5fa6418fe99bd63b3577e3e7c04aaf45cce0726d912fa793c04d54e1d"
+  },
+  "files": [
+    {
+      "path": "checkpoints.zip",
+      "bytes": 134638,
+      "sha256": "8e337a00a613a2c4c051043b177c0339a6e2717047c90fedb1719c899c49db5f"
+    },
+    {
+      "path": "generated_input_manifest.json.gz",
+      "bytes": 5928,
+      "sha256": "f4ca4fa151eb969e94ded5994c733488e851c33bddeb51b2baaa510a6109d905"
+    },
+    {
+      "path": "h3d_inventory.json",
+      "bytes": 75165,
+      "sha256": "eefe4ff6c7329739823acbe22d0517f0b6daba87e66ebc35c39e63f4c1e40f26"
+    },
+    {
+      "path": "histories.zip",
+      "bytes": 1062808,
+      "sha256": "d422f043d716d665e1e0a672e75716fac9f8975d828edd82f1e17b1285a00572"
+    },
+    {
+      "path": "input_manifest.json.gz",
+      "bytes": 174553,
+      "sha256": "b78d76ecd3fb14949559462a862878af3b488b199960ff3ca31abc92844f88af"
+    },
+    {
+      "path": "logs.zip",
+      "bytes": 103597,
+      "sha256": "192276fef938cde72280c1cfcd418100b67d86eea60551a9d680b122db4651fe"
+    },
+    {
+      "path": "models_report.json",
+      "bytes": 39371,
+      "sha256": "2a3f5e07a3aa17bb2b798c907f331963c1de913cea6713b5db9f25e2d3674b6d"
+    },
+    {
+      "path": "numerical_report.json",
+      "bytes": 35175,
+      "sha256": "c2ac68a97bfb7b3f9e7c1fba4b4930d3bd654bddb84fe910831a8bafe1c6535e"
+    },
+    {
+      "path": "reader_snapshots.json",
+      "bytes": 21987,
+      "sha256": "4a46f7d7670608904c1ac8e5d8934c658fed16bf01a295a65ba7835d18151f78"
+    },
+    {
+      "path": "suite_report.json",
+      "bytes": 48062,
+      "sha256": "292399e7dc07e9cd273548007d1f9e7db7b564bdd48e069dcd9160871bd37c11"
+    }
+  ],
+  "local_reference_binaries": {
+    "path": "cbuild_dependency_baseline_20261028\\reference_binaries.zip",
+    "sha256": "dd3c047dd8dca982777760cb6d655750e2dc929976013c6c607f330a6b878cb0"
+  }
+}

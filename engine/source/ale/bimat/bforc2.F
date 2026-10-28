@@ -66,22 +66,11 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE BFORC2(TIMERS,  ELBUF_TAB   ,NG        ,
-     1                   PM         ,GEO       ,IC         ,X       ,
-     2                   A          ,V         ,MS         ,W       ,FLUX    ,
-     3                   FLU1       ,VEUL      ,ALE_CONNECT,IPARG   ,
-     4                   JPARG      ,FILL      ,DFILL      ,IMS     ,NLOC_DMG,
-     5                   TF         ,NPF       ,BUFMAT     ,PARTSAV ,
-     6                   DT2T       ,NELTST    ,ITYPTST    ,STIFN   ,OFFSET  ,
-     7                   EANI       ,IPARTQ    ,NEL        ,IADQ    ,FSKY    ,
-     8                   IPM        ,BUFVOIS   ,
-     9                   GRESAV     ,GRTH      ,IGRTH      ,TABLE  ,IGEO     ,
-     A                   VOLN       ,ITASK     ,MS_2D      ,FSKYM  ,MAT_ELEM ,
-     B                   H3D_STRAIN ,OUTPUT    ,SZ_BUFVOIS ,SNPC   ,STF      ,SBUFMAT, SVIS,
-     C                   NSVOIS     , IRESP    ,IDEL7NOK   ,
-     D                   IDTMIN     , MAXFUNC  ,IMON_MAT   ,
-     E                   USERL_AVAIL, impl_s     ,idyna  ,DT       ,
-     F                   GLOB_THERM,SENSORS,s_flux,nv46)
+      SUBROUTINE BFORC2(TIMERS, ELBUF_TAB, NG, PM, GEO, IC, X, A, V, MS, W, FLUX, FLU1, VEUL, ALE_CONNECT, IPARG,
+     . JPARG, FILL, DFILL, IMS, NLOC_DMG, TF, NPF, BUFMAT, PARTSAV, DT2T, NELTST, ITYPTST, STIFN, OFFSET, EANI, IPARTQ,
+     . NEL, IADQ, FSKY, IPM, BUFVOIS, GRESAV, GRTH, IGRTH, TABLE, IGEO, VOLN, ITASK, MS_2D, FSKYM, MAT_ELEM, OUTPUT,
+     . SZ_BUFVOIS, SNPC, STF, SBUFMAT, SVIS, NSVOIS, IRESP, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s,
+     . idyna, DT, GLOB_THERM, SENSORS, s_flux, nv46)
 C-----------------------------------------------
 C   M o d u l e s 
 C-----------------------------------------------
@@ -135,7 +124,7 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: IMON_MAT
       integer, intent(in) :: s_flux !< first dimension of flux array
       integer, intent(in) :: nv46 !< second dimension of flux array        
-      INTEGER IC(*), IPARG(NPARG,NGROUP), JPARG(*), IMS(*), NPF(*),IPARTQ(NUMELQ),IPM(*),IGEO(*),ITASK,H3D_STRAIN
+      INTEGER IC(*), IPARG(NPARG,NGROUP), JPARG(*), IMS(*), NPF(*),IPARTQ(NUMELQ),IPM(*),IGEO(*),ITASK
       INTEGER NELTST,ITYPTST, IADQ(4,*),GRTH(*),IGRTH(*)
       my_real DT2T
       my_real PM(*), GEO(*), X(*), A(*), V(*), MS(*), W(*), FLUX(s_flux,nv46),
@@ -342,42 +331,14 @@ C-----------------------------------------------------
 C-----------------------------------------------------
 C     STRESS TENSOR
 C-----------------------------------------------------
-      CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IC,          IPARG,
-     3   V,           TF,          NPF,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   LBUF%OFF,    NGEO,        MAT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        SSP,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          EYY,         EZZ,         ETT,
-     B   EYZ,         EYT,         EZT,         WYY,
-     C   WZZ,         WYZ,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDX,         VDY,         VDZ,         MUVOID,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   BUFVOIS,     LBUF%PLA,    R3_FREE,     R4_FREE,
-     H   EYY,         EZZ,         ETT,         EYZ,
-     I   EYT,         EZT,         WYY,         WZZ,
-     J   WYZ,         IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         IBID,        BID,
-     M   BID,         IBID,        ILAY,        MBID,
-     N   MBID,        1,           1,           1,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         IPARG(1,NG), IGEO,        BID,
-     Q   ITASK,       NLOC_DMG,    VARNL,       MAT_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        SZ_BUFVOIS,
-     T   SNPC,        STF,         SBUFMAT,     GLOB_THERM,
-     .   SVIS,        SZ_IX,       IRESP,
-     .   N2D,         th_strain,   NGROUP       ,TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,            
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT         ,BID     ,sensors)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IC, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, LBUF%OFF, NGEO, MAT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, SSP, S1, S2, S3,
+     . S4, S5, S6, EYY, EZZ, ETT, EYZ, EYT, EZT, WYY, WZZ, WYZ, RX, RY, RZ, SX, SY, SZ, VDX, VDY, VDZ, MUVOID, SSP_EQ,
+     . AIRE, SIGY, ET, BUFVOIS, LBUF%PLA, R3_FREE, R4_FREE, EYY, EZZ, ETT, EYZ, EYT, EZT, WYY, WZZ, WYZ, IPM, GAMA, BID,
+     . BID, BID, BID, BID, BID, BID, IBID, BID, BID, IBID, ILAY, MBID, MBID, 1, 1, 1, TABLE, BID, BID, BID, BID,
+     . IPARG(1,NG), IGEO, BID, ITASK, NLOC_DMG, VARNL, MAT_ELEM, JPLASOL, JSPH, SZ_BUFVOIS, SNPC, STF, SBUFMAT,
+     . GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ, nummat, numgeo, numnod, numels,
+     . IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, BID, sensors)
 C----------------------------------
 C     PETROV-GALERKIN PSEUDO MASSES & ALE MASSES
 C----------------------------------
@@ -561,42 +522,14 @@ C-----------------------------------------------------
 C-----------------------------------------------------
 C     STREE TENSOR
 C-----------------------------------------------------
-      CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IC,          IPARG,
-     3   V,           TF,          NPF,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   LBUF%OFF,    NGEO,        MAT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        SSP,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          EYY,         EZZ,         ETT,
-     B   EYZ,         EYT,         EZT,         WYY,
-     C   WZZ,         WYZ,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDX,         VDY,         VDZ,         MUVOID,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   BUFVOIS,     LBUF%PLA,    R3_FREE,     R4_FREE,
-     H   EYY,         EZZ,         ETT,         EYZ,
-     I   EYT,         EZT,         WYY,         WZZ,
-     J   WYZ,         IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         IBID,        BID,
-     M   BID,         IBID,        ILAY,        MBID,
-     N   MBID,        1,           1,           1,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         NPARG_BID,       IGEO,        BID,
-     Q   ITASK,       NLOC_DMG,    VARNL,       MAT_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        SZ_BUFVOIS,
-     S   SNPC,        STF,         SBUFMAT,     GLOB_THERM,
-     *   SVIS,        SZ_IX,       IRESP,
-     T   N2D,         th_strain,   NGROUP,      TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT         ,BID ,sensors)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IC, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, LBUF%OFF, NGEO, MAT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, SSP, S1, S2, S3,
+     . S4, S5, S6, EYY, EZZ, ETT, EYZ, EYT, EZT, WYY, WZZ, WYZ, RX, RY, RZ, SX, SY, SZ, VDX, VDY, VDZ, MUVOID, SSP_EQ,
+     . AIRE, SIGY, ET, BUFVOIS, LBUF%PLA, R3_FREE, R4_FREE, EYY, EZZ, ETT, EYZ, EYT, EZT, WYY, WZZ, WYZ, IPM, GAMA, BID,
+     . BID, BID, BID, BID, BID, BID, IBID, BID, BID, IBID, ILAY, MBID, MBID, 1, 1, 1, TABLE, BID, BID, BID, BID,
+     . NPARG_BID, IGEO, BID, ITASK, NLOC_DMG, VARNL, MAT_ELEM, JPLASOL, JSPH, SZ_BUFVOIS, SNPC, STF, SBUFMAT,
+     . GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ, nummat, numgeo, numnod, numels,
+     . IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, BID, sensors)
 C----------------------------------
 C     PETROV-GALERKIN PSEUDO MASSES & MASSES ALE
 C----------------------------------

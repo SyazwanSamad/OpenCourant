@@ -41,7 +41,6 @@ Copyright>        copyright and attribution statement.
 !||    fxb_mod                ../engine/share/modules/fxb_mod.F
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod           ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    intbuf_fric_mod        ../common_source/modules/interfaces/intbuf_fric_mod.F90
 !||    interfaces_mod         ../common_source/modules/interfaces/interfaces_mod.F90
 !||    loads_mod              ../common_source/modules/loads/loads_mod.F90
@@ -70,20 +69,11 @@ Copyright>        copyright and attribution statement.
 !||    unitab_mod             ../common_source/modules/unitab_mod.F
 !||    user_windows_mod       ../common_source/modules/user_windows_mod.F
 !||====================================================================
-      SUBROUTINE RESOL_HEAD( ELEMENT, NODES,
-     .           ITASK       ,AF          ,IAF            ,IDATA      ,RDATA,
-     .           GRAPHE      ,IFLOW       ,RFLOW          ,
-     .           STACK       ,IRUNN_BIS   , TIMERS,
-     .           MULTI_FVM   ,H3D_DATA    ,SUBSETS    ,IGRNOD          ,
-     .           IGRBRIC     ,IGRQUAD     ,IGRSH4N        ,IGRSH3N    ,IGRTRUSS        ,
-     .           IGRBEAM     ,IGRSPRING   ,IGRPART        ,IGRSURF    ,IGRSLIN         , 
-     .           FORNEQS     ,PINCH_DATA  ,ALE_CONNECTIVITY,
-     .           DRAPE_SH4N  ,DRAPE_SH3N  ,T_MONVOL       ,SENSORS    ,EBCS_TAB        ,
-     .           DIFFUSION   ,SEGVAR      ,DYNAIN_DATA    ,DRAPEG     ,USER_WINDOWS    ,
-     .           OUTPUT      ,INTERFACES  ,DT             ,LOADS      ,MAT_ELEM        ,
-     .           PYTHON      ,NAMES_AND_TITLES, UNITAB    ,SKEWS      ,LIFLOW          ,
-     .           LRFLOW      ,glob_therm ,PBLAST          ,RBE3       ,coupling        ,
-     .           RWALL       ,SFEM   )
+      SUBROUTINE RESOL_HEAD(ELEMENT, NODES, ITASK, AF, IAF, IDATA, RDATA, GRAPHE, IFLOW, RFLOW, STACK, IRUNN_BIS,
+     . TIMERS, MULTI_FVM, SUBSETS, IGRNOD, IGRBRIC, IGRQUAD, IGRSH4N, IGRSH3N, IGRTRUSS, IGRBEAM, IGRSPRING, IGRPART,
+     . IGRSURF, IGRSLIN, FORNEQS, PINCH_DATA, ALE_CONNECTIVITY, DRAPE_SH4N, DRAPE_SH3N, T_MONVOL, SENSORS, EBCS_TAB,
+     . DIFFUSION, SEGVAR, DYNAIN_DATA, DRAPEG, USER_WINDOWS, OUTPUT, INTERFACES, DT, LOADS, MAT_ELEM, PYTHON,
+     . NAMES_AND_TITLES, UNITAB, SKEWS, LIFLOW, LRFLOW, glob_therm, PBLAST, RBE3, coupling, RWALL, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -97,7 +87,6 @@ C-----------------------------------------------
       USE CLUSTER_MOD
       USE STACK_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE INTBUF_FRIC_MOD
       USE GROUPDEF_MOD
       USE MAT_ELEM_MOD
@@ -161,7 +150,6 @@ C     REAL
       TYPE(PRGRAPH) :: GRAPHE(*)
       TYPE (STACK_PLY) :: STACK
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(UNIT_TYPE_) :: UNITAB
 !
       TYPE(SUBSET_) ,DIMENSION(NSUBS)   :: SUBSETS
@@ -220,90 +208,38 @@ C-----------------------------------------------
       ITRACE(2)=NTHREAD
       CALL TRACE_IN(2,ITRACE,ZERO)
 C
-      CALL RESOL(TIMERS, ELEMENT,NODES,coupling,
-     .  AF              ,IAF            ,
-     1  ISKWN          ,NETH           ,IPART          ,NOM_OPT     ,KXX              ,IXX       ,
-     2  IXTG            ,IXS            ,IXQ            ,IXT            ,IXP         ,IXR       ,
-     3  IFILL          ,MAT_ELEM       ,
-     4  IMS             ,NPC            ,IBCL           ,
-     5  IBFV            ,IECRAN         ,ILAS           ,LACCELM        ,NNLINK         ,LNLINK      ,
-     6  IPARG           ,DD_IAD         ,IGRV           ,IEXLNK         ,
-     7  IPARI           ,ICONX          ,NPBY           ,
-     8  LPBY            ,LRIVET         ,NSTRF          ,LJOINT         ,NODPOR         ,MONVOL      ,
-     9  ILINK     ,
-     A  LLINK           ,LINALE         ,NEFLSW         ,NNFLSW         ,ICUT           ,CLUSTER     ,
-     B  ITASK           ,IAF(IF01)      ,
-     C  THKE        ,DAMP               ,
-     D  PM             ,SKEWS          ,GEO            ,EANI           ,BUFMAT      ,BUFGEO           ,BUFSF     ,
-     E  W               ,VEUL           ,FILL           ,DFILL          ,ALPH           ,WB          ,DSAVE            ,ASAVE     ,
-     .  MSNF            , 
-     F  TF              ,FORC           ,VEL            ,FSAV           ,FZERO          ,XLAS        ,ACCELM           ,
-     G  GRAV            ,FR_WAVE        ,FAILWAVE       ,PARTS0         ,ELBUF          ,SENSORS,
-     H  RBY             ,RIVET          ,SECBUF         ,VOLMON         ,LAMBDA      ,
-     I  WA              ,FV             ,PARTSAV          ,
-     J  UWA             ,VAL2           ,PHI            ,SEGVAR         ,R              ,CRFLSW      ,
-     K  FLSW            ,XCUT           ,TANI           ,SECFCUM     ,AF(MF01),
-     L  IDATA           ,RDATA          ,
-     M  IFRAME          ,KXSP           ,IXSP           ,NOD2SP         ,ISPSYM         ,ISPCOND     ,
-     N  XFRAME          ,SPBUF          ,XSPSYM         ,VSPSYM         ,PV             ,
-     O  FSAVD           ,IBVEL          ,LBVEL          ,WASPH          ,W16         ,
-     P  ISPHIO          ,LPRTSPH        ,LONFSPH        ,VSPHIO         ,FBVEL          ,LAGBUF      ,IBCSLAG,
-     Q  IACTIV          ,DAMPR          ,GJBUFI         ,GJBUFR         ,RBMPC          ,IBMPC       ,SPHVELN,
-     T  NBRCVOIS        ,NBSDVOIS       ,LNRCVOIS       ,LNSDVOIS       ,NERCVOIS       ,NESDVOIS    ,LERCVOIS         ,
-     U  LESDVOIS        ,NPSEGCOM       ,LSEGCOM        ,NPORGEO        ,
-     V  IXTG1           ,NPBYL          ,LPBYL          ,RBYL           ,IGEO           ,IPM         ,
-     W  MADPRT         ,MADSH4         ,MADSH3         ,MADSOL         ,MADNOD      ,
-     X  IAD_RBY         ,FR_RBY         ,IAD_RBY2       ,
-     Y  FR_RBY2         ,IAD_I2M        ,FR_I2M         ,ADDCNI2        ,PROCNI2        ,IADI2       ,FR_MV            ,
-     Z  IADMV2          ,FR_LL          ,FR_RL          ,IADCJ          ,
-     a  FR_CJ           ,FR_SEC         ,
-     b  IAD_SEC         ,IAD_CUT        ,FR_CUT         ,RG_CUT         ,NEWFRONT       ,FR_MAD      ,
-     c  FXBIPM          ,FXBRPM         ,FXBNOD         ,FXBMOD         ,FXBGLM         ,FXBCPM      ,FXBCPS           ,
-     d  FXBLM           ,FXBFLS         ,FXBDLS         ,FXBDEP         ,FXBVIT         ,FXBACC      ,FXBELM           ,
-     e  FXBSIG          ,FXBGRVI        ,FXBGRVR        ,EIGIPM         ,EIGIBUF        ,EIGRPM      ,
-     f  LNODPOR         ,
-     g  FR_I18          ,GRAPHE         ,IFLOW          ,RFLOW,
-     h  LGRAV           ,DD_R2R         ,FASOLFR        ,FR_LAGF        ,
-     j  LLAGF           ,ICONTACT       ,RCONTACT       ,SH4TREE        ,SH3TREE     ,
-     k  IPADMESH        ,PADMESH        ,MSC            ,MSTG           ,INC            ,INTG        ,PTG              ,
-     l  ISKWP           ,NSKWP          ,ISENSP         ,NSENSP         ,IACCP          ,NACCP       ,IPART_STATE      ,
-     m  ACONTACT        ,PCONTACT       ,FACTIV         ,
-     p  SH4TRIM         ,SH3TRIM        ,MSCND          ,INCND          ,
-     q  IBFFLUX         ,FBFFLUX        ,RBYM           ,IRBYM          ,LNRBYM         ,ICODRBYM,
-     r  IBCV            ,FCONV          ,IBFTEMP        ,FBFTEMP        ,IAD_RBYM       ,FR_RBYM,
-     t  WEIGHT_RM       ,MS_PLY         ,ZI_PLY         ,INOD_PXFEM     ,IEL_PXFEM      ,IADC_PXFEM  ,
-     u  ADSKY_PXFEM     ,ICODE_PLY      ,ICODT_PLY      ,ISKEW_PLY      ,ADMSMS      ,
-     v  MADCLNOD        ,NOM_SECT       ,MCPC           ,MCPTG          ,DMELC          ,DMELTG      ,MSSA             ,
-     w  DMELS           ,MSTR           ,DMELTR         ,MSP            ,DMELP          ,MSRT        ,DMELRT           ,
-     x  IBCR            ,FRADIA         ,RES_SMS        ,TABLE          ,IRBE2          ,LRBE2       ,IAD_RBE2         ,
-     y  FR_RBE2         ,PHIE           ,MSF            ,
-     z  PROCNE_PXFEM    ,IADSDP_PXFEM   ,IADRCP_PXFEM   ,ICFIELD        ,LCFIELD        ,CFIELD      ,
-     1  MSZ2            ,DIAG_SMS       ,ILOADP         ,LLOADP      ,LOADP            ,
-     2  INOD_CRKXFEM    ,IEL_CRKXFEM    ,IADC_CRKXFEM   ,ADSKY_CRKXFEM  ,
-     3  CNE_CRKXFEM     ,PROCNE_CRKXFEM ,IADSDP_CRKXFEM ,IADRCP_CRKXFEM ,IBUFSSG_IO     ,
-     4  IBC_PLY         ,DMINT2         ,IBORDNODE      ,
-     5  MAT_ELEM%ELBUF  ,POR            ,NODEDGE        ,IAD_EDGE       ,
-     6  FR_EDGE         ,FR_NBEDGE      ,CRKNODIAD      ,LGAUGE         ,GAUGE          ,
-     7  IGAUP           ,NGAUP          ,NODLEVXF       ,DD_R2R_ELEM    ,
-     8  NODGLOBXFE      ,SPH2SOL        ,SOL2SPH        ,IRST           ,
-     9  DMSPH           ,WAGAP          ,MAT_ELEM%XFEM_TAB,ELCUTC       ,NODENR         ,
-     A  KXFENOD2ELC     ,ENRTAG         ,
-     B  RTHBUF          ,KXIG3D         ,IXIG3D         ,KNOT           ,WIGE           ,
-     C  WSMCOMP        ,STACK          ,
-     D  CPUTIME_MP_GLOB ,CPUTIME_MP     ,TAB_UMP        ,POIN_UMP       ,SOL2SPH_TYP    ,
-     E  IRUNN_BIS       ,ADDCSRECT      ,IAD_FRNOR      ,FR_NOR         ,PROCNOR        ,
-     F  INTERFACES%SPMD_ARRAYS%IAD_FREDG,INTERFACES%SPMD_ARRAYS%FR_EDG  ,DRAPE_SH4N     ,DRAPE_SH3N     ,TAB_MAT        , 
-     G  NATIV0_SMS      ,MULTI_FVM      ,SEGQUADFR      ,MS_2D          ,
-     H  H3D_DATA        ,SUBSETS        ,IGRNOD         ,IGRBRIC        ,
-     I  IGRQUAD         ,IGRSH4N        ,IGRSH3N        ,IGRTRUSS       ,IGRBEAM        ,
-     J  IGRSPRING       ,IGRPART        ,IGRSURF        ,FORNEQS        ,
-     K  NLOC_DMG        ,ISKWP_L        ,KNOTLOCPC      ,KNOTLOCEL      ,PINCH_DATA     ,TAG_SKINS6  ,ALE_CONNECTIVITY ,
-     L  XCELL           , XFACE         ,NE_NERCVOIS    ,NE_NESDVOIS    ,NE_LERCVOIS    ,NE_LESDVOIS ,IBCSCYC          ,LBCSCYC   ,
-     M  T_MONVOL        ,ID_GLOBAL_VOIS ,FACE_VOIS      ,DYNAIN_DATA    ,FCONT_MAX   ,EBCS_TAB         ,DIFFUSION ,
-     N  KLOADPINTER     ,LOADPINTER     ,DGAPLOADINT    ,DRAPEG         ,USER_WINDOWS ,OUTPUT          ,INTERFACES,
-     O  DT              ,LOADS          ,PYTHON         ,DPL0CLD        ,VEL0CLD        ,
-     P  NDAMP_VREL      ,ID_DAMP_VREL   ,FR_DAMP_VREL   ,NDAMP_VREL_RBYG,NAMES_AND_TITLES,UNITAB,LIFLOW,LRFLOW,
-     R  GLOB_THERM      ,PBLAST         ,RBE3           ,RWALL          ,SFEM   )
+      CALL RESOL(TIMERS, ELEMENT, NODES, coupling, AF, IAF, ISKWN, NETH, IPART, NOM_OPT, KXX, IXX, IXTG, IXS, IXQ, IXT,
+     . IXP, IXR, IFILL, MAT_ELEM, IMS, NPC, IBCL, IBFV, IECRAN, ILAS, LACCELM, NNLINK, LNLINK, IPARG, DD_IAD, IGRV,
+     . IEXLNK, IPARI, ICONX, NPBY, LPBY, LRIVET, NSTRF, LJOINT, NODPOR, MONVOL, ILINK, LLINK, LINALE, NEFLSW, NNFLSW,
+     . ICUT, CLUSTER, ITASK, IAF(IF01), THKE, DAMP, PM, SKEWS, GEO, EANI, BUFMAT, BUFGEO, BUFSF, W, VEUL, FILL, DFILL,
+     . ALPH, WB, DSAVE, ASAVE, MSNF, TF, FORC, VEL, FSAV, FZERO, XLAS, ACCELM, GRAV, FR_WAVE, FAILWAVE, PARTS0, ELBUF,
+     . SENSORS, RBY, RIVET, SECBUF, VOLMON, LAMBDA, WA, FV, PARTSAV, UWA, VAL2, PHI, SEGVAR, R, CRFLSW, FLSW, XCUT,
+     . TANI, SECFCUM, AF(MF01), IDATA, RDATA, IFRAME, KXSP, IXSP, NOD2SP, ISPSYM, ISPCOND, XFRAME, SPBUF, XSPSYM,
+     . VSPSYM, PV, FSAVD, IBVEL, LBVEL, WASPH, W16, ISPHIO, LPRTSPH, LONFSPH, VSPHIO, FBVEL, LAGBUF, IBCSLAG, IACTIV,
+     . DAMPR, GJBUFI, GJBUFR, RBMPC, IBMPC, SPHVELN, NBRCVOIS, NBSDVOIS, LNRCVOIS, LNSDVOIS, NERCVOIS, NESDVOIS,
+     . LERCVOIS, LESDVOIS, NPSEGCOM, LSEGCOM, NPORGEO, IXTG1, NPBYL, LPBYL, RBYL, IGEO, IPM, MADPRT, MADSH4, MADSH3,
+     . MADSOL, MADNOD, IAD_RBY, FR_RBY, IAD_RBY2, FR_RBY2, IAD_I2M, FR_I2M, ADDCNI2, PROCNI2, IADI2, FR_MV, IADMV2,
+     . FR_LL, FR_RL, IADCJ, FR_CJ, FR_SEC, IAD_SEC, IAD_CUT, FR_CUT, RG_CUT, NEWFRONT, FR_MAD, FXBIPM, FXBRPM, FXBNOD,
+     . FXBMOD, FXBGLM, FXBCPM, FXBCPS, FXBLM, FXBFLS, FXBDLS, FXBDEP, FXBVIT, FXBACC, FXBELM, FXBSIG, FXBGRVI, FXBGRVR,
+     . EIGIPM, EIGIBUF, EIGRPM, LNODPOR, FR_I18, GRAPHE, IFLOW, RFLOW, LGRAV, DD_R2R, FASOLFR, FR_LAGF, LLAGF, ICONTACT,
+     . RCONTACT, SH4TREE, SH3TREE, IPADMESH, PADMESH, MSC, MSTG, INC, INTG, PTG, ISKWP, NSKWP, ISENSP, NSENSP, IACCP,
+     . NACCP, IPART_STATE, ACONTACT, PCONTACT, FACTIV, SH4TRIM, SH3TRIM, MSCND, INCND, IBFFLUX, FBFFLUX, RBYM, IRBYM,
+     . LNRBYM, ICODRBYM, IBCV, FCONV, IBFTEMP, FBFTEMP, IAD_RBYM, FR_RBYM, WEIGHT_RM, MS_PLY, ZI_PLY, INOD_PXFEM,
+     . IEL_PXFEM, IADC_PXFEM, ADSKY_PXFEM, ICODE_PLY, ICODT_PLY, ISKEW_PLY, ADMSMS, MADCLNOD, NOM_SECT, MCPC, MCPTG,
+     . DMELC, DMELTG, MSSA, DMELS, MSTR, DMELTR, MSP, DMELP, MSRT, DMELRT, IBCR, FRADIA, RES_SMS, TABLE, IRBE2, LRBE2,
+     . IAD_RBE2, FR_RBE2, PHIE, MSF, PROCNE_PXFEM, IADSDP_PXFEM, IADRCP_PXFEM, ICFIELD, LCFIELD, CFIELD, MSZ2, DIAG_SMS,
+     . ILOADP, LLOADP, LOADP, INOD_CRKXFEM, IEL_CRKXFEM, IADC_CRKXFEM, ADSKY_CRKXFEM, CNE_CRKXFEM, PROCNE_CRKXFEM,
+     . IADSDP_CRKXFEM, IADRCP_CRKXFEM, IBUFSSG_IO, IBC_PLY, DMINT2, IBORDNODE, MAT_ELEM%ELBUF, POR, NODEDGE, IAD_EDGE,
+     . FR_EDGE, FR_NBEDGE, CRKNODIAD, LGAUGE, GAUGE, IGAUP, NGAUP, NODLEVXF, DD_R2R_ELEM, NODGLOBXFE, SPH2SOL, SOL2SPH,
+     . IRST, DMSPH, WAGAP, MAT_ELEM%XFEM_TAB, ELCUTC, NODENR, KXFENOD2ELC, ENRTAG, RTHBUF, KXIG3D, IXIG3D, KNOT, WIGE,
+     . WSMCOMP, STACK, CPUTIME_MP_GLOB, CPUTIME_MP, TAB_UMP, POIN_UMP, SOL2SPH_TYP, IRUNN_BIS, ADDCSRECT, IAD_FRNOR,
+     . FR_NOR, PROCNOR, INTERFACES%SPMD_ARRAYS%IAD_FREDG, INTERFACES%SPMD_ARRAYS%FR_EDG, DRAPE_SH4N, DRAPE_SH3N,
+     . TAB_MAT, NATIV0_SMS, MULTI_FVM, SEGQUADFR, MS_2D, SUBSETS, IGRNOD, IGRBRIC, IGRQUAD, IGRSH4N, IGRSH3N, IGRTRUSS,
+     . IGRBEAM, IGRSPRING, IGRPART, IGRSURF, FORNEQS, NLOC_DMG, ISKWP_L, KNOTLOCPC, KNOTLOCEL, PINCH_DATA, TAG_SKINS6,
+     . ALE_CONNECTIVITY, XCELL, XFACE, NE_NERCVOIS, NE_NESDVOIS, NE_LERCVOIS, NE_LESDVOIS, IBCSCYC, LBCSCYC, T_MONVOL,
+     . ID_GLOBAL_VOIS, FACE_VOIS, DYNAIN_DATA, FCONT_MAX, EBCS_TAB, DIFFUSION, KLOADPINTER, LOADPINTER, DGAPLOADINT,
+     . DRAPEG, USER_WINDOWS, OUTPUT, INTERFACES, DT, LOADS, PYTHON, DPL0CLD, VEL0CLD, NDAMP_VREL, ID_DAMP_VREL,
+     . FR_DAMP_VREL, NDAMP_VREL_RBYG, NAMES_AND_TITLES, UNITAB, LIFLOW, LRFLOW, GLOB_THERM, PBLAST, RBE3, RWALL, SFEM)
 C
       CALL TRACE_OUT(2)
 C

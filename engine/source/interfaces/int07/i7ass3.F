@@ -32,35 +32,17 @@ Copyright>        copyright and attribution statement.
 !||    i7assigeo0   ../engine/source/interfaces/int07/i7ass3.F
 !||    i7sms2       ../engine/source/interfaces/int07/i7sms2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    tri7box      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I7ASS33(JLT       ,A        ,NOINT     ,ITAB      ,STIFN    ,
-     2                  STIF      ,FSKYI    ,ISKY      ,FCONT     ,IX1       ,
-     3                  IX2       ,IX3      ,IX4       ,NSVG      ,NELTST    ,
-     4                  ITYPTST   ,DT2T     ,NISKYFI   ,ISECIN    ,NSTRF     ,
-     5                  SECFCUM   ,VISCN    ,NIN       ,FXI       ,FYI       ,
-     6                  FZI       ,FX1      ,FY1       ,FZ1       ,FX2       ,
-     7                  FY2       ,FZ2      ,FX3       ,FY3       ,FZ3       ,
-     8                  FX4       ,FY4      ,FZ4       ,H1        ,H2        ,
-     9                  H3        ,H4       ,KS        ,KT        ,K1        ,
-     A                  K2        ,K3       ,K4        ,CS        ,CF        ,
-     B                  C1        ,C2       ,C3        ,C4        ,C         ,
-     C                  INTTH     ,PHI      ,PHI1      ,PHI2      ,PHI3      ,
-     D                  PHI4      ,FTHE     ,FTHESKYI  ,MSKYI_SMS ,ISKYI_SMS ,
-     E                  NSMS      ,DTMINI    ,JTASK     ,
-     F                  CONDN     ,CONDINT   ,CONDNSKYI,IXIG3D   ,KXIG3D    ,
-     J                  WIGE      ,KNOT      ,IGEO      ,NIGE     ,RIGE      ,
-     K                  X         ,H3D_DATA  ,KNOTLOCPC ,KNOTLOCEL,IFORM     ,
-     L                  NODADT_THERM)
+      SUBROUTINE I7ASS33(JLT, A, NOINT, ITAB, STIFN, STIF, FSKYI, ISKY, FCONT, IX1, IX2, IX3, IX4, NSVG, NELTST,
+     . ITYPTST, DT2T, NISKYFI, ISECIN, NSTRF, SECFCUM, VISCN, NIN, FXI, FYI, FZI, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3,
+     . FY3, FZ3, FX4, FY4, FZ4, H1, H2, H3, H4, KS, KT, K1, K2, K3, K4, CS, CF, C1, C2, C3, C4, C, INTTH, PHI, PHI1,
+     . PHI2, PHI3, PHI4, FTHE, FTHESKYI, MSKYI_SMS, ISKYI_SMS, NSMS, DTMINI, JTASK, CONDN, CONDINT, CONDNSKYI, IXIG3D,
+     . KXIG3D, WIGE, KNOT, IGEO, NIGE, RIGE, X, KNOTLOCPC, KNOTLOCEL, IFORM, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
 C-----------------------------------------------
@@ -109,10 +91,6 @@ C-----------------------------------------------
      .   KT(MVSIZ),C(MVSIZ),CF(MVSIZ)
       my_real
      .   WIGE(*),KNOT(*),RIGE(3,*),KNOTLOCPC(*),KNOTLOCEL(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,K,JG,K0,NBINTER,K1S,J,TAGIGEO
       my_real
      .   DTI
@@ -171,13 +149,9 @@ c
      6                  INTTH ,PHI  ,FTHE ,PHI1 , PHI2  ,PHI3 ,
      7                  PHI4  ,CONDN,CONDINT,JTASK,IFORM,NODADT_THERM)
           ELSE
-            CALL I7ASSIGEO0(JLT   ,IX1  ,IX2  ,IX3  ,IX4    ,
-     2                  NSVG  ,H1   ,H2   ,H3   ,H4     ,STIF ,
-     3                  FX1   ,FY1  ,FZ1  ,FX2  ,FY2    ,FZ2  ,
-     4                  FX3   ,FY3  ,FZ3  ,FX4  ,FY4    ,FZ4  ,
-     5                  FXI   ,FYI  ,FZI  ,A    ,STIFN  ,IXIG3D,
-     6                  KXIG3D,X    ,WIGE ,KNOT ,IGEO   ,NIGE,
-     7                  RIGE  ,FCONT,H3D_DATA,KNOTLOCPC,KNOTLOCEL)
+      CALL I7ASSIGEO0(JLT, IX1, IX2, IX3, IX4, NSVG, H1, H2, H3, H4, STIF, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3, FY3, FZ3,
+     . FX4, FY4, FZ4, FXI, FYI, FZI, A, STIFN, IXIG3D, KXIG3D, X, WIGE, KNOT, IGEO, NIGE, RIGE, FCONT, KNOTLOCPC,
+     . KNOTLOCEL)
           ENDIF
         ELSE
 C
@@ -227,7 +201,7 @@ c     7               RIGE  ,FCONT,H3D_DATA,KNOTLOCPC,KNOTLOCEL)
         ENDIF
       ENDIF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -1794,28 +1768,19 @@ C
 !||--- calls      -----------------------------------------------------
 !||    ig3donebasis     ../engine/source/elements/ige3d/ig3donebasis.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I7ASSIGEO0(JLT   ,IX1  ,IX2  ,IX3  ,IX4    ,
-     2                  NSVG  ,H1   ,H2   ,H3   ,H4     ,STIF ,
-     3                  FX1   ,FY1  ,FZ1  ,FX2  ,FY2    ,FZ2  ,
-     4                  FX3   ,FY3  ,FZ3  ,FX4  ,FY4    ,FZ4  ,
-     5                  FXI   ,FYI  ,FZI  ,A    ,STIFN  ,IXIG3D,
-     6                  KXIG3D,X    ,WIGE ,KNOT ,IGEO   ,NIGE ,
-     7                  RIGE  ,FCONT,H3D_DATA,KNOTLOCPC,KNOTLOCEL)
+      SUBROUTINE I7ASSIGEO0(JLT, IX1, IX2, IX3, IX4, NSVG, H1, H2, H3, H4, STIF, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3,
+     . FY3, FZ3, FX4, FY4, FZ4, FXI, FYI, FZI, A, STIFN, IXIG3D, KXIG3D, X, WIGE, KNOT, IGEO, NIGE, RIGE, FCONT,
+     . KNOTLOCPC, KNOTLOCEL)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
@@ -1847,10 +1812,6 @@ C-----------------------------------------------
       my_real
      .    X(3,*),WIGE(*),KNOT(*),RIGE(3,*),
      .    KNOTLOCPC(DEG_MAX,3,*),KNOTLOCEL(2,3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, JS, IPID, IAD_KNOT, NKNOT1,
      .        NKNOT2, NKNOT3, IDX, IDY, IDZ, N1, N2, N3,
      .        NCTRL, IG, NUMCP(64), K, IDX2, IDY2, IDZ2,
@@ -1952,7 +1913,7 @@ c      print*,'JS main ', JS, KXIG3D(2,JS)
 
         DO J=1,NCTRL
           K = NUMCP(J)
-          IF(ANIM_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)>0)THEN
             FCONT(1,K) = FCONT(1,K) + R(J)*FX1(I)
             FCONT(2,K) = FCONT(2,K) + R(J)*FY1(I)
             FCONT(3,K) = FCONT(3,K) + R(J)*FZ1(I)
@@ -2055,7 +2016,7 @@ c     7     PY-1      ,PZ-1      ,0)
 
         DO J=1,NCTRL
           K = NUMCP(J)
-          IF(ANIM_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)>0)THEN
             FCONT(1,K) = FCONT(1,K) + R(J)*FX2(I)
             FCONT(2,K) = FCONT(2,K) + R(J)*FY2(I)
             FCONT(3,K) = FCONT(3,K) + R(J)*FZ2(I)
@@ -2158,7 +2119,7 @@ c     7     PY-1      ,PZ-1      ,0)
 
         DO J=1,NCTRL
           K = NUMCP(J)
-          IF(ANIM_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)>0)THEN
             FCONT(1,K) = FCONT(1,K) + R(J)*FX3(I)
             FCONT(2,K) = FCONT(2,K) + R(J)*FY3(I)
             FCONT(3,K) = FCONT(3,K) + R(J)*FZ3(I)
@@ -2252,7 +2213,7 @@ c     7     PY-1      ,PZ-1      ,0)
 
         DO J=1,NCTRL
           K = NUMCP(J)
-          IF(ANIM_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)>0)THEN
             FCONT(1,K) = FCONT(1,K) + R(J)*FX4(I)
             FCONT(2,K) = FCONT(2,K) + R(J)*FY4(I)
             FCONT(3,K) = FCONT(3,K) + R(J)*FZ4(I)
@@ -2366,7 +2327,7 @@ C-------------------------------------
 
         DO J=1,NCTRL
           K = NUMCP(J)
-          IF(ANIM_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)>0)THEN
             FCONT(1,K) = FCONT(1,K) - R(J)*FXI(I)
             FCONT(2,K) = FCONT(2,K) - R(J)*FYI(I)
             FCONT(3,K) = FCONT(3,K) - R(J)*FZI(I)

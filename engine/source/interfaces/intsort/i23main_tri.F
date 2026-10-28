@@ -40,20 +40,15 @@ Copyright>        copyright and attribution statement.
 !||    upgrade_multimp              ../common_source/interf/upgrade_multimp.F
 !||--- uses       -----------------------------------------------------
 !||    check_sorting_criteria_mod   ../engine/source/interfaces/intsort/check_sorting_criteria.F90
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod                  ../engine/share/message_module/message_mod.F
 !||    multi_fvm_mod                ../common_source/modules/ale/multi_fvm_mod.F90
 !||    timer_mod                    ../engine/source/system/timer_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I23MAIN_TRI(TIMERS,
-     1                  IPARI   ,X       ,INTBUF_TAB,V     ,
-     2                  MS      ,NIN     ,ITASK   ,MWAG    ,WEIGHT  ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM ,
-     4                  ITAB    ,KINET   ,NRTM_T  ,RENUM   ,
-     5                  NSNFIOLD,ESHIFT  ,NUM_IMP ,IND_IMP ,NODNX_SMS,
-     6                  H3D_DATA, MULTI_FVM,INTHEAT,IDT_THERM,NODADT_THERM)
+      SUBROUTINE I23MAIN_TRI(TIMERS, IPARI, X, INTBUF_TAB, V, MS, NIN, ITASK, MWAG, WEIGHT, ISENDTO, IRCVFROM, RETRI,
+     . IAD_ELEM, FR_ELEM, ITAB, KINET, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP, IND_IMP, NODNX_SMS, MULTI_FVM, INTHEAT,
+     . IDT_THERM, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -61,7 +56,6 @@ C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD 
-      USE H3D_MOD 
       USE MULTI_FVM_MOD
       use check_sorting_criteria_mod , only : check_sorting_criteria
 C-----------------------------------------------
@@ -101,7 +95,6 @@ C     REAL
       my_real 
      .   X(*), V(*), MS(*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -376,11 +369,8 @@ C mono tache
         IF (IMONM > 0) CALL STARTIME(TIMERS,26)
         INTBUF_TAB%VARIABLES(5) = -INTBUF_TAB%VARIABLES(5)
 C
-        CALL SPMD_TRI7GAT(
-     1      RESULT       ,NSN ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2      IPARI(21,NIN),NSNR,MULTIMP      ,NTY,IPARI(47,NIN),
-     3      ILEV   ,NSNFIOLD, IPARI, H3D_DATA,INTFRIC,
-     4      MULTI_FVM,NODADT_THERM)
+      CALL SPMD_TRI7GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), ILEV, NSNFIOLD, IPARI, INTFRIC, MULTI_FVM, NODADT_THERM)
         IPARI(24,NIN) = NSNR
 C
         IF (NUM_IMP>0) 

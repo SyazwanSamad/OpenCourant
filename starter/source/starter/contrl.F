@@ -29,13 +29,13 @@ Copyright>        copyright and attribution statement.
 !||    contrbe2                       ../starter/source/constraints/general/rbe2/hm_read_rbe2.F
 !||    contrbe3                       ../starter/source/constraints/general/rbe3/contrbe3.F
 !||    find_dt1brick_engine           ../starter/source/starter/contrl.F
-!||    hm_elem_count                  ../starter/source/devtools/hm_reader/hm_elem_count.F
-!||    hm_get_intv                    ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string                  ../starter/source/devtools/hm_reader/hm_get_string.F
-!||    hm_option_count                ../starter/source/devtools/hm_reader/hm_option_count.F
-!||    hm_option_next                 ../starter/source/devtools/hm_reader/hm_option_next.F
-!||    hm_option_read_key             ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start                ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_elem_count                  ../starter/source/devtools/reader/hm_elem_count.F
+!||    hm_get_intv                    ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string                  ../starter/source/devtools/reader/hm_get_string.F
+!||    hm_option_count                ../starter/source/devtools/reader/hm_option_count.F
+!||    hm_option_next                 ../starter/source/devtools/reader/hm_option_next.F
+!||    hm_option_read_key             ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start                ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_prelce16s                   ../starter/source/elements/reader/hm_read_solid.F
 !||    hm_preread_node                ../starter/source/elements/reader/hm_preread_node.F
 !||    hm_preread_part                ../starter/source/model/assembling/hm_read_part.F
@@ -58,7 +58,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_spmd                   ../starter/source/general_controls/computation/hm_read_spmd.F
 !||    hm_read_unit                   ../starter/source/general_controls/computation/hm_read_unit.F
 !||    hm_read_upwind                 ../starter/source/general_controls/computation/hm_read_upwind.F
-!||    hm_s_ale                       ../starter/source/devtools/hm_reader/hm_s_ale.F90
+!||    hm_s_ale                       ../starter/source/devtools/reader/hm_s_ale.F90
 !||    init_def_elem                  ../starter/source/modules/defaults_mod.F90
 !||    init_def_zero                  ../starter/source/modules/defaults_mod.F90
 !||    istr                           ../starter/source/tools/univ/istr.F
@@ -72,7 +72,7 @@ Copyright>        copyright and attribution statement.
 !||    format_mod                     ../starter/share/modules1/format_mod.F90
 !||    grp_size_mod                   ../starter/share/modules1/grp_size_mod.F
 !||    hm_option_read_mod             ../starter/share/modules1/hm_option_read_mod.F
-!||    hm_s_ale_mod                   ../starter/source/devtools/hm_reader/hm_s_ale.F90
+!||    hm_s_ale_mod                   ../starter/source/devtools/reader/hm_s_ale.F90
 !||    inivol_def_mod                 ../starter/share/modules1/inivol_mod.F
 !||    input_modification_mod         ../starter/source/starter/input_modification.F90
 !||    message_mod                    ../starter/share/message_module/message_mod.F
@@ -1149,7 +1149,6 @@ C
       IRUN=0
       IGER=0
       IANIM=0
-      IH3D=0
 C
       DO I = 1,9
         THIS1(I)= 0
@@ -1797,341 +1796,6 @@ C
      .              C2=ROOTNAM(1:ROOTLEN)//'D01')   
 C
       ENDIF
-C------------------------------------------- 
-      RETURN
-      END
-!||====================================================================
-!||    ini_h3dtmax_engine     ../starter/source/starter/contrl.F
-!||--- called by ------------------------------------------------------
-!||    lectur                 ../starter/source/starter/lectur.F
-!||--- calls      -----------------------------------------------------
-!||    read_h3dtmax_key       ../starter/source/starter/contrl.F
-!||--- uses       -----------------------------------------------------
-!||    message_mod            ../starter/share/message_module/message_mod.F
-!||====================================================================
-      SUBROUTINE INI_H3DTMAX_ENGINE(IPARG,IPART,IPARTS,IPARTC,IPARTG,IDDLEVEL)
-C-----------------------------------------------
-C   M o d u l e s
-C-----------------------------------------------
-      USE MESSAGE_MOD
-      USE INOUTFILE_MOD
-      USE OUTMAX_MOD
-      USE NAMES_AND_TITLES_MOD , ONLY : NCHARLINE
-      use my_alloc_mod
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
-#include      "implicit_f.inc"
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
-#include      "com01_c.inc"
-#include      "com04_c.inc"
-#include      "scr15_c.inc"
-#include      "scr17_c.inc"
-#include      "param_c.inc"
-C-----------------------------------------------
-C   D u m m y   A r g u m e n t s
-C-----------------------------------------------
-      INTEGER ,INTENT(IN) :: IDDLEVEL
-      INTEGER, DIMENSION(NPARG,NGROUP) ,INTENT(IN):: IPARG
-      INTEGER ,DIMENSION(LIPART1,NPART),INTENT(IN):: IPART
-      INTEGER ,DIMENSION(NUMELS),INTENT(IN):: IPARTS
-      INTEGER ,DIMENSION(NUMELC),INTENT(IN):: IPARTC
-      INTEGER ,DIMENSION(NUMELTG),INTENT(IN):: IPARTG
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER I, J, K, N ,NELC , NELTG , IP , NPRT , IPRT
-      INTEGER IH3D,NG,ITY,NFT,IKEY,K_LEN
-
-      INTEGER :: TMAX_IPART(NPART),NKPART(NPART+1,NKEYMAX+1)
-      CHARACTER(LEN=NCHARLINE) :: CARTE
-C-----------------------------------------------
-      IF (ALLOCATED(IKEYMAX)) CALL MY_DEALLOC(IKEYMAX)
-      IF (ALLOCATED(IPART_OK)) CALL MY_DEALLOC(IPART_OK)
-      call my_alloc(IKEYMAX, NKEYMAX, "IKEYMAX")
-      call my_alloc(IPART_OK, NGROUP, NKEYMAX, "IPART_OK")
-      IKEYMAX =0
-      IPART_OK = 0
-      LMAX_DIS = 0
-      LMAX_VEL = 0
-      LMAX_NSIG = 0
-      LMAX_NSTRA = 0
-      NKPART(1:NPART+1,1:NKEYMAX+1) = 0
-C-----------------------------------------------
-C     Reading data from the engine file
-C-----------------------------------------------
-      IH3D=1
-      K_LEN = 19 
-      CARTE(1:K_LEN) = '/H3D/ELEM/VONM/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 20 
-        CARTE(1:K_LEN) = '/H3D/SOLID/VONM/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/VONM/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=2
-      K_LEN = 20 
-      CARTE(1:K_LEN) = '/H3D/ELEM/SIGEQ/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 21 
-        CARTE(1:K_LEN) = '/H3D/SOLID/SIGEQ/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/SIGEQ/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=3
-      K_LEN = 19 
-      CARTE(1:K_LEN) = '/H3D/ELEM/ENER/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 20 
-        CARTE(1:K_LEN) = '/H3D/SOLID/ENER/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/ENER/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=4
-      K_LEN = 19 
-      CARTE(1:K_LEN) = '/H3D/ELEM/DAMA/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 20 
-        CARTE(1:K_LEN) = '/H3D/SOLID/DAMA/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/DAMA/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=5
-      K_LEN = 26 
-      CARTE(1:K_LEN) = '/H3D/ELEM/TENS/STRESS/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 27 
-        CARTE(1:K_LEN) = '/H3D/SOLID/TENS/STRESS/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/TENS/STRESS/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=6
-      K_LEN = 26 
-      CARTE(1:K_LEN) = '/H3D/ELEM/TENS/STRAIN/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY >0) THEN
-        IKEYMAX(IH3D) = 1
-      ELSE
-        K_LEN = 27 
-        CARTE(1:K_LEN) = '/H3D/SOLID/TENS/STRAIN/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-        CARTE(1:K_LEN) = '/H3D/SHELL/TENS/STRAIN/TMAX'    
-        CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-        IF (IKEY >0) IKEYMAX(IH3D) = 1
-      END IF
-      IH3D=7 ! NKEYMAX+1
-      K_LEN = 9 
-      CARTE(1:K_LEN) = '/H3D/PART'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,NKPART(1,IH3D),IPART)
-      IF (IKEY == 0 ) NKPART(1:NPART,IH3D)=1
-      IH3D=8 
-      K_LEN =18 
-      CARTE(1:K_LEN) = '/H3D/NODA/DIS/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,TMAX_IPART,IPART)
-      IF (IKEY > 0 ) LMAX_DIS = 3
-      IH3D=9 
-      K_LEN =18 
-      CARTE(1:K_LEN) = '/H3D/NODA/VEL/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,TMAX_IPART,IPART)
-      IF (IKEY > 0 ) LMAX_VEL = 3
-      IH3D=10 
-      K_LEN =18 
-      CARTE(1:K_LEN) = '/H3D/NODA/GPS/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,TMAX_IPART,IPART)
-      IF (IKEY > 0 ) LMAX_NSIG = 6
-      IH3D=11 
-      K_LEN =23 
-      CARTE(1:K_LEN) = '/H3D/NODA/GPSTRAIN/TMAX'    
-      CALL READ_H3DTMAX_KEY(CARTE,K_LEN,IKEY,TMAX_IPART,IPART)
-      IF (IKEY > 0 ) LMAX_NSTRA = 6
-C
-        IH3D = 0
-        DO I=1,NKEYMAX
-          IH3D = IH3D + IKEYMAX(I)
-        END DO
-        IF (IH3D>0) THEN
-          DO I=1,NKEYMAX
-           NKPART(1:NPART,I)=NKPART(1:NPART,NKEYMAX+1)*NKPART(1:NPART,I)
-          END DO
-C
-          DO NG=1,NGROUP
-            NFT=IPARG(3,NG)+1
-            ITY=IPARG(5,NG)
-C          
-            IPRT = 0
-            SELECT CASE (ITY)
-              CASE(1)
-                IPRT = IPARTS(NFT)
-              CASE(3)
-                IPRT = IPARTC(NFT)
-              CASE(7)
-                IPRT = IPARTG(NFT)
-            END SELECT
-            IF(IPRT>0) IPART_OK(NG,1:NKEYMAX) = NKPART(IPRT,1:NKEYMAX)
-          END DO
-        END IF
-C------------------------------------------- 
-      RETURN
-      END
-!||====================================================================
-!||    read_h3dtmax_key       ../starter/source/starter/contrl.F
-!||--- called by ------------------------------------------------------
-!||    ini_h3dtmax_engine     ../starter/source/starter/contrl.F
-!||--- uses       -----------------------------------------------------
-!||    message_mod            ../starter/share/message_module/message_mod.F
-!||====================================================================
-      SUBROUTINE READ_H3DTMAX_KEY(KEY_TM,KEY_LEN,IFUND,NTM_PART,IPART)
-C-----------------------------------------------
-C   M o d u l e s
-C-----------------------------------------------
-      USE MESSAGE_MOD
-      USE INOUTFILE_MOD
-      USE NAMES_AND_TITLES_MOD , ONLY : NCHARLINE
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
-#include      "implicit_f.inc"
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
-#include      "com01_c.inc"
-#include      "com04_c.inc"
-#include      "scr15_c.inc"
-#include      "scr17_c.inc"
-#include      "param_c.inc"
-C-----------------------------------------------
-C   D u m m y   A r g u m e n t s
-C-----------------------------------------------
-      INTEGER, INTENT(IN):: KEY_LEN
-      CHARACTER(len=KEY_LEN) :: KEY_TM
-      INTEGER ,DIMENSION(LIPART1,NPART),INTENT(IN):: IPART
-      INTEGER, INTENT(OUT):: IFUND
-      INTEGER ,DIMENSION(NPART),INTENT(INOUT):: NTM_PART
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER I, J, K, N ,NELC , NELTG , IP , NPRT , IPRT
-      INTEGER IH3D,NG,ITY,NFT,IO_ERR1,LEN_C,IC
-      CHARACTER FILNAM*109, KEYA*80, KEYA2*80
-      CHARACTER(LEN=NCHARLINE) :: CARTE
-
-      INTEGER :: LEN_TMP_NAME,TMAX_IPART(NPART)
-      CHARACTER(len=4096) :: TMP_NAME
-C-----------------------------------------------
-      IFUND=0
-      IO_ERR1 = 0
-      NPRT = 0
-C-----------------------------------------------
-C     Reading data from the engine file
-C-----------------------------------------------   
-      FILNAM=ROOTNAM(1:ROOTLEN)//'_0001.rad'
-
-      TMP_NAME=INFILE_NAME(1:INFILE_NAME_LEN)//FILNAM(1:ROOTLEN+9)
-      LEN_TMP_NAME = INFILE_NAME_LEN+ROOTLEN+9
-      OPEN(UNIT=71,FILE=TMP_NAME(1:LEN_TMP_NAME),
-     .        ACCESS='SEQUENTIAL',STATUS='OLD',IOSTAT=IO_ERR1)
-
-      DO WHILE (IO_ERR1 == 0 .AND. IFUND==0)
-C
-        READ(71,FMT='(A)',END=20) KEYA
-        IF(KEYA(1:KEY_LEN) == KEY_TM ) THEN
-C---- read ipart_id if there are 
-           IFUND = 1
-           IC = 1
-           NPRT = NPART
-           DO WHILE(IC == 1)           
-             READ(71,FMT='(A)',ERR=20,END=20) CARTE
-             IF(CARTE(1:1) == '#' .OR. CARTE(1:1) == '$') CYCLE
-             IC = 0
-             LEN_C = LEN_TRIM(CARTE)
-             IF(CARTE(LEN_C:LEN_C)==CHAR(13)) LEN_C = LEN_C - 1
-             IF (CARTE(1:1) == '/' .OR. LEN_C==0) THEN
-             ELSE
-               J=1
-               NPRT = 0
-               DO WHILE(CARTE(1:1) /= '/' .AND. CARTE(1:1) /= '#' .AND. 
-     .                  CARTE(1:1) /= '$' .AND. LEN_C /= 0) 
-                 DO WHILE (J <= LEN_C)
-                  IF(CARTE(J:J) /= ' ') THEN
-                    K=J
-                    DO WHILE(CARTE(K:K) /= ' ' .AND. K < LEN_C)
-                      K=K+1
-                    ENDDO
-                    NPRT = NPRT + 1
-                    READ(CARTE(J:K),'(I10)') IPRT
-                    TMAX_IPART(NPRT) = IPRT
-                    J = K
-                  ENDIF
-                  J = J +1
-                 END DO
-                 READ(71,FMT='(A)',ERR=20,END=20) CARTE
-                 LEN_C = LEN_TRIM(CARTE)
-                 IF(CARTE(LEN_C:LEN_C)==CHAR(13)) LEN_C = LEN_C - 1
-               END DO
-                   IF (NPRT==0) THEN
-                 NPRT = NPART
-                 NTM_PART(1:NPRT) = 1
-               END IF
-             END IF
-           END DO !(CI == 1) Remove Comments
-        END IF        
-C
-      END DO
-C
- 20     CONTINUE
-
-        CLOSE(71)
-C        
-        IF (IFUND>0 .AND. (NPRT == NPART .OR.NPRT ==0)) THEN   
-          NTM_PART(1:NPRT) = 1
-        ELSEIF (IFUND>0) THEN   
-            DO I=1,NPRT
-             IP=0
-             IPRT = TMAX_IPART(I)
-               DO J=1,NPART
-                  IF(IPART(4,J)==IPRT)IP=J
-               END DO
-               IF (IP > 0) NTM_PART(IP)=1
-             IP = 0
-               DO J=1,NPART
-                 IP = IP +NTM_PART(J)
-               END DO
-             IF (IP==0) NTM_PART(1:NPART) = 1 
-          ENDDO
-        END IF 
 C------------------------------------------- 
       RETURN
       END

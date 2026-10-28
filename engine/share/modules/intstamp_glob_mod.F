@@ -49,18 +49,17 @@ C-----------------------------------------------
 #include      "my_real.inc"
 C-----------------------------------------------
       TYPE int_pointer
-        INTEGER, DIMENSION(:), POINTER :: P
+      INTEGER, DIMENSION(:), POINTER ::  P
       END TYPE int_pointer
 
       TYPE real_pointer
-        my_real, DIMENSION(:), POINTER :: P
+      my_real, DIMENSION(:), POINTER ::  P
       END TYPE real_pointer
 
       TYPE(INTSTAMP_DATA), DIMENSION(:), ALLOCATABLE :: INTSTAMP
       INTEGER,
      .       DIMENSION(:), ALLOCATABLE :: INDEXCONT, TAGCONT
-      my_real,
-     .       DIMENSION(:,:), ALLOCATABLE :: FCONTG, FNCONTG, FTCONTG, PSKIDS
+      my_real, DIMENSION(:,:), ALLOCATABLE :: FCONTG, FNCONTG, FTCONTG
 
 C SPMD STRUCTURES :
 C NMNFI : Tab of pointers siz NINSTAMP => number of remote main node in NMVFI 

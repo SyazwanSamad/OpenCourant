@@ -21,7 +21,6 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    uroto_tens2d_aniso   ../engine/source/materials/tools/uroto_tens2d_aniso.F
 !||--- called by ------------------------------------------------------
-!||    h3d_shell_tensor     ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
 !||    tensorc              ../engine/source/output/anim/generate/tensorc.F
 !||====================================================================
       SUBROUTINE UROTO_TENS2D_ANISO(NEL,TENS,DIR_A,DIR_B)

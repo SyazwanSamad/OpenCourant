@@ -103,10 +103,34 @@ def lifecycle(reader, mode):
             getattr(reader.library, symbol)
 
 
+def mode2_lifecycle(reader, mode):
+    with tempfile.TemporaryDirectory() as temporary:
+        fixture = Path(temporary) / 'connected.rad'
+        text = (HERE / 'data/flag_two_single.rad').read_text().replace(
+            '         1         1         2         3         4\n',
+            '         1         1         2         3         4\n         2         4         5         6         7\n')
+        fixture.write_text(text)
+        shutil.copy(HERE / 'data/common.inc', temporary)
+        reader.load(fixture)
+    counts, mapping, ids = GuardedArray(1), GuardedArray(1), GuardedArray(1)
+    reader.select(b'PART')
+    reader.library.cpp_option_next()
+    reader.library.cpp_evaluate_rbodies_number_from_rigid_parts(counts.pointer)
+    assert counts.values() == [1] and reader.integer('id') == 10
+    if mode == 'mode2-flag':
+        reader.library.cpp_set_intv.argtypes = [TEXT, PINT, PINT, PBOOL]
+        reader.library.cpp_set_intv(b'IRIGID', REF(INT(6)), REF(INT(1)), REF(ct.c_bool()))
+    for _ in range(2):
+        reader.library.cpp_create_rbodies_from_rigid_parts(mapping.pointer, ids.pointer)
+        assert mode == 'mode2-repeat', 'Changed mode-2 plan was accepted'
+        assert mapping.values() == [10] and ids.values() == [1]
+        reader.library.cpp_evaluate_rbodies_number_from_rigid_parts(counts.pointer)
+        assert counts.values() == [1] and reader.count(b'/RBODY') == 1
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', required=True, type=lambda path: Path(path).resolve())
-    parser.add_argument('--reference', type=lambda path: Path(path).resolve())
     parser.add_argument('--worker', help=argparse.SUPPRESS)
     parser.add_argument('--output', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -115,6 +139,8 @@ def main():
         if args.worker.endswith('.rad'):
             snapshot = reader.snapshot(HERE / 'data' / args.worker, metadata=True)
             args.output.write_text(json.dumps(snapshot, indent=2), encoding='utf-8')
+        elif args.worker.startswith('mode2-'):
+            mode2_lifecycle(reader, args.worker)
         else:
             lifecycle(reader, args.worker)
         return
@@ -141,24 +167,61 @@ def main():
             ('changed-after-create', 'parts changed after'),
             ('deleted-part', 'parts changed after'),
             ('missing-reference', 'references a missing'),
+            ('mode2-repeat', None),
+            ('mode2-flag', 'parts changed after'),
         ]:
             run(args.reader, mode, diagnostic)
             print(f'PASS {mode}', flush=True)
-        if args.reference:
-            for name in ['solid', 'include_fields', 'submodel_units', 'different_offsets', 'two_submodels']:
-                actual = run(args.reader, name + '.rad')
-                expected = run(args.reference, name + '.rad')
-                # v82 loses explicit units on generated objects; preserve the part's unit context.
-                part_units = {row['id']: row['unitid'] for row in actual['ownership']['PART']}
-                for kind in ['/RBODY', '/SET']:
-                    for row, source in zip(actual['ownership'][kind], actual['mapping']):
-                        assert row['unitid'] == part_units[source], (name, kind, row, part_units)
-                    for row in expected['ownership'][kind]:
-                        assert row['unitid'] == 0, (name, row)
-                    for row in actual['ownership'][kind]:
-                        row['unitid'] = 0
-                assert actual == expected, (name, actual, expected)
-                print(f'PASS {name} (v82 comparison, explicit units retained)', flush=True)
+        golden = json.loads((HERE / 'expected_conversion.json').read_text())
+        for name in ['solid', 'include_fields', 'submodel_units', 'different_offsets', 'two_submodels']:
+            actual = run(args.reader, name + '.rad')
+            expected = golden['mode1'][name]
+            # v82 loses explicit units on generated objects; preserve the part's unit context.
+            part_units = {row['id']: row['unitid'] for row in actual['ownership']['PART']}
+            for kind in ['/RBODY', '/SET']:
+                for row, source in zip(actual['ownership'][kind], actual['mapping']):
+                    assert row['unitid'] == part_units[source], (name, kind, row, part_units)
+                for row in expected['ownership'][kind]:
+                    assert row['unitid'] == 0, (name, row)
+                for row in actual['ownership'][kind]:
+                    row['unitid'] = 0
+            assert actual == expected, (name, actual, expected)
+            print(f'PASS {name} (frozen v82 snapshot, explicit units retained)', flush=True)
+        variants = work / 'mode2'
+        shutil.copytree(HERE / 'data', variants)
+        for fixture in variants.iterdir():
+            if fixture.suffix not in ['.rad', '.inc']:
+                continue
+            lines = fixture.read_text().splitlines()
+            for index in reversed(range(len(lines))):
+                if lines[index].startswith('/PART/') and lines[index+2][50:60].strip() == '1':
+                    lines[index+2] = lines[index+2][:50] + f'{2:10d}'
+                    del lines[index+3:index+6]
+            fixture.write_text('\n'.join(lines) + '\n')
+        base = (variants / 'flag_two_single.rad').read_text()
+        for name, nodes in [('vertex', (4, 5, 6, 7)), ('edge', (3, 4, 5, 6))]:
+            (variants / (name + '.rad')).write_text(base.replace('/PART/10',
+                ''.join(f'{n:10d}' for n in (2, *nodes)) + '\n/PART/10'))
+        (variants / 'reverse.rad').write_text(base.replace(
+            '         1         1         2         3         4\n',
+            '         1         5         6         7         8\n         2         1         2         3         4\n'))
+        for kind, nodes in [('SH3N', [1, 2, 3]), ('TRUSS', [1, 2]), ('BEAM', [1, 2, 3]),
+                            ('TETRA4', [1, 2, 3, 4])]:
+            (variants / (kind.lower() + '.rad')).write_text(base.replace(
+                '/SHELL/10\n         1         1         2         3         4\n',
+                f'/{kind}/10\n' + ''.join(f'{n:10d}' for n in [1, *nodes]) + '\n'))
+        for name in ['flag_two_single', 'disconnected_two', 'vertex', 'edge', 'reverse', 'empty',
+                     'solid', 'shared', 'existing', 'mixed', 'include_fields', 'different_offsets',
+                     'submodel_units', 'two_submodels', 'sh3n', 'truss', 'beam', 'tetra4']:
+            actual = run(args.reader, str(variants / (name + '.rad')))
+            expected = golden['mode2'][name]
+            part_units = {row['id']: row['unitid'] for row in actual['ownership']['PART']}
+            for kind in ['/RBODY', '/SET']:
+                for row, source in zip(actual['ownership'][kind][-len(actual['mapping']):], actual['mapping']):
+                    assert row['unitid'] == part_units[source], (name, kind, row)
+                    row['unitid'] = 0
+            assert actual == expected, (name, actual, expected)
+            print(f'PASS mode2 {name} (full node sets and ownership)', flush=True)
 
 
 if __name__ == '__main__':

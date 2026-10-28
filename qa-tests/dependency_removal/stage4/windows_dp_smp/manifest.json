@@ -1,0 +1,239 @@
+{
+  "captured_utc": "2026-10-28T10:00:48.042866+00:00",
+  "commit": "d0a844f7270ae3c0666c1360700be42708a7694b",
+  "working_tree_dirty": true,
+  "scope": "Windows x64 double precision SMP; four shared-result cases also compared with two Intel MPI ranks",
+  "toolchain": {
+    "fortran_c_cpp": "Intel ifx/icx 2025.2.0 build 20250605",
+    "mkl": "2025.2",
+    "mpi": "Intel MPI 2021.16, local shared memory, two ranks",
+    "vs": "VS 2022 Community, MSVC 14.44.35215",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+  },
+  "reader_build_ids": {
+    "open_reader_win64.dll": "or_20261028121134_d0a844f7"
+  },
+  "build_settings": {
+    "starter": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_C_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/ifx.exe",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ],
+    "engine": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_C_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:UNINITIALIZED=ifx.exe",
+      "MPI:UNINITIALIZED=smp",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ]
+  },
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "suite_pass_lines": 148,
+  "query_families": [
+    "shell",
+    "tria",
+    "quad",
+    "solid"
+  ],
+  "maximum_query_or_history_difference": 0.0,
+  "pre_removal_checkpoint_continuations": 4,
+  "shared_state": {
+    "original_members": 67,
+    "retained_members": 65,
+    "direct_references": 2652,
+    "deleted_unreferenced_root_fields": [
+      "SH_IEPSDOT",
+      "IS_CORNER_DATA"
+    ]
+  },
+  "source_checks_passed": true,
+  "workflow_yaml_parsed": true,
+  "diff_whitespace_check_passed": true,
+  "binaries": [
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45913600,
+      "sha256": "767f18bdc4829f53ab5cac1678268589ae407fbafee2e47a2986ee1a71517a01"
+    },
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17494016,
+      "sha256": "5e5259fbdcd59ab5e5d547ff74e00fe3632432f82314dd02d9b57080e68027af"
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 136400384,
+      "sha256": "9e14dda825db7fe63af2568d1089c2a5c780a7c1906a8e3c68fc92675a67a657"
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 144873984,
+      "sha256": "812e4acd4a822b7425e8d617e56be38b193075d4ae370c927df06d1000c4f7bb"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dreader.dll",
+      "bytes": 804208,
+      "sha256": "b3de1e636d2c290a8c2e95f50a6dff7036af03cb8dfae62522f986d994e01836"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dwriter.dll",
+      "bytes": 672384,
+      "sha256": "cbe2ef4362095e1d952d17b69c0f6a023c830500595ce00d137365f7f741e483"
+    },
+    {
+      "path": "cbuild_dependency_stage4/engine-before.exe",
+      "bytes": 136658944,
+      "sha256": "2a0baa77fbb3d9c4ececec76cac8294a196cd18ef0d11c6d0e95a2e60945b7db"
+    },
+    {
+      "path": "cbuild_dependency_stage4/engine-impi-before.exe",
+      "bytes": 145132544,
+      "sha256": "c518433bd190dcbb7b226d0c0be40bb125be4cd3c05047fdf700305efb1219ea"
+    },
+    {
+      "path": "cbuild_dependency_stage4/binaries/starter-openreader.exe",
+      "bytes": 46057984,
+      "sha256": "50f212f03a0469b3c48ce76e38e3fc4e863eefc5bbe5ff4d00b837ea7299e694"
+    },
+    {
+      "path": "cbuild_dependency_stage4/binaries/driver-openreader.exe",
+      "bytes": 1182208,
+      "sha256": "e4d410a0090201aadb1b6e380df81ccc54b9c2b7200986fb0aef452dee2cb0ba"
+    }
+  ],
+  "limits": [
+    "Linux x64/ARM64",
+    "single precision",
+    "hosted CI",
+    "broader MPI/R2R",
+    "full miniqa",
+    "all material/formulation runtime branches",
+    "large-model performance",
+    "complete H3D dataset payload numerical comparison"
+  ],
+  "pending": "H3D functionality and active writer state remain for Stage 5; dependency artifact/package delivery and cross-platform cutover remain Stages 6-7.",
+  "files": [
+    {
+      "path": "generated_input_manifest.json.gz",
+      "bytes": 4544,
+      "sha256": "d6d1156a5ef34fc510476d9fe8a05932b0814479f29bf59d9b62c9e895d2574a"
+    },
+    {
+      "path": "h3d_before_report.json",
+      "bytes": 5535,
+      "sha256": "8592ef8a615ed53304b16998f115d895e9db980ef2ee0fa41081552400470659"
+    },
+    {
+      "path": "h3d_report.json",
+      "bytes": 5831,
+      "sha256": "ce32f3c623668cbcd4db0eb404a631424fcd8aadea2f869448b3ea7ad40a04cd"
+    },
+    {
+      "path": "h3d_state_audit.json.gz",
+      "bytes": 26564,
+      "sha256": "3706fa30725d6cabf865c2d7e52c85ed0c84a3da96de4ea06272f3d92ae956fe"
+    },
+    {
+      "path": "h3d_state_audit_before.json.gz",
+      "bytes": 26688,
+      "sha256": "78c42ad2b8a4c36869ba4b45a87016031fb13de1a04c756d3593f6a180358cf2"
+    },
+    {
+      "path": "input_manifest.json.gz",
+      "bytes": 174476,
+      "sha256": "926df7b8158b02ef3a5d90f6431d86ab7c904f651ff1ea0422801e9857fdcd75"
+    },
+    {
+      "path": "logs.zip",
+      "bytes": 340852,
+      "sha256": "01338a43fd55bb5ed749e3a6c01bb5f080ed471573b42dd4d7c25409aafaf949"
+    },
+    {
+      "path": "mode2_report.json",
+      "bytes": 5942,
+      "sha256": "851055b106773c40aaa147bd8a8c10ba700f0cd0c04d92f47f2bde9e81ce4c99"
+    },
+    {
+      "path": "models_report.json",
+      "bytes": 21147,
+      "sha256": "e9b6c83739c8a381d1640671bf7bd18266b335f5dc74228596d299c91dc90c56"
+    },
+    {
+      "path": "native_output_before_report.json",
+      "bytes": 535,
+      "sha256": "ac5d723581673964b43ccd4c15bf9f6ea2180aab9d81cb89da19b821da431734"
+    },
+    {
+      "path": "native_output_report.json",
+      "bytes": 535,
+      "sha256": "ac5d723581673964b43ccd4c15bf9f6ea2180aab9d81cb89da19b821da431734"
+    },
+    {
+      "path": "native_outputs.zip",
+      "bytes": 5800246,
+      "sha256": "e0dcc6971d5cfa3f5a057d1e3e0e3ddd566bb9d001282605050d5894231af29a"
+    },
+    {
+      "path": "numerical_report.json",
+      "bytes": 20772,
+      "sha256": "1928e99564e4ccd631d6a36eec18956f56fa65dad0121db01ab74b0ef0b5eb86"
+    },
+    {
+      "path": "old_checkpoints_report.json",
+      "bytes": 819,
+      "sha256": "4a905fd5673aa08fa50a48522f62a4e6a282d79a6c3ebf33b6bfc2c297153d2a"
+    },
+    {
+      "path": "queries_before_report.json",
+      "bytes": 3201,
+      "sha256": "27e2b49c244f2564d80e96db4cbf77393968c07ccf0716757038256598ed3bdd"
+    },
+    {
+      "path": "queries_mpi_before_report.json",
+      "bytes": 3201,
+      "sha256": "6f76625dca9f50e5eb82fdf3bf0422dcc3c18c0b5d3540ec30d6b9bd6a52b0b4"
+    },
+    {
+      "path": "queries_mpi_report.json",
+      "bytes": 3524,
+      "sha256": "f7a3e1c1692055cd9e24d2e654e44ee987b2de12d5ec8c84fb8a8aca666bf062"
+    },
+    {
+      "path": "queries_smp_report.json",
+      "bytes": 3524,
+      "sha256": "fba3d5651aae247db0dd6ae29a3f43ca81720e1b611c204dc623bc0dbd6e9882"
+    },
+    {
+      "path": "query_values.zip",
+      "bytes": 5373896,
+      "sha256": "cef061e22fa7a90465779b1e68c06343c6a259641d59598c4645bfc53c3d880b"
+    },
+    {
+      "path": "source_before.zip",
+      "bytes": 66427,
+      "sha256": "a1be7c382e7debaf395ce3f01165e67bc98663cbc712dea90c2963aa84ba0ebc"
+    },
+    {
+      "path": "source_checks.log",
+      "bytes": 275,
+      "sha256": "0584602e6c64c11a73bdc3cdf75e28d5a8dd4e7be01ca746ec9ccac93ed548d4"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 144714,
+      "sha256": "98edc017f0d353a93788d26bd25b1885e873b0ac9dec9675d033a14bb927c3c7"
+    },
+    {
+      "path": "suite_report.json",
+      "bytes": 28846,
+      "sha256": "eba43d2b326c8b027e9defc3d3bd6b7e75b82fea00d6fb25ddcaa5b5ec39115a"
+    }
+  ]
+}

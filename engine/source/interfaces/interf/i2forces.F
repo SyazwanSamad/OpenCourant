@@ -42,15 +42,10 @@ Copyright>        copyright and attribution statement.
 !||    i2for3pn       ../engine/source/interfaces/interf/i2for3p.F
 !||    i2for3po       ../engine/source/interfaces/interf/i2for3p.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FORCES(X       ,FS      ,FX       ,FY     ,FZ      ,
-     .                    IRECT   ,NIR     ,FSAV     ,FNCONT ,FNCONTP ,
-     .                    FTCONTP ,WEIGHT  ,H3D_DATA ,NSL    ,H)
+      SUBROUTINE I2FORCES(X, FS, FX, FY, FZ, IRECT, NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, NSL, H)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD , ONLY : H3D_DATABASE
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -59,10 +54,6 @@ C-----------------------------------------------
       INTEGER :: NSL,IRECT(4),NIR,WEIGHT(*)
       my_real :: X(3,*),H(4),FSAV(*),FNCONT(3,*),FNCONTP(3,*),FTCONTP(3,*)
       my_real,INTENT(IN) :: FS(3),FX(4),FY(4),FZ(4)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com08_c.inc"
 #include      "scr14_c.inc"
 C-----------------------------------------------
@@ -140,7 +131,7 @@ C=======================================================================
         FSAV(6) = FSAV(6) + FT(3)*DT1
 
         ! print of forces in ANIM / H3D
-        IF(ANIM_V(13)+H3D_DATA%N_VECT_CONT2>0) THEN
+      IF(ANIM_V(13)>0) THEN
           FNCONT(1,NSL) = FNCONT(1,NSL) - FS(1)
           FNCONT(2,NSL) = FNCONT(2,NSL) - FS(2)
           FNCONT(3,NSL) = FNCONT(3,NSL) - FS(3)
@@ -152,7 +143,7 @@ C=======================================================================
           ENDDO
         ENDIF  
 
-        IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2 > 0) THEN ! Normal/Tangential forces output
+      IF(ANIM_V(27)>0) THEN
           FNCONTP(1,NSL) = FNCONTP(1,NSL) - FS(1)
           FNCONTP(2,NSL) = FNCONTP(2,NSL) - FS(2)
           FNCONTP(3,NSL) = FNCONTP(3,NSL) - FS(3)

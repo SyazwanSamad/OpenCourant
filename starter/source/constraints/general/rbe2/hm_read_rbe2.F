@@ -25,9 +25,9 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    fretitl                ../starter/source/starter/freform.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_sz_r2r              ../starter/source/coupling/rad2rad/routines_r2r.F
 !||    ifrontplus             ../starter/source/spmd/node/frontplus.F
 !||    kinset                 ../starter/source/constraints/general/kinset.F
@@ -312,9 +312,9 @@ C
 !||--- called by ------------------------------------------------------
 !||    lectur                 ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_sz_r2r              ../starter/source/coupling/rad2rad/routines_r2r.F
 !||    ngr2usrn               ../starter/source/system/nintrr.F
 !||--- uses       -----------------------------------------------------
@@ -996,9 +996,9 @@ C
 !||--- called by ------------------------------------------------------
 !||    contrl                 ../starter/source/starter/contrl.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod     ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod           ../starter/share/modules1/submodel_mod.F
@@ -1173,9 +1173,9 @@ C  -----DEACTIVATED ELEMENTS will done in SETELOFF------
 !||--- called by ------------------------------------------------------
 !||    lectur                 ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    ngr2usrn               ../starter/source/system/nintrr.F
 !||    usr2sys                ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

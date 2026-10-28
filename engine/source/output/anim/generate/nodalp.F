@@ -22,7 +22,6 @@ Copyright>        copyright and attribution statement.
 !||    nodalp                       ../engine/source/output/anim/generate/nodalp.F
 !||--- called by ------------------------------------------------------
 !||    genani                       ../engine/source/output/anim/generate/genani.F
-!||    h3d_nodal_scalar             ../engine/source/output/h3d/h3d_results/h3d_nodal_scalar.F
 !||--- calls      -----------------------------------------------------
 !||    anim_nodal_contour_fvmbags   ../engine/source/output/anim/generate/anim_nodal_contour_fvmbags.F
 !||    anim_nodal_p_elems           ../engine/source/output/anim/generate/anim_nodal_p_elems.F
@@ -35,7 +34,7 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
       SUBROUTINE NODALP(IFUNC          , WA4                , WA4_FVM, IFLOW   , RFLOW,  
      .                  IPARG          , ELBUF_TAB          , IX     , NIX     , NUMEL, 
-     .                  ITAB           , NV46               , MONVOL , VOLMON  , AIRBAGS_TOTAL_FVM_IN_H3D,
+     .                  ITAB           , NV46               , MONVOL , VOLMON  , AIRBAGS_TOTAL_FVM_VIS,
      .                  IS_WRITTEN_NODE, IS_WRITTEN_NODE_FVM, ISPMD  , FVDATA_P,
      .                  SWA4           , AIRBAGS_NODE_ID_SHIFT)
 C-----------------------------------------------
@@ -75,12 +74,12 @@ C-----------------------------------------------
       INTEGER,INTENT(IN) :: NUMEL, IFUNC, NIX, NV46,ITAB(NUMNOD),ISPMD, SWA4, AIRBAGS_NODE_ID_SHIFT
       INTEGER,INTENT(IN) :: IFLOW(*),IPARG(NPARG,NGROUP),IX(NIX,NUMEL)
       my_real,INTENT(IN) :: RFLOW(*)
-      INTEGER, INTENT(IN) :: AIRBAGS_TOTAL_FVM_IN_H3D
-      REAL,INTENT(INOUT) :: WA4(SWA4), WA4_FVM(AIRBAGS_TOTAL_FVM_IN_H3D)
+      INTEGER, INTENT(IN) :: AIRBAGS_TOTAL_FVM_VIS
+      REAL,INTENT(INOUT) :: WA4(SWA4), WA4_FVM(AIRBAGS_TOTAL_FVM_VIS)
       TYPE (ELBUF_STRUCT_), INTENT(IN), DIMENSION(NGROUP), TARGET :: ELBUF_TAB    
       INTEGER,INTENT(IN) :: MONVOL(SMONVOL) 
       my_real,INTENT(IN) :: VOLMON(SVOLMON)
-      INTEGER,INTENT(INOUT) :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_IN_H3D), IS_WRITTEN_NODE(NUMNOD)
+      INTEGER,INTENT(INOUT) :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_VIS), IS_WRITTEN_NODE(NUMNOD)
       TYPE(FVBAG_DATA),INTENT(IN) :: FVDATA_P(NFVBAG)      
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -100,9 +99,9 @@ C------------------------------------------------------------------
 C        /MONVOL/FVMBAG*
 C           set pressure from polyhedra centroids
 C------------------------------------------------------------------
-        IF(NFVBAG > 0 .AND. ISPMD == 0 .AND. AIRBAGS_TOTAL_FVM_IN_H3D > 0)THEN
+        IF(NFVBAG > 0 .AND. ISPMD == 0 .AND. AIRBAGS_TOTAL_FVM_VIS > 0)THEN
           CALL ANIM_NODAL_CONTOUR_FVMBAGS('PRES', WA4_FVM, MONVOL , VOLMON                  , FVDATA_P           , 
-     .                                    NFVBAG, SMONVOL, SVOLMON, AIRBAGS_TOTAL_FVM_IN_H3D, IS_WRITTEN_NODE_FVM,
+     .                                    NFVBAG, SMONVOL, SVOLMON, AIRBAGS_TOTAL_FVM_VIS, IS_WRITTEN_NODE_FVM,
      .                                    AIRBAGS_NODE_ID_SHIFT)
         
         ENDIF

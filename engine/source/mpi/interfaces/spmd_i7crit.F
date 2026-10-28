@@ -26,23 +26,16 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_TRI20GAT(RESULT,NSN ,CAND_N ,I_STOK,NIN  ,
-     2                         IGAP  ,NSNR,MULTIMP,ITY   ,INTTH,
-     3                         INACTI,H3D_DATA)
+      SUBROUTINE SPMD_TRI20GAT(RESULT, NSN, CAND_N, I_STOK, NIN, IGAP, NSNR, MULTIMP, ITY, INTTH, INACTI)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
 #include      "r4r8_p.inc"
@@ -67,10 +60,6 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER RESULT, NIN, NSN, I_STOK, IGAP, NSNR, MULTIMP, ITY,
      .        CAND_N(*),INTTH,INACTI
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER OLDNSNR,NODFI,NNP,LSKYFI,
      .         LOC_PROC, I, N, NN, P, IDEB, J, K,
      .        IERROR1,IERROR2,IERROR3,IERROR4,IERROR5,IERROR6,IERROR7,
@@ -1589,7 +1578,7 @@ C
 C
 C Output Pressure conditional allowances
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)

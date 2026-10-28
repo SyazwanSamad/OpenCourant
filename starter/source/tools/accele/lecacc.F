@@ -27,10 +27,10 @@ C=======================================================================
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    anodset                ../starter/source/output/analyse/analyse_node.c
 !||    fretitl                ../starter/source/starter/freform.F
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    usr2sys                ../starter/source/system/sysfus.F
 !||    vdouble                ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

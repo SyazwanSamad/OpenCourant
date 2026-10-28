@@ -45,10 +45,8 @@
 !||    ebcs12_cyclic                    ../engine/source/boundary_conditions/ebcs/ebcs12_cyclic.F90
 !||    ebcs8_inlet                      ../engine/source/boundary_conditions/ebcs/ebcs8_inlet.F90
 !||    eikonal_init_mixture_vel         ../starter/source/initial_conditions/detonation/eikonal_ini_mixture_vel.F90
-!||    h3d_quad_scalar                  ../engine/source/output/h3d/h3d_results/h3d_quad_scalar.F
-!||    h3d_shell_scalar_1               ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_solid_scalar_1               ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
-!||    h3d_sph_scalar                   ../engine/source/output/h3d/h3d_results/h3d_sph_scalar.F
+!||    result_shell_scalar               ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar               ../engine/source/tools/element_results/result_solid_scalar.F
 !||    hm_read_mat                      ../starter/source/materials/mat/hm_read_mat.F90
 !||    hm_read_mat20                    ../starter/source/materials/mat/mat020/hm_read_mat20.F
 !||    hm_read_mat51                    ../starter/source/materials/mat/mat051/hm_read_mat51.F

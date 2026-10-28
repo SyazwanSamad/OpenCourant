@@ -12,22 +12,10 @@
     "md5/include/md5.h",
     "exprtk/exprtk.hpp",
     "boost/boost_1_70_0/boost/filesystem.hpp",
-    "hm_reader/linux64/libhm_reader_linux64.so",
-    "hm_reader/linux64/libapr-1.so.0",
-    "hm_reader/linuxa64/libhm_reader_linuxa64.so",
-    "hm_reader/linuxa64/libapr-1.so.0",
-    "hm_reader/win64/hm_reader_win64.dll",
-    "hm_reader/win64/hm_reader_win64.lib"
+    "boost/boost_1_70_0/static/lib/win64/libboost_filesystem.lib",
+    "boost/boost_1_70_0/static/lib/linux64/libboost_filesystem.a",
+    "boost/boost_1_70_0/static/lib/linuxa64/libboost_filesystem.a"
   ],
-  "reader_components": {
-    "all_platforms": {
-      "build_id": "20260918_f907fe76",
-      "effective_extlib_era": "v82",
-      "missing_symbols": [],
-      "notes": "pristine upstream package; readers match the Starter with no compatibility fallbacks",
-      "linux64_reader_sha256": "5c9c46b12a155853598970f7668b1cc29f654be3d0066de6db4f574789331afb"
-    }
-  },
   "package_tag": "upstream-v82-extlib",
   "package_date": "2026-10-11",
   "url": "https://github.com/OpenCourant/extlib/releases/download/upstream-v82-extlib/extlib.zip",

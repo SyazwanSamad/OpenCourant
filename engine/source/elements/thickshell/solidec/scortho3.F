@@ -24,7 +24,6 @@ Copyright>        copyright and attribution statement.
 !||    srcoor3    ../engine/source/elements/solid/solide/srcoor3.F
 !||    srcoork    ../engine/source/elements/solid/solide8z/srcoork.F
 !||    srep2glo   ../engine/source/elements/sph/srep2glo.F
-!||    tsh_dir2   ../engine/source/output/h3d/h3d_results/h3d_skin_tensor.F
 !||====================================================================
       SUBROUTINE SCORTHO3(
      1   RX,      RY,      RZ,      SX,

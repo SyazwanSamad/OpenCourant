@@ -21,7 +21,6 @@
 #include <checksum_model.h>
 #include <checksum_output_files.h>
 #include <checksum_list.h>
-#include <h3dpublic_import.h>
 using namespace std;
 
 bool List_checksum::is_integer(const std::string s) {
@@ -174,10 +173,6 @@ bool List_checksum::is_integer(const std::string s) {
       if (fname.compare(0,th_pattern.length(),th_pattern) == 0 &&
         (is_base_th_file || is_aux_th_file)) {
         th_file_list.push_back(fname);
-      }
-
-        if (fname == rootname + ".h3d") {
-          h3d_file_list.push_back(fname);
       }
 
   }
@@ -619,96 +614,11 @@ std::string List_checksum::get_path(const std::string& filepath) {
     // parse all time history files in the directory
     parse_th_files(directory, rootname);
 
-    // parse all H3D files in the directory
-    parse_h3d_files(directory, rootname);
 
   }
 
 // End of class Verify_checksum
 // ------------------------------------------------------------------------------------------------------------------------
-
-extern "C" {
-  void h3dreaderlib_load_(int *IERROR);
-}
-
-// ------------------------------------------------------------------------------------------------------------------------
-// parse_h3d_files : read ZCHKSM_ tags stored in the H3D string table.
-// ------------------------------------------------------------------------------------------------------------------------
-void List_checksum::parse_h3d_files(string directory, string rootname) {
-
-  if (h3d_file_list.empty()) return;
-
-  int ierror = 0;
-  h3dreaderlib_load_(&ierror);
-  if (ierror != 0) {
-    if (debug) {
-      cout << "Warning: Could not load libh3dreader.so (error=" << ierror
-           << ") - H3D checksum parsing skipped." << endl;
-    }
-    return;
-  }
-
-
-  for (const auto& item : h3d_file_list) {
-    string h3d_path;
-    if (directory.length() > 0) {
-      h3d_path = directory + item;
-    } else {
-      h3d_path = item;
-    }
-
-    H3DFileInfo* h3d = Hyper3DImportOpen(h3d_path.c_str(), nullptr, nullptr);
-    if (!h3d) {
-      if (debug) cout << "Warning: Cannot open H3D file: " << h3d_path << endl;
-      continue;
-    }
-
-    list<string> found_tags;
-    const string prefix = "ZCHKSM_";
-    H3D_ID string_id = 1;
-    const char* value = nullptr;
-    while (Hyper3DLookupString(h3d, string_id, &value)) {
-      if (value && string(value).compare(0, prefix.size(), prefix) == 0) {
-        found_tags.push_back(string(value).substr(prefix.size()));
-      }
-      ++string_id;
-      value = nullptr;
-    }
-
-    Hyper3DImportClose(h3d);
-    checksum file_cs;
-    string file_checksum = file_cs.compute_checksum(h3d_path);
-    bool compared = compare_checksum_list(h3d_path, file_checksum);
-    h3d_checksum_list.push_back(make_tuple(h3d_path, file_checksum, compared, found_tags));
-  }
-}
-
-// ------------------------------------------------------------------------------------------------------------------------
-// print_h3d_checksums : print the H3D file checksum and the ZCHKSM_ strings.
-// ------------------------------------------------------------------------------------------------------------------------
-void List_checksum::print_h3d_checksums(int *fd) {
-  if (h3d_checksum_list.empty()) return;
-
-  for (const auto& item : h3d_checksum_list) {
-    write_out(fd, " ");
-    write_out(fd, "    File. . . .   " + get<0>(item));
-    write_out(fd, "            File Checksum: " + get<1>(item));
-    write_out(fd, get<2>(item) ? "            Checksum match: YES"
-                               : "            Checksum match: NO");
-    write_out(fd, " ");
-    const auto& tags = get<3>(item);
-    if (tags.empty()) {
-      write_out(fd, "            No ZCHKSM_ checksum strings found.");
-    } else {
-      write_out(fd, "            Checksum Tags:");
-      for (const auto& tag : tags) {
-        write_out(fd, "                  " + tag);
-      }
-    }
-  }
-  write_out(fd, " ");
-}
-
 
 // C/Fortran interface for Starter
 extern "C" {
@@ -776,7 +686,6 @@ extern "C" {
 
     chksum_tool.print_outfiles(fd);
     chksum_tool.print_outputfiles(fd);
-    chksum_tool.print_h3d_checksums(fd);
 
 
   }

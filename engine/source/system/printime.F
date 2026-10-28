@@ -449,17 +449,6 @@ C
         
         CALL PRINT_SUMMARY(2,MAX_NB_TIMER,REALTIME,TITLES,IOUT,ITHERM,sfem) 
 
-       IF(.FALSE.)THEN
-        WRITE(IOUT,*)' '
-        WRITE(IOUT,*)'               ** ADDITIONAL DEBUG TIMERS (2) **'
-        WRITE(IOUT,*)' '
-        DO I = 1, NPROC
-           WRITE(IOUT,5550)I,
-     .      REALTIME(96,I),REALTIME(97,I),REALTIME(98,I),REALTIME(99,I),
-     .      REALTIME(100,I),REALTIME(101,I),REALTIME(102,I)
-        ENDDO
-       END IF
-C
       WRITE(IOUT,*)' '
 
       WRITE(ISTDO,*)
@@ -526,8 +515,7 @@ C Engine Disk usage Statistics
 !     THFILESIZE : kb
 !     OUTPFILESIZE : kb
 !     H3DTOTALSIZE : mb --> kb
-      H3DTOTALSIZE = H3DTOTALSIZE*1024
-      OUTSIZE=ANIMTOTALSIZE+THFILESIZE+OUTPFILESIZE+H3DTOTALSIZE
+      OUTSIZE=ANIMTOTALSIZE+THFILESIZE+OUTPFILESIZE
       DO I=1,9
         OUTSIZE = OUTSIZE+MULTITHFILESIZE(I)
       ENDDO
@@ -548,7 +536,7 @@ C Engine Disk usage Statistics
       WRITE(ISTDO,'(A,A,I10,A)')' TOTAL DISK SPACE USED ',
      *                    '.....................: ',TOTALFILECOUNT,
      *                   ' MB'
-      WRITE(ISTDO,'(A,A,I10,A)')' ANIMATION/H3D/TH/OUTP SIZE ',
+      WRITE(ISTDO,'(A,A,I10,A)')' ANIMATION/TH/OUTP SIZE ',
      *                 '................: ',OUTSIZE,
      *                   ' MB'
       WRITE(ISTDO,'(A,A,I10,A)')' RESTART FILE SIZE ',
@@ -575,7 +563,7 @@ C Engine Disk usage Statistics
       WRITE(IOUT,'(A,A,I10,A)')' TOTAL DISK SPACE USED ',
      *                   '.....................: ',TOTALFILECOUNT,
      *                   ' MB'
-      WRITE(IOUT,'(A,A,I10,A)')' ANIMATION/H3D/TH/OUTP SIZE ',
+      WRITE(IOUT,'(A,A,I10,A)')' ANIMATION/TH/OUTP SIZE ',
      *                   '................: ',OUTSIZE,
      *                   ' MB'
       WRITE(IOUT,'(A,A,I10,A)')' RESTART FILE SIZE ',

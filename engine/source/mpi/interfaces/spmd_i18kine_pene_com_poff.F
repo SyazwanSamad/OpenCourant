@@ -28,23 +28,20 @@ C
 !||    ancmsg                       ../engine/source/output/message/message.F
 !||    arret                        ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod                  ../engine/share/message_module/message_mod.F
 !||    output_mod                   ../common_source/modules/output/output_mod.F90
 !||    spmd_mod                     ../engine/source/mpi/spmd_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_I18KINE_PENE_COM_POFF(OUTPUT,IPARI,INTBUF_TAB,FCONT,
-     *                MTF,A,IAD_ELEM,FR_ELEM,MODE,SLVNDTAG,TAGPENE,ITAB,
-     .                H3D_DATA )
+      SUBROUTINE SPMD_I18KINE_PENE_COM_POFF(OUTPUT, IPARI, INTBUF_TAB, FCONT, MTF, A, IAD_ELEM, FR_ELEM, MODE,
+     . SLVNDTAG, TAGPENE, ITAB)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -79,10 +76,6 @@ C
      .  MTF(14,*),A(3,*),FCONT(3,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef MPI
       INTEGER STATUS(MPI_STATUS_SIZE),
      *        REQ_SI(NSPMD),REQ_RI(NSPMD)
@@ -266,10 +259,8 @@ c                      ENDIF
                          A(1,NOD) = BBUFR(IADR(P)+L)
                          A(2,NOD) = BBUFR(IADR(P)+L+1)
                          A(3,NOD) = BBUFR(IADR(P)+L+2)
-                         IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .                    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.
-     .                     (TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .                    (MANIM>=4.AND.MANIM<=15)))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
                            IF(INCONV == 1) THEN
                              FCONT(1,NOD) = FCONT(1,NOD)+BBUFR(IADR(P)+L+3)
                              FCONT(2,NOD) = FCONT(2,NOD)+BBUFR(IADR(P)+L+4)

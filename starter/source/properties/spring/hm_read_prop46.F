@@ -23,10 +23,10 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_prop_generic     ../starter/source/properties/hm_read_prop_generic.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_floatv_dim        ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_floatv_dim        ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    set_u_geo                ../starter/source/user_interface/uaccess.F
 !||    set_u_pnu                ../starter/source/user_interface/uaccess.F
 !||--- uses       -----------------------------------------------------

@@ -32,23 +32,16 @@ Copyright>        copyright and attribution statement.
 !||    force           ../engine/source/loads/general/force.F90
 !||--- uses       -----------------------------------------------------
 !||    force_mod       ../engine/source/loads/general/force.F90
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    pinchtype_mod   ../common_source/modules/pinchtype_mod.F
 !||    sensor_mod      ../common_source/modules/sensor_mod.F90
 !||    skew_mod        ../common_source/modules/skew_mod.F90
 !||    th_surf_mod     ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE FORCE_IMP(IB      ,FAC     ,SNPC    ,NPC        ,TF         ,
-     2                     A       ,V       ,X       ,SKEWS      ,
-     3                     AR      ,VR      ,NSENSOR ,SENSOR_TAB ,WFEXC      ,
-     4                     IADC    ,FSKY    ,FEXT    ,H3D_DATA   ,CPTREAC    ,
-     5                     FTHREAC ,NODREAC ,TH_SURF ,
-     6                     DPL0CLD ,VEL0CLD ,D       ,DR         ,NCONLD     ,
-     7                     NUMNOD  ,NFUNCT  ,STF     ,WFEXT)
+      SUBROUTINE FORCE_IMP(IB, FAC, SNPC, NPC, TF, A, V, X, SKEWS, AR, VR, NSENSOR, SENSOR_TAB, WFEXC, IADC, FSKY,
+     . FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT, STF, WFEXT)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
       USE PINCHTYPE_MOD 
       USE SENSOR_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_
@@ -82,7 +75,6 @@ C-----------------------------------------------
       INTEGER IB(NIBCLD,*)
       INTEGER IADC(4,*)
       my_real FAC(LFACCLD,*),TF(*),A(3,*),V(3,*),AR(3,*),VR(3,*),X(3,*),WFEXC,FSKY(8,LSKY),FEXT(3,*),FTHREAC(6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
       TYPE(SKEW_),INTENT(INOUT) :: SKEWS
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
@@ -90,15 +82,8 @@ C-----------------------------------------------
       my_real, INTENT(IN) ::  D(3,NUMNOD), DR(3,NUMNOD)
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
 C-----------------------------------------------
-      call FORCE( NIBCLD  ,IB      ,LFACCLD    ,FAC      ,SNPC      ,
-     2            NPC     ,STF     ,TF         ,A        ,V         ,
-     3            X       ,SKEWS   ,AR         ,
-     4            VR      ,NSENSOR ,SENSOR_TAB ,WFEXC    ,IADC      ,
-     5            LSKY    ,FSKY    ,FEXT       ,H3D_DATA ,CPTREAC   ,
-     6            FTHREAC ,NODREAC ,TH_SURF    ,
-     7            DPL0CLD ,VEL0CLD ,D          ,DR       ,NCONLD    ,
-     8            NUMNOD  ,NFUNCT  , ANIM_V    ,OUTP_V   ,
-     9            IPARIT  ,TT      ,DT1        ,N2D      ,WFEXT     ,
-     A            IMPL_S) 
+      call FORCE(NIBCLD, IB, LFACCLD, FAC, SNPC, NPC, STF, TF, A, V, X, SKEWS, AR, VR, NSENSOR, SENSOR_TAB, WFEXC,
+     . IADC, LSKY, FSKY, FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT,
+     . ANIM_V, OUTP_V, IPARIT, TT, DT1, N2D, WFEXT, IMPL_S)
 
       END SUBROUTINE

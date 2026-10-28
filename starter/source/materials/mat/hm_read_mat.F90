@@ -39,8 +39,8 @@
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                       ../starter/source/output/message/message.F
 !||    fretitl                      ../starter/source/starter/freform.F
-!||    hm_option_read_key           ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start              ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_option_read_key           ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start              ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_read_elasto_plastic       ../starter/source/materials/mat/mat131/hm_read_elasto_plastic.F90
 !||    hm_read_mat00                ../starter/source/materials/mat/mat000/hm_read_mat00.F
 !||    hm_read_mat01                ../starter/source/materials/mat/mat001/hm_read_mat01.F

@@ -25,7 +25,7 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                       ../starter/source/output/message/message.F
 !||    fretitl                      ../starter/source/starter/freform.F
-!||    hm_get_intv                  ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_intv                  ../starter/source/devtools/reader/hm_get_intv.F
 !||    hm_read_inter_hertz_type17   ../starter/source/interfaces/int17/hm_read_inter_hertz_type17.F
 !||    hm_read_inter_type02         ../starter/source/interfaces/int02/hm_read_inter_type02.F
 !||    hm_read_inter_type03         ../starter/source/interfaces/int03/hm_read_inter_type03.F

@@ -236,7 +236,6 @@ C
 !||    reallocate_fi1       ../engine/source/mpi/interfaces/spmd_i25slide.F
 !||    reallocate_fi2       ../engine/source/mpi/interfaces/spmd_i25slide.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    ifront_mod           ../engine/share/modules/ifront_mod.F
 !||    intbufdef_mod        ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod          ../engine/share/message_module/message_mod.F
@@ -245,11 +244,8 @@ C
 !||    tri25tmp             ../engine/share/modules/tri25tmp_mod.F
 !||    tri7box              ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_I25_SLIDE_GAT(NSN  ,NIN, NI25,
-     2                             IGAP  ,NSNR   ,INTTH   ,ILEV,INTBUF_TAB,
-     3                             FR_NOR, IAD_FRNOR, NB_SLID   ,ITAB, H3D_DATA,
-     4                             INTFRIC,FLAGREMN , LREMNORMAX,NRTM,IVIS2 ,
-     5                             ISTIF_MSDT,IFSUB_CAREA,NODADT_THERM)
+      SUBROUTINE SPMD_I25_SLIDE_GAT(NSN, NIN, NI25, IGAP, NSNR, INTTH, ILEV, INTBUF_TAB, FR_NOR, IAD_FRNOR, NB_SLID,
+     . ITAB, INTFRIC, FLAGREMN, LREMNORMAX, NRTM, IVIS2, ISTIF_MSDT, IFSUB_CAREA, NODADT_THERM)
 c
 c -  Nodes in IREM are not necessarily from their PMAIN processor.
 c -  IREM is reordered according to ITAB for each PMAIN 
@@ -345,7 +341,6 @@ C-----------------------------------------------
       USE TRI25TMP
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD 
-      USE H3D_MOD  
       use my_alloc_mod
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -372,10 +367,6 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: NODADT_THERM
       INTEGER, INTENT(IN) :: ISTIF_MSDT,IFSUB_CAREA
       INTEGER IAD_FRNOR(NINTER25,NSPMD+1),FR_NOR(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef MPI
       INTEGER NSNR_OLD,NSNR_NEW,NODFI,LSKYFI,
      .        LOC_PROC, I, N, NN, P, IDEB, J, K,L,JJ, IX
@@ -645,7 +636,6 @@ C shift for integer variables (prepare for next setting)
               ISHIFT = 8 
 
 C  symmetric plane
-          IF(.TRUE. )THEN
              NBLOCAL = 0
              DO J = 1, NN
                I = IAUX(J)
@@ -663,11 +653,6 @@ C  symmetric plane
                END IF
              END DO
              ISHIFT = ISHIFT + 2
-          ENDIF
-
-
-C
-C specific cases ../..
           IF(IGAP==1 .OR. IGAP==2 .OR. IGAP==5)THEN
             NBLOCAL = 0
             DO J=1,NN
@@ -1103,7 +1088,7 @@ C
 C
 C   ALLOCATIONS FOR THE ASSEMBLY  
 C
-      CALL REALLOCATE_FI2(NIN, INTTH, NODFI, LSKYFI, H3D_DATA,NODADT_THERM) 
+      CALL REALLOCATE_FI2(NIN, INTTH, NODFI, LSKYFI, NODADT_THERM)
 C
 C      ! DEALLOCATE old structures
 C
@@ -1189,10 +1174,8 @@ C-----------------------------------------------
       TMP%KINFI%P=>KINFI(NIN)%P
 
 
-      IF(.TRUE.) THEN
        TMP%ICODT_FI%P=>ICODT_FI(NIN)%P
        TMP%ISKEW_FI%P=>ISKEW_FI(NIN)%P
-      ENDIF
       IF(INTTH > 0 ) THEN
        TMP%TEMPFI%P=>TEMPFI(NIN)%P
        TMP%MATSFI%P=>MATSFI(NIN)%P
@@ -1261,10 +1244,8 @@ C     WRITE(6,*) "NEW SIZE:",NEW_SIZE
       ALLOCATE(KINFI(NIN)%P(NEW_SIZE))
       ALLOCATE(VFI(NIN)%P(3,NEW_SIZE))
       ALLOCATE(XFI(NIN)%P(3,NEW_SIZE))
-      IF(.TRUE.) THEN
        ALLOCATE(ICODT_FI(NIN)%P(NEW_SIZE))
        ALLOCATE(ISKEW_FI(NIN)%P(NEW_SIZE))
-      ENDIF
       IF(INTTH > 0 ) THEN
        ALLOCATE(TEMPFI(NIN)%P(NEW_SIZE))
        ALLOCATE(MATSFI(NIN)%P(NEW_SIZE))
@@ -1369,10 +1350,8 @@ C-----------------------------------------------
       call my_dealloc(TMP%ITAFI%P)
       call my_dealloc(TMP%PMAINFI%P)
       call my_dealloc(TMP%KINFI%P)
-      IF(.TRUE.) THEN
         call my_dealloc(TMP%ICODT_FI%P)
         call my_dealloc(TMP%ISKEW_FI%P)
-      ENDIF
       IF(INTTH > 0 ) THEN
        call my_dealloc(TMP%TEMPFI%P)
        call my_dealloc(TMP%MATSFI%P)
@@ -1436,13 +1415,12 @@ C
 !||    ancmsg               ../engine/source/output/message/message.F
 !||    arret                ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    message_mod          ../engine/share/message_module/message_mod.F
 !||    my_dealloc_mod       ../common_source/tools/memory/my_dealloc.F90
 !||    spmd_mod             ../engine/source/mpi/spmd_mod.F90
 !||    tri7box              ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE REALLOCATE_FI2(NIN, INTTH, NODFI, LSKYFI,H3D_DATA,NODADT_THERM) 
+      SUBROUTINE REALLOCATE_FI2(NIN, INTTH, NODFI, LSKYFI, NODADT_THERM)
 C
 C                               
 C
@@ -1451,10 +1429,6 @@ C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
         USE SPMD_MOD
         use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
@@ -1471,10 +1445,6 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER, INTENT(IN) ::  NIN, INTTH, NODFI, LSKYFI
       INTEGER, INTENT(IN) :: NODADT_THERM
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J,IERROR1,IERROR2,IERROR3,IERROR4
 
       IERROR1 = 0
@@ -1612,7 +1582,7 @@ C
 C
 C Output Pressure/ Friction Energy conditional allowances
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)
@@ -1632,34 +1602,6 @@ C
         END IF          
       END IF
 C
-      IF(H3D_DATA%N_SCAL_CSE_FRICINT >0)THEN
-       IF(H3D_DATA%N_CSE_FRIC_INTER (NIN) >0)THEN
-        IF(ASSOCIATED(EFRICFI(NIN)%P)) call my_dealloc(EFRICFI(NIN)%P)
-        ALLOCATE(EFRICFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-       END IF
-      ENDIF
-C
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF(ASSOCIATED(EFRICGFI(NIN)%P)) call my_dealloc(EFRICGFI(NIN)%P)
-        ALLOCATE(EFRICGFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICGFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-      END IF
-
       RETURN
       END SUBROUTINE
 

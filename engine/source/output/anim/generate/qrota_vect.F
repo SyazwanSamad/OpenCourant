@@ -21,7 +21,6 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    qrota_vect        ../engine/source/output/anim/generate/qrota_vect.F
 !||--- called by ------------------------------------------------------
-!||    h3d_quad_vector   ../engine/source/output/h3d/h3d_results/h3d_quad_vector.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod       ../common_source/modules/elements/element_mod.F90
 !||====================================================================

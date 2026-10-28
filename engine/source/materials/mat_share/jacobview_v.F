@@ -170,4 +170,4 @@ C----------------------------------------------------------------
         call my_dealloc(Z)
 
         RETURN
-        END SUBROUTINE JACOBIEW_V  
+        END SUBROUTINE JACOBIEW_V

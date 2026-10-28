@@ -39,25 +39,16 @@
 !||--- uses       -----------------------------------------------------
 !||    bcs_mod         ../common_source/modules/boundary_conditions/bcs_mod.F90
 !||    constant_mod    ../common_source/modules/constant_mod.F
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    precision_mod   ../common_source/modules/precision_mod.F90
 !||====================================================================
-        subroutine bcs_nrf(n2d      , numnod  , &
-          x        , v       , a     , &
-          iparit   , lsky    , fsky  , &
-          wfext    , fext    , dt1, &
-          anim_v   , outp_v  , h3d_data, &
-          bcs      , stifn   , ms, mode)
+      subroutine bcs_nrf(n2d, numnod, x, v, a, iparit, lsky, fsky, wfext, fext, dt1, anim_v, outp_v, bcs, stifn, ms, &
+     & mode)
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Modules
 ! ----------------------------------------------------------------------------------------------------------------------
           use bcs_mod , only : bcs_struct_
           use precision_mod , only : WP
           use constant_mod , only : zero, em14, half, em20, TWO, one, fourth, third
-          use h3d_mod , only : h3d_database
-! ----------------------------------------------------------------------------------------------------------------------
-!                                                   Included files
-! ----------------------------------------------------------------------------------------------------------------------
           implicit none
 #include "units_c.inc"
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -76,7 +67,6 @@
           real(kind=wp),intent(inout) :: fext(3,numnod)
           integer,intent(in) :: anim_v(10)
           integer,intent(in) :: outp_v(10)
-          type(h3d_database) :: h3d_data
           real(kind=wp),intent(in) :: dt1
           type(bcs_struct_), intent(inout) :: bcs
           real(kind=WP),intent(inout) :: stifn(numnod)
@@ -117,7 +107,7 @@
 !                                                   Body
 ! ----------------------------------------------------------------------------------------------------------------------
           if(mode==0) then
-            IOUTPUT  = ANIM_V(5)+OUTP_V(5) + H3D_DATA%N_VECT_FINT + ANIM_V(6)+OUTP_V(6) + H3D_DATA%N_VECT_FEXT !in case of requested output of nodal external forces
+      IOUTPUT  =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
             ! Reset la_nrf only for NRF boundary nodes (compact list)
             do ii = 1, bcs%nrf_num_nodes
               bcs%la_nrf(1:3, bcs%nrf_node_ids(ii)) = zero

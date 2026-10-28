@@ -26,11 +26,11 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg                     ../starter/source/output/message/message.F
 !||    euler_mrot                 ../starter/source/model/submodel/euler_mrot.F
 !||    euler_vrot                 ../starter/source/model/submodel/euler_vrot.F
-!||    hm_get_floatv              ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_count            ../starter/source/devtools/hm_reader/hm_option_count.F
-!||    hm_option_read_key         ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start            ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_floatv              ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_count            ../starter/source/devtools/reader/hm_option_count.F
+!||    hm_option_read_key         ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start            ../starter/source/devtools/reader/hm_option_start.F
 !||    local_to_global_skew       ../starter/source/model/transformation/local_to_global_skew.F90
 !||    ngr2usr                    ../starter/source/system/nintrr.F
 !||    points_to_frame            ../starter/source/model/submodel/3points_to_frame.F

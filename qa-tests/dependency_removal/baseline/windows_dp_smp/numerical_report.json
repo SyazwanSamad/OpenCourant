@@ -1,0 +1,1424 @@
+{
+  "engine_sha256": "2a0baa77fbb3d9c4ececec76cac8294a196cd18ef0d11c6d0e95a2e60945b7db",
+  "numpy_version": "1.26.4",
+  "time_history_reader_sha256": "45788089db6ca354a5e231092752e758f33553c57e7180574c5c736c8bb5c12a",
+  "status": "passed",
+  "cases": [
+    {
+      "case": "translation",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\translation-openreader-generated-x61vdmem",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "translation",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\translation-v82-generated-egny9ygc",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "translation",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\translation-v82-explicit-usdeid0n",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "missing_node",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\missing_node-openreader-generated-xt7qjwn_",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "missing_node",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\missing_node-v82-generated-hqirkes5",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "missing_node",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\missing_node-v82-explicit-ufkx7abm",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "rotation",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\rotation-openreader-generated-wupbrqqa",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 6.680082442755975e-08,
+        "max_position_error": 6.006832919958072e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "rotation",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\rotation-v82-generated-jvq08v5m",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 6.680082442755975e-08,
+        "max_position_error": 6.006832919958072e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "rotation",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\rotation-v82-explicit-shaurr7v",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 6.680082442755975e-08,
+        "max_position_error": 6.006832919958072e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "force",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\force-openreader-generated-5p2g4nq9",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "force",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\force-v82-generated-cnlqr44u",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "force",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\force-v82-explicit-3no1qb1u",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "offset",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\offset-openreader-generated-u3fvwuqu",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "offset",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\offset-v82-generated-68uw9qp1",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "offset",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\offset-v82-explicit-6gak2lpj",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "sensor",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\sensor-openreader-generated-15ajv0mb",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.09904278069734573,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "sensor",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\sensor-v82-generated-0sejvmyn",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.09904278069734573,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "sensor",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\sensor-v82-explicit-qlfadxo6",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.09904278069734573,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "load_sensor",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\load_sensor-openreader-generated-xru_rxt_",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.9138983488082886e-08,
+        "max_position_error": 2.4500475376844875e-06,
+        "max_energy_error": 2.451328106224584e-06
+      }
+    },
+    {
+      "case": "load_sensor",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\load_sensor-v82-generated-26nboyms",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.9138983488082886e-08,
+        "max_position_error": 2.4500475376844875e-06,
+        "max_energy_error": 2.451328106224584e-06
+      }
+    },
+    {
+      "case": "load_sensor",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\load_sensor-v82-explicit-0vyrl6eo",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.9138983488082886e-08,
+        "max_position_error": 2.4500475376844875e-06,
+        "max_energy_error": 2.451328106224584e-06
+      }
+    },
+    {
+      "case": "added",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\added-openreader-generated-im5rhrpz",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "added",
+      "variant": "v82-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\added-v82-generated-lt3j68qu",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "added",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\added-v82-explicit-qo_b0t8k",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "units",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\units-openreader-generated-m1eho826",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "units",
+      "variant": "v82-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\units-v82-explicit-00vos89u",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "explicit_rota",
+      "variant": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\explicit-rota-openreader-5af9piqp",
+      "checks": {
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 1.9096501047144443e-09
+      }
+    },
+    {
+      "case": "explicit_rota",
+      "variant": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\explicit-rota-v82-cgmtoypk",
+      "checks": {
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 1.9096501047144443e-09
+      }
+    }
+  ],
+  "structural": [
+    {
+      "case": "ordinary_zero",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-ordinary_zero-openreader-hziow1jl",
+      "expected_rejection": false,
+      "bodies": {}
+    },
+    {
+      "case": "ordinary_zero",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-ordinary_zero-v82-391b9zaa",
+      "expected_rejection": false,
+      "bodies": {}
+    },
+    {
+      "case": "single",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-single-openreader-hkt_bpnh",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "single",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-single-v82-uoye93nw",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "disconnected_one",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-disconnected_one-openreader-7hfr_kwk",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 156.0,
+          "center": [
+            1.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            56.33463,
+            212.3346,
+            251.3346
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "disconnected_one",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-disconnected_one-v82-6j7lcj4l",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 156.0,
+          "center": [
+            1.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            56.33463,
+            212.3346,
+            251.3346
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "mixed",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-mixed-openreader-ll9ta4v5",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "mixed",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-mixed-v82-g2s_oi4b",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "existing",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-existing-openreader-irqrdlfg",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "102": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            28.16732
+          ],
+          "off_diagonal": [
+            -1.25e-20,
+            -6.410256e-42,
+            -3.205128e-41
+          ],
+          "nodes": [
+            9
+          ]
+        }
+      }
+    },
+    {
+      "case": "existing",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-existing-v82-eq7renj6",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "102": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            28.16732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            9
+          ]
+        }
+      }
+    },
+    {
+      "case": "shared",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-shared-openreader-6jor250e",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 117.0,
+          "center": [
+            0.6666667,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            42.25097,
+            39.00097,
+            68.25098
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 156.0,
+          "center": [
+            1.0,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            53.08463,
+            95.33463,
+            105.0846
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            8,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "case": "shared",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-shared-v82-1mhlmtlc",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 117.0,
+          "center": [
+            0.6666667,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            42.25097,
+            39.00097,
+            68.25098
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 156.0,
+          "center": [
+            1.0,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            53.08463,
+            95.33463,
+            105.0846
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            8,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "case": "interleaved",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-interleaved-openreader-enjrqmbq",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "interleaved",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-interleaved-v82-zl3geeyk",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "lagmul",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-lagmul-openreader-q8pbcj1b",
+      "expected_rejection": false,
+      "bodies": {
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "lagmul",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-lagmul-v82-69zwc7_5",
+      "expected_rejection": false,
+      "bodies": {
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "explicit_fields",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-explicit_fields-openreader-0v4vumrj",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "explicit_fields",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-explicit_fields-v82-2gvhh3re",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "empty",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-empty-openreader-j6goaf8k",
+      "expected_rejection": true,
+      "bodies": {}
+    },
+    {
+      "case": "empty",
+      "reader": "v82",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\structural-empty-v82-9cz4oz4b",
+      "expected_rejection": true,
+      "bodies": {}
+    }
+  ],
+  "known_reference_differences": {
+    "explicit_unit": {
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\run\\numerical\\known-v82-units-th00uhce",
+      "v82_generated_diagonal": [
+        300000.5,
+        200000.5,
+        400000.5
+      ],
+      "physical_diagonal": [
+        0.8,
+        0.7,
+        0.9
+      ],
+      "oracle": "v82 explicit /RBODY with unit ID 7; OpenReader generated body preserves that unit"
+    }
+  }
+}

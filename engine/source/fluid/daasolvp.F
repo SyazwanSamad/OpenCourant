@@ -839,7 +839,7 @@ C Quadrangular elements
 C-----------------------------------------------------------
 C     Populate NODA_PEXT output array for H3D/NODA/PEXT
 C-----------------------------------------------------------
-      IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%ANIM_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%H3D_HAS_NODA_PEXT > 0) THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0) THEN
         IF(JFORM == 1) THEN
           DO I=1,NEL
              I1 = ELEM(1,I)

@@ -40,7 +40,6 @@ Copyright>        copyright and attribution statement.
 !||    genani                     ../engine/source/output/anim/generate/genani.F
 !||    genani1                    ../starter/source/output/anim/genani1.F
 !||    gendynain                  ../engine/source/output/dynain/gendynain.F
-!||    genh3d                     ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genoutp                    ../engine/source/output/sty/genoutp.F
 !||    genstat                    ../engine/source/output/sta/genstat.F
 !||    hist1                      ../engine/source/output/th/hist1.F
@@ -54,7 +53,6 @@ Copyright>        copyright and attribution statement.
 !||    hm_setfxrbyon              ../starter/source/constraints/fxbody/hm_setfxrbyon.F
 !||    ifrbody_off                ../starter/source/constraints/general/rbody/ifrbody_off.F90
 !||    ini_fxbody                 ../starter/source/constraints/fxbody/ini_fxbody.F
-!||    ini_h3dtmax_engine         ../starter/source/starter/contrl.F
 !||    inintr                     ../starter/source/interfaces/interf1/inintr.F
 !||    inintr_thkvar              ../starter/source/interfaces/interf1/inintr_thkvar.F
 !||    lec_inimap1d_file          ../starter/source/initial_conditions/inimap/lec_inimap1d_file.F
@@ -72,7 +70,6 @@ Copyright>        copyright and attribution statement.
 !||    radioss2                   ../engine/source/engine/radioss2.F
 !||    read_engine_dtmin          ../starter/source/general_controls/damping/read_engine_dtmin.F
 !||    read_flag_ale              ../starter/source/coupling/rad2rad/r2r_fork.F
-!||    read_h3dtmax_key           ../starter/source/starter/contrl.F
 !||    read_pch_file              ../starter/source/constraints/fxbody/read_pch_file.F
 !||    report                     ../engine/source/output/report/report.F
 !||    section_init               ../engine/source/tools/sect/section_init.F

@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "whitespace_lines_fixed": 18,
+  "diff_check_passed": true,
+  "changed_python_files_parsed": 23,
+  "changed_workflows_parsed": 6,
+  "binaries": [
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45873664,
+      "sha256": "14158884751c7d7809621b8a02a7e0dc19f7ca326dffe3f06895ffd88415154e",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 131674624,
+      "sha256": "33c3515912416fd1b7cbb711d43dc77976a048eb33fc12f5fea9448b38551661",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 139902464,
+      "sha256": "bfe91b1166d07bae8177c390ee12d97ab186562a551ca831ea0d4d686e57f5d1",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17495552,
+      "sha256": "623769d123bb58f48d23b67868707243d6aad4609da756a317932a531f7c7286",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    }
+  ],
+  "build_graphs": [
+    {
+      "path": "cbuild_dependency_stage3/clean-starter/compile_commands.json",
+      "sha256": "cfc31de874974b319e0ec6c4b0588f3aa3943b5bea9bcff0e8bdba18c8a858d4",
+      "compilation_units": 2701,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_ninja/compile_commands.json",
+      "sha256": "f88adb6a474ac5706ae5b682efda3f8670d21429a085e60d59fb3acc84e62c89",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_impi_ninja/compile_commands.json",
+      "sha256": "c74391bede01916f162157378c9c0ed4a1447c245e1ff4966be8efb6ed111592",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    }
+  ],
+  "limit": "PE import/export and embedded SDK library-name inspection; no loaded-module snapshot or package/cache absence assertion. Delivery cleanup remains Stage 6."
+}

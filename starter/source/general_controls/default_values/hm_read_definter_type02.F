@@ -24,7 +24,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_definter          ../starter/source/general_controls/default_values/hm_read_definter.F
 !||--- calls      -----------------------------------------------------
 !||    definter                  ../starter/source/interfaces/interf1/definter.F
-!||    hm_get_intv               ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_intv               ../starter/source/devtools/reader/hm_get_intv.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod        ../starter/share/modules1/hm_option_read_mod.F
 !||    message_mod               ../starter/share/message_module/message_mod.F

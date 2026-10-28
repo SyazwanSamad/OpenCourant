@@ -23,15 +23,12 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lag_mult     ../engine/source/tools/lagmul/lag_mult.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE LAG_ANITH(OUTPUT,IADLL  ,LLL   ,JLL    ,SLL    ,XLL    ,
-     2                     FANI  ,FSAV   ,NC     ,H3D_DATA)
+      SUBROUTINE LAG_ANITH(OUTPUT, IADLL, LLL, JLL, SLL, XLL, FANI, FSAV, NC)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -55,18 +52,13 @@ C-----------------------------------------------
 C     REAL
       my_real
      .  XLL(*),FANI(3,*),FSAV(NTHVKI,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J,IC,IK,NIN
 C======================================================================|
 C---
 C     SAUVEGARDE DES FORCES D'ANIM
 C---
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
           DO IC=1,NC
             DO IK=IADLL(IC),IADLL(IC+1)-1
@@ -104,16 +96,13 @@ C SPMD routine
 !||--- calls      -----------------------------------------------------
 !||    spmd_sg_fani   ../engine/source/mpi/lag_multipliers/spmd_lag.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    output_mod     ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE LAG_ANITHP(OUTPUT, IADLL  ,LLL   ,JLL  ,SLL     ,XLL    ,
-     2                      FANI   ,FSAV  ,NC   ,INDEXLAG,FANIG  ,
-     3                      FR_LAGF,NBNODL,LLAGF,NLAGF   ,H3D_DATA)
+      SUBROUTINE LAG_ANITHP(OUTPUT, IADLL, LLL, JLL, SLL, XLL, FANI, FSAV, NC, INDEXLAG, FANIG, FR_LAGF, NBNODL, LLAGF,
+     . NLAGF)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -140,18 +129,13 @@ C-----------------------------------------------
 C     REAL
       my_real
      .  XLL(*),FANI(3,*),FSAV(NTHVKI,*), FANIG(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J,IC,IK,NIN,N
 C======================================================================|
 C---
 C     SAUVEGARDE DES FORCES D'ANIM
 C---
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
         IF(ISPMD==0)THEN
           DO I = 1, NBNODL
             FANIG(1,I) = ZERO

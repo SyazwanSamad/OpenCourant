@@ -84,12 +84,6 @@ C=======================================================================
              LINE='{ RESULT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'A001.gz"}'
            WRITE(IOUTMVW,'(A)') LINE
          ENDIF
-       ELSEIF(IMVW == 3 .OR. IMVW == 4)THEN
-         WRITE(IOUTMVW,'(A)')'{ safe_quotes_on }'
-           LINE='{ GRAPHIC_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'.h3d"}'
-         WRITE(IOUTMVW,'(A)') LINE
-           LINE='{ RESULT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'.h3d"}'
-         WRITE(IOUTMVW,'(A)') LINE
        ENDIF
 
        IF (IMVW_REF == 1) THEN
@@ -102,8 +96,8 @@ C=======================================================================
          WRITE(IOUTMVW,'(A)') LINE
        ENDIF
 
-       IF (IMVW == 1 .OR. IMVW == 3)LINE='{ PLOT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'T01"}'
-       IF (IMVW == 2 .OR. IMVW == 4)LINE='{ PLOT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'_0001.abf"}'
+       IF (IMVW == 1)LINE='{ PLOT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'T01"}'
+       IF (IMVW == 2)LINE='{ PLOT_FILE_1 = "'//ROOTNAM(1:ROOTLEN)//'_0001.abf"}'
        WRITE(IOUTMVW,'(A)') LINE
        WRITE(IOUTMVW,'(A)')'*Id("HyperWorks", "13.*")'
        WRITE(IOUTMVW,'(A)')'*BeginPalette()'
@@ -719,7 +713,7 @@ c
        WRITE(IOUTMVW,'(A)')'                    *Filename({PLOT_FILE_1})'
        WRITE(IOUTMVW,'(A)')'                    *ReaderTargetVersion(14)'
        WRITE(IOUTMVW,'(A)')'                    *Datatype("Global Variables")'
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'                    *Request("Springs internal energy")'
        ELSE
          WRITE(IOUTMVW,'(A)')'                    *Request("Spring internal energy")'
@@ -734,7 +728,7 @@ c
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWReaderTargetVersion", "ReaderTargetVersion", "String", "14.000000")'
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWWordSize", "WordSize", "String", "4")'
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWDatatype", "Datatype", "String", "Global Variables")'
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'                    *Attribute("HWRequest", "Request", "String", "Springs internal energy")'
        ELSE
          WRITE(IOUTMVW,'(A)')'                    *Attribute("HWRequest", "Request", "String", "Spring internal energy")'
@@ -795,7 +789,7 @@ c
        WRITE(IOUTMVW,'(A)')'                    *Filename({PLOT_FILE_1})'
        WRITE(IOUTMVW,'(A)')'                    *ReaderTargetVersion(14)'
        WRITE(IOUTMVW,'(A)')'                    *Datatype("Global Variables")'
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'                    *Request("Springs internal energy")'
        ELSE
          WRITE(IOUTMVW,'(A)')'                    *Request("Spring internal energy")'
@@ -810,7 +804,7 @@ c
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWReaderTargetVersion", "ReaderTargetVersion", "String", "14.000000")'
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWWordSize", "WordSize", "String", "4")'
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWDatatype", "Datatype", "String", "Global Variables")'
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'                    *Attribute("HWRequest", "Request", "String", "Springs internal energy")'
        ELSE
          WRITE(IOUTMVW,'(A)')'                    *Attribute("HWRequest", "Request", "String", "Springs internal energy")'
@@ -818,7 +812,7 @@ c
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWComplexComponent", "ComplexComponent", "String", "MAG")'
        WRITE(IOUTMVW,'(A)')'                    *Attribute("HWReader", "Reader", "String", "hgradioss++.exe")'
        WRITE(IOUTMVW,'(A)')'                *EndVector()'
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'                *Attribute("HWLastGoodCurveName", "HWLastGoodCurveName", "String", "Springs internal e
      .nergy")'
        ELSE
@@ -1019,7 +1013,7 @@ c
        WRITE(IOUTMVW,'(A)')'                *Attribute("HWLastGoodCurveName", "HWLastGoodCurveName", "String", "Hourglass energy")'
        WRITE(IOUTMVW,'(A)')'            *EndCurve()'
 c
-       IF (IMVW == 1 .OR. IMVW == 3) THEN
+       IF (IMVW == 1) THEN
          WRITE(IOUTMVW,'(A)')'            *BeginCurve(On, "{y.HWRequest}")'
          WRITE(IOUTMVW,'(A)')'                *Line(1, 24, 1)'
          WRITE(IOUTMVW,'(A)')'                *Symbol(0, 24, 1)'

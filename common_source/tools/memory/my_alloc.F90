@@ -202,7 +202,6 @@
 !||    czke3                                    ../engine/source/elements/shell/coquez/czke3.F
 !||    daaacc                                   ../engine/source/fluid/daaacc.F
 !||    daasolvp                                 ../engine/source/fluid/daasolvp.F
-!||    dam_fld_sol                              ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    damping51                                ../engine/source/assembly/damping.F
 !||    dd_ani                                   ../starter/source/output/anim/dd_ani.F
 !||    dd_bfs                                   ../starter/source/spmd/domain_decomposition/grid2mat.F
@@ -255,7 +254,6 @@
 !||    fail_orthbiquad_s                        ../engine/source/materials/fail/orthbiquad/fail_orthbiquad_s.F
 !||    fail_wind_frwave_init                    ../engine/source/materials/fail/alter/fail_wind_frwave_init.F
 !||    failwave_init                            ../starter/source/materials/fail/failwave_init.F
-!||    fcont_max_output                         ../engine/source/output/h3d/h3d_results/fcont_max_output.F
 !||    fill_buffer_51                           ../starter/source/materials/mat/mat051/fill_buffer_51.F
 !||    fill_clause_elt_box                      ../starter/source/model/sets/fill_clause_elt_box.F
 !||    fill_clause_node_box                     ../starter/source/model/sets/fill_clause_node_box.F
@@ -306,7 +304,6 @@
 !||    genani                                   ../engine/source/output/anim/generate/genani.F
 !||    genani1                                  ../starter/source/output/anim/genani1.F
 !||    gendynain                                ../engine/source/output/dynain/gendynain.F
-!||    genh3d                                   ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genoutp                                  ../engine/source/output/sty/genoutp.F
 !||    genq1np                                  ../starter/source/elements/solid/solid_q1np/q1np_genelements.F90
 !||    genstat                                  ../engine/source/output/sta/genstat.F
@@ -325,27 +322,14 @@
 !||    gpstra_solid                             ../engine/source/output/outmaxsubr.F
 !||    groups_get_elem_list                     ../starter/source/groups/groups_get_elem_list.F
 !||    grpsplit                                 ../engine/source/engine/resol_init.F
-!||    h3d_create_fvmbag_centroids              ../engine/source/output/h3d/h3d_build_fortran/h3d_create_fvmbag_centroids.F
-!||    h3d_create_rbe2_impi                     ../engine/source/output/h3d/h3d_build_fortran/h3d_create_rbe2_impi.F
-!||    h3d_create_rbe3_impi                     ../engine/source/output/h3d/h3d_build_fortran/h3d_create_rbe3_impi.F
-!||    h3d_nodal_tensor                         ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
-!||    h3d_read                                 ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
-!||    h3d_shell_tensor                         ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
-!||    h3d_skin_pre_dim                         ../engine/source/output/h3d/h3d_results/h3d_skin_ixskin.F
-!||    h3d_skin_pre_map                         ../engine/source/output/h3d/h3d_results/h3d_skin_pre_map.F
-!||    h3d_sol_skin_scalar                      ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
-!||    h3d_sol_skin_tensor                      ../engine/source/output/h3d/h3d_results/h3d_sol_skin_tensor.F
-!||    h3d_update_fvmbag_centroids              ../engine/source/output/h3d/h3d_build_fortran/h3d_update_fvmbag_centroids.F
-!||    h3d_velvecc22                            ../engine/source/output/h3d/h3d_results/h3d_velvecc22.F
-!||    h3d_velvecz22                            ../engine/source/output/h3d/h3d_results/h3d_velvecz22.F
 !||    hierarbe2                                ../starter/source/constraints/general/rbe2/hm_read_rbe2.F
 !||    hierarchy_rbody                          ../starter/source/constraints/general/rbody/hierarchy_rbody.F90
 !||    hierarchy_rbody_ddm                      ../starter/source/constraints/general/rbody/hierarchy_rbody.F90
 !||    hireorbe3                                ../starter/source/constraints/general/rbe3/hm_read_rbe3.F
 !||    hist1                                    ../engine/source/output/th/hist1.F
 !||    hist13                                   ../engine/source/output/th/hist13.F
-!||    hm_convert_2d_elements_seatbelt          ../starter/source/devtools/hm_reader/hm_convert_2d_elements_seatbelt.F
-!||    hm_count_2d_element_seatbelt             ../starter/source/devtools/hm_reader/hm_count_2d_element_seatbelt.F
+!||    hm_convert_2d_elements_seatbelt          ../starter/source/devtools/reader/hm_convert_2d_elements_seatbelt.F
+!||    hm_count_2d_element_seatbelt             ../starter/source/devtools/reader/hm_count_2d_element_seatbelt.F
 !||    hm_grogro                                ../starter/source/groups/hm_grogro.F
 !||    hm_grogronod                             ../starter/source/groups/hm_grogronod.F
 !||    hm_lecgre                                ../starter/source/groups/hm_lecgre.F
@@ -605,7 +589,6 @@
 !||    i7sti3                                   ../starter/source/interfaces/inter3d1/i7sti3.F
 !||    i7trivox                                 ../engine/source/interfaces/intsort/i7trivox.F
 !||    i7trivox1                                ../starter/source/interfaces/inter3d1/i7trivox1.F
-!||    idx_fld_sol                              ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    iedge_xfem                               ../starter/source/elements/xfem/iedge_xfem.F
 !||    ig3duforc3                               ../engine/source/elements/ige3d/ig3duforc3.F
 !||    igrsurf_split                            ../starter/source/spmd/igrsurf_split.F
@@ -613,7 +596,6 @@
 !||    incpflow                                 ../engine/source/fluid/incpflow.F
 !||    ingrbric_nodes                           ../starter/source/interfaces/interf1/ingrbric_nodes.F
 !||    ini_fxbody                               ../starter/source/constraints/fxbody/ini_fxbody.F
-!||    ini_h3dtmax_engine                       ../starter/source/starter/contrl.F
 !||    ini_inimap1d                             ../starter/source/initial_conditions/inimap/ini_inimap1d.F
 !||    ini_msg                                  ../engine/source/output/message/ini_msg.F
 !||    ini_seatbelt                             ../starter/source/tools/seatbelts/ini_seatbelt.F
@@ -637,7 +619,6 @@
 !||    init_bcs_nrf                             ../starter/source/boundary_conditions/init_bcs_nrf.F90
 !||    init_bcs_wall                            ../starter/source/boundary_conditions/init_bcs_wall.F90
 !||    init_global_boundary_list                ../engine/source/mpi/init/init_global_boundary_list.F90
-!||    init_h3d_engine                          ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    init_hashtable_for_neighbour_segment     ../engine/source/interfaces/interf/init_hashtable_for_neighbour_segment.F90
 !||    init_i25_edge                            ../engine/source/interfaces/int25/init_i25_edge.F
 !||    init_inivol                              ../starter/source/initial_conditions/inivol/init_inivol.F90
@@ -714,7 +695,6 @@
 !||    lecextlnk                                ../starter/source/coupling/rad2rad/lecextlnk.F
 !||    lecfill                                  ../starter/source/elements/initia/lecfill.F
 !||    lecfvbag                                 ../engine/source/input/lecfvbag.F
-!||    lech3d                                   ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    lecig3d                                  ../starter/source/elements/ige3d/lecig3d.F
 !||    lecins                                   ../starter/source/interfaces/interf1/lecins.F
 !||    lecint                                   ../starter/source/interfaces/interf1/lecint.F
@@ -1116,11 +1096,6 @@
 !||    spmd_get_penis20                         ../engine/source/mpi/interfaces/send_cand.F
 !||    spmd_get_stif25_edg                      ../engine/source/mpi/interfaces/spmd_getstif25_edg.F
 !||    spmd_glob_fsum9                          ../engine/source/mpi/interfaces/spmd_th.F
-!||    spmd_h3d_max_r_nodal_value               ../engine/source/output/h3d/spmd/spmd_h3d_gather_r_nodal_value.F
-!||    spmd_h3d_max_r_nodal_value_21            ../engine/source/output/h3d/spmd/spmd_h3d_gather_r_nodal_value.F
-!||    spmd_h3d_sum_r_nodal                     ../engine/source/output/h3d/spmd/spmd_h3d_gather_r_node.F
-!||    spmd_h3d_sum_r_nodal_21                  ../engine/source/output/h3d/spmd/spmd_h3d_gather_r_node.F
-!||    spmd_h3d_sum_r_nodal_value               ../engine/source/output/h3d/spmd/spmd_h3d_sum_r_nodal_value.F
 !||    spmd_i21fthecom                          ../engine/source/mpi/interfaces/send_cand.F
 !||    spmd_i21tempcom                          ../engine/source/mpi/interfaces/send_cand.F
 !||    spmd_i25_prepare                         ../engine/source/interfaces/int25/i25_prepare.F

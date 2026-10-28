@@ -5,6 +5,29 @@
 cmake_minimum_required (VERSION 3.15)
 project(open_reader)
 
+if(arch MATCHES "^win64")
+    set(arch win64)
+elseif(arch MATCHES "^linuxa64")
+    set(arch linuxa64)
+elseif(arch MATCHES "^linux64" OR NOT DEFINED arch)
+    set(arch linux64)
+else()
+    message(FATAL_ERROR "Unsupported OpenReader architecture: ${arch}")
+endif()
+if(NOT DEFINED com OR NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(com 0)
+endif()
+if(arch STREQUAL "win64")
+    set(PYTHON_EXEC python)
+else()
+    set(PYTHON_EXEC python3)
+endif()
+if(NOT TARGET extlib)
+    add_custom_target(extlib ALL
+        COMMAND ${PYTHON_EXEC} ${CMAKE_CURRENT_SOURCE_DIR}/../Compiling_tools/script/load_extlib.py
+        COMMENT "Loading extlib libraries")
+endif()
+
 # Windows specific settings
 # --------------------------
 if (arch STREQUAL "win64")
@@ -12,6 +35,7 @@ if (arch STREQUAL "win64")
 endif()
 
 set (open_reader_root_dir ${CMAKE_CURRENT_SOURCE_DIR})
+set(c_source_files "")
 
 include ( CMake_arch/CMake_${arch}.cmake )
 
@@ -96,8 +120,7 @@ if (com STREQUAL "0")
                    POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E make_directory ${open_reader_root_dir}/../exec
                    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${link_library_name}> ${open_reader_root_dir}/../exec
-                   COMMAND ${CMAKE_COMMAND} -E copy ${link_library_name}.lib ${open_reader_root_dir}/../exec
-                   COMMAND ${CMAKE_COMMAND} -E copy ${link_library_name}.exp ${open_reader_root_dir}/../exec
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${link_library_name}> ${open_reader_root_dir}/../exec
                    )
     else()
         add_custom_command(TARGET ${link_library_name}
@@ -129,3 +152,11 @@ endif()
 
 
 
+
+# Reader compilation needs the external headers before any object is built.
+foreach(reader_target solver_interface dyna2rad io sdi cfgio cfgkernel)
+    add_dependencies(${reader_target}_${arch} extlib)
+endforeach()
+if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(OPEN_READER_TARGET ${link_library_name} PARENT_SCOPE)
+endif()

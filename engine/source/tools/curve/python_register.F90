@@ -166,10 +166,10 @@
 
           do i = 1, n
             do j = 1, NAME_LEN
-              py%elements%global%keyword(i)%h3d(j:j) = c_null_char
+              py%elements%global%keyword(i)%result(j:j) = c_null_char
               py%elements%global%keyword(i)%name(j:j) = c_null_char
             end do
-            call python_get_elemental_entity(i,py%elements%global%keyword(i)%h3d,py%elements%global%user_ids(i)) !bind(c,name="cpp_python_get_elemental_entity")
+            call python_get_elemental_entity(i,py%elements%global%keyword(i)%result,py%elements%global%user_ids(i)) !bind(c,name="cpp_python_get_elemental_entity")
           end do
 
           if(py%nb_functs >0 ) then

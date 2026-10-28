@@ -24,21 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    dfunc0                       ../engine/source/output/anim/generate/dfunc0.F
 !||    dfuncc                       ../engine/source/output/anim/generate/dfuncc.F
 !||    dfuncs                       ../engine/source/output/anim/generate/dfunc6.F
-!||    h3d_quad_scalar              ../engine/source/output/h3d/h3d_results/h3d_quad_scalar.F
-!||    h3d_quad_scalar_1            ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
-!||    h3d_quad_vector              ../engine/source/output/h3d/h3d_results/h3d_quad_vector.F
-!||    h3d_shell_scalar             ../engine/source/output/h3d/h3d_results/h3d_shell_scalar.F
-!||    h3d_shell_scalar_1           ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_shell_vector             ../engine/source/output/h3d/h3d_results/h3d_shell_vector.F
-!||    h3d_shell_vector_1           ../engine/source/output/h3d/h3d_results/h3d_shell_vector_1.F
-!||    h3d_skin_scalar              ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_solid_scalar             ../engine/source/output/h3d/h3d_results/h3d_solid_scalar.F
-!||    h3d_solid_scalar_1           ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
-!||    h3d_solid_tensor             ../engine/source/output/h3d/h3d_results/h3d_solid_tensor.F
-!||    h3d_solid_tensor_1           ../engine/source/output/h3d/h3d_results/h3d_solid_tensor_1.F
-!||    h3d_solid_vector             ../engine/source/output/h3d/h3d_results/h3d_solid_vector.F
-!||    h3d_sph_scalar               ../engine/source/output/h3d/h3d_results/h3d_sph_scalar.F
-!||    h3d_sph_tensor               ../engine/source/output/h3d/h3d_results/h3d_sph_tensor.F
+!||    result_quad_scalar            ../engine/source/tools/element_results/result_quad_scalar.F90
+!||    result_shell_scalar           ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar           ../engine/source/tools/element_results/result_solid_scalar.F
 !||    schlieren_buffer_gathering   ../engine/source/output/anim/generate/schlieren_buffer_gathering.F
 !||====================================================================
       MODULE SCHLIEREN_MOD

@@ -766,69 +766,30 @@ Procedure was tested on Visual Studio 2022
 
 ### Build OpenCourant with Open_Reader
 
-Compiler installation is same than for Starter.
-No further installation task is need.
+OpenReader is the sole Starter reader and is built automatically by Starter's
+CMake target. Root CMake, component scripts, CI, and Visual Studio use the same
+target. The former `-open_reader` / `USE_OPEN_READER` selection and legacy API
+fallbacks are retired. No separate reader build is required.
 
-To build Starter with Open_Reader, add: **-open_reader** to build command line:
+Use the normal Starter build commands with the installed compiler environment:
 
-* On Linux
+* Linux, from `starter/`: `./build_script.sh -arch=linux64_gf -nt=4`
+* Windows, from `starter/`: `build_windows.bat -arch=win64 -nt=4`
 
-      ./build_linux.sh -arch=linux64_gf -open_reader
+The shared library and executable are copied to `exec/`. Put that directory on
+`LD_LIBRARY_PATH` (Linux) or `PATH` (Windows). Keep `RAD_CFG_PATH` pointing to the
+in-tree `hm_cfg_files` tree; these CFG schemas/messages remain required.
 
-* On Windows
+OpenReader supports profile `2612`, `IRIGID=1` (one body per part), and `IRIGID=2`
+(one body per connected region). It rejects `/ALE/STRUCTURED_MESH` with file/line
+context, including in includes; structured mesh generation remains unsupported.
+Ordinary ALE is separate. See [the regression commands](qa-tests/reader/README.md)
+and [Stage 5 results and limits](qa-tests/dependency_removal/STAGE5.md).
 
-      build_windows.bat  -arch=win64 -open_reader
-
-The built library will be copied in exec directory.
-Starter is linked against this library
-
-With `USE_OPEN_READER=1` (set by `-open_reader`), Starter uses the indexed
-include and part-element APIs by default. The legacy include/part CMake options
-remain available for older external readers. OpenReader still automatically
-disables `/PART` Irigid-to-RBODY conversion pending mode-2 implementation and
-validation, including when reusing an existing build directory. This does not
-change cached compatibility options for external readers.
-
-While rigid-part conversion is disabled, a detected nonzero `/PART` `IRIGID`
-value stops Starter with an error identifying the part and submodel. Ordinary
-parts continue without conversion. The reader-level reference contract and
-guard checks are documented in [the Irigid regression tests](qa-tests/reader/rigid_parts/README.md).
-
-OpenReader supports the current `2612` configuration profile. The Windows x64
-accelerometer Starter smoke test completes and generates a restart file.
-Configuration and model-loading failures return an error before Starter queries
-the model. Reproducible loading checks are documented in
-[the reader tests](qa-tests/reader/README.md).
-
-OpenReader now implements the rigid-part count/create APIs. The Windows reader
-tests cover the v82 conversion contract, includes, submodel offsets, explicit unit
-context, repeated calls, and model reload. Stage 4 validates `IRIGID=1` through
-bounds-checked Starter runs against v82, including mixed explicit/generated bodies
-and LAGMUL. Corrected fixtures show that v82 also supports connected-region
-conversion for `IRIGID=2`; OpenReader explicitly rejects that unimplemented mode.
-Stage 5 validates mode-1 mass/inertia, rigid motion, forces, sensor release, energy,
-submodel offsets, and alternate units with the Windows double-precision SMP Engine.
-The reproducible [numerical checks](qa-tests/reader/README.md#numerical-validation-stage-5)
-compare both readers, explicit bodies, and analytic expectations. The automatic
-conversion bypass remains enabled pending mode-2 and rollout work.
-
-Stage 6 aligns the include-count ABI with the bundled reader, adds indexed
-include and part-element queries, and preserves original keyword include paths.
-The [API checks and Windows CI](qa-tests/reader/README.md#api-alignment-and-rollout-stage-6)
-cover these replacements. Linux/ARM validation remains outstanding.
-
-Rigid-part conversion and broader model coverage still require validation. Use
-the default bundled reader for simulations that require `/PART` `IRIGID`.
-
-To execute Starter with Open_Reader set PATH (for Windows) or  LD_LIBRARY (for Linux):
-
-* On Linux
-
-      export LD_LIBRARY_PATH=[PATH to OpenCourant clone]/exec:$LD_LIBRARY_PATH
-
-* On Windows
-
-      set PATH=[PATH to OpenCourant clone]\exec:%PATH%
+H3D functionality is removed; use native animation, history, STATE or DYNAIN
+outputs. Windows DP SMP and two-rank MPI checks do not establish Linux/ARM, SP,
+broader MPI/R2R, multiple OpenMP threads, hosted CI, full model coverage, or
+large-model performance.
 
 
 ## How to build OpenCourant on Linux with Container using Apptainer

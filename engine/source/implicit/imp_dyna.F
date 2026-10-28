@@ -720,7 +720,6 @@ C--------------------------------------------
 !||    spmd_max_i         ../engine/source/mpi/implicit/imp_spmd.F
 !||    spmd_sumf_a        ../engine/source/mpi/implicit/imp_spmd.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    imp_dyna           ../engine/share/modules/impbufdef_mod.F
 !||    message_mod        ../engine/share/message_module/message_mod.F
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
@@ -728,24 +727,16 @@ C--------------------------------------------
 !||    skew_mod           ../common_source/modules/skew_mod.F90
 !||    th_surf_mod        ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE DYNA_INA(IBCL      ,FORC    ,SNPC    ,NPC    ,TF     ,A     ,
-     2                    V         ,X       ,SKEWS   ,AR     ,VR     ,
-     3                    SENSOR_TAB,WEIGHT  ,WFEXC   ,IADS_F ,
-     4                    FSKY      ,IGRV    ,AGRV    ,MS     ,IN     ,
-     5                    LGRAV     ,ITASK   ,NRBYAC  ,IRBYAC ,NPBY   ,
-     6                    RBY       ,FR_ELEM ,IAD_ELEM,NDDL   ,NNZK   ,
-     7                    IDIV      ,H3D_DATA,CPTREAC ,FTHREAC,NODREAC,
-     8                    NSENSOR   ,TH_SURF ,DPL0CLD,
-     9                    VEL0CLD   ,D       ,DR      ,NUMNOD ,NSURF  ,
-     A                    NFUNCT    ,NCONLD  ,NGRAV   ,NINVEL ,STF    ,NUMSKW ,
-     B                    WFEXT, PYTHON)
+      SUBROUTINE DYNA_INA(IBCL, FORC, SNPC, NPC, TF, A, V, X, SKEWS, AR, VR, SENSOR_TAB, WEIGHT, WFEXC, IADS_F, FSKY,
+     . IGRV, AGRV, MS, IN, LGRAV, ITASK, NRBYAC, IRBYAC, NPBY, RBY, FR_ELEM, IAD_ELEM, NDDL, NNZK, IDIV, CPTREAC,
+     . FTHREAC, NODREAC, NSENSOR, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NUMNOD, NSURF, NFUNCT, NCONLD, NGRAV, NINVEL, STF,
+     . NUMSKW, WFEXT, PYTHON)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE IMP_DYNA
       use python_funct_mod, only: python_
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_, TH_SURF_NUM_CHANNEL
       USE SKEW_MOD
@@ -778,7 +769,6 @@ C-----------------------------------------------
      .   X(3,*)    ,V(3,*)   ,VR(3,*),MS(*)   ,AGRV(*),
      .   TF(*) ,FORC(*)  ,RBY(NRBY,*),IN(*),
      .   A(3,*) ,AR(3,*),WFEXC,FSKY(*),FTHREAC(6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
       TYPE (SKEW_),INTENT(INOUT)   :: SKEWS
@@ -851,13 +841,8 @@ C--- Estimate A (t = 0) ----
         IF (TT==DT2) TT = ZERO
         IF(NCONLD/=0) THEN
 !         IF (IMON>0 .AND. ITASK == 0) CALL STARTIME(TIMERS,4)
-          CALL FORCE_IMP(IBCL    ,FORC       ,SNPC       ,NPC        ,TF         ,
-     2                   DY_A    ,V          ,X          ,SKEWS      ,
-     3                   DY_AR   ,VR         ,NSENSOR    ,SENSOR_TAB ,WFEXC      ,
-     4                   IADS_F  ,FSKY       ,DUMMY_FEXT ,H3D_DATA   ,CPTREAC    ,
-     5                   FTHREAC ,NODREAC    ,TH_SURF    ,
-     6                   DPL0CLD ,VEL0CLD    ,D          ,DR         ,NCONLD     ,
-     7                   NUMNOD  ,NFUNCT     ,STF        ,WFEXT)
+      CALL FORCE_IMP(IBCL, FORC, SNPC, NPC, TF, DY_A, V, X, SKEWS, DY_AR, VR, NSENSOR, SENSOR_TAB, WFEXC, IADS_F, FSKY,
+     . DUMMY_FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT, STF, WFEXT)
          IF (NSPMD>1) THEN
           DO I=IAD_ELEM(1,1),IAD_ELEM(1,NSPMD+1)-1
             J = FR_ELEM(I)
@@ -978,29 +963,20 @@ C
 !||    gravit_imp         ../engine/source/loads/general/grav/gravit_imp.F
 !||    wfv_imp            ../engine/source/constraints/general/impvel/fv_imp0.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    imp_dyna           ../engine/share/modules/impbufdef_mod.F
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||    skew_mod           ../common_source/modules/skew_mod.F90
 !||    th_surf_mod        ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE DYNA_WEX(IBCL  ,FORC   ,SNPC,NPC   ,TF    ,A     ,
-     2                    V     ,X      ,SKEWS  ,AR    ,VR    ,
-     3                    SENSOR_TAB,WEIGHT,WFEXT ,IADS_F ,
-     4                    FSKY  ,IGRV   ,AGRV  ,MS    ,IN    ,
-     5                    LGRAV ,ITASK ,NRBYAC,IRBYAC ,NPBY  ,
-     6                    RBY   ,IBFV  ,VEL   ,D      ,DR    ,
-     7                    IKC   ,IDDL  ,IFRAME,XFRAME ,NDOF  ,
-     8                    H3D_DATA,CPTREAC,FTHREAC,NODREAC,NSENSOR,
-     9                    TH_SURF ,DPL0CLD,
-     A                    VEL0CLD, NUMNOD,NSURF,NFUNCT,NCONLD,
-     B                    NGRAV,NFXVEL,STF,NUMSKW,python)
+      SUBROUTINE DYNA_WEX(IBCL, FORC, SNPC, NPC, TF, A, V, X, SKEWS, AR, VR, SENSOR_TAB, WEIGHT, WFEXT, IADS_F, FSKY,
+     . IGRV, AGRV, MS, IN, LGRAV, ITASK, NRBYAC, IRBYAC, NPBY, RBY, IBFV, VEL, D, DR, IKC, IDDL, IFRAME, XFRAME, NDOF,
+     . CPTREAC, FTHREAC, NODREAC, NSENSOR, TH_SURF, DPL0CLD, VEL0CLD, NUMNOD, NSURF, NFUNCT, NCONLD, NGRAV, NFXVEL, STF,
+     . NUMSKW, python)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE IMP_DYNA
-      USE H3D_MOD
       USE SENSOR_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_, TH_SURF_NUM_CHANNEL
       USE SKEW_MOD
@@ -1035,7 +1011,6 @@ C-----------------------------------------------
      .        A(3,*) ,AR(3,*),FSKY(*),
      .        VEL(LFXVELR,*), D(3,*), DR(3,*),XFRAME(NXFRAME,*),
      .        FTHREAC(6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
       TYPE(SKEW_),INTENT(INOUT) :: SKEWS
@@ -1051,13 +1026,8 @@ C--------------------------------
 C--------------------------------
 !      IF (IMON>0 .AND. ITASK ==0) CALL STARTIME(TIMERS,4)
         IF(NCONLD/=0) THEN
-          CALL FORCE_IMP( IBCL    ,FORC    ,SNPC       ,NPC        ,TF         ,
-     2                    A       ,V       ,X          ,SKEWS      ,
-     3                    AR      ,VR      ,NSENSOR    ,SENSOR_TAB ,WFEXC      ,
-     4                    IADS_F  ,FSKY    ,DUMMY_FEXT ,H3D_DATA   ,CPTREAC    ,
-     5                    FTHREAC ,NODREAC ,TH_SURF    ,
-     6                    DPL0CLD ,VEL0CLD ,D          ,DR         ,NCONLD     ,
-     7                    NUMNOD  ,NFUNCT  ,STF        ,WFEXT)
+      CALL FORCE_IMP(IBCL, FORC, SNPC, NPC, TF, A, V, X, SKEWS, AR, VR, NSENSOR, SENSOR_TAB, WFEXC, IADS_F, FSKY,
+     . DUMMY_FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT, STF, WFEXT)
 
           WFEXT = WFEXT + WFEXC*DT2
         ENDIF

@@ -73,15 +73,14 @@ def probe(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', required=True, type=lambda p: Path(p).resolve())
-    parser.add_argument('--reference', type=lambda p: Path(p).resolve())
     parser.add_argument('--starter', type=lambda p: Path(p).resolve())
     parser.add_argument('--worker', choices=['contact', 'native', 'reload'], help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.worker:
         probe(args)
         return
-    for library in [args.reader] + ([args.reference] if args.reference else []):
-        cases = ['contact', 'native', 'reload'] if library == args.reader else ['contact', 'native']
+    for library in [args.reader]:
+        cases = ['contact', 'native', 'reload']
         for case in cases:
             with tempfile.TemporaryDirectory(prefix='opencourant-contact-groups-') as temporary:
                 work = Path(temporary)
@@ -98,8 +97,7 @@ def main():
             for path in (HERE / 'contact_groups').iterdir():
                 shutil.copy2(path, work / path.name)
             env = os.environ.copy()
-            env.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m',
-                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
+            env.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m')
             env['PATH'] = str(args.reader.parent) + os.pathsep + env['PATH']
             result = subprocess.run([str(args.starter), '-i', 'case_0000.rad', '-np', '1'],
                                     cwd=work, env=env, capture_output=True, text=True, timeout=60)

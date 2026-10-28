@@ -24,8 +24,6 @@ endif()
 
 
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${open_reader_root_dir}/${build_dir}/libopen_reader/${arch}" )
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${open_reader_root_dir}/${build_dir}/libopen_reader/${arch}" )
 
 # Add includes for project
 include ( ${open_reader_root_dir}/CMake_arch/CMake_includes.cmake )

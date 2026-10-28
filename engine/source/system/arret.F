@@ -43,30 +43,6 @@ Copyright>        copyright and attribution statement.
 !||    c_freemem                        ../engine/stub/superlu_stub.F
 !||    c_tricall                        ../engine/stub/fvmbags_stub.F
 !||    cp_ifront                        ../engine/source/implicit/produt_v.F
-!||    create_h3d_1d_scalar             ../engine/source/output/h3d/h3d_build_fortran/create_h3d_1d_scalar.F
-!||    create_h3d_1d_tensor             ../engine/source/output/h3d/h3d_build_fortran/create_h3d_1d_tensor.F
-!||    create_h3d_1d_torsor             ../engine/source/output/h3d/h3d_build_fortran/create_h3d_1d_torsor.F
-!||    create_h3d_1d_vector             ../engine/source/output/h3d/h3d_build_fortran/create_h3d_1d_vector.F
-!||    create_h3d_input                 ../engine/source/output/h3d/h3d_build_fortran/create_h3d_input.F
-!||    create_h3d_nodal_scalar          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_nodal_scalar.F
-!||    create_h3d_nodal_tensor          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_nodal_tensor.F
-!||    create_h3d_nodal_vector          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_nodal_vector.F
-!||    create_h3d_parts                 ../engine/source/output/h3d/h3d_build_fortran/create_h3d_parts.F
-!||    create_h3d_parts_all             ../engine/source/output/h3d/h3d_build_fortran/create_h3d_parts_all.F
-!||    create_h3d_quad_scalar           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_quad_scalar.F
-!||    create_h3d_quad_tensor           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_quad_tensor.F
-!||    create_h3d_quad_vector           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_quad_vector.F
-!||    create_h3d_shell_scalar          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_shell_scalar.F
-!||    create_h3d_shell_tensor          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_shell_tensor.F
-!||    create_h3d_shell_vector          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_shell_vector.F
-!||    create_h3d_skin_scalar           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_skin_scalar.F
-!||    create_h3d_skin_tensor           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_skin_tensor.F
-!||    create_h3d_skin_vector           ../engine/source/output/h3d/h3d_build_fortran/create_h3d_skin_vector.F
-!||    create_h3d_solid_scalar          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_solid_scalar.F
-!||    create_h3d_solid_tensor          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_solid_tensor.F
-!||    create_h3d_solid_vector          ../engine/source/output/h3d/h3d_build_fortran/create_h3d_solid_vector.F
-!||    create_h3d_sph_scalar            ../engine/source/output/h3d/h3d_build_fortran/create_h3d_sph_scalar.F
-!||    create_h3d_sph_tensor            ../engine/source/output/h3d/h3d_build_fortran/create_h3d_sph_tensor.F
 !||    crklayer3n_adv                   ../engine/source/elements/xfem/crklayer3n_adv.F
 !||    crklayer3n_ini                   ../engine/source/elements/xfem/crklayer3n_ini.F
 !||    crklayer4n_adv                   ../engine/source/elements/xfem/crklayer4n_adv.F
@@ -132,12 +108,10 @@ Copyright>        copyright and attribution statement.
 !||    fxbsys                           ../engine/source/constraints/fxbody/fxbsys.F
 !||    genani                           ../engine/source/output/anim/generate/genani.F
 !||    gendynain                        ../engine/source/output/dynain/gendynain.F
-!||    genh3d                           ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genstat                          ../engine/source/output/sta/genstat.F
 !||    get_file_name_info               ../engine/source/system/get_file_name_info.F
 !||    get_u_func_x                     ../engine/source/user_interface/ufunc.F
 !||    get_u_func_y                     ../engine/source/user_interface/ufunc.F
-!||    h3d_read                         ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
 !||    i10buce                          ../engine/source/interfaces/intsort/i10buce.F
 !||    i10lll                           ../engine/source/interfaces/int16/i10lagm.F
 !||    i10main_tri                      ../engine/source/interfaces/intsort/i10main_tri.F
@@ -231,7 +205,6 @@ Copyright>        copyright and attribution statement.
 !||    ini_k0h                          ../engine/source/implicit/imp_solv.F
 !||    ini_kisc                         ../engine/source/implicit/lin_solv.F
 !||    inipar                           ../engine/source/mpi/init/inipar.F
-!||    init_h3d_engine                  ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    intbuf_ini                       ../common_source/interf/intbuf_ini.F
 !||    inter7_collision_detection       ../engine/source/interfaces/intsort/inter7_collision_detection.F90
 !||    inter_count_node_curv            ../engine/source/interfaces/generic/inter_count_node_curv.F
@@ -251,7 +224,6 @@ Copyright>        copyright and attribution statement.
 !||    lecfun                           ../engine/source/tools/curve/lecfun.F
 !||    lecfvbag                         ../engine/source/input/lecfvbag.F
 !||    lecfxinp                         ../engine/source/input/lecfxinp.F
-!||    lech3d                           ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    lecimpl                          ../engine/source/input/lectur.F
 !||    lecinv                           ../engine/source/input/lecinv.F
 !||    lecnoise                         ../engine/source/general_controls/computation/lecnoise.F
@@ -418,7 +390,6 @@ Copyright>        copyright and attribution statement.
 !||    wriusc2                          ../engine/source/input/wriusc2.F
 !||    xforc28                          ../engine/source/elements/xelem/xforc28.F
 !||--- calls      -----------------------------------------------------
-!||    c_h3d_close_file                 ../engine/source/output/h3d/h3d_build_cpp/c_h3d_close_file.cpp
 !||    checksum_option_checksum_file    ../common_source/modules/output/checksum_mod.F90
 !||    checksum_option_out_file         ../common_source/modules/output/checksum_mod.F90
 !||    close_c                          ../common_source/tools/input_output/write_routines.c
@@ -435,7 +406,6 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    dynlib_mod                       ../engine/share/modules/dynlib_mod.F
 !||    file_descriptor_mod              ../engine/source/modules/file_descriptor_mod.F90
-!||    h3d_mod                          ../engine/share/modules/h3d_mod.F
 !||    inoutfile_mod                    ../common_source/modules/inoutfile_mod.F
 !||    mds_restart_mod                  ../common_source/modules/mds_rest.mod.F
 !||    output_mod                       ../common_source/modules/output/output_mod.F90
@@ -443,7 +413,6 @@ Copyright>        copyright and attribution statement.
 !||    scratchfile_mod                  ../engine/share/modules/scratchfiles_mod.F
 !||====================================================================
       SUBROUTINE ARRET (N)  
-      USE H3D_MOD
       USE INOUTFILE_MOD
       USE QA_OUT_MOD
       USE DYNLIB_MOD
@@ -479,8 +448,6 @@ C-----------------------------------------------
       INTEGER I
       INTEGER :: LEN_TMP_NAME
       CHARACTER(len=2148) :: TMP_NAME
-      INTEGER :: LEN_TMP_NAME_H3D
-      CHARACTER(len=2148), TARGET :: TMP_NAME_H3D
       INTEGER :: IZIP
 C-----------------------------------------------
 C Different End Values
@@ -504,22 +471,6 @@ C N==7 exits before initialization: no outputs exist to clean up
 C ----------------------------------------------
 C TEMPO FILES Clean
 C-----------------------------------------------
-       IF(ISPMD == 0 )THEN
-         IF(IS_H3D_USED) THEN
-           CALL C_H3D_CLOSE_FILE()
-           IF (OUTPUT_PTR%CHECKSUM%CHECKSUM_COUNT > 0) THEN
-             TMP_NAME_H3D=ROOTNAM(1:ROOTLEN)//'.h3d'
-             LEN_TMP_NAME_H3D=ROOTLEN+4
-             IZIP=0
-             CALL COMPUTE_BINARY_CHECKSUM(
-     .            OUTPUT_PTR%CHECKSUM%FILES_CHECKSUM,
-     .            C_LOC(TMP_NAME_H3D),LEN_TMP_NAME_H3D,IZIP)
-           ENDIF
-         ENDIF
-       ENDIF
-C -----------------------------------------------
-C TH FILES
-C -----------------------------------------------
        IF (ASSOCIATED(OUTPUT_PTR) .AND. ISPMD == 0) THEN
 
             ! Close the TH file
@@ -689,7 +640,7 @@ C
                 CALL PRINT_RUNTIME( )
 
 
-                IF (IHTML == 1) CALL REPORT(IH3DREADER,N,IMVW,OUTPUT_PTR%TH%WFEXT,OUTPUT_PTR%TH%WFEXT_MD, OUTPUT_PTR)                ! Htlm report
+      IF (IHTML==1) CALL REPORT(N, IMVW, OUTPUT_PTR%TH%WFEXT, OUTPUT_PTR%TH%WFEXT_MD, OUTPUT_PTR)
                 IF (IMVW /= 0) CALL SORTIE_MVW(IMVW,IMVW_REF)               ! MVW output
                 IF ((IRAD2R==1).AND.(ISPMD==0)) CALL SEND_IBUF_C(1,1)      ! Rad2rad termination
 
@@ -750,7 +701,7 @@ C
                 WRITE(ISTDO,1250) NCYCLE
                 CALL PRINT_RUNTIME( )
 
-                IF (IHTML == 1) CALL REPORT(IH3DREADER,N,IMVW,OUTPUT_PTR%TH%WFEXT,OUTPUT_PTR%TH%WFEXT_MD, OUTPUT_PTR) ! Htlm report
+      IF (IHTML==1) CALL REPORT(N, IMVW, OUTPUT_PTR%TH%WFEXT, OUTPUT_PTR%TH%WFEXT_MD, OUTPUT_PTR)
                 IF (IMVW /= 0) CALL SORTIE_MVW(IMVW,IMVW_REF)
               ENDIF
 
@@ -765,8 +716,6 @@ C
 
         CASE(4)
               WRITE(ISTDO,1400)
-              IF (ISPMD==0) THEN     
-              ENDIF
               CALL SPMD_KILL(2)
               CALL MY_EXIT(2)
         CASE(5)                                  ! restart file not found
@@ -777,8 +726,6 @@ C
               WRITE(IOUT,1100)
               WRITE(ISTDO,1150)
 
-              IF (ISPMD==0)THEN
-              ENDIF
               CALL SPMD_KILL(3)
         CASE (7)                                     ! Exiting only - errors before MPP_INIT
              CALL MY_EXIT(2)

@@ -308,7 +308,7 @@ C
 !||    lectranssub                   ../starter/source/model/submodel/lectranssub.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                        ../starter/source/output/message/message.F
-!||    hm_get_current_option         ../starter/source/devtools/hm_reader/hm_get_current_option.F
+!||    hm_get_current_option         ../starter/source/devtools/reader/hm_get_current_option.F
 !||--- uses       -----------------------------------------------------
 !||    hm_current_option_mod         ../starter/share/modules1/hm_current_option_mod.F
 !||    message_mod                   ../starter/share/message_module/message_mod.F

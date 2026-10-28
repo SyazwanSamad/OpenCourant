@@ -24,9 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_properties       ../starter/source/properties/hm_read_properties.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    hm_read_ale_close        ../starter/source/ale/hm_read_ale_close.F
 !||    usr2sys                  ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

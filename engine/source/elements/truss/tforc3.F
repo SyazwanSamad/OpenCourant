@@ -37,29 +37,17 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    dt_mod              ../engine/source/modules/dt_mod.F
 !||    elbufdef_mod        ../common_source/modules/mat_elem/elbufdef_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    matparam_def_mod    ../common_source/modules/mat_elem/matparam_def_mod.F90
 !||    preload_axial_mod   ../engine/source/elements/spring/preload_axial.F90
 !||    sensor_mod          ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE TFORC3(mat_param ,NUMMAT,
-     1   ELBUF_STR,JFT,      JLT,      PM,
-     2   GEO,      NCT,      X,        F,
-     3   V,        PARTSAV,  BUFMAT,   DT2T,
-     4   NELTST,   ITYPTST,  STIFN,    FSKY,
-     5   IADT,     OFFSET,   IPARTT,   TANI,
-     6   FX1,      FX2,      FY1,      FY2,
-     7   FZ1,      FZ2,      NEL,      GRESAV,
-     8   GRTH,     IGRTH,    MSTR,     DMELTR,
-     9   IOUTPRT,  IPM,      NPF,      TF,
-     A   ITASK,    H3D_DATA, NFT,      MTN,
-     B   JSMS,     IGRE,     PRELD1,   STF_F,
-     C   DT , SENSORS)
+      SUBROUTINE TFORC3(mat_param, NUMMAT, ELBUF_STR, JFT, JLT, PM, GEO, NCT, X, F, V, PARTSAV, BUFMAT, DT2T, NELTST,
+     . ITYPTST, STIFN, FSKY, IADT, OFFSET, IPARTT, TANI, FX1, FX2, FY1, FY2, FZ1, FZ2, NEL, GRESAV, GRTH, IGRTH, MSTR,
+     . DMELTR, IOUTPRT, IPM, NPF, TF, ITASK, NFT, MTN, JSMS, IGRE, PRELD1, STF_F, DT, SENSORS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE ELBUFDEF_MOD
-      USE H3D_MOD
       USE PRELOAD_AXIAL_MOD
       USE DT_MOD
       USE SENSOR_MOD
@@ -96,7 +84,6 @@ C-----------------------------------------------
       my_real, INTENT(IN)          :: PRELD1,STF_F
 C
       TYPE (ELBUF_STRUCT_), TARGET :: ELBUF_STR
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (DT_), INTENT(IN) :: DT
       type (sensors_),INTENT(INOUT) :: SENSORS
       TYPE (MATPARAM_STRUCT_) ,DIMENSION(NUMMAT) ,INTENT(IN) :: MAT_PARAM
@@ -192,15 +179,8 @@ C--------------------------
 C     BALANCES BY MATERIAL
 C--------------------------
       IF (IOUTPRT>0) THEN
-      CALL TBILAN(
-     1   PM,       V,        GBUF%EINT,GBUF%AREA,
-     2   PARTSAV,  IPARTT,   TANI,     GBUF%FOR,
-     3   GRESAV,   GRTH,     IGRTH,    MAT,
-     4   AL,       VX1,      VX2,      VY1,
-     5   VY2,      VZ1,      VZ2,      X1,
-     6   X2,       Y1,       Y2,       Z1,
-     7   Z2,       ITASK,    H3D_DATA, NEL,
-     8   IGRE,     SENSORS)
+      CALL TBILAN(PM, V, GBUF%EINT, GBUF%AREA, PARTSAV, IPARTT, TANI, GBUF%FOR, GRESAV, GRTH, IGRTH, MAT, AL, VX1, VX2,
+     . VY1, VY2, VZ1, VZ2, X1, X2, Y1, Y2, Z1, Z2, ITASK, NEL, IGRE, SENSORS)
       END IF !(IOUTPRT>0) THEN
 C-------------------------
 C     /PRELOAD/AXIAL

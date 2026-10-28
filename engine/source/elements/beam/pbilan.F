@@ -26,25 +26,14 @@ Copyright>        copyright and attribution statement.
 !||    grelem_sav            ../engine/source/output/th/grelem_sav.F
 !||    sensor_energy_bilan   ../engine/source/tools/sensor/sensor_energy_bilan.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE PBILAN(
-     1   PM,      V,       EINT,    GEO,
-     2   PARTSAV, IPARTP,  TANI,    FOR,
-     3   MOM,     GRESAV,  GRTH,    IGRTH,
-     4   OFF_DUM, NEL,     AL,      NC1,
-     5   NC2,     NC3,     E1X,     E1Y,
-     6   E1Z,     E2X,     E2Y,     E2Z,
-     7   MAT,     PID,     VX1G,    VX2G,
-     8   VY1G,    VY2G,    VZ1G,    VZ2G,
-     9   X1G,     X2G,     Y1G,     Y2G,
-     A   Z1G,     Z2G,     ITASK,   H3D_DATA,
-     B   IGRE,    SENSORS, G_WPLA,  WPLA)
+      SUBROUTINE PBILAN(PM, V, EINT, GEO, PARTSAV, IPARTP, TANI, FOR, MOM, GRESAV, GRTH, IGRTH, OFF_DUM, NEL, AL, NC1,
+     . NC2, NC3, E1X, E1Y, E1Z, E2X, E2Y, E2Z, MAT, PID, VX1G, VX2G, VY1G, VY2G, VZ1G, VZ2G, X1G, X2G, Y1G, Y2G, Z1G,
+     . Z2G, ITASK, IGRE, SENSORS, G_WPLA, WPLA)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE SENSOR_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -74,7 +63,6 @@ C     REAL
      .   VY1G(MVSIZ),VY2G(MVSIZ),VZ1G(MVSIZ),VZ2G(MVSIZ),
      .   X1G(MVSIZ),X2G(MVSIZ),Y1G(MVSIZ),Y2G(MVSIZ),
      .   Z1G(MVSIZ),Z2G(MVSIZ)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       type (sensors_),INTENT(INOUT) :: SENSORS
       INTEGER, INTENT(IN) :: G_WPLA
       my_real,DIMENSION(NEL*G_WPLA), INTENT(IN) :: WPLA
@@ -195,7 +183,7 @@ C
         IF (G_WPLA > 0)  PARTSAV(29,M)=PARTSAV(29,M) + WPLA(I)
       ENDDO
 C
-      IF (ANIM_FT(1) /= 0 .OR. H3D_DATA%UND_FORC /= 0) THEN
+      IF (ANIM_FT(1)/=0) THEN
         DO I=1,NEL
           ! Beam force
           TANI(1,I)= FOR(I,1)

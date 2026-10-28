@@ -449,6 +449,9 @@ CDECL void cpp_find_dyna__mess__ (char *name, int *size, int *id, char *Option, 
 CDECL void cpp_find_dyna_mess (char *name, int *size, int *id, char *Option, int *SOption,int *ID,char * Title, int *STitle)
 {cpp_find_dyna_mess_ (name,size,id, Option, SOption, ID,Title,STitle);}
 
+CDECL void cpp_find_dyna_mess__(char *name, int *size, int *id, char *Option, int *SOption,int *ID,char *Title, int *STitle)
+{cpp_find_dyna_mess_ (name,size,id,Option,SOption,ID,Title,STitle);}
+
 
 
 

@@ -25,7 +25,7 @@ Copyright>        copyright and attribution statement.
 !||    create_node_box             ../starter/source/model/sets/create_node_box.F
 !||    create_rbody_box            ../starter/source/model/sets/create_rbody_box.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F
 !||    message_mod                 ../starter/share/message_module/message_mod.F

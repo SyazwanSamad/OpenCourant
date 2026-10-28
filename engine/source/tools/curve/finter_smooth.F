@@ -32,8 +32,6 @@ Copyright>        copyright and attribution statement.
 !||    gravit                ../engine/source/loads/general/grav/gravit.F
 !||    gravit_fvm_fem        ../engine/source/loads/general/grav/gravit_fvm_fem.F
 !||    gravit_imp            ../engine/source/loads/general/grav/gravit_imp.F
-!||    h3d_pre_skin_scalar   ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_vector       ../engine/source/output/h3d/h3d_results/h3d_skin_vector.F
 !||    incpflow              ../engine/source/fluid/incpflow.F
 !||    lag_fxv               ../engine/source/tools/lagmul/lag_fxv.F
 !||    lag_fxvp              ../engine/source/tools/lagmul/lag_fxv.F

@@ -37,28 +37,19 @@ Copyright>        copyright and attribution statement.
 !||    spmd_exch_a_int2h_ams   ../engine/source/mpi/forces/spmd_exch_a_int2h_ams.F
 !||--- uses       -----------------------------------------------------
 !||    glob_therm_mod          ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                 ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod           ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    my_alloc_mod            ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod          ../common_source/tools/memory/my_dealloc.F90
 !||    nodal_arrays_mod        ../common_source/modules/nodal_arrays.F90
 !||====================================================================
-      SUBROUTINE INTTI1(NODES,
-     1   IPARI    ,X        ,V        ,A       ,
-     2   VR       ,AR       ,WA       ,MS      ,IN       ,WEIGHT  ,
-     3   STIFN    ,STIFR    ,KHIE     ,ITAB    ,FR_I2M   ,IAD_I2M ,
-     4   ADDCNI2  ,PROCNI2  ,IADI2    ,I2MSCH  ,DMAST    ,ADM     ,
-     5   SKEW     ,I2SIZE   ,FR_NBCCI2,ADI     ,IGEO     ,BUFGEO  ,
-     6   FSAV     ,NPF      ,TF       ,FNCONT  ,IAD_ELEM ,FR_ELEM ,
-     7   NODNX_SMS,DMINT2   ,PDAMA2   ,NB_FRI2M,FR_LOCI2M,
-     8   DT2T     ,NELTST   ,ITYPTST  ,INTBUF_TAB,TEMP   ,MCP     ,
-     9   FTHE     ,CONDN    ,GLOB_THERM,
-     A   H3D_DATA ,T2FAC_SMS,FNCONTP  ,FTCONTP)
+      SUBROUTINE INTTI1(NODES, IPARI, X, V, A, VR, AR, WA, MS, IN, WEIGHT, STIFN, STIFR, KHIE, ITAB, FR_I2M, IAD_I2M,
+     . ADDCNI2, PROCNI2, IADI2, I2MSCH, DMAST, ADM, SKEW, I2SIZE, FR_NBCCI2, ADI, IGEO, BUFGEO, FSAV, NPF, TF, FNCONT,
+     . IAD_ELEM, FR_ELEM, NODNX_SMS, DMINT2, PDAMA2, NB_FRI2M, FR_LOCI2M, DT2T, NELTST, ITYPTST, INTBUF_TAB, TEMP, MCP,
+     . FTHE, CONDN, GLOB_THERM, T2FAC_SMS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       use glob_therm_mod
       USE MY_ALLOC_MOD
       USE NODAL_ARRAYS_MOD, ONLY : nodal_arrays_
@@ -98,7 +89,6 @@ C     REAL
      .   FNCONTP(3,*),FTCONTP(3,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
       type (glob_therm_) ,intent(inout)   :: glob_therm
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -167,12 +157,8 @@ C      rupture flag calculation for interface type 2 user
          IF (NTY == 2 .AND. ILEV >= 10 .AND. ILEV < 23) THEN             
            JI  =IPARI(1,N)                                 
            JB  =IPARI(2,N)    
-           CALL INT2RUPT(                              
-     .          IPARI(1,N),MS        ,IN         ,
-     .          X         ,V        ,A        ,STIFN     ,IGEO       ,
-     .          WEIGHT    ,FSAV(1,N),ILEV     ,NPF       ,TF         ,
-     .          ITAB      ,FNCONT   ,PDAMA2   ,INTBUF_TAB(N),H3D_DATA,
-     .          FNCONTP   ,FTCONTP )         
+      CALL INT2RUPT(IPARI(1,N), MS, IN, X, V, A, STIFN, IGEO, WEIGHT, FSAV(1,N), ILEV, NPF, TF, ITAB, FNCONT, PDAMA2,
+     . INTBUF_TAB(N), FNCONTP, FTCONTP)
          ENDIF                                           
        ENDDO                                            
 C
@@ -263,16 +249,10 @@ C---
         !       for_array_copy_in and other initialisations represent up to 5% of total CPUTIME
         !       and break the scalability of the code
             IF((NSN>0)) THEN
-            CALL INTTI2F(                                               
-     1       IPARI(1,N),X       ,V        ,A      , 
-     2       VR        ,AR       ,MS       ,IN      ,WEIGHT   ,STIFN  , 
-     3       STIFR     ,FSKYI2   ,IADI2    ,I2MSCH  ,DMAST    ,ADM    , 
-     4       I0        ,NIR      ,I2SIZE   ,ADI     ,IGEO     ,BUFGEO , 
-     5       FSAV(1,N) ,FNCONT   ,NODNX_SMS,DMINT2(KSN)  ,SAV_FOR_PENA,
-     6       MS_PENA   ,DT2T     ,NELTST   ,ITYPTST ,INTBUF_TAB(N),TEMP,
-     7       FTHE      ,FTHESKYI2,CONDN    ,CONDNSKYI2,ITAB,
-     8       SAV_INER_POFF     ,H3D_DATA,T2FAC_SMS,FNCONTP ,
-     A       FTCONTP,GLOB_THERM%IDT_THERM  ,GLOB_THERM%THEACCFACT)
+      CALL INTTI2F(IPARI(1,N), X, V, A, VR, AR, MS, IN, WEIGHT, STIFN, STIFR, FSKYI2, IADI2, I2MSCH, DMAST, ADM, I0,
+     . NIR, I2SIZE, ADI, IGEO, BUFGEO, FSAV(1,N), FNCONT, NODNX_SMS, DMINT2(KSN), SAV_FOR_PENA, MS_PENA, DT2T, NELTST,
+     . ITYPTST, INTBUF_TAB(N), TEMP, FTHE, FTHESKYI2, CONDN, CONDNSKYI2, ITAB, SAV_INER_POFF, T2FAC_SMS, FNCONTP,
+     . FTCONTP, GLOB_THERM%IDT_THERM, GLOB_THERM%THEACCFACT)
             ELSE
         !       WARNING : if NSN==0 and ILEV==2 or 4, ones needs to save the mass 
                 ILEV = IPARI(20,N)
@@ -317,32 +297,20 @@ C spmd version with more than one proc: sum a and ar on main nodes
           IF(NHIN2 == 0) THEN
             LCOMI2M = IAD_I2M(NSPMD+1)
             IF(IDTMINS/=0)THEN
-              CALL SPMD_EXCH_A_INT2_AMS(
-     .            A    ,AR   ,MS      ,IN     ,STIFN,
-     .            STIFR,FR_I2M,IAD_I2M,LCOMI2M,I2SIZETH,
-     .            NB_FRI2M,FR_LOCI2M,INTTH2,FTHE,CONDN,
-     .            FNCONT,FNCONTP,FTCONTP,H3D_DATA,GLOB_THERM%IDT_THERM)
+      CALL SPMD_EXCH_A_INT2_AMS(A, AR, MS, IN, STIFN, STIFR, FR_I2M, IAD_I2M, LCOMI2M, I2SIZETH, NB_FRI2M, FR_LOCI2M,
+     . INTTH2, FTHE, CONDN, FNCONT, FNCONTP, FTCONTP, GLOB_THERM%IDT_THERM)
             ELSE
-              CALL SPMD_EXCH_A_INT2(
-     .            A    ,AR   ,MS      ,IN     ,STIFN,
-     .            STIFR,FR_I2M,IAD_I2M,LCOMI2M,I2SIZETH,
-     .            INTTH2,FTHE ,CONDN  ,FNCONT ,FNCONTP ,
-     .            FTCONTP,H3D_DATA ,GLOB_THERM%IDT_THERM)
+      CALL SPMD_EXCH_A_INT2(A, AR, MS, IN, STIFN, STIFR, FR_I2M, IAD_I2M, LCOMI2M, I2SIZETH, INTTH2, FTHE, CONDN,
+     . FNCONT, FNCONTP, FTCONTP, GLOB_THERM%IDT_THERM)
              ENDIF
           ELSE
             LCOMI2M = IAD_I2M(NSPMD+1)
             IF(IDTMINS/=0)THEN
-              CALL SPMD_EXCH_A_INT2H_AMS(
-     .         A    ,AR   ,MS      ,IN     ,STIFN,
-     .         STIFR,FR_I2M,IAD_I2M,LCOMI2M,I2SIZETH,
-     .         NB_FRI2M,FR_LOCI2M,TAGNOD,INTTH2,FTHE,
-     .         CONDN,FNCONT,FNCONTP,FTCONTP,H3D_DATA ,GLOB_THERM%IDT_THERM)
+      CALL SPMD_EXCH_A_INT2H_AMS(A, AR, MS, IN, STIFN, STIFR, FR_I2M, IAD_I2M, LCOMI2M, I2SIZETH, NB_FRI2M, FR_LOCI2M,
+     . TAGNOD, INTTH2, FTHE, CONDN, FNCONT, FNCONTP, FTCONTP, GLOB_THERM%IDT_THERM)
             ELSE
-              CALL SPMD_EXCH_A_INT2H(
-     .         A    ,AR   ,MS      ,IN     ,STIFN,
-     .         STIFR,FR_I2M,IAD_I2M,LCOMI2M,I2SIZETH,
-     .         TAGNOD,INTTH2,FTHE  ,CONDN  ,FNCONT  ,
-     .         FNCONTP,FTCONTP,H3D_DATA ,GLOB_THERM%IDT_THERM)
+      CALL SPMD_EXCH_A_INT2H(A, AR, MS, IN, STIFN, STIFR, FR_I2M, IAD_I2M, LCOMI2M, I2SIZETH, TAGNOD, INTTH2, FTHE,
+     . CONDN, FNCONT, FNCONTP, FTCONTP, GLOB_THERM%IDT_THERM)
             ENDIF
           END IF
         ELSEIF (IPARIT > 0) THEN
@@ -351,11 +319,8 @@ C         version spmd p/on
             LENS = FR_NBCCI2(1,NSPMD+1)
             LENR = FR_NBCCI2(2,NSPMD+1)
             LCOMI2M = IAD_I2M(NSPMD+1)
-            CALL SPMD_EXCH_A_INT2_PON(
-     1         FR_I2M  ,IAD_I2M,ADDCNI2,PROCNI2,FR_NBCCI2,
-     2         I2SIZETH,LENR   ,LENS   ,FSKYI2 ,INTTH2   ,
-     3         FTHESKYI2,CONDNSKYI2 ,I2SIZE,LCOMI2M,FNCONT,
-     4         FNCONTP,FTCONTP,H3D_DATA ,GLOB_THERM%IDT_THERM)
+      CALL SPMD_EXCH_A_INT2_PON(FR_I2M, IAD_I2M, ADDCNI2, PROCNI2, FR_NBCCI2, I2SIZETH, LENR, LENS, FSKYI2, INTTH2,
+     . FTHESKYI2, CONDNSKYI2, I2SIZE, LCOMI2M, FNCONT, FNCONTP, FTCONTP, GLOB_THERM%IDT_THERM)
           END IF
 C
 C Routine assemblage parith/ON

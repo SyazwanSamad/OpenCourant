@@ -21,7 +21,6 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    wriusc2                ../engine/source/input/wriusc2.F
 !||--- called by ------------------------------------------------------
-!||    create_h3d_input       ../engine/source/output/h3d/h3d_build_fortran/create_h3d_input.F
 !||    fraleonoff             ../engine/source/input/fraleonoff.F
 !||    fralnk                 ../engine/source/input/fralnk.F
 !||    fralnk2                ../engine/source/input/fralnk.F
@@ -46,7 +45,6 @@ Copyright>        copyright and attribution statement.
 !||    frethermal             ../engine/source/constraints/thermic/frethermal.F
 !||    freupwind              ../engine/source/input/freupwind.F
 !||    freupwm                ../engine/source/input/freupwm.F
-!||    h3d_read               ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../engine/source/output/message/message.F
 !||    arret                  ../engine/source/system/arret.F

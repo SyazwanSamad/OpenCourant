@@ -31,20 +31,15 @@ Copyright>        copyright and attribution statement.
 !||    get_u_sens_value      ../engine/source/user_interface/usensor.F
 !||    set_u_sens_value      ../engine/source/user_interface/usensor.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    pinchtype_mod         ../common_source/modules/pinchtype_mod.F
 !||    python_funct_mod      ../common_source/modules/python_mod.F90
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE FORCEPINCH (IB     ,FAC     ,NPC    ,TF      ,A     ,
-     2                  V      ,X       ,SKEW   ,AR      ,VR    ,
-     3                  NSENSOR,SENSOR_TAB ,WEIGHT ,TFEXC   ,IADC  ,
-     4                  FSKY   ,FSKYV   ,FEXT   ,H3D_DATA,
-     5                  APINCH ,VPINCH, PYTHON, WFEXT)
+      SUBROUTINE FORCEPINCH (IB, FAC, NPC, TF, A, V, X, SKEW, AR, VR, NSENSOR, SENSOR_TAB, WEIGHT, TFEXC, IADC, FSKY,
+     . FSKYV, FEXT, APINCH, VPINCH, PYTHON, WFEXT)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
       USE PINCHTYPE_MOD  
       USE SENSOR_MOD
       USE PYTHON_FUNCT_MOD
@@ -82,7 +77,6 @@ C-----------------------------------------------
      .   X(3,*), SKEW(LSKEW,*), TFEXC,
      .   FSKY(8,LSKY), FSKYV(LSKY,8),FEXT(3,*),
      .   APINCH(3,*),VPINCH(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
       TYPE(PYTHON_) :: PYTHON
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
@@ -106,8 +100,7 @@ C=======================================================================
       WFEXTT = ZERO
       N_OLD  = 0
       X_OLD  = ZERO
-      IANIM  = ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .         ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT
+      IANIM  =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 C
        DO 10 NL=NCONLD-NPLOADPINCH+1,NCONLD
        N1      = IB(1,NL)

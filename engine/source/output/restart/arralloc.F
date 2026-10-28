@@ -48,7 +48,6 @@ Copyright>        copyright and attribution statement.
 !||    element_mod             ../common_source/modules/elements/element_mod.F90
 !||    fxb_mod                 ../engine/share/modules/fxb_mod.F
 !||    glob_therm_mod          ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                 ../engine/share/modules/h3d_mod.F
 !||    interfaces_mod          ../common_source/modules/interfaces/interfaces_mod.F90
 !||    intstamp_glob_mod       ../engine/share/modules/intstamp_glob_mod.F
 !||    message_mod             ../engine/share/message_module/message_mod.F
@@ -70,8 +69,8 @@ Copyright>        copyright and attribution statement.
 !||    stack_mod               ../engine/share/modules/stack_mod.F
 !||    trimat_mod              ../engine/share/modules/trimat.F
 !||====================================================================
-      SUBROUTINE RESTALLOC(OUTPUT,ELEMENT, NODES,MULTI_FVM,H3D_DATA,PINCH_DATA,ALE_CONNECTIVITY,SEGVAR,INTERFACES,SKEWS,
-     .                     GLOB_THERM,RBE3,RWALL,SFEM)
+      SUBROUTINE RESTALLOC(OUTPUT, ELEMENT, NODES, MULTI_FVM, PINCH_DATA, ALE_CONNECTIVITY, SEGVAR, INTERFACES, SKEWS,
+     . GLOB_THERM, RBE3, RWALL, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -87,7 +86,6 @@ C-----------------------------------------------
       USE ECND_MOD
       USE MULTI_FVM_MOD
       USE ALEANIM_MOD
-      USE H3D_MOD                    
       USE PINCHTYPE_MOD 
       USE DRAPE_MOD
       USE FXB_MOD
@@ -146,7 +144,6 @@ C-----------------------------------------------
       TYPE(connectivity_) :: ELEMENT
       TYPE(NODAL_ARRAYS_) :: NODES
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(PINCH) :: PINCH_DATA
       TYPE(t_ale_connectivity), INTENT(INOUT) :: ALE_CONNECTIVITY
       TYPE(t_SEGVAR) :: SEGVAR
@@ -1745,7 +1742,7 @@ C        ALLOCATE(IN0(SIN),STAT=IERR)
          ENDIF
 C--------------------------------------------
 C
-         IF(NINTSTAMP/=0.AND.ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(NINTSTAMP/=0.AND.ANIM_V(4)+OUTP_V(4)>0)THEN
            ALLOCATE(FCONTG(3,NUMNODG),STAT=IERR)
            IF (IERR/=0) GOTO 1000
            FCONTG=ZERO
@@ -1754,7 +1751,7 @@ C
          END IF
 C
          SFCONT_MAX = 0
-         IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX >0.OR.IFCONTMAX > 0)THEN
+      IF(ANIM_V(26)>0)THEN
            IF(NSPMD > 1 .AND. NINTSTAMP/=0) THEN
               IF(ISPMD == 0) THEN
                  ALLOCATE(FCONT_MAX(3*NUMNODG),STAT=IERR)
@@ -1775,7 +1772,7 @@ C
          END IF
 
 C 
-         IF(NINTSTAMP/=0.AND.ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0)THEN
+      IF(NINTSTAMP/=0.AND.ANIM_V(12)+OUTP_V(12)>0)THEN
            ALLOCATE(FNCONTG(3,NUMNODG),FTCONTG(3,NUMNODG),STAT=IERR)
            IF (IERR/=0) GOTO 1000
            FNCONTG=ZERO
@@ -1785,84 +1782,6 @@ C
          END IF
 C
          SPCONT_MAX = 0
-         IF(H3D_DATA%N_VECT_PCONT_MAX >0.OR.IFCONTPMAX > 0)THEN
-           IF(NSPMD > 1 .AND. NINTSTAMP/=0) THEN
-              IF(ISPMD == 0) THEN
-                 ALLOCATE(FTCONT_MAX(3*NUMNODG),FNCONT_MAX(3*NUMNODG),STAT=IERR)
-                 IF (IERR/=0) GOTO 1000
-                 FTCONT_MAX=ZERO
-                 FNCONT_MAX=ZERO
-                 SPCONT_MAX = NUMNODG
-              ELSE
-                 ALLOCATE(FNCONT_MAX(0),FTCONT_MAX(0),STAT=IERR)
-               ENDIF
-            ELSE
-               ALLOCATE(FTCONT_MAX(3*NUMNOD),FNCONT_MAX(3*NUMNOD),STAT=IERR)
-               IF (IERR/=0) GOTO 1000
-               FTCONT_MAX=ZERO
-               FNCONT_MAX=ZERO
-               SPCONT_MAX = NUMNOD
-            ENDIF
-         ELSE
-            ALLOCATE(FNCONT_MAX(0),STAT=IERR)
-            ALLOCATE(FTCONT_MAX(0),STAT=IERR)
-         END IF
-C
-         IF(H3D_DATA%N_VECT_CONT2_MAX >0.OR.IFCONT2MAX > 0)THEN
-            ALLOCATE(FCONT2_MAX(3*NUMNOD),STAT=IERR)
-            IF (IERR/=0) GOTO 1000
-            FCONT2_MAX=ZERO
-         ELSE
-            ALLOCATE(FCONT2_MAX(0),STAT=IERR)
-         END IF
-C
-         IF(H3D_DATA%N_VECT_PCONT2_MAX >0.OR.IFCONTP2MAX > 0)THEN
-            ALLOCATE(FTCONT2_MAX(3*NUMNOD),FNCONT2_MAX(3*NUMNOD),STAT=IERR)
-            ALLOCATE(NPCONT2_MAX(3*NUMNOD),STAT=IERR)
-            IF (IERR/=0) GOTO 1000
-            FNCONT2_MAX=ZERO
-            FTCONT2_MAX=ZERO
-            NPCONT2_MAX=ZERO
-         ELSE
-            ALLOCATE(FNCONT2_MAX(0),STAT=IERR)
-            ALLOCATE(FTCONT2_MAX(0),STAT=IERR)
-            ALLOCATE(NPCONT2_MAX(0),STAT=IERR)
-         END IF
-C
-C
-         IF(H3D_DATA%N_VECT_CONT2_MIN >0.OR.IFCONT2MIN > 0)THEN
-            ALLOCATE(FCONT2_MIN(3*NUMNOD),STAT=IERR)
-            IF (IERR/=0) GOTO 1000
-            FCONT2_MIN=ZERO
-         ELSE
-            ALLOCATE(FCONT2_MIN(0),STAT=IERR)
-         END IF
-C
-         IF(H3D_DATA%N_VECT_PCONT2_MIN >0.OR.IFCONTP2MIN > 0)THEN
-            ALLOCATE(FTCONT2_MIN(3*NUMNOD),FNCONT2_MIN(3*NUMNOD),STAT=IERR)
-            ALLOCATE(NPCONT2_MIN(3*NUMNOD),STAT=IERR)
-            IF (IERR/=0) GOTO 1000
-            FNCONT2_MIN=ZERO
-            FTCONT2_MIN=ZERO
-            NPCONT2_MIN=ZERO
-         ELSE
-            ALLOCATE(FNCONT2_MIN(0),STAT=IERR)
-            ALLOCATE(FTCONT2_MIN(0),STAT=IERR)
-            ALLOCATE(NPCONT2_MIN(0),STAT=IERR)
-         END IF
-C
-         IF(H3D_DATA%N_VECT_CONT2M > 0)THEN
-            ALLOCATE(MCONT2(3,NUMNOD),STAT=IERR)
-            IF (IERR/=0) GOTO 1000
-            MCONT2=ZERO
-            MCONT2=ZERO
-         ELSE
-            ALLOCATE(MCONT2(3,0),STAT=IERR)
-            ALLOCATE(MCONT2(3,0),STAT=IERR)
-         END IF
-C        
-C----Frictional energy output  when it is coming from restart
-C
          IF(OUTPUT%DATA%S_EFRICINT > 0)THEN
            IF(OUTPUT%DATA%NINEFRIC > 0) THEN 
             ALLOCATE(OUTPUT%DATA%EFRIC(OUTPUT%DATA%NINEFRIC,NUMNOD))
@@ -1888,8 +1807,7 @@ C            ALLOCATE(EFRICG(0))
 C            ALLOCATE(EFRICG_STAMP(0))
          ENDIF
 C
-         IF(NINTSTAMP/=0.AND.(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.OR.
-     .          ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0))THEN
+      IF(NINTSTAMP/=0.AND.(ANIM_V(12)+OUTP_V(12)>0.OR.ANIM_V(4)+OUTP_V(4)>0))THEN
            ALLOCATE(INDEXCONT(NUMNODG),TAGCONT(NUMNODG),STAT=IERR)
            IF (IERR/=0) GOTO 1000
            INDEXCONT=0
@@ -1898,18 +1816,6 @@ C
            ALLOCATE(INDEXCONT(0),TAGCONT(0),STAT=IERR)
          ENDIF
 c
-         IF(NINTSKIDOLD >0)THEN
-           IF(NINTSTAMP/=0) THEN
-              ALLOCATE(PSKIDS(NINTSKIDOLD,NUMNODG),STAT=IERR)
-              IF (IERR/=0) GOTO 1000
-           ELSE
-              ALLOCATE(PSKIDS(NINTSKIDOLD,NUMNOD),STAT=IERR)
-              IF (IERR/=0) GOTO 1000
-           ENDIF
-         END IF
-
-         ! Stamping
-         ! INTSTAMP structures allocation
          IF(NINTSTAMP/=0)THEN
             ALLOCATE(INTSTAMP(NINTSTAMP),STAT=IERR)
             IF (IERR/=0)THEN
@@ -2170,7 +2076,7 @@ C
 
         
         IF (MULTI_FVM%IS_USED) THEN
-           CALL MULTI_ALLOCATE(MULTI_FVM, H3D_DATA)
+      CALL MULTI_ALLOCATE(MULTI_FVM)
            ALLOCATE (ALEFVM_Buffer%VERTEX(4,NUMNOD)      ,STAT=IERR)
            IF (IERR /= 0) GOTO 1000
            ALEFVM_Buffer%VERTEX(:,:) = ZERO
@@ -2461,7 +2367,7 @@ C-----------------------------------------------
 C----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-        INTEGER IWIOUT
+      INTEGER  IWIOUT
 C-----------------------------------------------
 C   
 C    For debug purposes only

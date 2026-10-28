@@ -23,9 +23,9 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    read_detonators        ../starter/source/initial_conditions/detonation/read_detonators.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    ngr2usrn               ../starter/source/system/nintrr.F
 !||--- uses       -----------------------------------------------------
 !||    detonators_mod         ../starter/share/modules1/detonators_mod.F

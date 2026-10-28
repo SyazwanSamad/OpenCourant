@@ -24,8 +24,8 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_sensors      ../starter/source/tools/sensor/hm_read_sensors.F
 !||--- calls      -----------------------------------------------------
 !||    anodset              ../starter/source/output/analyse/analyse_node.c
-!||    hm_get_floatv        ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv          ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv        ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv          ../starter/source/devtools/reader/hm_get_intv.F
 !||    ifrontplus           ../starter/source/spmd/node/frontplus.F
 !||    usr2sys              ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

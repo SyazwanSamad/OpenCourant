@@ -33,9 +33,9 @@
 !||--- called by ------------------------------------------------------
 !||    hm_read_srate_dependency             ../starter/source/materials/mat/mat131/srate_dependency/hm_read_srate_dependency.F90
 !||--- calls      -----------------------------------------------------
-!||    hm_get_float_array_index             ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_floatv_dim                    ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_int_array_index               ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_float_array_index             ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_floatv_dim                    ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_int_array_index               ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod                   ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod                         ../starter/share/modules1/submodel_mod.F

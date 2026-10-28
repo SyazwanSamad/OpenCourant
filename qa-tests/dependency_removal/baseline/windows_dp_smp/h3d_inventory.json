@@ -1,0 +1,1925 @@
+[
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 532,
+    "kind": "text_reference",
+    "text": "          export PATH=../../extlib/hm_reader/win64:../../extlib/h3d/lib/win64:$PATH;",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 597,
+    "kind": "text_reference",
+    "text": "                   todeliver/${MAINDIR}/extlib/h3d/lib/win64 \\",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 603,
+    "kind": "text_reference",
+    "text": "          cp -a extlib/h3d/lib/win64/* todeliver/${MAINDIR}/extlib/h3d/lib/win64/",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 648,
+    "kind": "text_reference",
+    "text": "          set PATH=%OPENCOURANT_PATH%\\extlib\\hm_reader\\win64;%OPENCOURANT_PATH%\\extlib\\h3d\\lib\\win64;%OPENCOURANT_PATH%\\extlib\\intelOneAPI_runtime\\win64;%PATH%",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 922,
+    "kind": "text_reference",
+    "text": "                   todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64 \\",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 927,
+    "kind": "text_reference",
+    "text": "          cp -a extlib/h3d/lib/linuxa64/* todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64/",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 992,
+    "kind": "text_reference",
+    "text": "          export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 1044,
+    "kind": "text_reference",
+    "text": "                   todeliver/${MAINDIR}/extlib/h3d/lib/linux64 \\",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 1053,
+    "kind": "text_reference",
+    "text": "          cp -a extlib/h3d/lib/linux64/* todeliver/${MAINDIR}/extlib/h3d/lib/linux64/",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 1120,
+    "kind": "text_reference",
+    "text": "            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linux64:$OPENCOURANT_PATH/extlib/h3d/lib/linux64:$LD_LIBRARY_PATH'",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 1132,
+    "kind": "text_reference",
+    "text": "            echo 'set PATH=%OPENCOURANT_PATH%\\extlib\\hm_reader\\win64;%OPENCOURANT_PATH%\\extlib\\h3d\\lib\\win64;%OPENCOURANT_PATH%\\extlib\\intelOneAPI_runtime\\win64;%PATH%'",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "line": 1166,
+    "kind": "text_reference",
+    "text": "            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64:$LD_LIBRARY_PATH'",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/prmerge_ci_main.yml",
+    "line": 386,
+    "kind": "text_reference",
+    "text": "          export PATH=../../extlib/hm_reader/win64:../../extlib/h3d/lib/win64:$PATH;",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/windows_ci.yml",
+    "line": 159,
+    "kind": "text_reference",
+    "text": "          export PATH=../../extlib/hm_reader/win64:../../extlib/h3d/lib/win64:$PATH;",
+    "following_lines": []
+  },
+  {
+    "path": ".github/workflows/windows_ci.yml",
+    "line": 194,
+    "kind": "text_reference",
+    "text": "          set PATH=%TEMP%\\mpirt;%CD%\\extlib\\hm_reader\\win64;%CD%\\extlib\\h3d\\lib\\win64;%PATH%",
+    "following_lines": []
+  },
+  {
+    "path": "Apptainer/opencourant_build.def",
+    "line": 86,
+    "kind": "text_reference",
+    "text": "export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/{{ ARCH_DIR }}:$OPENCOURANT_PATH/extlib/h3d/lib/{{ ARCH_DIR }}:/opt/openmpi/lib:$LD_LIBRARY_PATH",
+    "following_lines": []
+  },
+  {
+    "path": "CMakeSettings.json",
+    "line": 6,
+    "kind": "text_reference",
+    "text": "      \"RAD_H3D_PATH\": \"${projectDir}\\\\extlib\\\\h3d\\\\lib\\\\win64\"",
+    "following_lines": []
+  },
+  {
+    "path": "EXTLIB_VERSION.json",
+    "line": 9,
+    "kind": "text_reference",
+    "text": "    \"h3d/includes/h3dpublic_defs.h\",",
+    "following_lines": []
+  },
+  {
+    "path": "EXTLIB_VERSION.json",
+    "line": 10,
+    "kind": "text_reference",
+    "text": "    \"h3d/includes/h3dpublic_export.h\",",
+    "following_lines": []
+  },
+  {
+    "path": "EXTLIB_VERSION.json",
+    "line": 11,
+    "kind": "text_reference",
+    "text": "    \"h3d/includes/h3dpublic_import.h\",",
+    "following_lines": []
+  },
+  {
+    "path": "INSTALL.md",
+    "line": 40,
+    "kind": "text_reference",
+    "text": "        export RAD_H3D_PATH=$OPENCOURANT_PATH/extlib/h3d/lib/linux64",
+    "following_lines": []
+  },
+  {
+    "path": "INSTALL.md",
+    "line": 50,
+    "kind": "text_reference",
+    "text": "        set RAD_H3D_PATH=%OPENCOURANT_PATH%\\extlib\\h3d\\lib\\win64",
+    "following_lines": []
+  },
+  {
+    "path": "INSTALL.md",
+    "line": 81,
+    "kind": "text_reference",
+    "text": "        export PATH=$OPENCOURANT_PATH/extlib/hm_reader/win64:$OPENCOURANT_PATH/extlib/h3d/lib/win64:$PATH",
+    "following_lines": []
+  },
+  {
+    "path": "INSTALL.md",
+    "line": 84,
+    "kind": "text_reference",
+    "text": "        export RAD_H3D_PATH=c:/OpenCourant/extlib/h3d/lib/win64",
+    "following_lines": []
+  },
+  {
+    "path": "INSTALL.md",
+    "line": 88,
+    "kind": "text_reference",
+    "text": "Note that variables `RAD_CFG_PATH` and `RAD_H3D_PATH` start with `c:` unlike the `PATH` that starts with `/cygdrive/c`.",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 32,
+    "kind": "text_reference",
+    "text": "       \u2502\u00a0\u00a0 \u251c\u2500\u2500 h3d",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 35,
+    "kind": "text_reference",
+    "text": "       \u2502\u00a0\u00a0 \u2502\u00a0\u00a0         \u2514\u2500\u2500 libh3dwriter.so",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 55,
+    "kind": "text_reference",
+    "text": "  * h3d: Library to write OpenCourant H3D output format.",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 74,
+    "kind": "text_reference",
+    "text": "      \u2502\u00a0\u00a0 \u251c\u2500\u2500 h3d",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 77,
+    "kind": "text_reference",
+    "text": "      \u2502\u00a0\u00a0 \u2502\u00a0\u00a0         \u2514\u2500\u2500 h3dwriter.dll",
+    "following_lines": []
+  },
+  {
+    "path": "RELEASES.md",
+    "line": 109,
+    "kind": "text_reference",
+    "text": "  * h3d: Library to write OpenCourant H3D output format.",
+    "following_lines": []
+  },
+  {
+    "path": "doc/ENGINE_TIME_LOOP_documentation.md",
+    "line": 210,
+    "kind": "text_reference",
+    "text": "| `/H3D/dt` | H3D result file | `GENH3D` |",
+    "following_lines": []
+  },
+  {
+    "path": "doc/ENGINE_TIME_LOOP_documentation.md",
+    "line": 256,
+    "kind": "text_reference",
+    "text": "  \u2502   \u251c\u2500\u2500 GENH3D                 H3D (if triggered)",
+    "following_lines": []
+  },
+  {
+    "path": "doc/ENGINE_TIME_LOOP_documentation.md",
+    "line": 306,
+    "kind": "text_reference",
+    "text": "| `engine/source/output/sortie_main.F` | Output dispatcher (anim, H3D, TH, dynain) |",
+    "following_lines": []
+  },
+  {
+    "path": "doc/NLOCAL_STR_documentation.md",
+    "line": 398,
+    "kind": "text_reference",
+    "text": "* They are written to animation/H3D/time-history output",
+    "following_lines": []
+  },
+  {
+    "path": "doc/NLOCAL_STR_documentation.md",
+    "line": 399,
+    "kind": "text_reference",
+    "text": "  (`h3d_shell_scalar_1.F`, `h3d_solid_scalar_1.F`, `dfuncc.F`, `dfunc6.F`, `thcoq.F`,",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 63,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 64,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 117,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 120,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 129,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" -O3 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 132,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" -O3  ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 72,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 73,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 204,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 207,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} -std=c++14 ${coupling} ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 219,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" ${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 222,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} ${coupling} ${mpi_flag} -std=c++14  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 237,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP}  ${zlib_inc} ${md5_inc}  ${coupling} \")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 240,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP}  ${zlib_inc} ${md5_inc} ${coupling} ${mpi_flag} -std=c++14\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 253,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 256,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling} -std=c++14 ${coupling} ${mpi_flag} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 64,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 65,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 168,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS   \"${optc_flag} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 171,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${optc_flag} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2  -std=c++11 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 38,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 130,
+    "kind": "text_reference",
+    "text": "  set(c_flags       \"${optc_flag_debug} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 131,
+    "kind": "text_reference",
+    "text": "  set(cpp_flags     \"${optc_flag_debug} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2 -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 137,
+    "kind": "text_reference",
+    "text": "  set(c_flags       \"${optc_flag_debug} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 138,
+    "kind": "text_reference",
+    "text": "  set(cpp_flags     \"${optc_flag_debug} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2 -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 144,
+    "kind": "text_reference",
+    "text": "  set(c_flags       \"${optc_flag_debug} -fsanitize=address -DSANITIZE ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 145,
+    "kind": "text_reference",
+    "text": "  set(cpp_flags     \"${optc_flag_debug} -fsanitize=address -DSANITIZE ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2 -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 151,
+    "kind": "text_reference",
+    "text": "  set(c_flags       \"${optc_flag} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 152,
+    "kind": "text_reference",
+    "text": "  set(cpp_flags     \"${optc_flag} ${linalg_cflags} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} -O2 -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 155,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 156,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 248,
+    "kind": "text_reference",
+    "text": "  \"-g -O0 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 252,
+    "kind": "text_reference",
+    "text": "  \"-g -O0 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 258,
+    "kind": "text_reference",
+    "text": "    \"-g -O0 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 269,
+    "kind": "text_reference",
+    "text": "  \"-w -O3 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 273,
+    "kind": "text_reference",
+    "text": "  \"-w -O3 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linux64_nvidia.txt",
+    "line": 279,
+    "kind": "text_reference",
+    "text": "    \"-w -O3 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 60,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 61,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 108,
+    "kind": "text_reference",
+    "text": "set_source_files_properties( ${source_files}    PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${Vect_precise} ${wo_linalg} ${precision_flag} ${Fortran} ${mpi_flag} ${cppmach} ${cpprel} ${h3d_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 111,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files}   PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${wo_linalg} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 114,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${wo_linalg} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc} -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 118,
+    "kind": "text_reference",
+    "text": "set_source_files_properties( ${source_files}    PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${Vect_precise} ${wo_linalg} ${precision_flag} ${Fortran} ${mpi_flag} ${cppmach} ${cpprel} ${h3d_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 121,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files}   PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${wo_linalg} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 124,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-g -O0 ${Vect_opt} ${wo_linalg} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc} -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 129,
+    "kind": "text_reference",
+    "text": "set_source_files_properties( ${source_files}    PROPERTIES COMPILE_FLAGS \"${wo_linalg} ${Vect_opt} ${precision_flag} ${Fortran} ${mpi_flag} ${cppmach} ${cpprel} -O3 ${Vect_precise} ${h3d_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 132,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files}   PROPERTIES COMPILE_FLAGS \"${wo_linalg} ${Vect_opt} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc} -O2\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 135,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${wo_linalg} ${Vect_opt} ${precision_flag} ${mpi_flag} ${cppmach} ${cpprel} ${zlib_inc} ${h3d_inc} ${md5_inc} -O2 -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 149,
+    "kind": "text_reference",
+    "text": "set (F_O0 \" -O0 ${Vect_opt} ${Vect_precise} ${precision_flag} ${Fortran} ${mpi_flag} ${wo_linalg} ${cppmach} ${cpprel} ${h3d_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 150,
+    "kind": "text_reference",
+    "text": "set (F_O1 \" -O1 ${Vect_opt} ${Vect_precise} ${precision_flag} ${Fortran} ${mpi_flag} ${wo_linalg} ${cppmach} ${cpprel} ${h3d_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 151,
+    "kind": "text_reference",
+    "text": "set (F_O2 \" -O2 ${Vect_opt} ${Vect_precise} ${precision_flag} ${Fortran} ${mpi_flag} ${wo_linalg} ${cppmach} ${cpprel} ${h3d_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 152,
+    "kind": "text_reference",
+    "text": "set (F_O2 \" -O3 ${Vect_opt} ${Vect_precise} ${precision_flag} ${Fortran} ${mpi_flag} ${wo_linalg} ${cppmach} ${cpprel} ${h3d_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 72,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 73,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 173,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 176,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 190,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE ${h3d_inc} ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp  ${zlib_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 193,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE} ${h3d_inc} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp  ${zlib_inc} ${md5_inc} -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 208,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 211,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 142,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 143,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 234,
+    "kind": "text_reference",
+    "text": "\t\"-g -O0 -mp -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 238,
+    "kind": "text_reference",
+    "text": "\t\"-g -O0 -mp -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 244,
+    "kind": "text_reference",
+    "text": "\t\t\"-g -O0 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 255,
+    "kind": "text_reference",
+    "text": "\t\"-w -O3 -mp -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 259,
+    "kind": "text_reference",
+    "text": "\t\"-w -O3 -mp -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_linuxa64_nvidia.txt",
+    "line": 265,
+    "kind": "text_reference",
+    "text": "\t\t\"-w -O3 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile -DARCH_CPU=ARM -I${nv_sdk_inc} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 59,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 60,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-DH3D_DEFINE_BOOL -I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 171,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 172,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 176,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /check:bounds /check:uninit\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 177,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11 /check:bounds /check:uninit\" )",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 180,
+    "kind": "text_reference",
+    "text": "  set (fortran_flags \"/nologo /O3 ${opt_flag} ${precision_flag} ${Vect_precise} ${Fortran} ${mpi_flag}  ${h3d_inc} ${mumps_flag} -DMETIS5 ${cppmach} ${cpprel} ${ADF}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 181,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${h3d_inc} ${md5_inc}  -DMETIS5  ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/CMake_Compilers/cmake_win64.txt",
+    "line": 182,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${h3d_inc} ${md5_inc} -DMETIS5 ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}\")",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1102,
+    "kind": "text_reference",
+    "text": " ** ERROR: H3D EXTERNAL LIBRARY NOT FOUND",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1105,
+    "kind": "text_reference",
+    "text": " ** ERROR: NON-EXISTENT /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1142,
+    "kind": "text_reference",
+    "text": "\\n ** ERROR IN /H3D/LSENSOR OPTION",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1260,
+    "kind": "text_reference",
+    "text": "** ERROR IN H3D FILE",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1265,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1280,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1285,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1290,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1295,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1300,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1305,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1323,
+    "kind": "text_reference",
+    "text": " ** WARNING: NON-AVAILABLE PARAMETERS FOR /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1338,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1343,
+    "kind": "text_reference",
+    "text": " ** ERROR IN /H3D OPTION: %s",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1345,
+    "kind": "text_reference",
+    "text": "    SEVERAL /H3D OPTIONS TO OUTPUT MDSVAR FOR %s WITH DIFFERENT SETTING",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1348,
+    "kind": "text_reference",
+    "text": " ** ERROR: INCOMPATIBLE H3D LIBRARY VERSION ",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1353,
+    "kind": "text_reference",
+    "text": "    PLEASE UPDATE THE H3D LIBRARY TO THE REQUIRED VERSION OR HIGHER",
+    "following_lines": []
+  },
+  {
+    "path": "engine/source/output/message/engine_message_description.txt",
+    "line": 1354,
+    "kind": "text_reference",
+    "text": "    (VERSION 0.0 INDICATES THAT THE H3D LIBRARY DOES NOT SUPPORT VERSION CHECKING)",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2020/INTER/inter_type21.cfg",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "    Pskid                                   = VALUE(FLOAT,        \"Maximum contact pressure used for defining a limit tangential force for skid line output (/H3D/NODA/SKID_LINE)\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2021/INTER/inter_type21.cfg",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "    Pskid                                   = VALUE(FLOAT,        \"Maximum contact pressure used for defining a limit tangential force for skid line output (/H3D/NODA/SKID_LINE)\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag1.cfg",
+    "line": 40,
+    "kind": "text_reference",
+    "text": "    IH3D_FLAG                               = VALUE(INT, \"FVMBAG flag for H3D output\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag1.cfg",
+    "line": 976,
+    "kind": "text_reference",
+    "text": "    COMMENT(\"#surf_IDex                         Hconv      IH3D\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag1.cfg",
+    "line": 977,
+    "kind": "text_reference",
+    "text": "    CARD(\"%10d%10s%20lg%10d\", entityiddisplayed, _BLANK_, HEAT_T0, IH3D_FLAG);",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag2.cfg",
+    "line": 34,
+    "kind": "text_reference",
+    "text": "    IH3D_FLAG                               = VALUE(INT, \"FVMBAG flag for H3D output\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag2.cfg",
+    "line": 481,
+    "kind": "text_reference",
+    "text": "    COMMENT(\"#surf_IDex surf_IDin               Hconv      IH3D\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/CONTROLVOL/monvol_fvmbag2.cfg",
+    "line": 482,
+    "kind": "text_reference",
+    "text": "    CARD(\"%10d%10d%20lg%10d\", entityiddisplayed, entityiddisplayed_IN, HEAT_T0, IH3D_FLAG);",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2023/INTER/inter_type21.cfg",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "    Pskid                                   = VALUE(FLOAT,        \"Maximum contact pressure used for defining a limit tangential force for skid line output (/H3D/NODA/SKID_LINE)\");",
+    "following_lines": []
+  },
+  {
+    "path": "hm_cfg_files/config/CFG/radioss2025/INTER/inter_type21.cfg",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "    Pskid                                   = VALUE(FLOAT,        \"Maximum contact pressure used for defining a limit tangential force for skid line output (/H3D/NODA/SKID_LINE)\");",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/mapSimple_0001.rad",
+    "line": 17,
+    "kind": "mixed_card_review",
+    "text": "/STOP",
+    "following_lines": [
+      "0.000000000000000    0.000000000000000    0.000000000000000    1          1         ",
+      "/DTIX",
+      "0.002000000000000    0.002000000000000   ",
+      "/DT/NODA/CST/0"
+    ]
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/reference/mapSimpleT01",
+    "line": 13084,
+    "kind": "text_reference",
+    "text": "X5B-7\ufffdA\ufffd\"\ufffdB\ufffd,\ufffdC{!\ufffdB\ufffdg\ufffdC\ufffd,\ufffdA\ufffd\ufffd4A\u0004>\ufffdBv\ufffdzC\ufffd\ufffd\ufffdC\u0004\ufffd'C\u0637eB\u0014l\ufffdA\ufffd\ufffd.BXt\ufffd\u0000\u0000\u0000H\u0000\u0000\u0000\u0004A7\ufffdP\u0000\u0000\u0000\u0004\u0000\u0000\u00000KpL\ufffdF\ufffd|\u001fC\u03ac\ufffdB\ufffda\ufffdD6\u0019\ufffdA\ufffdS\u0013;\u0003\u0012oD\ufffd\ufffd<Kp\ufffd\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000A\u0012\ufffd/\u0000\u0000\u00000\u0000\u0000\u0000HC\ufffdx\ufffdC:h3D",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/reference/FOAM_V10T01",
+    "line": 385,
+    "kind": "text_reference",
+    "text": "J\u0005\ufffd\ufffd\u0018\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\ufffd\ufffdI\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\ufffd\ufffd\ufffd\u001f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\ufffd\ufffdqZ\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\ufffdb\ufffd-\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0002X\u0000\u0000\u0000H3d\u0015}\ufffdd\u0015}<0|l>\u000e\ufffd\u05be\u000e\ufffdz\ufffd\ufffd\u0004\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000/}\ufffdi\ufffd}\ufffdi\ufffd/\ufffd\ufffd\u0012",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/reference/CONV_ELST01",
+    "line": 431,
+    "kind": "text_reference",
+    "text": "KqC.\ufffd\ufffdH3d\ufffd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u00000\u0000\u0000\u0000\ufffd\ufffdK\"g#\ufffd\u029b?",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/qa_tools/qa_system.py",
+    "line": 129,
+    "kind": "text_reference",
+    "text": "  # RAD_H3D_PATH",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/qa_tools/qa_system.py",
+    "line": 131,
+    "kind": "text_reference",
+    "text": "  rad_h3d_path=os.getcwd()+slash+'..'+slash+'..'+slash+'..'+slash+'extlib'+slash+'h3d'+slash+'lib'+arch",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/qa_tools/qa_system.py",
+    "line": 132,
+    "kind": "text_reference",
+    "text": "  set_variable('RAD_H3D_PATH',rad_h3d_path)",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_numerical.py",
+    "line": 338,
+    "kind": "text_reference",
+    "text": "                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_starter_integration.py",
+    "line": 115,
+    "kind": "text_reference",
+    "text": "                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/reader/test_contact_groups.py",
+    "line": 102,
+    "kind": "text_reference",
+    "text": "                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/reader/test_model_loading.py",
+    "line": 179,
+    "kind": "text_reference",
+    "text": "                               KMP_STACKSIZE='400m', RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_QA.constants",
+    "line": 149,
+    "kind": "text_reference",
+    "text": "delete  [.](h3d|rst)$",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 289,
+    "kind": "text_reference",
+    "text": "$h3dtoxmlexec    = \"\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 290,
+    "kind": "text_reference",
+    "text": "$local_h3d_xml     = \"run.h3d_xml\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 291,
+    "kind": "text_reference",
+    "text": "$local_h3d_extract = \"run.h3d_extract\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 292,
+    "kind": "text_reference",
+    "text": "@h3d_extract_file  = ();",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 363,
+    "kind": "text_reference",
+    "text": "     $h3dtoxmlexec    =\"./h3dtoxml_Linux_I.exe\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 366,
+    "kind": "text_reference",
+    "text": "     $h3dtoxmlexec    =\"./h3dtoxml_Linux_I.exe\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1097,
+    "kind": "text_reference",
+    "text": "@h3dfiles             = () ; #list of h3d files to be checked",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1890,
+    "kind": "text_reference",
+    "text": "   } elsif (/^\\s*h3dfiles\\s+(\\S.*\\S)\\s*$/i) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1892,
+    "kind": "text_reference",
+    "text": "      @h3dfiles=split(/ /,$t);",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1893,
+    "kind": "text_reference",
+    "text": "      # &out_file (     \"  h3dfiles  file = @h3dfiles\\n\" ) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1894,
+    "kind": "text_reference",
+    "text": "   } elsif (/^\\s*h3dextract\\s+(\\S.*\\S)\\s*$/i) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1898,
+    "kind": "text_reference",
+    "text": "      push (@h3d_extract_file , $t) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1899,
+    "kind": "text_reference",
+    "text": "      # &out_file (     \"  h3d extract file = @h3d_extract_file\\n\" ) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1900,
+    "kind": "text_reference",
+    "text": "   } elsif (/^\\s*h3dextract2\\s+(\\S.*\\S)\\s*$/i) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1902,
+    "kind": "text_reference",
+    "text": "      push (@h3d_extract_file , $t) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 1903,
+    "kind": "text_reference",
+    "text": "      # &out_file (     \"  h3d extract file = @h3d_extract_file\\n\" ) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3343,
+    "kind": "text_reference",
+    "text": "        }elsif($#h3dfiles>=0 && $#h3d_extract_file >= 0 && $h3dtoxmlexec ){",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3345,
+    "kind": "text_reference",
+    "text": "    #     Testing h3d extract file if needed",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3347,
+    "kind": "text_reference",
+    "text": "          if(! -f $h3dtoxmlexec){",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3348,
+    "kind": "text_reference",
+    "text": "            print \"      $h3dtoxmlexec does not exist!\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3353,
+    "kind": "text_reference",
+    "text": "          $h3dlinenumber=0;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3354,
+    "kind": "text_reference",
+    "text": "          foreach $ih3dfile (@h3dfiles) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3355,
+    "kind": "text_reference",
+    "text": "            if(! -f $ih3dfile){",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3356,
+    "kind": "text_reference",
+    "text": "              print \"      $ih3dfile is not created\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3360,
+    "kind": "text_reference",
+    "text": "            system(\"$h3dtoxmlexec $ih3dfile $local_h3d_xml >> $qa_screen 2>&1\");",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3361,
+    "kind": "text_reference",
+    "text": "            #system(\"$h3dtoxmlexec $ih3dfile $local_h3d_xml\");",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3368,
+    "kind": "text_reference",
+    "text": "            while ($h3dline=<NEW_XML>) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3369,
+    "kind": "text_reference",
+    "text": "              #print \"$h3dline\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3370,
+    "kind": "text_reference",
+    "text": "              chomp ($h3dline) ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3371,
+    "kind": "text_reference",
+    "text": "              if($h3dline =~ /^\\s*<DataSetDataInfo ID=\\\"(\\d+)\\\" DataSize=\\\"(\\d+)\\\" Data=\\\"(.*)\\\" \\/>\\s*$/){",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3378,
+    "kind": "text_reference",
+    "text": "                  $h3dlinenumber++;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3379,
+    "kind": "text_reference",
+    "text": "                  #print \"$h3dlinenumber $datasetid $idata\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3380,
+    "kind": "text_reference",
+    "text": "                  print NEW_H3DEXTRACT \"$h3dlinenumber DataSet${datasetid}_${iline} $idata\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3390,
+    "kind": "text_reference",
+    "text": "          $original_extract_file=pop(@h3d_extract_file);",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3393,
+    "kind": "text_reference",
+    "text": "              $out_buffer .= \"      **No h3d extract file found !!\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3404,
+    "kind": "text_reference",
+    "text": "          @h3dfiles    = () ; ",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 3937,
+    "kind": "text_reference",
+    "text": "    unlink <*.html>, <*.h3d>, <*.igs>, <*.log> ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 5454,
+    "kind": "text_reference",
+    "text": "    @h3dfiles    = () ; ",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 5455,
+    "kind": "text_reference",
+    "text": "    @h3d_extract_file =();",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 6519,
+    "kind": "text_reference",
+    "text": "    if ( $h3dtoxmlexec && -f $h3dtoxmlexec ) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 6520,
+    "kind": "text_reference",
+    "text": "  system \"cp -f $h3dtoxmlexec $newdir/\" ;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 6768,
+    "kind": "text_reference",
+    "text": "  if ( $i =~ /^run.*h3d\\d*$/ )  { next; } #h3d10...",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 6963,
+    "kind": "text_reference",
+    "text": "                      # XXXXXX take h3d files into account when creating reference files",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "line": 6964,
+    "kind": "text_reference",
+    "text": "                      if ($file =~ /.h3d$/ and $create_ref > 3) { $i_copy=1 }",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1181,
+    "kind": "text_reference",
+    "text": "  my @env2delete = ('KMP_STACKSIZE','HWSOLVERS_TEMPLEX','RAD_H3D_PATH','RAD_CFG_PATH','HM_MSG_DIR','HM_MV_CFG_DIR','HM_MV_UNITS_DIR','ABF_PATH','RADFLEX_PATH');",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1789,
+    "kind": "text_reference",
+    "text": "  print \"Duplicate /ANIM keywords to /H3D ...\\n\";",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1793,
+    "kind": "text_reference",
+    "text": "  my @h3d_lines;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1798,
+    "kind": "text_reference",
+    "text": "      $line_h3d =~ s/\\/ANIM\\//\\/H3D\\//;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1799,
+    "kind": "text_reference",
+    "text": "      push @h3d_lines,$line_h3d;",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1802,
+    "kind": "text_reference",
+    "text": "        push @h3d_lines,$file[$j];",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1812,
+    "kind": "text_reference",
+    "text": "      for my $h3d_line (@h3d_lines) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1813,
+    "kind": "text_reference",
+    "text": "        print $fh1 $h3d_line; ",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1823,
+    "kind": "text_reference",
+    "text": "    for my $h3d_line (@h3d_lines) {",
+    "following_lines": []
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "line": 1824,
+    "kind": "text_reference",
+    "text": "      print $fh1 $h3d_line;",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 37,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 38,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 87,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 90,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g  -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 98,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O3 -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_AOCC.txt",
+    "line": 101,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O3 -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 35,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 36,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 113,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} -O0 -g ${OPENMP}  ${md5_inc} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 116,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc}  -O0 -g  ${OPENMP}  ${md5_inc} -std=c++14  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 128,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g ${OPENMP} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 131,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc}  ${md5_inc} -O0 -g  ${OPENMP} -std=c++14  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 147,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} -O0 -g ${OPENMP} ${zlib_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 150,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel}  -O0 -g  ${OPENMP} ${zlib_inc}  ${md5_inc} -std=c++14 \")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 162,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O2 ${OPENMP} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_gf.txt",
+    "line": 165,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O2 ${OPENMP} -std=c++14 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 29,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 30,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 99,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g   -traceback \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 102,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g  -O0 -traceback -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 108,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g -DSANITIZE -traceback \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 111,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc}  -O0 -g  -DSANITIZE -O0 -traceback -std=c++11\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 118,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -qopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifort.txt",
+    "line": 121,
+    "kind": "text_reference",
+    "text": "  set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc}  -axsse3 -O2 -fopenmp -Wno-deprecated -fpermissive -std=c++11 -fPIC  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 29,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 30,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 98,
+    "kind": "text_reference",
+    "text": "  set(c_flags       \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g -traceback -openmp\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 99,
+    "kind": "text_reference",
+    "text": "  set(cpp_flags     \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g  -O0 -traceback -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 105,
+    "kind": "text_reference",
+    "text": "set(c_flags       \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g -traceback -openmp\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 106,
+    "kind": "text_reference",
+    "text": "set(cpp_flags     \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g  -O0 -traceback -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 111,
+    "kind": "text_reference",
+    "text": "set(c_flags       \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -fsanitize=address -DSANITIZE -O0 -g -traceback -openmp\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 112,
+    "kind": "text_reference",
+    "text": "set(cpp_flags     \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -fsanitize=address -DSANITIZE -O0 -g  -O0 -traceback -std=c++11\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 119,
+    "kind": "text_reference",
+    "text": "set(c_flags       \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -qopenmp\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_ifx.txt",
+    "line": 120,
+    "kind": "text_reference",
+    "text": "set(cpp_flags     \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -axsse3 -O2 -fopenmp -Wno-deprecated -fpermissive -std=c++11 -fPIC\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 39,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 40,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 92,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} -O0 -g \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 95,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} -O0 -g -std=c++14 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 105,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} -O2 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linux64_nv.txt",
+    "line": 108,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} -O2 -std=c++14 \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 33,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 34,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 82,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" -g ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} ${ARCH_OPT}  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 85,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" -g ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} ${ARCH_OPT} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 95,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \" -g ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} ${ARCH_OPT}  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 98,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \" -g ${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} ${ARCH_OPT} \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 108,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} ${ARCH_OPT}  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64.txt",
+    "line": 111,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${h3d_inc} ${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O2 -march=armv8-a -nofma -D COMP_ARMFLANG=1 -D ARCH_CPU=ARM -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 35,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 36,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 96,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g -fopenmp \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 99,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O0 -g  -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 114,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} -O0 -g -fopenmp ${zlib_inc} ${md5_inc} -march=armv8-a -DARCH_CPU=ARM \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 117,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"${FSANITIZE} ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel}  -O0 -g  -fopenmp  ${zlib_inc} ${md5_inc} -std=c++11 -march=armv8-a -DARCH_CPU=ARM\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 129,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O2 -fopenmp -march=armv8-a -DARCH_CPU=ARM  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_linuxa64_gf.txt",
+    "line": 132,
+    "kind": "text_reference",
+    "text": "set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS \"-w ${h3d_inc} ${precision_flag} -DMETIS5 ${cppmach} ${cpprel} ${zlib_inc} ${md5_inc} -O2 -fopenmp -std=c++11  \" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 23,
+    "kind": "text_reference",
+    "text": "#H3D",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 24,
+    "kind": "text_reference",
+    "text": "set (h3d_inc \"-DH3D_DEFINE_BOOL -I${source_directory}/../extlib/h3d/includes\")",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 91,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"${precision_flag} -DMETIS5 ${cppmach} ${cpprel} /nologo /Od /debug:all /Zi /Qftz  /Qopenmp /traceback ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 92,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"${precision_flag} -DMETIS5 ${cppmach} ${cpprel} /nologo /Od /debug:all /Zi /Qftz  /Qopenmp /traceback ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 96,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"${precision_flag} -DMETIS5 ${cppmach} ${cpprel} /nologo /Od /debug:all /Zi /Qftz  /Qopenmp /traceback  ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 97,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"${precision_flag} -DMETIS5 ${cppmach} ${cpprel} /nologo /Od /debug:all /Zi /Qftz  /Qopenmp /traceback  ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 101,
+    "kind": "text_reference",
+    "text": "  set (c_flags \"${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${VECT_OPT}  ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 102,
+    "kind": "text_reference",
+    "text": "  set (cpp_flags \"${precision_flag} ${Tet_mesher_inc} -DMETIS5 ${cppmach} ${cpprel} ${VECT_OPT}  ${zlib_inc} ${h3d_inc} ${md5_inc}\" )",
+    "following_lines": []
+  },
+  {
+    "path": "starter/CMake_Compilers/cmake_win64.txt",
+    "line": 115,
+    "kind": "text_reference",
+    "text": "set (CMAKE_EXE_LINKER_FLAGS \"${debug_link} /F1500000000 /STACK:1500000000 ${reader_lib} ${MKL_Lib}  ${metis_lib}  ${zlib_lib} ${h3d_inc} ${md5_lib} svml_dispmd.lib\")",
+    "following_lines": []
+  },
+  {
+    "path": "tools/rht_user_material/tests/run_solver.py",
+    "line": 184,
+    "kind": "text_reference",
+    "text": "    env['RAD_H3D_PATH']=str(root/'extlib/h3d/lib'/arch)",
+    "following_lines": []
+  }
+]

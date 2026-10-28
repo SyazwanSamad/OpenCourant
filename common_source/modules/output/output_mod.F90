@@ -76,13 +76,8 @@
 !||    fxbypid                            ../engine/source/constraints/fxbody/fxbypid.F
 !||    fxbyvit                            ../engine/source/constraints/fxbody/fxbyvit.F
 !||    genani                             ../engine/source/output/anim/generate/genani.F
-!||    genh3d                             ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genoutp                            ../engine/source/output/sty/genoutp.F
 !||    genstat                            ../engine/source/output/sta/genstat.F
-!||    h3d_create_datatype                ../engine/source/output/h3d/h3d_build_fortran/h3d_create_datatype.F
-!||    h3d_list_nodal_scalar              ../engine/source/output/h3d/input_list/h3d_list_noda_scalar.F
-!||    h3d_nodal_scalar                   ../engine/source/output/h3d/h3d_results/h3d_nodal_scalar.F
-!||    h3d_read                           ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
 !||    hist2                              ../engine/source/output/th/hist2.F
 !||    hm_read_checksum                   ../starter/source/output/checksum/checksum_option.F90
 !||    hm_read_prethgrou                  ../starter/source/output/th/hm_read_prethgrou.F
@@ -140,7 +135,6 @@
 !||    imp_tripi                          ../engine/source/implicit/imp_int_k.F
 !||    incpflow                           ../engine/source/fluid/incpflow.F
 !||    iniresa                            ../engine/source/output/restart/rdresa.F
-!||    init_h3d_engine                    ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    intal1                             ../engine/source/ale/inter/intal1.F
 !||    intal2                             ../engine/source/ale/inter/intal2.F
 !||    intfop1                            ../engine/source/interfaces/interf/intfop1.F
@@ -155,7 +149,6 @@
 !||    lag_anithp                         ../engine/source/tools/lagmul/lag_anith.F
 !||    lag_mult                           ../engine/source/tools/lagmul/lag_mult.F
 !||    lag_multp                          ../engine/source/tools/lagmul/lag_mult.F
-!||    lech3d                             ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    lecinp                             ../engine/source/input/lecinp.F
 !||    lectur                             ../engine/source/input/lectur.F
 !||    manctr                             ../engine/source/input/manctr.F
@@ -268,7 +261,6 @@
           ! /H3D/NODA/PEXT and /ANIM/NODA/PEXT and /TH/NODE(PEXT)
           real(kind=WP), dimension(:), allocatable :: NODA_SURF, NODA_PEXT       !domain array
           real(kind=WP), dimension(:), allocatable :: NODA_SURF_G, NODA_PEXT_G   !global array (proc 0) for animation files
-          integer :: H3D_HAS_NODA_PEXT = 0 ! should be in H3D_MOD ?
           integer :: ANIM_HAS_NODA_PEXT = 0
 
           ! Friction (both for /H3D/ and /ANIM/)
@@ -362,7 +354,7 @@
           TYPE(working_arrays_) :: OUTPUT
           INTEGER,INTENT(IN) :: NUMNOD  ! number of nodes per domain
           INTEGER,INTENT(IN) :: NUMNODG ! number of nodes (proc 0 only)
-          IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%ANIM_HAS_NODA_PEXT > 0 .OR. OUTPUT%H3D_HAS_NODA_PEXT > 0) THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%ANIM_HAS_NODA_PEXT>0) THEN
             ALLOCATE(OUTPUT%NODA_SURF(NUMNOD))
             ALLOCATE(OUTPUT%NODA_PEXT(NUMNOD))
             OUTPUT%NODA_SURF(1:NUMNOD)=ZERO

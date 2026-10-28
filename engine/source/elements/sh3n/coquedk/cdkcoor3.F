@@ -296,7 +296,6 @@ c
 !||    shell_loc_cor       ../engine/source/tools/seatbelts/shell_loc_cor.F
 !||    shell_local_frame   ../engine/source/output/dynain/shell_rota.F
 !||    shlrotg             ../engine/source/output/anim/generate/tensor6.F
-!||    tens3dto2d          ../engine/source/output/h3d/h3d_results/h3d_skin_tensor.F
 !||====================================================================
       SUBROUTINE CLSKEW3(JFT,JLT,IREP,
      .   RX, RY, RZ, SX, SY, SZ, 

@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    s8cforc3   ../engine/source/elements/thickshell/solide8c/s8cforc3.F
 !||--- calls      -----------------------------------------------------
-!||    clsys3     ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
+!||    clsys3     ../engine/source/tools/element_results/clsys3.F
 !||====================================================================
       SUBROUTINE SDLENSH8(
      1   VOLN,    LLSH, AREA, X1,      X2,

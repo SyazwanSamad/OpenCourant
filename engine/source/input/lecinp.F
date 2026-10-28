@@ -27,17 +27,14 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    dt_mod           ../engine/source/modules/dt_mod.F
 !||    glob_therm_mod   ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    output_mod       ../common_source/modules/output/output_mod.F90
 !||    sensor_mod       ../common_source/modules/sensor_mod.F90
 !||    state_mod        ../common_source/modules/state_mod.F
 !||====================================================================
-      SUBROUTINE LECINP(IRUN,IRFL,IRFE,H3D_DATA,FLAG_CST_AMS,DYNAIN_DATA,
-     .                  SENSORS ,DT, OUTPUT ,GLOB_THERM)
+      SUBROUTINE LECINP(IRUN, IRFL, IRFE, FLAG_CST_AMS, DYNAIN_DATA, SENSORS, DT, OUTPUT, GLOB_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE STATE_MOD
       USE SENSOR_MOD
       USE DT_MOD
@@ -51,7 +48,6 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER IRUN, IRFL, IRFE,FLAG_CST_AMS
-      TYPE(H3D_DATABASE), INTENT(INOUT) :: H3D_DATA
       TYPE(DYNAIN_DATABASE), INTENT(INOUT) :: DYNAIN_DATA
       TYPE(SENSORS_), INTENT(INOUT) :: SENSORS
       TYPE (DT_), INTENT(INOUT) :: DT
@@ -84,8 +80,7 @@ C
       NODADT = 0
 C
       IFREEF=1
-      CALL FREFORM(IRUN,IRFL,IRFE,H3D_DATA,FLAG_CST_AMS,DYNAIN_DATA,
-     .             SENSORS,DT,OUTPUT,GLOB_THERM)
+      CALL FREFORM(IRUN, IRFL, IRFE, FLAG_CST_AMS, DYNAIN_DATA, SENSORS, DT, OUTPUT, GLOB_THERM)
 C
       REWIND IIN
 C

@@ -23,15 +23,10 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    rgjoint   ../engine/source/elements/joint/rgjoint.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod   ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE RANIM33(JFT,JLT,FORX,FORY,FORZ,XMOM,YMOM,ZMOM,XL,TANI,H3D_DATA)
+      SUBROUTINE RANIM33(JFT, JLT, FORX, FORY, FORZ, XMOM, YMOM, ZMOM, XL, TANI)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -46,10 +41,6 @@ C-----------------------------------------------
      .   FORX(*), FORY(*), FORZ(*), XMOM(*),
      .   YMOM(*), ZMOM(*),TANI(15,*)
       DOUBLE PRECISION XL(MVSIZ,3)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -58,7 +49,7 @@ C-----------------------------------------------
       my_real M1,M2,M3
 C=======================================================================
 C
-      IF(ANIM_FT(1)/=0 .OR. H3D_DATA%UND_FORC /= 0)THEN
+      IF(ANIM_FT(1)/=0)THEN
        DO I=JFT,JLT
         TANI(1,I)= FORX(I)
         TANI(2,I)= FORY(I)

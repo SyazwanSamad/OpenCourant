@@ -67,14 +67,11 @@ class List_checksum {
     std::list<std::string> th_file_list;                                            // .thy files
     std::list<std::string> anim_file_list;                                          // rootnameAxxx
     std::list<std::string> checksum_file_list;                                      // .checksum files
-    std::list<std::string> h3d_file_list;                                           // rootname.h3d
      // Output file hashes
     // file_hash_list : list of tuples (filename, list of tuples (deck_checksum_option, checksum value), list of tuples (checksum filename, checksum value))
     std::list<std::tuple<std::string,bool,std::list<std::tuple<std::string,std::string>>,std::list<std::tuple<std::string,std::string>>>> output_files_hash_list;
     std::list<std::tuple<std::string,std::string,bool,std::list<std::string>>> checksum_list ;               // extracted checksum list from the output files : Filename, checksum list
     std::list<std::tuple<std::string,std::list<std::string>>> checksum_decks ;              // extracted checksum list from the output files : Filename, checksum list
-    // H3D checksum results: filename, file checksum, match status, ZCHKSM_ tag names
-    std::list<std::tuple<std::string,std::string,bool,std::list<std::string>>> h3d_checksum_list;
 
     // -----------------------------------------------------------------------------------
     // Tool : get directory path from a file path
@@ -94,7 +91,6 @@ class List_checksum {
       void parse_checksum_files(std::string directory, std::string rootname);
       void parse_animation_files(std::string directory, std::string rootname);
       void parse_th_files(std::string directory, std::string rootname);
-      void parse_h3d_files(std::string directory, std::string rootname);
 
     public:
       void file_list(std::string directory,std::string rootname);
@@ -104,8 +100,7 @@ class List_checksum {
       List_checksum();
       void print_outfiles(int *fd);
       void print_outputfiles(int *fd);
-      void print_h3d_checksums(int *fd);
 
   }; 
 
-  
+

@@ -56,7 +56,6 @@ Copyright>        copyright and attribution statement.
 !||    element_mod            ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod           ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    imp_workg              ../engine/share/modules/impbufdef_mod.F
 !||    impbufdef_mod          ../engine/share/modules/impbufdef_mod.F
 !||    intbufdef_mod          ../common_source/modules/interfaces/intbufdef_mod.F90
@@ -67,40 +66,17 @@ Copyright>        copyright and attribution statement.
 !||    sensor_mod             ../common_source/modules/sensor_mod.F90
 !||    stack_mod              ../engine/share/modules/stack_mod.F
 !||====================================================================
-      SUBROUTINE IMP_BUCK(
-     2                    PM          , GEO         , IPM      , IGEO     , ELBUF     ,
-     3                    IXS         , IXQ         , IXC      , IXT      , IXP       ,
-     4                    IXR         , IXTG        , IXTG1    , IPARG     ,
-     5                    TF          , NPC         , FR_WAVE  , W16      , BUFMAT    ,
-     6                    THKE        , BUFGEO      , NSENSOR  ,SENSOR_TAB, RBY       ,
-     7                    SKEW        , WA          ,ICODT     , ICODR    , ISKEW     ,
-     9                    IBFV        , VEL         , LPBY     , NPBY     , ITAB      ,
-     A                    WEIGHT      , MS          , IN       ,IPARI    , INTBUF_TAB ,  
-     B                    X           ,ITASK        ,
-     E                    CONT        , ICUT        , XCUT     , FINT     , FEXT      ,
-     F                    FOPT        , ANIN        , NSTRF    , RWBUF    , NPRW      ,
-     G                    TANI        , DD_IAD      , EANI     , IPART    ,
-     H                    NOM_OPT     , IGRSURF     , BUFSF    , IDATA    ,
-     I                    RDATA       , KXX         , IXX      , KXSP     , IXSP      ,
-     J                    NOD2SP      , SPBUF       , IXS10    , IXS20    , IXS16     ,
-     K                    VR          , MONVOL      , VOLMON   , NODGLOB  , IAD_ELEM  ,
-     L                    FR_ELEM     , FR_SEC      , FR_RBY2  , IAD_RBY2 , FR_WALL   ,
-     M                    V           , A           , GRAPHE   , PARTSAV  , XFRAME    ,
-     N                    DIRUL        , 
-     O                    FNCONT      ,FTCONT       , TEMP     , SH4TREE  , SH3TREE   ,
-     P                    ERR_THK_SH4 ,ERR_THK_SH3  , IFRAME   , LPRW     ,
-     P                    ELBUF_TAB   ,FSAV         , FSAVD    , RWSAV    , AR        ,
-     R                    IRBE3       ,LRBE3        , FRBE3    , FR_I2M   , IAD_I2M   ,
-     S                    FR_RBE3M    ,IAD_RBE3M    , FRWL6    , IBCL     , FORC      ,
-     T                    IRBE2       ,LRBE2        , IAD_RBE2 , FR_RBE2  , WEIGHT_MD ,
-     U                    CLUSTER     ,FCLUSTER     , MCLUSTER , XFEM_TAB ,
-     V                    ALE_CONNECT ,W            , NV46     , NERCVOIS , NESDVOIS  ,
-     W                    LERCVOIS    ,LESDVOIS     ,CRKEDGE   , STACK    ,DIMFB      ,
-     X                    FBSAV6      ,STABSEN      ,TABSENSOR ,INDX_CRK  ,XEDGE4N    ,
-     Y                    XEDGE3N     ,SPH2SOL      ,STIFN     ,STIFR     ,DRAPE_SH4N   ,
-     Z                    DRAPE_SH3N    ,H3D_DATA     ,SUBSET    ,IGRNOD    ,FCONT_MAX  ,
-     a                    FNCONTP2    ,FTCONTP2     ,NDDL0     ,NNZK0     ,IMPBUF_TAB ,
-     b                    DRAPEG      ,MATPARAM_TAB ,GLOB_THERM,OUTPUT)
+      SUBROUTINE IMP_BUCK(PM, GEO, IPM, IGEO, ELBUF, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG, IXTG1, IPARG, TF, NPC,
+     . FR_WAVE, W16, BUFMAT, THKE, BUFGEO, NSENSOR, SENSOR_TAB, RBY, SKEW, WA, ICODT, ICODR, ISKEW, IBFV, VEL, LPBY,
+     . NPBY, ITAB, WEIGHT, MS, IN, IPARI, INTBUF_TAB, X, ITASK, CONT, ICUT, XCUT, FINT, FEXT, FOPT, ANIN, NSTRF, RWBUF,
+     . NPRW, TANI, DD_IAD, EANI, IPART, NOM_OPT, IGRSURF, BUFSF, IDATA, RDATA, KXX, IXX, KXSP, IXSP, NOD2SP, SPBUF,
+     . IXS10, IXS20, IXS16, VR, MONVOL, VOLMON, NODGLOB, IAD_ELEM, FR_ELEM, FR_SEC, FR_RBY2, IAD_RBY2, FR_WALL, V, A,
+     . GRAPHE, PARTSAV, XFRAME, DIRUL, FNCONT, FTCONT, TEMP, SH4TREE, SH3TREE, ERR_THK_SH4, ERR_THK_SH3, IFRAME, LPRW,
+     . ELBUF_TAB, FSAV, FSAVD, RWSAV, AR, IRBE3, LRBE3, FRBE3, FR_I2M, IAD_I2M, FR_RBE3M, IAD_RBE3M, FRWL6, IBCL, FORC,
+     . IRBE2, LRBE2, IAD_RBE2, FR_RBE2, WEIGHT_MD, CLUSTER, FCLUSTER, MCLUSTER, XFEM_TAB, ALE_CONNECT, W, NV46,
+     . NERCVOIS, NESDVOIS, LERCVOIS, LESDVOIS, CRKEDGE, STACK, DIMFB, FBSAV6, STABSEN, TABSENSOR, INDX_CRK, XEDGE4N,
+     . XEDGE3N, SPH2SOL, STIFN, STIFR, DRAPE_SH4N, DRAPE_SH3N, SUBSET, IGRNOD, FCONT_MAX, FNCONTP2, FTCONTP2, NDDL0,
+     . NNZK0, IMPBUF_TAB, DRAPEG, MATPARAM_TAB, GLOB_THERM, OUTPUT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -112,7 +88,6 @@ C-----------------------------------------------
       USE INTBUFDEF_MOD
       USE CRACKXFEM_MOD
       USE STACK_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE MULTI_FVM_MOD
       USE DRAPE_MOD
@@ -202,7 +177,6 @@ C-----------------------------------------------
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
       TYPE (XFEM_EDGE_)   , DIMENSION(*) :: CRKEDGE
       TYPE (STACK_PLY) :: STACK
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SUBSET_) , DIMENSION(NSUBS)  :: SUBSET
       TYPE (GROUP_)  , DIMENSION(NGRNOD) :: IGRNOD
       TYPE (SURF_)   , DIMENSION(NSURF)  :: IGRSURF
@@ -852,44 +826,19 @@ C
          IF (OUTPUT%DTANIM>ZERO) THEN
             IANIM=IANIM+1
             TT=EIG(I,1)
-            CALL GENANI(
-     1             X          ,D         ,V          ,A           ,ELBUF     ,
-     2             IXS        ,IXQ       ,IXC        ,IXT         ,IXP       ,
-     3             IXR        ,IXTG      ,SN1        ,SN2         ,SN3       ,
-     4             SN4        ,IPARG     ,PM         ,GEO         ,MS        ,
-     5             SN5        ,CONT      ,SN6        ,ICUT        ,SKEW      ,
-     6             XCUT       ,FINT      ,ITAB       ,SN7         ,FEXT      ,
-     7             FOPT       ,LPBY       ,NPBY        ,NSTRF     ,
-     8             RWBUF      ,NPRW      ,TANI       ,ELBUF_TAB   ,MATPARAM_TAB,
-     A             DD_IAD     ,WEIGHT    ,EANI       ,IPART       ,CLUSTER   ,
-     B             IPART(K1)  ,IPART(K2) ,IPART(K3)  ,IPART(K4)   ,IPART(K5) ,
-     C             IPART(K6)  ,IPART(K7) ,IPART(K8)  ,
-     D             RBY        ,SN3       ,TANI(L1)   ,NOM_OPT     ,IGRSURF   ,
-     E             BUFSF      ,IDATA     ,RDATA      ,SN9         ,BUFMAT    ,
-     F             BUFGEO     ,KXX       ,IXX        ,IPART(K9)   ,SKUIX     ,
-     G             SKXUSR     ,SKFACPTX  ,SKXEDGE    ,SKXFACET    ,SKXSOLID  ,
-     H             SKNUMX1    ,SKNUMX2   ,SKNUMX3    ,SKOFFX1     ,SKOFFX2   ,
-     I             SKOFFX3    ,SKMASS1   ,SKMASS2    ,SKMASS3     ,SKFUNC1   ,
-     J             SKFUNC2    ,SKFUNC3   ,KXSP       ,IXSP        ,NOD2SP    ,
-     K             IPART(K10) ,SPBUF     ,IXS10      ,IXS20       ,IXS16     ,
-     L             VR         ,MONVOL    ,VOLMON     ,IPM         ,IGEO      ,NODGLOB,
-     M             IAD_ELEM   ,FR_ELEM   ,FR_SEC     ,FR_RBY2     ,IAD_RBY2  ,
-     N             FR_WALL    ,RIBID     ,RRBID      ,FNCONT      ,FTCONT    ,
-     O             TEMP       ,THKE      ,ERR_THK_SH4,ERR_THK_SH3 ,RRBID     ,
-     P             IPARI      ,RRBID     ,RRBID      ,ALE_CONNECT ,
-     Q             IRBE2      ,IRBE3     ,LRBE2      ,LRBE3       ,FR_RBE2,
-     R             FR_RBE3M   ,IAD_RBE2  ,RRBID      ,RIBID       ,RIBID     ,
-     S             RRBID      ,RRBID     ,RRBID      ,RRBID       ,RRBID     ,
-     S             RRBID      ,RIBID     ,RIBID      ,RIBID       ,RIBID     ,
-     U             RRBID      ,RRBID     ,WEIGHT_MD  ,RIBID       ,RIBID     ,
-     V             FCLUSTER   ,MCLUSTER  ,XFEM_TAB   ,W           ,
-     W             NV46       ,IPART(K11),RIBID      ,RIBID       ,IBID      ,
-     X             RRBID      ,RRBID     ,NERCVOIS   ,NESDVOIS    ,LERCVOIS  ,
-     Y             LESDVOIS   ,CRKEDGE   ,INDX_CRK   ,XEDGE4N     ,XEDGE3N   ,
-     Z             STACK      ,SPH2SOL   ,STIFN      ,STIFR       ,IGRNOD    ,
-     1             H3D_DATA   ,SUBSET    ,MULTI_FVM  ,RRBID       ,RRBID     ,
-     2             FCONT_MAX  ,FNCONTP2  ,FTCONTP2   ,GLOB_THERM  ,
-     .             DRAPE_SH4N ,DRAPE_SH3N,DRAPEG     ,OUTPUT)
+      CALL GENANI(X, D, V, A, ELBUF, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG, SN1, SN2, SN3, SN4, IPARG, PM, GEO, MS, SN5,
+     . CONT, SN6, ICUT, SKEW, XCUT, FINT, ITAB, SN7, FEXT, FOPT, LPBY, NPBY, NSTRF, RWBUF, NPRW, TANI, ELBUF_TAB,
+     . MATPARAM_TAB, DD_IAD, WEIGHT, EANI, IPART, CLUSTER, IPART(K1), IPART(K2), IPART(K3), IPART(K4), IPART(K5),
+     . IPART(K6), IPART(K7), IPART(K8), RBY, SN3, TANI(L1), NOM_OPT, IGRSURF, BUFSF, IDATA, RDATA, SN9, BUFMAT, BUFGEO,
+     . KXX, IXX, IPART(K9), SKUIX, SKXUSR, SKFACPTX, SKXEDGE, SKXFACET, SKXSOLID, SKNUMX1, SKNUMX2, SKNUMX3, SKOFFX1,
+     . SKOFFX2, SKOFFX3, SKMASS1, SKMASS2, SKMASS3, SKFUNC1, SKFUNC2, SKFUNC3, KXSP, IXSP, NOD2SP, IPART(K10), SPBUF,
+     . IXS10, IXS20, IXS16, VR, MONVOL, VOLMON, IPM, IGEO, NODGLOB, IAD_ELEM, FR_ELEM, FR_SEC, FR_RBY2, IAD_RBY2,
+     . FR_WALL, RIBID, RRBID, FNCONT, FTCONT, TEMP, THKE, ERR_THK_SH4, ERR_THK_SH3, RRBID, IPARI, RRBID, RRBID,
+     . ALE_CONNECT, IRBE2, IRBE3, LRBE2, LRBE3, FR_RBE2, FR_RBE3M, IAD_RBE2, RRBID, RIBID, RIBID, RRBID, RRBID, RRBID,
+     . RRBID, RRBID, RRBID, RIBID, RIBID, RIBID, RIBID, RRBID, RRBID, WEIGHT_MD, RIBID, RIBID, FCLUSTER, MCLUSTER,
+     . XFEM_TAB, W, NV46, IPART(K11), RIBID, RIBID, IBID, RRBID, RRBID, NERCVOIS, NESDVOIS, LERCVOIS, LESDVOIS, CRKEDGE,
+     . INDX_CRK, XEDGE4N, XEDGE3N, STACK, SPH2SOL, STIFN, STIFR, IGRNOD, SUBSET, MULTI_FVM, RRBID, RRBID, FCONT_MAX,
+     . FNCONTP2, FTCONTP2, GLOB_THERM, DRAPE_SH4N, DRAPE_SH3N, DRAPEG, OUTPUT)
          ENDIF
 C
          IF (DTOUTP>ZERO) THEN

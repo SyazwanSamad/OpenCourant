@@ -35,8 +35,8 @@
 !||    read_ebcs                ../starter/source/boundary_conditions/ebcs/read_ebcs.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    ngr2usr                  ../starter/source/system/nintrr.F
 !||    usr2sys                  ../starter/source/system/sysfus.F
 !||--- uses       -----------------------------------------------------

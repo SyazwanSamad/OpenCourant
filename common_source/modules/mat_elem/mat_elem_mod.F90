@@ -71,10 +71,7 @@
 !||    forintp                   ../engine/source/elements/forintp.F
 !||    fractal_dmg_init          ../starter/source/materials/fail/fractal/fractal_dmg_init.F90
 !||    genstat                   ../engine/source/output/sta/genstat.F
-!||    h3d_skin_scalar           ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_sol_skin_scalar       ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
-!||    h3d_sol_skin_scalar1      ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar1.F
-!||    h3d_solid_scalar_1        ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
+!||    result_solid_scalar        ../engine/source/tools/element_results/result_solid_scalar.F
 !||    hm_read_part              ../starter/source/model/assembling/hm_read_part.F
 !||    hm_read_perturb           ../starter/source/general_controls/computation/hm_read_perturb.F
 !||    hm_read_perturb_fail      ../starter/source/general_controls/computation/hm_read_perturb_fail.F

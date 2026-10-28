@@ -36,23 +36,16 @@ Copyright>        copyright and attribution statement.
 !||    i6ini3          ../engine/source/interfaces/inter3d/i6ini3.F
 !||    i6ipmact        ../engine/source/interfaces/inter3d/i6impact.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I6MAIN(OUTPUT,IPARI,X     ,A   ,
-     2                  ICODT,NPC   ,TF     ,V     ,FSAV,
-     3                  DT2T ,NELTST,ITYPTST,FSKYI ,ISKY,
-     4                  FCONT,MS,INTBUF_TAB,H3D_DATA)
+      SUBROUTINE I6MAIN(OUTPUT, IPARI, X, A, ICODT, NPC, TF, V, FSAV, DT2T, NELTST, ITYPTST, FSKYI, ISKY, FCONT, MS,
+     . INTBUF_TAB)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE INTBUFDEF_MOD 
       USE OUTPUT_MOD
-      USE H3D_MOD 
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   C o m m o n   B l o c k s
@@ -73,10 +66,6 @@ C     REAL
      .   FCONT(3,*),MS(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER   
      .   INACTI,NOINT, NGROUS, NGROUM, NG, IGIMP,INTY,IFRICF,IFRICV,
      .   IDAMPV,IDAMPF
@@ -367,16 +356,10 @@ c
      E   NFT)
       ENDDO
 C-----------
-      CALL I6ASS3(output,
-     1     A     ,INTBUF_TAB%MSR ,INTBUF_TAB%NSV ,INTBUF_TAB%FS  ,      
-     2  INTBUF_TAB%FM  ,NPC         ,TF         ,ANSMX         ,     
-     3  FMX         ,FMY         ,FMZ         ,INTBUF_TAB%VARIABLES(4),      
-     4  IPARI(11)      ,V         ,NOINT         ,NSN         ,      
-     5  NMN         ,FSAV         ,DT2T         ,NELTST         ,      
-     6  ITYPTST        ,INTBUF_TAB%STFAC(1)  ,FSKYI         ,ISKY         ,     
-     7  FCONT,INTBUF_TAB%VARIABLES(19),INTBUF_TAB%VARIABLES(20),STIFF    ,
-     8  IPARI(47)      ,IPARI(49)      ,IPARI(58)      ,INTBUF_TAB%FCONT  ,
-     9  INTBUF_TAB%ANSMX0(1)  ,INTBUF_TAB%ANSMX0(2),H3D_DATA )   
+      CALL I6ASS3(output, A, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%FS, INTBUF_TAB%FM, NPC, TF, ANSMX, FMX, FMY,
+     . FMZ, INTBUF_TAB%VARIABLES(4), IPARI(11), V, NOINT, NSN, NMN, FSAV, DT2T, NELTST, ITYPTST, INTBUF_TAB%STFAC(1),
+     . FSKYI, ISKY, FCONT, INTBUF_TAB%VARIABLES(19), INTBUF_TAB%VARIABLES(20), STIFF, IPARI(47), IPARI(49), IPARI(58),
+     . INTBUF_TAB%FCONT, INTBUF_TAB%ANSMX0(1), INTBUF_TAB%ANSMX0(2))
 C-----------
       RETURN
       END

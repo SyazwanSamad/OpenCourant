@@ -24,9 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_thgrou           ../starter/source/output/th/hm_read_thgrou.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
 !||    hm_thvarc                ../starter/source/output/th/hm_read_thvarc.F
 !||    r2r_exist                ../starter/source/coupling/rad2rad/routines_r2r.F
 !||--- uses       -----------------------------------------------------
@@ -177,9 +177,9 @@ c-----------
 !||    hm_read_thgrou           ../starter/source/output/th/hm_read_thgrou.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
 !||    hm_thvarc                ../starter/source/output/th/hm_read_thvarc.F
 !||    r2r_exist                ../starter/source/coupling/rad2rad/routines_r2r.F
 !||--- uses       -----------------------------------------------------

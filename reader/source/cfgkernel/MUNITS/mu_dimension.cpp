@@ -293,6 +293,7 @@ static MuQuantitiesUnitsOperatorManager_t &loc_get_operator_manager() {
   return *loc_operator_manager_p;
 }
 
+// CFG unit expressions use single-byte superscript operators.
 static bool loc_is_operator_begin(char op) {
   typedef set<char> LocOperators_t;
   static LocOperators_t a_operators;
@@ -301,8 +302,8 @@ static bool loc_is_operator_begin(char op) {
     a_operators.insert('*');
     a_operators.insert('/');
     a_operators.insert('^');
-    a_operators.insert('²');
-    a_operators.insert('³');
+    a_operators.insert('\xB2');
+    a_operators.insert('\xB3');
   }
   //
   return a_operators.find(op)!=a_operators.end();
@@ -557,8 +558,8 @@ static MuQuantitiesUnitsOperand_t *loc_evaluate_next_operator(MuQuantitiesUnitsO
       a_ind=ind0;
     }
     break;
-  case '²':
-  case '³':
+  case '\xB2':
+  case '\xB3':
     case '^':
     if(level==0) {
       if(a_char=='^') {
@@ -569,7 +570,7 @@ static MuQuantitiesUnitsOperand_t *loc_evaluate_next_operator(MuQuantitiesUnitsO
 	  return NULL;
 	}
       } else {
-	double a_exp=(a_char=='²' ? 2. : 3.);
+	double a_exp=(a_char=='\xB2' ? 2. : 3.);
         a_operand_p=new MuScalarOperand_t(a_exp);
       }
       //

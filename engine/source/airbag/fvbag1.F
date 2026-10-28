@@ -39,7 +39,6 @@ Copyright>        copyright and attribution statement.
 !||    finter_mixed_mod         ../engine/source/tools/finter_mixed.F90
 !||    fvbag_mod                ../engine/share/modules/fvbag_mod.F
 !||    fvmbag_meshcontrol_mod   ../common_source/modules/airbag/fvmbag_meshcontrol_mod.F
-!||    h3d_mod                  ../engine/share/modules/h3d_mod.F
 !||    message_mod              ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod             ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod           ../common_source/tools/memory/my_dealloc.F90
@@ -47,29 +46,13 @@ Copyright>        copyright and attribution statement.
 !||    python_funct_mod         ../common_source/modules/python_mod.F90
 !||    sensor_mod               ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE FVBAG1(OUTPUT,NN       , NEL    , IBUF     , ELEM          , NJET    ,
-     2                  IBAGJET  , RBAGJET, NVENT    , IBAGHOL       , RBAGHOL ,
-     3                  P        , RHO    , TK       , U             , SSPK    ,
-     4                  X        , V      , A        , NSENSOR       ,SENSOR_TAB,
-     5                  FSAV     , NPC    , TF       , IVOLU         , RVOLU    ,
-     6                  MPOLH    , QPOLH  , EPOLH    , CENTROID_POLH , 
-     7                  PPOLH    , RPOLH  , GPOLH    , SSPPOLH       ,
-     8                  NPOLH    , IFVNOD , RFVNOD   , IFVTRI        ,
-     9                  IFVPOLY  , IFVTADR, IFVPOLH  ,
-     A                  IFVPADR  , INFO   , NNS      , NNTR          , IFV     ,
-     B                  NPOLHA   , DLH    , CPAPOLH  ,
-     C                  CPBPOLH  , CPCPOLH, RMWPOLH  ,
-     D                  ITAGEL   , ELSINI , ICONTACT , IDPOLH        , 
-     E                  ELFMASS  , ELFVEL , IBUFA    , ELEMA         , TAGELA  ,
-     F                  PA       , RHOA   , TKA      , UA            , BRNA    ,
-     G                  NNA      , NTGA   , IBPOLH   , DTPOLH        , NNT     ,
-     H                  NELT     , XXXA   , VVVA     , NCONA         , POROSITY,
-     I                  LGAUGE   , GAUGE  , ITYP     , IGEO          , SSPKA   ,
-     J                  GEO      , PM     , IPM      , TPOLH         , ELFEHPY ,
-     K                  CPDPOLH  , CPEPOLH, CPFPOLH  ,
-     L                  ELTG     , IPARG  , MATTG    ,
-     M                  IGROUPTG , IGROUPC, ELBUF_TAB, FEXT          , CFL_COEF ,
-     N                  PDISP_OLD, PDISP  , H3D_DATA , ITAB          , WFEXT, PYTHON)
+      SUBROUTINE FVBAG1(OUTPUT, NN, NEL, IBUF, ELEM, NJET, IBAGJET, RBAGJET, NVENT, IBAGHOL, RBAGHOL, P, RHO, TK, U,
+     . SSPK, X, V, A, NSENSOR, SENSOR_TAB, FSAV, NPC, TF, IVOLU, RVOLU, MPOLH, QPOLH, EPOLH, CENTROID_POLH, PPOLH,
+     . RPOLH, GPOLH, SSPPOLH, NPOLH, IFVNOD, RFVNOD, IFVTRI, IFVPOLY, IFVTADR, IFVPOLH, IFVPADR, INFO, NNS, NNTR, IFV,
+     . NPOLHA, DLH, CPAPOLH, CPBPOLH, CPCPOLH, RMWPOLH, ITAGEL, ELSINI, ICONTACT, IDPOLH, ELFMASS, ELFVEL, IBUFA, ELEMA,
+     . TAGELA, PA, RHOA, TKA, UA, BRNA, NNA, NTGA, IBPOLH, DTPOLH, NNT, NELT, XXXA, VVVA, NCONA, POROSITY, LGAUGE,
+     . GAUGE, ITYP, IGEO, SSPKA, GEO, PM, IPM, TPOLH, ELFEHPY, CPDPOLH, CPEPOLH, CPFPOLH, ELTG, IPARG, MATTG, IGROUPTG,
+     . IGROUPC, ELBUF_TAB, FEXT, CFL_COEF, PDISP_OLD, PDISP, ITAB, WFEXT, PYTHON)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -80,7 +63,6 @@ C-----------------------------------------------
       USE FVMBAG_MESHCONTROL_MOD
       USE SENSOR_MOD
       USE OUTPUT_MOD
-      USE H3D_MOD , only:H3D_DATABASE
       USE CAST_MOD, only: double_to_my_real
       USE PYTHON_FUNCT_MOD, only : python_
       USE FINTER_MIXED_MOD, only: finter_mixed
@@ -135,7 +117,6 @@ C-----------------------------------------------
       
       TYPE(ELBUF_STRUCT_), DIMENSION(NGROUP) :: ELBUF_TAB
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER,INTENT(IN)::ITAB(NUMNOD)
       my_real, INTENT(INOUT) :: CENTROID_POLH(3,NPOLH)
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
@@ -2283,9 +2264,7 @@ C
       ! ANIM / H3D : LOCATE POLYHEDRA CENTROIDS                    !
       !------------------------------------------------------------!
       !whenever output file is required
-      IF((TT>=OUTPUT%TANIM         .AND. TT<=OUTPUT%TANIM_STOP)         .OR. TT>=TOUTP .OR.
-     .   (TT>=H3D_DATA%TH3D .AND. TT<=H3D_DATA%TH3D_STOP) .OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0)THEN
+      IF((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.MANIM<=15))THEN
      
         !check if IH3D_FLAG ENABLES OUTPUT. OTHERWISE CALCULATION OF CENTROID IS USELESS 
         IF(IVOLU(75)==1)THEN

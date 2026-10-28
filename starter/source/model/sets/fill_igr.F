@@ -28,7 +28,7 @@ Copyright>        copyright and attribution statement.
 !||    fill_surf             ../starter/source/model/sets/fill_gr.F
 !||    fill_surf_ellipse     ../starter/source/model/sets/fill_gr_surf_ellipse.F
 !||    fill_surf_plane       ../starter/source/model/sets/fill_gr_surf_plane.F90
-!||    hm_group_is_used      ../starter/source/devtools/hm_reader/hm_group_is_used.F
+!||    hm_group_is_used      ../starter/source/devtools/reader/hm_group_is_used.F
 !||--- uses       -----------------------------------------------------
 !||    file_descriptor_mod   ../starter/source/modules/file_descriptor_mod.F90
 !||    fill_surf_plane_mod   ../starter/source/model/sets/fill_gr_surf_plane.F90
@@ -129,22 +129,6 @@ C
      .           KEYA(1:14) == '/INIV/AXIS/X/2' .OR. KEYA(1:14) == '/INIV/AXIS/Y/2' .OR.
      .           KEYA(1:14) == '/INIV/AXIS/Z/2'.OR. KEYA(1:9) == '/ADYREL/1')  THEN
                 NB_GRNODE = NB_GRNODE + 1
-              ELSEIF(KEYA(1:4) == '/H3D' .AND. KEYA(1:7) /= '/H3D/DT'  .AND.
-     .               KEYA(1:10) /= '/H3D/TITLE'   .AND. KEYA(1:13) /= '/H3D/COMPRESS'   .AND.
-     .               KEYA(1:12) /= '/H3D/LSENSOR' .AND. KEYA(1:7) /= '/H3D/RB'     ) THEN
-                READ(UNIT=tmp_engine, FMT='(A)', IOSTAT=IO_ERR2) CARTE
-                IF(IO_ERR2 == 0) THEN
-                  IF(CARTE(1:1) == '/') THEN 
-                    BACKSPACE(tmp_engine)
-                  ELSE IF(CARTE(1:1) /= '#' .AND. CARTE(1:1) /= '$') THEN
-                    call my_alloc(GRPART_TMP, NVAR(CARTE), "GRPART_TMP")
-                    READ(CARTE, FMT=*) GRPART_TMP
-                    DO J=1,NVAR(CARTE)
-                      IF(GRPART_TMP(J) < 0)  NB_GRPART = NB_GRPART + 1
-                    END DO
-                    IF(ALLOCATED(GRPART_TMP))  CALL MY_DEALLOC(GRPART_TMP)
-                  ENDIF
-                ENDIF
               ELSE IF(KEYA(1:6) == '/BEGIN') THEN
                 IO_ERR2 = 1
               ENDIF
@@ -234,25 +218,6 @@ C
                 READ(CARTE, FMT=*) GRNODE(NB_GRNODE)
               ELSE IF(KEYA(1:6) == '/BEGIN') THEN
                 IO_ERR2 = 1
-              ELSE IF(KEYA(1:4) == '/H3D' .AND. KEYA(1:7) /= '/H3D/DT'  .AND.
-     .                KEYA(1:10) /= '/H3D/TITLE'   .AND. KEYA(1:13) /= '/H3D/COMPRESS'   .AND.
-     .                KEYA(1:12) /= '/H3D/LSENSOR' .AND. KEYA(1:7) /= '/H3D/RB'     ) THEN
-                READ(UNIT=tmp_engine, FMT='(A)', IOSTAT=IO_ERR2) CARTE
-                IF(IO_ERR2 == 0) THEN
-                  IF(CARTE(1:1) == '/') THEN 
-                    BACKSPACE(tmp_engine)
-                  ELSE IF(CARTE(1:1) /= '#' .AND. CARTE(1:1) /= '$') THEN
-                    call my_alloc(GRPART_TMP, NVAR(CARTE), "GRPART_TMP")
-                    READ(CARTE, FMT=*) GRPART_TMP
-                    DO J=1,NVAR(CARTE)
-                      IF(GRPART_TMP(J) < 0)  THEN 
-                        NB_GRPART = NB_GRPART + 1
-                        GRPART(NB_GRPART) = GRPART_TMP(J)
-                      ENDIF
-                    END DO
-                    IF(ALLOCATED(GRPART_TMP))  CALL MY_DEALLOC(GRPART_TMP)
-                  ENDIF
-                ENDIF
               ENDIF
             END IF
           END DO

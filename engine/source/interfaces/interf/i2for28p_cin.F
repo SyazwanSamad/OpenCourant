@@ -26,21 +26,14 @@ Copyright>        copyright and attribution statement.
 !||    i2forces       ../engine/source/interfaces/interf/i2forces.F
 !||    m33_p1         ../engine/source/interfaces/interf/m33_p1.F90
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    m33_p1_mod     ../engine/source/interfaces/interf/m33_p1.F90
 !||====================================================================
-      SUBROUTINE I2FOR28P_CIN(
-     1             NSN      ,NMN     ,A      ,IRECT   ,DPARA   ,
-     2             MSR      ,NSV     ,IRTL   ,MS      ,WEIGHT  ,
-     3             AR       ,IN      ,X      ,STIFN   ,STIFR   ,
-     4             FSKYI2   ,IADI2   ,FSAV   ,DMAST   ,ADM     ,
-     5             MMASS    ,I0      ,NIR    ,I2SIZE  ,IDEL2   ,
-     6             SMASS    ,SINER   ,CRST    ,FNCONT ,INDXC   ,
-     7             IADX    ,H3D_DATA,FNCONTP,FTCONTP )
+      SUBROUTINE I2FOR28P_CIN(NSN, NMN, A, IRECT, DPARA, MSR, NSV, IRTL, MS, WEIGHT, AR, IN, X, STIFN, STIFR, FSKYI2,
+     . IADI2, FSAV, DMAST, ADM, MMASS, I0, NIR, I2SIZE, IDEL2, SMASS, SINER, CRST, FNCONT, INDXC, IADX, FNCONTP,
+     . FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE M33_P1_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -58,10 +51,6 @@ C     REAL
      .   DPARA(7,*), MS(*), IN(*),STIFN(*),STIFR(*),DMAST,ADM(*),
      .   SMASS(*), SINER(*),FSAV(*), CRST(2,*),FNCONT(3,*),
      .   FNCONTP(3,*) ,FTCONTP(3,*) 
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
@@ -90,7 +79,7 @@ C
 C specific processing for dmas
 C
 C MMASS(II) initialise a MS(J) a t=0 in starter
-      IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS  >0) THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0) THEN
         DO II=1,NMN
           J=MSR(II)
           ADM(J) = ADM(J)*MMASS(II)
@@ -331,7 +320,7 @@ C
 C
          DMAST = DMAST + 4.*XMSI - MS(I)
 C
-         IF (ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF (ANIM_N(2)+OUTP_N(2)>0) THEN
           ADM(J1) = ADM(J1) + XMSI - FOURTH*MS(I)
           ADM(J2) = ADM(J2) + XMSI - FOURTH*MS(I)
           ADM(J3) = ADM(J3) + XMSI - FOURTH*MS(I)
@@ -350,9 +339,7 @@ C
         ENDIF
 C
 C---    output of tied contact forces 
-        CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)  
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C----
 C zero storage for nodes deleted by idel2
        ELSEIF(WEIGHT(-I)==1) THEN
@@ -416,7 +403,7 @@ C
 C
 C specific processing for adm
 C
-      IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS  >0) THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0) THEN
 #include "vectorize.inc"
         DO II=1,NMN
           J=MSR(II)

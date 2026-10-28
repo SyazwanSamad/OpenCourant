@@ -23,11 +23,8 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    forint               ../engine/source/elements/forint.F
 !||    gpsstrain_skin       ../engine/source/output/anim/generate/tensgpstrain.F
-!||    h3d_solid_tensor_1   ../engine/source/output/h3d/h3d_results/h3d_solid_tensor_1.F
 !||    stat_s_straf         ../engine/source/output/sta/stat_s_straf.F
 !||    stat_s_strsf         ../engine/source/output/sta/stat_s_strsf.F
-!||    strn_tenscor3        ../engine/source/output/h3d/h3d_results/h3d_strn_tenscor3.F
-!||    strs_tenscor3        ../engine/source/output/h3d/h3d_results/strs_tenscor3.F
 !||    tensgps1             ../engine/source/output/anim/generate/tensor6.F
 !||    tensgps2             ../engine/source/output/anim/generate/tensor6.F
 !||    tensgps3             ../engine/source/output/anim/generate/tensor6.F

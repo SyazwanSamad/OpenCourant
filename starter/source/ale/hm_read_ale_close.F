@@ -25,7 +25,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_prop14f     ../starter/source/properties/solid/hm_read_prop14.F
 !||    hm_read_prop15      ../starter/source/properties/solid/hm_read_prop15.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_floatv       ../starter/source/devtools/hm_reader/hm_get_floatv.F
+!||    hm_get_floatv       ../starter/source/devtools/reader/hm_get_floatv.F
 !||--- uses       -----------------------------------------------------
 !||    submodel_mod        ../starter/share/modules1/submodel_mod.F
 !||====================================================================

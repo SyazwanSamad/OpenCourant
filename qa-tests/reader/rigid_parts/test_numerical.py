@@ -18,7 +18,7 @@
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
-"""Compare rigid-part Starter initialization and Engine motion with v82 and explicit bodies."""
+"""Compare rigid-part Starter initialization and Engine motion with explicit bodies and analytic controls."""
 
 import argparse
 import contextlib
@@ -256,7 +256,7 @@ def solve(program, filename, folder, environment):
 
 def existing_rotation(args, environment, report):
     previous = None
-    for role in ['openreader', 'v82']:
+    for role in ['openreader']:
         folder = Path(tempfile.mkdtemp(prefix='explicit-rota-'+role+'-', dir=args.output))
         source = ROOT / 'qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data'
         shutil.copytree(source, folder, dirs_exist_ok=True)
@@ -289,7 +289,7 @@ def structural_checks(args, environment, report):
                        'shared': 2, 'interleaved': 2, 'lagmul': 1, 'explicit_fields': 1, 'empty': None}
     for case, count in expected_counts.items():
         previous = None
-        for role in ['openreader', 'v82']:
+        for role in ['openreader']:
             folder = Path(tempfile.mkdtemp(prefix='structural-'+case+'-'+role+'-', dir=args.output))
             shutil.copytree(HERE / 'data', folder, dirs_exist_ok=True)
             shutil.copy(folder / (case+'.rad'), folder / 'case_0000.rad')
@@ -314,15 +314,6 @@ def structural_checks(args, environment, report):
             report.setdefault('structural', []).append({'case': case, 'reader': role, 'folder': str(folder),
                                                         'expected_rejection': count is None, 'bodies': bodies})
             print(f'PASS structural {case}/{role}', flush=True)
-    folder = Path(tempfile.mkdtemp(prefix='known-v82-units-', dir=args.output))
-    make_deck(folder, 'units', False)
-    solve(args.binaries / 'starter-v82.exe', 'rigid_0000.rad', folder, environment)
-    observed = initialization((folder / 'rigid_0000.out').read_text(errors='replace'))
-    np.testing.assert_allclose(observed['diagonal'], [300000.5, 200000.5, 400000.5], rtol=2e-6)
-    report['known_reference_differences'] = {'explicit_unit': {'folder': str(folder),
-        'v82_generated_diagonal': observed['diagonal'], 'physical_diagonal': [0.8, 0.7, 0.9],
-        'oracle': 'v82 explicit /RBODY with unit ID 7; OpenReader generated body preserves that unit'}}
-    print('PASS documented v82 generated-unit discrepancy', flush=True)
 
 
 def main():
@@ -336,8 +327,7 @@ def main():
     environment = os.environ.copy()
     environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m',
                        RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
-    environment['PATH'] = os.pathsep.join([str(ROOT / 'exec'), str(ROOT / 'extlib/hm_reader/win64'),
-                                         environment.get('PATH', '')])
+    environment['PATH'] = os.pathsep.join([str(ROOT / 'exec'), environment.get('PATH', '')])
     report = {'engine_sha256': hashlib.sha256(args.engine.read_bytes()).hexdigest(),
               'numpy_version': np.__version__,
               'time_history_reader_sha256': hashlib.sha256(Path(inspect.getfile(RadiossTHReader)).read_bytes()).hexdigest(),
@@ -348,7 +338,7 @@ def main():
                 existing_rotation(args, environment, report)
                 continue
             previous = None
-            variants = [('openreader', False)] + ([] if case == 'units' else [('v82', False)]) + [('v82', True)]
+            variants = [('openreader', False), ('openreader', True)]
             for role, explicit in variants:
                 label = role + ('-explicit' if explicit else '-generated')
                 folder = Path(tempfile.mkdtemp(prefix=case+'-'+label+'-', dir=args.output))

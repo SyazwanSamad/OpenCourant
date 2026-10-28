@@ -3397,7 +3397,6 @@ C-----------
 !||    tensgps1           ../engine/source/output/anim/generate/tensor6.F
 !||--- called by ------------------------------------------------------
 !||    genani             ../engine/source/output/anim/generate/genani.F
-!||    h3d_nodal_tensor   ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf            ../engine/share/resol/initbuf.F
 !||    shlrotg            ../engine/source/output/anim/generate/tensor6.F
@@ -3643,7 +3642,6 @@ C-----------------------------------------------
 !||    tensgps2           ../engine/source/output/anim/generate/tensor6.F
 !||--- called by ------------------------------------------------------
 !||    genani             ../engine/source/output/anim/generate/genani.F
-!||    h3d_nodal_tensor   ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf            ../engine/share/resol/initbuf.F
 !||    shlrotg            ../engine/source/output/anim/generate/tensor6.F
@@ -3898,7 +3896,6 @@ C-----------
 !||--- called by ------------------------------------------------------
 !||    genani             ../engine/source/output/anim/generate/genani.F
 !||    gps_solid          ../engine/source/output/outmaxsubr.F
-!||    h3d_nodal_tensor   ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf            ../engine/share/resol/initbuf.F
 !||    pre_heph           ../engine/source/output/anim/generate/tensor6.F
@@ -4748,7 +4745,6 @@ C-----------------------------------------------
 !||====================================================================
 !||    tensgps_skin          ../engine/source/output/anim/generate/tensor6.F
 !||--- called by ------------------------------------------------------
-!||    h3d_sol_skin_tensor   ../engine/source/output/h3d/h3d_results/h3d_sol_skin_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf               ../engine/share/resol/initbuf.F
 !||    pre_heph              ../engine/source/output/anim/generate/tensor6.F
@@ -5458,7 +5454,6 @@ C-----------------------------------------------
 !||====================================================================
 !||    pre_heph        ../engine/source/output/anim/generate/tensor6.F
 !||--- called by ------------------------------------------------------
-!||    strs_tenscor3   ../engine/source/output/h3d/h3d_results/strs_tenscor3.F
 !||    tensgps3        ../engine/source/output/anim/generate/tensor6.F
 !||    tensgps_skin    ../engine/source/output/anim/generate/tensor6.F
 !||--- calls      -----------------------------------------------------

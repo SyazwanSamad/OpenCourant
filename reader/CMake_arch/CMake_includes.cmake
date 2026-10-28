@@ -1,5 +1,5 @@
 ##########################################################
-# hm_reader has problematic include statements for CMAKE
+# CFG/SDI includes need these explicit search paths
 # need to add Manually include list
 
 list (APPEND include_dir_list ${open_reader_root_dir}/source )

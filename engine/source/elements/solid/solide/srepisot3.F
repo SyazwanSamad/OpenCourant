@@ -25,7 +25,6 @@ Copyright>        copyright and attribution statement.
 !||    sr8coor3    ../engine/source/elements/solid/solide8/sr8coor3.F
 !||    srcoork     ../engine/source/elements/solid/solide8z/srcoork.F
 !||    srep2glo    ../engine/source/elements/sph/srep2glo.F
-!||    tsh_dir2    ../engine/source/output/h3d/h3d_results/h3d_skin_tensor.F
 !||====================================================================
       SUBROUTINE SREPISOT3(
      1   X1,      X2,      X3,      X4,

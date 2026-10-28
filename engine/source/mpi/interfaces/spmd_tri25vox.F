@@ -256,12 +256,7 @@ c general case
       RSIZ = 9    
       ISIZ = 6
 
-      IF(.TRUE.) THEN
         ISIZ = ISIZ + 2 
-      ENDIF
-
-c specific cases 
-c IGAP=1 or IGAP=2
       IF(IGAP==1 .OR. IGAP==2)THEN
         RSIZ = RSIZ + 1
 c IGAP=3        
@@ -704,7 +699,6 @@ c shift for integer variables (prepare for next setting)
             ISHIFT = 7 
 
 C  symmetric plane
-          IF(.TRUE. )THEN
             L = 0        
 #include    "vectorize.inc"
             DO J = 1, NB
@@ -715,14 +709,6 @@ C  symmetric plane
               L = L + ISIZ    
             ENDDO
             ISHIFT = ISHIFT + 2
-          ENDIF
-
-
-
-
-
-c specific cases
-c IGAP=1 or IGAP=2               
             IF(IGAP==1 .OR. IGAP==2.OR. IGAP==5)THEN
                L = 0        
                IGAPXREMP = RSHIFT       

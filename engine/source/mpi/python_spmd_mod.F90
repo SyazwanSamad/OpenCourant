@@ -116,7 +116,7 @@
               element%local%local_id(local_n) = local_id(j)
               element%local%values(local_n) = element%global%values(i)
               do k = 1, NAME_LEN
-                element%local%keyword(local_n)%h3d(k:k) = element%global%keyword(i)%h3d(k:k)
+                element%local%keyword(local_n)%result(k:k) = element%global%keyword(i)%result(k:k)
                 element%local%keyword(local_n)%name(k:k) = element%global%keyword(i)%name(k:k)
                 element%local%global_id(local_n) = i
               end do
@@ -132,7 +132,7 @@
 !           write(6,*) "Python element initialization"
 !           do i = 1, element%global%n
 !             write(6,*) "Element ", element%global%user_ids(i), " is on processor ", element%global%processor(i)
-!             write(6,*) "Keywords:", element%global%keyword(i)%h3d, element%global%keyword(i)%name
+!             write(6,*) "Keywords:", element%global%keyword(i)%result, element%global%keyword(i)%name
 !           enddo
 !         endif
 
@@ -140,7 +140,7 @@
 !          do i = 1, element%global%n
 !            if(element%global%processor(i) == rank) then
 !              write(6,*) "Element ", element%global%user_ids(i), " is on processor ", rank
-!              write(6,*) "Keywords:", element%global%keyword(i)%h3d, element%global%keyword(i)%name
+!              write(6,*) "Keywords:", element%global%keyword(i)%result, element%global%keyword(i)%name
 !            endif
 !          enddo
 !         call flush(6)
@@ -183,7 +183,7 @@
           call spmd_allreduce(values, element%global%values, element%global%n, SPMD_MAX)
           deallocate(values)
           do i = 1, element%global%n
-            call python_update_elemental_entity(element%global%keyword(i)%h3d,element%global%values(i), element%global%user_ids(i))
+            call python_update_elemental_entity(element%global%keyword(i)%result,element%global%values(i), element%global%user_ids(i))
           end do
         end subroutine python_element_sync
 

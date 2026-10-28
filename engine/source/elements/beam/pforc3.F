@@ -46,37 +46,19 @@ Copyright>        copyright and attribution statement.
 !||    dt_mod              ../engine/source/modules/dt_mod.F
 !||    elbufdef_mod        ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    mat_elem_mod        ../common_source/modules/mat_elem/mat_elem_mod.F90
 !||    preload_axial_mod   ../engine/source/elements/spring/preload_axial.F90
 !||    sensor_mod          ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE PFORC3(
-     1           ELBUF_STR,JFT      ,JLT      ,NEL      ,
-     2           MTN      ,ISMSTR   ,PM       ,NCC      ,
-     3           X        ,F        ,M        ,V        ,
-     4           R        ,GEO      ,PARTSAV  ,DT2T     ,
-     5           NELTST   ,ITYPTST  ,STIFN    ,STIFR    ,
-     6           FSKY     ,IADP     ,OFFSET   ,IPARTP   ,
-     7           TANI     ,FX1      ,FX2      ,FY1      ,
-     8           FY2      ,FZ1      ,FZ2      ,MX1      ,
-     9           MX2      ,MY1      ,MY2      ,MZ1      ,
-     A           MZ2      ,IGEO     ,IPM      ,BUFMAT   ,
-     B           NPT      ,NPF      ,TF       ,GRESAV   ,
-     C           GRTH     ,IGRTH    ,MSP      ,DMELP    ,
-     D           IOUTPRT  ,ITASK    ,JTHE     ,TEMP     ,
-     E           FTHE     ,FTHESKY  ,IEXPAN   ,H3D_DATA ,
-     F           JSMS     ,IGRE     ,NFT      ,IFAIL    ,
-     G           SBUFMAT  ,SNPC     ,STF      ,NUMMAT   ,
-     H           NUMGEO   ,IOUT     ,ISTDO    ,IDEL7NOK ,
-     I           IDYNA    ,IMCONV   ,IMPL_S   ,MAT_PARAM,
-     J           PRELD1   ,STF_F    ,DT       ,SENSORS  ,
-     H           NTABLE   ,TABLE    )
+      SUBROUTINE PFORC3(ELBUF_STR, JFT, JLT, NEL, MTN, ISMSTR, PM, NCC, X, F, M, V, R, GEO, PARTSAV, DT2T, NELTST,
+     . ITYPTST, STIFN, STIFR, FSKY, IADP, OFFSET, IPARTP, TANI, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1,
+     . MZ2, IGEO, IPM, BUFMAT, NPT, NPF, TF, GRESAV, GRTH, IGRTH, MSP, DMELP, IOUTPRT, ITASK, JTHE, TEMP, FTHE, FTHESKY,
+     . IEXPAN, JSMS, IGRE, NFT, IFAIL, SBUFMAT, SNPC, STF, NUMMAT, NUMGEO, IOUT, ISTDO, IDEL7NOK, IDYNA, IMCONV, IMPL_S,
+     . MAT_PARAM, PRELD1, STF_F, DT, SENSORS, NTABLE, TABLE)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MAT_ELEM_MOD
-      USE H3D_MOD
       USE PRELOAD_AXIAL_MOD
       USE ELBUFDEF_MOD
       USE DT_MOD
@@ -130,8 +112,6 @@ C-----------------------------------------------
       my_real, INTENT(IN)          :: PRELD1,STF_F
 C
       TYPE (ELBUF_STRUCT_), TARGET :: ELBUF_STR
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C     MAIN_BEAM3 declares MAT_PARAM as INTENT(INOUT).
       TYPE (MATPARAM_STRUCT_) ,DIMENSION(NUMMAT) ,INTENT(INOUT) :: MAT_PARAM
       TYPE (DT_), INTENT(IN) :: DT
       type (sensors_),INTENT(INOUT) :: SENSORS
@@ -324,19 +304,9 @@ C--------------------------
 C     BALANCES BY MATERIAL
 C--------------------------
       IFLAG = MOD(NCYCLE,NCPRI)
-      IF (IOUTPRT > 0)     
-     .  CALL PBILAN(
-     1   PM,       V,        GBUF%EINT,GEO,
-     2   PARTSAV,  IPARTP,   TANI,     GBUF%FOR,
-     3   GBUF%MOM, GRESAV,   GRTH,     IGRTH,
-     4   GBUF%OFF, NEL,      AL,       NC1,
-     5   NC2,      NC3,      E1X,      E1Y,
-     6   E1Z,      E2X,      E2Y,      E2Z,
-     7   MAT,      PID,      VX1G,     VX2G,
-     8   VY1G,     VY2G,     VZ1G,     VZ2G,
-     9   X1,       X2,       Y1,       Y2,
-     A   Z1,       Z2,       ITASK,    H3D_DATA,
-     B   IGRE,     SENSORS,GBUF%G_WPLA,GBUF%WPLA)
+      IF (IOUTPRT>0) CALL PBILAN(PM, V, GBUF%EINT, GEO, PARTSAV, IPARTP, TANI, GBUF%FOR, GBUF%MOM, GRESAV, GRTH, IGRTH,
+     . GBUF%OFF, NEL, AL, NC1, NC2, NC3, E1X, E1Y, E1Z, E2X, E2Y, E2Z, MAT, PID, VX1G, VX2G, VY1G, VY2G, VZ1G, VZ2G, X1,
+     . X2, Y1, Y2, Z1, Z2, ITASK, IGRE, SENSORS, GBUF%G_WPLA, GBUF%WPLA)
 C-------------------------
 C     /PRELOAD/AXIAL
 C-------------------------

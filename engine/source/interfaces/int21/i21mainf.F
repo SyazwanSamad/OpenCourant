@@ -36,7 +36,6 @@ Copyright>        copyright and attribution statement.
 !||    stoptime                   ../engine/source/system/timer_mod.F90
 !||    sum_6_float_sens           ../engine/source/system/parit.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                    ../engine/share/modules/h3d_mod.F
 !||    intbuf_fric_mod            ../common_source/modules/interfaces/intbuf_fric_mod.F90
 !||    intbufdef_mod              ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    intstamp_mod               ../engine/share/modules/intstamp_mod.F
@@ -46,22 +45,12 @@ Copyright>        copyright and attribution statement.
 !||    output_mod                 ../common_source/modules/output/output_mod.F90
 !||    timer_mod                  ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I21MAINF(output,TIMERS,
-     1                   IPARI  ,INTBUF_TAB         ,X        ,A      ,
-     2                   ICODT  ,FSAV    ,V         ,MS       ,ITAB   ,
-     3                   STIFN  ,FSKYI   ,ISKY      ,FCONT    ,NIN    ,
-     4                   LINDMAX ,JTASK  ,NB_JLT ,NB_JLT_NEW,NB_STOK_N,
-     5                   NSTRF  ,SECFCUM ,ICONTACT  ,VISCN   ,NUM_IMP ,
-     6                   NS_IMP ,NE_IMP  ,IND_IMP   ,NRTMDIM ,FNCONT  ,
-     7                   FTCONT ,RCONTACT ,ACONTACT ,PCONTACT,INTSTAMP,
-     8                   WEIGHT ,TEMP     ,FTHE     ,FTHESKYI,MSKYI_SMS,
-     9                   ISKYI_SMS ,NODNX_SMS ,NODGLOB,NPC   ,TF       ,
-     A                   QFRICINT,NCONT   ,INDEXCONT ,TAGCONT,CONDN    ,
-     B                   CONDNSKYI,DT2T   ,NELTST   ,ITYPTST ,KINET    ,
-     C                   FBSAV6  ,ISENSINT,DIMFB    ,NISKYFI ,H3D_DATA ,
-     D                   PSKIDS  ,TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,
-     E                   DGAPLOADINT,S_LOADPINTER,INTEREFRIC ,NODADT_THERM,THEACCFACT,
-     F                   INTBUF_FRIC_TAB)                   
+      SUBROUTINE I21MAINF(output, TIMERS, IPARI, INTBUF_TAB, X, A, ICODT, FSAV, V, MS, ITAB, STIFN, FSKYI, ISKY, FCONT,
+     . NIN, LINDMAX, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, NSTRF, SECFCUM, ICONTACT, VISCN, NUM_IMP, NS_IMP, NE_IMP,
+     . IND_IMP, NRTMDIM, FNCONT, FTCONT, RCONTACT, ACONTACT, PCONTACT, INTSTAMP, WEIGHT, TEMP, FTHE, FTHESKYI,
+     . MSKYI_SMS, ISKYI_SMS, NODNX_SMS, NODGLOB, NPC, TF, QFRICINT, NCONT, INDEXCONT, TAGCONT, CONDN, CONDNSKYI, DT2T,
+     . NELTST, ITYPTST, KINET, FBSAV6, ISENSINT, DIMFB, NISKYFI, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER,
+     . DGAPLOADINT, S_LOADPINTER, INTEREFRIC, NODADT_THERM, THEACCFACT, INTBUF_FRIC_TAB)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -69,7 +58,6 @@ C-----------------------------------------------
       USE TIMER_MOD
       USE INTSTAMP_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MESSAGE_MOD
       USE MY_ALLOC_MOD
       USE INTBUF_FRIC_MOD
@@ -102,103 +90,71 @@ C-----------------------------------------------
       type(output_), intent(inout) :: output
       TYPE(TIMER_), INTENT(INOUT) :: TIMERS
       INTEGER NELTST, ITYPTST, NIN, NSTRF(*), NRTMDIM
-      INTEGER IPARI(NPARI,NINTER), ICODT(*),ICONTACT(*),
-     .        ITAB(*), ISKY(*), ISKYI_SMS(*), NODNX_SMS(*),
-     .         NODGLOB(*), NPC(*),INDEXCONT(*),
-     .        TAGCONT(*),KINET(*),
-     .        TAGNCONT(NLOADP_HYD_INTER,NUMNOD)
-      INTEGER NB_JLT,NB_JLT_NEW,NB_STOK_N,JTASK,
-     .        LINDMAX, NCONT,NISKYFI
-      INTEGER NUM_IMP,NS_IMP(*),NE_IMP(*),IND_IMP(*), WEIGHT(*), 
-     .        ISENSINT(*),DIMFB
-      INTEGER  , INTENT(IN) :: S_LOADPINTER
-      INTEGER  , INTENT(IN) :: KLOADPINTER(NINTER+1)
-      INTEGER  , INTENT(IN) :: LOADPINTER(S_LOADPINTER)
-      INTEGER  , INTENT(IN) :: LOADP_HYD_INTER(NLOADP_HYD)
-      INTEGER  , INTENT(IN) :: INTEREFRIC
-      INTEGER  , INTENT(IN) :: NODADT_THERM
+      INTEGER IPARI(NPARI,NINTER), ICODT(*), ICONTACT(*), ITAB(*), ISKY(*), ISKYI_SMS(*), NODNX_SMS(*), NODGLOB(*),
+     . NPC(*), INDEXCONT(*), TAGCONT(*), KINET(*), TAGNCONT(NLOADP_HYD_INTER,NUMNOD)
+      INTEGER NB_JLT, NB_JLT_NEW, NB_STOK_N, JTASK, LINDMAX, NCONT, NISKYFI
+      INTEGER NUM_IMP, NS_IMP(*), NE_IMP(*), IND_IMP(*), WEIGHT(*), ISENSINT(*), DIMFB
+      INTEGER  , INTENT(IN) ::  S_LOADPINTER
+      INTEGER  , INTENT(IN) ::  KLOADPINTER(NINTER+1)
+      INTEGER  , INTENT(IN) ::  LOADPINTER(S_LOADPINTER)
+      INTEGER  , INTENT(IN) ::  LOADP_HYD_INTER(NLOADP_HYD)
+      INTEGER  , INTENT(IN) ::  INTEREFRIC
+      INTEGER  , INTENT(IN) ::  NODADT_THERM
       ! 
-      my_real  , intent(in) :: theaccfact
-      my_real  , INTENT(IN) :: DGAPLOADINT(S_LOADPINTER)
-      my_real 
-     .   X(*), A(3,*), FSAV(*), V(3,*),
-     .   MS(*),STIFN(*),FSKYI(LSKYI,4), FCONT(3,*),
-     .   SECFCUM(7,NUMNOD,NSECT), VISCN(*),
-     .   FNCONT(3,*), FTCONT(3,*), RCONTACT(*), ACONTACT(*),
-     .   PCONTACT(*), TEMP(*), FTHE(*), FTHESKYI(LSKYI), MSKYI_SMS(*),
-     .   TF(*), QFRICINT(*),CONDN(*),CONDNSKYI(LSKYI), PSKIDS(*), DT2T
-      DOUBLE PRECISION FBSAV6(12,6,DIMFB)
+      my_real  , intent(in) ::  theaccfact
+      my_real  , INTENT(IN) ::  DGAPLOADINT(S_LOADPINTER)
+      my_real X(*), A(3,*), FSAV(*), V(3,*), MS(*), STIFN(*), FSKYI(LSKYI,4), FCONT(3,*), SECFCUM(7,NUMNOD,NSECT),
+     . VISCN(*), FNCONT(3,*), FTCONT(3,*), RCONTACT(*), ACONTACT(*), PCONTACT(*), TEMP(*), FTHE(*), FTHESKYI(LSKYI),
+     . MSKYI_SMS(*), TF(*), QFRICINT(*), CONDN(*), CONDNSKYI(LSKYI), DT2T
+      DOUBLE PRECISION  FBSAV6(12,6,DIMFB)
       TYPE(INTSTAMP_DATA) INTSTAMP
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(INTBUF_FRIC_STRUCT_), TARGET, DIMENSION(NINTERFRIC) ::  INTBUF_FRIC_TAB
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER I, I_STOK, JLT , NFT, J,
-     .        IBC, NOINT, ISECIN, IBAG, IADM,
-     .        IGAP, INACTI, IFQ, MFROT, IGSTI, NISUB,
-     .        NB_LOC, I_STOK_LOC,DEBUT,
-     .        INTTH,IFORM, MSTR, ILEV, IKTHE, IROT, H,
-     .        IFORM_THE,INVN,IFTLIM, IERROR, NINSKID,INTFRIC, 
-     .        NSETPRTS ,NPARTFRIC,JJ,IORTHFRIC,NTY
+      INTEGER I, I_STOK, JLT, NFT, J, IBC, NOINT, ISECIN, IBAG, IADM, IGAP, INACTI, IFQ, MFROT, IGSTI, NISUB, NB_LOC,
+     . I_STOK_LOC, DEBUT, INTTH, IFORM, MSTR, ILEV, IKTHE, IROT, H, IFORM_THE, INVN, IFTLIM, IERROR, INTFRIC, NSETPRTS,
+     . NPARTFRIC, JJ, IORTHFRIC, NTY
       INTEGER IX1(MVSIZ), IX2(MVSIZ), IX3(MVSIZ), IX4(MVSIZ),
      .        NSVG(MVSIZ),
      .        CAND_N_N(MVSIZ), CAND_E_N(MVSIZ), 
      .        NSMS(MVSIZ)
-      INTEGER,DIMENSION(:),ALLOCATABLE :: INDEX2
-      INTEGER :: NSN 
+      INTEGER,DIMENSION(:),ALLOCATABLE ::  INDEX2
+      INTEGER ::  NSN
 C     REAL
-      my_real
-     .   STARTT, FRIC, GAP, STOPT,
-     .   VISC,STIGLO,GAPMIN,VISCF,
-     .   KMIN, KMAX, GAPMAX, KTHE, XTHE, TINT, DTI ,PMAXSKID
+      my_real STARTT, FRIC, GAP, STOPT, VISC, STIGLO, GAPMIN, VISCF, KMIN, KMAX, GAPMAX, KTHE, XTHE, TINT, DTI
 C-----------------------------------------------
 C     REAL
-      my_real
-     .   LB(MVSIZ), LC(MVSIZ),
-     .   X1(MVSIZ), X2(MVSIZ), X3(MVSIZ), X4(MVSIZ),
-     .   Y1(MVSIZ), Y2(MVSIZ), Y3(MVSIZ), Y4(MVSIZ),
-     .   Z1(MVSIZ), Z2(MVSIZ), Z3(MVSIZ), Z4(MVSIZ),
-     .   XI(MVSIZ), YI(MVSIZ), ZI(MVSIZ), STIF(MVSIZ),
-     .   NX(MVSIZ), NY(MVSIZ), NZ(MVSIZ), PENE(MVSIZ),
-     .   GAPV(MVSIZ),VXI(MVSIZ),VYI(MVSIZ),VZI(MVSIZ),MSI(MVSIZ),
-     .   GAP0(MVSIZ), AREA0(MVSIZ), TEMPI(MVSIZ), PHI(MVSIZ),
-     .   MXI(MVSIZ), MYI(MVSIZ), MZI(MVSIZ), STRI(MVSIZ),
-     .   ASI(MVSIZ), BSI(MVSIZ),DIST(MVSIZ),
-     .   XP(MVSIZ), YP(MVSIZ), ZP(MVSIZ), KT(MVSIZ), C(MVSIZ),
-     .   PENRAD(MVSIZ), TEMPM(MVSIZ),EFRICT(MVSIZ),CONDINT(MVSIZ),
-     .   H1(MVSIZ), H2(MVSIZ), H3(MVSIZ), H4(MVSIZ),
-     .   PHI1(MVSIZ),PHI2(MVSIZ),PHI3(MVSIZ),PHI4(MVSIZ),PRATIO(MVSIZ),
-     .   EFRIC_L(MVSIZ)
+      my_real LB(MVSIZ), LC(MVSIZ), X1(MVSIZ), X2(MVSIZ), X3(MVSIZ), X4(MVSIZ), Y1(MVSIZ), Y2(MVSIZ), Y3(MVSIZ),
+     . Y4(MVSIZ), Z1(MVSIZ), Z2(MVSIZ), Z3(MVSIZ), Z4(MVSIZ), XI(MVSIZ), YI(MVSIZ), ZI(MVSIZ), STIF(MVSIZ), NX(MVSIZ),
+     . NY(MVSIZ), NZ(MVSIZ), PENE(MVSIZ), GAPV(MVSIZ), VXI(MVSIZ), VYI(MVSIZ), VZI(MVSIZ), MSI(MVSIZ), GAP0(MVSIZ),
+     . AREA0(MVSIZ), TEMPI(MVSIZ), PHI(MVSIZ), MXI(MVSIZ), MYI(MVSIZ), MZI(MVSIZ), STRI(MVSIZ), ASI(MVSIZ), BSI(MVSIZ),
+     . DIST(MVSIZ), XP(MVSIZ), YP(MVSIZ), ZP(MVSIZ), KT(MVSIZ), C(MVSIZ), PENRAD(MVSIZ), TEMPM(MVSIZ), EFRICT(MVSIZ),
+     . CONDINT(MVSIZ), H1(MVSIZ), H2(MVSIZ), H3(MVSIZ), H4(MVSIZ), PHI1(MVSIZ), PHI2(MVSIZ), PHI3(MVSIZ), PHI4(MVSIZ),
+     . EFRIC_L(MVSIZ)
       my_real
      .     RCURVI(MVSIZ), ANGLMI(MVSIZ), ANGLT, PADM
-      INTEGER   NRADM, ITRIA(MVSIZ)
-      my_real
-     .    FNI(MVSIZ),
-     .    FXT(MVSIZ), FYT(MVSIZ), FZT(MVSIZ),
-     .    FXN(MVSIZ), FYN(MVSIZ), FZN(MVSIZ),
-     .    VXM, VYM, VZM, PMAX,
-     .    XG(3), ROT(9), WXM, WYM, WZM, FRAD, DRAD, FHEAT, XFRIC,DCOND
-      INTEGER ICURV,SFSAVPARIT,IFRIC,FCOND
-      my_real
-     .     , DIMENSION(:,:,:), ALLOCATABLE :: FSAVPARIT
-      my_real
-     .    FRIC_COEFS(MVSIZ,10),VISCFFRIC(MVSIZ),FRICC(MVSIZ)
+      INTEGER NRADM, ITRIA(MVSIZ)
+      my_real FNI(MVSIZ), FXT(MVSIZ), FYT(MVSIZ), FZT(MVSIZ), FXN(MVSIZ), FYN(MVSIZ), FZN(MVSIZ), VXM, VYM, VZM, PMAX,
+     . XG(3), ROT(9), WXM, WYM, WZM, FRAD, DRAD, FHEAT, XFRIC, DCOND
+      INTEGER ICURV, SFSAVPARIT, IFRIC, FCOND
+      my_real , DIMENSION(:,:,:), ALLOCATABLE ::  FSAVPARIT
+      my_real FRIC_COEFS(MVSIZ,10), VISCFFRIC(MVSIZ), FRICC(MVSIZ)
 
       INTEGER IPARTFRICSI(MVSIZ), IPARTFRICMI(MVSIZ)
 
-      INTEGER, DIMENSION(:) ,POINTER  :: TABCOUPLEPARTS_FRIC
-      INTEGER, DIMENSION(:) ,POINTER  :: TABPARTS_FRIC 
-      INTEGER, DIMENSION(:) ,POINTER  :: ADPARTS_FRIC
-      INTEGER, DIMENSION(:) ,POINTER  :: IFRICORTH  
-      my_real, DIMENSION(:) ,POINTER  :: TABCOEF_FRIC
+      INTEGER, DIMENSION(:) ,POINTER  ::  TABCOUPLEPARTS_FRIC
+      INTEGER, DIMENSION(:) ,POINTER  ::  TABPARTS_FRIC
+      INTEGER, DIMENSION(:) ,POINTER  ::  ADPARTS_FRIC
+      INTEGER, DIMENSION(:) ,POINTER  ::  IFRICORTH
+      my_real, DIMENSION(:) ,POINTER  ::  TABCOEF_FRIC
  
-      INTEGER,TARGET, DIMENSION(1):: TABCOUPLEPARTS_FRIC_BID
-      INTEGER,TARGET, DIMENSION(1):: TABPARTS_FRIC_BID
-      INTEGER,TARGET, DIMENSION(1):: ADPARTS_FRIC_BID
-      INTEGER,TARGET, DIMENSION(1):: IFRICORTH_BID
-      my_real,TARGET, DIMENSION(1):: TABCOEF_FRIC_BID
+      INTEGER,TARGET, DIMENSION(1)::  TABCOUPLEPARTS_FRIC_BID
+      INTEGER,TARGET, DIMENSION(1)::  TABPARTS_FRIC_BID
+      INTEGER,TARGET, DIMENSION(1)::  ADPARTS_FRIC_BID
+      INTEGER,TARGET, DIMENSION(1)::  IFRICORTH_BID
+      my_real,TARGET, DIMENSION(1)::  TABCOEF_FRIC_BID
 C----------------------------------------------------
       call my_alloc(INDEX2, LINDMAX, "INDEX2")
 C----------------------------------------------------
@@ -271,13 +227,6 @@ C
       XG(1:3) =INTSTAMP%XG(1:3)
       ROT(1:9)=INTSTAMP%ROT(1:9)
 
-      NINSKID = 0
-      IF(H3D_DATA%N_SCAL_SKID > 0) THEN
-       NINSKID = H3D_DATA%N_SKID_INTER(NIN)
-      ENDIF
-      PMAXSKID=INTBUF_TAB%VARIABLES(35)
-
-C--- Corresponding Friction model  
       INTFRIC=IPARI(72,NIN)
       NSETPRTS = 0
       NPARTFRIC = 0
@@ -426,30 +375,13 @@ C-------------------------------------------------------------------------------
           IF (DEBUG(3)>=1)
      .      NB_JLT_NEW = NB_JLT_NEW + JLT         
 C
-              CALL I21FOR3(
-     1  JLT       ,NIN    ,NOINT        ,IBC    ,ICODT             ,
-     2  FSAV      ,GAP    ,STIGLO       ,VISC   ,INACTI            ,
-     3  MFROT     ,IFQ    ,IBAG         ,IADM   ,IPARI(39,NIN)     ,
-     4  STIF      ,GAPV   ,ITAB ,INTBUF_TAB%PENIS,INTBUF_TAB%ALPHA0,
-     5  INTBUF_TAB%IFPEN  ,ICONTACT     ,RCONTACT,ACONTACT ,PCONTACT,
-     6  NSVG      ,X1     ,Y1           ,Z1      ,X2                ,
-     7  Y2        ,Z2     ,X3           ,Y3      ,Z3                ,
-     8  X4        ,Y4     ,Z4           ,XI      ,YI                ,
-     9  ZI        ,VXI    ,VYI          ,VZI     ,MSI               ,
-     A  VXM       ,VYM    ,VZM          ,NX      ,NY                ,
-     B  NZ        ,PENE   ,FXT          ,FYT     ,FZT               ,
-     C  FXN       ,FYN    ,FZN          ,RCURVI  ,ANGLMI            ,
-     D  PADM      ,CAND_N_N,WEIGHT      ,IGAP    ,GAP0              ,
-     E  AREA0     ,PMAX   ,IROT         ,XG      ,MXI               ,
-     G  MYI       ,MZI    ,STRI         ,WXM     ,WYM               ,
-     H  WZM       ,XP     ,YP           ,ZP      ,KT                ,
-     I  C         ,ILEV   ,FNI          ,INTTH   ,FHEAT             ,
-     J  EFRICT    ,QFRICINT(NIN),IFRIC  ,XFRIC    ,TEMPI            ,
-     K  TEMPM     ,NPC       ,TF        ,IX1      ,IX2              ,
-     L  IX3       ,IX4       ,DT2T      ,NELTST   ,ITYPTST          ,
-     M  KINET     ,NISUB     ,ISENSINT  ,FSAVPARIT,NFT              ,
-     N  IFTLIM    ,NINSKID   ,PRATIO    ,PMAXSKID ,INTEREFRIC       ,
-     O  EFRIC_L   ,FRICC     ,FRIC_COEFS)
+      CALL I21FOR3(JLT, NIN, NOINT, IBC, ICODT, FSAV, GAP, STIGLO, VISC, INACTI, MFROT, IFQ, IBAG, IADM, IPARI(39,NIN),
+     . STIF, GAPV, ITAB, INTBUF_TAB%PENIS, INTBUF_TAB%ALPHA0, INTBUF_TAB%IFPEN, ICONTACT, RCONTACT, ACONTACT, PCONTACT,
+     . NSVG, X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4, XI, YI, ZI, VXI, VYI, VZI, MSI, VXM, VYM, VZM, NX, NY, NZ,
+     . PENE, FXT, FYT, FZT, FXN, FYN, FZN, RCURVI, ANGLMI, PADM, CAND_N_N, WEIGHT, IGAP, GAP0, AREA0, PMAX, IROT, XG,
+     . MXI, MYI, MZI, STRI, WXM, WYM, WZM, XP, YP, ZP, KT, C, ILEV, FNI, INTTH, FHEAT, EFRICT, QFRICINT(NIN), IFRIC,
+     . XFRIC, TEMPI, TEMPM, NPC, TF, IX1, IX2, IX3, IX4, DT2T, NELTST, ITYPTST, KINET, NISUB, ISENSINT, FSAVPARIT, NFT,
+     . IFTLIM, INTEREFRIC, EFRIC_L, FRICC, FRIC_COEFS)
 C
           IF( INTTH > 0 ) THEN 
            CALL I21THERM(JLT   ,XI     ,YI    ,ZI    ,KTHE  ,
@@ -482,26 +414,12 @@ C
             STIF(1:JLT)=ZERO
           END IF
 C
-            CALL I21ASS3(output, JLT       ,A        ,NIN      ,NOINT    ,FXN    ,
-     2      FYN      ,FZN      ,FXT      ,FYT      ,FZT    ,
-     3      IX1      ,IX2      ,IX3      ,IX4      ,NSVG   ,
-     4      FCONT    ,FNCONT   ,FTCONT   ,LB       ,LC     ,
-     5      ITRIA    ,STIFN    ,STIF     ,FSKYI    ,ISKY   ,
-     6      ISECIN   ,NSTRF    ,SECFCUM  ,INTBUF_TAB%FTSAVX,
-     .              INTBUF_TAB%FTSAVY,
-     7      INTBUF_TAB%FTSAVZ  ,CAND_N_N ,INTSTAMP,WEIGHT  ,
-     .              INTBUF_TAB%MSR21,
-     8      INTTH    ,PHI      ,FTHE   ,FTHESKYI  ,MXI     ,
-     9      MYI      ,MZI      ,STRI   ,NODGLOB   ,NCONT   ,
-     A      INDEXCONT,TAGCONT  ,CONDN  ,CONDINT   ,CONDNSKYI,
-     B                  IFORM_THE, PHI1    ,PHI2   ,PHI3      ,PHI4     ,
-     C                  H1       ,H2       ,H3     ,H4        ,NISKYFI  ,
-     D                  INTBUF_TAB%MSR_L   ,ITAB   ,H3D_DATA  ,NINSKID  ,
-     E                  PRATIO   ,H3D_DATA%N_SCAL_SKID,PSKIDS ,IPARI(95,NIN),
-     F                  TAGNCONT ,KLOADPINTER,LOADPINTER ,LOADP_HYD_INTER,
-     G                  DGAPLOADINT,DIST,GAPV,S_LOADPINTER    ,EFRIC_L  ,
-     H                  FHEAT     ,EFRICT ,INTEREFRIC , 
-     .                  NODADT_THERM)
+      CALL I21ASS3(output, JLT, A, NIN, NOINT, FXN, FYN, FZN, FXT, FYT, FZT, IX1, IX2, IX3, IX4, NSVG, FCONT, FNCONT,
+     . FTCONT, LB, LC, ITRIA, STIFN, STIF, FSKYI, ISKY, ISECIN, NSTRF, SECFCUM, INTBUF_TAB%FTSAVX, INTBUF_TAB%FTSAVY,
+     . INTBUF_TAB%FTSAVZ, CAND_N_N, INTSTAMP, WEIGHT, INTBUF_TAB%MSR21, INTTH, PHI, FTHE, FTHESKYI, MXI, MYI, MZI, STRI,
+     . NODGLOB, NCONT, INDEXCONT, TAGCONT, CONDN, CONDINT, CONDNSKYI, IFORM_THE, PHI1, PHI2, PHI3, PHI4, H1, H2, H3, H4,
+     . NISKYFI, INTBUF_TAB%MSR_L, ITAB, IPARI(95,NIN), TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, DGAPLOADINT,
+     . DIST, GAPV, S_LOADPINTER, EFRIC_L, FHEAT, EFRICT, INTEREFRIC, NODADT_THERM)
 C
           IF (IMONM > 0 .AND. JTASK == 1) CALL STOPTIME(TIMERS,20)
 C

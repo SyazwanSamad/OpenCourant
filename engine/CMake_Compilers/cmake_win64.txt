@@ -56,8 +56,6 @@ set ( RELNAME ${arch}${mpi_suf})
 # Third party libraries
 # ---------------------
 
-#H3D
-set (h3d_inc "-DH3D_DEFINE_BOOL -I${source_directory}/../extlib/h3d/includes")
 
 # Zlib
 set (zlib_inc "-I${source_directory}/../extlib/zlib/win64_mt/include")
@@ -168,18 +166,18 @@ set(Fortran "${FPP_FLAG}  /extend-source /assume:buffered_io")
 
 if ( debug STREQUAL "1" )
   set (fortran_flags "/nologo /Qopenmp ${opt_flag} /Od /debug:all /traceback /Zi /Qftz ${FPP_FLAG} /extend-source /assume:buffered_io ${precision_flag} ${Fortran} ${mpi_flag} ${mumps_flag} -DMETIS5 ${cppmach} ${cpprel} ${ADF}" )
-  set (c_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}" )
-  set (cpp_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11" )
+  set (c_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}" )
+  set (cpp_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Zi /Qftz ${precision_flag} -DMETIS5 ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11" )
 
 elseif ( debug STREQUAL "chkb" )
   set (fortran_flags "/nologo /Qopenmp ${opt_flag} /Od /debug:all /traceback /Zi /Qftz ${FPP_FLAG} /extend-source /assume:buffered_io ${precision_flag} ${Fortran} ${mpi_flag} ${mumps_flag} -DMETIS5 ${cppmach} ${cpprel} /check:bounds /check:uninit ${ADF}" )
-  set (c_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /check:bounds /check:uninit" )
-  set (cpp_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${h3d_inc} ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11 /check:bounds /check:uninit" )
+  set (c_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /check:bounds /check:uninit" )
+  set (cpp_flags "/nologo /Qopenmp ${optc_flag} /Od /debug:all /Qftz /Zi ${precision_flag} -DMETIS5 ${md5_inc} ${mpi_flag} ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc} /Qstd=c++11 /check:bounds /check:uninit" )
 
 else ()
-  set (fortran_flags "/nologo /O3 ${opt_flag} ${precision_flag} ${Vect_precise} ${Fortran} ${mpi_flag}  ${h3d_inc} ${mumps_flag} -DMETIS5 ${cppmach} ${cpprel} ${ADF}")
-  set (c_flags "/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${h3d_inc} ${md5_inc}  -DMETIS5  ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}")
-  set (cpp_flags "/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${h3d_inc} ${md5_inc} -DMETIS5 ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}")
+  set (fortran_flags "/nologo /O3 ${opt_flag} ${precision_flag} ${Vect_precise} ${Fortran} ${mpi_flag}  ${mumps_flag} -DMETIS5 ${cppmach} ${cpprel} ${ADF}")
+  set (c_flags "/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${md5_inc}  -DMETIS5  ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}")
+  set (cpp_flags "/nologo /O2 ${optc_flag} ${precision_flag} ${Vect_precise} ${mpi_flag} ${md5_inc} -DMETIS5 ${mumps_flag} ${cppmach} ${cpprel} ${zlib_inc}")
 endif()
 
 # Fortran

@@ -113,7 +113,6 @@ Copyright>        copyright and attribution statement.
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    group_mod                    ../engine/share/modules/group_mod.F
 !||    groupdef_mod                 ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    impbufdef_mod                ../engine/share/modules/impbufdef_mod.F
 !||    inoutfile_mod                ../common_source/modules/inoutfile_mod.F
 !||    int8_mod                     ../common_source/modules/interfaces/int8_mod.F90
@@ -157,17 +156,11 @@ Copyright>        copyright and attribution statement.
 !||    write_inivel_mod             ../engine/source/output/restart/write_inivel.F90
 !||    xfem2vars_mod                ../engine/share/modules/xfem2vars_mod.F
 !||====================================================================
-      SUBROUTINE WRRESTP(ELEMENTS, NODES, AF         ,IAF      ,ICH       ,ADDCNE,
-     .                   ELBUF_TAB  ,XFEM_TAB        ,INTBUF_TAB ,MULTI_FVM   ,MAT_ELEM         ,
-     .                   H3D_DATA   ,INTBUF_FRIC_TAB ,SUBSET     ,PINCH_DATA  ,ALE_CONNECTIVITY ,
-     .                   T_MONVOL   ,SENSORS         ,EBCS_TAB   ,DYNAIN_DATA ,USER_WINDOWS     ,
-     .                   OUTPUT     ,INTERFACES      ,LOADS      ,PYTHON      ,NAMES_AND_TITLES ,
-     .                   EIGIPM     ,EIGIBUF         ,EIGRPM     ,NEIPM       ,LEIBUF           ,
-     .                   NERPM      ,IFLOW           ,RFLOW      ,LIFLOW      ,LRFLOW           ,
-     .                   IMPBUF_TAB ,IMPL_S          ,IMPL_S0    ,MCP         ,TEMP             ,
-     .                   FORNEQS    ,UNITAB          ,STACK      ,NDRAPE      ,DRAPE_SH3N       ,
-     .                   DRAPE_SH4N ,DRAPEG          ,RESTSIZE   ,SKEWS       ,GLOB_THERM       ,
-     .                   PBLAST     ,RBE3            ,RWALL      ,SFEM )
+      SUBROUTINE WRRESTP(ELEMENTS, NODES, AF, IAF, ICH, ADDCNE, ELBUF_TAB, XFEM_TAB, INTBUF_TAB, MULTI_FVM, MAT_ELEM,
+     . INTBUF_FRIC_TAB, SUBSET, PINCH_DATA, ALE_CONNECTIVITY, T_MONVOL, SENSORS, EBCS_TAB, DYNAIN_DATA, USER_WINDOWS,
+     . OUTPUT, INTERFACES, LOADS, PYTHON, NAMES_AND_TITLES, EIGIPM, EIGIBUF, EIGRPM, NEIPM, LEIBUF, NERPM, IFLOW, RFLOW,
+     . LIFLOW, LRFLOW, IMPBUF_TAB, IMPL_S, IMPL_S0, MCP, TEMP, FORNEQS, UNITAB, STACK, NDRAPE, DRAPE_SH3N, DRAPE_SH4N,
+     . DRAPEG, RESTSIZE, SKEWS, GLOB_THERM, PBLAST, RBE3, RWALL, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -184,7 +177,6 @@ C-----------------------------------------------
       USE CLUSTER_MOD
       USE ECND_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE INTBUF_FRIC_MOD
       USE GROUPDEF_MOD
       USE GROUP_MOD
@@ -254,7 +246,6 @@ C-----------------------------------------------
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT)               :: MULTI_FVM
 c     TYPE (CLUSTER_) ,DIMENSION(NCLUSTER) :: CLUSTER
-      TYPE(H3D_DATABASE), INTENT(IN)                      :: H3D_DATA
       TYPE(INTBUF_FRIC_STRUCT_) INTBUF_FRIC_TAB(*)
       TYPE(SUBSET_), TARGET, DIMENSION(NSUBS)             :: SUBSET
       TYPE(PINCH)                                         :: PINCH_DATA
@@ -360,8 +351,8 @@ C--------------------------------------
       IPARI0 = IPARIT
       SFR_ELEM = SIZE(NODES%BOUNDARY,1)
       SIAD_ELEM = SIZE(NODES%BOUNDARY_ADD,1) * SIZE(NODES%BOUNDARY_ADD,2)
-      CALL WRCOMI(OUTPUT,LMXVINT,LVARINT,TABVINT,1,MULTI_FVM,H3D_DATA,DYNAIN_DATA,
-     .     INTERFACES%PARAMETERS,SENSORS,LOADS,GLOB_THERM,PBLAST,SFEM)
+      CALL WRCOMI(OUTPUT, LMXVINT, LVARINT, TABVINT, 1, MULTI_FVM, DYNAIN_DATA, INTERFACES%PARAMETERS, SENSORS, LOADS,
+     . GLOB_THERM, PBLAST, SFEM)
 C
       ENTMP(1) = OUTPUT%TH%WFEXT
       ENTMP(2) = EHOUR
@@ -1451,14 +1442,6 @@ C--------------------------------------
           CALL INTSTAMP_WRESTR(INTSTAMP)
         END IF
 
-        IF(H3D_DATA%N_SCAL_SKID > 0) THEN
-         IF(NINTSTAMP/=0) THEN
-           CALL WRITE_DB(PSKIDS, H3D_DATA%N_SCAL_SKID*NUMNODG)
-         ELSE
-           CALL WRITE_DB(PSKIDS, H3D_DATA%N_SCAL_SKID*NUMNOD)
-         ENDIF
-       ENDIF
-
         IF(IFCONTMAX >0)THEN
           IF(NINTSTAMP/=0.AND.NSPMD > 1 ) THEN
              IF(ISPMD == 0) CALL WRITE_DB(FCONT_MAX, 3*NUMNODG)
@@ -1467,29 +1450,6 @@ C--------------------------------------
          ENDIF
         ENDIF
 
-        IF(IFCONTPMAX >0)THEN
-          CALL WRITE_DB(FNCONT_MAX, 3*SPCONT_MAX)
-          CALL WRITE_DB(FTCONT_MAX, 3*SPCONT_MAX)
-        ENDIF
-
-        IF(IFCONT2MAX >0)THEN
-          CALL WRITE_DB(FCONT2_MAX, 3*NUMNOD)
-        ENDIF
-        IF(IFCONTP2MAX >0)THEN
-          CALL WRITE_DB(FNCONT2_MAX, 3*NUMNOD)
-          CALL WRITE_DB(FTCONT2_MAX, 3*NUMNOD)
-          CALL WRITE_DB(NPCONT2_MAX, 3*NUMNOD)
-        ENDIF
-
-        IF(IFCONT2MIN >0)THEN
-          CALL WRITE_DB(FCONT2_MIN, 3*NUMNOD)
-        ENDIF
-        IF(IFCONTP2MIN >0)THEN
-          CALL WRITE_DB(FNCONT2_MIN, 3*NUMNOD)
-          CALL WRITE_DB(FTCONT2_MIN, 3*NUMNOD)
-          CALL WRITE_DB(NPCONT2_MIN, 3*NUMNOD)
-        ENDIF
-C--------Frictional energy output-------
       IF(OUTPUT%DATA%S_EFRICINT >0)THEN
          IF(OUTPUT%DATA%NINEFRIC > 0) CALL WRITE_DB(OUTPUT%DATA%EFRIC, OUTPUT%DATA%NINEFRIC*NUMNOD)
          IF(OUTPUT%DATA%NINEFRIC_STAMP > 0) CALL WRITE_DB(OUTPUT%DATA%EFRIC_STAMP, OUTPUT%DATA%NINEFRIC_STAMP*NUMNODG)

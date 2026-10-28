@@ -1,0 +1,291 @@
+{
+  "platform": "nt",
+  "reader_calls": {
+    "cpp_add_rbody_main_node": [
+      "starter\\source\\devtools\\reader\\hm_rbodies_add_main_node.F90"
+    ],
+    "cpp_beam_read": [
+      "starter\\source\\elements\\reader\\hm_read_beam.F"
+    ],
+    "cpp_brick20_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_brick_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_build_model_inc": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_cnode_read": [
+      "starter\\source\\elements\\reader\\hm_read_node.F"
+    ],
+    "cpp_convert_2d_elements_seatbelt": [
+      "starter\\source\\devtools\\reader\\hm_convert_2d_elements_seatbelt.F"
+    ],
+    "cpp_convert_fail_tab": [
+      "starter\\source\\devtools\\reader\\hm_convert_fail_tab.F"
+    ],
+    "cpp_convert_inter_type19": [
+      "starter\\source\\devtools\\reader\\hm_convert_inter_type19.F"
+    ],
+    "cpp_convert_tetra4_to_tetra10": [
+      "starter\\source\\devtools\\reader\\hm_convert_tetra4_to_tetra10.F90"
+    ],
+    "cpp_convert_th_2d_element_seatbelt": [
+      "starter\\source\\devtools\\reader\\hm_convert_2d_elements_seatbelt.F"
+    ],
+    "cpp_count_elements_in_part": [
+      "starter\\source\\devtools\\reader\\hm_count_2d_element_seatbelt.F"
+    ],
+    "cpp_create_rbodies_from_rigid_parts": [
+      "starter\\source\\devtools\\reader\\hm_create_rbodies_from_rigid_parts.F90"
+    ],
+    "cpp_current_option": [
+      "starter\\source\\devtools\\reader\\hm_get_current_option.F"
+    ],
+    "cpp_debug_global_entity_sdi_write": [
+      "starter\\source\\devtools\\reader\\hm_debug_print_option.F"
+    ],
+    "cpp_debug_model_close_file": [
+      "starter\\source\\devtools\\reader\\hm_debug_print_option.F"
+    ],
+    "cpp_debug_model_open_file": [
+      "starter\\source\\devtools\\reader\\hm_debug_print_option.F"
+    ],
+    "cpp_delete_entity": [
+      "starter\\source\\devtools\\reader\\hm_convert_fail_tab.F",
+      "starter\\source\\devtools\\reader\\hm_convert_inter_type19.F"
+    ],
+    "cpp_delete_model": [
+      "starter\\source\\starter\\lectur.F",
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_elem_count": [
+      "starter\\source\\devtools\\reader\\hm_elem_count.F"
+    ],
+    "cpp_elem_sub_tag": [
+      "starter\\source\\groups\\hm_submodgr.F"
+    ],
+    "cpp_entity_reference_number": [
+      "starter\\source\\devtools\\reader\\hm_entity_reference_number.F"
+    ],
+    "cpp_evaluate_rbodies_number_from_rigid_parts": [
+      "starter\\source\\devtools\\reader\\hm_evaluate_rbodies_from_rigid_parts.F90"
+    ],
+    "cpp_find_dyna_mess": [
+      "starter\\source\\output\\message\\message.F"
+    ],
+    "cpp_get_boolv": [
+      "starter\\source\\devtools\\reader\\hm_get_boolv.F"
+    ],
+    "cpp_get_float_array": [
+      "starter\\source\\devtools\\reader\\hm_get_float_array.F"
+    ],
+    "cpp_get_floatv_2index": [
+      "starter\\source\\devtools\\reader\\hm_get_float_array_2indexes.F"
+    ],
+    "cpp_get_floatv_floatd": [
+      "starter\\source\\devtools\\reader\\hm_get_floatv.F",
+      "starter\\source\\devtools\\reader\\hm_get_floatv_dim.F"
+    ],
+    "cpp_get_floatv_floatd_index": [
+      "starter\\source\\devtools\\reader\\hm_get_float_array_index.F",
+      "starter\\source\\devtools\\reader\\hm_get_float_array_index_dim.F"
+    ],
+    "cpp_get_floatv_only": [
+      "starter\\source\\devtools\\reader\\hm_get_floatv_without_uid.F"
+    ],
+    "cpp_get_include_file_by_index": [
+      "starter\\source\\devtools\\reader\\write_include_files_list.F90"
+    ],
+    "cpp_get_intv": [
+      "starter\\source\\devtools\\reader\\hm_get_intv.F"
+    ],
+    "cpp_get_intv_2index": [
+      "starter\\source\\devtools\\reader\\hm_get_int_array_2indexes.F"
+    ],
+    "cpp_get_intv_index": [
+      "starter\\source\\devtools\\reader\\hm_get_int_array_index.F"
+    ],
+    "cpp_get_message_dyna": [
+      "starter\\source\\devtools\\reader\\hm_messages.F"
+    ],
+    "cpp_get_message_number_dyna": [
+      "starter\\source\\devtools\\reader\\hm_messages.F"
+    ],
+    "cpp_get_message_number_radioss": [
+      "starter\\source\\devtools\\reader\\hm_messages.F"
+    ],
+    "cpp_get_message_radioss": [
+      "starter\\source\\devtools\\reader\\hm_messages.F"
+    ],
+    "cpp_get_number_of_include_files": [
+      "starter\\source\\devtools\\reader\\write_include_files_list.F90"
+    ],
+    "cpp_get_string": [
+      "starter\\source\\devtools\\reader\\hm_get_string.F"
+    ],
+    "cpp_get_string_index": [
+      "starter\\source\\devtools\\reader\\hm_get_string_index.F"
+    ],
+    "cpp_get_submodel_index": [
+      "starter\\source\\devtools\\reader\\hm_convert_2d_elements_seatbelt.F"
+    ],
+    "cpp_global_entity_sdi_write": [
+      "starter\\source\\general_controls\\engine\\read_engine_driver.F"
+    ],
+    "cpp_group_is_used": [
+      "starter\\source\\devtools\\reader\\hm_group_is_used.F"
+    ],
+    "cpp_is_part_with_elements": [
+      "starter\\source\\devtools\\reader\\hm_is_part_with_elements.F90"
+    ],
+    "cpp_model_close_file": [
+      "starter\\source\\general_controls\\engine\\read_engine_driver.F"
+    ],
+    "cpp_model_open_file": [
+      "starter\\source\\general_controls\\engine\\read_engine_driver.F"
+    ],
+    "cpp_node_count": [
+      "starter\\source\\elements\\ige3d\\nbadigemesh.F",
+      "starter\\source\\model\\remesh\\nbadmesh.F",
+      "starter\\source\\model\\submodel\\lectranssub.F"
+    ],
+    "cpp_node_id_read": [
+      "starter\\source\\elements\\ige3d\\nbadigemesh.F",
+      "starter\\source\\model\\remesh\\nbadmesh.F"
+    ],
+    "cpp_node_read": [
+      "starter\\source\\elements\\reader\\hm_read_node.F"
+    ],
+    "cpp_node_sub_tag": [
+      "starter\\source\\groups\\hm_submodgr.F",
+      "starter\\source\\model\\sets\\create_subm_clause.F",
+      "starter\\source\\model\\submodel\\lecsubmod.F",
+      "starter\\source\\model\\submodel\\lectranssub.F"
+    ],
+    "cpp_node_sub_tag_dyna": [
+      "starter\\source\\model\\submodel\\lecsubmod.F",
+      "starter\\source\\model\\submodel\\lectranssub.F"
+    ],
+    "cpp_nodes_count": [
+      "starter\\source\\elements\\reader\\hm_read_node.F",
+      "starter\\source\\groups\\hm_submodgr.F",
+      "starter\\source\\model\\submodel\\lecsubmod.F",
+      "starter\\source\\starter\\contrl.F"
+    ],
+    "cpp_nodes_read": [
+      "starter\\source\\elements\\reader\\hm_preread_node.F"
+    ],
+    "cpp_option_count": [
+      "starter\\source\\devtools\\reader\\hm_option_count.F"
+    ],
+    "cpp_option_is_crypted": [
+      "starter\\source\\devtools\\reader\\hm_option_is_encrypted.F"
+    ],
+    "cpp_option_next": [
+      "starter\\source\\devtools\\reader\\hm_option_next.F"
+    ],
+    "cpp_option_read": [
+      "starter\\source\\devtools\\reader\\hm_get_max_id.F",
+      "starter\\source\\devtools\\reader\\hm_option_read.F",
+      "starter\\source\\devtools\\reader\\hm_option_read_key.F"
+    ],
+    "cpp_option_start": [
+      "starter\\source\\devtools\\reader\\hm_option_start.F"
+    ],
+    "cpp_option_start_list": [
+      "starter\\source\\devtools\\reader\\hm_option_start.F"
+    ],
+    "cpp_penta6_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_print_dyna": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_print_parameters": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_quad_read": [
+      "starter\\source\\elements\\reader\\hm_read_quad.F"
+    ],
+    "cpp_read_dyna_and_convert": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_rivet_read": [
+      "starter\\source\\elements\\reader\\hm_read_rivet.F"
+    ],
+    "cpp_select_option_by_name": [
+      "starter\\source\\devtools\\reader\\hm_select_option_by_name.F"
+    ],
+    "cpp_set_floatv": [
+      "starter\\source\\devtools\\reader\\hm_set_floatv.F"
+    ],
+    "cpp_set_intv": [
+      "starter\\source\\devtools\\reader\\hm_set_intv.F"
+    ],
+    "cpp_sh3n_read": [
+      "starter\\source\\elements\\reader\\hm_read_sh3n.F",
+      "starter\\source\\model\\remesh\\nbadmesh.F"
+    ],
+    "cpp_shel16_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_shell_read": [
+      "starter\\source\\elements\\reader\\hm_read_shell.F",
+      "starter\\source\\model\\remesh\\nbadmesh.F"
+    ],
+    "cpp_sphcel_read": [
+      "starter\\source\\elements\\reader\\hm_read_sphcel.F"
+    ],
+    "cpp_spring_read": [
+      "starter\\source\\elements\\reader\\hm_read_spring.F"
+    ],
+    "cpp_submodel_build": [
+      "starter\\source\\model\\assembling\\hm_read_submodel.F"
+    ],
+    "cpp_submodel_count": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "cpp_tetra10_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_tetra4_read": [
+      "starter\\source\\elements\\reader\\hm_read_solid.F"
+    ],
+    "cpp_tria_read": [
+      "starter\\source\\elements\\reader\\hm_read_tria.F"
+    ],
+    "cpp_truss_read": [
+      "starter\\source\\elements\\reader\\hm_read_truss.F"
+    ],
+    "cpp_xelem_preread": [
+      "starter\\source\\elements\\reader\\hm_preread_xelem.F"
+    ],
+    "cpp_xelem_read": [
+      "starter\\source\\elements\\reader\\hm_read_xelem.F"
+    ],
+    "hm_reader_variables": [
+      "starter\\source\\starter\\starter0.F"
+    ],
+    "open_reader_build_id": [
+      "starter\\source\\starter\\execargcheck.F"
+    ]
+  },
+  "local_calls": [
+    "cpp_count_candidates",
+    "cpp_reorder_elements",
+    "cpp_table_mat_spline_fit",
+    "deck_checksum_count",
+    "deck_checksum_creation",
+    "deck_checksum_read",
+    "st_userlib_cini",
+    "wrap_metis_partgraphkway",
+    "wrap_metis_partgraphkway_part",
+    "wrap_metis_partgraphrecursive",
+    "wrap_metis_partgraphrecursive_part"
+  ],
+  "guarded_missing": {},
+  "missing_exports": {},
+  "unresolved": []
+}

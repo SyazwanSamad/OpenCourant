@@ -21,7 +21,6 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    szsigpara       ../engine/source/elements/solid/solidez/szsigpara.F
 !||--- called by ------------------------------------------------------
-!||    strs_tenscor3   ../engine/source/output/h3d/h3d_results/strs_tenscor3.F
 !||    tensgps3        ../engine/source/output/anim/generate/tensor6.F
 !||    tensgps_skin    ../engine/source/output/anim/generate/tensor6.F
 !||====================================================================

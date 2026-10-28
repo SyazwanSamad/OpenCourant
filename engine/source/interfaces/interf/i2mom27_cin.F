@@ -23,18 +23,13 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    i2for27       ../engine/source/interfaces/interf/i2for27.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||    outmax_mod    ../common_source/modules/outmax_mod.F
 !||====================================================================
-      SUBROUTINE I2MOM27_CIN(NSN ,NMN     ,AR      ,IRECT    ,CRST    ,
-     2               MSR     ,NSV     ,IRTL    ,IN       ,MS      ,
-     3               A       ,X       ,WEIGHT  ,STIFR    ,STIFN   ,
-     4               IDEL2   ,SMASS   ,SINER   ,NMAS     ,ADI     ,
-     5               INDXC   ,MINER   ,H3D_DATA,MSEGTYP2 ,CSTS_BIS)
+      SUBROUTINE I2MOM27_CIN(NSN, NMN, AR, IRECT, CRST, MSR, NSV, IRTL, IN, MS, A, X, WEIGHT, STIFR, STIFN, IDEL2,
+     . SMASS, SINER, NMAS, ADI, INDXC, MINER, MSEGTYP2, CSTS_BIS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTMAX_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -50,10 +45,6 @@ C     REAL
      .   A(3,*), AR(3,*),CRST(2,*), MS(*),
      .   X(3,*),IN(*),STIFR(*),STIFN(*), SMASS(*), SINER(*),
      .   NMAS(*),ADI(*),MINER(*),CSTS_BIS(2,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
 #include      "impl1_c.inc"
@@ -69,7 +60,7 @@ C     REAL
      .   STF,AI,H2(4)
 C=======================================================================
 C     MINER(II) initialise a MS(J) in resol_init
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
         DO II=1,NMN
           J=MSR(II)
           ADI(J) = ADI(J)*NMAS(II)
@@ -153,25 +144,13 @@ C
 C
         W = WEIGHT(I)
         AI=AA * MS(I) * W
-        IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
           DO JJ=1,NIR
             J=IRECT(JJ,L)
             ADI(J)=ADI(J)+AI*H(JJ)
           END DO
         END IF
 C
-        IF (H3D_DATA%N_VECT_CONT2M > 0) THEN
-          MCONT2(1,I) =  -AR(1,I)*W
-          MCONT2(2,I) =  -AR(2,I)*W
-          MCONT2(3,I) =  -AR(3,I)*W
-          DO JJ=1,NIR
-            J=IRECT(JJ,L)
-            MCONT2(1,J) = MCONT2(1,J) + MXI*H(JJ)*W
-            MCONT2(2,J) = MCONT2(2,J) + MYI*H(JJ)*W
-            MCONT2(3,J) = MCONT2(3,J) + MZI*H(JJ)*W
-          ENDDO
-        ENDIF
-C         
         DO JJ=1,NIR
          J=IRECT(JJ,L)
          IF (MSEGTYP2(L)==1) THEN
@@ -288,25 +267,13 @@ C
 C
         W = WEIGHT(I)
         AI=AA * MS(I) * W
-        IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
           DO JJ=1,4
             J=IRECT(JJ,L)
             ADI(J)=ADI(J)+AI*H(JJ)
           END DO
         END IF
 C
-        IF (H3D_DATA%N_VECT_CONT2M > 0) THEN
-          MCONT2(1,I) =  -AR(1,I)*W
-          MCONT2(2,I) =  -AR(2,I)*W
-          MCONT2(3,I) =  -AR(3,I)*W
-          DO JJ=1,NIR
-            J=IRECT(JJ,L)
-            MCONT2(1,J) = MCONT2(1,J) + MXI*H(JJ)*W
-            MCONT2(2,J) = MCONT2(2,J) + MYI*H(JJ)*W
-            MCONT2(3,J) = MCONT2(3,J) + MZI*H(JJ)*W
-          ENDDO
-        ENDIF
-C        
         DO JJ=1,4
          J=IRECT(JJ,L)
          IF (MSEGTYP2(L)==1) THEN
@@ -332,7 +299,7 @@ C
       ENDIF
 C
 C
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
 #include "vectorize.inc"
         DO II=1,NMN
           J=MSR(II)

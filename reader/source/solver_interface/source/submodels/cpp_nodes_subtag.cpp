@@ -98,6 +98,12 @@ CDECL void c_node_sub_tag__(int *TAGNODSUB)
 CDECL void c_node_sub_tag(int *TAGNODSUB)
 {cpp_node_sub_tag_ (TAGNODSUB);}
 
+CDECL void cpp_node_sub_tag(int *TAGNODSUB)
+{cpp_node_sub_tag_ (TAGNODSUB);}
+
+CDECL void cpp_node_sub_tag__(int *TAGNODSUB)
+{cpp_node_sub_tag_ (TAGNODSUB);}
+
 
 CDECL void cpp_node_sub_tag_dyna_(int *TAGNODSUB, int *IDNOD)
 {
@@ -138,6 +144,12 @@ CDECL void c_node_sub_tag_dyna__(int *TAGNODSUB, int *IDNOD)
 {cpp_node_sub_tag_dyna_ (TAGNODSUB,IDNOD);}
 
 CDECL void c_node_sub_tag_dyna(int *TAGNODSUB, int *IDNOD)
+{cpp_node_sub_tag_dyna_ (TAGNODSUB,IDNOD);}
+
+CDECL void cpp_node_sub_tag_dyna(int *TAGNODSUB, int *IDNOD)
+{cpp_node_sub_tag_dyna_ (TAGNODSUB,IDNOD);}
+
+CDECL void cpp_node_sub_tag_dyna__(int *TAGNODSUB, int *IDNOD)
 {cpp_node_sub_tag_dyna_ (TAGNODSUB,IDNOD);}
 
 

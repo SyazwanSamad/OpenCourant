@@ -284,20 +284,6 @@ C             insertion sort NEWNN by ascending ITAB(INDX(NN)) (global id)
         ENDDO
 
 C--- [NLOC_NBCC] Print send/receive sizes per rank-pair at cycle 0 (split cycle)
-        IF (.FALSE.) THEN  ! [NLOC_NBCC] debug disabled
-          DO J=1,NSPMD
-            IF (NLOC_DMG%FR_NBCC(1,J) > 0 .OR.
-     .          NLOC_DMG%FR_NBCC(2,J) > 0) THEN
-              WRITE(*,'(A,I2,A,I2,A,I8,A,I8)')
-     .          '[NLOC_NBCC] r=', LOC_PROC-1,
-     .          ' <-> r=', J-1,
-     .          ' send=', NLOC_DMG%FR_NBCC(1,J),
-     .          ' recv=', NLOC_DMG%FR_NBCC(2,J)
-            ENDIF
-          ENDDO
-          FLUSH(6)
-        ENDIF
-
         NLOC_DMG%IADSDP(NSPMD+1)=LSD
         NLOC_DMG%IADRCP(NSPMD+1)=LRD
  9001   FORMAT('[DBG_SUB_SEND] r=',I2,' p=',I2,' nn=',I7,' cc=',I8,

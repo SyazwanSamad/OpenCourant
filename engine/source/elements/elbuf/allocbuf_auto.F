@@ -26,7 +26,6 @@ Copyright>        copyright and attribution statement.
 !||    read_db          ../common_source/tools/input_output/read_db.F
 !||    read_dpdb        ../common_source/tools/input_output/read_db.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_inc_mod      ../engine/share/modules/h3d_inc_mod.F
 !||    mat_elem_mod     ../common_source/modules/mat_elem/mat_elem_mod.F90
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
@@ -37,10 +36,6 @@ C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MAT_ELEM_MOD    
-      USE H3D_INC_MOD          
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"

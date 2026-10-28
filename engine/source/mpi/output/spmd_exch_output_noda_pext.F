@@ -44,10 +44,7 @@ Copyright>        copyright and attribution statement.
 !||    spmd_gather_nodal_scalar_mod   ../engine/source/mpi/nodes/spmd_gather_nodal_scalar.F
 !||    th_mod                         ../engine/share/modules/th_mod.F
 !||====================================================================
-          SUBROUTINE spmd_exch_output_noda_pext(OUTPUT, NSPMD, NODES, NUMNOD, NUMNODG,
-     .                                           TRIGGER_TH,
-     .                                           TRIGGER_ANIM,
-     .                                           TRIGGER_H3D)
+      SUBROUTINE spmd_exch_output_noda_pext(OUTPUT, NSPMD, NODES, NUMNOD, NUMNODG, TRIGGER_TH, TRIGGER_ANIM)
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Modules
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -65,7 +62,6 @@ Copyright>        copyright and attribution statement.
 ! ----------------------------------------------------------------------------------------------------------------------
             TYPE(OUTPUT_), INTENT(INOUT) :: OUTPUT
             LOGICAL,INTENT(IN) :: TRIGGER_ANIM
-            LOGICAL,INTENT(IN) :: TRIGGER_H3D
             LOGICAL,INTENT(IN) :: TRIGGER_TH
             INTEGER,INTENT(IN) :: NSPMD
             INTEGER,INTENT(IN) :: NUMNOD
@@ -78,9 +74,8 @@ Copyright>        copyright and attribution statement.
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Body
 ! ----------------------------------------------------------------------------------------------------------------------
-            IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%ANIM_HAS_NODA_PEXT > 0 
-     .          .OR. OUTPUT%DATA%H3D_HAS_NODA_PEXT > 0 )THEN
-              IF(TRIGGER_ANIM .OR. TRIGGER_TH .OR. TRIGGER_H3D)THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0)THEN
+      IF(TRIGGER_ANIM.OR.TRIGGER_TH.OR.0)THEN
                 IF(NSPMD > 1)THEN
                   LENR = NODES%BOUNDARY_ADD(1,NSPMD+1)-NODES%BOUNDARY_ADD(1,1)
                   !exchange between domains which have common nodes

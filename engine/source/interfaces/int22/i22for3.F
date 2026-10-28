@@ -30,36 +30,17 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod     ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod      ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    i22bufbric_mod   ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    i22tri_mod       ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    output_mod       ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I22FOR3(OUTPUT, JLT       ,A        ,V         ,IBC      ,ICODT  ,
-     2                   FSAV      ,GAP      ,FRIC      ,MS       ,VISC   ,
-     3                   VISCF     ,NOINT    ,STFN      ,ITAB     ,CB_LOC ,
-     4                   STIGLO    ,STIFN    ,STIF      ,FSKYI    ,ISKY   ,
-     6                   NX1       ,NX2      ,NX3       ,NX4      ,NY1    ,
-     7                   NY2       ,NY3      ,NY4       ,NZ1      ,NZ2    ,
-     8                   NZ3       ,NZ4      ,LB1       ,LB2      ,LB3    ,
-     9                   LB4       ,LC1      ,LC2       ,LC3      ,LC4    ,
-     A                   P1        ,P2       ,P3        ,P4       ,FCONT  ,
-     B                   IX1       ,IX2      ,IX3       ,IX4      ,NSVG   ,
-     C                   IVIS2     ,NELTST   ,ITYPTST   ,DT2T     ,INTTH  ,
-     D                   GAPV      ,INACTI   ,CAND_P    ,INDEX    ,NISKYFI,
-     E                   KINET     ,NEWFRONT ,ISECIN    ,NSTRF    ,SECFCUM,
-     F                   X         ,IRECT    ,CE_LOC    ,MFROT    ,IFQ    ,
-     G                   FROT_P    ,CAND_FX  ,CAND_FY   ,CAND_FZ  ,ALPHA0,
-     H                   IFPEN     ,IBAG     ,ICONTACT ,
-     J                   VISCN     ,VXI      ,VYI       ,VZI      ,MSI    ,
-     K                   KINI      ,NIN      ,NISUB     ,LISUB    ,ADDSUBS,
-     L                   ADDSUBM   ,LISUBS   ,LISUBM    ,FSAVSUB  ,CAND_N ,
-     M                   ILAGM     ,ICURV    ,PRES      ,FNCONT   ,MS0    ,
-     N                   N_SCUT    ,N_SURF   ,CoG       ,CAND_E   ,Swet   ,
-     O                   ELBUF_TAB ,X1       ,X2        ,X3       ,X4     ,
-     3                   Y1        ,Y2       ,Y3        ,Y4       ,Z1     ,
-     4                   Z2        ,Z3       ,Z4        ,IXS      ,NV46   ,
-     5                   Delta     ,ISENSINT ,FSAVPARIT ,IPARG    ,H3D_DATA)
+      SUBROUTINE I22FOR3(OUTPUT, JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, STFN, ITAB, CB_LOC,
+     . STIGLO, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4,
+     . LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, NSVG, IVIS2, NELTST, ITYPTST, DT2T, INTTH, GAPV,
+     . INACTI, CAND_P, INDEX, NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF, SECFCUM, X, IRECT, CE_LOC, MFROT, IFQ, FROT_P,
+     . CAND_FX, CAND_FY, CAND_FZ, ALPHA0, IFPEN, IBAG, ICONTACT, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB, LISUB,
+     . ADDSUBS, ADDSUBM, LISUBS, LISUBM, FSAVSUB, CAND_N, ILAGM, ICURV, PRES, FNCONT, MS0, N_SCUT, N_SURF, CoG, CAND_E,
+     . Swet, ELBUF_TAB, X1, X2, X3, X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, IXS, NV46, Delta, ISENSINT, FSAVPARIT, IPARG)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -72,7 +53,6 @@ C-----------------------------------------------
       USE ELBUFDEF_MOD  
       USE I22TRI_MOD
       USE I22BUFBRIC_MOD  
-      USE H3D_MOD 
       USE OUTPUT_MOD
       use element_mod , only : nixs
 C-----------------------------------------------
@@ -138,11 +118,6 @@ C-----------------------------------------------
      .   Y1(MVSIZ), Y2(MVSIZ), Y3(MVSIZ), Y4(MVSIZ),
      .   Z1(MVSIZ), Z2(MVSIZ), Z3(MVSIZ), Z4(MVSIZ),
      .   delta(4,NBCUT_MAX,MVSIZ),FSAVPARIT(NISUB+1,11,*),FACE
-      TYPE(H3D_DATABASE) :: H3D_DATA
-
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       TYPE(G_BUFEL_)  ,POINTER            :: GBUF1, GBUF2
       INTEGER I, J1, J2, IG, J, JG , K0,NBINTER,K1S,K,IL,IE, NN, NI,NA1,NA2
       INTEGER IBv, Jv, NBCUTv, IEv, LLT1, LLT2
@@ -712,7 +687,7 @@ C
       !---------------------------------!
       !       /ANIM/VECT/CONT           !
       !---------------------------------!
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
 #include "lockon.inc"
            DO I=1,JLT  
              IB    = CB_LOC(I)
@@ -755,10 +730,8 @@ C
       !---------------------------------!
       !       /ANIM/VECT/PCONT          !
       !---------------------------------!   
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
 #include "lockon.inc"
            DO I=1,JLT
              FNCONT(1,IX1(I)) =FNCONT(1,IX1(I)) + FXI(I)

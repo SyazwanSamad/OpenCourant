@@ -27,18 +27,16 @@ Copyright>        copyright and attribution statement.
 !||    spmd_rbcast            ../engine/source/mpi/generic/spmd_rbcast.F
 !||--- uses       -----------------------------------------------------
 !||    ale_mod                ../common_source/modules/ale/ale_mod.F
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    inoutfile_mod          ../common_source/modules/inoutfile_mod.F
 !||    names_and_titles_mod   ../common_source/modules/names_and_titles_mod.F
 !||    output_mod             ../common_source/modules/output/output_mod.F90
 !||    sensor_mod             ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE MANCTR(OUTPUT,SENSORS ,H3D_DATA)
+      SUBROUTINE MANCTR(OUTPUT, SENSORS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE NAMES_AND_TITLES_MOD, ONLY: NCHARLINE100
-      USE H3D_MOD         
       USE INOUTFILE_MOD
       USE SENSOR_MOD
       USE OUTPUT_MOD
@@ -65,18 +63,16 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       TYPE(OUTPUT_), INTENT(INOUT) :: OUTPUT
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSORS_) ,INTENT(INOUT) :: SENSORS
 C-----------------------------------------------
 C   L o c a l   P a r a m e t e r s
 C-----------------------------------------------
       INTEGER NKEY,I
-      PARAMETER (NKEY = 13)
+      PARAMETER (NKEY = 12)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER MANIM0, MREST0, MSTOP0, MFILR, MCYCLE, LK2, IKEY, WMCHECK0, 
-     .   MSG_R2R,ICTLSTOP0, MH3D0,SENS_ID
+      INTEGER MANIM0, MREST0, MSTOP0, MFILR, MCYCLE, LK2, IKEY, WMCHECK0, MSG_R2R,ICTLSTOP0,SENS_ID
       my_real TMPMAN(50), TMAN
       CHARACTER FILNAM*100, KEY2*80, FMT*80, KEY0(NKEY)*5,REC*1
       CHARACTER(LEN=NCHARLINE100)::CARTE
@@ -87,7 +83,7 @@ C   E x t e r n a l   F u n c t i o n s
 C-----------------------------------------------
 C     REAL
 C-----------------------------------------------
-      SAVE MANIM0,MREST0,MSTOP0,MFILR,KEY0,ICTLSTOP0,MH3D0
+      SAVE MANIM0,MREST0,MSTOP0,MFILR,KEY0,ICTLSTOP0
       DATA MFILR/0/
       DATA MANIM0/0/
       DATA MREST0/0/
@@ -96,10 +92,8 @@ C-----------------------------------------------
       DATA TMAN/0.0/
       DATA WMCHECK0/0/
       DATA ICTLSTOP0/0/
-      DATA MH3D0/0/
       DATA KEY0/'TIME ','CYCLE','GFILE','PATRA','RFILE','STOP ',
-     .          'KILL ','INFO ','ANIM ','OUTP ','LFLUS','CHKPT',
-     .          'H3D  '/  
+     .          'KILL ','INFO ','ANIM ','OUTP ','LFLUS','CHKPT'/
 C-----------------------------
 C     INTERVENTION MANUELLE
 C-----------------------------
@@ -108,9 +102,6 @@ C-----------------------------
       MANIM=0
       MSTOP=0
       WMCHECK = 0
-      H3D_DATA%MH3D=0
-      MH3D0=0
-
       MSG_R2R = 0
       IF ((IRAD2R==1).AND.(NCYCLE<2)) R2R_MFILR = 0   
 C
@@ -157,26 +148,6 @@ c
          ENDDO
        ENDIF
 c
-       IF(H3D_DATA%N_SENS_H3D>0)THEN
-         DO I=1,H3D_DATA%N_SENS_H3D
-           IF(H3D_DATA%LSENS_H3D(I)>0)THEN
-             IF (TT > SENSORS%SENSOR_TAB(H3D_DATA%LSENS_H3D(I))%TSTART) THEN
-C           ACTIVATION
-               H3D_DATA%LSENS_H3D(I)=-H3D_DATA%LSENS_H3D(I)
-               H3D_DATA%MH3D=1
-             ENDIF
-           ELSEIF (H3D_DATA%LSENS_H3D(I)<0) THEN
-             IF (TT < SENSORS%SENSOR_TAB(-H3D_DATA%LSENS_H3D(I))%TSTART) THEN
-C           DEACTIVATION
-               H3D_DATA%LSENS_H3D(I)=-H3D_DATA%LSENS_H3D(I)
-             ENDIF
-           ENDIF
-         ENDDO
-       ENDIF
-C-----------------------------
-C     INTERVENTION MANUELLE
-C-----------------------------
-C
       IF((NCYCLE/NCINP)*NCINP==NCYCLE)THEN
        IF(ISPMD==0)THEN
         FILNAM=ROOTNAM(1:ROOTLEN)//'_'//CHRUN//'.ctl'
@@ -196,10 +167,12 @@ C
          MCYCLE=0
          ICTLSTOP=0
          ICTLSTOP0=0
-         MH3D0 = 0
-C
- 5       CALL REDKEY2(KEY2,LK2,KEY0,NKEY,CARTE,IKEY)
-          GOTO (10,20,30,40,50,60,70,80,90,95,96,97,98)IKEY
+ 5       IF(CARTE(1:4)=='/H3D'.AND.(CARTE(5:5)=='/'.OR.CARTE(5:5)==' '))THEN
+           WRITE(ISTDO,*) 'ERROR: H3D control-file output has been removed; use /ANIM.'
+           CALL ARRET(2)
+         ENDIF
+         CALL REDKEY2(KEY2,LK2,KEY0,NKEY,CARTE,IKEY)
+          GOTO (10,20,30,40,50,60,70,80,90,95,96,97)IKEY
           GOTO 100
 C TIME
  10       IF(LK2>1.AND.LK2<10)THEN
@@ -258,9 +231,6 @@ C L01 FLUSH
           GOTO 100
  97         WMCHECK0 = 1
           GOTO 100 
-C H3D PLOT
- 98       MH3D0=1
-          GOTO 100  
  100      CONTINUE
           READ(IUSC3,'(A)',ERR=400,END=400)CARTE
          GOTO 5
@@ -310,8 +280,6 @@ C
      .    WRITE(IUSC3,'(A,A)',ERR=990)' WRITE NEXT RESTART FILE',CARTE
          IF(MSTOP0==1)
      .    WRITE(IUSC3,'(A,A)',ERR=990)' RUN STOP',CARTE
-         IF(MH3D0 == 1)
-     .    WRITE(IUSC3,'(A,A)',ERR=990)' UPDATE H3D FILE', CARTE
          MFILR=1
            IF (IRAD2R==1) R2R_MFILR=1    
          GOTO 999
@@ -353,8 +321,7 @@ C *** applying the flags received from rad2rad ***
 C---------------------------------
 C     ECHANGE MULTIPROCS
 C---------------------------------
-      IF((SENSORS%ANIM_ID /=0 .OR. SENSORS%NANIM /=0 .OR. H3D_DATA%N_SENS_H3D > 0) .OR.
-     .  ((NCYCLE/NCINP)*NCINP==NCYCLE) .OR. (IRAD2R==1 .AND. MFILR==1)) THEN    
+      IF((SENSORS%ANIM_ID/=0.OR.SENSORS%NANIM/=0).OR.((NCYCLE/NCINP)*NCINP==NCYCLE).OR.(IRAD2R==1.AND.MFILR==1)) THEN
           IF (ISPMD==0) THEN
              TMPMAN(1) = MDESS
              TMPMAN(2) = MREST0
@@ -368,8 +335,8 @@ C---------------------------------
              TMPMAN(10)= TMAN
              TMPMAN(11)= WMCHECK0
              TMPMAN(12) = ICTLSTOP0
-             TMPMAN(13) = MH3D0
-             TMPMAN(14) = H3D_DATA%MH3D
+      TMPMAN(13) =0
+      TMPMAN(14) =0
            ENDIF
            IF(NSPMD > 1)CALL SPMD_RBCAST(TMPMAN,TMPMAN,1,14,0,2)
            IF (ISPMD/=0)THEN
@@ -385,8 +352,6 @@ C---------------------------------
               TMAN   = TMPMAN(10)      
               WMCHECK0 = NINT(TMPMAN(11))
               ICTLSTOP0 = NINT(TMPMAN(12))
-              MH3D0 =     NINT(TMPMAN(13))
-              H3D_DATA%MH3D = NINT(TMPMAN(14))
            ENDIF
         ENDIF
 C---------------------------------
@@ -400,7 +365,6 @@ C---------------------------------
         MDESS=MDESS+MANIM
         WMCHECK = WMCHECK0
         ICTLSTOP = ICTLSTOP0
-        H3D_DATA%MH3D=MH3D0
        ENDIF
       ENDIF
 C

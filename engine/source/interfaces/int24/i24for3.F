@@ -33,56 +33,30 @@ Copyright>        copyright and attribution statement.
 !||    i24sms2              ../engine/source/interfaces/int24/i24for3.F
 !||    ibcoff               ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    i24intarea_fic_mod   ../engine/source/interfaces/int24/i24intarea_fic.F90
 !||    output_mod           ../common_source/modules/output/output_mod.F90
 !||    parameters_mod       ../common_source/modules/interfaces/parameters_mod.F
 !||    plyxfem_mod          ../engine/share/modules/plyxfem_mod.F
 !||    tri7box              ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I24FOR3(OUTPUT, JLT ,A  ,V       ,IBCC        ,ICODT     ,
-     2    FSAV        ,GAP       ,FRIC    ,MS          ,VISC      ,
-     3    VISCF       ,NOINT     ,STFN    ,ITAB        ,CN_LOC    ,
-     4    STIGLO      ,STIFN     ,STIF    ,FSKYI       ,ISKY      ,
-     5    N1          ,N2        ,N3      ,H1          ,H2        ,
-     6    H3          ,H4        ,FCONT   ,PENE        ,
-     7    IX1         ,IX2       ,IX3     ,IX4         ,NSVG      ,
-     8    IVIS2       ,NELTST    ,ITYPTST ,DT2T        ,SUBTRIA   ,
-     9    GAPV        ,INACTI    ,INDEX   ,NISKYFI     ,
-     A    KINET       ,NEWFRONT  ,ISECIN  ,NSTRF       ,SECFCUM   ,
-     B    X           ,IRECT     ,CE_LOC  ,MFROT       ,IFQ       ,
-     C    FROT_P      ,SECND_FR   ,ALPHA0  ,
-     D    IBAG        ,ICONTACT  ,IRTLM   ,
-     E    VISCN       ,VXI       ,VYI     ,VZI         ,MSI       ,
-     F    KINI        ,NIN       ,NISUB   ,LISUB       ,ADDSUBS   ,
-     G    ADDSUBM     ,LISUBS    ,LISUBM  ,FSAVSUB     ,CAND_N    ,
-     H    ILAGM       ,ICURV     ,FNCONT  ,FTCONT      ,NSN       ,
-     I    X1          ,X2        ,X3      ,X4          ,Y1        ,
-     J    Y2          ,Y3        ,Y4      ,Z1          ,Z2        ,
-     K    Z3          ,Z4        ,XI      ,YI          ,ZI        ,
-     L    IADM        ,RCURVI    ,RCONTACT ,ACONTACT   ,PCONTACT  ,
-     M    ANGLMI      ,PADM      ,INTTH    ,PHI        , FTHE     ,
-     N    FTHESKYI    ,TEMP      ,TEMPI   ,RSTIF       ,IFORM     ,
-     O    MSKYI_SMS   ,ISKYI_SMS ,NSMS    ,CAND_N_N    ,PENE_OLD  ,
-     P    STIF_OLD    ,MBINFLG   ,ILEV    ,IGSTI       ,KMIN      ,
-     P    INTPLY      ,IPLY      ,INOD_PXFEM,NM1       ,NM2       ,
-     R    NM3         ,NREBOU    ,IRTSE   ,NSNE        ,IS2SE     ,
-     S    IS2PT       ,MSEGTYP   ,JTASK   ,ISENSINT  ,
-     U    FSAVPARIT   ,NFT       ,H3D_DATA,FRICC       ,VISCFFRIC ,
-     V    FRIC_COEFS  ,T2MAIN_SMS,INTNITSCHE,FORNEQSI,IORTHFRIC ,
-     W    FRIC_COEFS2 ,FRICC2    ,VISCFFRIC2,NFORTH    ,NFISOT    ,
-     X    INDEXORTH   , INDEXISOT,DIR1      ,DIR2      ,T2FAC_SMS ,
-     Y    F_PFIT      ,TAGNCONT  ,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,
-     Z    TYPSUB      ,INFLG_SUBS,INFLG_SUBM ,NINLOADP  ,DGAPLOADINT,
-     1    S_LOADPINTER,DIST      ,IXX        ,INTEREFRIC,INTCAREA,
-     2    PARAMETERS  ,PENREF    ,KMAX       ,S_ADDSUBM, S_LISUBM,S_TYPSUB,
-     3    NISUBMAX,I_STOK,NRTM   ,NRTSE      ,NSNR)
+      SUBROUTINE I24FOR3(OUTPUT, JLT, A, V, IBCC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, STFN, ITAB, CN_LOC,
+     . STIGLO, STIFN, STIF, FSKYI, ISKY, N1, N2, N3, H1, H2, H3, H4, FCONT, PENE, IX1, IX2, IX3, IX4, NSVG, IVIS2,
+     . NELTST, ITYPTST, DT2T, SUBTRIA, GAPV, INACTI, INDEX, NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF, SECFCUM, X, IRECT,
+     . CE_LOC, MFROT, IFQ, FROT_P, SECND_FR, ALPHA0, IBAG, ICONTACT, IRTLM, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB,
+     . LISUB, ADDSUBS, ADDSUBM, LISUBS, LISUBM, FSAVSUB, CAND_N, ILAGM, ICURV, FNCONT, FTCONT, NSN, X1, X2, X3, X4, Y1,
+     . Y2, Y3, Y4, Z1, Z2, Z3, Z4, XI, YI, ZI, IADM, RCURVI, RCONTACT, ACONTACT, PCONTACT, ANGLMI, PADM, INTTH, PHI,
+     . FTHE, FTHESKYI, TEMP, TEMPI, RSTIF, IFORM, MSKYI_SMS, ISKYI_SMS, NSMS, CAND_N_N, PENE_OLD, STIF_OLD, MBINFLG,
+     . ILEV, IGSTI, KMIN, INTPLY, IPLY, INOD_PXFEM, NM1, NM2, NM3, NREBOU, IRTSE, NSNE, IS2SE, IS2PT, MSEGTYP, JTASK,
+     . ISENSINT, FSAVPARIT, NFT, FRICC, VISCFFRIC, FRIC_COEFS, T2MAIN_SMS, INTNITSCHE, FORNEQSI, IORTHFRIC, FRIC_COEFS2,
+     . FRICC2, VISCFFRIC2, NFORTH, NFISOT, INDEXORTH, INDEXISOT, DIR1, DIR2, T2FAC_SMS, F_PFIT, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, TYPSUB, INFLG_SUBS, INFLG_SUBM, NINLOADP, DGAPLOADINT, S_LOADPINTER, DIST, IXX,
+     . INTEREFRIC, INTCAREA, PARAMETERS, PENREF, KMAX, S_ADDSUBM, S_LISUBM, S_TYPSUB, NISUBMAX, I_STOK, NRTM, NRTSE,
+     . NSNR)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE PLYXFEM_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
       USE PARAMETERS_MOD
       USE I24INTAREA_FIC_MOD  , ONLY : I24INTAREA_FIC  
@@ -181,7 +155,6 @@ C-----------------------------------------------
       my_real, DIMENSION(MVSIZ), INTENT(IN) :: PENREF
       my_real, INTENT(IN) :: KMAX
 
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -1021,10 +994,8 @@ C
         ENDDO
       ENDIF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -2605,10 +2576,8 @@ C            IFPEN(INDEX(I)) = 1
       ENDIF    !ifq
 C
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -3176,29 +3145,6 @@ C---------------------------------
         END IF !(INCONV==1) THEN
       ENDIF
 C---------------------------------
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF (INCONV==1) THEN
-#include "lockon.inc"
-          DO I=1,JLT
-            IF(PENE(I) == ZERO)CYCLE
-            EFRIC_LM = HALF*EFRIC_L(I)
-            OUTPUT%DATA%EFRICG(IX1(I)) = OUTPUT%DATA%EFRICG(IX1(I)) + H1(I)*EFRIC_LM
-            OUTPUT%DATA%EFRICG(IX2(I)) = OUTPUT%DATA%EFRICG(IX2(I)) + H2(I)*EFRIC_LM
-            OUTPUT%DATA%EFRICG(IX3(I)) = OUTPUT%DATA%EFRICG(IX3(I)) + H3(I)*EFRIC_LM
-            OUTPUT%DATA%EFRICG(IX4(I)) = OUTPUT%DATA%EFRICG(IX4(I)) + H4(I)*EFRIC_LM
-            JG = NSVG(I)
-            EFRIC_LS = HALF*EFRIC_L(I)
-            IF(JG>0) THEN
-              OUTPUT%DATA%EFRICG(JG) = OUTPUT%DATA%EFRICG(JG) + EFRIC_LS
-            ELSE ! node remote
-              JG = -JG
-              EFRICGFI(NIN)%P(JG)=EFRICGFI(NIN)%P(JG)+ EFRIC_LS
-            ENDIF
-          ENDDO
-#include "lockoff.inc"
-        END IF !(INCONV==1) THEN
-      ENDIF
-C---------------------------------
       IF(KDTINT==1)THEN
         IF(    (VISC/=ZERO)
      .    .AND.(IVIS2==0.OR.IVIS2==1))THEN
@@ -3591,7 +3537,7 @@ C
      8              INOD_PXFEM,IRTSE,NSNE,IS2SE,IS2PT,TAGIP )
       ENDIF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT

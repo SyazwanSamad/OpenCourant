@@ -91,8 +91,8 @@ C-----------------------------------------------
 !||--- called by ------------------------------------------------------
 !||    create_setcol_array         ../starter/source/model/sets/create_setcol_clause.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
-!||    hm_get_int_array_index      ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_index      ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||    set_usrtos                  ../starter/source/model/sets/ipartm1.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F
@@ -217,8 +217,8 @@ C-------------------------
 !||--- called by ------------------------------------------------------
 !||    create_setcol_array         ../starter/source/model/sets/create_setcol_clause.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
-!||    hm_get_int_array_index      ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_index      ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||    set_usrtos_nearest          ../starter/source/model/sets/ipartm1.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F

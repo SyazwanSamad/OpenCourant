@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lectur               ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_option_count      ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count      ../starter/source/devtools/reader/hm_option_count.F
 !||    read_impdisp         ../starter/source/constraints/general/impvel/read_impdisp.F
 !||    read_impdisp_fgeo    ../starter/source/constraints/general/impvel/read_impdisp_fgeo.F
 !||    read_impvel          ../starter/source/constraints/general/impvel/read_impvel.F

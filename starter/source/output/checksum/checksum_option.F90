@@ -73,7 +73,7 @@
 !||    starter0               ../starter/source/starter/starter0.F
 !||--- calls      -----------------------------------------------------
 !||    deck_checksum_read     ../starter/source/output/checksum/checksum_model.cpp
-!||    hm_option_count        ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count        ../starter/source/devtools/reader/hm_option_count.F
 !||--- uses       -----------------------------------------------------
 !||    file_descriptor_mod    ../starter/source/modules/file_descriptor_mod.F90
 !||====================================================================

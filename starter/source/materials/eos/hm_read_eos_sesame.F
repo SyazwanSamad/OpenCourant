@@ -24,9 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_eos              ../starter/source/materials/eos/hm_read_eos.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_string            ../starter/source/devtools/hm_reader/hm_get_string.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_string            ../starter/source/devtools/reader/hm_get_string.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    mrdse2                   ../starter/source/materials/mat/mat026/mrdse2.F
 !||    tb2si1                   ../starter/source/materials/eos/sesame_tools.F
 !||    tbusr1                   ../starter/source/materials/eos/sesame_tools.F

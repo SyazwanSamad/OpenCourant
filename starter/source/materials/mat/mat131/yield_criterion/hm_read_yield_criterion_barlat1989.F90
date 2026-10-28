@@ -35,7 +35,7 @@
 !||    hm_read_yield_criterion              ../starter/source/materials/mat/mat131/yield_criterion/hm_read_yield_criterion.F90
 !||--- calls      -----------------------------------------------------
 !||    calculp2                             ../starter/source/materials/mat/mat057/calculp2.F90
-!||    hm_get_float_array_index             ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
+!||    hm_get_float_array_index             ../starter/source/devtools/reader/hm_get_float_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    calculp2_mod                         ../starter/source/materials/mat/mat057/calculp2.F90
 !||    hm_option_read_mod                   ../starter/share/modules1/hm_option_read_mod.F

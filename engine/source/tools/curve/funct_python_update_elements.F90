@@ -34,16 +34,16 @@
 !||    resol                          ../engine/source/engine/resol.F
 !||    resol_alloc_python             ../engine/source/engine/resol_alloc.F90
 !||--- calls      -----------------------------------------------------
-!||    h3d_quad_scalar_1              ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
-!||    h3d_shell_scalar_1             ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_solid_scalar_1             ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
+!||    result_quad_scalar              ../engine/source/tools/element_results/result_quad_scalar.F90
+!||    result_shell_scalar             ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar             ../engine/source/tools/element_results/result_solid_scalar.F
 !||    python_element_sync            ../engine/source/mpi/python_spmd_mod.F90
 !||    schlieren_buffer_gathering     ../engine/source/output/anim/generate/schlieren_buffer_gathering.F
 !||--- uses       -----------------------------------------------------
 !||    ale_connectivity_mod           ../common_source/modules/ale/ale_connectivity_mod.F
 !||    aleanim_mod                    ../common_source/modules/aleanim_mod.F
 !||    elbufdef_mod                   ../common_source/modules/mat_elem/elbufdef_mod.F90
-!||    h3d_quad_scalar_1_mod          ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
+!||    result_quad_scalar_mod          ../engine/source/tools/element_results/result_quad_scalar.F90
 !||    matparam_def_mod               ../common_source/modules/mat_elem/matparam_def_mod.F90
 !||    multi_fvm_mod                  ../common_source/modules/ale/multi_fvm_mod.F90
 !||    mvsiz_mod                      ../engine/share/spe_inc/mvsiz_mod.F90
@@ -61,7 +61,7 @@
         &   numgeo, numelc, numeltg, numels,numelq, nummat, numnod, &
         &   nparg, npropg, npropm, npropmi, npropgi, &
         &   snercvois, snesdvois, slercvois, slesdvois, &
-        &   sthke, seani, npart,&
+        &   sthke, seani,&
         &   elbuf_tab   ,iparg       ,geo        , &
         &   ixc         ,ixtg,     ixs, ixq, pm          ,bufmat     , &
         &   ehour       , &
@@ -69,7 +69,6 @@
         &   nodes        ,w           ,ale_connect, &
         &   nercvois  ,nesdvois  ,lercvois    ,lesdvois, &
         &   n0phas, nvphas,stack       ,          &
-        &   ipartc, iparts, iparttg, ipartq, &
         &   multi_fvm , &
         &   mat_param, fani_cell    ,itherm)
 
@@ -86,7 +85,7 @@
           use names_and_titles_mod, only: ncharline100
           use matparam_def_mod, only: MATPARAM_STRUCT_
           use aleanim_mod  , only : fani_cell_
-          use h3d_quad_scalar_1_mod, only : h3d_quad_scalar_1
+          use result_quad_scalar_mod, only : result_quad_scalar
           use nodal_arrays_mod, only : nodal_arrays_
           use mvsiz_mod, only : MVSIZ
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -124,7 +123,6 @@
           integer, intent(in) :: slesdvois !< size of lesdvois array
           integer, intent(in) :: sthke !< size of thke array
           integer, intent(in) :: seani !< size of ehour array
-          integer, intent(in) :: npart !< number of partitions
           integer, intent(in) :: n0phas !< law 51 phases
           integer, intent(in) :: nvphas !< law 51 phases
           integer, intent(in) :: itherm
@@ -143,10 +141,6 @@
           integer, intent(inout) :: ixq(nixq,numelq) !< quad connectivity array
           integer, intent(inout) :: ipm(npropmi,nummat) !< property array
           integer, intent(inout) :: igeo(npropgi,numgeo) !< property array
-          integer, intent(inout) :: ipartc(numelc) !< part id of shell elements
-          integer, intent(inout) :: iparts(numels) !< part id of solid elements
-          integer, intent(inout) :: iparttg(numeltg) !< part id of triangle elements
-          integer, intent(inout) :: ipartq(numelq) !< part id of quad elements
           integer, intent(inout) :: nercvois(snercvois) !< for Schlieren option
           integer, intent(inout) :: nesdvois(snesdvois) !< for Schlieren option
           integer, intent(inout) :: lercvois(slercvois) !< for Schlieren option
@@ -163,11 +157,9 @@
 ! ----------------------------------------------------------------------------------------------------------------------
           integer :: ii,j,ng,i
           real(kind=WP), dimension(:), allocatable :: scalar_results
-          integer, dimension(:), allocatable :: id_elem
-          integer, dimension(:), allocatable :: ity_elem
-          integer, dimension(:), allocatable :: is_written
-          integer, dimension(:), allocatable :: h3d_part
-          integer, dimension(:), allocatable :: mds_matid
+          integer :: mds_matid(0)
+          integer, allocatable :: valid_results(:)
+          logical :: zero_default
           integer :: idmds
           integer :: imdsvar
           integer :: ipt_input
@@ -178,33 +170,23 @@
           integer :: mode
           integer :: ity
           character(len=ncharline100) :: keyword
-          real(kind=4),dimension(1) :: shell_stack !< shell scalar stack // Need for H3D Only
-          integer :: max_shell_stacksize !< dimension of shell_stack     // Need for H3D Only
-          integer :: shell_stakcksize !< number of shell scalar to write // Need for H3D Only
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                      Body
 ! ----------------------------------------------------------------------------------------------------------------------
-          max_shell_stacksize = 1
-          shell_stakcksize = 0
           if(py%elements%global%n > 0) then
             !-----------------------------------------------------------!
-            ! stubs for h3d keywords not available from Python functions
+            ! Default material, layer, and integration-point selectors
             !-----------------------------------------------------------!
             idmds = 0
             imdsvar = 0
-            call my_alloc(mds_matid, 0, "mds_matid")
             ipt_input = -2
             layer_input = -2
             ply_input = -2
             iuvar_input = -2
             id = -1
             mode = -1
-            call my_alloc(h3d_part, npart, "h3d_part")
             call my_alloc(scalar_results, MVSIZ, "scalar_results")
-            call my_alloc(id_elem, MVSIZ, "id_elem")
-            call my_alloc(ity_elem, MVSIZ, "ity_elem")
-            call my_alloc(is_written, MVSIZ, "is_written")
-            is_written(1:MVSIZ) = 0
+            call my_alloc(valid_results, MVSIZ, "valid_results")
             !-------------------------------------------------------!
             !     LOOP OVER ELEM GROUPS & OUTPUT DATA               !
             !-------------------------------------------------------!
@@ -214,7 +196,7 @@
               j = py%elements%local%local_id(ii)
               ity = iparg(5,ng)
               do i = 1,ncharline100
-                keyword(i:i) = py%elements%local%keyword(ii)%h3d(i:i)
+                keyword(i:i) = py%elements%local%keyword(ii)%result(i:i)
                 if(ichar(keyword(i:i)) == 0) keyword(i:i) = " "
               end do
               if(ity == 3 .or. ity == 7 ) then
@@ -223,49 +205,37 @@
                 !     SCHLIEREN INITIALIZATION (IF DEFINED)             !
                 !       DENSITY FOR ALL TRIA ARE STORED IN WA_L         !
                 !-------------------------------------------------------!
-                ! /TRIA are 2d solid elements (new entity type derived from SH3N buffer, it is currently managed from h3d_shell_* subroutines. It will change in the future.
+                ! /TRIA uses the shared three-node element buffer.
                 if(keyword == "SCHLIEREN" .and. n2d > 0)then
                   call schlieren_buffer_gathering(nercvois ,nesdvois ,lercvois ,lesdvois, iparg, elbuf_tab, multi_fvm,itherm)
                 end if
 
-                call h3d_shell_scalar_1(.true.,                                                     &
-                &       elbuf_tab   ,scalar_results,iparg       ,geo        ,                &
-                &       ixc       ,ixtg      ,pm          ,bufmat     ,                    &
-                &       ehour       ,                                                      &
-                &       ipm         ,igeo      ,thke      ,err_thk_sh4 ,err_thk_sh3,       &
-                &       nodes%x     ,nodes%v         ,w           ,ale_connect      ,              &
-                &       stack       ,id_elem   ,ity_elem  ,                                &
-                &       is_written,ipartc,iparttg   ,layer_input ,ipt_input  ,       &
-                &       ply_input   ,iuvar_input,h3d_part  ,keyword    ,                   &
-                &       nodes%d     ,ng         ,multi_fvm,idmds       ,imdsvar    ,       &
-                &       mds_matid   ,id         ,mode     ,mat_param   ,                   &
-                &       0           ,shell_stack, max_shell_stacksize, shell_stakcksize)
+                CALL RESULT_SHELL_SCALAR( &
+                & elbuf_tab, scalar_results, iparg, geo, ixc, &
+                & ixtg, pm, bufmat, ehour, ipm, &
+                & igeo, thke, err_thk_sh4, err_thk_sh3, nodes%x, &
+                & nodes%v, w, ale_connect, stack, layer_input, &
+                & ipt_input, ply_input, iuvar_input, keyword, nodes%d, &
+                & ng, multi_fvm, idmds, imdsvar, mds_matid, &
+                & id, mode, mat_param, valid_results, zero_default)
               else if (ity == 1) then ! solid
-                call h3d_solid_scalar_1(.true.,                                              &
-                &         elbuf_tab       ,scalar_results ,iparg       ,                      &
-                &         ixs          ,pm          ,bufmat      ,                            &
-                &         ehour        ,                                                      &
-                &         ipm             ,                                                   &
-                &         nodes%x        ,nodes%v         ,w           ,ale_connect,                  &
-                &         id_elem      ,ity_elem  ,iparts      ,layer_input ,                 &
-                &         -1 ,-1 ,-1,iuvar_input ,h3d_part   , &
-                &         is_written,0 ,keyword   ,fani_cell   ,             &
-                &         multi_fvm       , ng        ,idmds       ,imdsvar     ,             &
-                &         id           ,mat_param ,mode     )
+                CALL RESULT_SOLID_SCALAR( &
+                & elbuf_tab, scalar_results, iparg, ixs, pm, &
+                & bufmat, ehour, ipm, nodes%x, nodes%v, &
+                & w, ale_connect, layer_input, -1, -1, &
+                & -1, iuvar_input, 0, keyword, fani_cell, &
+                & multi_fvm, ng, idmds, imdsvar, id, &
+                & mat_param, mode, valid_results)
 
               else if (ity == 2) then ! quad
-                call h3d_quad_scalar_1(.true.,ng,                                               &
-                &       n0phas        ,nvphas        ,ngroup, n2d, numelq, nummat, numnod, nparg, npropm, npropmi, ispmd,&
-                &       elbuf_tab     ,scalar_results, MVSIZ, iparg       ,                             &
-                &       ixq           ,NIXQ          ,pm          ,                                           &
-                &       ehour         ,                                                          &
-                &       ipm           ,                                                        &
-                &       nodes%x       ,nodes%v          ,w           ,ale_connect      ,                &
-                &       id_elem       ,                                                          &
-                &       is_written    ,ipartq        ,layer_input , npart,                               &
-                &       iuvar_input   ,h3d_part      ,keyword     ,                                   &
-                &       bufmat        ,multi_fvm     ,                                              &
-                &       id            ,mat_param)
+                CALL RESULT_QUAD_SCALAR( &
+                & ng, n0phas, nvphas, ngroup, n2d, &
+                & numelq, nummat, numnod, nparg, npropm, &
+                & npropmi, ispmd, elbuf_tab, scalar_results, iparg, &
+                & ixq, NIXQ, pm, ehour, ipm, &
+                & nodes%x, nodes%v, w, ale_connect, layer_input, &
+                & iuvar_input, keyword, bufmat, multi_fvm, id, &
+                & mat_param, valid_results)
 
               end if
               py%elements%local%values(ii) = scalar_results(j)
@@ -274,15 +244,12 @@
             end do
 
             call my_dealloc(scalar_results)
-            call my_dealloc(id_elem)
-            call my_dealloc(ity_elem)
-            call my_dealloc(is_written)
+            call my_dealloc(valid_results)
 
             call python_element_sync(py%elements)
 
 
 
-            call my_dealloc(h3d_part)
           end if
           return
         end subroutine funct_python_update_elements

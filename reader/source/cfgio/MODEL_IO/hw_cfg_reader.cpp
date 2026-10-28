@@ -53,6 +53,7 @@ into neutral objects.
 #include <KERNEL_BASE/fileformat_API.h> 
 #include <KERNEL/mv_file_format.h>
 #include <cassert>
+#include <stdexcept>
 extern "C"
 {
 #include <KERNEL_BASE/utils.h>
@@ -335,6 +336,28 @@ void HWCFGReader::readHeaderPositions(MECIModelFactory* model_p) {
                     a_buffer_d = mySyntaxInfo->getNormalisedHeader(a_buffer);// +mySyntaxInfo->getHeaderSize();
                 a_buffer_d = killBlanksBegin(a_buffer_d);
                 string a_header(a_buffer_d);
+                const string structured_mesh = "/ALE/STRUCTURED_MESH";
+                const string source_header(a_buffer);
+                if(mySyntaxInfo->getAppMode() == HCDI_SOLVER_RADIOSS &&
+                   source_header.compare(0, structured_mesh.size(), structured_mesh) == 0 &&
+                   (source_header.size() == structured_mesh.size() || source_header[structured_mesh.size()] == '/'))
+                {
+                    const string file = GetCurrentFilePtr() ? GetCurrentFilePtr()->GetFullName() : "";
+                    throw std::runtime_error(file + ":" + std::to_string(GetPreviousLine()) +
+                        ": /ALE/STRUCTURED_MESH is unsupported by OpenReader");
+                }
+
+                const bool removed_h3d = (source_header.compare(0, 4, "/H3D") == 0 &&
+                    source_header.find_first_not_of(" \t", 4) == string::npos) ||
+                    source_header.compare(0, 5, "/H3D/") == 0 ||
+                    (source_header.compare(0, 8, "/REPORT/") == 0 &&
+                     (source_header + "/").find("/H3D/") != string::npos);
+                if(mySyntaxInfo->getAppMode() == HCDI_SOLVER_RADIOSS && removed_h3d)
+                {
+                    const string file = GetCurrentFilePtr() ? GetCurrentFilePtr()->GetFullName() : "";
+                    throw std::runtime_error(file + ":" + std::to_string(GetPreviousLine()) +
+                        ": " + source_header + " requests removed H3D output; use /ANIM or /TFILE");
+                }
 
                 //store the current position after reading the header as these position may change after reading comments after headers..
                 int a_current_include_file_index = GetCurrentFileIndex();

@@ -25,10 +25,10 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    fretitl2               ../starter/source/starter/freform.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_count        ../starter/source/devtools/hm_reader/hm_option_count.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_count        ../starter/source/devtools/reader/hm_option_count.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    soltosphx4             ../starter/source/elements/sph/soltosph.F
 !||    soltosphx8             ../starter/source/elements/sph/soltosph.F
 !||    udouble                ../starter/source/system/sysfus.F

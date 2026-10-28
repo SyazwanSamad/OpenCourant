@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_sensors      ../starter/source/tools/sensor/hm_read_sensors.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_floatv        ../starter/source/devtools/hm_reader/hm_get_floatv.F
+!||    hm_get_floatv        ../starter/source/devtools/reader/hm_get_floatv.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod   ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod         ../starter/share/modules1/submodel_mod.F

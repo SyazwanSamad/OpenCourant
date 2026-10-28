@@ -21,9 +21,9 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    output_div_u         ../engine/source/output/anim/generate/output_div_u.F
 !||--- called by ------------------------------------------------------
-!||    h3d_quad_scalar_1    ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
-!||    h3d_shell_scalar_1   ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_solid_scalar_1   ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
+!||    result_quad_scalar    ../engine/source/tools/element_results/result_quad_scalar.F90
+!||    result_shell_scalar   ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar   ../engine/source/tools/element_results/result_solid_scalar.F
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod         ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||====================================================================

@@ -25,19 +25,13 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I3FOR2(OUTPUT, X     ,E    ,IRECT,LMSR ,MSR  ,
-     1                  NSV   ,ILOC ,IRTL ,STF  ,NSN  ,
-     2                  NMN   ,NTY  ,CST  ,IRTLO,FRIC0,
-     3                  FRIGAP,STFN ,IBC  ,ICODT,IMAST,
-     4                  FSAV  ,FSKYI,ISKY ,PTMAX,AREAS,
-     5                  FCONT ,FNCONT,FTCONT,H3D_DATA)
+      SUBROUTINE I3FOR2(OUTPUT, X, E, IRECT, LMSR, MSR, NSV, ILOC, IRTL, STF, NSN, NMN, NTY, CST, IRTLO, FRIC0, FRIGAP,
+     . STFN, IBC, ICODT, IMAST, FSAV, FSKYI, ISKY, PTMAX, AREAS, FCONT, FNCONT, FTCONT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -67,10 +61,6 @@ C     REAL
      .   X(3,*), E(*), STF(*), CST(2,*), FRIC0(3,*), FRIGAP(*),
      .   STFN(*), FSAV(*),FSKYI(LSKYI,NFSKYI),PTMAX, AREAS(*),
      .   FCONT(3,*),FNCONT(3,*), FTCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER IX(2), II, I, J, K, L, M, IMP, I3, I2, JJ, J3, J2, LOLD,
      .   NISKYL, IPAS
 C     REAL
@@ -205,9 +195,8 @@ C
         ENDIF
       ENDIF  
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
          FCONT(2,IX(1)) =FCONT(2,IX(1)) + FYI*H(1)
          FCONT(3,IX(1)) =FCONT(3,IX(1)) + FZI*H(1)
          FCONT(2,IX(2)) =FCONT(2,IX(2)) + FYI*H(2)
@@ -217,9 +206,8 @@ c
          FCONT(3,I)=FCONT(3,I)- FZI
       ENDIF
 
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .        ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP) .OR.
-     .            (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 
         FNCONT(2,IX(1)) =FNCONT(2,IX(1)) + FYI*H(1)
         FNCONT(3,IX(1)) =FNCONT(3,IX(1)) + FZI*H(1)
@@ -355,9 +343,8 @@ C
         ENDIF
       ENDIF  
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
           FCONT(2,IX(1)) =FCONT(2,IX(1)) + FYI*H(1)
           FCONT(3,IX(1)) =FCONT(3,IX(1)) + FZI*H(1)
           FCONT(2,IX(2)) =FCONT(2,IX(2)) + FYI*H(2)
@@ -366,9 +353,8 @@ c
           FCONT(2,I)=FCONT(2,I)- FYI
           FCONT(3,I)=FCONT(3,I)- FZI
       ENDIF
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .        ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .            (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
         FTCONT(2,IX(1)) =FTCONT(2,IX(1)) + FYI*H(1)
         FTCONT(3,IX(1)) =FTCONT(3,IX(1)) + FZI*H(1)
         FTCONT(2,IX(2)) =FTCONT(2,IX(2)) + FYI*H(2)

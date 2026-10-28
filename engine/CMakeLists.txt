@@ -263,11 +263,13 @@ list(APPEND include_dir_list ${Build_includes_directory} )
 message (" dir : ${Build_includes_directory} added")
 
 # Load external libraries
+if(NOT TARGET extlib)
 add_custom_target(
     extlib ALL
     COMMAND ${PYTHON_EXEC} ${source_directory}/../Compiling_tools/script/load_extlib.py
     COMMENT "Loading extlib libraries"
 )
+endif()
 
 if ( NOT DEFINED COM )
 #include generated with a text files

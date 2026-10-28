@@ -35,18 +35,14 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    ale_connectivity_mod         ../common_source/modules/ale/ale_connectivity_mod.F
 !||    array_mod                    ../common_source/modules/array_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    multi_fvm_mod                ../common_source/modules/ale/multi_fvm_mod.F90
 !||    my_dealloc_mod               ../common_source/tools/memory/my_dealloc.F90
 !||    output_mod                   ../common_source/modules/output/output_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I18MAIN_KINE_1(output, IPARI   ,INTBUF_TAB ,X        ,V             ,
-     2                          A       ,ISKEW      ,SKEW     ,LCOD          ,WA      ,
-     3                          MS      ,ITAB       ,JTASK    ,KINET         ,STIFN   ,
-     4                          MTF     ,CAND_SAV   ,INT18ADD ,IAD_ELEM      ,FR_ELEM ,
-     5                          TAGPENE ,H3D_DATA   ,MULTI_FVM,ALE_NE_CONNECT,XCELL,XCELL_REMOTE)
+      SUBROUTINE I18MAIN_KINE_1(output, IPARI, INTBUF_TAB, X, V, A, ISKEW, SKEW, LCOD, WA, MS, ITAB, JTASK, KINET,
+     . STIFN, MTF, CAND_SAV, INT18ADD, IAD_ELEM, FR_ELEM, TAGPENE, MULTI_FVM, ALE_NE_CONNECT, XCELL, XCELL_REMOTE)
 C-----------------------------------------------
 C   D e s c r i p t i o n 
 C-----------------------------------------------
@@ -59,7 +55,6 @@ C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD    
       USE ALE_CONNECTIVITY_MOD
       USE OUTPUT_MOD
@@ -89,7 +84,6 @@ C-----------------------------------------------
      .   X(*), V(*), A(3,*), SKEW(*), WA(*), MS(*),
      .   MTF(14,*),CAND_SAV(*),STIFN(*),XCELL(3,SXCELL)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(IN) :: MULTI_FVM  
       TYPE(t_connectivity), INTENT(IN) :: ALE_NE_CONNECT  
       TYPE(array_type), DIMENSION(NINTER), INTENT(in) :: XCELL_REMOTE !< remote data structure for interface 18         
@@ -235,9 +229,8 @@ c   1: send to the proc that owns the node
 c   2: accumulate (or min) on secondary 18 boundary nodes
 c   2: accumulate on secondary 18 boundary nodes
       IF (NSPMD > 1)THEN
-         CALL SPMD_I18KINE_PENE_COM_POFF(output, IPARI,INTBUF_TAB,VBID,
-     *                                   MTF,A,IAD_ELEM,FR_ELEM,1,BID_I,TAGPENE,ITAB,
-     .                                   H3D_DATA  )
+      CALL SPMD_I18KINE_PENE_COM_POFF(output, IPARI, INTBUF_TAB, VBID, MTF, A, IAD_ELEM, FR_ELEM, 1, BID_I, TAGPENE,
+     . ITAB)
 
 c     need accelerations for the second node
 c     quand on a surface main, node second. distant
@@ -320,28 +313,20 @@ C
 !||    spmd_i18kine_com_v           ../engine/source/mpi/interfaces/spmd_i18kine_com_v.F
 !||    spmd_i18kine_pene_com_poff   ../engine/source/mpi/interfaces/spmd_i18kine_pene_com_poff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    my_alloc_mod                 ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod               ../common_source/tools/memory/my_dealloc.F90
 !||    output_mod                   ../common_source/modules/output/output_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I18MAIN_KINE_2(output,IPARI,INTBUF_TAB ,X   ,V       ,
-     2                   A    ,ISKEW ,SKEW    ,LCOD   ,WA      ,
-     3                   MS   ,ITAB  ,FSAV    ,JTASK  ,KINET   ,
-     4                   STIFN,MTF   ,CAND_SAV,FCONT  ,INT18ADD,
-     5                   IAD_ELEM,FR_ELEM,H3D_DATA)
+      SUBROUTINE I18MAIN_KINE_2(output, IPARI, INTBUF_TAB, X, V, A, ISKEW, SKEW, LCOD, WA, MS, ITAB, FSAV, JTASK,
+     . KINET, STIFN, MTF, CAND_SAV, FCONT, INT18ADD, IAD_ELEM, FR_ELEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       use output_mod
       USE TRI7BOX
       USE INTBUFDEF_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
@@ -363,10 +348,6 @@ C-----------------------------------------------
      .   FSAV(NTHVKI,*),MTF(14,*),CAND_SAV(*),STIFN(*),
      .   FCONT(3,*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,NODF,NODL
       INTEGER N, NTY, INACTI
       INTEGER NB_JLT(PARASIZ),NB_JLT_NEW(PARASIZ),NB_STOK_N(PARASIZ),
@@ -453,9 +434,8 @@ c   1: send to proc which contain the fluid node
 c   2: cumul on boundary fluid nodes
 !$OMP SINGLE
       IF (NSPMD > 1)THEN
-        CALL SPMD_I18KINE_PENE_COM_POFF(output, IPARI,INTBUF_TAB,FCONT,
-     *                                  MTF,A,IAD_ELEM,FR_ELEM,2,SLVNDTAG,IBID,ITAB,
-     .                                  H3D_DATA )
+      CALL SPMD_I18KINE_PENE_COM_POFF(output, IPARI, INTBUF_TAB, FCONT, MTF, A, IAD_ELEM, FR_ELEM, 2, SLVNDTAG, IBID,
+     . ITAB)
 C reset  MTF_V on procs which do not have fluid node but have it as candidate
         CALL SPMD_I18KINE_COM_V(IPARI,INTBUF_TAB,MTF,A,ITAB)
       ENDIF
@@ -473,12 +453,8 @@ C -------------------
        NTY   =IPARI(7,N)
        INACTI =IPARI(22,N)
        IF(NTY==7.and.IPARI(34,N)==-2.and.INACTI==7)THEN
-         CALL I18MAIN_KINE_S(output, N,
-     1                       IPARI(1,N)   ,INTBUF_TAB(N)    ,X                    ,STIFN      ,
-     2                       V            ,A                ,MS                   ,FSAV(1,N)  ,FCONT     ,
-     3                       JTASK        ,ITAB             ,CAND_SAV(INT18ADD(N)),MTF        ,
-     4                       NB_JLT(JTASK),NB_JLT_NEW(JTASK),NB_STOK_N(JTASK)     ,ISKEW      ,SKEW      ,
-     5                       LCOD         ,SLVNDTAG         ,H3D_DATA )
+      CALL I18MAIN_KINE_S(output, N, IPARI(1,N), INTBUF_TAB(N), X, STIFN, V, A, MS, FSAV(1,N), FCONT, JTASK, ITAB,
+     . CAND_SAV(INT18ADD(N)), MTF, NB_JLT(JTASK), NB_JLT_NEW(JTASK), NB_STOK_N(JTASK), ISKEW, SKEW, LCOD, SLVNDTAG)
        ENDIF
       ENDDO
 C=======================================================================
@@ -487,9 +463,8 @@ C     COMM SPMD : A(1:3,*)= acceleration des seconds
 
 c   1: send to the proc that owns the node that overwrites the acceleration
       IF (NSPMD > 1)THEN
-        CALL SPMD_I18KINE_PENE_COM_POFF(output,IPARI,INTBUF_TAB,FCONT,
-     *                                  MTF,A,IAD_ELEM,FR_ELEM,3,SLVNDTAG,IBID,ITAB,
-     .                                  H3D_DATA)
+      CALL SPMD_I18KINE_PENE_COM_POFF(output, IPARI, INTBUF_TAB, FCONT, MTF, A, IAD_ELEM, FR_ELEM, 3, SLVNDTAG, IBID,
+     . ITAB)
       ENDIF
 
 C=======================================================================
@@ -1110,21 +1085,15 @@ C
 !||    i18kine_s        ../engine/source/interfaces/int18/i18main_kine.F
 !||    my_barrier       ../engine/source/system/machine.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod    ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod       ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I18MAIN_KINE_S(output, NIN,
-     1      IPARI     ,INTBUF_TAB         ,X       ,STIFN    ,
-     2      V         ,A         ,MS      ,FSAV    ,FCONT    ,
-     3      JTASK     ,ITAB      ,CAND_SAV,MTF      ,
-     4      NB_JLT    ,NB_JLT_NEW,NB_STOK_N,ISKEW  ,SKEW     ,
-     5      LCOD      ,SLVNDTAG, H3D_DATA )
+      SUBROUTINE I18MAIN_KINE_S(output, NIN, IPARI, INTBUF_TAB, X, STIFN, V, A, MS, FSAV, FCONT, JTASK, ITAB, CAND_SAV,
+     . MTF, NB_JLT, NB_JLT_NEW, NB_STOK_N, ISKEW, SKEW, LCOD, SLVNDTAG)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       use output_mod
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -1169,10 +1138,6 @@ C-----------------------------------------------
      .   X(3,*), V(3,*), A(3,*), MS(*), STIFN(*),
      .   MTF(14,*),CAND_SAV(8,*), FSAV(*),FCONT(3,*), SKEW(*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER NSN,
      .        NOINT,NTY,IVIS2,
      .        IGAP,INACTI,IBAG,I_STOK, I_STOK_LOC, DEBUT,
@@ -1237,18 +1202,10 @@ C=======================================================================
       if(JTASK/=1)return
       DO NFT = 0 , I_STOK - 1 , NVSIZ
           JLT = MIN( NVSIZ, I_STOK - NFT )
-          CALL I18KINE_S(output,
-     1  JLT          ,A         ,V       ,INTBUF_TAB%CAND_E(1+NFT) ,INTBUF_TAB%CAND_N(1+NFT) ,
-     2  GAP          ,MS        ,NOINT   ,INTBUF_TAB%STFNS,ITAB         ,
-     3  STIFN        ,STIF      ,X       ,INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,
-     4  NX1          ,NX2       ,NX3          ,NX4         ,NY1      ,
-     5  NY2          ,NY3       ,NY4          ,NZ1         ,NZ2      ,
-     6  NZ3          ,NZ4       ,LB1          ,LB2         ,LB3      ,
-     7  LB4          ,LC1       ,LC2          ,LC3         ,LC4      ,
-     8  P1           ,P2        ,P3           ,P4          ,NIN      ,     
-     9  GAPV         ,INACTI    ,VXI          ,VYI         ,VZI      ,
-     A  MSI          ,MTF   ,CAND_SAV(1,1+NFT),FCONT       ,FSAV     ,
-     B  NSN          ,SLVNDTAG  ,H3D_DATA     )
+      CALL I18KINE_S(output, JLT, A, V, INTBUF_TAB%CAND_E(1+NFT), INTBUF_TAB%CAND_N(1+NFT), GAP, MS, NOINT,
+     . INTBUF_TAB%STFNS, ITAB, STIFN, STIF, X, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, NX1, NX2, NX3, NX4, NY1, NY2, NY3,
+     . NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4, LC1, LC2, LC3, LC4, P1, P2, P3, P4, NIN, GAPV, INACTI, VXI, VYI,
+     . VZI, MSI, MTF, CAND_SAV(1,1+NFT), FCONT, FSAV, NSN, SLVNDTAG)
       ENDDO
 C
       RETURN
@@ -1910,26 +1867,16 @@ C
 !||--- called by ------------------------------------------------------
 !||    i18main_kine_s   ../engine/source/interfaces/int18/i18main_kine.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    output_mod       ../common_source/modules/output/output_mod.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I18KINE_S(OUTPUT,JLT ,A      ,V      ,CAND_E,CAND_N ,
-     2                  GAP    ,MS    ,NOINT  ,STFN   ,ITAB   ,
-     3                  STIFN  ,STIF   ,X      ,IRECT ,NSV    ,
-     4                  NX1    ,NX2    ,NX3    ,NX4   ,NY1    ,
-     5                  NY2    ,NY3    ,NY4    ,NZ1   ,NZ2    ,
-     6                  NZ3    ,NZ4    ,LB1    ,LB2   ,LB3    ,
-     7                  LB4    ,LC1    ,LC2    ,LC3   ,LC4    ,
-     8                  P1     ,P2     ,P3     ,P4    ,NIN    ,
-     9                  GAPV   ,INACTI ,VXI    ,VYI   ,VZI    ,
-     A                  MSI    ,MTF    ,CAND_SAV,FCONT,FSAV   ,
-     B                  NSN    ,SLVNDTAG,H3D_DATA )
+      SUBROUTINE I18KINE_S(OUTPUT, JLT, A, V, CAND_E, CAND_N, GAP, MS, NOINT, STFN, ITAB, STIFN, STIF, X, IRECT, NSV,
+     . NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4, LC1, LC2, LC3, LC4, P1, P2, P3,
+     . P4, NIN, GAPV, INACTI, VXI, VYI, VZI, MSI, MTF, CAND_SAV, FCONT, FSAV, NSN, SLVNDTAG)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -1965,10 +1912,6 @@ C-----------------------------------------------
      .        LC1(MVSIZ), LC2(MVSIZ), LC3(MVSIZ), LC4(MVSIZ),
      .        P1(MVSIZ), P2(MVSIZ), P3(MVSIZ), P4(MVSIZ), STIF(MVSIZ),
      . GAPV(MVSIZ),VXI(MVSIZ),VYI(MVSIZ),VZI(MVSIZ),MSI(MVSIZ)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, IG, JG, NN, NI, 
      .        L
       INTEGER IX1(MVSIZ),IX2(MVSIZ),IX3(MVSIZ),IX4(MVSIZ),NSVG(MVSIZ)
@@ -2145,9 +2088,8 @@ C---------------------------------
         FSAV(11)=FSAV(11)+FSAV11
 #include "lockoff.inc"
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT > 0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT >= TOUTP.OR.TT >= H3D_DATA%TH3D.OR.
-     .              (MANIM >= 4.AND.MANIM <= 15).OR. H3D_DATA%MH3D  /=  0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
          DO I=1,JLT
           IF(PENE(I) > ZERO)THEN

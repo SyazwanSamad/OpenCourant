@@ -118,7 +118,6 @@ Copyright>        copyright and attribution statement.
 !||    ecnd_mod                     ../engine/share/modules/ecdn_mod.F
 !||    element_mod                  ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    interfaces_mod               ../common_source/modules/interfaces/interfaces_mod.F90
 !||    intstamp_glob_mod            ../engine/share/modules/intstamp_glob_mod.F
 !||    loads_mod                    ../common_source/modules/loads/loads_mod.F90
@@ -159,15 +158,10 @@ Copyright>        copyright and attribution statement.
 !||    unitab_mod                   ../common_source/modules/unitab_mod.F
 !||    user_windows_mod             ../common_source/modules/user_windows_mod.F
 !||====================================================================
-      SUBROUTINE RDRESB( AF               ,IAF        ,LVARREA      ,IRUNN            ,
-     .                   MULTI_FVM        ,H3D_DATA   ,PINCH_DATA   ,ALE_CONNECTIVITY ,T_MONVOL   ,
-     .                   SENSORS          ,EBCS_TAB   ,DYNAIN_DATA  ,USER_WINDOWS     ,OUTPUT     ,
-     .                   INTERFACES       ,LOADS      ,MAT_ELEM     ,PYTHON           ,IFLOW      ,
-     .                   SKEWS            ,RFLOW      ,LIFLOW       ,LRFLOW           ,IMPL_S0    ,
-     .                   FORNEQS          ,UNITAB     ,DT           ,DTFAC1           ,
-     .                   STACK            ,DRAPE_SH4N ,DRAPE_SH3N   ,DRAPEG           ,NDRAPE     ,
-     .                   GLOB_THERM       ,PBLAST     ,ELEMENT      ,NODES            ,RBE3       ,
-     .                   RWALL            ,SFEM       )
+      SUBROUTINE RDRESB(AF, IAF, LVARREA, IRUNN, MULTI_FVM, PINCH_DATA, ALE_CONNECTIVITY, T_MONVOL, SENSORS, EBCS_TAB,
+     . DYNAIN_DATA, USER_WINDOWS, OUTPUT, INTERFACES, LOADS, MAT_ELEM, PYTHON, IFLOW, SKEWS, RFLOW, LIFLOW, LRFLOW,
+     . IMPL_S0, FORNEQS, UNITAB, DT, DTFAC1, STACK, DRAPE_SH4N, DRAPE_SH3N, DRAPEG, NDRAPE, GLOB_THERM, PBLAST, ELEMENT,
+     . NODES, RBE3, RWALL, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -182,7 +176,6 @@ C-----------------------------------------------
       USE CLUSTER_MOD
       USE ECND_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE NLOCAL_REG_MOD
       USE MAT_ELEM_MOD
       USE PINCHTYPE_MOD
@@ -264,10 +257,9 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IAF(*),LVARREA,LEN_G,LEN_M, IRUNN
-      my_real AF(*)
+      INTEGER IAF(*), LVARREA, LEN_G, LEN_M, IRUNN
+      my_real  AF(*)
       TYPE(MULTI_FVM_STRUCT)                               :: MULTI_FVM
-      TYPE(H3D_DATABASE)                                   :: H3D_DATA
       TYPE(PINCH)                                          :: PINCH_DATA
       TYPE(t_ale_connectivity), INTENT(INOUT)              :: ALE_CONNECTIVITY
       TYPE(MONVOL_STRUCT_),DIMENSION(NVOLU), INTENT(INOUT) :: T_MONVOL
@@ -293,33 +285,33 @@ C-----------------------------------------------
       TYPE(RWALL_)          ,INTENT(INOUT)                 :: RWALL
       TYPE(global_sfem_)    ,INTENT(INOUT)                 :: SFEM
       TYPE(DT_)             ,INTENT(INOUT)                 :: DT
-      INTEGER, INTENT(IN) :: LIFLOW
-      INTEGER, INTENT(IN) :: LRFLOW
-      my_real, INTENT(INOUT) :: FORNEQS(3,NUMNOD)
-      INTEGER, INTENT(INOUT) :: IFLOW(LIFLOW)
-      my_real, INTENT(INOUT) :: RFLOW(LRFLOW)
-      INTEGER, INTENT(IN) :: IMPL_S0
-      INTEGER, INTENT(IN) :: NDRAPE
-      my_real, INTENT(INOUT) :: DTFAC1(102)
+      INTEGER, INTENT(IN) ::  LIFLOW
+      INTEGER, INTENT(IN) ::  LRFLOW
+      my_real, INTENT(INOUT) ::  FORNEQS(3,NUMNOD)
+      INTEGER, INTENT(INOUT) ::  IFLOW(LIFLOW)
+      my_real, INTENT(INOUT) ::  RFLOW(LRFLOW)
+      INTEGER, INTENT(IN) ::  IMPL_S0
+      INTEGER, INTENT(IN) ::  NDRAPE
+      my_real, INTENT(INOUT) ::  DTFAC1(102)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER  IDUMM(MVSIZ)
-      INTEGER  I,J,LMXVREA, LEN,MY_ILEN,MY_RLEN,ISTAT,II,NS_DIFF
+      INTEGER   IDUMM(MVSIZ)
+      INTEGER I, J, LMXVREA, LEN, MY_ILEN, MY_RLEN, ISTAT, II, NS_DIFF
       PARAMETER (LMXVREA=1000+30*MAXLAW+30)
-      my_real TABVREA(LMXVREA)
-      INTEGER, DIMENSION(:), ALLOCATABLE::IBID
-      my_real, DIMENSION(:), ALLOCATABLE::RBID
-      DOUBLE PRECISION, DIMENSION(:),ALLOCATABLE :: XDPDUM
-      INTEGER, DIMENSION(NVOLU) :: NTRI
-      INTEGER, DIMENSION(:), ALLOCATABLE :: INTEGER_DATA
+      my_real  TABVREA(LMXVREA)
+      INTEGER, DIMENSION(:), ALLOCATABLE:: IBID
+      my_real, DIMENSION(:), ALLOCATABLE:: RBID
+      DOUBLE PRECISION, DIMENSION(:),ALLOCATABLE ::  XDPDUM
+      INTEGER, DIMENSION(NVOLU) ::  NTRI
+      INTEGER, DIMENSION(:), ALLOCATABLE ::  INTEGER_DATA
       INTEGER :: INT1, INT2, INT3, INT0, ITMP
-      INTEGER :: MY_SIZE
-      INTEGER :: PYTHON_LEN
-      INTEGER, DIMENSION(:), ALLOCATABLE :: BUFFER
-      INTEGER :: SKEW_LEN
+      INTEGER ::  MY_SIZE
+      INTEGER ::  PYTHON_LEN
+      INTEGER, DIMENSION(:), ALLOCATABLE ::  BUFFER
+      INTEGER ::  SKEW_LEN
       LOGICAL :: IS_EBCS_PARALLEL
-      INTEGER :: NPT,NRBE3PEN_L
+      INTEGER :: NPT, NRBE3PEN_L
 C-----------------------------------------------
 C   S o u r c e   L i n e s
 C-----------------------------------------------
@@ -966,8 +958,7 @@ C--------------------------------------
 C--------------------------------------
 C Allowance + Reading Structure Interface Entiere Party
 C--------------------------------------
-        CALL SPMD_INITFI(IPARI,1,H3D_DATA,INTERFACES%PARAMETERS,
-     .                   GLOB_THERM%IDT_THERM,GLOB_THERM%INTHEAT)
+      CALL SPMD_INITFI(IPARI, 1, INTERFACES%PARAMETERS, GLOB_THERM%IDT_THERM, GLOB_THERM%INTHEAT)
 C
 C--------------------------------------
 C     Reading + Intit Frontiere SPMD for SPH (integer part)
@@ -1265,8 +1256,8 @@ C--------------------------------------
         CALL READ_DB(PCONTACT ,SRCONTACT)
 
 C lecture struture interface partie reelle si irunn > 1
-        IF(IRUNN>1.OR.MCHECK/=0) CALL SPMD_INITFI(IPARI,2,H3D_DATA,INTERFACES%PARAMETERS,
-     .                                            GLOB_THERM%IDT_THERM,GLOB_THERM%INTHEAT)
+      IF(IRUNN>1.OR.MCHECK/=0) CALL SPMD_INITFI(IPARI, 2, INTERFACES%PARAMETERS, GLOB_THERM%IDT_THERM,
+     . GLOB_THERM%INTHEAT)
 C--------------------------------------
 C     Reading + Intit Frontier SPMD for SPH (real part)
 C--------------------------------------
@@ -1381,37 +1372,52 @@ C   ----------------------------------------------------------------------
       END IF
       IF(NINTSKIDOLD > 0) THEN
          IF(NINTSTAMP/=0) THEN
-           CALL READ_DB(PSKIDS, NINTSKIDOLD*NUMNODG)
+      CALL DISCARD_RESTART_REALS(NINTSKIDOLD*NUMNODG)
          ELSE
-           CALL READ_DB(PSKIDS, NINTSKIDOLD*NUMNOD)
+      CALL DISCARD_RESTART_REALS(NINTSKIDOLD*NUMNOD)
          ENDIF
       ENDIF
       IF(IFCONTMAX >0)THEN
+        IF(ANIM_V(26) == 0)THEN
+          IF(NINTSTAMP/=0.AND.NSPMD > 1)THEN
+            IF(ISPMD == 0) CALL DISCARD_RESTART_REALS(3*NUMNODG)
+          ELSE
+            CALL DISCARD_RESTART_REALS(3*NUMNOD)
+          ENDIF
+        ELSE
         IF(NINTSTAMP/=0.AND.NSPMD > 1 ) THEN
            IF(ISPMD == 0) CALL READ_DB(FCONT_MAX, 3*NUMNODG)
          ELSE
            CALL READ_DB(FCONT_MAX, 3*NUMNOD)
          ENDIF
+        ENDIF
       ENDIF
       IF(IFCONTPMAX >0)THEN
-         CALL READ_DB(FNCONT_MAX, 3*SPCONT_MAX)
-         CALL READ_DB(FTCONT_MAX, 3*SPCONT_MAX)
+        IF(NINTSTAMP/=0.AND.NSPMD > 1)THEN
+          IF(ISPMD == 0)THEN
+            CALL DISCARD_RESTART_REALS(3*NUMNODG)
+            CALL DISCARD_RESTART_REALS(3*NUMNODG)
+          ENDIF
+        ELSE
+          CALL DISCARD_RESTART_REALS(3*NUMNOD)
+          CALL DISCARD_RESTART_REALS(3*NUMNOD)
+        ENDIF
       ENDIF
       IF(IFCONT2MAX >0)THEN
-         CALL READ_DB(FCONT2_MAX, 3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
       ENDIF
       IF(IFCONTP2MAX >0)THEN
-         CALL READ_DB(FNCONT2_MAX, 3*NUMNOD)
-         CALL READ_DB(FTCONT2_MAX, 3*NUMNOD)
-         CALL READ_DB(NPCONT2_MAX, 3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
       ENDIF
       IF(IFCONT2MIN >0)THEN
-         CALL READ_DB(FCONT2_MIN, 3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
       ENDIF
       IF(IFCONTP2MIN >0)THEN
-         CALL READ_DB(FNCONT2_MIN, 3*NUMNOD)
-         CALL READ_DB(FTCONT2_MIN, 3*NUMNOD)
-         CALL READ_DB(NPCONT2_MIN, 3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
+      CALL DISCARD_RESTART_REALS(3*NUMNOD)
       ENDIF
 C--------Frictional energy output-------
       IF(OUTPUT%DATA%S_EFRICINT >0)THEN
@@ -1790,6 +1796,14 @@ C       that still test ASSOCIATED(Q1NP_KTAB_G) see a valid target.
              CALL READ_DPDB(GLOBAL_COMP_TIME%ENGINE_TIME,GLOBAL_COMP_TIME%RUN_NBR-1)
       ENDIF      
 C
+C     Retired request counts describe the old records only.
+      IFCONTMAX=MIN(1,ANIM_V(26))
+      IFCONTPMAX=0
+      IFCONT2MAX=0
+      IFCONTP2MAX=0
+      IFCONT2MIN=0
+      IFCONTP2MIN=0
+      NINTSKIDOLD=0
       RETURN
       END
 !||====================================================================
@@ -1829,11 +1843,9 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER LEN_IPM,LEN_MOD, NRECM, NRECS, IRCM, IRCM0, IRCM1,
-     .        IRCS, IRCS0, IRCS1, LREC, I, J, RCLEN,TLEN
-      my_real
-     .        VV(6)
-      INTEGER MY_PID
+      INTEGER LEN_IPM, LEN_MOD, NRECM, NRECS, IRCM, IRCM0, IRCM1, IRCS, IRCS0, IRCS1, LREC, I, J, RCLEN, TLEN
+      my_real  VV(6)
+      INTEGER  MY_PID
       CHARACTER(LEN=10) :: CPID
       CHARACTER(LEN=6) :: CISPMD
       CHARACTER(LEN=4096) :: TMPDIR
@@ -1967,13 +1979,12 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER NRECM, IRCM, NBN, NBM, LREC, I, J, RCLEN,TLEN
-      my_real
-     .        VV(6)
+      INTEGER NRECM, IRCM, NBN, NBM, LREC, I, J, RCLEN, TLEN
+      my_real  VV(6)
       CHARACTER(LEN=10) :: CPID
       CHARACTER(LEN=6) :: CISPMD
       CHARACTER(LEN=4096) :: TMPDIR
-      INTEGER MY_PID
+      INTEGER  MY_PID
 C--------------------------------------
 C     READING INTEGERS
 C--------------------------------------
@@ -2055,8 +2066,7 @@ C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER I, J, TN(7), N, NDDL, DSNDDL, DSLEN, K, L, NSDEC
-      my_real
-     .        CUTFREQ
+      my_real  CUTFREQ
 C
       DO I=1,NSPROC
 C--------------------------------------
@@ -2200,9 +2210,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IFLOW(*)
-      my_real
-     .        RFLOW(*)
+      INTEGER  IFLOW(*)
+      my_real  RFLOW(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -2257,13 +2266,12 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER NIMPR
+      INTEGER  NIMPR
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER ND,IDYNA0
-      my_real
-     . A(3*NUMNOD),AR(3*NUMNOD)
+      INTEGER ND, IDYNA0
+      my_real A(3*NUMNOD), AR(3*NUMNOD)
 C--------------------------------------
        IF(ALLOCATED(IMP_RR)) DEALLOCATE(IMP_RR)
        ALLOCATE(IMP_RR(NIMPR))
@@ -2330,7 +2338,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER, INTENT(IN) :: MONVOL(SMONVOL)
+      INTEGER, INTENT(IN) ::  MONVOL(SMONVOL)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -2338,7 +2346,7 @@ C-----------------------------------------------
      .        LENP_ANIM, NPOLH_ANIM, LENH_ANIM, NNS_ANIM, NN_L, NNA_L,
      .        NNSA_L, NSA, NELSA, NNI_L, IFV, ID_DT_OPTION, K1, ITYP, 
      .        ID_BAG, ID_BAG_INPUT, N
-      INTEGER COLOR,KEY, IH3D_FLAG
+      INTEGER COLOR, KEY, VIS_FLAG
       LOGICAL lFOUND
 C-----------------------------------------------
 C   S o u r c e   L i n e s
@@ -2347,8 +2355,8 @@ C-----------------------------------------------
 C----------------------------------------------------------
 C   CONSTANT INIT. : VISUALIZATION OF FVBAG RESULTS
 C----------------------------------------------------------       
-       !---AIRBAGS_TOTAL_FVM_IN_H3D
-       AIRBAGS_TOTAL_FVM_IN_H3D = 0 !number of polyhedra to display for visualization subroutines (Sum FVDATA%NPOLH_ANIM)
+       !---AIRBAGS_TOTAL_FVM_VIS
+       AIRBAGS_TOTAL_FVM_VIS = 0 !number of polyhedra to display for visualization subroutines (Sum FVDATA%NPOLH_ANIM)
        
 C--------------------------------------
 C     READING SIZES
@@ -2599,14 +2607,14 @@ C--------------------------------------
          !FVDATA_OLD(I)%CENTROID_POLH not read : H3D only. Generated if needed.
 C
          K1 = 1
-         IH3D_FLAG = 0
+         VIS_FLAG = 0
          !Looping over all existing bags to check which one is matching : collect IHED_FLAG
          DO N=1,NVOLU                                                          
            IFV = MONVOL(K1-1 + 45)         
            IF(IFV==I)THEN                  
-             IH3D_FLAG = MONVOL(K1-1 + 75)
-             IF(IH3D_FLAG==1)THEN
-               AIRBAGS_TOTAL_FVM_IN_H3D = AIRBAGS_TOTAL_FVM_IN_H3D + NPOLH_ANIM
+             VIS_FLAG = MONVOL(K1-1 + 75)
+             IF(VIS_FLAG==1)THEN
+               AIRBAGS_TOTAL_FVM_VIS = AIRBAGS_TOTAL_FVM_VIS + NPOLH_ANIM
              ENDIF 
              EXIT                          
            ENDIF                                                                                                       
@@ -2771,8 +2779,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        MCP(*),TEMP(*)
+      my_real MCP(*), TEMP(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -2816,8 +2823,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        FORNEQS(*)
+      my_real  FORNEQS(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -2867,8 +2873,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IBCV(*)
-      my_real :: FCONV(*)
+      INTEGER  IBCV(*)
+      my_real ::  FCONV(*)
       type (glob_therm_) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -2920,8 +2926,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IBCR(*)
-      my_real :: FRADIA(*)
+      INTEGER  IBCR(*)
+      my_real ::  FRADIA(*)
       type (glob_therm_) ,intent(inout) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -2973,8 +2979,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IBFTEMP(*)
-      my_real :: FBFTEMP(*)
+      INTEGER  IBFTEMP(*)
+      my_real ::  FBFTEMP(*)
       type (glob_therm_) ,intent(inout) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -3021,9 +3027,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IRBYM(*), LNRBYM(*),WEIGHT(*)
-      my_real
-     .        RBYM(*)
+      INTEGER IRBYM(*), LNRBYM(*), WEIGHT(*)
+      my_real  RBYM(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3073,10 +3078,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        MS_LAYER(*),ZI_LAYER(*),MSZ2(*)
-      INTEGER
-     .   ICODE(*),ISKEW(*),INOD(*),IEL(*)
+      my_real MS_LAYER(*), ZI_LAYER(*), MSZ2(*)
+      INTEGER ICODE(*), ISKEW(*), INOD(*), IEL(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3126,7 +3129,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER K,ELSZ,NDSZ
+      INTEGER K, ELSZ, NDSZ
 C-----------------------------------------------
       IF(IPLYXFEM == 0) THEN
 ! Those array be used as dummy argument
@@ -3198,8 +3201,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        CFIELD(*)
+      my_real  CFIELD(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3241,7 +3243,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real LOADP(*)
+      my_real  LOADP(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3278,7 +3280,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER INOD_CRKXFEM(*),IEL_CRKXFEM(*),NODLEVXF(*)
+      INTEGER INOD_CRKXFEM(*), IEL_CRKXFEM(*), NODLEVXF(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3317,8 +3319,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER K,LEN,ELSZ,NENR,ELSZC,ELSZTG,NCRKXFE_G,
-     .        CRKNUMNODS
+      INTEGER K, LEN, ELSZ, NENR, ELSZC, ELSZTG, NCRKXFE_G, CRKNUMNODS
 C=======================================================================
       IF(ICRACK3D == 0) THEN
         ALLOCATE(INDX_CRK(0))
@@ -3491,7 +3492,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER K,NOSZ
+      INTEGER K, NOSZ
 C-----------------------------------------------
       ALLOCATE(PLY(NPLYMAX))
       DO K=1,NPLYMAX
@@ -3528,7 +3529,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER NOSZ
+      INTEGER  NOSZ
 C-----------------------------------------------
         ALLOCATE (VFLOW(3*NUMNOD), DFLOW(3*NUMNOD),WFLOW(3*NUMNOD))
         NOSZ = 3*NUMNOD
@@ -3559,10 +3560,8 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        RTHBUF(*)
-      INTEGER
-     .        SRTHBUF
+      my_real  RTHBUF(*)
+      INTEGER  SRTHBUF
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3604,8 +3603,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        KNOT(*)
+      my_real  KNOT(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3645,8 +3643,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real
-     .        KNOTLOCPC(*)
+      my_real  KNOTLOCPC(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3686,7 +3683,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real KNOTLOCEL(*)
+      my_real  KNOTLOCEL(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3726,7 +3723,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      my_real WIGE(*)
+      my_real  WIGE(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3761,12 +3758,12 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IGEO(*)
-      my_real GEO(*),PM(*)
+      INTEGER  IGEO(*)
+      my_real GEO(*), PM(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER LSIZ
+      INTEGER  LSIZ
 
 C-----------------------------------------------
         LSIZ =(4*NPT_STACK +2)*NS_STACK
@@ -3806,13 +3803,11 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER LEN,OFF,II,J,IS,NSLICE,NPT,NDIM_INDX_PLY,NDIM,NDIM_SLICE,
-     .        NPT_DRAPE
-      my_real, DIMENSION(:,:), ALLOCATABLE :: RTMP
-      my_real, DIMENSION(:)  , ALLOCATABLE :: THK
-      INTEGER, DIMENSION(:,:), ALLOCATABLE :: ITMP
-      INTEGER, DIMENSION(:)  , ALLOCATABLE :: NPTDRP_ELT,ISLICE,INDX_PLY,
-     .                                        NPT_ELT
+      INTEGER LEN, OFF, II, J, IS, NSLICE, NPT, NDIM_INDX_PLY, NDIM, NDIM_SLICE, NPT_DRAPE
+      my_real, DIMENSION(:,:), ALLOCATABLE ::  RTMP
+      my_real, DIMENSION(:)  , ALLOCATABLE ::  THK
+      INTEGER, DIMENSION(:,:), ALLOCATABLE ::  ITMP
+      INTEGER, DIMENSION(:)  , ALLOCATABLE :: NPTDRP_ELT, ISLICE, INDX_PLY, NPT_ELT
 C--------------------------------------
 C     READING INTEGERS
 C--------------------------------------
@@ -3958,7 +3953,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER PLY_INFO(*)
+      INTEGER  PLY_INFO(*)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
@@ -3972,4 +3967,16 @@ C     READING REALS
 C--------------------------------------
 C
       RETURN
+      END
+
+      SUBROUTINE DISCARD_RESTART_REALS(N)
+#include "implicit_f.inc"
+      INTEGER, INTENT(IN) ::  N
+      INTEGER I, COUNT
+      my_real  BUFFER(1000)
+      IF(N < 0) CALL ARRET(2)
+      DO I=1,N,1000
+        COUNT=MIN(1000,N-I+1)
+        CALL READ_DB(BUFFER,COUNT)
+      ENDDO
       END

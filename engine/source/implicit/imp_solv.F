@@ -124,7 +124,6 @@ Copyright>        copyright and attribution statement.
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod     ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod       ../common_source/modules/groupdef_mod.F
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    imp_lintf          ../engine/share/modules/impbufdef_mod.F
 !||    imp_pcg_proj       ../engine/share/modules/impbufdef_mod.F
 !||    imp_worki          ../engine/share/modules/impbufdef_mod.F
@@ -142,35 +141,21 @@ Copyright>        copyright and attribution statement.
 !||    th_surf_mod        ../common_source/modules/interfaces/th_surf_mod.F
 !||    timer_mod          ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_SOLV(OUTPUT, TIMERS,PYTHON,
-     1  ICODE  ,ISKEW  ,ISKWN  ,IPART  ,IXTG   ,IXS    ,IXQ    ,
-     2  IXC    ,IXT    ,IXP    ,IXR    ,IXTG1          ,ITAB   ,ITABM1 ,
-     3  NPC    ,IBCL   ,IBFV   ,SENSOR_TAB,NNLINK ,LNLINK ,IPARG  ,IGRV   ,
-     4  IPARI  ,INTBUF_TAB,NPRW   ,ICONX  ,NPBY   ,LPBY   ,LRIVET ,
-     5  NSTRF  ,LJOINT ,ICODT  ,ICODR  ,ISKY   ,ADSKY  ,IADS_F ,
-     6  ILINK  ,LLINK  ,WEIGHT         ,ITASK  ,IBVEL  ,LBVEL  ,FBVEL  ,
-     7  X      ,D      ,V      ,VR     ,DR     ,THKE   ,DAMP   ,MS     ,
-     8  IN     ,PM     ,SKEWS  ,GEO    ,EANI   ,BUFMAT ,BUFGEO ,BUFSF  ,
-     9  TF     ,FORC   ,VEL    ,FSAV   ,AGRV   ,FR_WAVE,PARTS0 ,
-     A  ELBUF  ,RBY    ,RIVET  ,FR_ELEM,IAD_ELEM,
-     B  WA             ,A      ,AR     ,STIFN  ,STIFR  ,PARTSAV,FSKY   ,
-     C  FSKYI  ,IFRAME ,XFRAME ,W16    ,IACTIV ,FSKYM  ,IGEO   ,IPM    ,
-     D  WFEXT  ,NODFT  ,NODLT  ,NINT7  ,NUM_IMP,NS_IMP ,NE_IMP ,IND_IMP,
-     L  IT     ,RWBUF  ,LPRW   ,FR_WALL,NBINTC ,INTLIST,FOPT   ,RWSAV  ,
-     M          FSAVD  ,GRAPHE ,FAC_K  ,IPIV_K ,NKCOND ,NSENSOR,
-     N  MONVOL ,IGRSURF,FR_MV  ,VOLMON ,DIRUL  ,
-     O  NODGLOB,MUMPS_PAR,CDDLP,ISENDTO,IRECVFROM,NEWFRONT,IMSCH  ,
-     P  I2MSCH ,ISIZXV,ILENXV ,ISLEN7  ,IRLEN7 ,ISLEN11,IRLEN11,ISLEN17,
-     Q  IRLEN17,IRLEN7T,ISLEN7T,KINET  ,NUM_IMP1,TEMP   ,DT2PREV,WAINT ,
-     R  LGRAV   ,SH4TREE ,SH3TREE,IRLEN20,ISLEN20,IRLEN20T,ISLEN20T    ,
-     S  IRLEN20E,ISLEN20E,IRBE3,LRBE3  ,FRBE3  ,FR_I2M,IAD_I2M,FR_RBE3M,
-     T  IAD_RBE3M,FRWL6,IRBE2 ,LRBE2   ,INTBUF_TAB_C,IKINE  ,DIAG_SMS,
-     V  ICFIELD,LCFIELD,CFIELD,COUNT_REMSLV,COUNT_REMSLVE,
-     X  ELBUF_TAB,ELBUF_IMP,XDP,WEIGHT_MD , STACK ,
-     Y  DIMFB  ,FBSAV6 ,STABSEN,TABSENSOR,DRAPE_SH4N, DRAPE_SH3N,
-     Z  H3D_DATA,MULTI_FVM,IGRBRIC,IGRSH4N,IGRSH3N,IGRBEAM,FORNEQS,MAXDGAP,
-     A  NDDL0   ,NNZK0 ,IT_T    ,IMPBUF_TAB,CPTREAC,FTHREAC,NODREAC, DRAPEG,
-     B  INTERFACES,TH_SURF,DPL0CLD,VEL0CLD,SNPC,STF,GLOB_THERM, WFEXT_MD)
+      SUBROUTINE IMP_SOLV(OUTPUT, TIMERS, PYTHON, ICODE, ISKEW, ISKWN, IPART, IXTG, IXS, IXQ, IXC, IXT, IXP, IXR,
+     . IXTG1, ITAB, ITABM1, NPC, IBCL, IBFV, SENSOR_TAB, NNLINK, LNLINK, IPARG, IGRV, IPARI, INTBUF_TAB, NPRW, ICONX,
+     . NPBY, LPBY, LRIVET, NSTRF, LJOINT, ICODT, ICODR, ISKY, ADSKY, IADS_F, ILINK, LLINK, WEIGHT, ITASK, IBVEL, LBVEL,
+     . FBVEL, X, D, V, VR, DR, THKE, DAMP, MS, IN, PM, SKEWS, GEO, EANI, BUFMAT, BUFGEO, BUFSF, TF, FORC, VEL, FSAV,
+     . AGRV, FR_WAVE, PARTS0, ELBUF, RBY, RIVET, FR_ELEM, IAD_ELEM, WA, A, AR, STIFN, STIFR, PARTSAV, FSKY, FSKYI,
+     . IFRAME, XFRAME, W16, IACTIV, FSKYM, IGEO, IPM, WFEXT, NODFT, NODLT, NINT7, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, IT,
+     . RWBUF, LPRW, FR_WALL, NBINTC, INTLIST, FOPT, RWSAV, FSAVD, GRAPHE, FAC_K, IPIV_K, NKCOND, NSENSOR, MONVOL,
+     . IGRSURF, FR_MV, VOLMON, DIRUL, NODGLOB, MUMPS_PAR, CDDLP, ISENDTO, IRECVFROM, NEWFRONT, IMSCH, I2MSCH, ISIZXV,
+     . ILENXV, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, KINET, NUM_IMP1, TEMP, DT2PREV,
+     . WAINT, LGRAV, SH4TREE, SH3TREE, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, IRBE3, LRBE3, FRBE3,
+     . FR_I2M, IAD_I2M, FR_RBE3M, IAD_RBE3M, FRWL6, IRBE2, LRBE2, INTBUF_TAB_C, IKINE, DIAG_SMS, ICFIELD, LCFIELD,
+     . CFIELD, COUNT_REMSLV, COUNT_REMSLVE, ELBUF_TAB, ELBUF_IMP, XDP, WEIGHT_MD, STACK, DIMFB, FBSAV6, STABSEN,
+     . TABSENSOR, DRAPE_SH4N, DRAPE_SH3N, MULTI_FVM, IGRBRIC, IGRSH4N, IGRSH3N, IGRBEAM, FORNEQS, MAXDGAP, NDDL0, NNZK0,
+     . IT_T, IMPBUF_TAB, CPTREAC, FTHREAC, NODREAC, DRAPEG, INTERFACES, TH_SURF, DPL0CLD, VEL0CLD, SNPC, STF,
+     . GLOB_THERM, WFEXT_MD)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -184,7 +169,6 @@ C-----------------------------------------------
         USE ELBUFDEF_MOD
         USE INTBUFDEF_MOD
         USE STACK_MOD
-        USE H3D_MOD
         USE MULTI_FVM_MOD
         USE GROUPDEF_MOD
         USE DRAPE_MOD
@@ -280,7 +264,6 @@ C
 #endif
         TYPE(INTBUF_STRUCT_) INTBUF_TAB(*), INTBUF_TAB_C
         TYPE (STACK_PLY) :: STACK
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 !
         TYPE (GROUP_)  , DIMENSION(NGRBRIC) :: IGRBRIC
@@ -526,18 +509,10 @@ C
             CALL IMP_SETB(A ,AR ,IDDL ,NDOF ,LB0  )
           ENDIF
 C
-          IF (NCYCLE==1.AND.IDYNA>0)
-     .       CALL DYNA_INA(IBCL       ,FORC     ,SNPC            ,NPC     ,TF     ,A   ,
-     2                     V          ,X        ,SKEWS           ,AR      ,VR     ,
-     3                     SENSOR_TAB ,WEIGHT   ,TFEXC           ,IADS_F  ,
-     4                     FSKY       ,IGRV     ,AGRV            ,MS      ,IN     ,
-     5                     LGRAV      ,ITASK    ,NRBYAC          ,IRBYAC  ,NPBY   ,
-     6                     RBY        ,FR_ELEM  ,IAD_ELEM        ,NDDL0   ,NNZK0  ,
-     7                     I_IMP(5)   ,H3D_DATA ,CPTREAC         ,FTHREAC ,NODREAC,
-     8                     NSENSOR    ,TH_SURF  ,DPL0CLD ,
-     9                     VEL0CLD    ,D        ,DR              ,NUMNOD  ,NSURF  ,
-     A                     NFUNCT     ,NCONLD   ,NGRAV           ,NINVEL  ,STF    ,NUMSKW,
-     B                     WFEXT,python)
+      IF (NCYCLE==1.AND.IDYNA>0) CALL DYNA_INA(IBCL, FORC, SNPC, NPC, TF, A, V, X, SKEWS, AR, VR, SENSOR_TAB, WEIGHT,
+     . TFEXC, IADS_F, FSKY, IGRV, AGRV, MS, IN, LGRAV, ITASK, NRBYAC, IRBYAC, NPBY, RBY, FR_ELEM, IAD_ELEM, NDDL0,
+     . NNZK0, I_IMP(5), CPTREAC, FTHREAC, NODREAC, NSENSOR, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NUMNOD, NSURF, NFUNCT,
+     . NCONLD, NGRAV, NINVEL, STF, NUMSKW, WFEXT, python)
 C
 C----------------------------------
 C       EXTERNAL FORCES A=Fext-Fint
@@ -547,13 +522,8 @@ C
           IF(NCONLD/=0) THEN
             IF (IMON>0) CALL STARTIME(TIMERS,4)
 C         --spmd : force treated like elements ---
-            CALL FORCE_IMP( IBCL    ,FORC       ,SNPC       ,NPC        ,TF         ,
-     2                      AC      ,V          ,X          ,SKEWS      ,
-     3                      ACR     ,VR         ,NSENSOR    ,SENSOR_TAB ,TFEXC      ,
-     4                      IADS_F  ,FSKY       ,DUMMY_FEXT ,H3D_DATA   ,CPTREAC    ,
-     5                      FTHREAC ,NODREAC    ,TH_SURF    ,
-     6                      DPL0CLD ,VEL0CLD    ,D          ,DR         ,NCONLD     ,
-     7                      NUMNOD  ,NFUNCT     ,STF        ,WFEXT)
+      CALL FORCE_IMP(IBCL, FORC, SNPC, NPC, TF, AC, V, X, SKEWS, ACR, VR, NSENSOR, SENSOR_TAB, TFEXC, IADS_F, FSKY,
+     . DUMMY_FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT, STF, WFEXT)
 C
             IF (NSPMD>1) THEN
               DO I=IAD_ELEM(1,1),IAD_ELEM(1,NSPMD+1)-1
@@ -1420,20 +1390,11 @@ c     5                  D_IMP ,DR_IMP,1      ,W_DDL  ,AC     ,
 c     6                  ACR   ,A     ,AR     ,R2     ,0  ,NODGLOB)
 c         END IF
           IF (ILINTF>0.AND.NCYCLE<ILINTF) THEN
-            CALL IMP_INTTD0(OUTPUT,TIMERS,
-     1         IPARI ,INTBUF_TAB    ,X_A     ,D       ,
-     2         MS    ,ITAB   ,IN    ,D_IMP   ,DR_IMP  ,
-     3         IMSCH ,I2MSCH ,ISIZXV,ILENXV  ,IGRBRIC ,
-     4         ISLEN7,IRLEN7 ,ISLEN11,IRLEN11,ISLEN17 ,
-     5         IRLEN17,IRLEN7T,ISLEN7T,IAD_ELEM,FR_ELEM ,
-     6         NBINTC,INTLIST,ITASK  ,KINET   ,NEWFRONT,
-     7         NUM_IMP,NS_IMP,NE_IMP,IND_IMP ,ISENDTO ,
-     8         IRECVFROM,WEIGHT ,IXS   ,TEMP  ,
-     9         DT2PREV,WAINT ,NUM_IMP1,IRLEN20,ISLEN20,
-     A         IRLEN20T,ISLEN20T,IRLEN20E,ISLEN20E,
-     B         IKINE,DIAG_SMS,COUNT_REMSLV,COUNT_REMSLVE,
-     C         NSENSOR,SENSOR_TAB,XDP,H3D_DATA,MULTI_FVM,
-     D         FORNEQS,MAXDGAP,INTERFACES,GLOB_THERM)
+      CALL IMP_INTTD0(OUTPUT, TIMERS, IPARI, INTBUF_TAB, X_A, D, MS, ITAB, IN, D_IMP, DR_IMP, IMSCH, I2MSCH, ISIZXV,
+     . ILENXV, IGRBRIC, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, IAD_ELEM, FR_ELEM, NBINTC,
+     . INTLIST, ITASK, KINET, NEWFRONT, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, ISENDTO, IRECVFROM, WEIGHT, IXS, TEMP,
+     . DT2PREV, WAINT, NUM_IMP1, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, IKINE, DIAG_SMS,
+     . COUNT_REMSLV, COUNT_REMSLVE, NSENSOR, SENSOR_TAB, XDP, MULTI_FVM, FORNEQS, MAXDGAP, INTERFACES, GLOB_THERM)
 
             TT=MAX(ZERO,TT-DT2)
             ISETK =0
@@ -1909,17 +1870,10 @@ C
           ENDIF
 C
           IF(IDYNA>0.AND.IMCONV==1)  THEN
-            CALL DYNA_WEX(IBCL  ,FORC   ,SNPC,NPC   ,TF    ,AC    ,
-     2                    V     ,X      ,SKEWS  ,ACR   ,VR    ,
-     3                    SENSOR_TAB,WEIGHT,WFEXT ,IADS_F,
-     4                    FSKY  ,IGRV   ,AGRV  ,MS    ,IN    ,
-     5                    LGRAV ,ITASK ,NRBYAC,IRBYAC ,
-     6                    NPBY  ,RBY   ,IBFV    ,VEL   ,D_IMP  ,
-     7                    DR_IMP,IKC   ,IDDL  ,IFRAME,XFRAME  ,
-     8                    NDOF  ,H3D_DATA,CPTREAC,FTHREAC,NODREAC,NSENSOR,
-     9                    TH_SURF ,DPL0CLD,
-     A                    VEL0CLD, NUMNOD,NSURF,NFUNCT,NCONLD,
-     B                    NGRAV,NFXVEL,STF,NUMSKW,PYTHON)
+      CALL DYNA_WEX(IBCL, FORC, SNPC, NPC, TF, AC, V, X, SKEWS, ACR, VR, SENSOR_TAB, WEIGHT, WFEXT, IADS_F, FSKY, IGRV,
+     . AGRV, MS, IN, LGRAV, ITASK, NRBYAC, IRBYAC, NPBY, RBY, IBFV, VEL, D_IMP, DR_IMP, IKC, IDDL, IFRAME, XFRAME, NDOF,
+     . CPTREAC, FTHREAC, NODREAC, NSENSOR, TH_SURF, DPL0CLD, VEL0CLD, NUMNOD, NSURF, NFUNCT, NCONLD, NGRAV, NFXVEL, STF,
+     . NUMSKW, PYTHON)
             CALL DYNA_CPR0(NDDL0  )
           END IF
 C----------D_imp taking D_n-1 :exception for case with Gravity-----
@@ -3104,7 +3058,6 @@ C------------------------------------------
 !||    elbufdef_mod       ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
 !||    groupdef_mod       ../common_source/modules/groupdef_mod.F
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    imp_worki          ../engine/share/modules/impbufdef_mod.F
 !||    impbufdef_mod      ../engine/share/modules/impbufdef_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
@@ -3115,26 +3068,16 @@ C------------------------------------------
 !||    th_surf_mod        ../common_source/modules/interfaces/th_surf_mod.F
 !||    timer_mod          ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_CHKM(TIMERS,PYTHON,
-     1  ICODE  ,ISKEW  ,ISKWN  ,IPART  ,IXTG   ,IXS    ,IXQ    ,
-     2  IXC    ,IXT    ,IXP    ,IXR    ,IXTG1          ,ITAB   ,ITABM1 ,
-     3  NPC    ,IBCL   ,IBFV   ,SENSOR_TAB,NNLINK ,LNLINK ,IPARG  ,IGRV   ,
-     4  IPARI  ,INTBUF_TAB,NPRW   ,ICONX  ,NPBY   ,LPBY   ,LRIVET ,
-     5  NSTRF  ,LJOINT ,ICODT  ,ICODR  ,ISKY   ,ADSKY  ,IADS_F ,
-     6  ILINK  ,LLINK  ,WEIGHT         ,ITASK  ,IBVEL  ,LBVEL  ,FBVEL  ,
-     7  X      ,D      ,V      ,VR     ,DR     ,THKE   ,DAMP   ,MS     ,
-     8  IN     ,PM     ,SKEWS  ,GEO    ,EANI   ,BUFMAT ,BUFGEO ,BUFSF  ,
-     9  TF     ,FORC   ,VEL    ,FSAV   ,AGRV   ,FR_WAVE,PARTS0 ,
-     A  ELBUF  ,RBY    ,RIVET  ,FR_ELEM,IAD_ELEM,NSENSOR,
-     B  WA            ,A      ,AR     ,STIFN  ,STIFR  ,PARTSAV,FSKY   ,
-     C  FSKYI  ,IFRAME ,XFRAME ,W16    ,IACTIV ,FSKYM  ,IGEO   ,IPM    ,
-     D  WFEXT  ,NODFT  ,NODLT  ,NINT7  ,NUM_IMP,NS_IMP ,NE_IMP ,IND_IMP,
-     L  IT     ,RWBUF  ,LPRW   ,FR_WALL,NBINTC ,INTLIST,FOPT   ,RWSAV  ,
-     M  FSAVD  ,DIRUL  ,LGRAV  ,IRBE3  ,LRBE3  ,FRBE3  ,
-     N  FRWL6  ,IRBE2  ,LRBE2  ,ICFIELD,LCFIELD,CFIELD,ELBUF_TAB,WEIGHT_MD,
-     O  STACK  ,DIMFB  ,FBSAV6 ,STABSEN,TABSENSOR,DRAPE_SH4N,DRAPE_SH3N,H3D_DATA,
-     P  NDDL0  ,NNZK0  ,IMPBUF_TAB,CPTREAC,FTHREAC,NODREAC,DRAPEG,TH_SURF ,
-     Q  DPL0CLD,VEL0CLD,SNPC,STF, WFEXT_MD,IGRSURF)
+      SUBROUTINE IMP_CHKM(TIMERS, PYTHON, ICODE, ISKEW, ISKWN, IPART, IXTG, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG1, ITAB,
+     . ITABM1, NPC, IBCL, IBFV, SENSOR_TAB, NNLINK, LNLINK, IPARG, IGRV, IPARI, INTBUF_TAB, NPRW, ICONX, NPBY, LPBY,
+     . LRIVET, NSTRF, LJOINT, ICODT, ICODR, ISKY, ADSKY, IADS_F, ILINK, LLINK, WEIGHT, ITASK, IBVEL, LBVEL, FBVEL, X, D,
+     . V, VR, DR, THKE, DAMP, MS, IN, PM, SKEWS, GEO, EANI, BUFMAT, BUFGEO, BUFSF, TF, FORC, VEL, FSAV, AGRV, FR_WAVE,
+     . PARTS0, ELBUF, RBY, RIVET, FR_ELEM, IAD_ELEM, NSENSOR, WA, A, AR, STIFN, STIFR, PARTSAV, FSKY, FSKYI, IFRAME,
+     . XFRAME, W16, IACTIV, FSKYM, IGEO, IPM, WFEXT, NODFT, NODLT, NINT7, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, IT, RWBUF,
+     . LPRW, FR_WALL, NBINTC, INTLIST, FOPT, RWSAV, FSAVD, DIRUL, LGRAV, IRBE3, LRBE3, FRBE3, FRWL6, IRBE2, LRBE2,
+     . ICFIELD, LCFIELD, CFIELD, ELBUF_TAB, WEIGHT_MD, STACK, DIMFB, FBSAV6, STABSEN, TABSENSOR, DRAPE_SH4N, DRAPE_SH3N,
+     . NDDL0, NNZK0, IMPBUF_TAB, CPTREAC, FTHREAC, NODREAC, DRAPEG, TH_SURF, DPL0CLD, VEL0CLD, SNPC, STF, WFEXT_MD,
+     . IGRSURF)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -3145,7 +3088,6 @@ C-----------------------------------------------
         USE ELBUFDEF_MOD
         USE INTBUFDEF_MOD
         USE STACK_MOD
-        USE H3D_MOD
         USE IMPBUFDEF_MOD
         USE SENSOR_MOD
         USE DRAPE_MOD
@@ -3212,7 +3154,6 @@ C-----------------------------------------------
         TYPE (ELBUF_STRUCT_), DIMENSION(NGROUP) :: ELBUF_TAB
         TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
         TYPE (STACK_PLY) :: STACK
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE (IMPBUF_STRUCT_) ,TARGET :: IMPBUF_TAB
         TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
         TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
@@ -3330,13 +3271,8 @@ C----------------------------------
         NCL_MAX=0
         R_IMP(16)=ZERO
         IF(NCONLD/=0) THEN
-          CALL FORCE_IMP(IBCL    ,FORC    ,SNPC       ,NPC        ,TF         ,
-     2                   AC      ,V       ,X          ,SKEWS      ,
-     3                   ACR     ,VR      ,NSENSOR    ,SENSOR_TAB ,TFEXC      ,
-     4                   IADS_F  ,FSKY    ,DUMMY_FEXT ,H3D_DATA   ,CPTREAC    ,
-     5                   FTHREAC ,NODREAC ,TH_SURF    ,
-     6                   DPL0CLD ,VEL0CLD ,D          ,DR         ,NCONLD     ,
-     7                   NUMNOD  ,NFUNCT  ,STF        ,WFEXT)
+      CALL FORCE_IMP(IBCL, FORC, SNPC, NPC, TF, AC, V, X, SKEWS, ACR, VR, NSENSOR, SENSOR_TAB, TFEXC, IADS_F, FSKY,
+     . DUMMY_FEXT, CPTREAC, FTHREAC, NODREAC, TH_SURF, DPL0CLD, VEL0CLD, D, DR, NCONLD, NUMNOD, NFUNCT, STF, WFEXT)
           IF (NSPMD>1) THEN
             DO I=IAD_ELEM(1,1),IAD_ELEM(1,NSPMD+1)-1
               J = FR_ELEM(I)
@@ -4674,17 +4610,13 @@ C endif MUMPS defined
 !||--- called by ------------------------------------------------------
 !||    resol           ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    impbufdef_mod   ../engine/share/modules/impbufdef_mod.F
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_FOUT(
-     1          OUTPUT     ,A        ,AR       ,NFIA      ,NFEA       ,
-     2          NODFT    ,NODLT    ,H3D_DATA ,IMPBUF_TAB)
+      SUBROUTINE IMP_FOUT(OUTPUT, A, AR, NFIA, NFEA, NODFT, NODLT, IMPBUF_TAB)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-        USE H3D_MOD
         USE OUTPUT_MOD, ONLY : OUTPUT_
         USE IMPBUFDEF_MOD
 C-----------------------------------------------
@@ -4704,7 +4636,6 @@ C-----------------------------------------------
 C     REAL
         my_real
      .     A(3,*)    ,AR(3,*)  
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE (IMPBUF_STRUCT_) ,TARGET :: IMPBUF_TAB
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -4715,7 +4646,7 @@ C-------------mis  zero Fint des nodes dependants------------
         IDDL => IMPBUF_TAB%IDDL
         NDOF => IMPBUF_TAB%NDOF
         IKC => IMPBUF_TAB%IKC
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT>0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0) THEN
           DO I = NODFT,NODLT
             DO J=1,MIN(3,NDOF(I))
               ND = IDDL(I)+J
@@ -4736,16 +4667,12 @@ C
 !||--- called by ------------------------------------------------------
 !||    resol        ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_FANII(
-     1          OUTPUT,FINT     ,NFIA      ,NODFT    ,NODLT    ,
-     2          H3D_DATA )
+      SUBROUTINE IMP_FANII(OUTPUT, FINT, NFIA, NODFT, NODLT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-        USE H3D_MOD
         USE OUTPUT_MOD, ONLY : OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -4764,13 +4691,9 @@ C-----------------------------------------------
 C     REAL
         my_real
      .     FINT(3,*)  
-        TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
         INTEGER N,I,J,K,ND
 C---
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT>0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             OUTPUT%DATA%VECT_FINT(1,N)= FINT(1,N)
@@ -4786,16 +4709,12 @@ C
 !||--- called by ------------------------------------------------------
 !||    resol        ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_FANIE(
-     1          OUTPUT  ,FEXT   ,NFIA   ,NFEA     ,NODFT    ,NODLT    ,
-     2          H3D_DATA )
+      SUBROUTINE IMP_FANIE(OUTPUT, FEXT, NFIA, NFEA, NODFT, NODLT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-        USE H3D_MOD
         USE OUTPUT_MOD, ONLY : OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -4814,13 +4733,9 @@ C-----------------------------------------------
 C     REAL
         my_real
      .     FEXT(3,*) 
-        TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
         INTEGER N,I,J,K,ND
 C---
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT>0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             OUTPUT%DATA%VECT_FINT(1,N)= -FEXT(1,N)
@@ -4828,7 +4743,7 @@ C---
             OUTPUT%DATA%VECT_FINT(3,N)= -FEXT(3,N)
           ENDDO
         ENDIF
-        IF(ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT>0) THEN
+      IF(ANIM_V(6)+OUTP_V(6)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             OUTPUT%DATA%VECT_FEXT(1,N)= FEXT(1,N)

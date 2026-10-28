@@ -26,10 +26,10 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg                     ../starter/source/output/message/message.F
 !||    defbeam_sect               ../starter/source/properties/beam/hm_read_prop18.F
 !||    defbeam_sect_new           ../starter/source/properties/beam/defbeam_sect_new.F90
-!||    hm_get_float_array_index   ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_floatv              ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted     ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_float_array_index   ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_floatv              ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted     ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||--- uses       -----------------------------------------------------
 !||    defbeam_sect_new_mod       ../starter/source/properties/beam/defbeam_sect_new.F90
 !||    elbuftag_mod               ../starter/share/modules1/elbuftag_mod.F

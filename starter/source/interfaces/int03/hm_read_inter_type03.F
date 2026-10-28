@@ -23,8 +23,8 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_inter_struct   ../starter/source/interfaces/reader/hm_read_inter_struct.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
 !||    ngr2usr                ../starter/source/system/nintrr.F
 !||--- uses       -----------------------------------------------------
 !||    message_mod            ../starter/share/message_module/message_mod.F

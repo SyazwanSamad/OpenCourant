@@ -33,8 +33,8 @@ Copyright>        copyright and attribution statement.
 !||    hm_tagpart               ../starter/source/groups/hm_tagpart.F
 !||    hm_tagpart2              ../starter/source/groups/hm_tagpart2.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F
 !||    message_mod              ../starter/share/message_module/message_mod.F

@@ -1,0 +1,726 @@
+{
+  "openreader-disconnected_one": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1
+    ],
+    "mapping": [
+      10
+    ],
+    "ids": [
+      1
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 0,
+        "grnd_ID": 1,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      }
+    ],
+    "added_main_nodes": [
+      10
+    ],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 10
+      }
+    ]
+  },
+  "openreader-disconnected_two": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 2
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      2
+    ],
+    "mapping": [
+      10,
+      10
+    ],
+    "ids": [
+      1,
+      2
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": null,
+        "grnd_ID": 1,
+        "sens_ID": null,
+        "Skew_ID": null,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": null,
+        "Jxx": null,
+        "Jyy": null,
+        "Jzz": null,
+        "Jxy": null,
+        "Jyz": null,
+        "Jxz": null
+      },
+      {
+        "id": 2,
+        "node_ID": null,
+        "grnd_ID": 2,
+        "sens_ID": null,
+        "Skew_ID": null,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": null,
+        "Jxx": null,
+        "Jyy": null,
+        "Jzz": null,
+        "Jxy": null,
+        "Jyz": null,
+        "Jxz": null
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "NODE",
+        "items": 4,
+        "part": 1
+      },
+      {
+        "id": 2,
+        "clauses": 1,
+        "key": "NODE",
+        "items": 4,
+        "part": 5
+      }
+    ],
+    "added_main_nodes": [],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": null
+      },
+      {
+        "id": 2,
+        "node_ID": null
+      }
+    ]
+  },
+  "openreader-empty": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1
+    ],
+    "mapping": [
+      10
+    ],
+    "ids": [
+      1
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 0,
+        "grnd_ID": 1,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      }
+    ],
+    "added_main_nodes": [
+      10
+    ],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 10
+      }
+    ]
+  },
+  "openreader-existing": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      },
+      {
+        "id": 30,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [
+      100
+    ],
+    "counts": [
+      1,
+      1
+    ],
+    "mapping": [
+      10,
+      30
+    ],
+    "ids": [
+      101,
+      102
+    ],
+    "bodies": [
+      {
+        "id": 100,
+        "node_ID": 9,
+        "grnd_ID": 50,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": 1,
+        "Ispher": 2,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      },
+      {
+        "id": 101,
+        "node_ID": 0,
+        "grnd_ID": 52,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      },
+      {
+        "id": 102,
+        "node_ID": 0,
+        "grnd_ID": 53,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 52,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      },
+      {
+        "id": 53,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 30
+      }
+    ],
+    "added_main_nodes": [
+      10,
+      11
+    ],
+    "main_nodes": [
+      {
+        "id": 100,
+        "node_ID": 9
+      },
+      {
+        "id": 101,
+        "node_ID": 10
+      },
+      {
+        "id": 102,
+        "node_ID": 11
+      }
+    ]
+  },
+  "openreader-explicit_fields": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1
+    ],
+    "mapping": [
+      10
+    ],
+    "ids": [
+      1
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 9,
+        "grnd_ID": 1,
+        "sens_ID": 6,
+        "Skew_ID": 5,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 12.5,
+        "Jxx": 11.0,
+        "Jyy": 22.0,
+        "Jzz": 33.0,
+        "Jxy": 1.0,
+        "Jyz": 2.0,
+        "Jxz": 3.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      }
+    ],
+    "added_main_nodes": [],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 9
+      }
+    ]
+  },
+  "openreader-flag_negative": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": -1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      0
+    ],
+    "mapping": [],
+    "ids": [],
+    "bodies": [],
+    "sets": [],
+    "added_main_nodes": [],
+    "main_nodes": []
+  },
+  "openreader-flag_three": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 3
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      0
+    ],
+    "mapping": [],
+    "ids": [],
+    "bodies": [],
+    "sets": [],
+    "added_main_nodes": [],
+    "main_nodes": []
+  },
+  "openreader-flag_two_single": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 2
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1
+    ],
+    "mapping": [
+      10
+    ],
+    "ids": [
+      1
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": null,
+        "grnd_ID": 1,
+        "sens_ID": null,
+        "Skew_ID": null,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": null,
+        "Jxx": null,
+        "Jyy": null,
+        "Jzz": null,
+        "Jxy": null,
+        "Jyz": null,
+        "Jxz": null
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "NODE",
+        "items": 4,
+        "part": 1
+      }
+    ],
+    "added_main_nodes": [],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": null
+      }
+    ]
+  },
+  "openreader-mixed": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      },
+      {
+        "id": 20,
+        "IRIGID": 0
+      },
+      {
+        "id": 30,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1,
+      0,
+      1
+    ],
+    "mapping": [
+      10,
+      30
+    ],
+    "ids": [
+      1,
+      2
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 0,
+        "grnd_ID": 1,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      },
+      {
+        "id": 2,
+        "node_ID": 0,
+        "grnd_ID": 2,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      },
+      {
+        "id": 2,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 30
+      }
+    ],
+    "added_main_nodes": [
+      10,
+      11
+    ],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 10
+      },
+      {
+        "id": 2,
+        "node_ID": 11
+      }
+    ]
+  },
+  "openreader-no_parts": {
+    "parts": [],
+    "existing_body_ids": [],
+    "counts": [],
+    "mapping": [],
+    "ids": [],
+    "bodies": [],
+    "sets": [],
+    "added_main_nodes": [],
+    "main_nodes": []
+  },
+  "openreader-ordinary_missing": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": null
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      0
+    ],
+    "mapping": [],
+    "ids": [],
+    "bodies": [],
+    "sets": [],
+    "added_main_nodes": [],
+    "main_nodes": []
+  },
+  "openreader-ordinary_zero": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 0
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      0
+    ],
+    "mapping": [],
+    "ids": [],
+    "bodies": [],
+    "sets": [],
+    "added_main_nodes": [],
+    "main_nodes": []
+  },
+  "openreader-shared": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      },
+      {
+        "id": 30,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1,
+      1
+    ],
+    "mapping": [
+      10,
+      30
+    ],
+    "ids": [
+      1,
+      2
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 0,
+        "grnd_ID": 1,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      },
+      {
+        "id": 2,
+        "node_ID": 0,
+        "grnd_ID": 2,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      },
+      {
+        "id": 2,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 30
+      }
+    ],
+    "added_main_nodes": [
+      10,
+      11
+    ],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 10
+      },
+      {
+        "id": 2,
+        "node_ID": 11
+      }
+    ]
+  },
+  "openreader-single": {
+    "parts": [
+      {
+        "id": 10,
+        "IRIGID": 1
+      }
+    ],
+    "existing_body_ids": [],
+    "counts": [
+      1
+    ],
+    "mapping": [
+      10
+    ],
+    "ids": [
+      1
+    ],
+    "bodies": [
+      {
+        "id": 1,
+        "node_ID": 0,
+        "grnd_ID": 1,
+        "sens_ID": 0,
+        "Skew_ID": 0,
+        "ICoG": null,
+        "Ispher": null,
+        "Mass": 0.0,
+        "Jxx": 0.0,
+        "Jyy": 0.0,
+        "Jzz": 0.0,
+        "Jxy": 0.0,
+        "Jyz": 0.0,
+        "Jxz": 0.0
+      }
+    ],
+    "sets": [
+      {
+        "id": 1,
+        "clauses": 1,
+        "key": "PART",
+        "items": 1,
+        "part": 10
+      }
+    ],
+    "added_main_nodes": [
+      10
+    ],
+    "main_nodes": [
+      {
+        "id": 1,
+        "node_ID": 10
+      }
+    ]
+  }
+}

@@ -26,19 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    ninterp        ../engine/source/interfaces/int14/ninterp.F
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod   ../common_source/modules/groupdef_mod.F
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    output_mod     ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I14FRT(OUTPUT,AF    ,X     ,V     ,KSURF  ,IGRSURF,
-     2                  BUFSF ,NSC   ,KSC   ,NSP    ,KSP    ,
-     3                  KSI   ,IMPACT ,CIMP ,NIMP   ,FRIC   ,
-     4                  NFRIC ,NPC    ,PLD  ,GAPMIN ,STF    ,
-     5                  WF     ,WST   ,DE   ,MS     ,STIFN  , 
-     6                  FS     ,FCONT  ,FSKYI ,ISKY ,H3D_DATA)
+      SUBROUTINE I14FRT(OUTPUT, AF, X, V, KSURF, IGRSURF, BUFSF, NSC, KSC, NSP, KSP, KSI, IMPACT, CIMP, NIMP, FRIC,
+     . NFRIC, NPC, PLD, GAPMIN, STF, WF, WST, DE, MS, STIFN, FS, FCONT, FSKYI, ISKY)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE OUTPUT_MOD
       USE OUTPUT_MOD
@@ -75,7 +69,6 @@ C     REAL
      .  KSC(*), FRIC, CIMP(3,*),NIMP(3,*), MS(*),
      .  STIFN(*), FS(NTHVKI),FCONT(3,*),FSKYI(LSKYI,NFSKYI), PLD(*),
      .  WF(*), WST(*),GAPMIN ,  STF , DE
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SURF_)   , DIMENSION(NSURF)   :: IGRSURF
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -276,9 +269,8 @@ C 2C in Modsti FSKYI (Niskyl, 5) = 2.*WST (in)
 C------------------------------------------------------------
 C     anim (contact forces)
 C------------------------------------------------------------
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP) .OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
 #include "vectorize.inc"
         DO I=1,MIN(MVSIZ,NREST)
@@ -604,9 +596,8 @@ C 2C in Modsti FSKYI (Niskyl, 5) = 2.*WST (in)
 C------------------------------------------------------------
 C     anim (contact forces).
 C------------------------------------------------------------
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    (TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP.OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.(TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP.OR.TT>=TOUTP.OR.(MANIM>=4.AND.MANIM<=15)
+     . ))THEN
 #include "lockon.inc"
 #include "vectorize.inc"
         DO I=1,MIN(MVSIZ,NREST)

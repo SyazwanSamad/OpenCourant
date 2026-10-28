@@ -36,30 +36,20 @@ Copyright>        copyright and attribution statement.
 !||    spmd_i8_irtl      ../engine/source/mpi/interfaces/spmd_i8tool.F
 !||    spmd_i8_updbuf    ../engine/source/mpi/interfaces/spmd_i8tool.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod           ../engine/share/modules/h3d_mod.F
 !||    int8_mod          ../common_source/modules/interfaces/int8_mod.F90
 !||    intbufdef_mod     ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    my_alloc_mod      ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod    ../common_source/tools/memory/my_dealloc.F90
 !||    output_mod        ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE INTVO8(OUTPUT,IPARI,X ,A  ,
-     2                  ICODT,FSAV ,V ,MS ,
-     3                  FSKYI,ISKY ,FCONT,FNCONT,FTCONT,
-     4                  ICONTACT,RCONTACT,
-     5                  STIFN,ITAB,INTBUF_TAB, T8, H3D_DATA ,
-     6                  NIN  , PSKIDS,TAGNCONT,KLOADPINTER,LOADPINTER,
-     7                  LOADP_HYD_INTER)
+      SUBROUTINE INTVO8(OUTPUT, IPARI, X, A, ICODT, FSAV, V, MS, FSKYI, ISKY, FCONT, FNCONT, FTCONT, ICONTACT,
+     . RCONTACT, STIFN, ITAB, INTBUF_TAB, T8, NIN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE OUTPUT_MOD
       USE INTBUFDEF_MOD 
       USE INT8_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
@@ -74,61 +64,43 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       type(output_), intent(inout) :: output
-      INTEGER IPARI(*), ICODT(*), ISKY(*),
-     .        ICONTACT(*) ,NIN
-      INTEGER ITAB(*),
-     .   TAGNCONT(NLOADP_HYD_INTER,NUMNOD),
-     .   KLOADPINTER(NINTER+1),LOADPINTER(NINTER*NLOADP_HYD),
-     .   LOADP_HYD_INTER(NLOADP_HYD)
+      INTEGER IPARI(*), ICODT(*), ISKY(*), ICONTACT(*), NIN
+      INTEGER ITAB(*), TAGNCONT(NLOADP_HYD_INTER,NUMNOD), KLOADPINTER(NINTER+1), LOADPINTER(NINTER*NLOADP_HYD),
+     . LOADP_HYD_INTER(NLOADP_HYD)
 C     REAL
-      my_real
-     .   X(*), A(3,*), FSAV(*), V(3,*), MS(*),
-     .   FSKYI(LSKYI,NFSKYI),FCONT(3,*), FNCONT(3,*), FTCONT(3,*),
-     .   RCONTACT(*),STIFN(*),PSKIDS(*)
+      my_real X(*), A(3,*), FSAV(*), V(3,*), MS(*), FSKYI(LSKYI,NFSKYI), FCONT(3,*), FNCONT(3,*), FTCONT(3,*),
+     . RCONTACT(*), STIFN(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
       TYPE(INT8_STRUCT_) T8
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER I
-      INTEGER, DIMENSION(:,:), ALLOCATABLE  ::
-     .  TAB_RMAX_UID
-      INTEGER, DIMENSION(:), ALLOCATABLE  ::
-     . HAS_MOVED,
-     .   INDEX_IN_COMM,
-     .   IX1, IX2, IX3,IX4,
-     .   NSV_A, !NSV reduced only to active secnd on the proc
-     .   NSV2,  !Numbering from NSV_A to NSV
-     .   IRTL_A !IRTL reduced only to active secnd on the proc
+      INTEGER  I
+      INTEGER, DIMENSION(:,:), ALLOCATABLE  ::  TAB_RMAX_UID
+      INTEGER, DIMENSION(:), ALLOCATABLE  :: HAS_MOVED, INDEX_IN_COMM, IX1, IX2, IX3, IX4, NSV_A, NSV2, IRTL_A
 C     REAL
-      my_real, DIMENSION(:), ALLOCATABLE :: TAB_RMAX
-      my_real, DIMENSION(:), ALLOCATABLE :: DISTANCE,DIST
-      my_real, DIMENSION(:), ALLOCATABLE :: X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3
-      my_real, DIMENSION(:), ALLOCATABLE :: X4,Y4,Z4
-      my_real, DIMENSION(:), ALLOCATABLE :: XI,XI_A,YI,YI_A,ZI,ZI_A
-      my_real, DIMENSION(:), ALLOCATABLE :: XP,YP,ZP,N1,N2,N3
-      my_real, DIMENSION(:), ALLOCATABLE :: ANS,SSC,TTC
-      my_real, DIMENSION(:), ALLOCATABLE :: H1,H2,H3,H4
-      my_real, DIMENSION(:), ALLOCATABLE :: FACE,FACE_A,STIF
-      my_real, DIMENSION(:), ALLOCATABLE :: X0,XX1,XX2,XX3,XX4
-      my_real, DIMENSION(:), ALLOCATABLE :: Y0,YY1,YY2,YY3,YY4
-      my_real, DIMENSION(:), ALLOCATABLE :: Z0,ZZ1,ZZ2,ZZ3,ZZ4
-      my_real, DIMENSION(:), ALLOCATABLE :: XI1,XI2,XI3,XI4
-      my_real, DIMENSION(:), ALLOCATABLE :: YI1,YI2,YI3,YI4
-      my_real, DIMENSION(:), ALLOCATABLE :: ZI1,ZI2,ZI3,ZI4
-      my_real, DIMENSION(:), ALLOCATABLE :: XN1,XN2,XN3,XN4
-      my_real, DIMENSION(:), ALLOCATABLE :: YN1,YN2,YN3,YN4
-      my_real, DIMENSION(:), ALLOCATABLE :: ZN1,ZN2,ZN3,ZN4
-      my_real, DIMENSION(:), ALLOCATABLE :: THK,AREA,ALP
-      my_real, DIMENSION(:), ALLOCATABLE :: DISTLIN
-      INTEGER IBC, NCIMP, NRTM4, NOINT,IGIMP,NINSKID
-      INTEGER MFROT,IBAG,IADM,IFORM,IFT0,IFLINEAR
+      my_real, DIMENSION(:), ALLOCATABLE ::  TAB_RMAX
+      my_real, DIMENSION(:), ALLOCATABLE :: DISTANCE, DIST
+      my_real, DIMENSION(:), ALLOCATABLE :: X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3
+      my_real, DIMENSION(:), ALLOCATABLE :: X4, Y4, Z4
+      my_real, DIMENSION(:), ALLOCATABLE :: XI, XI_A, YI, YI_A, ZI, ZI_A
+      my_real, DIMENSION(:), ALLOCATABLE :: XP, YP, ZP, N1, N2, N3
+      my_real, DIMENSION(:), ALLOCATABLE :: ANS, SSC, TTC
+      my_real, DIMENSION(:), ALLOCATABLE :: H1, H2, H3, H4
+      my_real, DIMENSION(:), ALLOCATABLE :: FACE, FACE_A, STIF
+      my_real, DIMENSION(:), ALLOCATABLE :: X0, XX1, XX2, XX3, XX4
+      my_real, DIMENSION(:), ALLOCATABLE :: Y0, YY1, YY2, YY3, YY4
+      my_real, DIMENSION(:), ALLOCATABLE :: Z0, ZZ1, ZZ2, ZZ3, ZZ4
+      my_real, DIMENSION(:), ALLOCATABLE :: XI1, XI2, XI3, XI4
+      my_real, DIMENSION(:), ALLOCATABLE :: YI1, YI2, YI3, YI4
+      my_real, DIMENSION(:), ALLOCATABLE :: ZI1, ZI2, ZI3, ZI4
+      my_real, DIMENSION(:), ALLOCATABLE :: XN1, XN2, XN3, XN4
+      my_real, DIMENSION(:), ALLOCATABLE :: YN1, YN2, YN3, YN4
+      my_real, DIMENSION(:), ALLOCATABLE :: ZN1, ZN2, ZN3, ZN4
+      my_real, DIMENSION(:), ALLOCATABLE :: THK, AREA, ALP
+      my_real, DIMENSION(:), ALLOCATABLE ::  DISTLIN
+      INTEGER IBC, NCIMP, NRTM4, NOINT, IGIMP, NINSKID
+      INTEGER MFROT, IBAG, IADM, IFORM, IFT0, IFLINEAR
 C     REAL
-      my_real
-     .   STARTT, FRIC, GAP,  STOPT,  
-     .   VISC,VISCF,FNOR,DEPTH,FRIC_LAST,FNOR_LAST
+      my_real STARTT, FRIC, GAP, STOPT, VISC, VISCF, FNOR, DEPTH, FRIC_LAST, FNOR_LAST
       INTEGER :: NMN, NTY, NSN
       INTEGER :: LFT, LLT, NFT
 C-----------------------------------------------
@@ -345,10 +317,6 @@ C
         ENDDO 
   
         NINSKID = 0
-        IF(H3D_DATA%N_SCAL_SKID > 0) THEN
-           NINSKID = H3D_DATA%N_SKID_INTER(NIN)
-        ENDIF
-
         CALL I8COR3(
      1   X,                INTBUF_TAB%IRECTM,INTBUF_TAB%MSR,   NSV_A,
      2   IRTL_A,           IX1,              IX2,              IX3,
@@ -388,30 +356,13 @@ C
      8   H2,      H3,      H4,      FACE_A,
      9   ALP,     LFT,     LLT)
 
-        CALL I8FOR3(output, LFT  ,LLT  ,NFT   ,A   ,
-     2          INTBUF_TAB%MSR,NSV_A,IRTL_A,INTBUF_TAB%STFM,
-     .          INTBUF_TAB%NSV,NSV2, INTBUF_TAB%ILOCS, 
-     3          INTBUF_TAB%STFNS,IBC     ,ICODT      ,FSAV      ,IGIMP  , 
-     4          X       ,V       ,MS      ,FRIC      ,NSN    ,
-     5          FSKYI       ,ISKY    ,FCONT      ,RCONTACT  ,IFORM  ,
-     6          INTBUF_TAB%FTSAVX,INTBUF_TAB%FTSAVY,INTBUF_TAB%FTSAVZ,VISC ,FNOR   ,
-     7          DEPTH       ,DIST     ,INTBUF_TAB%GAPN,INTBUF_TAB%STF8,
-     8          STIFN       ,FNCONT     ,FTCONT   ,ITAB,   IFT0,
-     9          IX1     ,IX2       ,IX3      ,IX4, 
-     A          XI_A    ,YI_A      ,ZI_A,
-     B          N1    ,N2      ,N3,
-     C           ANS    , SSC      , TTC,
-     D            H1    ,  H2      ,  H3     ,  H4, 
-     E          FACE_A    ,STIF      , XX3,
-     G           YY3    , ZZ3      , XX4,
-     H           YY4    , ZZ4      , XI1,
-     I           YI1    , ZI1      , XI2,
-     J           YI2    , ZI2      , XI3,
-     K           YI3    , ZI3      , XI4,
-     L           THK    ,H3D_DATA  , NINSKID,
-     M           H3D_DATA%N_SCAL_SKID, PSKIDS,INTBUF_TAB%IRECTM,NIN,
-     N           TAGNCONT ,KLOADPINTER,LOADPINTER ,LOADP_HYD_INTER,
-     O           IFLINEAR ,FRIC_LAST,FNOR_LAST,DISTLIN)
+      CALL I8FOR3(output, LFT, LLT, NFT, A, INTBUF_TAB%MSR, NSV_A, IRTL_A, INTBUF_TAB%STFM, INTBUF_TAB%NSV, NSV2,
+     . INTBUF_TAB%ILOCS, INTBUF_TAB%STFNS, IBC, ICODT, FSAV, IGIMP, X, V, MS, FRIC, NSN, FSKYI, ISKY, FCONT, RCONTACT,
+     . IFORM, INTBUF_TAB%FTSAVX, INTBUF_TAB%FTSAVY, INTBUF_TAB%FTSAVZ, VISC, FNOR, DEPTH, DIST, INTBUF_TAB%GAPN,
+     . INTBUF_TAB%STF8, STIFN, FNCONT, FTCONT, ITAB, IFT0, IX1, IX2, IX3, IX4, XI_A, YI_A, ZI_A, N1, N2, N3, ANS, SSC,
+     . TTC, H1, H2, H3, H4, FACE_A, STIF, XX3, YY3, ZZ3, XX4, YY4, ZZ4, XI1, YI1, ZI1, XI2, YI2, ZI2, XI3, YI3, ZI3,
+     . XI4, THK, INTBUF_TAB%IRECTM, NIN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, IFLINEAR, FRIC_LAST,
+     . FNOR_LAST, DISTLIN)
 
       
       

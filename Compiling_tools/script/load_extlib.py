@@ -68,7 +68,8 @@ def main():
 
     try:
         with zipfile.ZipFile(archive, "r") as zip_ref:
-            zip_ref.extractall(source_root)
+            zip_ref.extractall(source_root, [entry for entry in zip_ref.infolist()
+                                           if not entry.filename.startswith("extlib/hm_reader/")])
     except Exception as exc:
         print(f"Extraction failed: {exc}", file=sys.stderr)
         return 1

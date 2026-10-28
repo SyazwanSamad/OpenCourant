@@ -63,20 +63,11 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE Q4FORC2(TIMERS, OUTPUT, PM    ,GEO    ,IC     ,X     ,A      ,
-     2                   V     ,MS     ,W      ,FLU1  ,
-     3                   VEUL   ,FV     ,ALE_CONNECT ,IPARG  ,NLOC_DMG,
-     4                   ELBUF_TAB,TF  ,NPF    ,BUFMAT,PARTSAV,
-     5                   DT2T  ,NELTST ,ITYPTST,STIFN ,OFFSET ,
-     6                   EANI  ,IPARTQ ,NEL    ,IADQ  ,FSKY   ,
-     7                   ICP   ,NG     ,
-     8                   IPM   ,BUFVOIS,GRESAV,GRTH   ,
-     9                   IGRTH ,TABLE  ,IGEO   ,ITASK ,IEXPAN ,
-     A                   MS_2D ,FSKYM  ,IOUTPRT,MAT_ELEM,H3D_STRAIN,SZ_BUFVOIS,SNPC,
-     B                   STF,SBUFMAT,SVIS,NSVOIS,IDTMINS,IRESP,TT,DT1,      
-     .                   IDEL7NG,     IDEL7NOK,    IDTMIN,      MAXFUNC,IMON_MAT,
-     V                   USERL_AVAIL, impl_s,     idyna,
-     .                   DT         , GLOB_THERM,SENSORS)
+      SUBROUTINE Q4FORC2(TIMERS, OUTPUT, PM, GEO, IC, X, A, V, MS, W, FLU1, VEUL, FV, ALE_CONNECT, IPARG, NLOC_DMG,
+     . ELBUF_TAB, TF, NPF, BUFMAT, PARTSAV, DT2T, NELTST, ITYPTST, STIFN, OFFSET, EANI, IPARTQ, NEL, IADQ, FSKY, ICP,
+     . NG, IPM, BUFVOIS, GRESAV, GRTH, IGRTH, TABLE, IGEO, ITASK, IEXPAN, MS_2D, FSKYM, IOUTPRT, MAT_ELEM, SZ_BUFVOIS,
+     . SNPC, STF, SBUFMAT, SVIS, NSVOIS, IDTMINS, IRESP, TT, DT1, IDEL7NG, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT,
+     . USERL_AVAIL, impl_s, idyna, DT, GLOB_THERM, SENSORS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -130,7 +121,7 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: IMON_MAT
       INTEGER IC(*), IPARG(NPARG,*), NPF(*), IPARTQ(*), 
      +  IPM(*), GRTH(*), IGRTH(*), IGEO(*), IADQ(4,*),ITASK,IOUTPRT
-      INTEGER OFFSET, NEL, NELTST, ITYPTST, ICP, NG, IEXPAN,H3D_STRAIN
+      INTEGER OFFSET, NEL, NELTST, ITYPTST, ICP, NG, IEXPAN
       my_real
      +  DT2T
       my_real
@@ -551,42 +542,14 @@ C       COPY OLD STRESS AND DO NECESSARY TREATMENT
      3   NEL,     JCVT)
 C
 C       UPDATE STRESS
-        CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IC,          IPARG,
-     3   V,           TF,          NPF,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   OFF,         NGEO,        MAT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        SSP,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          EYY,         EZZ,         EXX,
-     B   EYZ,         EZX,         EXY,         WYY,
-     C   WZZ,         WXX,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDY,         VDZ,         VDX,         MUVOID,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   BUFVOIS,     LBUF%PLA,    R3_FREE,     R4_FREE,
-     H   EYY,         EZZ,         EXX,         EYZ,
-     I   EZX,         EXY,         WYY,         WZZ,
-     J   WXX,         IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         ISTRAIN,     BID,
-     M   BID,         IBIDON(1),   ILAY,        MBID,
-     N   MBID,        IR,          IS,          1,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         IPARG(1,NG), IGEO,        BID,
-     Q   ITASK,       NLOC_DMG,    VARNL,       MAT_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        SZ_BUFVOIS,
-     S   SNPC,        STF,         SBUFMAT,     GLOB_THERM,
-     T   SVIS,        SZ_IX,       IRESP,
-     *   N2D,         th_strain,   NGROUP,      TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT         ,  BID   ,SENSORS)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IC, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, OFF, NGEO, MAT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, SSP, S1, S2, S3, S4,
+     . S5, S6, EYY, EZZ, EXX, EYZ, EZX, EXY, WYY, WZZ, WXX, RX, RY, RZ, SX, SY, SZ, VDY, VDZ, VDX, MUVOID, SSP_EQ, AIRE,
+     . SIGY, ET, BUFVOIS, LBUF%PLA, R3_FREE, R4_FREE, EYY, EZZ, EXX, EYZ, EZX, EXY, WYY, WZZ, WXX, IPM, GAMA, BID, BID,
+     . BID, BID, BID, BID, BID, ISTRAIN, BID, BID, IBIDON(1), ILAY, MBID, MBID, IR, IS, 1, TABLE, BID, BID, BID, BID,
+     . IPARG(1,NG), IGEO, BID, ITASK, NLOC_DMG, VARNL, MAT_ELEM, JPLASOL, JSPH, SZ_BUFVOIS, SNPC, STF, SBUFMAT,
+     . GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ, nummat, numgeo, numnod, numels,
+     . IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, BID, SENSORS)
 C
        IF (ISTRAIN == 1)THEN 
         CALL SSTRA3(

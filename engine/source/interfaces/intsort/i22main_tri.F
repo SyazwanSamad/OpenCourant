@@ -44,7 +44,6 @@ Copyright>        copyright and attribution statement.
 !||    check_sorting_criteria_mod   ../engine/source/interfaces/intsort/check_sorting_criteria.F90
 !||    element_mod                  ../common_source/modules/elements/element_mod.F90
 !||    groupdef_mod                 ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    i22bufbric_mod               ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    i22tri_mod                   ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
@@ -55,14 +54,9 @@ Copyright>        copyright and attribution statement.
 !||    timer_mod                    ../engine/source/system/timer_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I22MAIN_TRI(TIMERS,
-     1                  IPARI   ,X       ,V       ,
-     2                  MS      ,NIN     ,ITASK   ,MWAG    ,WEIGHT    ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM   ,
-     4                  ITAB    ,KINET   ,TEMP    ,NRTM_T  ,RENUM     ,
-     5                  NSNFIOLD,ESHIFT  ,NUM_IMP ,IND_IMP ,NODNX_SMS ,
-     6                  IXS     ,IGRBRIC ,ALE_CONNECTIVITY,INTBUF_TAB, 
-     7                  COUNT_REMSLV ,H3D_DATA,MULTI_FVM,NODADT_THERM)
+      SUBROUTINE I22MAIN_TRI(TIMERS, IPARI, X, V, MS, NIN, ITASK, MWAG, WEIGHT, ISENDTO, IRCVFROM, RETRI, IAD_ELEM,
+     . FR_ELEM, ITAB, KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP, IND_IMP, NODNX_SMS, IXS, IGRBRIC,
+     . ALE_CONNECTIVITY, INTBUF_TAB, COUNT_REMSLV, MULTI_FVM, NODADT_THERM)
 C============================================================================
 C   M o d u l e s
 C-----------------------------------------------
@@ -72,7 +66,6 @@ C-----------------------------------------------
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
       USE I22BUFBRIC_MOD  
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE MULTI_FVM_MOD
       USE ALE_CONNECTIVITY_MOD
@@ -120,7 +113,6 @@ C-----------------------------------------------
       my_real 
      .   X(3,*), V(3,*), MS(*),TEMP(*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 
 C-----------------------------------------------
@@ -677,11 +669,8 @@ C mono tache
         INTBUF_TAB%VARIABLES(5) = -INTBUF_TAB%VARIABLES(5)
 C
         INTFRIC = 0
-        CALL SPMD_TRI7GAT(
-     1      RESULT       ,NSN ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2      IPARI(21,NIN),NSNR,MULTIMP      ,NTY,IPARI(47,NIN),
-     3      IDUM1   ,NSNFIOLD, IPARI, H3D_DATA,INTFRIC,
-     4      MULTI_FVM,NODADT_THERM)
+      CALL SPMD_TRI7GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), IDUM1, NSNFIOLD, IPARI, INTFRIC, MULTI_FVM, NODADT_THERM)
         IPARI(24,NIN) = NSNR
 C
         IF (NUM_IMP>0) 

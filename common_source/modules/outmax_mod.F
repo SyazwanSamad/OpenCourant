@@ -22,14 +22,10 @@ Copyright>        copyright and attribution statement.
 !||    outmax_mod           ../common_source/modules/outmax_mod.F
 !||--- called by ------------------------------------------------------
 !||    ddsplit              ../starter/source/restart/ddsplit/ddsplit.F
-!||    genh3d               ../engine/source/output/h3d/h3d_results/genh3d.F
-!||    h3d_nodal_tensor     ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
-!||    h3d_nodal_vector     ../engine/source/output/h3d/h3d_results/h3d_nodal_vector.F
 !||    i2for27_pen          ../engine/source/interfaces/interf/i2for27_pen.F
 !||    i2for27p_pen         ../engine/source/interfaces/interf/i2for27p_pen.F
 !||    i2mom27_cin          ../engine/source/interfaces/interf/i2mom27_cin.F
 !||    i2mom27p_cin         ../engine/source/interfaces/interf/i2mom27p_cin.F
-!||    ini_h3dtmax_engine   ../starter/source/starter/contrl.F
 !||    ini_outmax_auto      ../starter/source/elements/elbuf_init/ini_outmax_auto.F
 !||    ini_tmax             ../engine/source/output/ini_outmax.F
 !||    rdcomi               ../engine/source/output/restart/rdcomm.F
@@ -55,18 +51,17 @@ Copyright>        copyright and attribution statement.
 !--------------------------------------------------------------------
         integer  NMAX_N     ! nodal Tmax number, work var
         integer  NMAX_E     ! elementary Tmax number, work var
-        integer  LMAX_DIS
-        integer  LMAX_VEL
-        integer  LMAX_NSIG  ! noda p1&p3 for 3D
-        integer  LMAX_NSTRA ! noda p1&p3 for 3D
+        integer :: LMAX_DIS = 0
+        integer :: LMAX_VEL = 0
+        integer :: LMAX_NSIG = 0 ! noda p1&p3 for 3D
+        integer :: LMAX_NSTRA = 0 ! noda p1&p3 for 3D
 C------ used to initialize LMAX_* (for elementary only)
-        integer :: NKEYMAX = 6
         integer :: NCY_GPS, NCY_GPSTR
 C---------Output Max contact force and pressure
         integer :: SFCONT_MAX, SPCONT_MAX
         integer :: IFCONTMAX,IFCONTPMAX, IFCONT2MAX,IFCONTP2MAX,IFCONT2MIN,IFCONTP2MIN
 C        /VONM;/SIGEQ; /ENER ; /DAMA, /TENS/STRESS ;/TENS/STRAIN
-        integer, DIMENSION(:) ,  ALLOCATABLE :: IKEYMAX,IGPSTAG,IGPSTRATAG
+        integer, DIMENSION(:) ,  ALLOCATABLE :: IGPSTAG,IGPSTRATAG
         integer, DIMENSION(:,:) ,ALLOCATABLE :: IPART_OK
         my_real, DIMENSION(:) , ALLOCATABLE ::  TM_DIS,TM_VEL  ! 3*NUMNOD
         my_real, DIMENSION(:) , ALLOCATABLE ::   TM_NSIG1 ,TM_NSIG3 ! 6*NUMNOD
@@ -76,11 +71,6 @@ C------ work arrays
         my_real, DIMENSION(:) , ALLOCATABLE ::   TM_PNSIG,TM_PNSTRA
         my_real, DIMENSION(:) , ALLOCATABLE ::   GPSTMP,P2TMP
 C---------Output Max contact force and pressure
-        my_real, DIMENSION(:) , ALLOCATABLE ::   FNCONT_MAX,FTCONT_MAX
-        my_real, DIMENSION(:) , ALLOCATABLE ::   FCONT2_MAX,FNCONT2_MAX,FTCONT2_MAX
-        my_real, DIMENSION(:) , ALLOCATABLE ::   FCONT2_MIN,FNCONT2_MIN,FTCONT2_MIN
-        my_real, DIMENSION(:) , ALLOCATABLE ::   NPCONT2_MIN,NPCONT2_MAX
 C---------Output of moment for int type2
-        my_real, DIMENSION(:,:) , ALLOCATABLE ::  MCONT2
 
       END MODULE OUTMAX_MOD

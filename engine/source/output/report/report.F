@@ -29,7 +29,7 @@ Copyright>        copyright and attribution statement.
 !||    output_mod             ../common_source/modules/output/output_mod.F90
 !||    user_interface_mod     ../engine/source/modules/user_interface_mod.F90
 !||====================================================================
-      SUBROUTINE REPORT(IH3DREADER,N,IMVW,WFEXT,WFEXT_MD,OUTPUT)
+      SUBROUTINE REPORT(N, IMVW, WFEXT, WFEXT_MD, OUTPUT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -59,7 +59,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IH3DREADER,N,IMVW
+      INTEGER N,IMVW
       my_real WFEXT,WFEXT_MD
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -143,14 +143,7 @@ c
        ELSE
          WRITE(IOUTREP,'(A,I4,A)')'<title>Simcenter Radioss(TM) ',2026,' Report</title>'
        ENDIF
-       WRITE(IOUTREP,'(A)')'<script language="JavaScript">'
-       WRITE(IOUTREP,'(A)')'function h3d()'
-       WRITE(IOUTREP,'(A)')'{'
-       WRITE(IOUTREP,'(A)')'winProps = "height=600,width=520,location=no,scrollbars=no,menubars=no,toolbars=no,
-     .                      status=no,resizable=yes";'
-       WRITE(IOUTREP,'(A,A,A)')'window.open("',ROOTNAM(1:ROOTLEN),'_frames.html","H3D",winProps);'
-       WRITE(IOUTREP,'(A)')'}'
-       WRITE(IOUTREP,'(A)')'</script>'
+
        WRITE(IOUTREP,'(A)')'</head>'
        WRITE(IOUTREP,'(A)')' '
        WRITE(IOUTREP,'(A)')'<body bgcolor="#FFFFFF" text="#000000">'
@@ -738,7 +731,7 @@ c       WRITE(IOUTREP,'(A)')'<p>'
        WRITE(IOUTREP,'(A)')'</ul>'
        WRITE(IOUTREP,'(A)')'<p>'
 
-       IF (IH3DREADER /= 0 .OR. IMVW /= 0) THEN
+      IF (IMVW/=0) THEN
 
          WRITE(IOUTREP,'(A)')' '
          WRITE(IOUTREP,'(A)')'<font face="Arial" size="4"><b><i>Results summary</i></b></font>'
@@ -751,38 +744,7 @@ c       WRITE(IOUTREP,'(A)')'<p>'
          WRITE(IOUTREP,'(A)')'<p>'
        ENDIF
 
-       IF (IH3DREADER /= 0) THEN
-         WRITE(IOUTREP,'(A)')'<OBJECT ID="HVPControl" WIDTH=800 HEIGHT=600'
-         WRITE(IOUTREP,'(A)')'classid="clsid:D28D4D39-57F5-4DFB-8832-C8CB1B1DC410">'
-         WRITE(IOUTREP,'(3A)')'<PARAM name="src" value="',ROOTNAM(1:ROOTLEN),'.h3d" />'
-         IF (IH3DREADER == 1) WRITE(IOUTREP,'(A)')'<PARAM name="inplace" value="1" />'
-         IF (IH3DREADER == 2) WRITE(IOUTREP,'(A)')'<PARAM name="inplace" value="0" />'
-         WRITE(IOUTREP,'(A)')'<PARAM name="launch_size" value="800x600" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_name0" value="contour dataset" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_val0" value="Displacement" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_name1" value="contour component" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_val1" value="Load Case 1" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_name2" value="simulation" />'
-c         WRITE(IOUTREP,'(A)')'<PARAM name="rr_val2" value="1" />'
-         WRITE(IOUTREP,'(A)')'<EMBED type="application/x-h3d"'
-         WRITE(IOUTREP,'(A)')'pluginspage="http://www.altair.com"'
-         WRITE(IOUTREP,'(A)')'width=800 height=600'
-         WRITE(IOUTREP,'(A)')'src="',ROOTNAM(1:ROOTLEN),'h3d"'
-         IF (IH3DREADER == 1) WRITE(IOUTREP,'(A)')'inplace=1'
-         IF (IH3DREADER == 2) WRITE(IOUTREP,'(A)')'inplace=0'
-         WRITE(IOUTREP,'(A)')'launch_size="800x600"'
-         WRITE(IOUTREP,'(A)')'>'
-         WRITE(IOUTREP,'(A)')'</OBJECT>'
-         WRITE(IOUTREP,'(A)')'<p>'
-
-
-c       WRITE(IOUTREP,'(A)')'<font face="Arial" size="2">'
-c       WRITE(IOUTREP,'(A)')'<a href="javascript:h3d();">Click here</a> to view the results with HyperViewPlayer
-c     . . This feature requires a modern browser with Javascript enabled, as well as the
-c     .HyperViewPlayer plugin installed.'
-       ENDIF
-
-       IF (IH3DREADER /= 0 .OR. IMVW /= 0) THEN
+      IF (IMVW/=0) THEN
          WRITE(IOUTREP,'(A)')'</font>'
        ENDIF
 

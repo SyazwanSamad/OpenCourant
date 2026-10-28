@@ -29,25 +29,19 @@ Copyright>        copyright and attribution statement.
 !||    pblast_parameters__free_air   ../common_source/modules/loads/pblast_mod.F90
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod                  ../common_source/modules/groupdef_mod.F
-!||    h3d_inc_mod                   ../engine/share/modules/h3d_inc_mod.F
-!||    h3d_mod                       ../engine/share/modules/h3d_mod.F
 !||    names_and_titles_mod          ../common_source/modules/names_and_titles_mod.F
 !||    output_mod                    ../common_source/modules/output/output_mod.F90
 !||    pblast_mod                    ../common_source/modules/loads/pblast_mod.F90
 !||    th_mod                        ../engine/share/modules/th_mod.F
 !||    th_surf_mod                   ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE PBLAST_1(OUTPUT, PBLAST  ,ILOADP   ,FAC     ,A         ,V         ,X        ,
-     1                    IADC    ,FSKY     ,LLOADP  ,FEXT      ,NODA_SURF ,NODA_PEXT,
-     2                    ITAB    ,H3D_DATA ,NL      ,DTMIN_LOC ,WFEXT_LOC ,
-     3                    TH_SURF ,NSEGPL)
+      SUBROUTINE PBLAST_1(OUTPUT, PBLAST, ILOADP, FAC, A, V, X, IADC, FSKY, LLOADP, FEXT, NODA_SURF, NODA_PEXT, ITAB,
+     . NL, DTMIN_LOC, WFEXT_LOC, TH_SURF, NSEGPL)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD 
       USE PBLAST_MOD
       USE GROUPDEF_MOD      
-      USE H3D_INC_MOD 
       USE TH_SURF_MOD , ONLY : TH_SURF_
       USE NAMES_AND_TITLES_MOD , ONLY : NCHARLINE
       USE TH_MOD , ONLY : TH_HAS_NODA_PEXT
@@ -86,7 +80,6 @@ C-----------------------------------------------
       my_real,INTENT(INOUT) :: FEXT(3,NUMNOD)
       my_real,INTENT(INOUT) :: NODA_SURF(NUMNOD)
       my_real,INTENT(INOUT) :: NODA_PEXT(NUMNOD)
-      TYPE(H3D_DATABASE),INTENT(IN) :: H3D_DATA
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
       INTEGER, INTENT(INOUT) :: NSEGPL
       TYPE(FRIEDLANDER_PARAMS_) :: FRIEDLANDER_PARAMS
@@ -94,7 +87,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER :: N1, N2, N3, N4,IL,IS,IAD,I,IANIM_OR_H3D,IZ_UPDATE,ABAC_ID,ISIZ_SEG,IERR1,
+      INTEGER :: N1, N2, N3, N4,IL,IS,IAD,I,IANIM_REQUEST,IZ_UPDATE,ABAC_ID,ISIZ_SEG,IERR1,
      .           ID, ITA_SHIFT,IMODEL,NN(4),NS,KSURF,NDT
       INTEGER :: NWARN !< number of segment for which it is not possible to correlate the positive impulse. It may happen that for a given Pmax and dt0 value even building a triangle shape leads to a lower impulse that the targeted one.
 
@@ -158,7 +151,7 @@ C-----------------------------------------------
 C-----------------------------------------------,
 C   S o u r c e   C o d e
 C-----------------------------------------------
-      IANIM_OR_H3D = ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT + ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT  !output
+      IANIM_REQUEST =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 
       !Index Bijection                                                                                  
       Z1_ = HALF
@@ -514,7 +507,7 @@ C----- /TH/SURF -------
       !   H3D FILE         /H3D/NODA/FEXT         !
       !-------------------------------------------!                                                                                                                       
 !$OMP SINGLE
-      IF(IANIM_OR_H3D > 0) THEN
+      IF(IANIM_REQUEST > 0) THEN
         DO I = 1,ISIZ_SEG                                                                        
           N1=PBLAST%PBLAST_TAB(IL)%N(1,I)
           N2=PBLAST%PBLAST_TAB(IL)%N(2,I)
@@ -536,7 +529,7 @@ C----- /TH/SURF -------
           ENDIF                                                                                  
         ENDDO                                                                                           
       ENDIF
-      IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%ANIM_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%H3D_HAS_NODA_PEXT > 0) THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0) THEN
         DO I = 1,ISIZ_SEG
           N1 = PBLAST%PBLAST_TAB(IL)%N(1,I)
           N2 = PBLAST%PBLAST_TAB(IL)%N(2,I)

@@ -25,20 +25,15 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    press_seg3     ../engine/source/loads/general/load_pcyl/press_seg3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    loads_mod      ../common_source/modules/loads/loads_mod.F90
 !||    sensor_mod     ../common_source/modules/sensor_mod.F90
 !||    table_mod      ../engine/share/modules/table_mod.F
 !||====================================================================
-      SUBROUTINE PRESSURE_CYL(
-     .           LOADS     ,TABLE     ,NSENSOR   ,SENSOR_TAB,IFRAME    ,
-     .           DT1       ,X         ,V         ,ACC       ,FEXT      ,
-     .           H3D_DATA  ,CPTREAC   ,FTHREAC   ,NODREAC   ,FSKY      ,
-     .           WFEXT)
+      SUBROUTINE PRESSURE_CYL(LOADS, TABLE, NSENSOR, SENSOR_TAB, IFRAME, DT1, X, V, ACC, FEXT, CPTREAC, FTHREAC,
+     . NODREAC, FSKY, WFEXT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE TABLE_MOD
       USE SENSOR_MOD
       USE LOADS_MOD
@@ -70,7 +65,6 @@ C-----------------------------------------------
       TYPE (TTABLE)      ,DIMENSION(NTABLE)  ,INTENT(IN) :: TABLE
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       TYPE (LOADS_)      ,INTENT(IN) :: LOADS
-      TYPE (H3D_DATABASE),INTENT(IN) :: H3D_DATA
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -83,8 +77,7 @@ C-----------------------------------------------
       my_real, DIMENSION(3) :: P0,DIR,A,B,C,D,M
 c=======================================================================
       WFEXTT = ZERO
-      IANIM  = ANIM_V(5) + OUTP_V(5) + H3D_DATA%N_VECT_FINT
-     .       + ANIM_V(6) + OUTP_V(6) + H3D_DATA%N_VECT_FEXT
+      IANIM  =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 
 c
       DO I = 1,LOADS%NLOAD_CYL

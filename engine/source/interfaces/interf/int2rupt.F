@@ -25,22 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    i2rupt          ../engine/source/interfaces/interf/int2rupt.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||====================================================================
-      SUBROUTINE INT2RUPT(IPARI   ,MS      ,IN      ,
-     .                    X       ,V       ,A       ,STIFN   ,IGEO    ,
-     .                    WEIGHT  ,FSAV    ,ILEV    ,NPF     ,TF      ,
-     .                    ITAB    ,FNCONT  ,PDAMA2  ,INTBUF_TAB,H3D_DATA,
-     .                    FNCONTP ,FTCONTP )         
+      SUBROUTINE INT2RUPT(IPARI, MS, IN, X, V, A, STIFN, IGEO, WEIGHT, FSAV, ILEV, NPF, TF, ITAB, FNCONT, PDAMA2,
+     . INTBUF_TAB, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD               
-      USE H3D_MOD                     
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -53,10 +45,6 @@ C     REAL
      .   FNCONT(*),PDAMA2(*), FNCONTP(*)  ,FTCONTP(* )         
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "param_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -83,15 +71,11 @@ c
         IGTYP =-1
       ENDIF      
 C
-      CALL I2RUPT(
-     1     X         ,V          ,A         ,MS        ,IN     ,        
-     2     STIFN     ,FSAV       ,WEIGHT          ,INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,               
-     3     INTBUF_TAB%MSR        ,INTBUF_TAB%IRTLM,INTBUF_TAB%IRUPT ,INTBUF_TAB%CSTS ,INTBUF_TAB%NMAS(1),          
-     4     INTBUF_TAB%NMAS(1+NMN),INTBUF_TAB%SMAS ,INTBUF_TAB%SINER ,INTBUF_TAB%AREAS2,INTBUF_TAB%UVAR   ,       
-     5     INTBUF_TAB%XM0        ,INTBUF_TAB%DSM  ,INTBUF_TAB%FSM   ,INTBUF_TAB%RUPT ,IPARI             ,          
-     6     NSN       ,NMN       ,NUVAR     ,IGTYP   ,PID       ,          
-     7     NPF       ,TF        ,ITAB      ,FNCONT  ,PDAMA2    ,
-     8     ISYM      ,INTBUF_TAB%INORM,H3D_DATA,FNCONTP  ,FTCONTP )
+      CALL I2RUPT(X, V, A, MS, IN, STIFN, FSAV, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%MSR,
+     . INTBUF_TAB%IRTLM, INTBUF_TAB%IRUPT, INTBUF_TAB%CSTS, INTBUF_TAB%NMAS(1), INTBUF_TAB%NMAS(1+NMN), INTBUF_TAB%SMAS,
+     . INTBUF_TAB%SINER, INTBUF_TAB%AREAS2, INTBUF_TAB%UVAR, INTBUF_TAB%XM0, INTBUF_TAB%DSM, INTBUF_TAB%FSM,
+     . INTBUF_TAB%RUPT, IPARI, NSN, NMN, NUVAR, IGTYP, PID, NPF, TF, ITAB, FNCONT, PDAMA2, ISYM, INTBUF_TAB%INORM,
+     . FNCONTP, FTCONTP)
 C-----------
       RETURN
       END SUBROUTINE INT2RUPT
@@ -105,23 +89,16 @@ C
 !||    arret                     ../engine/source/system/arret.F
 !||    ruptint2                  ../engine/source/interfaces/interf/ruptint2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                   ../engine/share/modules/h3d_mod.F
 !||    message_mod               ../engine/share/message_module/message_mod.F
 !||    uintbuf_mod               ../engine/source/user_interface/uintbuf_mod.F
 !||====================================================================
-      SUBROUTINE I2RUPT(X      ,V       ,A       ,MS      ,IN      ,
-     2                 STIFN   ,FSAV    ,WEIGHT  ,IRECT   ,NSV     , 
-     3                 MSR     ,IRTL    ,IRUPT   ,CRST    ,MMASS   , 
-     4                 MINER   ,SMASS   ,SINER   ,AREA    ,UVAR    , 
-     5                 XSM0    ,DSM     ,FSM     ,PROP    ,IPARI   , 
-     6                 NSN     ,NMN     ,NUVAR   ,IGTYP   ,PID     ,
-     7                 NPF     ,TF      ,ITAB    ,FNCONT  ,PDAMA2  ,
-     8                 ISYM    ,INORM   ,H3D_DATA,FNCONTP ,FTCONTP )                                     
+      SUBROUTINE I2RUPT(X, V, A, MS, IN, STIFN, FSAV, WEIGHT, IRECT, NSV, MSR, IRTL, IRUPT, CRST, MMASS, MINER, SMASS,
+     . SINER, AREA, UVAR, XSM0, DSM, FSM, PROP, IPARI, NSN, NMN, NUVAR, IGTYP, PID, NPF, TF, ITAB, FNCONT, PDAMA2, ISYM,
+     . INORM, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE UINTBUF_MOD
-      USE H3D_MOD
       USE MESSAGE_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -141,10 +118,6 @@ C     REAL
      .   FNCONTP(3,*)  ,FTCONTP(3,* ), PDAMA2(*) 
       my_real, DIMENSION(NUVAR,NSN) ::
      .   UVAR
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "com08_c.inc"
 #include      "scr14_c.inc"
@@ -436,11 +409,8 @@ C
              IFUNN = IPARI(49)      
              IFUNT = IPARI(50) 
              IDBG  = 0
-               CALL RUPTINT2(                                             
-     .            NSN       ,II        ,NUVAR     ,UVAR(1,II),USERBUF  , 
-     .            PROP      ,IFUNS     ,IFUNN     ,IFUNT     ,IMOD     ,
-     .            IFILTR    ,IDBG      ,NPF       ,TF        ,NOINT    ,
-     .            ITAB      ,PDAMA2    ,ISYM      ,H3D_DATA  )    
+      CALL RUPTINT2(NSN, II, NUVAR, UVAR(1,II), USERBUF, PROP, IFUNS, IFUNN, IFUNT, IMOD, IFILTR, IDBG, NPF, TF, NOINT,
+     . ITAB, PDAMA2, ISYM)
            ELSEIF (IGTYP == 29) THEN    
              IF(USERL_AVAIL==1)THEN
                CALL ENG_USERLIB_USERINT(IGTYP,
@@ -631,7 +601,7 @@ C------------------------------------------------
           FSAV(15)= FSAV(15)+ FSAV15*W  
 #include "lockoff.inc"
 C---
-         IF(ANIM_V(13)+H3D_DATA%N_VECT_CONT2>0) THEN
+      IF(ANIM_V(13)>0) THEN
            FNCONT(1,I) = - (FN(1)+FT(1))  * W
            FNCONT(2,I) = - (FN(2)+FT(2))  * W
            FNCONT(3,I) = - (FN(3)+FT(3))  * W
@@ -643,7 +613,7 @@ C---
            ENDDO
          ENDIF
 
-        IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2>0) THEN ! Normal/Tangential forces output
+      IF(ANIM_V(27)>0) THEN
            FNCONTP(1,I) = - (FN(1)+FT(1))  * W
            FNCONTP(2,I) = - (FN(2)+FT(2))  * W
            FNCONTP(3,I) = - (FN(3)+FT(3))  * W

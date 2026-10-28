@@ -25,16 +25,13 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    shapeh       ../engine/source/ale/inter/shapeh.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE IQELA1(OUTPUT,A,E,MSM,IRECT,CRST,MSR,
-     1                 NSV,ILOC,IRTL,MS,NOR,LCODE,ISKEW,FSAV,
-     2                 FCONT,FNCONT,H3D_DATA,NSN,NMN)
+      SUBROUTINE IQELA1(OUTPUT, A, E, MSM, IRECT, CRST, MSR, NSV, ILOC, IRTL, MS, NOR, LCODE, ISKEW, FSAV, FCONT,
+     . FNCONT, NSN, NMN)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   D e s c r i p t i o n
@@ -67,10 +64,6 @@ C-----------------------------------------------
       my_real,INTENT(INOUT) :: A(SA), E(*), MSM(*), CRST(2,*), MS(*),NOR(3,*),FSAV(*)
       my_real,INTENT(INOUT) :: FCONT(3,*),FNCONT(3,*)
       INTEGER, INTENT(IN) :: NSN,NMN
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER NIR, I, J, I3, J3, I2, J2, I1, J1, II, L, JJ, NN, JJ3, JJ2, JJ1, ISK, LCOD
       my_real H(4), N1, N2, N3, AA(3), SSS, TTT, XMSS, FXI, FYI, FZI, FSN
       my_real :: FSN_SAV, FXI_SAV, FYI_SAV, FZI_SAV,IMPX,IMPY,IMPZ
@@ -81,10 +74,9 @@ C-----------------------------------------------
       ICONT  = .FALSE.
       IPCONT = .FALSE.
       IANIM  = .FALSE.
-      ICONT  = (ANIM_V(4)+OUTP_V(4) > 0+H3D_DATA%N_VECT_CONT)
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT > 0)THEN      
-       IF( (TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP) .OR.TT >= TOUTP.OR.TT >= H3D_DATA%TH3D.OR.
-     .      (MANIM >= 4.AND.MANIM <= 15).OR. H3D_DATA%MH3D /= 0)THEN
+      ICONT  =(ANIM_V(4)+OUTP_V(4)>0)
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
+      IF((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.MANIM<=15))THEN
          IPCONT = .TRUE.
        ENDIF
       ENDIF

@@ -26,8 +26,8 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    fretitl                ../starter/source/starter/freform.F
 !||    fretitl2               ../starter/source/starter/freform.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_prop_read21         ../starter/source/properties/thickshell/hm_read_prop21.F
 !||    hm_read_inject1        ../starter/source/properties/injector/hm_read_inject1.F
 !||    hm_read_inject2        ../starter/source/properties/injector/hm_read_inject2.F

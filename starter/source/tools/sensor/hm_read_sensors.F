@@ -24,9 +24,9 @@ Copyright>        copyright and attribution statement.
 !||    lectur                   ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
-!||    hm_option_count          ../starter/source/devtools/hm_reader/hm_option_count.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start          ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_option_count          ../starter/source/devtools/reader/hm_option_count.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start          ../starter/source/devtools/reader/hm_option_start.F
 !||    read_sensor_acc          ../starter/source/tools/sensor/read_sensor_acc.F
 !||    read_sensor_and          ../starter/source/tools/sensor/read_sensor_and.F
 !||    read_sensor_contact      ../starter/source/tools/sensor/read_sensor_contact.F

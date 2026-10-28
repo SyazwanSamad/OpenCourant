@@ -85,7 +85,6 @@
 !||    fvinjt8                            ../engine/source/airbag/fvinjt8.F
 !||    fxbodfp2                           ../engine/source/constraints/fxbody/fxbodfp.F
 !||    fxbyfor                            ../engine/source/constraints/fxbody/fxbyfor.F
-!||    genh3d                             ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    get_preload_axial                  ../engine/source/elements/spring/preload_axial.F90
 !||    get_u_numsens                      ../engine/source/user_interface/usensor.F
 !||    get_u_sens                         ../engine/source/user_interface/usensor.F
@@ -98,10 +97,6 @@
 !||    gravit                             ../engine/source/loads/general/grav/gravit.F
 !||    gravit_fvm_fem                     ../engine/source/loads/general/grav/gravit_fvm_fem.F
 !||    gravit_imp                         ../engine/source/loads/general/grav/gravit_imp.F
-!||    h3d_pre_skin_scalar                ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_read                           ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
-!||    h3d_skin_scalar                    ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_vector                    ../engine/source/output/h3d/h3d_results/h3d_skin_vector.F
 !||    hist2                              ../engine/source/output/th/hist2.F
 !||    hm_read_activ                      ../starter/source/tools/activ/hm_read_activ.F
 !||    hm_read_bcs_wall                   ../starter/source/boundary_conditions/hm_read_bcs_wall.F90
@@ -155,7 +150,6 @@
 !||    iniebcs                            ../starter/source/boundary_conditions/ebcs/iniebcs.F
 !||    iniparsen                          ../starter/source/tools/sensor/iniparsen.F
 !||    inisen                             ../starter/source/tools/sensor/inisen.F
-!||    init_h3d_engine                    ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    init_monvol                        ../starter/source/airbag/init_monvol.F
 !||    initia                             ../starter/source/elements/initia/initia.F
 !||    inivel_dt2                         ../engine/source/loads/general/inivel/inivel_dt2.F90
@@ -480,7 +474,6 @@
           integer :: stop_nsanim    !< /stop/lsensor - write animation file
           integer :: stop_nsstat    !< /stop/lsensor - write state file
           integer :: stop_nsoutp    !< /stop/lsensor - write state file
-          integer :: stop_nsh3d     !< /stop/lsensor - write h3d state
           integer :: stop_nsabf     !< /stop/lsensor - write abf file
           real(kind=WP) :: anim_dt
 

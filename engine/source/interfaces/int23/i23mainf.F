@@ -35,7 +35,6 @@ Copyright>        copyright and attribution statement.
 !||    stoptime           ../engine/source/system/timer_mod.F90
 !||    sum_6_float_sens   ../engine/source/system/parit.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod        ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod       ../common_source/tools/memory/my_alloc.F90
@@ -43,24 +42,16 @@ Copyright>        copyright and attribution statement.
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||    timer_mod          ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I23MAINF(OUTPUT,TIMERS,
-     1                   IPARI  ,INTBUF_TAB         ,X        ,A      ,
-     2                   ICODT  ,FSAV    ,V         ,MS       ,ITAB   ,
-     3                   STIFN  ,FSKYI   ,ISKY      ,FCONT    ,NIN    ,
-     4                   LINDMAX ,JTASK  ,NB_JLT ,NB_JLT_NEW,NB_STOK_N,
-     5                   NSTRF  ,SECFCUM ,ICONTACT  ,VISCN   ,NUM_IMP ,
-     6                   NS_IMP ,NE_IMP  ,IND_IMP   ,NRTMDIM ,FNCONT  ,
-     7                   FTCONT ,RCONTACT ,ACONTACT ,PCONTACT,KINET   ,
-     8                   WEIGHT ,MSKYI_SMS,ISKYI_SMS,NODNX_SMS ,NODGLOB,
-     9                   NPC    ,TF      , NISKYFI  ,NEWFRONT  ,MWAG   ,
-     A                   FBSAV6 ,ISENSINT,DIMFB     ,DT2T      ,H3D_DATA)
+      SUBROUTINE I23MAINF(OUTPUT, TIMERS, IPARI, INTBUF_TAB, X, A, ICODT, FSAV, V, MS, ITAB, STIFN, FSKYI, ISKY, FCONT,
+     . NIN, LINDMAX, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, NSTRF, SECFCUM, ICONTACT, VISCN, NUM_IMP, NS_IMP, NE_IMP,
+     . IND_IMP, NRTMDIM, FNCONT, FTCONT, RCONTACT, ACONTACT, PCONTACT, KINET, WEIGHT, MSKYI_SMS, ISKYI_SMS, NODNX_SMS,
+     . NODGLOB, NPC, TF, NISKYFI, NEWFRONT, MWAG, FBSAV6, ISENSINT, DIMFB, DT2T)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       use output_mod
       USE TIMER_MOD
       USE INTBUFDEF_MOD 
-      USE H3D_MOD 
       USE MESSAGE_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -108,10 +99,6 @@ C     REAL
       DOUBLE PRECISION FBSAV6(12,6,DIMFB)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, I_STOK, JLT_NEW, JLT , NFT, J,
      . IBC, NOINT, ISECIN, IBAG,
      .        IGAP, INACTI, IFQ, MFROT, IGSTI, NISUB,
@@ -344,27 +331,13 @@ C
             IF (DEBUG(3)>=1)
      .        NB_JLT_NEW = NB_JLT_NEW + JLT
 C 
-              CALL I23FOR3(output,
-     1  JLT       ,NIN  ,NOINT        ,IBC  ,ICODT        ,
-     2  FSAV       ,GAP  ,STIGLO       ,FRIC  ,VISC        ,
-     3  INACTI       ,MFROT  ,IFQ        ,IBAG  ,
-     4  IPARI(39,NIN),STIF  ,GAPV        ,ITAB  ,A        ,
-     5  INTBUF_TAB%CAND_P,INTBUF_TAB%FRIC_P,INTBUF_TAB%XFILTR,V  ,ICONTACT,
-     6  NISKYFI      ,NSVG     ,X1        ,Y1      ,Z1       ,
-     7  X2       ,Y2     ,Z2        ,X3      ,Y3       ,
-     8  Z3       ,X4     ,Y4        ,Z4      ,XI       ,
-     9  YI       ,ZI     ,VXI       ,VYI      ,VZI      ,
-     A  MSI       ,VXM     ,VYM       ,VZM      ,NX       ,
-     B  NY       ,NZ     ,PENE      ,H1      ,H2       ,
-     C  H3       ,H4     ,INDEX2(NFT+1),CAND_N_N  ,WEIGHT   ,
-     F  FXT       ,FYT     ,FZT       ,DT2T         ,
-     G  FCONT       ,FNCONT     ,FTCONT    ,STIFN      ,VISCN    ,
-     H  NEWFRONT     ,ISECIN     ,NSTRF     ,SECFCUM      ,FSKYI    ,
-     I  ISKY       ,INTTH     ,MS        ,IX1      ,IX2      ,
-     J  IX3   ,IX4      ,INTBUF_TAB%FTSAVX,INTBUF_TAB%FTSAVY,INTBUF_TAB%FTSAVZ,
-     K  KMIN       ,KMAX    ,CN_LOC     ,CE_LOC  ,MSKYI_SMS    ,
-     L  ISKYI_SMS    ,NSMS     ,JTASK     ,ISENSINT ,FSAVPARIT    ,
-     M  NISUB        ,NFT          ,H3D_DATA  )
+      CALL I23FOR3(output, JLT, NIN, NOINT, IBC, ICODT, FSAV, GAP, STIGLO, FRIC, VISC, INACTI, MFROT, IFQ, IBAG,
+     . IPARI(39,NIN), STIF, GAPV, ITAB, A, INTBUF_TAB%CAND_P, INTBUF_TAB%FRIC_P, INTBUF_TAB%XFILTR, V, ICONTACT,
+     . NISKYFI, NSVG, X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4, XI, YI, ZI, VXI, VYI, VZI, MSI, VXM, VYM, VZM, NX,
+     . NY, NZ, PENE, H1, H2, H3, H4, INDEX2(NFT+1), CAND_N_N, WEIGHT, FXT, FYT, FZT, DT2T, FCONT, FNCONT, FTCONT, STIFN,
+     . VISCN, NEWFRONT, ISECIN, NSTRF, SECFCUM, FSKYI, ISKY, INTTH, MS, IX1, IX2, IX3, IX4, INTBUF_TAB%FTSAVX,
+     . INTBUF_TAB%FTSAVY, INTBUF_TAB%FTSAVZ, KMIN, KMAX, CN_LOC, CE_LOC, MSKYI_SMS, ISKYI_SMS, NSMS, JTASK, ISENSINT,
+     . FSAVPARIT, NISUB, NFT)
 C
             ENDIF ! JLT_NEW/=0
           IF (IMONM > 0) CALL STOPTIME(TIMERS,20)

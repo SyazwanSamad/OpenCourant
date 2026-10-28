@@ -938,6 +938,11 @@ public:
 
     virtual bool Next() override
     {
+        if(p_elemsCachePtrs.empty())
+        {
+            SetDataPointer(nullptr);
+            return false;
+        }
         // first call
         if(UINT_MAX == this->p_index) {
             SetDataPointer(p_pre_obj_lst->at(p_elemsCachePtrs[0]->at(0).p_index1));

@@ -21,13 +21,12 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    anim_nodal_vector_fvmbags   ../engine/source/output/anim/generate/anim_nodal_vector_fvmbags.F
 !||--- called by ------------------------------------------------------
-!||    h3d_nodal_vector            ../engine/source/output/h3d/h3d_results/h3d_nodal_vector.F
 !||--- uses       -----------------------------------------------------
 !||    fvbag_mod                   ../engine/share/modules/fvbag_mod.F
 !||    groupdef_mod                ../common_source/modules/groupdef_mod.F
 !||====================================================================
       SUBROUTINE ANIM_NODAL_VECTOR_FVMBAGS(KEY, WA4, MONVOL,VOLMON, FVDATA, NFVBAG, SMONVOL, SVOLMON,
-     .                                     AIRBAGS_TOTAL_FVM_IN_H3D, IS_WRITTEN_NODE_FVM, AIRBAGS_NODE_ID_SHIFT )
+     .                                     AIRBAGS_TOTAL_FVM_VIS, IS_WRITTEN_NODE_FVM, AIRBAGS_NODE_ID_SHIFT )
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -59,19 +58,19 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       CHARACTER*4, INTENT(IN) :: KEY
-      INTEGER,INTENT(IN) :: NFVBAG, SMONVOL,SVOLMON,AIRBAGS_TOTAL_FVM_IN_H3D, AIRBAGS_NODE_ID_SHIFT
-      my_real,INTENT(INOUT) :: WA4(3,AIRBAGS_TOTAL_FVM_IN_H3D)
+      INTEGER,INTENT(IN) :: NFVBAG, SMONVOL,SVOLMON,AIRBAGS_TOTAL_FVM_VIS, AIRBAGS_NODE_ID_SHIFT
+      my_real,INTENT(INOUT) :: WA4(3,AIRBAGS_TOTAL_FVM_VIS)
       my_real,INTENT(IN) :: VOLMON(SVOLMON)
       INTEGER,INTENT(IN) :: MONVOL(SMONVOL)
       TYPE(FVBAG_DATA), INTENT(IN) :: FVDATA(NFVBAG) 
-      INTEGER,INTENT(INOUT) :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_IN_H3D)
+      INTEGER,INTENT(INOUT) :: IS_WRITTEN_NODE_FVM(AIRBAGS_TOTAL_FVM_VIS)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER :: K1        !< index shift for MONVOL ARRAY
       INTEGER :: NN, II    !< loop
       INTEGER :: ITYP      !< monvol type (refer to read_monvol.F)
-      INTEGER :: IH3D_FLAG !< node group identifier
+      INTEGER :: VIS_FLAG !< node group identifier
  
       INTEGER :: IFV       !< FVMBAG identifier in [1, NFVBAG] where NFVBAG <= NVOLU
  
@@ -90,10 +89,10 @@ C-----------------------------------------------
       DO NN=1,NVOLU
          ITYP=MONVOL(K1-1+2)
          IF (ITYP == 6.OR.ITYP == 8 .OR. ITYP == 11) THEN   ! /MONVOL/FVMBAG, or FVMBAG1, or FVMBAG2
-            IH3D_FLAG = MONVOL(K1-1 +75)  !GRNOD internal identifier in [1:NGRNOD]
+            VIS_FLAG = MONVOL(K1-1 +75)  !GRNOD internal identifier in [1:NGRNOD]
             IFV = MONVOL(K1-1 +45)
             !check if grnod_id was provided, otherwise skip
-            IF(IH3D_FLAG == 1 .AND. IFV /= 0)THEN
+            IF(VIS_FLAG == 1 .AND. IFV /= 0)THEN
               
               IF(FVDATA(IFV)%NPOLH > 0)THEN !if GRNOD is not empty and if there are any polyhedrong
                                  
@@ -114,7 +113,7 @@ C-----------------------------------------------
                 END SELECT
 
               ENDIF !NPOLH>0>0 
-            ENDIF !IH3D_FLAG>0
+            ENDIF !VIS_FLAG>0
             K_SHIFT = K_SHIFT+FVDATA(IFV)%NPOLH
          ENDIF ! ITYP
          K1=K1+NIMV
@@ -122,8 +121,8 @@ C-----------------------------------------------
       ENDDO !next NN
       
       ! set minimum value to other nodes in the group (otherwise visualization may lead to unsuitable color legend/gradient)          
-      IF(K_SHIFT < AIRBAGS_TOTAL_FVM_IN_H3D)THEN                                                                       
-        DO II= K_SHIFT+1, AIRBAGS_TOTAL_FVM_IN_H3D
+      IF(K_SHIFT < AIRBAGS_TOTAL_FVM_VIS)THEN
+        DO II= K_SHIFT+1, AIRBAGS_TOTAL_FVM_VIS
           WA4(1:3, II) = ZERO
           IS_WRITTEN_NODE_FVM(II) = 0                                                                                                 
         ENDDO                                                                                                                         

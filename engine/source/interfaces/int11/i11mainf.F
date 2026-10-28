@@ -36,7 +36,6 @@ Copyright>        copyright and attribution statement.
 !||    stoptime                   ../engine/source/system/timer_mod.F90
 !||    sum_6_float_sens           ../engine/source/system/parit.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                    ../engine/share/modules/h3d_mod.F
 !||    intbuf_fric_mod            ../common_source/modules/interfaces/intbuf_fric_mod.F90
 !||    intbufdef_mod              ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod                ../engine/share/message_module/message_mod.F
@@ -45,26 +44,17 @@ Copyright>        copyright and attribution statement.
 !||    output_mod                 ../common_source/modules/output/output_mod.F90
 !||    timer_mod                  ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I11MAINF(OUTPUT, TIMERS,
-     1      IPARI   ,X         ,A       ,
-     2      ICODT   ,FSAV      ,V        ,MS     ,DT2T    ,
-     3      NELTST  ,ITYPTST   ,ITAB     ,STIFN  ,FSKYI   ,
-     4      ISKY    ,FCONT     ,NIN      ,LINDMAX ,JTASK   ,
-     5      NB_JLT  ,NB_JLT_NEW,NB_STOK_N,NISKYFI,NEWFRONT,
-     6      NSTRF   ,SECFCUM   ,VISCN    ,NUM_IMP, NS_IMP ,
-     7      NE_IMP  ,MSKYI_SMS ,ISKYI_SMS,NODNX_SMS,ICONTACT,
-     8      INTBUF_TAB,PM       ,TEMP    , FTHE    ,FTHESKYI ,
-     9      NPC     ,TF        ,CONDN    ,CONDNSKYI,FBSAV6,
-     A      ISENSINT,DIMFB     ,FSAVSUB  ,H3D_DATA ,INTBUF_FRIC_TAB,
-     B      ITASK   ,TAGNCONT  ,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,
-     C      DGAPLOADINT,S_LOADPINTER,NODADT_THERM)
+      SUBROUTINE I11MAINF(OUTPUT, TIMERS, IPARI, X, A, ICODT, FSAV, V, MS, DT2T, NELTST, ITYPTST, ITAB, STIFN, FSKYI,
+     . ISKY, FCONT, NIN, LINDMAX, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, NISKYFI, NEWFRONT, NSTRF, SECFCUM, VISCN,
+     . NUM_IMP, NS_IMP, NE_IMP, MSKYI_SMS, ISKYI_SMS, NODNX_SMS, ICONTACT, INTBUF_TAB, PM, TEMP, FTHE, FTHESKYI, NPC,
+     . TF, CONDN, CONDNSKYI, FBSAV6, ISENSINT, DIMFB, FSAVSUB, INTBUF_FRIC_TAB, ITASK, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, DGAPLOADINT, S_LOADPINTER, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TIMER_MOD
       USE OUTPUT_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE INTBUF_FRIC_MOD
       USE MESSAGE_MOD
       USE MY_ALLOC_MOD
@@ -118,7 +108,6 @@ C     REAL
       DOUBLE PRECISION FBSAV6(12,6,DIMFB)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(INTBUF_FRIC_STRUCT_), TARGET, DIMENSION(NINTERFRIC) ::  INTBUF_FRIC_TAB
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -405,20 +394,10 @@ C
      7          PHIM2     ,CONDINTM1,CONDINTM2  ,IFORMTH  ) 
         ENDIF
 C
-          CALL I11ASS3 (
-     1  JLT          ,A            ,NIN         ,NOINT       ,CS_LOC   ,
-     2  STIFN        ,STIF         ,FSKYI       ,ISKY        ,FCONT    ,
-     3  HS1          ,HS2          ,HM1         ,HM2         ,N1       ,
-     4  N2           ,M1           ,M2          ,NISKYFI     ,ISECIN   , 
-     5  NSTRF        ,SECFCUM      ,VISCN       ,NRTS        ,ISKYI_SMS,
-     6  NSMS         ,ICONTACT     ,MSKYI_SMS   ,FX1         ,FY1      ,
-     7  FZ1          ,FX2          ,FY2         ,FZ2         ,FX3      ,
-     8  FY3          ,FZ3          ,FX4         ,FY4         ,FZ4      ,
-     9  K1           ,K2           ,K3          ,K4          ,C1       ,      
-     A  C2           ,C3           ,C4          ,INTTH       ,PHIS1    ,
-     B  PHIS2        ,PHIM1        ,PHIM2       ,FTHE        ,FTHESKYI ,
-     C  CONDINTS1    ,CONDINTS2    ,CONDINTM1   ,CONDINTM2   ,CONDN    ,
-     D  CONDNSKYI    ,JTASK        ,H3D_DATA    ,NODADT_THERM)
+      CALL I11ASS3 (JLT, A, NIN, NOINT, CS_LOC, STIFN, STIF, FSKYI, ISKY, FCONT, HS1, HS2, HM1, HM2, N1, N2, M1, M2,
+     . NISKYFI, ISECIN, NSTRF, SECFCUM, VISCN, NRTS, ISKYI_SMS, NSMS, ICONTACT, MSKYI_SMS, FX1, FY1, FZ1, FX2, FY2, FZ2,
+     . FX3, FY3, FZ3, FX4, FY4, FZ4, K1, K2, K3, K4, C1, C2, C3, C4, INTTH, PHIS1, PHIS2, PHIM1, PHIM2, FTHE, FTHESKYI,
+     . CONDINTS1, CONDINTS2, CONDINTM1, CONDINTM2, CONDN, CONDNSKYI, JTASK, NODADT_THERM)
 C
             IF(IMPL_S==1) THEN
               DO I = 1 ,JLT_NEW

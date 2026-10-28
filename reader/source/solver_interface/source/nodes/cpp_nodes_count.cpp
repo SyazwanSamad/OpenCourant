@@ -44,6 +44,9 @@ CDECL void CPP_NODE_COUNT(int *nbNodes)
 CDECL void cpp_node_count__ (int *nbNodes)
 {cpp_node_count_ (nbNodes);}
 
+CDECL void cpp_node_count(int *nbNodes)
+{cpp_node_count_ (nbNodes);}
+
 CDECL void CPP_node_count (int *nbNodes)
 {cpp_node_count_ (nbNodes);}
 

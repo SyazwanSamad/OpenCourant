@@ -61,6 +61,10 @@ jobs:
         with:
           lfs: 'false'
 
+      - name: Check shared result separation
+        shell: cmd
+        run: python qa-tests/dependency_removal/test_shared_result_sources.py
+
       - name: Set up Intel oneAPI
         uses: ./.github/actions/setup-oneapi-win
 
@@ -104,6 +108,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           lfs: 'false'
+
+      - name: Check shared result separation
+        shell: cmd
+        run: python qa-tests/dependency_removal/test_shared_result_sources.py
 
       - name: Set up Intel oneAPI
         uses: ./.github/actions/setup-oneapi-win
@@ -156,7 +164,7 @@ jobs:
           cd qa-tests/scripts;
           rm -f QA.summary;
           chmod 755 or_qa_script or_radioss.pl;
-          export PATH=../../extlib/hm_reader/win64:../../extlib/h3d/lib/win64:$PATH;
+          export PATH=../../exec:../../extlib/h3d/lib/win64:$PATH;
           cmd=\"./or_qa_script ../../exec/engine_win64_impi.exe 1.0 --env:RAD_CFG_PATH=../../hm_cfg_files --system_run --env:KMP_STACKSIZE=400m --exec_script_args='mpiexec -np %QA_NB_PROC%' --env:OMP_NUM_THREADS=%QA_NB_THREAD% --output_failures_stdout --xtra_args='--timeoutscript=%QA_TIMEOUT_PER_TEST_WIN%' \";
           echo \"--  $cmd --\";
           eval $cmd;
@@ -191,7 +199,7 @@ jobs:
         run: |
           call "C:\Program Files (x86)\Intel\oneAPI\compiler\2025.0\env\vars.bat"
           call "C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\env\vars.bat"
-          set PATH=%TEMP%\mpirt;%CD%\extlib\hm_reader\win64;%CD%\extlib\h3d\lib\win64;%PATH%
+          set PATH=%TEMP%\mpirt;%CD%\exec;%CD%\extlib\h3d\lib\win64;%PATH%
           set RAD_CFG_PATH=%CD%\hm_cfg_files
           set KMP_STACKSIZE=400m
           set OMP_NUM_THREADS=2

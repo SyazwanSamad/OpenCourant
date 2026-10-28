@@ -23,10 +23,9 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    resol        ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE FORANI1(OUTPUT,A,NFIA,NFEA,NFOA,NODFT,NODLT,FEXT,H3D_DATA)
+      SUBROUTINE FORANI1(OUTPUT, A, NFIA, NFEA, NFOA, NODFT, NODLT, FEXT)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -52,7 +51,6 @@ C
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -73,10 +71,6 @@ C-----------------------------------------------
       INTEGER NFIA,NFEA,NFOA,NODFT,NODLT
       my_real A(3,*),FEXT(3,*)
       TYPE(OUTPUT_), INTENT(INOUT) :: OUTPUT
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER N
 C-----------------------------------------------
 C   S o u r c e   L i n e s
@@ -84,7 +78,7 @@ C-----------------------------------------------
 
 C --- PARITH OFF CASE
       IF(IPARIT == 0)THEN
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT > 0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0) THEN
         !if FINT is requested (ANIM or OUTP or H3D)
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
@@ -93,7 +87,7 @@ C --- PARITH OFF CASE
             OUTPUT%DATA%VECT_FINT(3,N) = - A(3,N)
           ENDDO
         ENDIF
-        IF(ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT > 0) THEN
+      IF(ANIM_V(6)+OUTP_V(6)>0) THEN
         !if FEXT is requested (ANIM or OUTP or H3D)
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
@@ -106,7 +100,7 @@ C --- PARITH OFF CASE
 
 C --- PARITH ON CASE
       ELSE
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             OUTPUT%DATA%VECT_FINT(1,N) = - FEXT(1,N)
@@ -114,7 +108,7 @@ C --- PARITH ON CASE
             OUTPUT%DATA%VECT_FINT(3,N) = - FEXT(3,N)
           ENDDO
         ENDIF
-        IF(ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT > 0) THEN
+      IF(ANIM_V(6)+OUTP_V(6)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             OUTPUT%DATA%VECT_FEXT(1,N) =  FEXT(1,N)
@@ -122,7 +116,7 @@ C --- PARITH ON CASE
             OUTPUT%DATA%VECT_FEXT(3,N) =  FEXT(3,N)
           ENDDO
         ENDIF
-        IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT > 0 .OR. ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT > 0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)>0.OR.ANIM_V(6)+OUTP_V(6)>0) THEN
 #include      "vectorize.inc"
           DO N=NODFT,NODLT
             FEXT(1,N)=ZERO

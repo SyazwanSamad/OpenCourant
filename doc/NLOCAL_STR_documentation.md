@@ -395,8 +395,8 @@ pieces:
 * These arrays are allocated only when the `/NONLOCAL` card set the `MLAW_TAG` flags
   (§5.1): Starter `starter/source/elements/elbuf_init/allocbuf_auto.F:265–267`, Engine
   restart `engine/source/elements/elbuf/allocbuf_auto.F:755–759`.
-* They are written to animation/H3D/time-history output
-  (`h3d_shell_scalar_1.F`, `h3d_solid_scalar_1.F`, `dfuncc.F`, `dfunc6.F`, `thcoq.F`,
+* They feed animation, time-history output and shared result queries
+  (`result_shell_scalar.F`, `result_solid_scalar.F`, `dfuncc.F`, `dfunc6.F`, `thcoq.F`,
   `thsol.F`), which makes the regularized field directly post-processable.
 
 ### 7.2 Through-thickness non-local buffers for shells / thick shells

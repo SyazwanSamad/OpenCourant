@@ -26,27 +26,19 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_TRI25GAT(RESULT,NSN ,CAND_N ,I_STOK,NIN,
-     2                        IGAP  ,NSNR,MULTIMP,ITY,INTTH ,
-     3                        ILEV  ,NSNFIOLD,IPARI,NSNROLD ,
-     4                        RENUM ,H3D_DATA,INTFRIC,FLAGREMN,
-     5                        LREMNORMAX,NRTM,KREMNOD,REMNOD,
-     6                        IVIS2,ISTIF_MSDT,IFSUB_CAREA,NODADT_THERM)
+      SUBROUTINE SPMD_TRI25GAT(RESULT, NSN, CAND_N, I_STOK, NIN, IGAP, NSNR, MULTIMP, ITY, INTTH, ILEV, NSNFIOLD,
+     . IPARI, NSNROLD, RENUM, INTFRIC, FLAGREMN, LREMNORMAX, NRTM, KREMNOD, REMNOD, IVIS2, ISTIF_MSDT, IFSUB_CAREA,
+     . NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
@@ -72,7 +64,6 @@ C-----------------------------------------------
      .        CAND_N(*),INTTH,ILEV, INTFRIC, IVIS2,
      .        NSNFIOLD(*), IPARI(NPARI,NINTER), NSNROLD, RENUM(*),
      .        KREMNOD(*), REMNOD(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER , INTENT(IN) :: ISTIF_MSDT, IFSUB_CAREA
       INTEGER , INTENT(IN) :: NODADT_THERM
 C-----------------------------------------------
@@ -378,7 +369,6 @@ c shift for real variables (prepare for next setting)
 c shift for integer variables (prepare for next setting)
             ISHIFT = 7
 
-            IF(.TRUE.)THEN
 #include      "vectorize.inc"
               DO J = 1, NN
                 I = IAUX(J)
@@ -386,9 +376,6 @@ c shift for integer variables (prepare for next setting)
                 ISKEW_FI(NIN)%P(NN2+J)  = IREM(ISHIFT+1,I+IDEB)
               ENDDO
               ISHIFT = ISHIFT + 2
-            ENDIF
-
-c IGAP=1 or IGAP=2
             IF(IGAP==1 .OR. IGAP==2.OR. IGAP==5)THEN
 #include      "vectorize.inc"
               DO J = 1, NN
@@ -742,7 +729,7 @@ C
 C
 C pressure output / friction energy output
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)
@@ -762,36 +749,6 @@ C
         END IF
       END IF
 
-      IF(H3D_DATA%N_SCAL_CSE_FRICINT >0)THEN
-       IF(H3D_DATA%N_CSE_FRIC_INTER (NIN) >0)THEN
-        IF(ASSOCIATED(EFRICFI(NIN)%P)) call my_dealloc(EFRICFI(NIN)%P)
-        ALLOCATE(EFRICFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-       END IF
-      ENDIF
-
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF(ASSOCIATED(EFRICGFI(NIN)%P)) call my_dealloc(EFRICGFI(NIN)%P)
-        ALLOCATE(EFRICGFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICGFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-      END IF
-C
-C Renumbering candidate
-C
       DO I = 1, I_STOK
         N = CAND_N(I)
         NN = N-NSN

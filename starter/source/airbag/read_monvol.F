@@ -25,8 +25,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                      ../starter/source/output/message/message.F
 !||    fretitl                     ../starter/source/starter/freform.F
-!||    hm_option_read_key          ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start             ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_option_read_key          ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start             ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_read_monvol_type1        ../starter/source/airbag/hm_read_monvol_type1.F
 !||    hm_read_monvol_type10       ../starter/source/airbag/hm_read_monvol_type10.F
 !||    hm_read_monvol_type11       ../starter/source/airbag/hm_read_monvol_type11.F

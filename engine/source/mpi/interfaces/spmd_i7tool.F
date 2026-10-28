@@ -466,23 +466,16 @@ C
 !||--- calls      -----------------------------------------------------
 !||    ibcoff             ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    multi_fvm_mod      ../common_source/modules/ale/multi_fvm_mod.F90
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||    parameters_mod     ../common_source/modules/interfaces/parameters_mod.F
 !||====================================================================
-      SUBROUTINE SPMD_FIADD_POFF(OUTPUT,
-     1       NB    ,LEN     ,BUFR   ,NSV    ,A       ,
-     2       STIFN ,VISCN   ,IBC    ,ISECIN ,NOINT   ,
-     3       IBAG  ,ICODT   ,SECFCUM,NSTRF  ,ICONTACT,
-     4       FCONT ,INACTI  ,IADM   ,INTTH  ,FTHE    ,
-     5       CONDN ,H3D_DATA, MULTI_FVM,NIN ,TAGNCONT,
-     6       KLOADPINTER,LOADPINTER,LOADP_HYD_INTER  ,
-     .       INTCAREA,FSAV  ,PARAMETERS,NODADT_THERM)       
+      SUBROUTINE SPMD_FIADD_POFF(OUTPUT, NB, LEN, BUFR, NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG, ICODT, SECFCUM,
+     . NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHE, CONDN, MULTI_FVM, NIN, TAGNCONT, KLOADPINTER, LOADPINTER,
+     . LOADP_HYD_INTER, INTCAREA, FSAV, PARAMETERS, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE OUTPUT_MOD
       USE PARAMETERS_MOD
@@ -518,7 +511,6 @@ C-----------------------------------------------
      .        SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHE(*),CONDN(*)
       my_real, INTENT(INOUT) :: FSAV(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
@@ -579,10 +571,8 @@ C
 C     following i7for3 & i10for3 process on secondary nodes
 C     
          IF (INCONV == 1) THEN
-            IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .           ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .           (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .          .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C     Anim FCONT
                DO I = 1, NB
                   N = NINT(BUFR(1,I))
@@ -669,19 +659,14 @@ C
 !||--- called by ------------------------------------------------------
 !||    spmd_i7fcom_poff    ../engine/source/mpi/forces/spmd_i7fcom_poff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD11_POFF(OUTPUT,
-     1       NB    ,LEN     ,BUFR   ,IRECTS ,A       ,
-     2       STIFN ,VISCN   ,IBC    ,ISECIN ,NOINT   ,
-     3       IBAG  ,ICODT   ,SECFCUM,NSTRF  ,ICONTACT,
-     4       FCONT ,INTTH   ,FTHE   ,CONDN  ,H3D_DATA,
-     5       TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,NODADT_THERM)
+      SUBROUTINE SPMD_FIADD11_POFF(OUTPUT, NB, LEN, BUFR, IRECTS, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG, ICODT,
+     . SECFCUM, NSTRF, ICONTACT, FCONT, INTTH, FTHE, CONDN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER,
+     . NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -712,10 +697,6 @@ C-----------------------------------------------
      .        BUFR(LEN,*), A(3,*), STIFN(*), VISCN(*),
      .        SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHE(*),CONDN(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, NBINTER,PP,PPL,NOD1,NOD2,NP
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -835,10 +816,8 @@ C
 C continue i11for3 processing on secondary node
 C
       IF(INCONV == 1) THEN
-       IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
          IF(KDTINT==0)THEN
           DO I = 1, NB
@@ -976,17 +955,12 @@ C
 !||    spmd_i7fcom_poff    ../engine/source/mpi/forces/spmd_i7fcom_poff.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD17_POFF(OUTPUT,
-     1       NB    ,LEN   ,BUFR   ,NELEMS ,A     ,
-     2       STIFN ,FCONT ,IXS    ,IXS16  ,FROTS ,
-     3       H3D_DATA)
+      SUBROUTINE SPMD_FIADD17_POFF(OUTPUT, NB, LEN, BUFR, NELEMS, A, STIFN, FCONT, IXS, IXS16, FROTS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
       use element_mod , only :nixs
 C-----------------------------------------------
@@ -1010,10 +984,6 @@ C-----------------------------------------------
       my_real
      .        BUFR(LEN,*), A(3,*), STIFN(*),
      .        FCONT(3,*), FROTS(7,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, NOD, NE 
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -1112,10 +1082,8 @@ C
 C
 C continue i11for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           NE = NINT(BUFR(1,I))
@@ -1199,19 +1167,13 @@ C
 !||    getdpdaanc          ../engine/source/mpi/interfaces/spmd_i7tool.F
 !||    ibcoff              ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD20_POFF(OUTPUT,
-     1       NB    ,LEN     ,BUFR   ,NSV    ,A       ,
-     2       STIFN ,VISCN   ,IBC    ,ISECIN ,NOINT   ,
-     3       IBAG  ,ICODT   ,SECFCUM,NSTRF  ,ICONTACT,
-     4       FCONT ,INACTI  ,IADM   ,INTTH  ,DAANC6  ,
-     5       FTHE  ,NLG     ,ALPHAK ,H3D_DATA)
+      SUBROUTINE SPMD_FIADD20_POFF(OUTPUT, NB, LEN, BUFR, NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG, ICODT,
+     . SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, DAANC6, FTHE, NLG, ALPHAK)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -1241,10 +1203,6 @@ C-----------------------------------------------
      .        SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHE(*), ALPHAK(3,*)
       DOUBLE PRECISION DAANC6(3,6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, IBCS, IBCM, NBINTER, INC,ISIGN
       DOUBLE PRECISION DAANC6L(3,6) 
 C-----------------------------------------------
@@ -1392,10 +1350,8 @@ C type20 interface treatment
 C
 C following i7for3 & i10for3 process on secondary nodes
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .    .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           N = NINT(BUFR(1,I))
@@ -1470,18 +1426,13 @@ C
 !||--- calls      -----------------------------------------------------
 !||    getdpdaanc           ../engine/source/mpi/interfaces/spmd_i7tool.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    output_mod           ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD20E_POFF(OUTPUT,
-     1       NB    ,LEN     ,BUFR   ,IXLINS ,A       ,
-     2       STIFN ,VISCN   ,IBC    ,ISECIN ,NOINT   ,
-     3       IBAG  ,ICODT   ,SECFCUM,NSTRF  ,ICONTACT,
-     4       FCONT ,DAANC6  ,NLG    ,ALPHAK ,H3D_DATA)
+      SUBROUTINE SPMD_FIADD20E_POFF(OUTPUT, NB, LEN, BUFR, IXLINS, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG, ICODT,
+     . SECFCUM, NSTRF, ICONTACT, FCONT, DAANC6, NLG, ALPHAK)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -1511,10 +1462,6 @@ C-----------------------------------------------
      .        SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*), ALPHAK(3,*)
       DOUBLE PRECISION DAANC6(3,6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, N1, N2, N1G, N2G, K0, K1S, NBINTER, INC,ISIGN 
       DOUBLE PRECISION DAANC6L(3,6) 
 C-----------------------------------------------
@@ -1652,10 +1599,8 @@ C
 C
 C continue i7for3 and i10for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .    .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           N = NINT(BUFR(1,I))
@@ -1782,23 +1727,17 @@ C
 !||    arret             ../engine/source/system/arret.F
 !||    ibcoff            ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod           ../engine/share/modules/h3d_mod.F
 !||    message_mod       ../engine/share/message_module/message_mod.F
 !||    output_mod        ../common_source/modules/output/output_mod.F90
 !||    parameters_mod    ../common_source/modules/interfaces/parameters_mod.F
 !||====================================================================
-      SUBROUTINE SPMD_FIADD_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR   ,NSV     ,FSKYI,
-     2       ISKY   ,IBC    ,ISECIN ,NOINT   ,IBAG ,
-     3       ICODT  ,SECFCUM,NSTRF  ,ICONTACT,FCONT,
-     4       INACTI ,IADM   ,INTTH  ,FTHESKYI,CONDNSKYI,
-     5       H3D_DATA,NIN   ,TAGNCONT,KLOADPINTER,LOADPINTER  ,
-     6       LOADP_HYD_INTER,INTCAREA,FSAV   ,PARAMETERS,NODADT_THERM)
+      SUBROUTINE SPMD_FIADD_PON(OUTPUT, NB, LEN, BUFR, NSV, FSKYI, ISKY, IBC, ISECIN, NOINT, IBAG, ICODT, SECFCUM,
+     . NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHESKYI, CONDNSKYI, NIN, TAGNCONT, KLOADPINTER, LOADPINTER,
+     . LOADP_HYD_INTER, INTCAREA, FSAV, PARAMETERS, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
       USE PARAMETERS_MOD
 C-----------------------------------------------
@@ -1833,7 +1772,6 @@ C-----------------------------------------------
      .        FSKYI(LSKYI,NFSKYI), SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHESKYI(LSKYI),CONDNSKYI(LSKYI)
       my_real, INTENT(INOUT) :: FSAV(*) 
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -1892,10 +1830,8 @@ C
 C
 C continue i7for3 and i10for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           N = NINT(BUFR(1,I))
@@ -1995,21 +1931,15 @@ C
 !||    arret               ../engine/source/system/arret.F
 !||    ibcoff              ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    message_mod         ../engine/share/message_module/message_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD20F_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR   ,NSV     ,FSKYI,
-     2       ISKY   ,IBC    ,ISECIN ,NOINT   ,IBAG ,
-     3       ICODT  ,SECFCUM,NSTRF  ,ICONTACT,FCONT,
-     4       INACTI ,IADM   ,INTTH  ,FTHESKYI,NLG  ,
-     5       H3D_DATA )
+      SUBROUTINE SPMD_FIADD20F_PON(OUTPUT, NB, LEN, BUFR, NSV, FSKYI, ISKY, IBC, ISECIN, NOINT, IBAG, ICODT, SECFCUM,
+     . NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHESKYI, NLG)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -2038,10 +1968,6 @@ C-----------------------------------------------
      .        BUFR(LEN,*),
      .        FSKYI(LSKYI,NFSKYI), SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHESKYI(LSKYI)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, IBCS, IBCM, NBINTER 
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -2110,10 +2036,8 @@ C
 C
 C continue i7for3 and i10for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           N = NINT(BUFR(1,I))
@@ -2189,22 +2113,16 @@ C
 !||    ancmsg             ../engine/source/output/message/message.F
 !||    arret              ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    message_mod        ../engine/share/message_module/message_mod.F
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD11_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR  ,IRECTS  ,FSKYI,
-     2       ISKY   ,IBC    ,ISECIN,NOINT   ,IBAG ,
-     3       ICODT  ,SECFCUM,NSTRF ,ICONTACT,FCONT,
-     4       INTTH  ,FTHESKYI,CONDNSKYI,H3D_DATA,
-     5       NIN    ,TAGNCONT,KLOADPINTER,LOADPINTER,
-     7       LOADP_HYD_INTER,NODADT_THERM)
+      SUBROUTINE SPMD_FIADD11_PON(OUTPUT, NB, LEN, BUFR, IRECTS, FSKYI, ISKY, IBC, ISECIN, NOINT, IBAG, ICODT, SECFCUM,
+     . NSTRF, ICONTACT, FCONT, INTTH, FTHESKYI, CONDNSKYI, NIN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER,
+     . NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -2236,10 +2154,6 @@ C-----------------------------------------------
      .        BUFR(LEN,*),
      .        FSKYI(LSKYI,NFSKYI), SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*),FTHESKYI(*),CONDNSKYI(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, NBINTER,PP,PPL,NOD1,NOD2,NP 
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -2387,10 +2301,8 @@ C-----------------------------------------------
 C
 C continue i11for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         IF(KDTINT==0)THEN
          DO I = 1, NB
@@ -2530,20 +2442,15 @@ C
 !||    ancmsg               ../engine/source/output/message/message.F
 !||    arret                ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    message_mod          ../engine/share/message_module/message_mod.F
 !||    output_mod           ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD20FE_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR  ,IRECTS  ,FSKYI,
-     2       ISKY   ,IBC    ,ISECIN,NOINT   ,IBAG ,
-     3       ICODT  ,SECFCUM,NSTRF ,ICONTACT,FCONT,
-     4       NLG    ,H3D_DATA)
+      SUBROUTINE SPMD_FIADD20FE_PON(OUTPUT, NB, LEN, BUFR, IRECTS, FSKYI, ISKY, IBC, ISECIN, NOINT, IBAG, ICODT,
+     . SECFCUM, NSTRF, ICONTACT, FCONT, NLG)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -2572,10 +2479,6 @@ C-----------------------------------------------
      .        BUFR(LEN,*),
      .        FSKYI(LSKYI,NFSKYI), SECFCUM(7,NUMNOD,NSECT),
      .        FCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, II, N, NOD, K0, K1S, NBINTER 
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -2627,10 +2530,8 @@ C-----------------------------------------------
 C
 C continue i11for3 processing on secondary node
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         IF(KDTINT==0)THEN
          DO I = 1, NB
@@ -2753,16 +2654,12 @@ C
 !||    spmd_i7fcom_pon    ../engine/source/mpi/forces/spmd_i7fcom_pon.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD17_PON(OUTPUT,
-     1       NB     ,LEN    ,BUFR  ,NELEMS ,FSKYI ,
-     2       ISKY   ,FCONT  ,IXS   ,IXS16  ,H3D_DATA  )
+      SUBROUTINE SPMD_FIADD17_PON(OUTPUT, NB, LEN, BUFR, NELEMS, FSKYI, ISKY, FCONT, IXS, IXS16)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
       use element_mod , only : nixs
 C-----------------------------------------------
@@ -2788,10 +2685,6 @@ C-----------------------------------------------
       my_real BUFR(LEN,*),
      .        FSKYI(LSKYI,NFSKYI),
      .        FCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, II, IIIS, NOD, IES, NN
 C-----------------------------------------------
 C   S o u r c e  L i n e s
@@ -2817,10 +2710,8 @@ C-----------------------------------------------
 C
 C following i11for3 process on secondary nodes
 C
-      IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .   ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .   .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C Anim FCONT
         DO I = 1, NB
           IES = NELEMS(NINT(BUFR(1,I)))
@@ -3398,7 +3289,6 @@ C
 !||    read_i_c                     ../common_source/tools/input_output/write_routines.c
 !||    read_r_c                     ../common_source/tools/input_output/write_routines.c
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    interface_modification_mod   ../engine/share/modules/interface_modification_mod.F
 !||    intstamp_glob_mod            ../engine/share/modules/intstamp_glob_mod.F
 !||    message_mod                  ../engine/share/message_module/message_mod.F
@@ -3407,7 +3297,7 @@ C
 !||    tri25ebox                    ../engine/share/modules/tri25ebox.F
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_INITFI(IPARI,IFLAG,H3D_DATA,PARAMETERS,IDT_THERM,INTHEAT)
+      SUBROUTINE SPMD_INITFI(IPARI, IFLAG, PARAMETERS, IDT_THERM, INTHEAT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -3415,7 +3305,6 @@ C-----------------------------------------------
       USE TRI25EBOX
       USE MESSAGE_MOD
       USE INTSTAMP_GLOB_MOD
-      USE H3D_MOD
       USE INTERFACE_MODIFICATION_MOD
       USE PARAMETERS_MOD
 C-----------------------------------------------
@@ -3443,7 +3332,6 @@ C-----------------------------------------------
       INTEGER IPARI(NPARI,*), IFLAG
       INTEGER, INTENT(IN) :: IDT_THERM
       INTEGER, INTENT(IN) :: INTHEAT
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -4773,7 +4661,7 @@ C Output structure under interfaces
             END IF
 
 C
-            IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
               IERROR = 0
               ALLOCATE(FNCONTI(I)%P(3,LENR),STAT=IERROR1)
               IERROR = IERROR + IERROR1

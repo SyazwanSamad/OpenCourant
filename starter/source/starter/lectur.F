@@ -121,7 +121,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_grogronod                        ../starter/source/groups/hm_grogronod.F
 !||    hm_lecgrn                           ../starter/source/groups/hm_lecgrn.F
 !||    hm_lines_of_lines                   ../starter/source/groups/hm_lines_of_lines.F
-!||    hm_option_count                     ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count                     ../starter/source/devtools/reader/hm_option_count.F
 !||    hm_pre_read_link                    ../starter/source/constraints/rigidlink/hm_pre_read_rlink.F
 !||    hm_pre_read_preload                 ../starter/source/loads/general/preload/hm_pre_read_preload.F
 !||    hm_pre_read_preload_axial           ../starter/source/loads/general/preload/hm_read_preload_axial.F90
@@ -263,7 +263,6 @@ Copyright>        copyright and attribution statement.
 !||    igrsurf_split                       ../starter/source/spmd/igrsurf_split.F
 !||    ind_s10edg                          ../starter/source/elements/solid/solide10/dim_s10edg.F
 !||    ini_bcscyc                          ../starter/source/constraints/general/bcs/lecbcscyc.F
-!||    ini_h3dtmax_engine                  ../starter/source/starter/contrl.F
 !||    ini_ifront                          ../starter/source/spmd/node/ddtools.F
 !||    inicrkfill                          ../starter/source/elements/xfem/inicrkfill.F
 !||    iniebcs                             ../starter/source/boundary_conditions/ebcs/iniebcs.F
@@ -6799,10 +6798,6 @@ C-------------------------------------------
 
 C---------------------------------------------
 C    CHECK ENGINE FILE /H3D/?/TMAX initialization
-C-------------------------------------------
-      CALL INI_H3DTMAX_ENGINE(IPARG,IPART,IPARTS,IPARTC,IPARTG,IDDLEVEL)
-C---------------------------------------------
-C    CHECK ENGINE FILE DYNAIN or STATE if to use F.I. total strain for QEPH
 C-------------------------------------------
       ISTR_24 = 0
       IF(NUMELC/=0) CALL CHECK_QEPH_STRA(ISTR_24)

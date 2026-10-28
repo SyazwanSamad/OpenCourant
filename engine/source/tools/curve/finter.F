@@ -51,8 +51,6 @@ Copyright>        copyright and attribution statement.
 !||    gravit                       ../engine/source/loads/general/grav/gravit.F
 !||    gravit_fvm_fem               ../engine/source/loads/general/grav/gravit_fvm_fem.F
 !||    gravit_imp                   ../engine/source/loads/general/grav/gravit_imp.F
-!||    h3d_pre_skin_scalar          ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_vector              ../engine/source/output/h3d/h3d_results/h3d_skin_vector.F
 !||    i11therm                     ../engine/source/interfaces/int11/i11therm.F
 !||    i21for3                      ../engine/source/interfaces/int21/i21for3.F
 !||    i21therm                     ../engine/source/interfaces/int21/i21therm.F
@@ -64,7 +62,6 @@ Copyright>        copyright and attribution statement.
 !||    incpflow                     ../engine/source/fluid/incpflow.F
 !||    lag_fxv                      ../engine/source/tools/lagmul/lag_fxv.F
 !||    lag_fxvp                     ../engine/source/tools/lagmul/lag_fxv.F
-!||    lech3d                       ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    lectur                       ../engine/source/input/lectur.F
 !||    load_pressure                ../engine/source/loads/general/load_pressure/load_pressure.F
 !||    m11law                       ../engine/source/materials/mat/mat011/m11law.F

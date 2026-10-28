@@ -25,18 +25,11 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
 !||    glob_therm_mod   ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    spmd_mod         ../engine/source/mpi/spmd_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_EXCH_A(
-     1   A, ADP        ,AR     ,STIFN,STIFR ,MS  ,
-     2   IAD_ELEM ,FR_ELEM,MSNF ,IFSUBM,SIZE,
-     3   LENR     ,FTHE   ,MCP  ,DMSPH ,CONDN, 
-     4   MS_2D,MCP_OFF,
-     5   FORNEQS  ,NFACNIT,LENC  ,FCONT ,H3D_DATA ,
-     6   FNCONT  ,FTCONT, GLOB_THERM)
+      SUBROUTINE SPMD_EXCH_A(A, ADP, AR, STIFN, STIFR, MS, IAD_ELEM, FR_ELEM, MSNF, IFSUBM, SIZE, LENR, FTHE, MCP,
+     . DMSPH, CONDN, MS_2D, MCP_OFF, FORNEQS, NFACNIT, LENC, FCONT, FNCONT, FTCONT, GLOB_THERM)
 C--------------------------------------
-      USE H3D_MOD
       USE GLOB_THERM_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -74,7 +67,6 @@ C-----------------------------------------------
      .        FORNEQS(3,*)
       my_real  , INTENT(INOUT) :: FCONT(3,NUMNOD),FNCONT(3,NUMNOD),
      .        FTCONT(3,NUMNOD)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(GLOB_THERM_) ,INTENT(IN) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -433,7 +425,7 @@ C --- NITSCHE
           END DO
        ENDIF
 C --- /CONT/MAX output
-      IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
 #include      "vectorize.inc"
           DO J=IAD_ELEM(1,I),IAD_ELEM(1,I+1)-1
              NOD = FR_ELEM(J)
@@ -809,7 +801,7 @@ C --- NITSCHE
           END DO
        ENDIF
 C --- /CONT/MAX output
-      IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
 #include      "vectorize.inc"
           DO J=IAD_ELEM(1,I),IAD_ELEM(1,I+1)-1
              NOD = FR_ELEM(J)

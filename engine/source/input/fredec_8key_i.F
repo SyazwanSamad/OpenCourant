@@ -25,7 +25,6 @@ C-----------------------------------------------
 !||    freanim                ../engine/source/output/anim/reader/freanim.F
 !||    fredynain              ../engine/source/input/fredynain.F
 !||    frestat                ../engine/source/input/frestat.F
-!||    h3d_read               ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
 !||--- uses       -----------------------------------------------------
 !||    names_and_titles_mod   ../common_source/modules/names_and_titles_mod.F
 !||====================================================================

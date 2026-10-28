@@ -35,19 +35,14 @@ Copyright>        copyright and attribution statement.
 !||    spmd_exch_rbe3_pon   ../engine/source/mpi/kinematic_conditions/spmd_exch_rbe3_pon.F
 !||    zero1                ../engine/source/system/zero.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    nodal_arrays_mod     ../common_source/modules/nodal_arrays.F90
 !||    rbe3_mod             ../common_source/modules/constraints/rbe3_mod.F90
 !||    rbe3pen_init_mod     ../engine/source/constraints/general/rbe3/rbe3pen_init.F90
 !||====================================================================
-      SUBROUTINE RBE3T1(RBE3  ,NODES    ,SKEW  ,
-     *                  DMAST ,ADM      ,DINERT,
-     *                  ADI   ,H3D_DATA , DT1  ,
-     *                  TT    ,IMPL_S   )
+      SUBROUTINE RBE3T1(RBE3, NODES, SKEW, DMAST, ADM, DINERT, ADI, DT1, TT, IMPL_S)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE rbe3_mod
       use nodal_arrays_mod
       use rbe3pen_init_mod, only: RBE3PEN_INIT
@@ -75,7 +70,6 @@ C     REAL
       my_real ADI(*)    !< Animation buffer
       INTEGER, INTENT(IN) :: IMPL_S
       TYPE (RBE3_),INTENT(INOUT) :: RBE3
-      TYPE (H3D_DATABASE) :: H3D_DATA
       TYPE(NODAL_ARRAYS_), INTENT(INOUT) :: NODES
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -172,10 +166,8 @@ C
 c--------------calcul dms,diner---
        IADM0=  NMT0*6 + 1
        IADI0=  IADM0 + NMT0
-       CALL DMI_RBE3(NMT   ,RBE3%LRBE3 ,RBE3%FRBE3(IADM0),RBE3%FRBE3(IADI0),
-     1               RBE3%RRBE3(IADMS)  ,RBE3%RRBE3(IADIN) ,DMAST ,ADM  ,
-     2               DINERT,ADI   ,RBE3%IROTG   ,RBE3%IRBE3  ,NODES%MS      ,
-     3               NODES%IN    ,NODES%WEIGHT,IADMP   ,H3D_DATA)
+      CALL DMI_RBE3(NMT, RBE3%LRBE3, RBE3%FRBE3(IADM0), RBE3%FRBE3(IADI0), RBE3%RRBE3(IADMS), RBE3%RRBE3(IADIN), DMAST,
+     . ADM, DINERT, ADI, RBE3%IROTG, RBE3%IRBE3, NODES%MS, NODES%IN, NODES%WEIGHT, IADMP)
 C       DEALLOCATE(RSUM)
       END IF ! IF (NMT>0)
 C
@@ -1075,18 +1067,11 @@ C---
 !||--- called by ------------------------------------------------------
 !||    rbe3t1     ../engine/source/constraints/general/rbe3/rbe3f.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE DMI_RBE3(NMT   ,LRBE3 ,MS0   ,IN0   ,DMS   ,
-     1                    DIN   ,DMAST ,ADM   ,DINERT,ADI   ,
-     2                    IROTG ,IRBE3 ,MS    ,IN    ,WEIGHT,
-     3                    IADMP ,H3D_DATA )
+      SUBROUTINE DMI_RBE3(NMT, LRBE3, MS0, IN0, DMS, DIN, DMAST, ADM, DINERT, ADI, IROTG, IRBE3, MS, IN, WEIGHT, IADMP)
+     .
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -1105,10 +1090,6 @@ C     REAL
       my_real
      .   MS0(*), IN0(*),DMS(*), DIN(*),
      .   DMAST ,ADM(*)   ,DINERT,ADI(*),MS(*),IN(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER  J ,M,N,NS,NML,IAD,K,IROT,IPEN
 C     REAL
       my_real
@@ -1145,7 +1126,7 @@ C
 C-------attention now for ANIM, ADM contains MS(NS), 
 C-------output only when real added mass happened: debug usage 
       IF (DMAS0>EM10) THEN
-      IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0) THEN
 #include    "vectorize.inc"
        DO N=1,NRBE3
         IAD = IRBE3(1,N)
@@ -1163,7 +1144,7 @@ C-------output only when real added mass happened: debug usage
         ENDIF
        ENDDO
       ENDIF
-      IF(ANIM_N(12)+OUTP_N(3)>0+H3D_DATA%N_SCAL_DINER .AND.IROTG>0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0.AND.IROTG>0) THEN
 #include    "vectorize.inc"
        DO N=1,NRBE3
         IAD = IRBE3(1,N)

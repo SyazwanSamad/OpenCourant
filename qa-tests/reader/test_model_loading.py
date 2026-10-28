@@ -24,6 +24,7 @@ import argparse
 import ctypes as ct
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -125,6 +126,17 @@ def run(args):
         configuration(unsupported, 9999)
         environment = os.environ.copy()
         environment['TEMP'] = environment['TMP'] = str(work)
+        structured = work / 'structured.rad'
+        mesh = '/ALE/STRUCTURED_MESH/1\nunsupported mesh\n' + \
+               ''.join(f'{value:10d}' for value in [10, 0, 0, 1, 2, 3, 0, 0, 0]) + '\n'
+        shutil.copy(DATA / 'common.inc', work)
+        ordinary = (DATA / 'ordinary_zero.rad').read_text()
+        structured.write_text(ordinary.replace('/END', mesh + '/END'))
+        (work / 'structured.inc').write_text(mesh)
+        structured_include = work / 'structured_include.rad'
+        structured_include.write_text(ordinary.replace('/END', '#include structured.inc\n/END'))
+        commented = work / 'commented.rad'
+        commented.write_text(ordinary.replace('/END', '# /ALE/STRUCTURED_MESH is only a comment\n/END'))
         cases = [
             ('ordinary', DATA / 'ordinary_zero.rad', ROOT / 'hm_cfg_files', 2612, 0, None),
             ('rigid-field', DATA / 'single.rad', ROOT / 'hm_cfg_files', 2612, 1, None),
@@ -133,6 +145,11 @@ def run(args):
             ('broken-configuration', DATA / 'ordinary_zero.rad', broken, 2612, None, 'NODE/missing.cfg'),
             ('missing-configuration', DATA / 'ordinary_zero.rad', work / 'absent-cfg', 2612, None, 'OpenReader:'),
             ('missing-input', work / 'absent.rad', ROOT / 'hm_cfg_files', 2612, None, 'OpenReader:'),
+            ('structured-ale', structured, ROOT / 'hm_cfg_files', 2612, None,
+             '/ALE/STRUCTURED_MESH is unsupported by OpenReader'),
+            ('structured-ale-include', structured_include, ROOT / 'hm_cfg_files', 2612, None,
+             'structured.inc:'),
+            ('comment-only', commented, ROOT / 'hm_cfg_files', 2612, 0, None),
         ]
         for name, fixture, cfg, version, irigid, diagnostic in cases:
             for entry in ['cpp_build_model', 'cpp_build_model_inc']:
@@ -188,7 +205,7 @@ def run(args):
             print('PASS Starter accelerometer smoke', flush=True)
             for name, fixture, cfg, diagnostic in [
                 ('configuration-error', DATA / 'ordinary_zero.rad', broken, 'Input reader failed to load'),
-                ('rigid-guard', DATA / 'single.rad', ROOT / 'hm_cfg_files', 'requests IRIGID=1'),
+                ('structured-ale', structured, ROOT / 'hm_cfg_files', '/ALE/STRUCTURED_MESH is unsupported'),
             ]:
                 folder = work / name
                 folder.mkdir()
@@ -201,6 +218,19 @@ def run(args):
                 assert diagnostic in result.stdout + result.stderr, (name, result.stdout, result.stderr)
                 assert 'forrtl: severe' not in result.stdout + result.stderr, (name, result.stdout, result.stderr)
                 print(f'PASS Starter {name}', flush=True)
+            for name, bodies in [('single', 1), ('flag_two_single', 1), ('disconnected_two', 2)]:
+                folder = work / name
+                folder.mkdir()
+                shutil.copy(DATA / 'common.inc', folder)
+                shutil.copy(DATA / (name + '.rad'), folder / 'case_0000.rad')
+                environment['RAD_CFG_PATH'] = str(ROOT / 'hm_cfg_files')
+                result = subprocess.run([str(args.starter), '-i', 'case_0000.rad', '-np', '1'],
+                                        env=environment, capture_output=True, text=True, timeout=60, cwd=folder)
+                assert result.returncode == 0, (name, result.stdout, result.stderr)
+                listing = (folder / 'case_0000.out').read_text(errors='replace')
+                assert '0 ERROR(S)' in listing and any(p.stat().st_size for p in folder.glob('*.rst'))
+                assert int(re.search(r'NRBODY:[^\n]*?\s(\d+)\s*$', listing, re.M).group(1)) == bodies
+                print(f'PASS default Starter rigid conversion {name}', flush=True)
 
 
 def main():

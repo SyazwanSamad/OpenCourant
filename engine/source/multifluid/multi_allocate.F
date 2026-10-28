@@ -26,21 +26,16 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    multi_fvm_mod    ../common_source/modules/ale/multi_fvm_mod.F90
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||====================================================================
-      SUBROUTINE MULTI_ALLOCATE(MULTI_FVM, H3D_DATA)
+      SUBROUTINE MULTI_ALLOCATE(MULTI_FVM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MULTI_FVM_MOD
       USE MESSAGE_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_alloc_mod
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -54,10 +49,6 @@ C----------------------------------------------
 C     D u m m y   a r g u m e n t s
 C----------------------------------------------
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER :: IERR, LEN, NBMAT
 C----------------------------------------------
 C     B e g i n n i n g   o f   s u b r o u t i n e
@@ -142,15 +133,6 @@ C     Allocation of centroid velocities
            ENDIF     
            MULTI_FVM%VEL(:, :) = ZERO
 C     Allocation of centroid accelerations
-         IF(H3D_DATA%N_VECT_ACC == 1)THEN
-           call my_alloc(MULTI_FVM%ACC, 3, LEN, "MULTI_FVM%ACC", stat=IERR)
-           IF (IERR /= 0) THEN
-              CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-              CALL ARRET(2)
-           ENDIF     
-           MULTI_FVM%ACC(:, :) = ZERO
-         ENDIF
-C     Allocation of soud speed
            call my_alloc(MULTI_FVM%SOUND_SPEED, LEN, "MULTI_FVM%SOUND_SPEED", stat=IERR)
            IF (IERR /= 0) THEN
               CALL ANCMSG(MSGID=20,ANMODE=ANINFO)

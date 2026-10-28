@@ -76,8 +76,6 @@ Copyright>        copyright and attribution statement.
 !||    failwave_mod               ../common_source/modules/failwave_mod.F
 !||    glob_therm_mod             ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod               ../common_source/modules/groupdef_mod.F
-!||    h3d_inc_mod                ../engine/share/modules/h3d_inc_mod.F
-!||    h3d_mod                    ../engine/share/modules/h3d_mod.F
 !||    inivel_init_mod            ../engine/source/loads/general/inivel/inivel_init.F90
 !||    intbufdef_mod              ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    inter_sh_offset_ini_mod    ../engine/source/interfaces/shell_offset/inter_offset_ini.F90
@@ -98,76 +96,30 @@ Copyright>        copyright and attribution statement.
 !||    spmd_xv_inter_type1_mod    ../engine/source/mpi/nodes/spmd_sd_xv_inter1.F90
 !||    stack_mod                  ../engine/share/modules/stack_mod.F
 !||====================================================================
-      SUBROUTINE RESOL_INIT(
-     1  ITASK   ,FR_NBCC   ,
-     2  ISENDTO ,IRCVFROM ,IAD_ELEM,FR_ELEM   ,ITABM1    ,
-     3  IPARI   ,IPARG    ,ITAB    ,IXS10     ,IXS20     ,
-     4  I13A    ,I13B     ,I13C    ,I13D      ,I13E      ,
-     5  I13F    ,I13G     ,I13H    ,I13I      ,I15A      ,
-     6  I15B    ,I15C     ,I15D    ,I15E      ,I15F      ,
-     7  I15G    ,I15H     ,I15I    ,I87A      ,I87B      ,
-     8  I87C    ,I87D     ,I87E    ,I87F      ,I87G      ,
-     9  NFIA    ,NFEA     ,NFOA    ,NDMA      ,NDMA2     ,
-     A  NODFT   ,NODLT    ,NDTASK  ,NUMNTHREAD  ,IXS16     ,
-     B  IXS     ,IXQ      ,IXC     ,IXT       ,IXP       ,
-     C  IXR     ,IXTG     ,PON, IKINE     ,
-     D  A        ,AR      ,V         ,VR        ,
-     E  X       ,D        ,MS      ,IN        ,STIFN     ,
-     F  STIFR   ,DMAS     ,DINER   ,
-     G           WA       ,UWA     ,PM        ,GEO       ,
-     H  PARTSAV ,PARTS0   ,MONVOL    ,
-     I  I87H    ,I87I     ,I87J    ,I87K      ,
-     J  I15J    ,KXX      ,
-     K  SECBUF  ,SECFCUM  ,NSTRF   ,IGRNOD    ,IEXLNK    ,
-     L  XFRAME  ,
-     M  IXTG1    ,IB      ,VISCN     ,DD_R2R    ,
-     O           ELBUF    ,IPART   ,MADPRT    ,MADSH4    ,
-     P  MADSH3  ,MADSOL   ,MADNOD  ,IGEO      ,
-     Q  INTLIST ,NBINTC   ,PROCNE  ,NISKYFI   ,WEIGHT    ,
-     R  ISIZXV  ,ILENXV   ,ADDCNI2 ,PROCNI2   ,IAD_I2M   ,
-     S  FR_I2M  ,FR_NBCCI2,I2SIZE  ,FR_MAD    ,LWIBEM    ,
-     T  LWRBEM  ,FXBFP    ,FXBEFW  ,FXBEDP    ,FXBGRP    ,
-     U  FXBGRW  ,NDIN     ,
-     V  ISLEN7   ,IRLEN7  ,ISLEN11   ,IRLEN11   ,
-     W  LWIFLOW ,LWRFLOW  ,IFLOW   ,ADDCNEL   ,CNEL      ,
-     X  ADDTMPL ,IPARTL   ,NPARTL  ,NFNCA     ,NFTCA     ,
-     Y  I15ATH  ,I35ATH   ,IPM     ,SH4TREE   ,IPADMESH  ,
-     Z  MSC     ,INC      ,SH3TREE ,MSTG      ,INTG      ,
-     a  PTG     ,FTHE     ,FTHESKY ,FTHESKYI  ,NME17     ,
-     b  ISLEN17 ,IRLEN17  ,IRLEN7T ,ISLEN7T   ,LINDIDEL  ,
-     c  LBUFIDEL,SH4TRIM  ,SH3TRIM ,MSCND     ,INCND     ,
-     d  IRLEN20 ,ISLEN20  ,IRLEN20T,ISLEN20T  ,NBINT20   ,
-     e  IRLEN20E,ISLEN20E ,NISKYFIE,
-     f  MCP     ,MS0      ,INOD_PXFEM,IEL_PXFEM,IADC_PXFEM,
-     g  ADSKY_PXFEM,ICODT,ICODR    ,IBFV      ,ADMSMS    ,
-     h  NODREAC  ,IGROUC  ,NGROUC  ,IGROUNC   ,NGROUNC ,
-     i  FR_RBY   ,FR_RBY6 ,NPBY    ,
-     j  NOM_SECT ,MCPC    ,MCPTG   ,GRTH      ,IGRTH     ,
-     k  NELEM    ,LAG_SEC ,NPRW    ,DIAG_SMS  ,DMELC     ,
-     l  DMELTG   ,NGRTH   ,NFT2    ,DMELS     ,DMELTR    ,
-     m  DMELP    ,DMELRT  ,RES_SMS ,I87L      ,IRBE2     ,
-     n  LRBE2    ,NMRBE2  ,IAD_RBE2 ,FR_RBE2  ,FR_RBE2M  ,
-     o  R2SIZE   ,LPBY    ,PROCNE_PXFEM ,ISENDP_PXFEM,IRECVP_PXFEM,
-     p  IADSDP_PXFEM,IADRCP_PXFEM,FR_NBCC1,RBY,INT18KINE ,
-     q  XDP      ,I87M,INOD_CRKXFEM,IEL_CRKXFEM ,IADC_CRKXFEM,
-     r  ADSKY_CRKXFEM,PROCNE_CRKXFEM,ISENDP_CRKXFEM,IRECVP_CRKXFEM,
-     s  IADSDP_CRKXFEM,IADRCP_CRKXFEM ,INT24USE,NDAMA2  ,
-     t  IGROUPC  ,IGROUPTG ,IGROUPS ,IGROUPFLG ,DMINT2  ,IRBKIN_L,
-     u  NRBYKIN_L,KINDRBY  ,ELBUF_TAB ,SENSORS ,DD_R2R_ELEM,
-     v  SDD_R2R_ELEM ,KINET, WEIGHT_MD,DMSPH ,IOLDSECT,LBUFIDEL24,
-     w  INTBUF_TAB   ,NUMSPH_GLO_R2R, FLG_SPHINOUT_R2R,I15K,
-     y  CONDN    ,CONDNSKY ,KXFENOD2ELC  ,ELCUTC ,NODEDGE,
-     z  IAD_EDGE ,CRKNODIAD,FR_EDGE     ,FR_NBEDGE ,NODLEVXF,
-     x  CRKEDGE  ,XFEM_TAB   ,ISENSINT  , NISUBMAX,
-     1  INTLIST25  ,INT24E2EUSE  ,TABMP_L   , 
-     2  I87N ,TAB_MAT,H3D_DATA,TAGTRIMC,TAGTRIMTG,
-     3  IGRBRIC ,IGRQUAD  ,IGRSH4N  ,IGRSH3N  ,IGRTRUSS   ,
-     4  IGRBEAM ,IGRSPRING,IGRPART  ,FORNEQS  ,INT7ITIED ,
-     5  FXVEL_FGEO,FAILWAVE,NLOC_DMG,PINCH_DATA,SLLOADP  ,
-     6  TAGSLV_RBY,NFNCA2 ,NFTCA2  ,IN0  ,SORT_COMM,STACK,OUTPUT,
-     7  THKE ,SFR_ELEM ,SH_OFFSET_TAB,
-     8  NEED_COMM_INT25_SOLID_EROSION,COMM_INT25_SOLID_EROSION,
-     9  ISKWN ,IFRAME, LOADS ,GLOB_THERM,PBLAST,RBE3,NHIER_RBY)
+      SUBROUTINE RESOL_INIT(ITASK, FR_NBCC, ISENDTO, IRCVFROM, IAD_ELEM, FR_ELEM, ITABM1, IPARI, IPARG, ITAB, IXS10,
+     . IXS20, I13A, I13B, I13C, I13D, I13E, I13F, I13G, I13H, I13I, I15A, I15B, I15C, I15D, I15E, I15F, I15G, I15H,
+     . I15I, I87A, I87B, I87C, I87D, I87E, I87F, I87G, NFIA, NFEA, NFOA, NDMA, NDMA2, NODFT, NODLT, NDTASK, NUMNTHREAD,
+     . IXS16, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG, PON, IKINE, A, AR, V, VR, X, D, MS, IN, STIFN, STIFR, DMAS, DINER, WA,
+     . UWA, PM, GEO, PARTSAV, PARTS0, MONVOL, I87H, I87I, I87J, I87K, I15J, KXX, SECBUF, SECFCUM, NSTRF, IGRNOD, IEXLNK,
+     . XFRAME, IXTG1, IB, VISCN, DD_R2R, ELBUF, IPART, MADPRT, MADSH4, MADSH3, MADSOL, MADNOD, IGEO, INTLIST, NBINTC,
+     . PROCNE, NISKYFI, WEIGHT, ISIZXV, ILENXV, ADDCNI2, PROCNI2, IAD_I2M, FR_I2M, FR_NBCCI2, I2SIZE, FR_MAD, LWIBEM,
+     . LWRBEM, FXBFP, FXBEFW, FXBEDP, FXBGRP, FXBGRW, NDIN, ISLEN7, IRLEN7, ISLEN11, IRLEN11, LWIFLOW, LWRFLOW, IFLOW,
+     . ADDCNEL, CNEL, ADDTMPL, IPARTL, NPARTL, NFNCA, NFTCA, I15ATH, I35ATH, IPM, SH4TREE, IPADMESH, MSC, INC, SH3TREE,
+     . MSTG, INTG, PTG, FTHE, FTHESKY, FTHESKYI, NME17, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, LINDIDEL, LBUFIDEL, SH4TRIM,
+     . SH3TRIM, MSCND, INCND, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, NBINT20, IRLEN20E, ISLEN20E, NISKYFIE, MCP, MS0,
+     . INOD_PXFEM, IEL_PXFEM, IADC_PXFEM, ADSKY_PXFEM, ICODT, ICODR, IBFV, ADMSMS, NODREAC, IGROUC, NGROUC, IGROUNC,
+     . NGROUNC, FR_RBY, FR_RBY6, NPBY, NOM_SECT, MCPC, MCPTG, GRTH, IGRTH, NELEM, LAG_SEC, NPRW, DIAG_SMS, DMELC,
+     . DMELTG, NGRTH, NFT2, DMELS, DMELTR, DMELP, DMELRT, RES_SMS, I87L, IRBE2, LRBE2, NMRBE2, IAD_RBE2, FR_RBE2,
+     . FR_RBE2M, R2SIZE, LPBY, PROCNE_PXFEM, ISENDP_PXFEM, IRECVP_PXFEM, IADSDP_PXFEM, IADRCP_PXFEM, FR_NBCC1, RBY,
+     . INT18KINE, XDP, I87M, INOD_CRKXFEM, IEL_CRKXFEM, IADC_CRKXFEM, ADSKY_CRKXFEM, PROCNE_CRKXFEM, ISENDP_CRKXFEM,
+     . IRECVP_CRKXFEM, IADSDP_CRKXFEM, IADRCP_CRKXFEM, INT24USE, NDAMA2, IGROUPC, IGROUPTG, IGROUPS, IGROUPFLG, DMINT2,
+     . IRBKIN_L, NRBYKIN_L, KINDRBY, ELBUF_TAB, SENSORS, DD_R2R_ELEM, SDD_R2R_ELEM, KINET, WEIGHT_MD, DMSPH, IOLDSECT,
+     . LBUFIDEL24, INTBUF_TAB, NUMSPH_GLO_R2R, FLG_SPHINOUT_R2R, I15K, CONDN, CONDNSKY, KXFENOD2ELC, ELCUTC, NODEDGE,
+     . IAD_EDGE, CRKNODIAD, FR_EDGE, FR_NBEDGE, NODLEVXF, CRKEDGE, XFEM_TAB, ISENSINT, NISUBMAX, INTLIST25, INT24E2EUSE,
+     . TABMP_L, I87N, TAB_MAT, TAGTRIMC, TAGTRIMTG, IGRBRIC, IGRQUAD, IGRSH4N, IGRSH3N, IGRTRUSS, IGRBEAM, IGRSPRING,
+     . IGRPART, FORNEQS, INT7ITIED, FXVEL_FGEO, FAILWAVE, NLOC_DMG, PINCH_DATA, SLLOADP, TAGSLV_RBY, NFNCA2, NFTCA2,
+     . IN0, SORT_COMM, STACK, OUTPUT, THKE, SFR_ELEM, SH_OFFSET_TAB, NEED_COMM_INT25_SOLID_EROSION,
+     . COMM_INT25_SOLID_EROSION, ISKWN, IFRAME, LOADS, GLOB_THERM, PBLAST, RBE3, NHIER_RBY)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -176,7 +128,6 @@ C-----------------------------------------------
       USE INTBUFDEF_MOD            
       USE CRACKXFEM_MOD
       USE ECND_MOD  
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE FAILWAVE_MOD
       USE NLOCAL_REG_MOD
@@ -187,7 +138,6 @@ C-----------------------------------------------
       USE STACK_MOD
       USE OUTMAX_MOD
       USE SENSOR_MOD
-      USE H3D_INC_MOD
       USE ALEMUSCL_MOD , only:ALEMUSCL_Param
       USE OUTPUT_MOD
       USE INTER_SH_OFFSET_INI_MOD , only : INTER_SH_OFFSET_INI
@@ -332,7 +282,6 @@ C
       TYPE (ELBUF_STRUCT_), DIMENSION(NGROUP)      :: ELBUF_TAB
       TYPE (ELBUF_STRUCT_), DIMENSION(NGROUP,NXEL) :: XFEM_TAB
       TYPE (XFEM_EDGE_)   , DIMENSION(*)           :: CRKEDGE
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PINCH) :: PINCH_DATA
       TYPE (SENSORS_) :: SENSORS
 C-----------------------------------------------
@@ -483,29 +432,29 @@ C
         ! FANI(1,1) = VECT_CONT !cont
 
         ! FANI(1,NFIA+1) = VECT_FINT ! FINT
-        NFIA = NUMNOD*MIN(1,ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT)
+      NFIA =NUMNOD*MIN(1,ANIM_V(4)+OUTP_V(4))
         ! FANI(1,NFEA+1) = VECT_FEXT ! FEXT
-        NFEA = NFIA + NUMNOD*MIN(1,ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT)
+      NFEA =NFIA+NUMNOD*MIN(1,ANIM_V(5)+OUTP_V(5))
         ! FANI(1,NFNCA+1) = VECT_PCONT ! FNCONT
-        NFNCA= NFEA + NUMNOD*MIN(1,ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT)
+      NFNCA=NFEA+NUMNOD*MIN(1,ANIM_V(6)+OUTP_V(6))
         ! FANI(1,NFTCA+1) = VECT_PCONT_2 !FTCONT
-        NFTCA= NFNCA+ NUMNOD*MIN(1,ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT)
+      NFTCA=NFNCA+NUMNOD*MIN(1,ANIM_V(12)+OUTP_V(12))
         ! FANI(1,NFOA+1) = SECT + RBODY + RWALL  = FOPT
-        NFOA = NFTCA+ NUMNOD*MIN(1,ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT)
+      NFOA =NFTCA+NUMNOD*MIN(1,ANIM_V(12)+OUTP_V(12))
         ! FANI(1,NFT2+1) = VECT_CONT2 = FNCONT2
         NFT2 = NFOA+ 2*(NSECT+NRBODY+NRWALL)
         ! FANI(1,NFNCA2+1) = VECT_PCONT2 = FNCONTP2
-        NFNCA2= NFT2  + NUMNOD*MIN(1,ANIM_V(13)+H3D_DATA%N_VECT_CONT2)
+      NFNCA2=NFT2+NUMNOD*MIN(1,ANIM_V(13))
         ! FANI(1,NFTCA2+1) = VECT_PCONT2_2 = FTCONTP2
-        NFTCA2= NFNCA2+ NUMNOD*MIN(1,ANIM_V(27)+H3D_DATA%N_VECT_PCONT2)
+      NFTCA2=NFNCA2+NUMNOD*MIN(1,ANIM_V(27))
 
         ! ANIN(1,1) = SCAL_DT
         ! ANIN(1,NDMA+1) = SCAL_DMAS
-        NDMA = NUMNOD*MIN(1,ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT)
+      NDMA =NUMNOD*MIN(1,ANIM_N(1)+OUTP_N(1))
         ! ANIN(1,NDIN+1) = SCAL_DINER
-        NDIN = NDMA +NUMNOD*MIN(1,ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS)
+      NDIN =NDMA+NUMNOD*MIN(1,ANIM_N(2)+OUTP_N(2))
         ! ANIN(1,NDMA2+1) = SCAL_SPRING       
-        NDMA2 = NDIN+NUMNOD*MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER)
+      NDMA2 =NDIN+NUMNOD*MIN(1,ANIM_N(12)+OUTP_N(3))
         ! ANIN(1,NDAMA2+1) = SCAL_DAMA2 ! PDAMA2
         NDAMA2 = NDMA2+NUMELR*(ANIM_FE(11)+ANIM_FE(12)+ANIM_FE(13))
 
@@ -591,7 +540,6 @@ C
         MREST = 0
         MSTOP = 0
         ICTLSTOP = 0
-        H3D_DATA%MH3D = 0
         IF(DTIN/=0. .AND. MCHECK==0)THEN   !go on with previous time step in case of checkpoint restart (/CHKPT)
           IF(DT2OLD==ZERO)THEN
             DT2OLD=DTIN/ONEP1
@@ -599,16 +547,7 @@ C
             DT2OLD= MIN(DT2OLD,DTIN/ONEP1)
           ENDIF
         ENDIF
-        IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX >0) IFCONTMAX=1
-        IF(H3D_DATA%N_VECT_PCONT_MAX >0) IFCONTPMAX=1
-        IF(H3D_DATA%N_VECT_CONT2_MAX >0) IFCONT2MAX=1
-        IF(H3D_DATA%N_VECT_PCONT2_MAX >0) IFCONTP2MAX=1
-        IF(H3D_DATA%N_VECT_CONT2_MIN >0) IFCONT2MIN=1
-        IF(H3D_DATA%N_VECT_PCONT2_MIN >0) IFCONTP2MIN=1
-        IF(H3D_DATA%N_SCAL_CSE_FRIC >0) THEN
-          OUTPUT%DATA%S_EFRIC = NUMNOD
-          IF(NINTSTAMP/=0) OUTPUT%DATA%S_EFRICG = NUMNODG
-        ENDIF
+      IF(ANIM_V(26)>0) IFCONTMAX=1
         IF(OUTPUT%DATA%NINEFRIC >0) OUTPUT%DATA%S_EFRICINT = NUMNOD
         IF(OUTPUT%DATA%NINEFRIC_STAMP >0) OUTPUT%DATA%S_EFRICINTG = NUMNODG
 C------------------------
@@ -878,26 +817,26 @@ C
 C--- // --------------------------------------
 C         FORCE & MOMENTUM INIT
 C---------------------------------------------
-       IF(NINTER/=0.AND.ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0) OUTPUT%DATA%VECT_CONT = 0
-       IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0) THEN
+      IF(NINTER/=0.AND.ANIM_V(4)+OUTP_V(4)>0) OUTPUT%DATA%VECT_CONT = 0
+      IF(ANIM_V(12)+OUTP_V(12)>0) THEN
           OUTPUT%DATA%VECT_PCONT = 0
           OUTPUT%DATA%VECT_PCONT_2 = 0
        END IF
-       IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0)THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0)THEN
           OUTPUT%DATA%SCAL_DMAS = 0
 !!#include      "vectorize.inc"
 !!       DO I=NODFT,NODLT
 !!         ANIN(I+NDMA) = ZERO
 !!       ENDDO
        ENDIF
-       IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0)THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0)THEN
           OUTPUT%DATA%SCAL_DINER = 0
 !!#include      "vectorize.inc"
 !!       DO I=NODFT,NODLT
 !!         ANIN(I+NDIN) = ZERO
 !!       ENDDO
        END IF
-       IF(ANIM_N(15) == 1  .OR. ANIM_N(16) == 1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1)THEN
+      IF(ANIM_N(15)==1.OR.ANIM_N(16)==1)THEN
           OUTPUT%DATA%SCAL_DAMA2 = 0
 !!#include      "vectorize.inc"
 !!       DO I=NODFT,NODLT
@@ -1149,9 +1088,7 @@ C-----------------------
 C-----------------------
 C TMAX OF H3D
 C-----------------------
-       IF (ITASK == 0) 
-     .   CALL TMAX_IPART(IPARG   ,IPART   ,IPART(I15A),IPART(I15C),
-     .                 IPART(I15I),H3D_DATA)
+      IF (ITASK==0) CALL TMAX_IPART(IPARG, IPART, IPART(I15A), IPART(I15C), IPART(I15I))
        CALL INI_TMAX(ELBUF_TAB ,IPARG   ,GEO     ,PM       ,
      .                IXS      ,IXS10   ,IXS16   ,IXS20    ,IXQ     ,
      .                IXC      ,IXTG    ,IXT     ,IXP      ,IXR     ,

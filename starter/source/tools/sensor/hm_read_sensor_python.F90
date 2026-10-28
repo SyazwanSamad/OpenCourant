@@ -33,8 +33,8 @@
 !||    hm_read_sensors         ../starter/source/tools/sensor/hm_read_sensors.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                  ../starter/source/output/message/message.F
-!||    hm_get_intv             ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string_index     ../starter/source/devtools/hm_reader/hm_get_string_index.F
+!||    hm_get_intv             ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string_index     ../starter/source/devtools/reader/hm_get_string_index.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod      ../starter/share/modules1/hm_option_read_mod.F
 !||    message_mod             ../starter/share/message_module/message_mod.F

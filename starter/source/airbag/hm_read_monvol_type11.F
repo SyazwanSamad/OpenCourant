@@ -32,11 +32,11 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                       ../starter/source/output/message/message.F
 !||    freerr                       ../starter/source/starter/freform.F
-!||    hm_get_float_array_index     ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_floatv                ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_int_array_index       ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv                  ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string_index          ../starter/source/devtools/hm_reader/hm_get_string_index.F
+!||    hm_get_float_array_index     ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_floatv                ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_int_array_index       ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv                  ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string_index          ../starter/source/devtools/reader/hm_get_string_index.F
 !||    monvol_check_surfclose       ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_check_venthole_surf   ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_compute_volume        ../starter/share/modules1/monvol_struct_mod.F
@@ -130,7 +130,7 @@ C-----------------------------------------------
       my_real TSWITCH, PSWITCH, LX, LY, LZ, CNMERG, QA, QB, PTOLE,HMIN, CFL_COEF, DTMIN, SJET, CGMERG
       my_real NX, NY, NZ, XX, YY, ZZ, X13, Y13, Z13, X24, Y24, Z24
       my_real ORIGX, ORIGY, ORIGZ, DIR2X, DIR2Y, DIR2Z, DIR, DS, DIRX, DIRY, DIRZ
-      INTEGER :: KMESH,ID_DT_OPTION, IH3D_FLAG
+      INTEGER :: KMESH,ID_DT_OPTION, LEGACY_OUTPUT
       LOGICAL :: IS_AVAILABLE
 C-----------------------------------------------
 C     E x t e r n a l   F u n c t i o n s
@@ -152,7 +152,12 @@ C     =======
       CALL HM_GET_INTV('surf_IDex', SURFID, IS_AVAILABLE, LSUBMODEL)
       CALL HM_GET_INTV('surf_IDin', SURFID_INT, IS_AVAILABLE, LSUBMODEL)
       CALL HM_GET_FLOATV('HEAT_T0',HCONV, IS_AVAILABLE, LSUBMODEL, UNITAB)
-      CALL HM_GET_INTV('IH3D', IH3D_FLAG, IS_AVAILABLE, LSUBMODEL)
+      CALL HM_GET_INTV('IH3D', LEGACY_OUTPUT, IS_AVAILABLE, LSUBMODEL)
+      IF(LEGACY_OUTPUT > 0)THEN
+        WRITE(ISTDO,*) 'ERROR: FVMBAG IH3D output has been removed; clear its output flag.'
+        WRITE(IOUT,*) 'ERROR: FVMBAG IH3D output has been removed; clear its output flag.'
+        CALL ARRET(2)
+      ENDIF
 
 !     Line 2
       CALL HM_GET_INTV('mat_ID', MID_INI, IS_AVAILABLE, LSUBMODEL)
@@ -472,10 +477,10 @@ C     internal surface check
                       
    !-----------------------------------------------   
 
-      !IH3D_FLAG
-      IF(IH3D_FLAG /= 0)THEN
-        IF(IH3D_FLAG /= -1 .AND. IH3D_FLAG /= 1)THEN
-          IH3D_FLAG = -1
+      !LEGACY_OUTPUT
+      IF(LEGACY_OUTPUT /= 0)THEN
+        IF(LEGACY_OUTPUT /= -1 .AND. LEGACY_OUTPUT /= 1)THEN
+          LEGACY_OUTPUT = -1
         ENDIF
       ENDIF    
 
@@ -603,7 +608,7 @@ C     =====
       T_MONVOLN%IVOLU(60)=IGMERG 
       T_MONVOLN%IVOLU(65)=NBZ
       T_MONVOLN%IVOLU(74) = ISWITCH !Parameter for autoswitching to uniform pressure airbag
-      T_MONVOLN%IVOLU(75) = IH3D_FLAG
+      T_MONVOLN%IVOLU(75) = LEGACY_OUTPUT
 
       T_MONVOLN%RVOLU(19) = HCONV
       T_MONVOLN%RVOLU(26) = ONE / SCAL_T
@@ -1372,7 +1377,7 @@ C-----------------------------------------------
  3001 FORMAT(
      .     /5X,'DEBUG OPTIONS',
      .     /5X,'-------------',
-     .     /5X,'   IH3D_FLAG (H3D OUTPUT). . . . . . . .=', I10)
+     .     /5X,'   Reserved output flag. . . . . . . .=', I10)
       
       END SUBROUTINE HM_READ_MONVOL_TYPE11
       END MODULE HM_READ_MONVOL_TYPE11_MOD

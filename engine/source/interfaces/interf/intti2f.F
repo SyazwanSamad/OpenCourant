@@ -52,27 +52,16 @@ Copyright>        copyright and attribution statement.
 !||    i2mzerop        ../engine/source/interfaces/interf/i2for3p.F
 !||    i2therm         ../engine/source/interfaces/interf/i2therm.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||====================================================================
-      SUBROUTINE INTTI2F(
-     1   IPARI  ,X      ,V      ,A      ,
-     2   VR     ,AR     ,MS     ,IN     ,WEIGHT ,STIFN  ,
-     3   STIFR  ,FSKYI2 ,IADI2  ,I2MSCH ,DMAST  ,ADM    ,
-     4   I0     ,NIR    ,I2SIZE ,ADI    ,IGEO   ,BUFGEO ,
-     5   FSAV   ,FNCONT ,NODNX_SMS,DMINT2 ,SAV_FOR_PENA ,
-     6   MS_PENA,DT2T   ,NELTST ,ITYPTST,INTBUF_TAB,TEMP,
-     7   FTHE   ,FTHESKYI2,CONDN,CONDNSKYI2,ITAB,
-     8   SAV_INER_POFF  ,H3D_DATA,T2FAC_SMS,FNCONTP ,
-     A   FTCONTP,IDT_THERM    ,THEACCFACT)
+      SUBROUTINE INTTI2F(IPARI, X, V, A, VR, AR, MS, IN, WEIGHT, STIFN, STIFR, FSKYI2, IADI2, I2MSCH, DMAST, ADM, I0,
+     . NIR, I2SIZE, ADI, IGEO, BUFGEO, FSAV, FNCONT, NODNX_SMS, DMINT2, SAV_FOR_PENA, MS_PENA, DT2T, NELTST, ITYPTST,
+     . INTBUF_TAB, TEMP, FTHE, FTHESKYI2, CONDN, CONDNSKYI2, ITAB, SAV_INER_POFF, T2FAC_SMS, FNCONTP, FTCONTP,
+     . IDT_THERM, THEACCFACT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD  
-      USE H3D_MOD  
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
@@ -92,10 +81,6 @@ C-----------------------------------------------
      .   FNCONTP(3,*),FTCONTP(3,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "parit_c.inc"
 #include      "param_c.inc"
@@ -121,21 +106,14 @@ C
       IF (IPARIT == 0) THEN
        IF((ILEV == 1.OR.ILEV == 3).AND.IRODDL /= 0)THEN
 C       FORMULATION SANS MOMENT SUR MAIN
-        CALL I2FOMO3(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%DPARA,
-     2   INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,MS        ,WEIGHT    ,
-     3   AR        ,IN        ,X         ,STIFN     ,STIFR     ,
-     4   ILEV      ,DMAST     ,ADM       ,INTBUF_TAB%NMAS,IDEL2     ,
-     5   INTBUF_TAB%SMAS,INTBUF_TAB%SINER,V         ,INTBUF_TAB%CSTS,FSAV      ,
-     6   FNCONT    ,H3D_DATA  ,FNCONTP   ,FTCONTP   )
+      CALL I2FOMO3(NSN, NMN, A, INTBUF_TAB%IRECTM, INTBUF_TAB%DPARA, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . MS, WEIGHT, AR, IN, X, STIFN, STIFR, ILEV, DMAST, ADM, INTBUF_TAB%NMAS, IDEL2, INTBUF_TAB%SMAS, INTBUF_TAB%SINER,
+     . V, INTBUF_TAB%CSTS, FSAV, FNCONT, FNCONTP, FTCONTP)
 
        ELSEIF(ILEV == 2)THEN
 C       formulation with moment on main
-        CALL I2FOR3(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,
-     2   INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,MS        ,WEIGHT    ,
-     3   STIFN     ,INTBUF_TAB%NMAS,X         ,V         ,FSAV      ,
-     4   FNCONT    ,H3D_DATA  ,INTBUF_TAB%CSTS_BIS ,FNCONTP ,FTCONTP   )
+      CALL I2FOR3(NSN, NMN, A, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . MS, WEIGHT, STIFN, INTBUF_TAB%NMAS, X, V, FSAV, FNCONT, INTBUF_TAB%CSTS_BIS, FNCONTP, FTCONTP)
 C
         IF(IRODDL /= 0)THEN
           CALL I2MOM3(
@@ -146,11 +124,8 @@ C
         ENDIF
        ELSEIF (ILEV == 4)THEN
 C       Formulation Standing DDL ROT
-        CALL I2FOR3O(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,
-     2   INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,MS      ,WEIGHT    ,
-     3   STIFN     ,INTBUF_TAB%NMAS,X         ,V         ,FSAV      ,
-     5   FNCONT    ,INTBUF_TAB%CSTS_BIS,H3D_DATA ,FNCONTP,FTCONTP)
+      CALL I2FOR3O(NSN, NMN, A, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . MS, WEIGHT, STIFN, INTBUF_TAB%NMAS, X, V, FSAV, FNCONT, INTBUF_TAB%CSTS_BIS, FNCONTP, FTCONTP)
        ELSEIF (ILEV == 10 .OR. ILEV == 11 .OR. ILEV == 12 .OR. 
      .         ILEV == 20 .OR. ILEV == 21 .OR. ILEV == 22) THEN       
 C        formulation with rupture
@@ -172,89 +147,59 @@ c        Penalty formulation with rotations
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)         
 C
-         CALL I2FOR25(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,STIFN     ,STIFR     ,WEIGHT    ,INTBUF_TAB%IRECTM,
-     .       INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%CSTS,INTBUF_TAB%SKEW,INTBUF_TAB%DSM,
-     .       INTBUF_TAB%FSM,INTBUF_TAB%FINI,FSAV      ,FNCONT    ,NSN       ,
-     .       INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,INTBUF_TAB%VARIABLES(14),PENFLAG,IROT ,
-     .       NOINT     ,NODNX_SMS ,DMINT2 ,  SAV_FOR_PENA ,
-     .       MS_PENA   ,DT2T      ,NELTST ,ITYPTST ,
-     .       IVISC     ,H3D_DATA  ,FNCONTP   ,FTCONTP   )
+      CALL I2FOR25(X, V, VR, A, AR, MS, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%CSTS, INTBUF_TAB%SKEW, INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN,
+     . INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, INTBUF_TAB%VARIABLES(14), PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2,
+     . SAV_FOR_PENA, MS_PENA, DT2T, NELTST, ITYPTST, IVISC, FNCONTP, FTCONTP)
        ELSEIF (ILEV == 26) THEN       
 c        formulation en penalty + rot
 
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)           
 C
-         CALL I2FOR26(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,STIFN     ,STIFR     ,WEIGHT    ,INTBUF_TAB%IRECTM,
-     .       INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%DSM,INTBUF_TAB%FSM,INTBUF_TAB%FINI,
-     .       FSAV      ,FNCONT    ,NSN       ,INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,
-     .       INTBUF_TAB%VARIABLES(14),NOINT  ,NODNX_SMS  ,DMINT2  ,SAV_FOR_PENA,  
-     .       MS_PENA   ,IN        ,DT2T      ,NELTST     ,ITYPTST ,
-     .       SAV_INER_POFF,H3D_DATA ,FNCONTP   ,FTCONTP   )
+      CALL I2FOR26(X, V, VR, A, AR, MS, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY,
+     . INTBUF_TAB%VARIABLES(14), NOINT, NODNX_SMS, DMINT2, SAV_FOR_PENA, MS_PENA, IN, DT2T, NELTST, ITYPTST,
+     . SAV_INER_POFF, FNCONTP, FTCONTP)
        ELSEIF (ILEV == 27) THEN       
 c        Penalty formulation with rotations
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)         
 c
-         CALL I2FOR27(                                               
-     .   X         ,V         ,VR        ,A         ,AR        ,                               
-     .   MS        ,IN        ,STIFN     ,STIFR     ,WEIGHT    ,                               
-     .   INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%DSM,INTBUF_TAB%FSM,      
-     .   INTBUF_TAB%FINI,INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,FSAV      ,FNCONT    ,    
-     .   INTBUF_TAB%IRUPT,INTBUF_TAB%VARIABLES(14),INTBUF_TAB%CSTS,INTBUF_TAB%MSR,ADI    ,     
-     .   INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),SAV_FOR_PENA,MS_PENA   ,                                                              
-     .   NOINT  ,NODNX_SMS  ,DMINT2  ,DT2T      ,NELTST      ,                                                      
-     .   ITYPTST  ,NSN       ,NMN       ,IDEL2  , PENFLAG   ,IROT   ,INTBUF_TAB%SKEW,
-     .   SAV_INER_POFF, H3D_DATA ,INTBUF_TAB%DPARA,
-     .   INTBUF_TAB%MSEGTYP2,INTBUF_TAB%CSTS_BIS,T2FAC_SMS ,FNCONTP   ,FTCONTP   )                                                                                     
+      CALL I2FOR27(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, FSAV, FNCONT,
+     . INTBUF_TAB%IRUPT, INTBUF_TAB%VARIABLES(14), INTBUF_TAB%CSTS, INTBUF_TAB%MSR, ADI, INTBUF_TAB%SMAS,
+     . INTBUF_TAB%SINER, INTBUF_TAB%NMAS(1+NMN), SAV_FOR_PENA, MS_PENA, NOINT, NODNX_SMS, DMINT2, DT2T, NELTST, ITYPTST,
+     . NSN, NMN, IDEL2, PENFLAG, IROT, INTBUF_TAB%SKEW, SAV_INER_POFF, INTBUF_TAB%DPARA, INTBUF_TAB%MSEGTYP2,
+     . INTBUF_TAB%CSTS_BIS, T2FAC_SMS, FNCONTP, FTCONTP)
 C
        ELSEIF (ILEV == 28) THEN       
 c        Penalty formulation with rotations
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)         
 c
-         CALL I2FOR28(                                               
-     .   X         ,V         ,VR        ,A         ,AR        ,                               
-     .   MS        ,IN        ,STIFN     ,STIFR     ,WEIGHT    ,                               
-     .   INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%DSM,INTBUF_TAB%FSM,      
-     .   INTBUF_TAB%FINI,INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,FSAV      ,FNCONT    ,    
-     .   INTBUF_TAB%IRUPT,INTBUF_TAB%VARIABLES(14),INTBUF_TAB%CSTS,INTBUF_TAB%MSR,ADI    ,     
-     .   INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),SAV_FOR_PENA,MS_PENA   ,                                                              
-     .   NOINT     ,NODNX_SMS  ,DMINT2   ,DT2T      ,NELTST    ,                                                      
-     .   ITYPTST   ,NSN        ,NMN      ,IDEL2     ,PENFLAG   ,
-     .   IROT,INTBUF_TAB%SKEW,
-     .   INTBUF_TAB%DPARA,INTBUF_TAB%NMAS,DMAST,ADM,SAV_INER_POFF,
-     .   H3D_DATA ,FNCONTP   ,FTCONTP   )                                                                                     
+      CALL I2FOR28(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, FSAV, FNCONT,
+     . INTBUF_TAB%IRUPT, INTBUF_TAB%VARIABLES(14), INTBUF_TAB%CSTS, INTBUF_TAB%MSR, ADI, INTBUF_TAB%SMAS,
+     . INTBUF_TAB%SINER, INTBUF_TAB%NMAS(1+NMN), SAV_FOR_PENA, MS_PENA, NOINT, NODNX_SMS, DMINT2, DT2T, NELTST, ITYPTST,
+     . NSN, NMN, IDEL2, PENFLAG, IROT, INTBUF_TAB%SKEW, INTBUF_TAB%DPARA, INTBUF_TAB%NMAS, DMAST, ADM, SAV_INER_POFF,
+     . FNCONTP, FTCONTP)
 C
        ELSEIF (ILEV == 30 .AND. IRODDL /= 0) THEN  
 c        formulation with main curvature
-         CALL I2CURVF(
-     .        MS        ,IN        ,X         ,V         ,VR        ,       
-     .        A         ,AR        ,STIFN     ,STIFR     ,WEIGHT    ,       
-     .        INTBUF_TAB%NSV,INTBUF_TAB%MSR,INTBUF_TAB%IRTLM,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,   
-     .        INTBUF_TAB%NMAS,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,FSAV      ,NSN ,
-     .        NMN       ,IDEL2     ,FNCONT    ,H3D_DATA  ,FNCONTP   ,
-     .        FTCONTP)
+      CALL I2CURVF(MS, IN, X, V, VR, A, AR, STIFN, STIFR, WEIGHT, INTBUF_TAB%NSV, INTBUF_TAB%MSR, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%NMAS, INTBUF_TAB%SMAS, INTBUF_TAB%SINER, FSAV, NSN, NMN, IDEL2,
+     . FNCONT, FNCONTP, FTCONTP)
 C  
        ELSEIF(ILEV == 0 .OR. IRODDL == 0)THEN
 C       formulation with moment on main
-        CALL I2FOR3N(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,
-     2   INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,MS   ,WEIGHT    ,
-     3   STIFN     ,INTBUF_TAB%NMAS,IDEL2     ,INTBUF_TAB%SMAS,X         ,
-     4   V         ,FSAV      ,FNCONT    ,H3D_DATA ,INTBUF_TAB%CSTS_BIS ,
-     5   FNCONTP   ,FTCONTP   )
+      CALL I2FOR3N(NSN, NMN, A, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . MS, WEIGHT, STIFN, INTBUF_TAB%NMAS, IDEL2, INTBUF_TAB%SMAS, X, V, FSAV, FNCONT, INTBUF_TAB%CSTS_BIS, FNCONTP,
+     . FTCONTP)
          IF(IRODDL /= 0)THEN
-           CALL I2MOM3N(
-     1     NSN       ,NMN       ,AR        ,INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS,
-     2     INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,IN ,MS   ,
-     3     A         ,X         ,WEIGHT    ,STIFR     ,STIFN     ,
-     4     IDEL2     ,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),ADI,
-     5     SAV_INER_POFF,H3D_DATA,INTBUF_TAB%CSTS_BIS)
+      CALL I2MOM3N(NSN, NMN, AR, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . IN, MS, A, X, WEIGHT, STIFR, STIFN, IDEL2, INTBUF_TAB%SMAS, INTBUF_TAB%SINER, INTBUF_TAB%NMAS(1+NMN), ADI,
+     . SAV_INER_POFF, INTBUF_TAB%CSTS_BIS)
          ENDIF
 C
        ENDIF 
@@ -266,23 +211,15 @@ C Watch out for the duals of the parith/on SPMD
 C
        IF((ILEV == 1.OR.ILEV == 3).AND.IRODDL /= 0)THEN
 C       FORMULATION SANS MOMENT SUR MAIN
-        CALL I2FOMO3P(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%DPARA,
-     2   INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,MS        ,WEIGHT    ,
-     3   AR        ,IN        ,X         ,STIFN     ,STIFR     ,
-     4   FSKYI2    ,IADI2     ,ILEV      ,DMAST     ,ADM       ,
-     5   INTBUF_TAB%NMAS,I0   ,NIR       ,I2SIZE    ,IDEL2     ,
-     6   INTBUF_TAB%SMAS,INTBUF_TAB%SINER,V         ,INTBUF_TAB%CSTS,FSAV   ,
-     7   FNCONT    ,H3D_DATA   ,FNCONTP   ,FTCONTP  )
+      CALL I2FOMO3P(NSN, NMN, A, INTBUF_TAB%IRECTM, INTBUF_TAB%DPARA, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . MS, WEIGHT, AR, IN, X, STIFN, STIFR, FSKYI2, IADI2, ILEV, DMAST, ADM, INTBUF_TAB%NMAS, I0, NIR, I2SIZE, IDEL2,
+     . INTBUF_TAB%SMAS, INTBUF_TAB%SINER, V, INTBUF_TAB%CSTS, FSAV, FNCONT, FNCONTP, FTCONTP)
        ELSEIF(ILEV == 2)THEN
 C       formulation with moment on main
         I0BASE = I0
-        CALL I2FOR3P(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%CSTS,INTBUF_TAB%MSR,
-     2   INTBUF_TAB%NSV,MS    ,WEIGHT    ,STIFN     ,INTBUF_TAB%NMAS,
-     3   FSKYI2    ,IADI2     ,I0        ,NIR       ,I2SIZE    ,
-     4   INTBUF_TAB%IRECTM,X   ,V        ,FSAV      ,FNCONT    ,
-     5   INTBUF_TAB%IRTLM ,H3D_DATA,INTBUF_TAB%CSTS_BIS ,FNCONTP   ,FTCONTP   )
+      CALL I2FOR3P(NSN, NMN, A, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, MS, WEIGHT, STIFN, INTBUF_TAB%NMAS,
+     . FSKYI2, IADI2, I0, NIR, I2SIZE, INTBUF_TAB%IRECTM, X, V, FSAV, FNCONT, INTBUF_TAB%IRTLM, INTBUF_TAB%CSTS_BIS,
+     . FNCONTP, FTCONTP)
 C
         IF(IRODDL /= 0)THEN
           I0 = I0BASE
@@ -296,13 +233,9 @@ C
        ELSEIF(ILEV == 4)THEN
 C       Formulation Standing DDL ROT
         I0BASE = I0
-        CALL I2FOR3PO(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%CSTS,INTBUF_TAB%MSR,
-     2   INTBUF_TAB%NSV,MS    ,WEIGHT    ,STIFN     ,INTBUF_TAB%NMAS,
-     3   FSKYI2    ,IADI2     ,I0        ,NIR       ,I2SIZE    ,
-     4   INTBUF_TAB%IRECTM,X  ,V         ,FSAV      ,FNCONT    ,
-     5   INTBUF_TAB%IRTLM     ,H3D_DATA  ,INTBUF_TAB%CSTS_BIS  ,
-     6   FNCONTP   ,FTCONTP   )
+      CALL I2FOR3PO(NSN, NMN, A, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, MS, WEIGHT, STIFN, INTBUF_TAB%NMAS,
+     . FSKYI2, IADI2, I0, NIR, I2SIZE, INTBUF_TAB%IRECTM, X, V, FSAV, FNCONT, INTBUF_TAB%IRTLM, INTBUF_TAB%CSTS_BIS,
+     . FNCONTP, FTCONTP)
         IF(IRODDL /= 0) THEN
           I0 = I0BASE
           CALL I2MZEROP(FSKYI2,I0        ,NIR   ,I2SIZE,IADI2,
@@ -332,92 +265,59 @@ C
          IROT    = IPARI(48)
 c        formulation en penalty         
 C
-         CALL I2FOR25P(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,STIFN     ,STIFR     ,WEIGHT    ,INTBUF_TAB%IRECTM,
-     .       INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%CSTS,INTBUF_TAB%SKEW,INTBUF_TAB%DSM,
-     .       INTBUF_TAB%FSM,INTBUF_TAB%FINI,FSAV      ,FNCONT    ,NSN       ,
-     .       I0        ,I2SIZE    ,IADI2     ,FSKYI2    ,INTBUF_TAB%SPENALTY, 
-     .       INTBUF_TAB%STFR_PENALTY,INTBUF_TAB%VARIABLES(14),PENFLAG,IROT ,NOINT ,
-     .       NODNX_SMS ,DMINT2    ,DT2T      ,NELTST    ,ITYPTST ,
-     .       IVISC     ,H3D_DATA  ,FNCONTP   ,FTCONTP   ) 
+      CALL I2FOR25P(X, V, VR, A, AR, MS, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%CSTS, INTBUF_TAB%SKEW, INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN, I0, I2SIZE,
+     . IADI2, FSKYI2, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, INTBUF_TAB%VARIABLES(14), PENFLAG, IROT, NOINT,
+     . NODNX_SMS, DMINT2, DT2T, NELTST, ITYPTST, IVISC, FNCONTP, FTCONTP)
 C
        ELSEIF (ILEV == 26) THEN       
 c        Penalty formulation with rotations         
-         CALL I2FOR26P(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,STIFN     ,STIFR     ,WEIGHT    ,INTBUF_TAB%IRECTM,
-     .       INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%DSM,INTBUF_TAB%FSM,INTBUF_TAB%FINI,
-     .       FSAV      ,FNCONT    ,NSN       ,I0        ,I2SIZE    ,
-     .       IADI2     ,FSKYI2    ,INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,INTBUF_TAB%VARIABLES(14),
-     .       NOINT     ,NODNX_SMS ,DMINT2    ,IN        ,DT2T      ,NELTST    ,ITYPTST , H3D_DATA,
-     .       FNCONTP   ,FTCONTP   )
+      CALL I2FOR26P(X, V, VR, A, AR, MS, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN, I0, I2SIZE, IADI2, FSKYI2,
+     . INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, INTBUF_TAB%VARIABLES(14), NOINT, NODNX_SMS, DMINT2, IN, DT2T,
+     . NELTST, ITYPTST, FNCONTP, FTCONTP)
 C
        ELSEIF (ILEV == 27) THEN       
 c        Formulation in cinematics - Penalty     
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)
 
-         CALL I2FOR27P(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,IN        ,STIFN     ,STIFR     ,WEIGHT    ,
-     .       INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%CSTS,INTBUF_TAB%SKEW,
-     .       INTBUF_TAB%DSM,INTBUF_TAB%FSM,INTBUF_TAB%FINI,FSAV      ,FNCONT    ,
-     .       NSN       ,I0        ,I2SIZE    ,IADI2     ,FSKYI2    , 
-     .       INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,INTBUF_TAB%VARIABLES(14),PENFLAG,IROT ,
-     .       NOINT ,NODNX_SMS ,DMINT2    ,DT2T      ,NELTST    ,
-     .       ITYPTST   ,INTBUF_TAB%NMAS,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),
-     .       INTBUF_TAB%MSR,INTBUF_TAB%IRUPT,ADI    ,IDEL2,NIR ,
-     .       NMN, H3D_DATA ,INTBUF_TAB%DPARA,
-     .       INTBUF_TAB%MSEGTYP2  ,INTBUF_TAB%CSTS_BIS,T2FAC_SMS,FNCONTP   ,FTCONTP   ) 
+      CALL I2FOR27P(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%CSTS, INTBUF_TAB%SKEW, INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN, I0, I2SIZE,
+     . IADI2, FSKYI2, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, INTBUF_TAB%VARIABLES(14), PENFLAG, IROT, NOINT,
+     . NODNX_SMS, DMINT2, DT2T, NELTST, ITYPTST, INTBUF_TAB%NMAS, INTBUF_TAB%SMAS, INTBUF_TAB%SINER, INTBUF_TAB%NMAS(1+
+     . NMN), INTBUF_TAB%MSR, INTBUF_TAB%IRUPT, ADI, IDEL2, NIR, NMN, INTBUF_TAB%DPARA, INTBUF_TAB%MSEGTYP2,
+     . INTBUF_TAB%CSTS_BIS, T2FAC_SMS, FNCONTP, FTCONTP)
 c
        ELSEIF (ILEV == 28) THEN       
 c        Formulation in cinematics - Penalty     
          PENFLAG = IPARI(43)
          IROT    = IPARI(48)
-         CALL I2FOR28P(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,IN        ,STIFN     ,STIFR     ,WEIGHT    ,
-     .       INTBUF_TAB%IRECTM,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%CSTS,INTBUF_TAB%SKEW,
-     .       INTBUF_TAB%DSM,INTBUF_TAB%FSM,INTBUF_TAB%FINI,FSAV      ,FNCONT    ,
-     .       NSN       ,I0        ,I2SIZE    ,IADI2     ,FSKYI2    , 
-     .       INTBUF_TAB%SPENALTY,INTBUF_TAB%STFR_PENALTY,INTBUF_TAB%VARIABLES(14),PENFLAG,IROT ,
-     .       NOINT ,NODNX_SMS ,DMINT2    ,DT2T      ,NELTST    ,
-     .       ITYPTST   ,INTBUF_TAB%NMAS,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),
-     .       INTBUF_TAB%MSR,INTBUF_TAB%IRUPT,ADI    ,IDEL2,NIR       ,
-     .       NMN   ,INTBUF_TAB%DPARA,
-     .       INTBUF_TAB%NMAS,DMAST,ADM,H3D_DATA,FNCONTP   ,FTCONTP   ) 
+      CALL I2FOR28P(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, INTBUF_TAB%IRECTM, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%CSTS, INTBUF_TAB%SKEW, INTBUF_TAB%DSM, INTBUF_TAB%FSM, INTBUF_TAB%FINI, FSAV, FNCONT, NSN, I0, I2SIZE,
+     . IADI2, FSKYI2, INTBUF_TAB%SPENALTY, INTBUF_TAB%STFR_PENALTY, INTBUF_TAB%VARIABLES(14), PENFLAG, IROT, NOINT,
+     . NODNX_SMS, DMINT2, DT2T, NELTST, ITYPTST, INTBUF_TAB%NMAS, INTBUF_TAB%SMAS, INTBUF_TAB%SINER, INTBUF_TAB%NMAS(1+
+     . NMN), INTBUF_TAB%MSR, INTBUF_TAB%IRUPT, ADI, IDEL2, NIR, NMN, INTBUF_TAB%DPARA, INTBUF_TAB%NMAS, DMAST, ADM,
+     . FNCONTP, FTCONTP)
 c
        ELSEIF (ILEV == 30 .AND. IRODDL /= 0) THEN  
 c        formulation with main curvature
-         CALL I2CURVFP(
-     .        MS        ,IN        ,X         ,V         ,VR        ,   
-     .        A         ,AR        ,STIFN     ,STIFR     ,WEIGHT    ,   
-     .        INTBUF_TAB%NSV,INTBUF_TAB%MSR,INTBUF_TAB%IRTLM,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,   
-     .        NSN       ,NMN       ,IDEL2     ,I0        ,I2SIZE    ,   
-     .        IADI2     ,INTBUF_TAB%NMAS,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,FSKYI2,
-     .        FSAV      ,FNCONT    ,H3D_DATA  ,FNCONTP   ,FTCONTP)
+      CALL I2CURVFP(MS, IN, X, V, VR, A, AR, STIFN, STIFR, WEIGHT, INTBUF_TAB%NSV, INTBUF_TAB%MSR, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, NSN, NMN, IDEL2, I0, I2SIZE, IADI2, INTBUF_TAB%NMAS, INTBUF_TAB%SMAS,
+     . INTBUF_TAB%SINER, FSKYI2, FSAV, FNCONT, FNCONTP, FTCONTP)
 C
        ELSEIF(ILEV == 0.OR.IRODDL == 0)THEN
 C       formulation with moment on main
           I0BASE = I0
-         CALL I2FOR3PN(
-     1   NSN       ,NMN       ,A         ,INTBUF_TAB%CSTS,INTBUF_TAB%NSV,
-     2   MS        ,WEIGHT    ,STIFN     ,INTBUF_TAB%NMAS,FSKYI2    ,
-     3   IADI2     ,I0        ,NIR       ,I2SIZE    ,IDEL2     ,   
-     4   INTBUF_TAB%SMAS,INTBUF_TAB%IRECTM,X        ,V         ,FSAV      ,
-     5   FNCONT    ,INTBUF_TAB%IRTLM     ,H3D_DATA  ,INTBUF_TAB%CSTS_BIS  ,
-     6   FNCONTP   ,FTCONTP   )
+      CALL I2FOR3PN(NSN, NMN, A, INTBUF_TAB%CSTS, INTBUF_TAB%NSV, MS, WEIGHT, STIFN, INTBUF_TAB%NMAS, FSKYI2, IADI2,
+     . I0, NIR, I2SIZE, IDEL2, INTBUF_TAB%SMAS, INTBUF_TAB%IRECTM, X, V, FSAV, FNCONT, INTBUF_TAB%IRTLM,
+     . INTBUF_TAB%CSTS_BIS, FNCONTP, FTCONTP)
 C
          IF(IRODDL /= 0)THEN
            I0 = I0BASE
-           CALL I2MOM3PN(
-     1     NSN       ,NMN       ,AR        ,INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS,
-     2     INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,IN  ,MS       ,
-     3     A         ,X         ,WEIGHT    ,STIFR     ,FSKYI2    ,
-     4     STIFN     ,IADI2     ,I0        ,NIR       ,I2SIZE    ,
-     5     IDEL2     ,INTBUF_TAB%SMAS,INTBUF_TAB%SINER,INTBUF_TAB%NMAS(1+NMN),ADI  ,
-     6     H3D_DATA  ,INTBUF_TAB%CSTS_BIS )
+      CALL I2MOM3PN(NSN, NMN, AR, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . IN, MS, A, X, WEIGHT, STIFR, FSKYI2, STIFN, IADI2, I0, NIR, I2SIZE, IDEL2, INTBUF_TAB%SMAS, INTBUF_TAB%SINER,
+     . INTBUF_TAB%NMAS(1+NMN), ADI, INTBUF_TAB%CSTS_BIS)
          ENDIF
 C
 C---                      

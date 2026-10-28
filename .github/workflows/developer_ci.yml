@@ -242,8 +242,8 @@ jobs:
         - /etc/localtime:/etc/localtime:ro
 
     env:
-      hm_reader_extlib: ../../extlib/hm_reader
-      hm_reader_cfgfiles: ../../hm_cfg_files
+      reader_runtime: ../../exec
+      reader_cfgfiles: ../../hm_cfg_files
       homeuser: /root
       mpi: ompi
       QA_NB_PROC: 2
@@ -290,7 +290,7 @@ jobs:
 
       - name: Unzip extlib
         run: |
-          unzip extlib.zip
+          unzip extlib.zip -x "extlib/hm_reader/*"
 
       - name: Running qa
         run: |
@@ -312,9 +312,9 @@ jobs:
           export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
           source ${{ env.homeuser }}/.bashrc
-          export LD_LIBRARY_PATH=${{ env.hm_reader_extlib }}/${{ matrix.os }}:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=${{ env.reader_runtime }}:$LD_LIBRARY_PATH
 
-          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.hm_reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST }}' "
+          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST }}' "
           echo "========================================="
           echo "--  QA ${{ matrix.os }}_${{ matrix.precision }} --"
           echo "--  $cmd --"

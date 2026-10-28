@@ -20,5 +20,5 @@ Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
 
 
-      COMMON /COM09/  IANIM, IOUTP, NHIN2, IDELI7, IBAGSURF,ISTATF, IH3D
-      INTEGER         IANIM, IOUTP, NHIN2, IDELI7, IBAGSURF,ISTATF, IH3D
+      COMMON /COM09/  IANIM, IOUTP, NHIN2, IDELI7, IBAGSURF,ISTATF, RESERVED_COM09_7
+      INTEGER         IANIM, IOUTP, NHIN2, IDELI7, IBAGSURF,ISTATF, RESERVED_COM09_7

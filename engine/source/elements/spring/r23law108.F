@@ -34,35 +34,19 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    elbufdef_mod       ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||    table_mod          ../engine/share/modules/table_mod.F
 !||====================================================================
-      SUBROUTINE R23LAW108(PYTHON,
-     1   ELBUF_STR, JFT,       JLT,       NEL,
-     2   MTN,       IGEO,      GEO,       IPM,
-     3   IXR,       X,         TABLE,     XDP,
-     4   F,         NPF,       TF,        SKEW,
-     5   FLG_KJ2,   VR,        AR,        V,
-     6   DT2T,      NELTST,    ITYPTST,   STIFN,
-     7   STIFR,     MS,        IN,        FSKY,
-     8   IADR,      NSENSOR,   SENSOR_TAB,OFFSET,    ANIM,
-     9   PARTSAV,   IPARTR,    TANI,      
-     A   BUFMAT,    BUFGEO,    PM,        RBY,
-     B   FX1,       FX2,       FY1,       FY2,
-     C   FZ1,       FZ2,       MX1,       MX2,
-     D   MY1,       MY2,       MZ1,       MZ2,
-     E   GRESAV,    GRTH,      IGRTH,     MSRT,
-     F   DMELRT,    H3D_DATA,  JSMS,      IGRE,
-     G   NFT,       STF,       SANIN,     IRESP,
-     H   SNPC,      FLG_SPR_DT)
+      SUBROUTINE R23LAW108(PYTHON, ELBUF_STR, JFT, JLT, NEL, MTN, IGEO, GEO, IPM, IXR, X, TABLE, XDP, F, NPF, TF, SKEW,
+     . FLG_KJ2, VR, AR, V, DT2T, NELTST, ITYPTST, STIFN, STIFR, MS, IN, FSKY, IADR, NSENSOR, SENSOR_TAB, OFFSET, ANIM,
+     . PARTSAV, IPARTR, TANI, BUFMAT, BUFGEO, PM, RBY, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2,
+     . GRESAV, GRTH, IGRTH, MSRT, DMELRT, JSMS, IGRE, NFT, STF, SANIN, IRESP, SNPC, FLG_SPR_DT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE ELBUFDEF_MOD
       USE TABLE_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       USE python_funct_mod
       use element_mod , only : nixr
@@ -109,7 +93,6 @@ C-----------------------------------------------
       TYPE(TTABLE) TABLE(*)
 C
       TYPE (ELBUF_STRUCT_), TARGET :: ELBUF_STR
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR), INTENT(IN) :: SENSOR_TAB
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -242,10 +225,8 @@ C
      3   GRTH,     IGRTH,    GBUF%OFF, NC1,
      4   NC2,      X,        VR,       NEL,
      5   IGRE)
-        CALL R2TORS(
-     1   GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),GBUF%MOM(II(1)),
-     2   GBUF%MOM(II(2)),GBUF%MOM(II(3)),TANI,           H3D_DATA,
-     3   NEL)
+      CALL R2TORS(GBUF%FOR(II(1)), GBUF%FOR(II(2)), GBUF%FOR(II(3)), GBUF%MOM(II(1)), GBUF%MOM(II(2)), GBUF%MOM(II(3)),
+     . TANI, NEL)
         IF (IPARIT == 0) THEN
           CALL R2CUM3(
      1   F,              GBUF%FOR(II(1)),GBUF%FOR(II(2)),GBUF%FOR(II(3)),

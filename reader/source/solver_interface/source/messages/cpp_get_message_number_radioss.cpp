@@ -31,7 +31,7 @@ using namespace std;
 extern "C" 
 {
 
-void cpp_get_message_number_radioss_(int *NBMESSAGES)
+CDECL void cpp_get_message_number_radioss_(int *NBMESSAGES)
 {
     const hwReaderMessageList& messages = RadiossblkGetMessages();
     for(hwReaderMessageList::const_iterator it=messages.begin(); it!=messages.end(); it++)
@@ -48,6 +48,12 @@ CDECL void cpp_get_message_numberr_radioss__ (int *NBMESSAGES)
 {cpp_get_message_number_radioss_ (NBMESSAGES);}
 
 CDECL void cpp_get_message_numberr_radioss (int *NBMESSAGES)
+{cpp_get_message_number_radioss_ (NBMESSAGES);}
+
+CDECL void cpp_get_message_number_radioss(int *NBMESSAGES)
+{cpp_get_message_number_radioss_ (NBMESSAGES);}
+
+CDECL void cpp_get_message_number_radioss__(int *NBMESSAGES)
 {cpp_get_message_number_radioss_ (NBMESSAGES);}
 
 

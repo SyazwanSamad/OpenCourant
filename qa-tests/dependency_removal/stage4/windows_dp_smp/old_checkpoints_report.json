@@ -1,0 +1,34 @@
+{
+  "engine_sha256": "9e14dda825db7fe63af2568d1089c2a5c780a7c1906a8e3c68fc92675a67a657",
+  "status": "passed",
+  "cases": [
+    {
+      "origin": "v82",
+      "h3d_enabled": false,
+      "samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_history_difference": 0.0
+    },
+    {
+      "origin": "v82",
+      "h3d_enabled": true,
+      "samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_history_difference": 0.0
+    },
+    {
+      "origin": "openreader",
+      "h3d_enabled": false,
+      "samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_history_difference": 0.0
+    },
+    {
+      "origin": "openreader",
+      "h3d_enabled": true,
+      "samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_history_difference": 0.0
+    }
+  ]
+}

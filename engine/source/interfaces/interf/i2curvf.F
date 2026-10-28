@@ -28,21 +28,11 @@ Copyright>        copyright and attribution statement.
 !||    i2forces     ../engine/source/interfaces/interf/i2forces.F
 !||    inv3         ../engine/source/elements/joint/rskew33.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2CURVF(
-     .           MS      ,IN      ,X       ,V       ,VR      ,
-     .           A       ,AR      ,STIFN   ,STIFR   ,WEIGHT  ,
-     .           NSV     ,MSR     ,IRTL    ,IRECT   ,CRST    ,
-     .           MMASS   ,SMASS   ,SINER   ,FSAV    ,NSN     ,
-     .           NMN     ,IDEL2   ,FNCONT  ,H3D_DATA,FNCONTP ,
-     .           FTCONTP)
+      SUBROUTINE I2CURVF(MS, IN, X, V, VR, A, AR, STIFN, STIFR, WEIGHT, NSV, MSR, IRTL, IRECT, CRST, MMASS, SMASS,
+     . SINER, FSAV, NSN, NMN, IDEL2, FNCONT, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -55,10 +45,6 @@ C     REAL
      .  MS(*),IN(*),MMASS(*),SMASS(*),SINER(*),X(3,*),V(3,*),
      .  VR(3,*),A(3,*),AR(3,*),STIFN(*),STIFR(*),FSAV(*),
      .  CRST(2,*),FNCONT(3,*),FNCONTP(3,*),FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I1,I2,I3,I4,II,IS,IM,JJ,L,NIR            
       INTEGER INOD(4)
       my_real
@@ -207,9 +193,7 @@ C
           ENDDO
 C
 C---      output of tied contact forces
-          CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                  INOD(1) ,NIR    ,FSAV   ,FNCONT  ,FNCONTP,
-     .                  FTCONTP ,WEIGHT ,H3D_DATA,IS     ,H)                         
+      CALL I2FORCES(X, FS, FX, FY, FZ, INOD(1), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, IS, H)
 C---
           IF (IDEL2/=0.AND.MS(IS)/=ZERO) SMASS(II)=MS(IS)
           IF (IDEL2/=0.AND.MS(IS)/=ZERO) SINER(II)=IN(IS)

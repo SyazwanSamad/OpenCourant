@@ -2742,13 +2742,14 @@ void GlobalEntitySDIdeleteEntity()
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void GlobalEntitySDIRbodiesCreateMainNode(int *addedNodeId)
 {
-    if(!addedNodeId || !g_pModelViewSDI || !g_pEntity)
+    if(!addedNodeId || !g_pModelViewSDI || !g_pEntity ||
+       g_pEntity->GetType() != g_pModelViewSDI->GetEntityType("/RBODY"))
         throw std::runtime_error("main-node creation requires a selected rigid body");
     *addedNodeId = 0;
     sdiValue value;
     sdiValueEntity node;
     // node_ID is the solver alias shared by ordinary and LAGMUL rigid bodies.
-    if(!g_pEntity->GetValue(sdiIdentifier("node_ID"), value) || !value.GetValue(node))
+    if(g_pEntity->GetValue(sdiIdentifier("node_ID"), value) && !value.GetValue(node))
         throw std::runtime_error("cannot read rigid-body main node");
     if(node.GetId() != 0) return;
 

@@ -367,20 +367,15 @@ C
 !||--- uses       -----------------------------------------------------
 !||    element_mod     ../common_source/modules/elements/element_mod.F90
 !||    groupdef_mod    ../common_source/modules/groupdef_mod.F
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I17MAIN_PENA(output,
-     1          NIN    ,IPARI  ,INTBUF_TAB    ,X      ,V      ,
-     2          A      ,ITASK  ,IGRBRIC ,EMINX  ,MS     ,
-     3          IXS    ,IXS16  ,IXS20   ,STIFN  ,FSKYI  ,ISKY   ,
-     4          FSAV   ,FCONT  ,NISKYFI ,H3D_DATA)
+      SUBROUTINE I17MAIN_PENA(output, NIN, IPARI, INTBUF_TAB, X, V, A, ITASK, IGRBRIC, EMINX, MS, IXS, IXS16, IXS20,
+     . STIFN, FSKYI, ISKY, FSAV, FCONT, NISKYFI)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD   
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE OUTPUT_MOD
       use element_mod , only : nixs
@@ -426,8 +421,6 @@ C     REAL
      .   FSKYI(LSKYI,NFSKYI), FSAV(*),FCONT(3,*)   
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
       TYPE (GROUP_)  , DIMENSION(NGRBRIC) :: IGRBRIC
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -464,15 +457,10 @@ C -------------------------------------------------------------
 C=======================================================================
 C      CONTACT
 C=======================================================================
-       CALL I17FOR3(output,
-     1   X       ,V         ,INTBUF_TAB%CAND_N,INTBUF_TAB%CAND_E,IPARI(35,NIN) ,
-     2   IXS     ,IXS16     ,EMINX    ,IGRBRIC(IGN)%ENTITY,IGRBRIC(IGE)%ENTITY,
-     3   ITASK   ,A         ,IPARI(30,NIN),NIN          ,EMINX(1,NME+1),
-     4   STIFN   ,FSKYI     ,ISKY         ,NME          ,NMES    ,
-     5   INTBUF_TAB%FROTM,INTBUF_TAB%FROTS,INTBUF_TAB%KM,INTBUF_TAB%KS,
-     5                                                 INTBUF_TAB%VARIABLES(1) ,
-     6   FSAV    ,FCONT     ,MS           ,NISKYFI      ,LSKYI17       ,
-     7   NOINT   ,H3D_DATA)
+      CALL I17FOR3(output, X, V, INTBUF_TAB%CAND_N, INTBUF_TAB%CAND_E, IPARI(35,NIN), IXS, IXS16, EMINX, IGRBRIC(IGN)
+     . %ENTITY, IGRBRIC(IGE)%ENTITY, ITASK, A, IPARI(30,NIN), NIN, EMINX(1,NME+1), STIFN, FSKYI, ISKY, NME, NMES,
+     . INTBUF_TAB%FROTM, INTBUF_TAB%FROTS, INTBUF_TAB%KM, INTBUF_TAB%KS, INTBUF_TAB%VARIABLES(1), FSAV, FCONT, MS,
+     . NISKYFI, LSKYI17, NOINT)
 C -------------------------------------------------------------
        CALL MY_BARRIER
 C -------------------------------------------------------------

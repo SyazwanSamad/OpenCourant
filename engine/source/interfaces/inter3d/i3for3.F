@@ -25,24 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I3FOR3(OUTPUT,LFT   ,LLT   ,NFT   ,
-     2                  E     ,MSR   ,NSV   ,IRTL  ,STF      ,
-     3                  STFN  ,IBC   ,ICODT ,IMAST ,FSAV     ,
-     4                  IGIMP ,FSKYI ,ISKY  ,FCONT ,H3D_DATA ,
-     5                  N1    ,N2    ,N3    ,IX1   ,IX2      ,
-     6                  IX3   ,IX4   ,ANS   ,
-     7                  THK   ,H1    ,H2    ,H3    ,H4       ,
-     8                  XFACE ,STIF  ,FNI   ,FXI   ,FYI      ,
-     9                  FZI   ,FX1   ,FX2   ,FX3   ,FX4      ,
-     1                  FY1   ,FY2   ,FY3   ,FY4   ,FZ1      ,
-     2                  FZ2   ,FZ3   ,FZ4)
+      SUBROUTINE I3FOR3(OUTPUT, LFT, LLT, NFT, E, MSR, NSV, IRTL, STF, STFN, IBC, ICODT, IMAST, FSAV, IGIMP, FSKYI,
+     . ISKY, FCONT, N1, N2, N3, IX1, IX2, IX3, IX4, ANS, THK, H1, H2, H3, H4, XFACE, STIF, FNI, FXI, FYI, FZI, FX1, FX2,
+     . FX3, FX4, FY1, FY2, FY3, FY4, FZ1, FZ2, FZ3, FZ4)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD, ONLY: OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -71,7 +61,6 @@ C-----------------------------------------------
       INTEGER MSR(*), NSV(*), IRTL(*), ICODT(*), ISKY(*)
       my_real
      .   E(*), STF(*), STFN(*), FSAV(*),FSKYI(LSKYI,NFSKYI),FCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER, DIMENSION(MVSIZ), INTENT(IN) :: IX1,IX2,IX3,IX4
       my_real, DIMENSION(MVSIZ), INTENT(IN) ::  N1,N2,N3
       my_real, DIMENSION(MVSIZ), INTENT(INOUT) :: ANS,THK
@@ -272,9 +261,8 @@ C
         ENDIF
       ENDIF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
            DO I=1,LLT
             FCONT(1,IX1(I)) =FCONT(1,IX1(I)) + FX1(I)

@@ -24,12 +24,11 @@ Copyright>        copyright and attribution statement.
 !||    elbuf_ini         ../starter/source/elements/elbuf_init/elbuf_ini.F
 !||--- uses       -----------------------------------------------------
 !||====================================================================
-      SUBROUTINE INI_OUTMAX_AUTO(ELBUF_STR,ITY,NG)
+      SUBROUTINE INI_OUTMAX_AUTO(ELBUF_STR,ITY)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE ELBUFDEF_MOD            
-      USE OUTMAX_MOD            
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
 C-----------------------------------------------
@@ -37,7 +36,7 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER ,INTENT(IN):: ITY,NG
+      INTEGER ,INTENT(IN):: ITY
       TYPE(ELBUF_STRUCT_),TARGET  :: ELBUF_STR
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -48,20 +47,13 @@ C=======================================================================
       GBUF => ELBUF_STR%GBUF
 C----
         SELECT CASE (ITY)
-          CASE(1)
-           GBUF%G_TM_YIELD=  IKEYMAX(1)*IPART_OK(NG,1)
-           GBUF%G_TM_SEQ  =  IKEYMAX(2)*IPART_OK(NG,2)
-           GBUF%G_TM_EINT =  IKEYMAX(3)*IPART_OK(NG,3)
-           GBUF%G_TM_DMG  =  IKEYMAX(4)*IPART_OK(NG,4)
-           GBUF%G_TM_SIG  =6*IKEYMAX(5)*IPART_OK(NG,5)
-           GBUF%G_TM_STRA =6*IKEYMAX(6)*IPART_OK(NG,6)
-          CASE(3,7)
-           GBUF%G_TM_YIELD=  IKEYMAX(1)*IPART_OK(NG,1)
-           GBUF%G_TM_SEQ  =  IKEYMAX(2)*IPART_OK(NG,2)
-           GBUF%G_TM_EINT =  IKEYMAX(3)*IPART_OK(NG,3)
-           GBUF%G_TM_DMG  =  IKEYMAX(4)*IPART_OK(NG,4)
-           GBUF%G_TM_SIG  =3*IKEYMAX(5)*IPART_OK(NG,5)
-           GBUF%G_TM_STRA =3*IKEYMAX(6)*IPART_OK(NG,6)
+          CASE(1,3,7)
+           GBUF%G_TM_YIELD=0
+           GBUF%G_TM_SEQ=0
+           GBUF%G_TM_EINT=0
+           GBUF%G_TM_DMG=0
+           GBUF%G_TM_SIG=0
+           GBUF%G_TM_STRA=0
         END SELECT
 C-----------------------------------------------
       RETURN

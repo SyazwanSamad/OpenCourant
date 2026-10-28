@@ -25,9 +25,6 @@ Copyright>        copyright and attribution statement.
 !||    dfuncc                         ../engine/source/output/anim/generate/dfuncc.F
 !||    dfuncs                         ../engine/source/output/anim/generate/dfunc6.F
 !||    funct_python_update_elements   ../engine/source/tools/curve/funct_python_update_elements.F90
-!||    h3d_quad_scalar                ../engine/source/output/h3d/h3d_results/h3d_quad_scalar.F
-!||    h3d_shell_scalar               ../engine/source/output/h3d/h3d_results/h3d_shell_scalar.F
-!||    h3d_solid_scalar               ../engine/source/output/h3d/h3d_results/h3d_solid_scalar.F
 !||--- calls      -----------------------------------------------------
 !||    spmd_e1vois                    ../engine/source/mpi/fluid/spmd_cfd.F
 !||--- uses       -----------------------------------------------------

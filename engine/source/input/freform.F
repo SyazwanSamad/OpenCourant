@@ -55,14 +55,12 @@ Copyright>        copyright and attribution statement.
 !||    frethermal               ../engine/source/constraints/thermic/frethermal.F
 !||    freupwind                ../engine/source/input/freupwind.F
 !||    freupwm                  ../engine/source/input/freupwm.F
-!||    h3d_ini                  ../engine/source/output/h3d/h3d_build_fortran/h3d_ini.F
-!||    h3d_read                 ../engine/source/output/h3d/h3d_build_fortran/h3d_read.F
 !||    init_idel_brick          ../engine/source/modules/dt_mod.F
 !||    open_f_scratch_file      ../engine/source/system/open_tempfile.F
 !||    rdele                    ../engine/source/input/rdele.F
 !||    redkey0                  ../engine/source/input/redkey0.F
 !||    redkey1                  ../engine/source/input/redkey1.F
-!||    redkey1_h3d              ../engine/source/input/redkey1_h3d.F
+!||    redkey1_output              ../engine/source/input/redkey1_output.F
 !||    wriusc2                  ../engine/source/input/wriusc2.F
 !||--- uses       -----------------------------------------------------
 !||    ale_mod                  ../common_source/modules/ale/ale_mod.F
@@ -71,7 +69,6 @@ Copyright>        copyright and attribution statement.
 !||    dt_mod                   ../engine/source/modules/dt_mod.F
 !||    fvbag_mod                ../engine/share/modules/fvbag_mod.F
 !||    glob_therm_mod           ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                  ../engine/share/modules/h3d_mod.F
 !||    message_mod              ../engine/share/message_module/message_mod.F
 !||    metric_mod               ../common_source/modules/interfaces/metric_mod.F
 !||    my_alloc_mod             ../common_source/tools/memory/my_alloc.F90
@@ -83,8 +80,7 @@ Copyright>        copyright and attribution statement.
 !||    th_mod                   ../engine/share/modules/th_mod.F
 !||    viper_mod                ../engine/source/coupling/viper/viper_interface_mod.F90
 !||====================================================================
-      SUBROUTINE FREFORM(IRUNN,IRFL,IRFE,H3D_DATA,FLAG_CST_AMS,DYNAIN_DATA,
-     .                   SENSORS,DT,OUTPUT,GLOB_THERM)
+      SUBROUTINE FREFORM(IRUNN, IRFL, IRFE, FLAG_CST_AMS, DYNAIN_DATA, SENSORS, DT, OUTPUT, GLOB_THERM)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -94,7 +90,6 @@ C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE METRIC_MOD
       USE CHECK_MOD
       USE FVBAG_MOD
@@ -118,7 +113,6 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER IRUNN, IRFL, IRFE, FLAG_CST_AMS
-      TYPE(H3D_DATABASE), INTENT(INOUT) :: H3D_DATA
       TYPE (DYNAIN_DATABASE), INTENT(INOUT) :: DYNAIN_DATA
       TYPE (SENSORS_), INTENT(INOUT) :: SENSORS
       TYPE (DT_), INTENT(INOUT) :: DT
@@ -174,7 +168,7 @@ C-----------------------------------------------
      .   NFXINP,KEIG,NEIGOFF,NEOFF,KFVBAG,
      .   NFVMESH,KSTATF,KSHVER,KABF,KDTSDE,
      .   KAABF,KBABF,KCABF,KDABF,KEABF,KFABF,KGABF,KHABF,KIABF,NFVMODI,
-     .   KUPWIND,KTHERMAL,KH3D,KREPORT,KNEGVOL,KADYREL,KDT1TET10,KPERF,
+     .   KUPWIND,KTHERMAL,KREPORT,KNEGVOL,KADYREL,KDT1TET10,KPERF,
      .   KDYNAIN,KDTTSH,KMASS,KSENSOR,KVIPER,KPROFI
       INTEGER
      .   IKEY,I,II,I1,J,J1,J2,K,KK,M,N, NCT, IKOLD, NBC, K3, K4,
@@ -189,6 +183,7 @@ C-----------------------------------------------
      .   ID_BAG, IERR1, ID_DT_OPTION, FVMBAG_L_TYPE, INUM,INTDT,NBSENS,
      .   NUM_ALE_GRID,NPARTOF
       INTEGER :: BCS_SK_FR(10000),VEL_SK_FR(10000),NSLASH(NKEY)
+      INTEGER :: LEGACY_STOP_OUTPUT
       INTEGER :: NBALEOFF, NBALEON, NBPARTALEON, NBPARTALEOFF     
       my_real
      .   TSTOP0,DTFAC0, DTMIN0, ALP, GAM,
@@ -197,7 +192,7 @@ C-----------------------------------------------
       CHARACTER KEY(9)*5, TITLE*81, KEY1*5, KEY2*5,KEY3*5,   CH4*4, KEY4*5, KEY5*5, StringALE*32
       CHARACTER(LEN=NCHARLINE100) :: KEYA
       CHARACTER(LEN=NCHARLINE100) :: CARTE,KEYW,MOT1,LINE
-      CHARACTER(LEN=NCHARKEY), DIMENSION(9) :: KEY_H3D
+      CHARACTER(LEN=NCHARKEY), DIMENSION(9) :: KEY_OUTPUT
       CHARACTER(LEN=5), DIMENSION(NKEY) :: KEY0
       CHARACTER(LEN=5), DIMENSION(NUM_ALE_KEY2)  ::  KEYALE
       CHARACTER(len=NCHARLINE100) :: STRING_RESTART
@@ -229,7 +224,7 @@ C-----------------------------------------------
      .     ''        ,'STATE'   ,'SHVER'   ,''        ,'ABF'     ,
      .     'DTSDE'   ,'AABF'    ,'BABF'    ,'CABF'    ,'DABF'    ,
      .     'EABF '   ,'FABF'    ,'GABF'    ,'HABF'    ,'IABF'    ,
-     .     'UPWIN'   ,'THERM'   ,'H3D'     ,'REPOR'   ,'NEGVO'  ,
+     .     'UPWIN'   ,'THERM'   ,''        ,'REPOR'   ,'NEGVO'  ,
      .     'ADYRE'   ,'DT1TE'   ,'PERF'    ,'DYNAI'   ,'DTTSH'   ,
      .     'MASS '   ,'SENS '   ,'VIPER'   ,'PROFI' /
 
@@ -249,7 +244,7 @@ C-----------------------------------------------
      .                 KSTATF/67/   ,KSHVER/68/   ,KABF/70/  ,
      .     KDTSDE/71/ ,KAABF/72/    ,KBABF/73/    ,KCABF/74/   ,KDABF/75/  ,
      .     KEABF/76/  ,KFABF/77/    ,KGABF/78/    ,KHABF/79/   ,KIABF/80/  ,
-     .     KUPWIND/81/,KTHERMAL/82/ ,KH3D/83/     ,KREPORT/84/ ,KNEGVOL/85/,
+     .     KUPWIND/81/,KTHERMAL/82/ ,KREPORT/84/ ,KNEGVOL/85/,
      .     KADYREL/86/,KDT1TET10/87/,KPERF/88/    ,KDYNAIN/89/ ,KDTTSH/90/ ,
      .     KMASS/91/  ,KSENSOR/92/  ,KVIPER/93/  ,KPROFI/94/
 
@@ -337,6 +332,14 @@ C---------------------------------------------------
         IF(KEYA(1:1)=='#')GOTO 10
         IF(KEYA(1:1)=='$')GOTO 10
         IF(KEYA==' ')     GOTO 10
+        IF((KEYA(1:4)=='/H3D'.AND.(KEYA(5:5)=='/'.OR.KEYA(5:5)==' ')).OR.
+     .     (KEYA(1:8)=='/REPORT/'.AND.INDEX(TRIM(KEYA)//'/', '/H3D/')>0)) THEN
+          WRITE(ISTDO,*) 'ERROR at Engine input line ',NCT,': ',TRIM(KEYA)
+          WRITE(IOUT,*) 'ERROR at Engine input line ',NCT,': ',TRIM(KEYA)
+          WRITE(ISTDO,*) 'H3D output has been removed; use /ANIM or /TFILE.'
+          WRITE(IOUT,*) 'H3D output has been removed; use /ANIM or /TFILE.'
+          CALL ARRET(2)
+        ENDIF
         IF(KEYA(1:1)=='/') CALL REDKEY0(KEY0,NKEY,KEYA,IKEY,NSLASH)
         IF(IKEY==0)     GOTO 10
         IKAD(IKEY)=IKAD(IKEY)+1
@@ -429,7 +432,7 @@ C---------------------------------------------------
         IF(KEYA(1:1)=='$')CYCLE
         IF(KEYA==' ')     CYCLE
         !---
-        IF(KEYA(1:4)=='/H3D' .OR. KEYA(1:6)=='/STATE'.OR. KEYA(1:7)=='/DYNAIN'.OR.KEYA(1:5)=='/ANIM'.OR.
+        IF(KEYA(1:6)=='/STATE'.OR. KEYA(1:7)=='/DYNAIN'.OR.KEYA(1:5)=='/ANIM'.OR.
      .        KEYA(1:5)=='/DAMP')THEN
           IS_KEYA_NCHARKEY = 1
         ELSE
@@ -444,7 +447,7 @@ C---------------------------------------------------
           ENDIF
           KEYW = KEYA
           IS_PREVKEYA_NCHARKEY = 1
-          CALL REDKEY1_H3D(KEY_H3D,KEY0,NKEY,KEYA,IKEY,IR)
+          CALL redkey1_output(KEY_OUTPUT,KEY0,NKEY,KEYA,IKEY,IR)
           IF(IR/=0) CYCLE
           NBC=0
           IKOLD=IKAD(IKEY)
@@ -623,11 +626,6 @@ C-----------------------
 C     //
 C-----------------------
       IKEY=KPROC
-      IF(IKAD(IKEY)/=IKAD(IKEY+1))THEN
-      ENDIF
-C-----------------------
-C     /KEREL (KINETIC ENERGY RELAXATION)
-C-----------------------
       ISTAT = 0
       ISTATG = 0
       IKEY=KKEREL
@@ -734,7 +732,7 @@ C-----------------------
       SENSORS%STOP_NSSTAT = 0
       SENSORS%STOP_NSOUTP = 0
       SENSORS%STOP_NSABF = 0 
-      SENSORS%STOP_NSH3D = 0
+      LEGACY_STOP_OUTPUT = 0
 
       IKEY=KSTOP
 c     
@@ -755,13 +753,18 @@ c        Second line
           IOK_READ = 0
           CALL WRIUSC2(IKAD(IKEY)+K,1,KEY0(IKEY))
           READ(IUSC2,*,ERR=148,END=148)SENSORS%STOP_NSANIM,SENSORS%STOP_NSTH,SENSORS%STOP_NSSTAT,
-     .                                 SENSORS%STOP_NSOUTP,SENSORS%STOP_NSABF,SENSORS%STOP_NSH3D,NSDYNANIN
+     .                                 SENSORS%STOP_NSOUTP,SENSORS%STOP_NSABF,LEGACY_STOP_OUTPUT,NSDYNANIN
           IOK_READ = 1
 c        Ensure Backward compatibility : without NSH3D
 148       IF (IOK_READ == 0) THEN
             CALL WRIUSC2(IKAD(IKEY)+K,1,KEY0(IKEY))
             READ(IUSC2,*,ERR=9990,END=9990)SENSORS%STOP_NSANIM,SENSORS%STOP_NSTH,SENSORS%STOP_NSSTAT,
      .                                     SENSORS%STOP_NSOUTP,SENSORS%STOP_NSABF
+          ENDIF
+          IF(LEGACY_STOP_OUTPUT /= 0) THEN
+            WRITE(ISTDO,*) 'ERROR: /STOP/LSENSOR H3D flag is unsupported; use native output flags.'
+            WRITE(IOUT,*) 'ERROR: /STOP/LSENSOR H3D flag is unsupported; use native output flags.'
+            CALL ARRET(2)
           ENDIF
            K=K+1
         ELSE
@@ -2657,15 +2660,8 @@ C-----------------------
 C-----------------------
 C     /H3D
 C-----------------------
-      CALL H3D_INI(H3D_DATA,KH3D,NSLASH)
-      CALL H3D_READ(IKAD(0),KEY0,KH3D,NSLASH,H3D_DATA,SENSORS)
-
-C-----------------------
-C     /REPORT
-C-----------------------
       IKEY=KREPORT
       IREPORT = 0
-      IH3DREADER = 0
       IMVW = 0
       IMVW_REF = 0
       K = 0
@@ -2674,10 +2670,6 @@ C-----------------------
         IREPORT=1
         IF(KEY2=='HTML')THEN
           IHTML = 1
-          IF(KEY3=='H3D' .AND. NSLASH(KH3D) /= 0) THEN
-            IH3DREADER = 1
-            IF(KEY4 =='EXT') IH3DREADER = 2
-          ENDIF
         ELSEIF(KEY2=='MVW')THEN
           IMVW=1
           IF(KEY3=='REF')THEN
@@ -2690,12 +2682,6 @@ C-----------------------
             ELSEIF(KEY4=='ABF')THEN
               IMVW=2
             ENDIF
-          ELSEIF(KEY3=='H3D')THEN
-            IF(KEY4=='TH')THEN
-              IMVW=3
-            ELSEIF(KEY4=='ABF')THEN
-              IMVW=4
-            ENDIF
           ELSE
             !autoselect of files format
             IF(NSLASH(KANIM) /= 0)THEN
@@ -2703,12 +2689,6 @@ C-----------------------
                 IMVW=1
               ELSEIF(NSLASH(KABF) /= 0)THEN
                 IMVW=2
-              ENDIF
-            ELSEIF(NSLASH(KH3D) /= 0) THEN
-              IF(NSLASH(KTFILE) /= 0)THEN
-                IMVW=3
-              ELSEIF(NSLASH(KABF) /= 0)THEN
-                IMVW=4
               ENDIF
             ENDIF
           ENDIF
@@ -2804,7 +2784,6 @@ C
 !||====================================================================
 !||    fretitl         ../engine/source/input/freform.F
 !||--- called by ------------------------------------------------------
-!||    genh3d          ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    w_gr_entity     ../engine/source/output/restart/w_gr_entity.F
 !||    w_line_str      ../engine/source/output/restart/w_line_str.F
 !||    w_subset_str    ../engine/source/output/restart/w_subset_str.F

@@ -56,7 +56,6 @@
 !||--- uses       -----------------------------------------------------
 !||    constant_mod                      ../common_source/modules/constant_mod.F
 !||    groupdef_mod                      ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                           ../engine/share/modules/h3d_mod.F
 !||    intbuf_fric_mod                   ../common_source/modules/interfaces/intbuf_fric_mod.F90
 !||    intbufdef_mod                     ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    ists_sts_bp_algo_mod              ../engine/source/interfaces/ists/ists_sts_bp_algo_mod.F90
@@ -72,22 +71,10 @@
 !||    sts_gp_state_mod                  ../engine/source/interfaces/ists/ists_gp_state_mod.F90
 !||    timer_mod                         ../engine/source/system/timer_mod.F90
 !||====================================================================
-      subroutine ists_mainf(timers, &
-                       ipari          ,x              ,v              ,a              , &
-                       stifn          ,fcont          ,nin            ,fsav           , &
-                       jtask          ,nb_jlt_new     , &
-                       temp           ,npc            ,tf             , &
-                       intbuf_tab     ,ixs            , &
-                       h3d_data       ,intbuf_fric_tab,igrsurf, &
-                       ms             ,dt2t           ,neltst         ,ityptst        , &
-                       iparit         ,lskyi          ,nfskyi         ,fskyi          , &
-                       isky           ,nisky          ,snpc           ,stf            , &
-                       ncycle         ,nsurf          ,ninter         ,ninterfric     , &
-                       numnod         ,numels         ,econtv         ,econt          , &
-                       debug          ,sdebug         ,imon           ,inconv         , &
-                       anim_v         ,sanim_v        ,outp_v         , &
-                       soutp_v        ,npari          ,nthvki         , &
-                       tt             ,dt1            ,dt12           ,dtfac1_10)
+      subroutine ists_mainf(timers, ipari, x, v, a, stifn, fcont, nin, fsav, jtask, nb_jlt_new, temp, npc, tf, &
+     & intbuf_tab, ixs, intbuf_fric_tab, igrsurf, ms, dt2t, neltst, ityptst, iparit, lskyi, nfskyi, fskyi, isky, nisky, &
+     & snpc, stf, ncycle, nsurf, ninter, ninterfric, numnod, numels, econtv, econt, debug, sdebug, imon, inconv, anim_v, &
+     & sanim_v, outp_v, soutp_v, npari, nthvki, tt, dt1, dt12, dtfac1_10)
 !======================================================================
 !-----------------------------------------------
 !   m o d u l e s
@@ -95,7 +82,6 @@
       use timer_mod
       use ists_sts_capacity_mod
       use intbufdef_mod
-      use h3d_mod
       use intbuf_fric_mod
       use groupdef_mod
       use sts_gp_state_mod
@@ -181,7 +167,6 @@
       real(kind=WP), intent(inout) :: econt                          !< contact energy
       type(timer_),              intent(inout) :: timers                             !< timer structure
       type(intbuf_struct_),      intent(inout) :: intbuf_tab                         !< interface buffer structure
-      type(h3d_database),        intent(in)    :: h3d_data                           !< h3d output database
       type(surf_),               intent(in)    :: igrsurf(nsurf)                     !< surface group definitions
       type(intbuf_fric_struct_), target, intent(inout) :: intbuf_fric_tab(ninterfric) !< friction interface buffer
 !-----------------------------------------------
@@ -525,14 +510,11 @@
                 ipari(29,nin) = 1
                 if (debug(3) >= 1) nb_jlt_new = nb_jlt_new + l - 1
                 if (iparit == 0) then
-                  call ists_ass0(a, stifn, load_arr, node_id_load, l, &
-                                 max_sts_size_actual, fcont, numnod, inconv, &
-                                 anim_v(4), outp_v(4), h3d_data%n_vect_cont)
+      call ists_ass0(a, stifn, load_arr, node_id_load, l, max_sts_size_actual, fcont, numnod, inconv, anim_v(4), &
+     & outp_v(4), 0)
                 else
-                  call ists_ass_parith(fskyi, isky, nisky, lskyi, nfskyi, &
-                                 load_arr, node_id_load, l, &
-                                 max_sts_size_actual, fcont, numnod, inconv, &
-                                 anim_v(4), outp_v(4), h3d_data%n_vect_cont)
+      call ists_ass_parith(fskyi, isky, nisky, lskyi, nfskyi, load_arr, node_id_load, l, max_sts_size_actual, fcont, &
+     & numnod, inconv, anim_v(4), outp_v(4), 0)
                 endif
               endif
 
@@ -556,13 +538,9 @@
         call q1np_contact_init_grid_nodes(ixs, nixs, numels)
         call my_barrier()
         if (jtask == 1) then
-          call q1np_contact_driver_int7(ncycle, numnod, x, a, stifn, &
-                                        gap, igsti, kmin, kmax, intbuf_tab%irectm, &
-                                        intbuf_tab%nsv, intbuf_tab%stfns, nsn, &
-                                        intbuf_tab%stfm, nrtm, fcont, &
-                                        inconv == 1 .and. &
-                                        anim_v(4)+outp_v(4)+h3d_data%n_vect_cont > 0, &
-                                        impact_glob)
+      call q1np_contact_driver_int7(ncycle, numnod, x, a, stifn, gap, igsti, kmin, kmax, intbuf_tab%irectm, &
+     & intbuf_tab%nsv, intbuf_tab%stfns, nsn, intbuf_tab%stfm, nrtm, fcont, inconv == 1 .and. anim_v(4)+outp_v(4)+0 > 0, &
+     & impact_glob)
           if (impact_glob > 0) ipari(29,nin) = 1
         endif
         call my_barrier()

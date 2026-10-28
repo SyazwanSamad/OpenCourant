@@ -23,17 +23,10 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    rforc3    ../engine/source/elements/spring/rforc3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod   ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE R3TORS(
-     1   FOR,     DF,      TANI,    H3D_DATA,
-     2   NEL)
+      SUBROUTINE R3TORS(FOR, DF, TANI, NEL)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -46,13 +39,9 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: NEL
       my_real
      .  FOR(*),DF(*),TANI(15,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I
 C-----------------------------------------------
-      IF (ANIM_FT(1) /= 0 .OR. H3D_DATA%UND_FORC /= 0)THEN
+      IF (ANIM_FT(1)/=0)THEN
         DO I=1,NEL
           TANI(1,I)= FOR(I)+DF(I)
           TANI(2,I)= ZERO

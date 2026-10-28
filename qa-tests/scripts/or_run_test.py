@@ -15,8 +15,9 @@ data_dir_name = 'data'
 
 mpirun = '/opt/openmpi-4.1.1/bin/mpirun'
 nbprocs = 4
-os.environ["RAD_CFG_PATH"] = "/work/mquinzin/GIT_Workspaces/GITHUB/mquinzin/OpenRadioss/hm_cfg_files"
-os.environ["LD_LIBRARY_PATH"] = "/work/mquinzin/GIT_Workspaces/GITHUB/mquinzin/OpenRadioss/extlib/hm_reader/linux64:" + os.environ["LD_LIBRARY_PATH"]
+source_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+os.environ["RAD_CFG_PATH"] = os.path.join(source_root, "hm_cfg_files")
+os.environ["LD_LIBRARY_PATH"] = os.path.join(source_root, "exec") + os.pathsep + os.environ.get("LD_LIBRARY_PATH", "")
 os.environ["OMP_STACKSIZE"] = "400m"
 os.environ["OMP_NUM_THREADS"] = "2"
 

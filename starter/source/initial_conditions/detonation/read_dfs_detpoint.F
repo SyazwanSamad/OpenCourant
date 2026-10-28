@@ -24,11 +24,11 @@ Copyright>        copyright and attribution statement.
 !||    read_detonators                  ../starter/source/initial_conditions/detonation/read_detonators.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                           ../starter/source/output/message/message.F
-!||    hm_get_floatv                    ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                      ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted           ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
-!||    hm_option_read_key               ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start                  ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_floatv                    ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                      ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted           ../starter/source/devtools/reader/hm_option_is_encrypted.F
+!||    hm_option_read_key               ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start                  ../starter/source/devtools/reader/hm_option_start.F
 !||    material_is_high_explosive       ../starter/source/materials/material_is_high_explosive.F90
 !||    nodgrnr5                         ../starter/source/starter/freform.F
 !||    unused_mat_detonator             ../starter/source/initial_conditions/detonation/unused_mat_detonator.F

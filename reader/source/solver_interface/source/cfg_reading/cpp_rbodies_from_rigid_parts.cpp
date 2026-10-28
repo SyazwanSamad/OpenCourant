@@ -23,10 +23,13 @@
 #include <sdiModelView.h>
 #include <sdiEntity.h>
 #include <sdiSelection.h>
+#include <sdiElement.h>
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <limits>
+#include <map>
+#include <set>
 #include <stdexcept>
 #include <vector>
 
@@ -39,6 +42,8 @@ struct RigidPart
     HandleRead handle;
     int id;
     int count;
+    int mode;
+    std::vector<sdiUIntList> regions;
 };
 
 std::vector<RigidPart> parts;
@@ -52,11 +57,54 @@ void Require(bool ok, const char *message)
     if(!ok) throw std::runtime_error(message);
 }
 
-int FortranId(unsigned int id)
+int FortranId(size_t id)
 {
-    Require(id <= static_cast<unsigned int>(std::numeric_limits<int>::max()),
+    Require(id <= static_cast<size_t>(std::numeric_limits<int>::max()),
             "entity ID exceeds the Starter integer range");
     return static_cast<int>(id);
+}
+
+std::vector<sdiUIntList> ConnectedRegions(const EntityRead& part)
+{
+    ModelViewEdit *model = Get_ModelViewSDI();
+    std::vector<sdiUIntList> elements, regions;
+    std::map<unsigned int, std::vector<size_t>> incident;
+    SelectionElementRead selection(part);
+    while(selection.Next())
+    {
+        sdiUIntList nodes;
+        selection->GetNodeIds(nodes);
+        nodes.erase(std::remove(nodes.begin(), nodes.end(), 0), nodes.end());
+        for(unsigned int node : nodes)
+        {
+            HandleRead handle;
+            Require(model->FindById("/NODE", node, handle), "rigid part references a missing element node");
+            incident[node].push_back(elements.size());
+        }
+        elements.push_back(nodes);
+    }
+    std::set<unsigned int> visited;
+    // Component IDs follow element order; node sets use the reference reader's depth-first order.
+    for(const sdiUIntList& element : elements)
+        for(unsigned int seed : element)
+        {
+            if(visited.count(seed)) continue;
+            regions.emplace_back();
+            sdiUIntList pending(1, seed);
+            while(!pending.empty())
+            {
+                unsigned int node = pending.back();
+                pending.pop_back();
+                if(!visited.insert(node).second) continue;
+                regions.back().push_back(node);
+                for(size_t index : incident.at(node))
+                    for(unsigned int next : elements[index])
+                        if(!visited.count(next)) pending.push_back(next);
+            }
+        }
+    Require(regions.size() <= static_cast<size_t>(std::numeric_limits<int>::max()),
+            "rigid-part region count exceeds the Starter integer range");
+    return regions;
 }
 
 std::vector<RigidPart> ReadParts()
@@ -70,10 +118,11 @@ std::vector<RigidPart> ReadParts()
         sdiValue value;
         if(selection->GetValue(sdiIdentifier("IRIGID"), value))
             Require(value.GetValue(flag), "invalid /PART IRIGID type");
-        if(flag == 2)
-            throw std::runtime_error("/PART " + std::to_string(selection->GetId()) +
-                " requests IRIGID=2; connected-region conversion is not implemented");
-        result.push_back({selection->GetHandle(), FortranId(selection->GetId()), flag == 1 ? 1 : 0});
+        std::vector<sdiUIntList> regions;
+        if(flag == 2) regions = ConnectedRegions(*selection);
+        result.push_back({selection->GetHandle(), FortranId(selection->GetId()),
+                          flag == 2 ? static_cast<int>(regions.size()) : flag == 1 ? 1 : 0,
+                          flag, std::move(regions)});
     }
     return result;
 }
@@ -84,6 +133,7 @@ void ValidateParts()
     Require(current.size() == parts.size(), "parts changed after rigid-part evaluation");
     for(size_t i = 0; i < parts.size(); ++i)
         Require(current[i].handle == parts[i].handle && current[i].id == parts[i].id &&
+                current[i].mode == parts[i].mode && current[i].regions == parts[i].regions &&
                 current[i].count == parts[i].count, "parts changed after rigid-part evaluation");
 }
 
@@ -96,7 +146,14 @@ void Evaluate(int *counts)
     }
     else ValidateParts();
     Require(counts != nullptr || parts.empty(), "null rigid-part count array");
-    for(size_t i = 0; i < parts.size(); ++i) counts[i] = parts[i].count;
+    size_t total = 0;
+    for(size_t i = 0; i < parts.size(); ++i)
+    {
+        total += parts[i].count;
+        Require(total <= static_cast<size_t>(std::numeric_limits<int>::max()),
+                "rigid-body count exceeds the Starter integer range");
+        counts[i] = parts[i].count;
+    }
 }
 
 struct Field
@@ -122,6 +179,8 @@ struct PreparedPart
     sdiValue unit;
     std::vector<sdiValue> values;
     int id;
+    int mode;
+    std::vector<sdiUIntList> regions;
 };
 
 PreparedPart Prepare(const RigidPart& part)
@@ -132,8 +191,10 @@ PreparedPart Prepare(const RigidPart& part)
     result.include = entity.GetInclude();
     result.title = entity.GetName();
     result.id = part.id;
+    result.mode = part.mode;
+    result.regions = part.regions;
     Require(entity.GetValue(sdiIdentifier("unitid"), result.unit), "cannot read part units");
-    for(const Field& field : fields)
+    if(part.mode == 1) for(const Field& field : fields)
     {
         sdiValue value;
         if(field.reference)
@@ -181,28 +242,36 @@ void Create(int *mapping, int *ids)
         Require((mapping && ids) || prepared.empty(), "null rigid-part output array");
         ModelViewEdit *model = Get_ModelViewSDI();
         std::vector<HandleEdit> added;
-        added.reserve(2 * prepared.size());
-        bodyIds.reserve(prepared.size());
-        partIds.reserve(prepared.size());
+        size_t total = 0;
+        for(const PreparedPart& part : prepared) total += part.mode == 1 ? 1 : part.regions.size();
+        added.reserve(2 * total);
+        bodyIds.reserve(total);
+        partIds.reserve(total);
         try
         {
             for(const PreparedPart& part : prepared)
+            for(size_t region = 0; region < (part.mode == 1 ? 1 : part.regions.size()); ++region)
             {
                 IncludeScope include(model, part.include);
                 HandleEdit setHandle, bodyHandle;
-                Require(model->CreateEntity(setHandle, "/SET/GENERAL", "Rigid Part:" + std::to_string(part.id)),
+                const bool connected = part.mode == 2;
+                const sdiUIntList members = connected ? part.regions[region] : sdiUIntList(1, part.id);
+                const sdiString number = std::to_string(region + 1);
+                Require(model->CreateEntity(setHandle, "/SET/GENERAL", "Rigid Part:" + std::to_string(part.id) +
+                        (connected ? " Component:" + number : "")),
                         "cannot create rigid-part set");
                 added.push_back(setHandle);
                 EntityEdit set(model, setHandle);
                 Require(set.SetValue(sdiIdentifier("unitid"), part.unit) &&
                         set.SetValue(sdiIdentifier("clausesmax"), sdiValue(1)) &&
-                        set.SetValue(sdiIdentifier("KEY_type", 0, 0), sdiValue(sdiString("PART"))) &&
-                        set.SetValue(sdiIdentifier("idsmax", 0, 0), sdiValue(1)) &&
+                        set.SetValue(sdiIdentifier("KEY_type", 0, 0), sdiValue(sdiString(connected ? "NODE" : "PART"))) &&
+                        set.SetValue(sdiIdentifier("idsmax", 0, 0), sdiValue(FortranId(members.size()))) &&
                         set.SetValue(sdiIdentifier("ids", 0, 0),
-                            sdiValue(sdiValueEntityList(model->GetEntityType("/PART"), sdiUIntList(1, part.id)))),
+                            sdiValue(sdiValueEntityList(model->GetEntityType(connected ? "/NODE" : "/PART"), members))),
                         "cannot populate rigid-part set");
                 Require(model->CreateEntity(bodyHandle, "/RBODY", "/RBODY Automatically generated from /PART Id: " +
-                        std::to_string(part.id) + " title: " + part.title), "cannot create rigid-part body");
+                        std::to_string(part.id) + (connected ? " component: " + number + "/" +
+                        std::to_string(part.regions.size()) : " title: " + part.title)), "cannot create rigid-part body");
                 added.push_back(bodyHandle);
                 EntityEdit body(model, bodyHandle);
                 Require(body.SetValue(sdiIdentifier("unitid"), part.unit) &&

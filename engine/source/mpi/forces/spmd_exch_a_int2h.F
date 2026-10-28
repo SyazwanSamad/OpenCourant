@@ -24,22 +24,11 @@ Copyright>        copyright and attribution statement.
 !||    intti1              ../engine/source/interfaces/interf/intti1.F
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    my_alloc_mod        ../common_source/tools/memory/my_alloc.F90
 !||    spmd_mod            ../engine/source/mpi/spmd_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_EXCH_A_INT2H(
-     1   A    ,AR     ,MS    ,IN     ,STIFN,
-     2   STIFR,FR_I2M,IAD_I2M,LCOMI2M,ISIZE,
-     3   TAGNOD,INTTH2,FTHE,CONDN,FNCONT  ,
-     4   FNCONTP,FTCONTP,H3D_DATA ,IDT_THERM)
-C-----------------------------------------------
-       USE H3D_MOD
-C-----------------------------------------------
-C realizes the accumulation of accelerations and masses at the main int2 nodes,
-C case where there is a hierarchy of interfaces in the model
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
+      SUBROUTINE SPMD_EXCH_A_INT2H(A, AR, MS, IN, STIFN, STIFR, FR_I2M, IAD_I2M, LCOMI2M, ISIZE, TAGNOD, INTTH2, FTHE,
+     . CONDN, FNCONT, FNCONTP, FTCONTP, IDT_THERM)
 C-----------------------------------------------
         USE SPMD_MOD
         use my_alloc_mod
@@ -67,10 +56,6 @@ C-----------------------------------------------
      .        STIFN(*), STIFR(*),FTHE(*),CONDN(*)
       my_real , INTENT(INOUT) :: FNCONT(3,NUMNOD),
      .      FNCONTP(3,NUMNOD),FTCONTP(3,NUMNOD)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef MPI
       INTEGER MSGTYP,LOC_PROC,NOD,I,J,L,IDEB,IAD,LEN,
      .        NBINDEX,INDEX,MSGOFF,SIZ,IERROR,ISIZE2,
@@ -84,12 +69,6 @@ C-----------------------------------------------
       LOC_PROC = ISPMD + 1
 C
       ISIZE2=ISIZE
-      IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-         ISIZE2 = ISIZE2 + 3
-      ENDIF
-      IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-         ISIZE2 = ISIZE2 + 6
-      ENDIF 
       call my_alloc(SBUF, LCOMI2M*ISIZE2, "SBUF")
       call my_alloc(RBUF, LCOMI2M*ISIZE2, "RBUF")
 C
@@ -212,30 +191,6 @@ C
          ENDIF
         ENDIF
 C
-       IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J = 1, LEN
-            NOD = FR_I2M(IAD+J)
-            SBUF(IDEB)   = FNCONT(1,NOD)
-            SBUF(IDEB+1) = FNCONT(2,NOD)
-            SBUF(IDEB+2) = FNCONT(3,NOD)
-            IDEB = IDEB + 3
-          ENDDO
-       ENDIF
-       IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J = 1, LEN
-            NOD = FR_I2M(IAD+J)
-            SBUF(IDEB)   = FNCONTP(1,NOD)
-            SBUF(IDEB+1) = FNCONTP(2,NOD)
-            SBUF(IDEB+2) = FNCONTP(3,NOD)
-            SBUF(IDEB+3) = FTCONTP(1,NOD)
-            SBUF(IDEB+4) = FTCONTP(2,NOD)
-            SBUF(IDEB+5) = FTCONTP(3,NOD)
-            IDEB = IDEB + 6
-          ENDDO
-       ENDIF 
-C 
       ENDDO
 C
       IDEB = 1
@@ -352,30 +307,6 @@ C
           END DO
          END IF
        ENDIF
-C
-       IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J = 1, LEN
-            NOD = FR_I2M(IAD+J)
-            FNCONT(1,NOD)   = FNCONT(1,NOD) + RBUF(IDEB)
-            FNCONT(2,NOD)   = FNCONT(2,NOD) + RBUF(IDEB+1)
-            FNCONT(3,NOD)   = FNCONT(3,NOD) + RBUF(IDEB+2)
-            IDEB = IDEB + 3
-          ENDDO
-       ENDIF
-       IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J = 1, LEN
-            NOD = FR_I2M(IAD+J)
-            FNCONTP(1,NOD)   = FNCONTP(1,NOD) + RBUF(IDEB)
-            FNCONTP(2,NOD)   = FNCONTP(2,NOD) + RBUF(IDEB+1)
-            FNCONTP(3,NOD)   = FNCONTP(3,NOD) + RBUF(IDEB+2)
-            FTCONTP(1,NOD)   = FTCONTP(1,NOD) + RBUF(IDEB+3)
-            FTCONTP(2,NOD)   = FTCONTP(2,NOD) + RBUF(IDEB+4)
-            FTCONTP(3,NOD)   = FTCONTP(3,NOD) + RBUF(IDEB+5)
-            IDEB = IDEB + 6
-          ENDDO
-       ENDIF 
 C
       ENDDO
 C

@@ -69,8 +69,6 @@ set ( RELNAME ${arch}${mpi_suf}  )
 # Third party libraries
 # ---------------------
 
-#H3D
-set (h3d_inc "-I${source_directory}/../extlib/h3d/includes")
 
 #ZLIB
 set (zlib_inc "-I${source_directory}/../extlib/zlib/linuxa64/include")
@@ -170,10 +168,10 @@ set( unused_dummy_arg_strict_flags "${FSANITIZE} -march=armv8-a -DCOMP_GFORTRAN=
 set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS "${FSANITIZE} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -Wall -Warray-temporaries -O0 -g -fdec-math -fbacktrace ${opt_flag} ${strict} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -ffixed-line-length-none  ${mpi_flag} ${ADF}  " )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp " )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp " )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp -std=c++11  " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp -std=c++11  " )
 
 
 elseif ( debug STREQUAL "asan" )
@@ -187,10 +185,10 @@ set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS "-march=ar
 
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE ${h3d_inc} ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp  ${zlib_inc} ${md5_inc}" )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE ${precision_flag}  ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -O0 -g  -fopenmp  ${zlib_inc} ${md5_inc}" )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE} ${h3d_inc} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp  ${zlib_inc} ${md5_inc} -std=c++11" )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE} ${precision_flag} ${cppmach} ${cpprel} -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM  -O0 -g -fopenmp  ${zlib_inc} ${md5_inc} -std=c++11" )
 
 set( FSANITIZE "-fsanitize=address -fsanitize=undefined  -fsanitize=bounds-strict -DSANITIZE") 
 
@@ -205,10 +203,10 @@ set( unused_dummy_arg_strict_flags "-march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math 
 set_source_files_properties( ${source_files}  PROPERTIES COMPILE_FLAGS "-march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -nostdinc -O3 -fdec-math  ${opt_flag} ${strict} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -ffixed-line-length-none ${mpi_flag} ${ADF} " )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} " )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} " )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-march=armv8-a -DCOMP_GFORTRAN=1 -fdec-math -DARCH_CPU=ARM -w -O2 ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  " )
 
 endif()
 

@@ -24,8 +24,8 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_prop33             ../starter/source/properties/spring/hm_read_prop33.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                     ../starter/source/output/message/message.F
-!||    hm_get_floatv              ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv              ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                ../starter/source/devtools/reader/hm_get_intv.F
 !||    set_u_geo                  ../starter/source/user_interface/uaccess.F
 !||    set_u_pnu                  ../starter/source/user_interface/uaccess.F
 !||--- uses       -----------------------------------------------------

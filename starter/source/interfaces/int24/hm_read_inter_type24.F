@@ -25,8 +25,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
 !||    definter               ../starter/source/interfaces/interf1/definter.F
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
 !||    inter_dcod_friction    ../starter/source/interfaces/reader/inter_dcod_friction.F
 !||    inter_dcod_sensor      ../starter/source/interfaces/reader/inter_dcod_sensor.F
 !||    ngr2usr                ../starter/source/system/nintrr.F

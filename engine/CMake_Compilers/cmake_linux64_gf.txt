@@ -69,8 +69,6 @@ set ( RELNAME ${arch}${mpi_suf}  )
 # Third party libraries
 # ---------------------
 
-#H3D
-set (h3d_inc "-I${source_directory}/../extlib/h3d/includes")
 
 #ZLIB
 set (zlib_inc "-I${source_directory}/../extlib/zlib/linux64/include")
@@ -201,10 +199,10 @@ set( unused_dummy_arg_strict_flags "${FSANITIZE} -Wall -Warray-temporaries -O0 -
 set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS "${FSANITIZE} -Wall -Warray-temporaries -O0 -g -fdec-math -fbacktrace ${strict} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -ffixed-line-length-none  ${mpi_flag} ${ADF}  ${coupling}" )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}" )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}" )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} -std=c++14 ${coupling} ${mpi_flag}" )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} -std=c++14 ${coupling} ${mpi_flag}" )
 
 elseif ( debug STREQUAL "analysis" )
 # Fortran
@@ -216,10 +214,10 @@ set( unused_dummy_arg_strict_flags "  -fplugin=../../scripts/gcc_plugin/fortran_
 set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS " -fplugin=../../scripts/gcc_plugin/fortran_signatures.so  ${FSANITIZE} -Wall -Warray-temporaries -O0 -g -fdec-math -fbacktrace ${strict} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -ffixed-line-length-none  ${mpi_flag} ${ADF} ${coupling} " )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " ${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}" )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " ${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP} ${coupling}" )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} ${coupling} ${mpi_flag} -std=c++14  " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP} ${coupling} ${mpi_flag} -std=c++14  " )
 
 
 elseif ( debug STREQUAL "asan" )
@@ -234,10 +232,10 @@ set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS "${FSANITI
 
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP}  ${zlib_inc} ${md5_inc}  ${coupling} ")
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  ${OPENMP}  ${zlib_inc} ${md5_inc}  ${coupling} ")
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP}  ${zlib_inc} ${md5_inc} ${coupling} ${mpi_flag} -std=c++14" )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g ${OPENMP}  ${zlib_inc} ${md5_inc} ${coupling} ${mpi_flag} -std=c++14" )
 
 else ()
 
@@ -250,10 +248,10 @@ set( unused_dummy_arg_strict_flags " -nostdinc -O3 -fdec-math ${strict_wo_mpi} $
 set_source_files_properties( ${source_files}  PROPERTIES COMPILE_FLAGS " -nostdinc -O3 -fdec-math ${strict}  ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -ffixed-line-length-none ${mpi_flag} ${ADF} ${coupling}" )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling}" )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -w -O2 ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling}" )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-w -O2 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling} -std=c++14 ${coupling} ${mpi_flag} " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "-w -O2 ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} ${coupling} -std=c++14 ${coupling} ${mpi_flag} " )
 
 endif()
 

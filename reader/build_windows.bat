@@ -48,6 +48,7 @@ GOTO ARG_LOOP
 :: Load external libraries
 echo Load external libraries
 python ..\Compiling_tools\script\load_extlib.py
+if errorlevel 1 exit /b 1
 
 :: build directory
 set build_directory=cbuild_%arch%%cs%

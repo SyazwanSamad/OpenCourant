@@ -1,0 +1,41 @@
+{
+  "hm_reader_directory_absent": true,
+  "model_loaded": "single.rad",
+  "loaded_modules": [
+    "ADVAPI32.dll",
+    "GDI32.dll",
+    "IMM32.DLL",
+    "KERNEL32.DLL",
+    "KERNELBASE.dll",
+    "OLEAUT32.dll",
+    "RPCRT4.dll",
+    "USER32.dll",
+    "VCRUNTIME140.dll",
+    "VERSION.dll",
+    "WS2_32.dll",
+    "_bz2.pyd",
+    "_ctypes.pyd",
+    "_lzma.pyd",
+    "bcrypt.dll",
+    "bcryptprimitives.dll",
+    "combase.dll",
+    "gdi32full.dll",
+    "libffi-8.dll",
+    "msvcp_win.dll",
+    "msvcrt.dll",
+    "ntdll.dll",
+    "ole32.dll",
+    "open_reader_win64.dll",
+    "psapi.DLL",
+    "python.exe",
+    "python3.DLL",
+    "python311.dll",
+    "sechost.dll",
+    "ucrtbase.dll",
+    "win32u.dll"
+  ],
+  "imports": {
+    "starter": "Microsoft (R) COFF/PE Dumper Version 14.44.35215.0\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n\nDump of file exec\\starter_win64.exe\n\nFile Type: EXECUTABLE IMAGE\n\n  Image has the following dependencies:\n\n    open_reader_win64.dll\n    ADVAPI32.dll\n    mkl_intel_thread.2.dll\n    libiomp5md.dll\n    KERNEL32.dll\n    WSOCK32.dll\n    imagehlp.dll\n\n  Summary\n\n     2CB3000 .data\n        1000 .fptable\n       1C000 .pdata\n      273000 .rdata\n        A000 .reloc\n        1000 .rsrc\n     2709000 .text\n        5000 .trace\n        2000 _RDATA\n",
+    "reader": "Microsoft (R) COFF/PE Dumper Version 14.44.35215.0\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n\nDump of file exec\\open_reader_win64.dll\n\nFile Type: DLL\n\n  Image has the following dependencies:\n\n    KERNEL32.dll\n\n  Summary\n\n       5D000 .data\n        1000 .fptable\n       87000 .pdata\n      391000 .rdata\n       15000 .reloc\n        1000 .rsrc\n      C30000 .text\n        6000 .trace\n        2000 _RDATA\n"
+  }
+}

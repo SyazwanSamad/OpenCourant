@@ -32,7 +32,6 @@ Copyright>        copyright and attribution statement.
 !||    drape_mod          ../engine/share/modules/drape_mod.F
 !||    eos_param_mod      ../common_source/modules/mat_elem/eos_param_mod.F90
 !||    glob_therm_mod     ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    loads_mod          ../common_source/modules/loads/loads_mod.F90
 !||    mat_elem_mod       ../common_source/modules/mat_elem/mat_elem_mod.F90
@@ -54,14 +53,12 @@ Copyright>        copyright and attribution statement.
 !||    state_mod          ../common_source/modules/state_mod.F
 !||    th_mod             ../engine/share/modules/th_mod.F
 !||====================================================================
-      SUBROUTINE RDCOMI(OUTPUT,TABVINT,MULTI_FVM,H3D_DATA,DYNAIN_DATA,
-     .                  INTER_PARAMETERS,SENSORS,LOADS ,MAT_ELEM,SKEWS,
-     .                  GLOB_THERM,PBLAST,RBE3 ,RWALL,SFEM)
+      SUBROUTINE RDCOMI(OUTPUT, TABVINT, MULTI_FVM, DYNAIN_DATA, INTER_PARAMETERS, SENSORS, LOADS, MAT_ELEM, SKEWS,
+     . GLOB_THERM, PBLAST, RBE3, RWALL, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MULTI_FVM_MOD 
-      USE H3D_MOD 
       USE PINCHTYPE_MOD
       USE OUTMAX_MOD
       USE PLOAD_CYL_MOD
@@ -92,10 +89,10 @@ C   I m p l i c i t   T y p e s
 C-----------------------------------------------
       use my_alloc_mod
 #include      "implicit_f.inc"
+#include      "units_c.inc"
       INTEGER TABVINT(*)
       TYPE(OUTPUT_), INTENT(INOUT) :: OUTPUT
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (DYNAIN_DATABASE),INTENT(INOUT) :: DYNAIN_DATA
       TYPE (PARAMETERS_)    ,INTENT(INOUT) :: INTER_PARAMETERS
       TYPE (SENSORS_)       ,INTENT(INOUT) :: SENSORS
@@ -482,7 +479,7 @@ C-----1
       NR2RLNK=TABVINT(293)
 C-----
       OUTPUT%DATA%ANIM_HAS_NODA_PEXT = MAX(TABVINT(294)/10     , OUTPUT%DATA%ANIM_HAS_NODA_PEXT)   !last digit, unless /ANIM/NODA/PEXT is present
-      OUTPUT%DATA%H3D_HAS_NODA_PEXT =  MAX(MOD(TABVINT(294),10),  OUTPUT%DATA%H3D_HAS_NODA_PEXT)   !2nd digit, unless /H3D/NODA/PEXT is present
+C     Slot 294 units digit is retired; the animation tens digit above is retained.
       IANIM =TABVINT(295)
       IOUTP =TABVINT(296)
       NHIN2 =TABVINT(297)
@@ -1629,8 +1626,10 @@ C---- old Isolid17
       IS17_OLD =TABVINT(NEXT)
 C IH3D -> H3D count       
       NEXT       = NEXT + 1
-      H3D_DATA%IH3D = TABVINT(NEXT)   
-C        
+      IF(TABVINT(NEXT) > 0 .AND. ISPMD == 0)THEN
+        WRITE(ISTDO,*) 'INFO: retired H3D output is not resumed from this checkpoint.'
+        WRITE(IOUT,*) 'INFO: retired H3D output is not resumed from this checkpoint.'
+      ENDIF
       NEXT       = NEXT + 1
       NUMELS10G  = TABVINT(NEXT)   
 C        
@@ -1832,8 +1831,6 @@ C
       LASTANIMCYCLE  = TABVINT(NEXT)
 
       NEXT       = NEXT + 1
-      LASTH3DCYCLE  = TABVINT(NEXT)
-
       NEXT       = NEXT + 1
       LASTDYNCYCLE  = TABVINT(NEXT)
 

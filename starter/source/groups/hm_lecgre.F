@@ -29,10 +29,10 @@ Copyright>        copyright and attribution statement.
 !||    hm_admlcnt               ../starter/source/groups/hm_admlistcnt.F
 !||    hm_admlist               ../starter/source/groups/hm_admlist.F
 !||    hm_bigbox2               ../starter/source/model/box/hm_bigbox2.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start          ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start          ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_submodgre             ../starter/source/groups/hm_submodgr.F
 !||    hm_tagpart               ../starter/source/groups/hm_tagpart.F
 !||    nintlstn                 ../starter/source/system/nintrr.F

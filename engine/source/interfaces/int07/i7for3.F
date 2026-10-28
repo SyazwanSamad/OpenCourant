@@ -26,58 +26,27 @@ Copyright>        copyright and attribution statement.
 !||    i7curv       ../engine/source/interfaces/int07/i7curv.F
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||    tri7box      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I7FOR3(OUTPUT,JLT       ,A         ,V          ,IBCC       ,ICODT  ,
-     2                  FSAV      ,GAP       ,FRIC       ,MS         ,VISC   ,
-     3                  VISCF     ,NOINT     ,STFN       ,ITAB       ,CN_LOC ,
-     4                  STIGLO    ,STIFN     ,STIF       ,FSKYI      ,ISKY   ,
-     5                  NX1       ,NX2       ,NX3        ,NX4        ,NY1    ,
-     6                  NY2       ,NY3       ,NY4        ,NZ1        ,NZ2    ,
-     7                  NZ3       ,NZ4       ,LB1        ,LB2        ,LB3    ,
-     8                  LB4       ,LC1       ,LC2        ,LC3        ,LC4    ,
-     9                  P1        ,P2        ,P3         ,P4         ,FCONT  ,
-     A                  IX1       ,IX2       ,IX3        ,IX4        ,NSVG   ,
-     B                  IVIS2     ,NELTST    ,ITYPTST    ,DT2T       ,GAPV   ,
-     C                  INACTI    ,CAND_P     ,INDEX     ,KINET      ,NEWFRONT,
-     D                  ISECIN    ,NSTRF      ,X         ,IRECT      ,CE_LOC  ,
-     E                  MFROT     ,IFQ        ,CAND_FX    ,CAND_FY   ,
-     F                  CAND_FZ   ,ALPHA0     ,IFPEN     ,IBAG       ,
-     H                  ICONTACT  ,VISCN      ,VXI       ,VYI        ,VZI     ,
-     I                  MSI       ,KINI       ,NIN       ,NISUB      ,LISUB   ,
-     J                  ADDSUBS   ,ADDSUBM    ,LISUBS    ,LISUBM     ,FSAVSUB ,
-     K                  CAND_N    ,ILAGM      ,ICURV     ,NOD_NORMAL ,FNCONT  ,
-     L                  FTCONT    ,X1         ,X2        ,X3         ,X4      ,
-     M                  Y1        ,Y2         ,Y3        ,Y4         ,Z1      ,
-     N                  Z2        , Z3        ,Z4        ,XI         ,YI      ,
-     O                  ZI        , IADM      ,RCURVI    ,RCONTACT   ,ACONTACT,
-     P                  PCONTACT  ,ANGLMI     ,PADM      ,INTTH      ,TEMP    ,
-     Q                  TEMPI     ,IFORM      ,NPC       ,TF         ,CMAJ    ,
-     R                  DTMINI    ,DRAD       ,FHEATS    ,FHEATM     ,EFRICT  ,
-     S                  QFRIC      ,FNI       ,IFRIC     ,
-     T                  JTASK      ,H1      ,
-     U                  H2         ,H3        ,H4        ,KS         ,KT      ,
-     V                  K1         ,K2        ,K3        ,K4         ,C1      ,
-     W                  C2         ,C3        ,C4        ,CS         ,C       ,
-     X                  CF         ,TINT      ,XFRIC     ,FXI        ,FYI     ,
-     Y                  FZI        ,FX1       ,FY1       ,FZ1        ,FX2     ,
-     Z                  FY2        ,FZ2       ,FX3       ,FY3        ,FZ3     ,
-     1                  FX4        ,FY4       ,FZ4       ,ISENSINT  ,FSAVPARIT,
-     5                  NFT        ,SYM_FLAG_TYPE19,H3D_DATA,FRICC  ,VISCFFRIC,
-     6                  FRIC_COEFS ,ITIED     ,JLT_TIED  ,CAND_F    ,IORTHFRIC,
-     7                  FRIC_COEFS2,FRICC2    ,VISCFFRIC2,NFORTH    ,NFISOT   ,
-     8                  INDEXORTH  ,INDEXISOT ,DIR1      ,DIR2      ,TAGNCONT ,
-     9                  KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,TYPSUB,INFLG_SUBS,
-     A                  INFLG_SUBM,NINLOADP   ,DGAPLOADINT,S_LOADPINTER,DGAPLOADP,
-     B                  INTEREFRIC )
+      SUBROUTINE I7FOR3(OUTPUT, JLT, A, V, IBCC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, STFN, ITAB, CN_LOC,
+     . STIGLO, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4,
+     . LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, NSVG, IVIS2, NELTST, ITYPTST, DT2T, GAPV, INACTI,
+     . CAND_P, INDEX, KINET, NEWFRONT, ISECIN, NSTRF, X, IRECT, CE_LOC, MFROT, IFQ, CAND_FX, CAND_FY, CAND_FZ, ALPHA0,
+     . IFPEN, IBAG, ICONTACT, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB, LISUB, ADDSUBS, ADDSUBM, LISUBS, LISUBM,
+     . FSAVSUB, CAND_N, ILAGM, ICURV, NOD_NORMAL, FNCONT, FTCONT, X1, X2, X3, X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, XI,
+     . YI, ZI, IADM, RCURVI, RCONTACT, ACONTACT, PCONTACT, ANGLMI, PADM, INTTH, TEMP, TEMPI, IFORM, NPC, TF, CMAJ,
+     . DTMINI, DRAD, FHEATS, FHEATM, EFRICT, QFRIC, FNI, IFRIC, JTASK, H1, H2, H3, H4, KS, KT, K1, K2, K3, K4, C1, C2,
+     . C3, C4, CS, C, CF, TINT, XFRIC, FXI, FYI, FZI, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3, FY3, FZ3, FX4, FY4, FZ4,
+     . ISENSINT, FSAVPARIT, NFT, SYM_FLAG_TYPE19, FRICC, VISCFFRIC, FRIC_COEFS, ITIED, JLT_TIED, CAND_F, IORTHFRIC,
+     . FRIC_COEFS2, FRICC2, VISCFFRIC2, NFORTH, NFISOT, INDEXORTH, INDEXISOT, DIR1, DIR2, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, TYPSUB, INFLG_SUBS, INFLG_SUBM, NINLOADP, DGAPLOADINT, S_LOADPINTER, DGAPLOADP,
+     . INTEREFRIC)
 
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -167,7 +136,6 @@ C-----------------------------------------------
      .   FX1(MVSIZ), FX2(MVSIZ), FX3(MVSIZ), FX4(MVSIZ),
      .   FY1(MVSIZ), FY2(MVSIZ), FY3(MVSIZ), FY4(MVSIZ),
      .   FZ1(MVSIZ), FZ2(MVSIZ), FZ3(MVSIZ), FZ4(MVSIZ)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       my_real  , INTENT(IN) :: DGAPLOADP, DGAPLOADINT(S_LOADPINTER)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -1484,10 +1452,8 @@ C
         ENDDO
       ENDIF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -3008,10 +2974,8 @@ C--------      total force
         END DO
       END IF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -3505,28 +3469,6 @@ C---------------------------------
             ELSE ! node remote
               JG = -JG
               EFRICFI(NIN)%P(JG)=EFRICFI(NIN)%P(JG)+ (EFRIC_LS-FHEATS*EFRICT(I))
-            ENDIF
-          ENDDO
-#include "lockoff.inc"
-        END IF !(INCONV==1) THEN
-      ENDIF
-C---------------------------------
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF (INCONV==1) THEN
-#include "lockon.inc"
-          DO I=1,JLT
-            EFRIC_LM = HALF*EFRIC_L(I)
-            OUTPUT%DATA%EFRICG(IX1(I)) = OUTPUT%DATA%EFRICG(IX1(I)) + H1(I)*(EFRIC_LM-FHEATM*EFRICT(I))
-            OUTPUT%DATA%EFRICG(IX2(I)) = OUTPUT%DATA%EFRICG(IX2(I)) + H2(I)*(EFRIC_LM-FHEATM*EFRICT(I))
-            OUTPUT%DATA%EFRICG(IX3(I)) = OUTPUT%DATA%EFRICG(IX3(I)) + H3(I)*(EFRIC_LM-FHEATM*EFRICT(I))
-            OUTPUT%DATA%EFRICG(IX4(I)) = OUTPUT%DATA%EFRICG(IX4(I)) + H4(I)*(EFRIC_LM-FHEATM*EFRICT(I))
-            JG = NSVG(I)
-            EFRIC_LS = HALF*EFRIC_L(I)
-            IF(JG>0) THEN
-              OUTPUT%DATA%EFRICG(JG) = OUTPUT%DATA%EFRICG(JG) + (EFRIC_LS-FHEATS*EFRICT(I))
-            ELSE ! node remote
-              JG = -JG
-              EFRICGFI(NIN)%P(JG)=EFRICGFI(NIN)%P(JG)+ (EFRIC_LS-FHEATS*EFRICT(I))
             ENDIF
           ENDDO
 #include "lockoff.inc"

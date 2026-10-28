@@ -42,7 +42,6 @@ Copyright>        copyright and attribution statement.
 !||    stoptime                    ../engine/source/system/timer_mod.F90
 !||    sum_6_float_sens            ../engine/source/system/parit.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                     ../engine/share/modules/h3d_mod.F
 !||    imp_intbuf                  ../engine/share/modules/imp_mod_def.F90
 !||    intbuf_fric_mod             ../common_source/modules/interfaces/intbuf_fric_mod.F90
 !||    intbufdef_mod               ../common_source/modules/interfaces/intbufdef_mod.F90
@@ -53,27 +52,13 @@ Copyright>        copyright and attribution statement.
 !||    output_mod                  ../common_source/modules/output/output_mod.F90
 !||    timer_mod                   ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I24MAINF(output,TIMERS,
-     1                   IPARI  ,INTBUF_TAB         ,X        ,A      ,
-     2                   ICODT  ,FSAV    ,V         ,MS       ,DT2T   ,
-     3                   NELTST ,ITYPTST ,ITAB      ,STIFN    ,FSKYI  ,
-     4                   ISKY   ,FCONT   ,NIN       ,LINDMAX  ,KINET  ,
-     5                   JTASK  ,NB_JLT  ,NB_JLT_NEW,NB_STOK_N,
-     6                   NISKYFI,NEWFRONT,NSTRF     ,SECFCUM  ,ICONTACT  ,
-     7                   VISCN    ,NUM_IMP,
-     9                   NS_IMP ,NE_IMP  ,IND_IMP   ,FSAVSUB  ,NRTMDIM,
-     A                   FSAVBAG,
-     B                   EMINX  ,IXS     ,IXS16     ,IXS20    ,FNCONT ,
-     C                   FTCONT ,IAD_ELEM,FR_ELEM   ,RCONTACT ,ACONTACT,
-     D                   PCONTACT,TEMP      ,FTHE     ,FTHESKYI,
-     E                   PM      ,IPARG ,IAD17   ,MSKYI_SMS  ,ISKYI_SMS,
-     F                   NODNX_SMS,MS0  ,INOD_PXFEM,MS_PLY    ,WAGAP  ,
-     G                   FBSAV6   ,ISENSINT,
-     H                   DIMFB    ,H3D_DATA ,INTBUF_FRIC_TAB, T2MAIN_SMS,
-     I                   FORNEQS  ,T2FAC_SMS,NPC    ,TF       ,TAGNCONT,
-     J                   KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,DGAPLOADINT,
-     .                                                         S_LOADPINTER,
-     K                   INTEREFRIC,INTERFACES,NISUBMAX)
+      SUBROUTINE I24MAINF(output, TIMERS, IPARI, INTBUF_TAB, X, A, ICODT, FSAV, V, MS, DT2T, NELTST, ITYPTST, ITAB,
+     . STIFN, FSKYI, ISKY, FCONT, NIN, LINDMAX, KINET, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, NISKYFI, NEWFRONT, NSTRF,
+     . SECFCUM, ICONTACT, VISCN, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, FSAVSUB, NRTMDIM, FSAVBAG, EMINX, IXS, IXS16, IXS20,
+     . FNCONT, FTCONT, IAD_ELEM, FR_ELEM, RCONTACT, ACONTACT, PCONTACT, TEMP, FTHE, FTHESKYI, PM, IPARG, IAD17,
+     . MSKYI_SMS, ISKYI_SMS, NODNX_SMS, MS0, INOD_PXFEM, MS_PLY, WAGAP, FBSAV6, ISENSINT, DIMFB, INTBUF_FRIC_TAB,
+     . T2MAIN_SMS, FORNEQS, T2FAC_SMS, NPC, TF, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, DGAPLOADINT,
+     . S_LOADPINTER, INTEREFRIC, INTERFACES, NISUBMAX)
 C========================================================================
 C-----------------------------------------------
 C   M o d u l e s
@@ -81,7 +66,6 @@ C-----------------------------------------------
       USE TIMER_MOD
       USE INTBUFDEF_MOD
       USE IMP_INTBUF
-      USE H3D_MOD
       USE INTBUF_FRIC_MOD
       USE MESSAGE_MOD
       USE OUTPUT_MOD
@@ -146,7 +130,6 @@ C     REAL
      .   MSKYI_SMS(*),MS_PLY(*),WAGAP(*),FORNEQS(3,*),T2FAC_SMS(*)
       DOUBLE PRECISION FBSAV6(12,6,DIMFB)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(INTBUF_FRIC_STRUCT_), TARGET, DIMENSION(NINTERFRIC) ::  INTBUF_FRIC_TAB
       TYPE (INTERFACES_) ,INTENT(IN):: INTERFACES
 C-----------------------------------------------
@@ -498,13 +481,9 @@ C
      I NM3         ,INTPLY      ,INTBUF_TAB%DGAP_NM ,INTBUF_TAB%ICONT_I,
      J MARGE       ,IEDG4       ,ISPT2_LOC  ,IPARI(40,NIN),IKNON,PENREF )
 
-          IF(IEDGE/=0)CALL I24DST3E(
-     1 JLT         ,A           ,X           ,CAND_N_N    ,CAND_E_N    ,
-     2 INTBUF_TAB%MBINFLG,INTBUF_TAB%ISEADD  ,INTBUF_TAB%ISEDGE,NSVG,NIN,
-     3 IXX         ,STIF        ,
-     4 JLT_NEW     ,INACTI      ,XI          ,YI          ,ZI          ,
-     5 XX0         ,YY0         ,ZZ0         ,PMAX_GAP    ,
-     6 FSKYI       ,ISKY        ,CAND_T_N    ,FCONT       ,H3D_DATA    )
+      IF(IEDGE/=0)CALL I24DST3E(JLT, A, X, CAND_N_N, CAND_E_N, INTBUF_TAB%MBINFLG, INTBUF_TAB%ISEADD,
+     . INTBUF_TAB%ISEDGE, NSVG, NIN, IXX, STIF, JLT_NEW, INACTI, XI, YI, ZI, XX0, YY0, ZZ0, PMAX_GAP, FSKYI, ISKY,
+     . CAND_T_N, FCONT)
 
           IF(IMPL_S > 0 ) THEN
            CALL IMPL_SAV(
@@ -567,47 +546,22 @@ C-------------------------------------------------------------------------------
         ENDIF 
         IF(JTASK==1) CALL STOPTIME(TIMERS,MACRO_TIMER_FRIC)      
 
-          CALL I24FOR3(output,
-     1  JLT          ,A         ,V            ,IBC         ,ICODT    ,
-     2  FSAV         ,GAP       ,FRIC         ,MS          ,VISC     ,
-     3  VISCF        ,NOINT     ,INTBUF_TAB%STFNS,ITAB     ,CN_LOC   ,
-     4  STIGLO       ,STIFN     ,STIF         ,FSKYI       ,ISKY     ,
-     5  N1           ,N2        ,N3           ,H1          ,H2       ,
-     6  H3           ,H4        ,FCONT        ,PENE        ,
-     7  IX1          ,IX2       ,IX3          ,IX4         ,NSVG     ,
-     8  IVIS2        ,NELTST    ,ITYPTST      ,DT2T        ,SUBTRIA  ,
-     9  GAPV         ,INACTI    ,INDEX2(NFT+1),NISKYFI ,
-     A  KINET        ,NEWFRONT  ,ISECIN       ,NSTRF       ,SECFCUM  ,
-     B  X            ,INTBUF_TAB%IRECTM,CE_LOC    ,MFROT       ,IFQ  ,
-     C  INTBUF_TAB%FRIC_P,INTBUF_TAB%SECND_FR,XFILTR_FRIC,
-     D  IBAG         ,ICONTACT ,INTBUF_TAB%IRTLM,       
-     E  VISCN        ,VXI       ,VYI          ,VZI         ,MSI      ,
-     F  KINI         ,NIN       ,NISUB        ,INTBUF_TAB%LISUB,INTBUF_TAB%ADDSUBS,
-     G  INTBUF_TAB%ADDSUBM,INTBUF_TAB%LISUBS,INTBUF_TAB%LISUBM,FSAVSUB,
-     +                                              INTBUF_TAB%CAND_N,
-     H  IPARI(33,NIN),IPARI(39,NIN),FNCONT     ,FTCONT   ,NSN        ,
-     I  X1           ,X2        ,X3          ,X4         ,Y1         ,
-     J  Y2           ,Y3        ,Y4          ,Z1         ,Z2         ,
-     K  Z3           ,Z4        ,XI          ,YI         ,ZI         ,
-     L  IADM         ,RCURVI    ,RCONTACT    ,ACONTACT   ,PCONTACT   ,
-     M  ANGLMI       ,PADM      ,INTTH       , PHI       , FTHE      ,
-     N  FTHESKYI     ,TEMP      , TEMPI      ,RSTIF      , IFORM     ,
-     O  MSKYI_SMS    ,ISKYI_SMS ,NSMS        ,CAND_N_N   ,INTBUF_TAB%PENE_OLD,
-     P  INTBUF_TAB%STIF_OLD,INTBUF_TAB%MBINFLG,ILEV     ,IGSTI      ,KMIN     ,
-     Q  INTPLY       ,IPLY        ,INOD_PXFEM,NM1        ,NM2        ,
-     R   NM3         ,NREBOU     ,INTBUF_TAB%IRTSE  ,NSNE    ,INTBUF_TAB%IS2SE   ,
-     S  INTBUF_TAB%IS2PT,INTBUF_TAB%MSEGTYP24,JTASK       ,ISENSINT  ,
-     U  FSAVPARIT   ,NFT        ,H3D_DATA    ,FRICC       ,VISCFFRIC ,
-     V  FRIC_COEFS  ,T2MAIN_SMS ,INTNITSCHE ,FORNEQSI   ,IORTHFRIC ,
-     W  FRIC_COEFS2 ,FRICC2      ,VISCFFRIC2  ,NFORTH     ,NFISOT    ,
-     X  INDEXORTH   ,INDEXISOT   ,DIR1        ,DIR2       ,T2FAC_SMS ,F_PFIT,
-     Y  TAGNCONT    ,KLOADPINTER ,LOADPINTER  ,LOADP_HYD_INTER,
-     Z  INTBUF_TAB%TYPSUB,INTBUF_TAB%INFLG_SUBS,INTBUF_TAB%INFLG_SUBM,
-     .                                      NINLOADP,DGAPLOADINT,
-     1  S_LOADPINTER, DIST       ,IXX         ,INTEREFRIC ,INTCAREA ,
-     2  INTERFACES%PARAMETERS ,PENREF ,KMAX , INTBUF_TAB%S_ADDSUBM ,
-     3  INTBUF_TAB%S_LISUBM,INTBUF_TAB%S_TYPSUB,NISUBMAX,I_STOK,NRTM,
-     4  NRTSE      ,IPARI(24,NIN))
+      CALL I24FOR3(output, JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, INTBUF_TAB%STFNS, ITAB,
+     . CN_LOC, STIGLO, STIFN, STIF, FSKYI, ISKY, N1, N2, N3, H1, H2, H3, H4, FCONT, PENE, IX1, IX2, IX3, IX4, NSVG,
+     . IVIS2, NELTST, ITYPTST, DT2T, SUBTRIA, GAPV, INACTI, INDEX2(NFT+1), NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF,
+     . SECFCUM, X, INTBUF_TAB%IRECTM, CE_LOC, MFROT, IFQ, INTBUF_TAB%FRIC_P, INTBUF_TAB%SECND_FR, XFILTR_FRIC, IBAG,
+     . ICONTACT, INTBUF_TAB%IRTLM, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB, INTBUF_TAB%LISUB, INTBUF_TAB%ADDSUBS,
+     . INTBUF_TAB%ADDSUBM, INTBUF_TAB%LISUBS, INTBUF_TAB%LISUBM, FSAVSUB, INTBUF_TAB%CAND_N, IPARI(33,NIN), IPARI(39,
+     . NIN), FNCONT, FTCONT, NSN, X1, X2, X3, X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, XI, YI, ZI, IADM, RCURVI, RCONTACT,
+     . ACONTACT, PCONTACT, ANGLMI, PADM, INTTH, PHI, FTHE, FTHESKYI, TEMP, TEMPI, RSTIF, IFORM, MSKYI_SMS, ISKYI_SMS,
+     . NSMS, CAND_N_N, INTBUF_TAB%PENE_OLD, INTBUF_TAB%STIF_OLD, INTBUF_TAB%MBINFLG, ILEV, IGSTI, KMIN, INTPLY, IPLY,
+     . INOD_PXFEM, NM1, NM2, NM3, NREBOU, INTBUF_TAB%IRTSE, NSNE, INTBUF_TAB%IS2SE, INTBUF_TAB%IS2PT,
+     . INTBUF_TAB%MSEGTYP24, JTASK, ISENSINT, FSAVPARIT, NFT, FRICC, VISCFFRIC, FRIC_COEFS, T2MAIN_SMS, INTNITSCHE,
+     . FORNEQSI, IORTHFRIC, FRIC_COEFS2, FRICC2, VISCFFRIC2, NFORTH, NFISOT, INDEXORTH, INDEXISOT, DIR1, DIR2,
+     . T2FAC_SMS, F_PFIT, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, INTBUF_TAB%TYPSUB, INTBUF_TAB%INFLG_SUBS,
+     . INTBUF_TAB%INFLG_SUBM, NINLOADP, DGAPLOADINT, S_LOADPINTER, DIST, IXX, INTEREFRIC, INTCAREA,
+     . INTERFACES%PARAMETERS, PENREF, KMAX, INTBUF_TAB%S_ADDSUBM, INTBUF_TAB%S_LISUBM, INTBUF_TAB%S_TYPSUB, NISUBMAX,
+     . I_STOK, NRTM, NRTSE, IPARI(24,NIN))
 C
           IF(IMPL_S > 0 ) 
      +     CALL IMPL_SAV1(

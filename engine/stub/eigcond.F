@@ -31,38 +31,19 @@ Copyright>        copyright and attribution statement.
 !||    dsgraph_mod            ../engine/share/modules/dsgraph_mod.F
 !||    elbufdef_mod           ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    groupdef_mod           ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod          ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    multi_fvm_mod          ../common_source/modules/ale/multi_fvm_mod.F90
 !||    stack_mod              ../engine/share/modules/stack_mod.F
 !||====================================================================
-      SUBROUTINE EIGCOND(GRAPHE      , EIGIPM    , EIGRPM  , IKC0      , NDDL0       ,
-     2                   K_DIAG      , K_LT      , IADK    , JDIK      , MS          ,
-     3                   IN          , NDOF      , NDDL    , EIGIBUF   , X           ,
-     4                   V           , A         , BUFEL   , IXS       , IXQ         ,
-     5                   IXC         , IXT       , IXP     , IXR       , IXTG        ,
-     6                   PM          , GEO       , CONT    , ICUT      , SKEW        ,
-     7                   XCUT        , FINT      , ITAB    , FEXT      , FOPT        ,
-     8                   ANIN        , LPBY      , NPBY    , NSTRF     , RWBUF       ,
-     9                   NPRW        , TANI      , ELBUF_TAB ,DD_IAD  ,
-     A                   FR_IAD      , DD_FRONT  , WEIGHT  , EANI      , IPART       ,
-     B                   RBY         , NOM_OPT   , IGRSURF ,
-     C                   BUFSF       , IDATA     , RDATA   , BUFMAT    , BUFGEO      ,
-     D                   KXX         , IXX       , KXSP    , IXSP      , NOD2SP      ,
-     E                   SPBUF       , IXS10     , IXS20   , IXS16     , VR          ,
-     F                   MONVOL      , VOLMON    , IPM     , IGEO      , IPARG       ,
-     G                   NODGLOB     , IAD_ELEM  , FR_ELEM , FR_SEC    , FR_RBY2     ,
-     H                   IAD_RBY2    , FR_WALL   , NINT2   , IINT2     , IPARI       ,
-     I                   INTBUF_TAB  , D         , LDDL    , PARTSAV   , 
-     J                   FNCONT      , FTCONT    ,TEMP     , THKE      , ERR_THK_SH4 ,
-     K                   ERR_THK_SH3 ,IRBE2      ,IRBE3    , LRBE2     ,
-     M                   LRBE3       ,FR_RBE2    ,FR_RBE3M , IAD_RBE2  , WEIGHT_MD   ,
-     N                   CLUSTER     ,FCLUSTER   ,MCLUSTER , XFEM_TAB  ,
-     O                   W          ,NV46     , NERCVOIS  , NESDVOIS    ,
-     P                   LERCVOIS    ,LESDVOIS   ,CRKEDGE  ,INDX_CRK   ,XEDGE4N      ,
-     Q                   XEDGE3N     ,STACK      ,SPH2SOL  ,STIFN      ,STIFR        ,
-     R                   DRAPE_Q4, DRAPE_T3      ,H3D_DATA ,SUBSET     ,IGRNOD       ,
-     S                   FCONT_MAX   ,FNCONTP2   ,FTCONTP2, ALE_CONNECTIVITY) 
+      SUBROUTINE EIGCOND(GRAPHE, EIGIPM, EIGRPM, IKC0, NDDL0, K_DIAG, K_LT, IADK, JDIK, MS, IN, NDOF, NDDL, EIGIBUF, X,
+     . V, A, BUFEL, IXS, IXQ, IXC, IXT, IXP, IXR, IXTG, PM, GEO, CONT, ICUT, SKEW, XCUT, FINT, ITAB, FEXT, FOPT, ANIN,
+     . LPBY, NPBY, NSTRF, RWBUF, NPRW, TANI, ELBUF_TAB, DD_IAD, FR_IAD, DD_FRONT, WEIGHT, EANI, IPART, RBY, NOM_OPT,
+     . IGRSURF, BUFSF, IDATA, RDATA, BUFMAT, BUFGEO, KXX, IXX, KXSP, IXSP, NOD2SP, SPBUF, IXS10, IXS20, IXS16, VR,
+     . MONVOL, VOLMON, IPM, IGEO, IPARG, NODGLOB, IAD_ELEM, FR_ELEM, FR_SEC, FR_RBY2, IAD_RBY2, FR_WALL, NINT2, IINT2,
+     . IPARI, INTBUF_TAB, D, LDDL, PARTSAV, FNCONT, FTCONT, TEMP, THKE, ERR_THK_SH4, ERR_THK_SH3, IRBE2, IRBE3, LRBE2,
+     . LRBE3, FR_RBE2, FR_RBE3M, IAD_RBE2, WEIGHT_MD, CLUSTER, FCLUSTER, MCLUSTER, XFEM_TAB, W, NV46, NERCVOIS,
+     . NESDVOIS, LERCVOIS, LESDVOIS, CRKEDGE, INDX_CRK, XEDGE4N, XEDGE3N, STACK, SPH2SOL, STIFN, STIFR, DRAPE_Q4,
+     . DRAPE_T3, SUBSET, IGRNOD, FCONT_MAX, FNCONTP2, FTCONTP2, ALE_CONNECTIVITY)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -72,7 +53,6 @@ C-----------------------------------------------
       USE INTBUFDEF_MOD
       USE CRACKXFEM_MOD
       USE STACK_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE MULTI_FVM_MOD
       USE DRAPE_MOD
@@ -135,7 +115,6 @@ C-----------------------------------------------
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
       TYPE (XFEM_EDGE_)   , DIMENSION(*) :: CRKEDGE
       TYPE (STACK_PLY) :: STACK
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SUBSET_) , DIMENSION(NSUBS) :: SUBSET
       TYPE (GROUP_)  , DIMENSION(NGRNOD) :: IGRNOD
       TYPE (SURF_)   , DIMENSION(NSURF)  :: IGRSURF

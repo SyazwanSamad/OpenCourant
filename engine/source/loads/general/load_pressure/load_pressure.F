@@ -30,22 +30,17 @@ Copyright>        copyright and attribution statement.
 !||    get_u_sens_value      ../engine/source/user_interface/usensor.F
 !||    set_u_sens_value      ../engine/source/user_interface/usensor.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    pblast_mod            ../common_source/modules/loads/pblast_mod.F90
 !||    python_funct_mod      ../common_source/modules/python_mod.F90
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||    th_surf_mod           ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE LOAD_PRESSURE (ILOADP          ,LOADP       ,LLOADP   ,NPC     ,TF        ,
-     2                          A               ,V           ,X       ,SKEW     ,SENSOR_TAB,
-     3                          IADC            ,FSKY        ,FEXT    ,TAGNCONT ,NSENSOR   ,
-     4                          LOADP_HYD_INTER , H3D_DATA   , PYTHON, 
-     5                          NPRESLOAD       ,LOADP_TAGDEL,TH_SURF,PBLAST    ,WFEXT)
+      SUBROUTINE LOAD_PRESSURE (ILOADP, LOADP, LLOADP, NPC, TF, A, V, X, SKEW, SENSOR_TAB, IADC, FSKY, FEXT, TAGNCONT,
+     . NSENSOR, LOADP_HYD_INTER, PYTHON, NPRESLOAD, LOADP_TAGDEL, TH_SURF, PBLAST, WFEXT)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE PYTHON_FUNCT_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_
       USE PBLAST_MOD
@@ -78,7 +73,6 @@ C-----------------------------------------------
       INTEGER NPC(*),LLOADP(SLLOADP)
       INTEGER ILOADP(SIZLOADP,*),TAGNCONT(NLOADP_HYD_INTER,NUMNOD),LOADP_HYD_INTER(NLOADP_HYD),IADC(*)
       my_real LOADP(SLOADP,*), TF(*), A(3,*), V(3,*), X(3,*), SKEW(LSKEW,*),FSKY(8,LSKY), FEXT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER, INTENT(IN) :: LOADP_TAGDEL(NPRESLOAD)
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
@@ -104,8 +98,7 @@ C---------------------------------------------------------------------
       FX = ZERO
       FY = ZERO
       FZ = ZERO
-      IANIM  = ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .         ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT
+      IANIM  =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 C
       NUMPRESLOAD = 0
       NSEGPL = TH_SURF%NSEGLOADPF+TH_SURF%NSEGLOADPB

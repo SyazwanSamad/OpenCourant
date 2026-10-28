@@ -25,17 +25,12 @@ C
 !||    intti1                 ../engine/source/interfaces/interf/intti1.F
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    my_alloc_mod           ../common_source/tools/memory/my_alloc.F90
 !||    spmd_mod               ../engine/source/mpi/spmd_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_EXCH_A_INT2_PON(
-     1   FR_I2M ,IAD_I2M,ADDCNI2 ,PROCNI2 ,FR_NBCCI2,
-     2   I2SIZE ,LENR   ,LENS    ,FSKYI2  ,INTTH2   ,
-     3   FTHESKYI2,CONDNSKYI2, I2SIZEMEC,LCOMI2M,FNCONT,
-     4   FNCONTP,FTCONTP,H3D_DATA ,IDT_THERM)
+      SUBROUTINE SPMD_EXCH_A_INT2_PON(FR_I2M, IAD_I2M, ADDCNI2, PROCNI2, FR_NBCCI2, I2SIZE, LENR, LENS, FSKYI2, INTTH2,
+     . FTHESKYI2, CONDNSKYI2, I2SIZEMEC, LCOMI2M, FNCONT, FNCONTP, FTCONTP, IDT_THERM)
 C-----------------------------------------------
-       USE H3D_MOD
        use my_alloc_mod
 
 C-----------------------------------------------
@@ -66,10 +61,6 @@ C-----------------------------------------------
      .        FSKYI2(I2SIZEMEC,*),FTHESKYI2(*),CONDNSKYI2(*)
       my_real , INTENT(INOUT) :: FNCONT(3,NUMNOD),
      .      FNCONTP(3,NUMNOD),FTCONTP(3,NUMNOD)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef MPI
       INTEGER MSGTYP,I,NOD,LOC_PROC,IERROR, INDEXI,
      .        SIZ, J, L, CC, NBIRECV, NBISEND, II, MSGOFF,ISIZOUT,LEN,
@@ -84,12 +75,6 @@ C-----------------------------------------------
       LOC_PROC = ISPMD + 1
 C
       ISIZOUT=0
-      IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-         ISIZOUT = 3
-      ENDIF
-      IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-         ISIZOUT = ISIZOUT + 6
-      ENDIF 
       call my_alloc(SBUF, LENS*I2SIZE+ISIZOUT*LCOMI2M, "SBUF")
       call my_alloc(RBUF, LENR*I2SIZE+ISIZOUT*LCOMI2M, "RBUF")
 
@@ -237,30 +222,6 @@ C
          ENDIF
        ENDIF
 C
-       IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J=IAD_I2M(I),IAD_I2M(I+1)-1
-            NOD = FR_I2M(J)
-            SBUF(L)   = FNCONT(1,NOD)
-            SBUF(L+1) = FNCONT(2,NOD)
-            SBUF(L+2) = FNCONT(3,NOD)
-            L = L + 3
-          ENDDO
-       ENDIF
-       IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J=IAD_I2M(I),IAD_I2M(I+1)-1
-            NOD = FR_I2M(J)
-            SBUF(L)   = FNCONTP(1,NOD)
-            SBUF(L+1) = FNCONTP(2,NOD)
-            SBUF(L+2) = FNCONTP(3,NOD)
-            SBUF(L+3) = FTCONTP(1,NOD)
-            SBUF(L+4) = FTCONTP(2,NOD)
-            SBUF(L+5) = FTCONTP(3,NOD)
-            L = L + 6
-          ENDDO
-       ENDIF 
-C  
       ENDDO
 C
 C   echange messages
@@ -398,31 +359,6 @@ C
          END IF
        ENDIF  
 C
-       IF (H3D_DATA%N_VECT_CONT2_MAX > 0.OR.H3D_DATA%N_VECT_CONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J=IAD_I2M(I),IAD_I2M(I+1)-1
-            NOD = FR_I2M(J)
-            FNCONT(1,NOD)   = FNCONT(1,NOD) + RBUF(L)
-            FNCONT(2,NOD)   = FNCONT(2,NOD) + RBUF(L+1)
-            FNCONT(3,NOD)   = FNCONT(3,NOD) + RBUF(L+2)
-            L = L + 3
-          ENDDO
-       ENDIF
-       IF (H3D_DATA%N_VECT_PCONT2_MAX > 0.OR.H3D_DATA%N_VECT_PCONT2_MIN > 0) THEN
-#include      "vectorize.inc"
-          DO J=IAD_I2M(I),IAD_I2M(I+1)-1
-            NOD = FR_I2M(J)
-            FNCONTP(1,NOD)   = FNCONTP(1,NOD) + RBUF(L)
-            FNCONTP(2,NOD)   = FNCONTP(2,NOD) + RBUF(L+1)
-            FNCONTP(3,NOD)   = FNCONTP(3,NOD) + RBUF(L+2)
-            FTCONTP(1,NOD)   = FTCONTP(1,NOD) + RBUF(L+3)
-            FTCONTP(2,NOD)   = FTCONTP(2,NOD) + RBUF(L+4)
-            FTCONTP(3,NOD)   = FTCONTP(3,NOD) + RBUF(L+5)
-            L = L + 6
-          ENDDO
-       ENDIF 
-C
-
       END DO
 C
 C   wait terminaison isend

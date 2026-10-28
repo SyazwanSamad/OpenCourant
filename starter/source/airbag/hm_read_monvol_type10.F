@@ -33,9 +33,9 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    check_function_id        ../starter/source/tools/curve/check_function.F
 !||    freerr                   ../starter/source/starter/freform.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_floatv_dim        ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_floatv_dim        ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||    monvol_check_surfclose   ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_compute_volume    ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_orient_surf       ../starter/share/modules1/monvol_struct_mod.F

@@ -25,18 +25,10 @@ Copyright>        copyright and attribution statement.
 !||    r23law135   ../engine/source/elements/spring/r23law135.F90
 !||    rforc3      ../engine/source/elements/spring/rforc3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod     ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE R2TORS(
-     1   FORX,    FORY,    FORZ,    XMOM,
-     2   YMOM,    ZMOM,    TANI,    H3D_DATA,
-     3   NEL)
+      SUBROUTINE R2TORS(FORX, FORY, FORZ, XMOM, YMOM, ZMOM, TANI, NEL)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -47,17 +39,13 @@ C     REAL
       my_real
      .   FORX(*),FORY(*),FORZ(*),XMOM(*),
      .   YMOM(*),ZMOM(*),TANI(15,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       INTEGER I
 C-----------------------------------------------
-      IF (ANIM_FT(1) /= 0 .OR. H3D_DATA%UND_FORC /= 0) THEN
+      IF (ANIM_FT(1)/=0) THEN
         DO I=1,NEL
           TANI(1,I)= FORX(I)
           TANI(2,I)= FORY(I)

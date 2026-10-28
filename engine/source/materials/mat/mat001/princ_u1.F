@@ -22,7 +22,6 @@ Copyright>        copyright and attribution statement.
 !||    princ_u1      ../engine/source/materials/mat/mat001/princ_u1.F
 !||--- called by ------------------------------------------------------
 !||    m1ismstr11    ../engine/source/materials/mat/mat001/m1ismstr11.F
-!||    u_from_f3     ../engine/source/output/h3d/h3d_results/h3d_solid_tensor_1.F
 !||--- calls      -----------------------------------------------------
 !||    valpvecop_v   ../engine/source/materials/mat/mat033/sigeps33.F
 !||====================================================================

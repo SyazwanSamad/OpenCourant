@@ -35,10 +35,10 @@
 !||    hm_read_mat                       ../starter/source/materials/mat/hm_read_mat.F90
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                            ../starter/source/output/message/message.F
-!||    hm_get_floatv                     ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                       ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string_index               ../starter/source/devtools/hm_reader/hm_get_string_index.F
-!||    hm_option_is_encrypted            ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv                     ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                       ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string_index               ../starter/source/devtools/reader/hm_get_string_index.F
+!||    hm_option_is_encrypted            ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    hm_read_elasticity                ../starter/source/materials/mat/mat131/elasticity/hm_read_elasticity.F90
 !||    hm_read_kinematic_hardening       ../starter/source/materials/mat/mat131/kinematic_hardening/hm_read_kinematic_hardening.F90
 !||    hm_read_self_heating              ../starter/source/materials/mat/mat131/self_heating/hm_read_self_heating.F90

@@ -26,29 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    finter     ../engine/source/tools/curve/finter.F
 !||    ibcoff     ../engine/source/interfaces/interf/ibcoff.F
 !||====================================================================
-      SUBROUTINE I21FOR3(JLT    ,NIN    ,NOINT  ,IBCC   ,ICODT  ,
-     2                  FSAV    ,GAP    ,STIGLO ,VISC   ,INACTI  ,
-     3                  MFROT   ,IFQ    ,IBAG   ,IADM   ,ICURV   ,
-     4                  STIF    ,GAPV   ,ITAB   ,PENI   ,ALPHA0  ,
-     5                  IFPEN   ,ICONTACT,RCONTACT,ACONTACT,PCONTACT,
-     6                  NSVG    ,X1     ,Y1     ,Z1     ,X2     ,
-     7                  Y2      ,Z2     ,X3     ,Y3     ,Z3     ,
-     8                  X4      ,Y4     ,Z4     ,XI     ,YI     ,
-     9                  ZI     ,VXI    ,VYI    ,VZI     ,MSI    ,
-     A                  VXM    ,VYM    ,VZM    ,NX      ,NY     ,
-     B                  NZ     ,PENE   ,FXT    ,FYT    ,FZT     ,
-     C                  FXN    ,FYN    ,FZN    ,RCURVI ,ANGLMI  ,
-     D                  PADM   ,CAND_N_N, WEIGHT,IGAP   ,GAP0   ,
-     E                  AREA0   ,PMAX   ,IROT   ,XG     ,MXI    ,
-     F                  MYI     ,MZI    ,STRI   ,WXM    ,WYM    ,
-     G                  WZM     ,XP     ,YP     ,ZP     ,KT     ,
-     H                  C       ,ILEV   ,FNI    ,INTTH  ,FHEAT  ,
-     I                  EFRICT  ,QFRIC  ,IFRIC  ,XFRIC  ,TEMPI  , 
-     J                  TEMPM   ,NPC    ,TF     ,IX1    ,IX2    ,
-     K                  IX3     ,IX4    ,DT2T   ,NELTST ,ITYPTST,
-     L                  KINET   ,NISUB  ,ISENSINT,FSAVPARIT,NFT ,
-     M                  IFTLIM  ,PSKIDFLAG,PRATIO,PMAXSKID,INTEREFRIC,
-     N                  EFRIC_L ,FRICC  ,FRIC_COEFS)
+      SUBROUTINE I21FOR3(JLT, NIN, NOINT, IBCC, ICODT, FSAV, GAP, STIGLO, VISC, INACTI, MFROT, IFQ, IBAG, IADM, ICURV,
+     . STIF, GAPV, ITAB, PENI, ALPHA0, IFPEN, ICONTACT, RCONTACT, ACONTACT, PCONTACT, NSVG, X1, Y1, Z1, X2, Y2, Z2, X3,
+     . Y3, Z3, X4, Y4, Z4, XI, YI, ZI, VXI, VYI, VZI, MSI, VXM, VYM, VZM, NX, NY, NZ, PENE, FXT, FYT, FZT, FXN, FYN,
+     . FZN, RCURVI, ANGLMI, PADM, CAND_N_N, WEIGHT, IGAP, GAP0, AREA0, PMAX, IROT, XG, MXI, MYI, MZI, STRI, WXM, WYM,
+     . WZM, XP, YP, ZP, KT, C, ILEV, FNI, INTTH, FHEAT, EFRICT, QFRIC, IFRIC, XFRIC, TEMPI, TEMPM, NPC, TF, IX1, IX2,
+     . IX3, IX4, DT2T, NELTST, ITYPTST, KINET, NISUB, ISENSINT, FSAVPARIT, NFT, IFTLIM, INTEREFRIC, EFRIC_L, FRICC,
+     . FRIC_COEFS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -77,67 +61,34 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER JLT, IBCC, INACTI, IBAG, NIN, NOINT, IADM,
-     .        MFROT, IFQ, ICURV(3), IGAP, IROT, ILEV,INTTH,IFRIC,
-     .        NELTST,ITYPTST,IFTLIM,
-     .        ICODT(*), ITAB(*),IFPEN(*) ,ICONTACT(*), NPC(*),KINET(*)
-      INTEGER NSVG(MVSIZ),CAND_N_N(MVSIZ), WEIGHT(*),
-     .        IX1(MVSIZ), IX2(MVSIZ), IX3(MVSIZ), IX4(MVSIZ), NISUB, 
-     .        ISENSINT(*),NFT,PSKIDFLAG
-      INTEGER  , INTENT(IN) :: INTEREFRIC
-      my_real
-     .   STIGLO, PENI(*), FSAV(*), TF(*),
-     .   ALPHA0, GAP, VISC,DT2T,PMAXSKID ,
-     .   FNI(MVSIZ),
-     .   FXN(MVSIZ), FYN(MVSIZ), FZN(MVSIZ), 
-     .   FXT(MVSIZ), FYT(MVSIZ), FZT(MVSIZ)
-      my_real
-     .   STIF(MVSIZ), GAPV(MVSIZ),
-     .   VXI(MVSIZ),VYI(MVSIZ),VZI(MVSIZ),MSI(MVSIZ),
-     .   X1(MVSIZ),Y1(MVSIZ),Z1(MVSIZ),
-     .   X2(MVSIZ),Y2(MVSIZ),Z2(MVSIZ),
-     .   X3(MVSIZ),Y3(MVSIZ),Z3(MVSIZ),
-     .   X4(MVSIZ),Y4(MVSIZ),Z4(MVSIZ),
-     .   XI(MVSIZ),YI(MVSIZ),ZI(MVSIZ),
-     .   NX(MVSIZ),NY(MVSIZ),NZ(MVSIZ),PENE(MVSIZ),
-     .   GAP0(MVSIZ), AREA0(MVSIZ), PMAX, FTMAX,
-     .   VXM, VYM, VZM, WXM, WYM, WZM,
-     .   XP(MVSIZ), YP(MVSIZ), ZP(MVSIZ)
-      my_real
-     .   RCURVI(*), RCONTACT(*), ACONTACT(*),
-     .   PCONTACT(*), PADM, ANGLMI(*),
-     .   XG(3), MXI(MVSIZ), MYI(MVSIZ), MZI(MVSIZ), STRI(MVSIZ),
-     .   KT(MVSIZ), C(MVSIZ), FHEAT,EFRICT(MVSIZ),QFRIC,
-     .   TEMPI(MVSIZ),TEMPM(MVSIZ),XFRIC,
-     .   FSAVPARIT(NISUB+1,11,*),PRATIO(MVSIZ)
-      my_real  , INTENT(INOUT) :: EFRIC_L(MVSIZ)
+      INTEGER JLT, IBCC, INACTI, IBAG, NIN, NOINT, IADM, MFROT, IFQ, ICURV(3), IGAP, IROT, ILEV, INTTH, IFRIC, NELTST,
+     . ITYPTST, IFTLIM, ICODT(*), ITAB(*), IFPEN(*), ICONTACT(*), NPC(*), KINET(*)
+      INTEGER NSVG(MVSIZ), CAND_N_N(MVSIZ), WEIGHT(*), IX1(MVSIZ), IX2(MVSIZ), IX3(MVSIZ), IX4(MVSIZ), NISUB,
+     . ISENSINT(*), NFT
+      INTEGER  , INTENT(IN) ::  INTEREFRIC
+      my_real STIGLO, PENI(*), FSAV(*), TF(*), ALPHA0, GAP, VISC, DT2T, FNI(MVSIZ), FXN(MVSIZ), FYN(MVSIZ), FZN(MVSIZ),
+     . FXT(MVSIZ), FYT(MVSIZ), FZT(MVSIZ)
+      my_real STIF(MVSIZ), GAPV(MVSIZ), VXI(MVSIZ), VYI(MVSIZ), VZI(MVSIZ), MSI(MVSIZ), X1(MVSIZ), Y1(MVSIZ), Z1(MVSIZ)
+     . , X2(MVSIZ), Y2(MVSIZ), Z2(MVSIZ), X3(MVSIZ), Y3(MVSIZ), Z3(MVSIZ), X4(MVSIZ), Y4(MVSIZ), Z4(MVSIZ), XI(MVSIZ),
+     . YI(MVSIZ), ZI(MVSIZ), NX(MVSIZ), NY(MVSIZ), NZ(MVSIZ), PENE(MVSIZ), GAP0(MVSIZ), AREA0(MVSIZ), PMAX, FTMAX, VXM,
+     . VYM, VZM, WXM, WYM, WZM, XP(MVSIZ), YP(MVSIZ), ZP(MVSIZ)
+      my_real RCURVI(*), RCONTACT(*), ACONTACT(*), PCONTACT(*), PADM, ANGLMI(*), XG(3), MXI(MVSIZ), MYI(MVSIZ),
+     . MZI(MVSIZ), STRI(MVSIZ), KT(MVSIZ), C(MVSIZ), FHEAT, EFRICT(MVSIZ), QFRIC, TEMPI(MVSIZ), TEMPM(MVSIZ), XFRIC,
+     . FSAVPARIT(NISUB+1,11,*)
+      my_real  , INTENT(INOUT) ::  EFRIC_L(MVSIZ)
       my_real  , INTENT(IN) :: FRIC_COEFS(MVSIZ,10), FRICC(MVSIZ)
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER I, IG, JG , NI,
-     .        IBCM,IBCS
-      my_real
-     .   FXI(MVSIZ), FYI(MVSIZ), FZI(MVSIZ),
-     .   XMU(MVSIZ),
-     .   VX(MVSIZ), VY(MVSIZ), VZ(MVSIZ), VN(MVSIZ), DTMI(MVSIZ), 
-     .      AA,
-     .   V2, ALPHA, BETA,
-     .   FX, FY, FZ, FT, FN, FTN,
-     .   ECONTT, ECONVT, FS2,ECONTDT,
-     .   FSAV1, FSAV2, FSAV3, FSAV4, FSAV5, FSAV6, FSAV8, 
-     .   FSAV9, FSAV10, FSAV11, FSAV12, FSAV13, FSAV14, FSAV15,FSAV25,
-     .   VV,AREA,P,VV1,VV2,DMU,
-     .   DT1INV, VIS, PA, PLIN, FS, QFRICT,DTMI0, MAS2,BETA1
-      my_real
-     .   PREC
-      my_real
-     .   
-     .   PENX(MVSIZ),STIF0(MVSIZ)
-      my_real
-     .   IMPX,IMPY,IMPZ,XX,YY,ZZ
-      my_real 
-     .   FINTER 
+      INTEGER I, IG, JG, NI, IBCM, IBCS
+      my_real FXI(MVSIZ), FYI(MVSIZ), FZI(MVSIZ), XMU(MVSIZ), VX(MVSIZ), VY(MVSIZ), VZ(MVSIZ), VN(MVSIZ), DTMI(MVSIZ),
+     . AA, V2, ALPHA, BETA, FX, FY, FZ, FT, FN, FTN, ECONTT, ECONVT, FS2, ECONTDT, FSAV1, FSAV2, FSAV3, FSAV4, FSAV5,
+     . FSAV6, FSAV8, FSAV9, FSAV10, FSAV11, FSAV12, FSAV13, FSAV14, FSAV15, FSAV25, VV, AREA, P, VV1, VV2, DMU, DT1INV,
+     . VIS, PA, PLIN, FS, QFRICT, DTMI0, MAS2, BETA1
+      my_real  PREC
+      my_real PENX(MVSIZ), STIF0(MVSIZ)
+      my_real IMPX, IMPY, IMPZ, XX, YY, ZZ
+      my_real  FINTER
       EXTERNAL FINTER
 C
 C-----------------------------------------------
@@ -150,11 +101,6 @@ C-----------------------------------------------
         DT1INV = ONE/DT1
       ELSE
         DT1INV =ZERO
-      ENDIF
-      IF(PSKIDFLAG >0) THEN
-         DO I=1,JLT
-            PRATIO(I) =  ZERO
-         ENDDO
       ENDIF
       EFRIC_L(1:JLT) =  ZERO
       EFRICT(1:JLT) =  ZERO
@@ -517,14 +463,6 @@ C should be the current nodal surface instead of the initial one.
         AREA = AREA0(I)
         FS   = FTMAX/SQRT(THREE)*AREA
         BETA = MIN(BETA,FS/FT)
-        IF(PSKIDFLAG >0) THEN
-           BETA1 = MIN(BETA1,FS/FT)
-           IF(BETA1 <= ONE) THEN
-             FS2   = PMAXSKID/SQRT(THREE)*AREA
-             PRATIO(I) =  MIN(ONE,BETA*FT/FS2)
-           ENDIF
-        ENDIF
-C
         FXT(I) = FX * BETA
         FYT(I) = FY * BETA
         FZT(I) = FZ * BETA

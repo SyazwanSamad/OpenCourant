@@ -27,26 +27,13 @@ Copyright>        copyright and attribution statement.
 !||    i2for27_pen   ../engine/source/interfaces/interf/i2for27_pen.F
 !||    i2mom27_cin   ../engine/source/interfaces/interf/i2mom27_cin.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR27(
-     .           X           ,V           ,VR          ,A           ,AR          ,
-     .           MS          ,IN          ,STIFN       ,STIFR       ,WEIGHT      ,
-     .           IRECTM      ,NSV         ,IRTLM       ,DR          ,DL          ,
-     .           FINI        ,STFN_PEN    ,STFR_PEN    ,FSAV        ,FNCONT      ,
-     .           IPENA       ,VISC        ,CSTS        ,MSR         ,ADI         ,
-     .           SMAS        ,SINER       ,MMAS        ,SAV_FOR_PENA,MS_PENA     ,                                                        
-     .           NOINT       ,NODNX_SMS   ,DMINT2      ,DT2T        ,NELTST      ,
-     .           ITYPTST     ,NSN         ,NMN         ,IDEL2       ,PENFLAG     ,
-     .           IROT        ,SKEW        ,      
-     .           SAV_INER_POFF,H3D_DATA   ,DPARA       ,MSEGTYP2    ,CSTS_BIS    ,
-     .           T2FAC_SMS   ,FNCONTP     ,FTCONTP     )
+      SUBROUTINE I2FOR27(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, IRECTM, NSV, IRTLM, DR, DL, FINI, STFN_PEN,
+     . STFR_PEN, FSAV, FNCONT, IPENA, VISC, CSTS, MSR, ADI, SMAS, SINER, MMAS, SAV_FOR_PENA, MS_PENA, NOINT, NODNX_SMS,
+     . DMINT2, DT2T, NELTST, ITYPTST, NSN, NMN, IDEL2, PENFLAG, IROT, SKEW, SAV_INER_POFF, DPARA, MSEGTYP2, CSTS_BIS,
+     . T2FAC_SMS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -65,10 +52,6 @@ C-----------------------------------------------
      .   T2FAC_SMS(*),FNCONTP(3,*)   ,FTCONTP(3,*) 
       my_real
      .   SAV_INER_POFF(*),DPARA(7,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -92,34 +75,19 @@ C----------------
       ENDDO
 c-----------
       IF (NINDXC > 0) THEN
-        CALL I2FOR27_CIN(
-     1   NSN       ,NMN       ,A         ,IRECTM     ,CSTS      ,
-     2   MSR       ,NSV       ,IRTLM     ,MS         ,WEIGHT    ,
-     3   STIFN     ,MMAS      ,IDEL2     ,SMAS       ,X         ,
-     4   V         ,FSAV      ,FNCONT    ,INDXC      ,H3D_DATA  ,
-     5   IN        ,SINER     ,DPARA     ,MSEGTYP2   ,AR,STIFR  ,
-     6   CSTS_BIS  ,T2FAC_SMS ,FNCONTP   ,FTCONTP    )
+      CALL I2FOR27_CIN(NSN, NMN, A, IRECTM, CSTS, MSR, NSV, IRTLM, MS, WEIGHT, STIFN, MMAS, IDEL2, SMAS, X, V, FSAV,
+     . FNCONT, INDXC, IN, SINER, DPARA, MSEGTYP2, AR, STIFR, CSTS_BIS, T2FAC_SMS, FNCONTP, FTCONTP)
 c
         IF (IRODDL /= 0) THEN
-           CALL I2MOM27_CIN(
-     1     NSN       ,NMN       ,AR        ,IRECTM   ,CSTS      ,
-     2     MSR       ,NSV       ,IRTLM     ,IN       ,MS        ,
-     3     A         ,X         ,WEIGHT    ,STIFR    ,STIFN     ,
-     4     IDEL2     ,SMAS      ,SINER     ,MMAS     ,ADI       ,
-     5     INDXC     ,SAV_INER_POFF,H3D_DATA  ,MSEGTYP2 ,CSTS_BIS)
+      CALL I2MOM27_CIN(NSN, NMN, AR, IRECTM, CSTS, MSR, NSV, IRTLM, IN, MS, A, X, WEIGHT, STIFR, STIFN, IDEL2, SMAS,
+     . SINER, MMAS, ADI, INDXC, SAV_INER_POFF, MSEGTYP2, CSTS_BIS)
         ENDIF
       ENDIF
 c
       IF (NINDXP > 0) THEN
-         CALL I2FOR27_PEN(                                               
-     .       X         ,V         ,VR        ,A           ,AR        ,
-     .       MS_PENA   ,IN        ,STIFN     ,STIFR       ,WEIGHT    ,
-     .       NSV       ,IRTLM     ,CSTS      ,SKEW        ,DL        ,
-     .       DR        ,FINI      ,FSAV      ,FNCONT      ,NSN       ,
-     .       STFN_PEN  ,STFR_PEN  ,VISC      ,PENFLAG     ,IROT      ,
-     .       NOINT     ,NODNX_SMS ,DMINT2    ,SAV_FOR_PENA,IRECTM    ,
-     .       DT2T      ,NELTST    ,ITYPTST   ,INDXP       ,SAV_INER_POFF,
-     .       H3D_DATA  ,MSEGTYP2  ,FNCONTP   ,FTCONTP   )                     
+      CALL I2FOR27_PEN(X, V, VR, A, AR, MS_PENA, IN, STIFN, STIFR, WEIGHT, NSV, IRTLM, CSTS, SKEW, DL, DR, FINI, FSAV,
+     . FNCONT, NSN, STFN_PEN, STFR_PEN, VISC, PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2, SAV_FOR_PENA, IRECTM, DT2T,
+     . NELTST, ITYPTST, INDXP, SAV_INER_POFF, MSEGTYP2, FNCONTP, FTCONTP)
 c
       ENDIF                                                            
 c-----------

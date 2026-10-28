@@ -1,0 +1,125 @@
+{
+  "status": "passed",
+  "engine_sha256": "33c3515912416fd1b7cbb711d43dc77976a048eb33fc12f5fea9448b38551661",
+  "ranks": 1,
+  "cases": [
+    {
+      "case": "shell",
+      "samples": 24060,
+      "history_samples": 15,
+      "inputs": {
+        "test_torsion_orthstrain_shell_0000.rad": "3974a6118da4c165bf782036b51afe6c108ad7d4289a02e1df25c69fb8aff759",
+        "test_torsion_orthstrain_shell_0001.rad": "41b7dc1fd941fc39f78d941f91a262748600a79534075fbeb02d7d632b01ee55"
+      },
+      "query_min": [
+        7.483356316739231e-07,
+        7.8e-09,
+        5.877192627943453e-07,
+        0.0,
+        5.877192627943489e-07,
+        0.0,
+        0.0
+      ],
+      "query_max": [
+        0.0014996685161494407,
+        7.8e-09,
+        5.877192627943984e-07,
+        23.273729461048738,
+        5.877192627944123e-07,
+        23.27671887623456,
+        0.0
+      ],
+      "max_query_difference": 0.0,
+      "max_history_difference": 0.0
+    },
+    {
+      "case": "tria",
+      "samples": 26768,
+      "history_samples": 100,
+      "inputs": {
+        "CT3AV4_0000.rad": "6c27c253d796c4a1c20e77295fe1a945f3a069ccf5f5c4ee124ca90061a58bef",
+        "CT3AV4_0001.rad": "1d918d902b2db9b3301c44de8df8ae7d3631dc23175624d369633a5a12cdd498",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "query_min": [
+        0.5941656819364148,
+        2.7,
+        0.40036253906249847,
+        0.0,
+        0.4003625390624987,
+        0.0,
+        0.0
+      ],
+      "query_max": [
+        2000.5002710329613,
+        2.7,
+        0.4003625390625004,
+        0.00290784876398851,
+        0.40036253906250335,
+        0.002873453008349448,
+        0.0
+      ],
+      "max_query_difference": 0.0,
+      "max_history_difference": 0.0
+    },
+    {
+      "case": "quad",
+      "samples": 33097,
+      "history_samples": 800,
+      "inputs": {
+        "BAR2V41B_0000.rad": "a4d3c5ca7571e8c4e29492741422ab89578d35c74944fb93b0323605c7676a2a",
+        "BAR2V41B_0001.rad": "d9e2236447880e2a7382d282da3389a7d75433a5ce7881050a44af68efd4e3b5",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "query_min": [
+        0.04451050017928974,
+        8.497864861369292,
+        0.0011304523370552475,
+        0.0,
+        0.003458879821875979,
+        0.0,
+        0.0
+      ],
+      "query_max": [
+        80.00089118485695,
+        9.489559969466328,
+        0.0015721203858669241,
+        0.0063471299279831295,
+        0.004861506493823555,
+        0.0062665946301998215,
+        2.347127718202071
+      ],
+      "max_query_difference": 0.0,
+      "max_history_difference": 0.0
+    },
+    {
+      "case": "solid",
+      "samples": 22114,
+      "history_samples": 100,
+      "inputs": {
+        "rigid_0000.rad": "c5d2d7f89d77839501d07c02c56af07407c0bd1186b03e2aeddb8fad959c977f",
+        "rigid_0001.rad": "6bc8acc95dbd77925e443296f9501093dfcd0cb7de08aa8c8332906bbec5e8d9"
+      },
+      "query_min": [
+        8.199127633941162e-05,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "query_max": [
+        0.10006393419121513,
+        1.0000000067225694,
+        1.0,
+        8.176396600797818e-05,
+        1.0,
+        2.3916446230333045e-05,
+        0.0
+      ],
+      "max_query_difference": 0.0,
+      "max_history_difference": 0.0
+    }
+  ]
+}

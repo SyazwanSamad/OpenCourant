@@ -23,27 +23,15 @@
 !||--- called by ------------------------------------------------------
 !||    contrl                    ../starter/source/starter/contrl.F
 !||    ddsplit                   ../starter/source/restart/ddsplit/ddsplit.F
-!||    genh3d                    ../engine/source/output/h3d/h3d_results/genh3d.F
-!||    h3d_pre_skin_ixskin       ../engine/source/output/h3d/h3d_results/h3d_skin_ixskin.F
-!||    h3d_pre_skin_scalar       ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_dim              ../engine/source/output/h3d/h3d_results/h3d_skin_ixskin.F
-!||    h3d_skin_ixskin           ../engine/source/output/h3d/h3d_results/h3d_skin_ixskin.F
-!||    h3d_skin_pre_dim          ../engine/source/output/h3d/h3d_results/h3d_skin_ixskin.F
-!||    h3d_skin_pre_map          ../engine/source/output/h3d/h3d_results/h3d_skin_pre_map.F
-!||    h3d_skin_scalar           ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_vector           ../engine/source/output/h3d/h3d_results/h3d_skin_vector.F
 !||    hm_preread_pblast         ../starter/source/loads/pblast/hm_preread_pblast.F
 !||    hm_read_load_pressure     ../starter/source/loads/general/load_pressure/hm_read_load_pressure.F
 !||    hm_read_pblast            ../starter/source/loads/pblast/hm_read_pblast.F
-!||    init_h3d_engine           ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
-!||    lech3d                    ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    lectur                    ../engine/source/input/lectur.F
 !||    load_pressure             ../engine/source/loads/general/load_pressure/load_pressure.F
 !||    pblast_1                  ../engine/source/loads/pblast/pblast_1.F
 !||    pblast_2                  ../engine/source/loads/pblast/pblast_2.F
 !||    pblast_3                  ../engine/source/loads/pblast/pblast_3.F
 !||    pblast_load_computation   ../engine/source/loads/pblast/pblast.F
-!||    prelech3d                 ../engine/source/output/h3d/h3d_build_fortran/prelech3d.F90
 !||    radioss2                  ../engine/source/engine/radioss2.F
 !||    rdcomi                    ../engine/source/output/restart/rdcomm.F
 !||    rdresa                    ../engine/source/output/restart/rdresa.F

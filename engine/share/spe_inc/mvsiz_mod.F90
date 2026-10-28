@@ -25,8 +25,7 @@
 !||    ale51_gradient_reconstruction   ../engine/source/ale/alemuscl/ale51_gradient_reconstruction.F
 !||    funct_python_update_elements    ../engine/source/tools/curve/funct_python_update_elements.F90
 !||    geom_vec                        ../engine/source/ale/alemuscl/geom_vec.F90
-!||    h3d_oned_scalar                 ../engine/source/output/h3d/h3d_results/h3d_oned_scalar.F90
-!||    h3d_quad_scalar_1               ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
+!||    result_quad_scalar               ../engine/source/tools/element_results/result_quad_scalar.F90
 !||    init_ale_boundary_condition     ../engine/source/ale/init_ale_boundary_condition.F90
 !||    mmain                           ../engine/source/materials/mat_share/mmain.F90
 !||    mulaw8                          ../engine/source/materials/mat_share/mulaw8.F90

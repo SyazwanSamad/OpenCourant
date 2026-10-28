@@ -8,6 +8,7 @@ on:
       - 'starter/**'
       - 'hm_cfg_files/**'
       - 'qa-tests/reader/**'
+      - 'qa-tests/dependency_removal/**'
       - 'Compiling_tools/**'
       - '.github/workflows/openreader_ci.yml'
       - '.github/actions/setup-oneapi-win/**'
@@ -35,18 +36,22 @@ jobs:
           call "C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\env\vars.bat"
           set CMAKE_EXPORT_COMPILE_COMMANDS=ON
           cd starter
-          call build_windows.bat -arch=win64 -release -open_reader -nt=4
+          call build_windows.bat -arch=win64 -release -nt=4
           if errorlevel 1 exit /b 1
           cd ..
-          python qa-tests/reader/test_model_queries.py --reader exec/open_reader_win64.dll --reference extlib/hm_reader/win64/hm_reader_win64.dll
+          python qa-tests/dependency_removal/test_reader_build.py
+          if errorlevel 1 exit /b 1
+          python qa-tests/reader/test_starter_api.py --reader exec/open_reader_win64.dll
+          if errorlevel 1 exit /b 1
+          python qa-tests/reader/test_model_queries.py --reader exec/open_reader_win64.dll
           if errorlevel 1 exit /b 1
           python qa-tests/reader/test_model_loading.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
           if errorlevel 1 exit /b 1
-          python qa-tests/reader/test_contact_groups.py --reader exec/open_reader_win64.dll --reference extlib/hm_reader/win64/hm_reader_win64.dll --starter exec/starter_win64.exe
+          python qa-tests/reader/test_contact_groups.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
           if errorlevel 1 exit /b 1
-          python qa-tests/reader/rigid_parts/test_reader_contract.py --reader exec/open_reader_win64.dll --openreader
+          python qa-tests/reader/rigid_parts/test_reader_contract.py --reader exec/open_reader_win64.dll
           if errorlevel 1 exit /b 1
-          python qa-tests/reader/rigid_parts/test_openreader_conversion.py --reader exec/open_reader_win64.dll --reference extlib/hm_reader/win64/hm_reader_win64.dll
+          python qa-tests/reader/rigid_parts/test_openreader_conversion.py --reader exec/open_reader_win64.dll
           if errorlevel 1 exit /b 1
           python qa-tests/reader/rigid_parts/build_integration.py --starter-build starter/cbuild_starter_win64_ninja --output cbuild_openreader_ci
           if errorlevel 1 exit /b 1

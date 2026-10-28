@@ -178,13 +178,10 @@
 !||    fix_principal_dirs                         ../engine/source/materials/mat/mat130/sigeps130.F90
 !||    force                                      ../engine/source/loads/general/force.F90
 !||    forintc_prepare_gpu                        ../engine/source/elements/shell/coque/shell_internal_forces.F90
-!||    fpcont2_max_output                         ../engine/source/output/h3d/h3d_results/fpcont2_max_output.F90
-!||    fpcont2_min_output                         ../engine/source/output/h3d/h3d_results/fpcont2_min_output.F90
 !||    fractal_dmg_init                           ../starter/source/materials/fail/fractal/fractal_dmg_init.F90
 !||    fractal_elem_renum                         ../starter/source/materials/fail/fractal/fractal_elem_spmd_renum.F90
 !||    func_table_copy                            ../starter/source/materials/tools/func_table_copy.F90
 !||    funct_python_update_elements               ../engine/source/tools/curve/funct_python_update_elements.F90
-!||    genh3d                                     ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genq1np_mod                                ../starter/source/elements/solid/solid_q1np/q1np_genelements.F90
 !||    geom_vec                                   ../engine/source/ale/alemuscl/geom_vec.F90
 !||    get_convexity_normals                      ../engine/source/interfaces/interf/get_convexity_normals.F90
@@ -210,8 +207,7 @@
 !||    group_param_mod                            ../common_source/modules/mat_elem/group_param_mod.F90
 !||    gruneisen                                  ../common_source/eos/gruneisen.F
 !||    guided_cable_force_mod                     ../engine/source/tools/seatbelts/guided_cable_force.F90
-!||    h3d_oned_scalar                            ../engine/source/output/h3d/h3d_results/h3d_oned_scalar.F90
-!||    h3d_quad_scalar_1                          ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
+!||    result_quad_scalar                          ../engine/source/tools/element_results/result_quad_scalar.F90
 !||    hierarchy_rbody                            ../starter/source/constraints/general/rbody/hierarchy_rbody.F90
 !||    hierarchy_rbody_ddm                        ../starter/source/constraints/general/rbody/hierarchy_rbody.F90
 !||    hm_pre_read_preload_axial                  ../starter/source/loads/general/preload/hm_read_preload_axial.F90

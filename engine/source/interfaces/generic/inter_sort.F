@@ -29,7 +29,6 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    command_line_args_mod   ../engine/share/modules/command_line_args.F
 !||    glob_therm_mod          ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                 ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod           ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    inter_sorting_mod       ../engine/share/modules/inter_sorting_mod.F
 !||    inter_struct_mod        ../engine/share/modules/inter_struct_mod.F
@@ -38,10 +37,9 @@ Copyright>        copyright and attribution statement.
 !||    sensor_mod              ../common_source/modules/sensor_mod.F90
 !||    timer_mod               ../engine/source/system/timer_mod.F90
 !||====================================================================
-        SUBROUTINE INTER_SORT( TIMERS,ITASK,NB_INTER_SORTED,LIST_INTER_SORTED,RETRI,IPARI,
-     1                         NSENSOR,ISENDTO,IRECVFROM,INTBUF_TAB,X,ITAB,
-     2                         RENUM,NSNFIOLD,MULTI_FVM,H3D_DATA,SENSOR_TAB,
-     3                         INTER_STRUCT,SORT_COMM,RENUM_SIZ,GLOB_THERM )
+      SUBROUTINE INTER_SORT(TIMERS, ITASK, NB_INTER_SORTED, LIST_INTER_SORTED, RETRI, IPARI, NSENSOR, ISENDTO,
+     . IRECVFROM, INTBUF_TAB, X, ITAB, RENUM, NSNFIOLD, MULTI_FVM, SENSOR_TAB, INTER_STRUCT, SORT_COMM, RENUM_SIZ,
+     . GLOB_THERM)
 !$COMMENT
 !       INTER_SORT description
 !       sort computation
@@ -53,7 +51,6 @@ C   M o d u l e s
 C-----------------------------------------------
       USE COMMAND_LINE_ARGS_MOD , ONLY : GOT_PREVIEW
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE METRIC_MOD
       USE INTBUFDEF_MOD  
       USE INTER_STRUCT_MOD
@@ -92,7 +89,6 @@ C-----------------------------------------------
       INTEGER, DIMENSION(RENUM_SIZ), INTENT(inout) :: RENUM
       INTEGER, DIMENSION(NSPMD), INTENT(inout) :: NSNFIOLD
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT), TARGET     :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(inter_struct_type), DIMENSION(NINTER), INTENT(inout) :: INTER_STRUCT   !   structure for interface
       TYPE(sorting_comm_type), DIMENSION(NINTER), INTENT(inout) :: SORT_COMM   ! structure for interface sorting comm
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
@@ -147,10 +143,9 @@ C-----------------------------------------------
                   ESHIFT = ITASK*NRTM_T
                   IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
                 ENDIF
-                CALL INTER_SORT_07( TIMERS,IPARI,X,N,ITASK,ISENDTO,
-     1                              IRECVFROM,RETRI,ITAB,NRTM_T,RENUM,RENUM_SIZ,
-     2                              NSNFIOLD,ESHIFT,MULTI_FVM,INTBUF_TAB(N),H3D_DATA,
-     3                              INTER_STRUCT,SORT_COMM,GLOB_THERM%INTHEAT, GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
+      CALL INTER_SORT_07(TIMERS, IPARI, X, N, ITASK, ISENDTO, IRECVFROM, RETRI, ITAB, NRTM_T, RENUM, RENUM_SIZ,
+     . NSNFIOLD, ESHIFT, MULTI_FVM, INTBUF_TAB(N), INTER_STRUCT, SORT_COMM, GLOB_THERM%INTHEAT, GLOB_THERM%IDT_THERM,
+     . GLOB_THERM%NODADT_THERM)
             ENDIF
             ! -----------------------------------------------------
 

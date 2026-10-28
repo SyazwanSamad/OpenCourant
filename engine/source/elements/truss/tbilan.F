@@ -26,22 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    grelem_sav            ../engine/source/output/th/grelem_sav.F
 !||    sensor_energy_bilan   ../engine/source/tools/sensor/sensor_energy_bilan.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE TBILAN(
-     1   PM,      V,       EINT,    AREA,
-     2   PARTSAV, IPARTT,  TANI,    FOR,
-     3   GRESAV,  GRTH,    IGRTH,   MAT,
-     4   AL,      VX1,     VX2,     VY1,
-     5   VY2,     VZ1,     VZ2,     X1,
-     6   X2,      Y1,      Y2,      Z1,
-     7   Z2,      ITASK,   H3D_DATA,NEL,
-     8   IGRE,    SENSORS)
+      SUBROUTINE TBILAN(PM, V, EINT, AREA, PARTSAV, IPARTT, TANI, FOR, GRESAV, GRTH, IGRTH, MAT, AL, VX1, VX2, VY1,
+     . VY2, VZ1, VZ2, X1, X2, Y1, Y2, Z1, Z2, ITASK, NEL, IGRE, SENSORS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE SENSOR_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -68,7 +59,6 @@ C-----------------------------------------------
      .   VY1(MVSIZ),VY2(MVSIZ),VZ1(MVSIZ),VZ2(MVSIZ),
      .   X1(MVSIZ),X2(MVSIZ),Y1(MVSIZ),Y2(MVSIZ),
      .   Z1(MVSIZ),Z2(MVSIZ)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       type (sensors_),INTENT(INOUT) :: SENSORS
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -185,7 +175,7 @@ c
         PARTSAV(22,M)=PARTSAV(22,M) + REK(I) 
       ENDDO
 c
-      IF (ANIM_FT(1) /= 0 .OR. H3D_DATA%UND_FORC /= 0) THEN
+      IF (ANIM_FT(1)/=0) THEN
         DO I=1,NEL
           TANI(1,I)= FOR(I)
           TANI(2,I)= ZERO

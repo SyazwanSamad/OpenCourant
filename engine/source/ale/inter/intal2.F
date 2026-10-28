@@ -28,19 +28,14 @@ Copyright>        copyright and attribution statement.
 !||    iqela1          ../engine/source/ale/inter/iqela1.F
 !||    iqela2          ../engine/source/ale/inter/iqela2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE INTAL2(output,IPARI,INTBUF_TAB         , X        ,V         ,
-     1           A           ,ISKEW   ,SKEW      ,LCOD      ,E         ,
-     2           MSM         ,MS      ,ITAB      ,FSAV      ,FCONT     ,
-     3           FNCONT      ,H3D_DATA  )
+      SUBROUTINE INTAL2(output, IPARI, INTBUF_TAB, X, V, A, ISKEW, SKEW, LCOD, E, MSM, MS, ITAB, FSAV, FCONT, FNCONT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -60,10 +55,6 @@ C-----------------------------------------------
       my_real,INTENT(INOUT) :: X(3,NUMNOD), V(3,NUMNOD), A(3,NUMNOD), SKEW(*), E(*), MSM(*), MS(*),FSAV(*)
       my_real,INTENT(INOUT) :: FCONT(3,*),FNCONT(3,*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER :: NSN,NMN
 C-----------------------------------------------
 C   S o u r c e   L i n e s
@@ -83,12 +74,8 @@ C-----------------------------------------------
      3   INTBUF_TAB%N )
       ENDIF
 
-      CALL IQELA1(output,
-     1    A                ,E               ,MSM           ,
-     2    INTBUF_TAB%IRECTM,INTBUF_TAB%CSTS ,INTBUF_TAB%MSR,INTBUF_TAB%NSV,
-     3    INTBUF_TAB%ILOCS ,INTBUF_TAB%IRTLM,MS            ,INTBUF_TAB%N  ,LCOD    ,
-     4    ISKEW            ,FSAV            ,FCONT         ,FNCONT        ,H3D_DATA,
-     5    NSN              ,NMN)
+      CALL IQELA1(output, A, E, MSM, INTBUF_TAB%IRECTM, INTBUF_TAB%CSTS, INTBUF_TAB%MSR, INTBUF_TAB%NSV,
+     . INTBUF_TAB%ILOCS, INTBUF_TAB%IRTLM, MS, INTBUF_TAB%N, LCOD, ISKEW, FSAV, FCONT, FNCONT, NSN, NMN)
 
       CALL IQELA2
      1   (SKEW             ,A              ,E             ,MSM           ,

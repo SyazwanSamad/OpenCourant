@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "ranks": 2,
+  "engine_sha256": "bfe91b1166d07bae8177c390ee12d97ab186562a551ca831ea0d4d686e57f5d1",
+  "cases": [
+    {
+      "case": "accelerometer",
+      "inputs": {
+        "ACCELERO_0000.rad": "55767fa07a9642cc61fdc3f881254e3da5bea802232b157b3bfd74e27795a63b",
+        "ACCELERO_0001.rad": "ad9734994ae5a630dfe6eda700cf974573376a735ea64fe79b826ecb57dcefa5",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "samples": 11,
+      "animation_files": 6,
+      "max_history_difference": 0.0,
+      "animation_bytes_match": true
+    },
+    {
+      "case": "friction",
+      "inputs": {
+        "FRICT41_0000.rad": "4cf18747d6c3dee6ee63bcf5dfc556250db8f14235cc05b8a7c0d3b1b13c6314",
+        "FRICT41_0001.rad": "61d833123cd2cf011613687fca6b02691806e8d5412d7d9905c6911a5499a4c7",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "samples": 100,
+      "animation_files": 11,
+      "max_history_difference": 0.0,
+      "animation_bytes_match": true
+    }
+  ]
+}

@@ -42,7 +42,6 @@
 !||    constant_mod       ../common_source/modules/constant_mod.F
 !||    elbufdef_mod       ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    mat_elem_mod       ../common_source/modules/mat_elem/mat_elem_mod.F90
 !||    matparam_def_mod   ../common_source/modules/mat_elem/matparam_def_mod.F90
 !||    mvsiz_mod          ../engine/share/spe_inc/mvsiz_mod.F90
@@ -54,23 +53,10 @@
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||    table_mod          ../engine/share/modules/table_mod.F
 !||====================================================================
-        subroutine r23law135( &
-            elbuf_str , nel       , igeo      , geo       , &
-            ipm       , ixr       , x         , xdp       , &
-            f         , skew      , vr        , ar        , &
-            v         , stifn     , stifr     , fsky      , &
-            iadr      , nsensor   , sensor_tab, partsav   , &
-            ipartr    , tani      , fx1       , fx2       , &
-            fy1       , fy2       , fz1       , fz2       , &
-            mx1       , mx2       , my1       , my2       , &
-            mz1       , mz2       , gresav    , grth      , &
-            igrth     , h3d_data  , igre      , nft       , &
-            mat_elem  , npropg    , lskew     , iparit    , &
-            inispri   , scodver   , ismdisp   , numelr    , &
-            tt        , dt1       , anim_fe   , mtn       , &
-            ngrth     , nelem     , numgeo    , nummat    , &
-            numnod    , npsav     , ngpe      , nthread   , &
-            numskw    , lsky)
+      subroutine r23law135(elbuf_str, nel, igeo, geo, ipm, ixr, x, xdp, f, skew, vr, ar, v, stifn, stifr, fsky, iadr, &
+     & nsensor, sensor_tab, partsav, ipartr, tani, fx1, fx2, fy1, fy2, fz1, fz2, mx1, mx2, my1, my2, mz1, mz2, gresav, &
+     & grth, igrth, igre, nft, mat_elem, npropg, lskew, iparit, inispri, scodver, ismdisp, numelr, tt, dt1, anim_fe, &
+     & mtn, ngrth, nelem, numgeo, nummat, numnod, npsav, ngpe, nthread, numskw, lsky)
 
 
 
@@ -83,7 +69,6 @@
           use prop_param_mod
           use elbufdef_mod
           use table_mod
-          use h3d_mod
           use sensor_mod
           use python_funct_mod
           use element_mod,      only : nixr
@@ -155,7 +140,6 @@
           real(kind=wp), dimension(nel),  intent(inout) :: mx2, my2, mz2
           real(kind=8),  dimension(3,numnod),    intent(in)    :: xdp       !< Double precision coordinates
           type(elbuf_struct_),              intent(inout), target :: elbuf_str !< Element buffer structure
-          type(h3d_database),               intent(inout) :: h3d_data          !< H3D Output database
           type(sensor_str_), dimension(nsensor), intent(in) :: sensor_tab      !< Sensor configuration
           type(mat_elem_),                  intent(inout), target :: mat_elem  !< Material element data
 
@@ -298,10 +282,8 @@
             nc2     , x       , vr      , nel     , &
             igre)
             
-          call r2tors( &
-            gbuf%for(ii(1))   , gbuf%for(ii(2))   , gbuf%for(ii(3))   , gbuf%mom(ii(1))   , &
-            gbuf%mom(ii(2))   , gbuf%mom(ii(3))   , tani              , h3d_data          , &
-            nel)
+      call r2tors(gbuf%for(ii(1)), gbuf%for(ii(2)), gbuf%for(ii(3)), gbuf%mom(ii(1)), gbuf%mom(ii(2)), gbuf%mom(ii(3)), &
+     & tani, nel)
 
           if (iparit == 0) then
             call r2cum3( &

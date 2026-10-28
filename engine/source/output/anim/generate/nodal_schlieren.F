@@ -22,7 +22,6 @@ Copyright>        copyright and attribution statement.
 !||    nodal_schlieren        ../engine/source/output/anim/generate/nodal_schlieren.F
 !||--- called by ------------------------------------------------------
 !||    genani                 ../engine/source/output/anim/generate/genani.F
-!||    h3d_nodal_scalar       ../engine/source/output/h3d/h3d_results/h3d_nodal_scalar.F
 !||--- calls      -----------------------------------------------------
 !||    agrad3                 ../engine/source/ale/ale3d/agrad3.F
 !||--- uses       -----------------------------------------------------

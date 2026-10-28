@@ -32,35 +32,19 @@ Copyright>        copyright and attribution statement.
 !||    i7sms2       ../engine/source/interfaces/int07/i7sms2.F
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||    tri7box      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I23FOR3(OUTPUT, JLT    ,NIN    ,NOINT  ,IBC    ,ICODT  ,
-     2                  FSAV    ,GAP    ,STIGLO ,FRIC   ,VISC   ,
-     3                  INACTI  ,MFROT  ,IFQ    ,IBAG   ,
-     4                  ICURV   ,STIF    ,GAPV  ,ITAB   ,A      ,    
-     5                  CAND_P  ,FROT_P ,ALPHA0 ,V     ,ICONTACT,
-     6                  NISKYFI,NSVG    ,X1     ,Y1     ,Z1     ,
-     7                  X2     ,Y2      ,Z2     ,X3     ,Y3     ,
-     8                  Z3     ,X4      ,Y4     ,Z4     ,XI     ,
-     9                  YI     ,ZI     ,VXI    ,VYI    ,VZI     ,
-     A                  MSI    ,VXM    ,VYM    ,VZM    ,NX      ,
-     B                  NY     ,NZ     ,PENE   ,H1     ,H2      ,
-     C                  H3     ,H4     ,INDEX  ,CAND_N_N, WEIGHT,
-     F                  FXT    ,FYT    ,FZT    ,DT2T   ,
-     G                  FCONT   ,FNCONT ,FTCONT ,STIFN  ,VISCN  ,
-     H                  NEWFRONT ,ISECIN ,NSTRF  ,SECFCUM,FSKYI ,
-     I                  ISKY     ,INTTH  ,MS     ,IX1    ,IX2   ,
-     J                  IX3      ,IX4    ,CAND_FX,CAND_FY,CAND_FZ ,
-     K                  KMIN     ,KMAX   ,CN_LOC ,CE_LOC  ,MSKYI_SMS ,
-     L                  ISKYI_SMS,NSMS   ,JTASK,ISENSINT  ,  FSAVPARIT, 
-     M                  NISUB    ,NFT    ,H3D_DATA )
+      SUBROUTINE I23FOR3(OUTPUT, JLT, NIN, NOINT, IBC, ICODT, FSAV, GAP, STIGLO, FRIC, VISC, INACTI, MFROT, IFQ, IBAG,
+     . ICURV, STIF, GAPV, ITAB, A, CAND_P, FROT_P, ALPHA0, V, ICONTACT, NISKYFI, NSVG, X1, Y1, Z1, X2, Y2, Z2, X3, Y3,
+     . Z3, X4, Y4, Z4, XI, YI, ZI, VXI, VYI, VZI, MSI, VXM, VYM, VZM, NX, NY, NZ, PENE, H1, H2, H3, H4, INDEX, CAND_N_N,
+     . WEIGHT, FXT, FYT, FZT, DT2T, FCONT, FNCONT, FTCONT, STIFN, VISCN, NEWFRONT, ISECIN, NSTRF, SECFCUM, FSKYI, ISKY,
+     . INTTH, MS, IX1, IX2, IX3, IX4, CAND_FX, CAND_FY, CAND_FZ, KMIN, KMAX, CN_LOC, CE_LOC, MSKYI_SMS, ISKYI_SMS, NSMS,
+     . JTASK, ISENSINT, FSAVPARIT, NISUB, NFT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -119,10 +103,6 @@ C-----------------------------------------------
      .   FCONT(3,*), FNCONT(3,*),FTCONT(3,*), STIFN(*), VISCN(*),
      .   SECFCUM(7,NUMNOD,NSECT),
      .   CAND_FX(*), CAND_FY(*), CAND_FZ(*),FSAVPARIT(NISUB+1,11,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J1, IG, J, JG , K0,NBINTER,K1S,K, NN,IBID,
      .        IBCM,IBCS
       my_real
@@ -288,10 +268,8 @@ C
         ENDDO
       ENDIF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
          IF (INCONV==1) THEN
 #include "lockon.inc"
            DO I=1,JLT
@@ -467,10 +445,8 @@ C-------    total force
       ENDDO
 C---------------------------------
 C
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
          IF (INCONV==1) THEN
 #include "lockon.inc"
            DO I=1,JLT
@@ -754,9 +730,8 @@ C
       ENDIF
 C
 C-----------------------------------------------------
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
          IF (INCONV==1) THEN
 #include "lockon.inc"
            DO I=1,JLT

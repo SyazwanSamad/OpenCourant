@@ -26,7 +26,6 @@ Copyright>        copyright and attribution statement.
 !||    intvo8           ../engine/source/interfaces/inter3d/intvo8.F
 !||    spmd_i8_reduce   ../engine/source/mpi/interfaces/spmd_i8tool.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    int8_mod         ../common_source/modules/interfaces/int8_mod.F90
 !||    intbufdef_mod    ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
@@ -34,23 +33,15 @@ Copyright>        copyright and attribution statement.
 !||    output_mod       ../common_source/modules/output/output_mod.F90
 !||    sensor_mod       ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE INTFOP8(output,
-     1       IPARI ,X      ,A    ,
-     2       ICODT ,FSAV    ,V      ,MS   ,
-     3       DT2T  ,NELTST  ,ITYPTST ,ITAB   ,STIFN,
-     4       NPC   ,TF      ,FSKYI   ,ISKY   ,VR   ,
-     5       FCONT ,IN      ,BUFSF   ,FNCONT ,NSENSOR,
-     6       FTCONT,ICONTACT,RCONTACT,NUM_IMP,NS_IMP,
-     7       NE_IMP ,NT_IMP  ,SENSOR_TAB,INTBUF_TAB    ,
-     8       H3D_DATA,PSKIDS,TAGNCONT,KLOADPINTER,LOADPINTER,
-     9       LOADP_HYD_INTER)
+      SUBROUTINE INTFOP8(output, IPARI, X, A, ICODT, FSAV, V, MS, DT2T, NELTST, ITYPTST, ITAB, STIFN, NPC, TF, FSKYI,
+     . ISKY, VR, FCONT, IN, BUFSF, FNCONT, NSENSOR, FTCONT, ICONTACT, RCONTACT, NUM_IMP, NS_IMP, NE_IMP, NT_IMP,
+     . SENSOR_TAB, INTBUF_TAB, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       use output_mod
       USE INTBUFDEF_MOD
       USE INT8_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -72,33 +63,27 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       type(output_), intent(inout) :: output
-      INTEGER ,INTENT(IN) :: NSENSOR
-      INTEGER NELTST,ITYPTST 
-      INTEGER NUM_IMP(*),NS_IMP(*),NE_IMP(*),NT_IMP
-      INTEGER IPARI(NPARI,*), ICODT(*),ITAB(*), 
-     .        NPC(*), ISKY(*), 
-     .        ICONTACT(*),TAGNCONT(NLOADP_HYD_INTER,NUMNOD),
-     .        KLOADPINTER(NINTER+1),LOADPINTER(NINTER*NLOADP_HYD),
-     .        LOADP_HYD_INTER(NLOADP_HYD)
+      INTEGER ,INTENT(IN) ::  NSENSOR
+      INTEGER NELTST, ITYPTST
+      INTEGER NUM_IMP(*), NS_IMP(*), NE_IMP(*), NT_IMP
+      INTEGER IPARI(NPARI,*), ICODT(*), ITAB(*), NPC(*), ISKY(*), ICONTACT(*), TAGNCONT(NLOADP_HYD_INTER,NUMNOD),
+     . KLOADPINTER(NINTER+1), LOADPINTER(NINTER*NLOADP_HYD), LOADP_HYD_INTER(NLOADP_HYD)
 
 C     REAL
-      my_real DT2T, 
-     .   X(*), A(*), FSAV(NTHVKI,*) ,V(*),MS(*),
-     .   STIFN(*), TF(*),FSKYI(LSKY,NFSKYI),VR(3,*),FCONT(3,*),IN(*),
-     .   BUFSF(*), FNCONT(3,*),FTCONT(3,*),RCONTACT(*),PSKIDS(*)
+      my_real DT2T, X(*), A(*), FSAV(NTHVKI,*), V(*), MS(*), STIFN(*), TF(*), FSKYI(LSKY,NFSKYI), VR(3,*), FCONT(3,*),
+     . IN(*), BUFSF(*), FNCONT(3,*), FTCONT(3,*), RCONTACT(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) :: SENSOR_TAB
 
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER N, IAD, ISENS,I
-      my_real TS,STARTT,STOPT
-      INTEGER NSLV,SIZ,NBT8
-      my_real, DIMENSION(:,:), ALLOCATABLE :: FTSAV_BUF
-      INTEGER :: NTY
+      INTEGER N, IAD, ISENS, I
+      my_real TS, STARTT, STOPT
+      INTEGER NSLV, SIZ, NBT8
+      my_real, DIMENSION(:,:), ALLOCATABLE ::  FTSAV_BUF
+      INTEGER ::  NTY
 C-----------------------------------------------
       !CALL STARTIME(TIMERS,96)
       NBT8 = 0
@@ -129,26 +114,14 @@ C
          IF(N2D==0)THEN
            IF(IMPL_S/=1)THEN
               IF(TT>=TS) THEN
-                CALL INTVO8(output,
-     1        IPARI(1,N) ,X,A    ,
-     2        ICODT      ,FSAV(1,N)    ,V ,MS       ,
-     3        FSKYI      ,ISKY         ,FCONT   ,FNCONT ,FTCONT   ,
-     4        ICONTACT   ,RCONTACT,
-     5        STIFN      ,ITAB,INTBUF_TAB(N),INTBUF_TAB(N)%T8,H3D_DATA,
-     6        N          ,PSKIDS     ,TAGNCONT,KLOADPINTER,LOADPINTER,
-     7        LOADP_HYD_INTER)
+      CALL INTVO8(output, IPARI(1,N), X, A, ICODT, FSAV(1,N), V, MS, FSKYI, ISKY, FCONT, FNCONT, FTCONT, ICONTACT,
+     . RCONTACT, STIFN, ITAB, INTBUF_TAB(N), INTBUF_TAB(N)%T8, N, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER)
              ENDIF
            ELSE
              NUM_IMP(N) =0
               IF(TT>=TS) THEN
-                CALL INTVO8(output,
-     1          IPARI(1,N) ,X ,A        ,
-     2          ICODT      ,FSAV(1,N)    ,V ,MS       ,
-     3          FSKYI      ,ISKY         ,FCONT   ,FNCONT ,FTCONT   ,
-     4          ICONTACT   ,RCONTACT,
-     5          STIFN      ,ITAB,INTBUF_TAB(N),INTBUF_TAB(N)%T8,H3D_DATA,
-     6          N          ,PSKIDS     ,TAGNCONT,KLOADPINTER,LOADPINTER,
-     7          LOADP_HYD_INTER)
+      CALL INTVO8(output, IPARI(1,N), X, A, ICODT, FSAV(1,N), V, MS, FSKYI, ISKY, FCONT, FNCONT, FTCONT, ICONTACT,
+     . RCONTACT, STIFN, ITAB, INTBUF_TAB(N), INTBUF_TAB(N)%T8, N, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER)
               ENDIF
              IAD=IAD+NUM_IMP(N)
            END IF

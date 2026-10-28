@@ -26,17 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    cluster_mod    ../engine/share/modules/cluster_mod.F
 !||    elbufdef_mod   ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    element_mod    ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE CLUSTERF(CLUSTER  ,ELBUF_TAB,X       ,A       ,AR       ,
-     .                    SKEW     ,IXS      ,IPARG   ,FCLUSTER,MCLUSTER ,
-     .                    H3D_DATA ,GEO      ) 
+      SUBROUTINE CLUSTERF(CLUSTER, ELBUF_TAB, X, A, AR, SKEW, IXS, IPARG, FCLUSTER, MCLUSTER, GEO)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE ELBUFDEF_MOD            
       USE CLUSTER_MOD         
-      USE H3D_MOD
       use element_mod , only : nixs
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -61,10 +57,6 @@ C-----------------------------------------------
       my_real ,DIMENSION(LSKEW,*) :: SKEW     
       TYPE (CLUSTER_) ,DIMENSION(NCLUSTER)   :: CLUSTER
       TYPE (ELBUF_STRUCT_),DIMENSION(NGROUP) :: ELBUF_TAB
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J,IEL,NG,NFT,NNOD,ISKN,N,N1,N2,N3,N4,NINDX,IFAIL,IPID
       INTEGER INDX(NCLUSTER)
       my_real, DIMENSION(NPROPG,*) :: GEO
@@ -416,7 +408,7 @@ c---------------------------
 c
       ENDDO   !  I = 1, NCLUSTER
 c---------------------------
-      IF (ANIM_V(19) + H3D_DATA%N_VECT_CLUST_FORCE > 0) THEN
+      IF (ANIM_V(19)>0) THEN
         DO I = 1, NCLUSTER
           NNOD = CLUSTER(I)%NNOD
           DO J = 1,NNOD
@@ -431,7 +423,7 @@ c---------------------------
           ENDDO
         ENDDO  !  I = 1, NCLUSTER
       ENDIF     
-      IF (ANIM_V(20) + H3D_DATA%N_VECT_CLUST_MOM > 0) THEN
+      IF (ANIM_V(20)>0) THEN
         DO I = 1, NCLUSTER
           NNOD = CLUSTER(I)%NNOD
           DO J = 1,NNOD

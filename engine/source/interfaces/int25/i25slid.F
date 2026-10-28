@@ -844,12 +844,7 @@ C computation of real and integer sending buffers sizes
 c general case
       RSIZ = 9
       ISIZ = 8
-      IF(.TRUE.) THEN
-! ICODT and ISKEW
         ISIZ = ISIZ + 2
-      ENDIF
-C
-C specific cases ../..
       IF(IGAP==1 .OR. IGAP==2)THEN
         RSIZ = RSIZ + 1
       ELSEIF(IGAP==3)THEN
@@ -1073,7 +1068,6 @@ C
 C specific cases ../..
 
 
-            IF(.TRUE.) THEN
               LI = 0
 #include      "vectorize.inc"
               DO J = 1, NSEND
@@ -1090,8 +1084,6 @@ C specific cases ../..
                 LI = LI + ISIZ
               END DO
               ISHIFT = ISHIFT + 2
-            ENDIF
-
             IF(IGAP==1 .OR. IGAP==2 .OR. IGAP==5)THEN
               LR = 0
               DO J=1,NSEND

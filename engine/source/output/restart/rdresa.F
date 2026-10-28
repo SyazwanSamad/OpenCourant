@@ -32,7 +32,6 @@ Copyright>        copyright and attribution statement.
 !||    set_q1np_tabvint_len   ../common_source/modules/q1np_restart_mod.F90
 !||--- uses       -----------------------------------------------------
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    interfaces_mod         ../common_source/modules/interfaces/interfaces_mod.F90
 !||    loads_mod              ../common_source/modules/loads/loads_mod.F90
 !||    mat_elem_mod           ../common_source/modules/mat_elem/mat_elem_mod.F90
@@ -50,19 +49,15 @@ Copyright>        copyright and attribution statement.
 !||    skew_mod               ../common_source/modules/skew_mod.F90
 !||    state_mod              ../common_source/modules/state_mod.F
 !||====================================================================
-      SUBROUTINE RDRESA(OUTPUT,ITSTV1 , LHEADER, LVARINT, LVARREA, PRADIOS,
-     .                  PRESFIL,MULTI_FVM,H3D_DATA,
-     .                  PINCH_DATA,DYNAIN_DATA,INTERFACES,SENSORS,LOADS,
-     .                  MAT_ELEM, NAMES_AND_TITLES,SKEWS ,GLOB_THERM,PBLAST,
-     .                  RBE3,RWALL,SFEM)
+      SUBROUTINE RDRESA(OUTPUT, ITSTV1, LHEADER, LVARINT, LVARREA, PRADIOS, PRESFIL, MULTI_FVM, PINCH_DATA,
+     . DYNAIN_DATA, INTERFACES, SENSORS, LOADS, MAT_ELEM, NAMES_AND_TITLES, SKEWS, GLOB_THERM, PBLAST, RBE3, RWALL,
+     . SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE PINCHTYPE_MOD
-      USE H3D_MOD
       USE STATE_MOD
       USE INTERFACES_MOD
       USE SENSOR_MOD
@@ -98,7 +93,6 @@ C-----------------------------------------------
       INTEGER ITSTV1, LHEADER, LVARINT, LVARREA, PRADIOS,
      .        PRESFIL
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(PINCH) :: PINCH_DATA
       TYPE (DYNAIN_DATABASE),INTENT(INOUT)   :: DYNAIN_DATA
       TYPE (INTERFACES_)    ,INTENT(INOUT)   :: INTERFACES
@@ -191,9 +185,8 @@ C----------------------------
 C     Read integer variables
 C----------------------------
       CALL READ_I_C(TABVINT,LVARINT)
-      CALL RDCOMI(output,TABVINT,MULTI_FVM,H3D_DATA,DYNAIN_DATA,
-     .            INTERFACES%PARAMETERS,SENSORS,LOADS  ,MAT_ELEM,SKEWS,
-     .            GLOB_THERM,PBLAST,RBE3 ,RWALL,SFEM)
+      CALL RDCOMI(output, TABVINT, MULTI_FVM, DYNAIN_DATA, INTERFACES%PARAMETERS, SENSORS, LOADS, MAT_ELEM, SKEWS,
+     . GLOB_THERM, PBLAST, RBE3, RWALL, SFEM)
 
 C
       IF(ANIM_PLY > 0 .AND.IPLYXFEM == 0) THEN
@@ -219,18 +212,16 @@ C
 !||    ale_mod                ../common_source/modules/ale/ale_mod.F
 !||    aleanim_mod            ../common_source/modules/aleanim_mod.F
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    message_mod            ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod           ../common_source/tools/memory/my_alloc.F90
 !||    output_mod             ../common_source/modules/output/output_mod.F90
 !||    pinchtype_mod          ../common_source/modules/pinchtype_mod.F
 !||====================================================================
-      SUBROUTINE INIRESA(OUTPUT, H3D_DATA,PINCH_DATA,GLOB_THERM)
+      SUBROUTINE INIRESA(OUTPUT, PINCH_DATA, GLOB_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE PINCHTYPE_MOD
       USE ALE_MOD
       USE ALEANIM_MOD
@@ -273,7 +264,6 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       TYPE(OUTPUT_) :: OUTPUT
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(PINCH) :: PINCH_DATA
       type (glob_therm_)    ,intent(inout)   :: GLOB_THERM
 C-----------------------------------------------
@@ -542,15 +532,15 @@ C---------------------------------------------------------
       OUTPUT%DATA%S_FOPT = (NSECT + NRBODY + NRWALL)
       call my_alloc(OUTPUT%DATA%FOPT, 6, NSECT + NRBODY + NRWALL+1, "OUTPUT%DATA%FOPT")
 
-      OUTPUT%DATA%S_VECT_CONT =(MIN(1,ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT))
-      OUTPUT%DATA%S_VECT_FINT = (MIN(1,ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT))
-      OUTPUT%DATA%S_VECT_FEXT = (MIN(1,ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT))
-      OUTPUT%DATA%S_VECT_PCONT = (MIN(1,ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT))
-      OUTPUT%DATA%S_VECT_PCONT_2 =(MIN(1,ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT))
+      OUTPUT%DATA%S_VECT_CONT =(MIN(1,ANIM_V(4)+OUTP_V(4)))
+      OUTPUT%DATA%S_VECT_FINT =(MIN(1,ANIM_V(5)+OUTP_V(5)))
+      OUTPUT%DATA%S_VECT_FEXT =(MIN(1,ANIM_V(6)+OUTP_V(6)))
+      OUTPUT%DATA%S_VECT_PCONT =(MIN(1,ANIM_V(12)+OUTP_V(12)))
+      OUTPUT%DATA%S_VECT_PCONT_2 =(MIN(1,ANIM_V(12)+OUTP_V(12)))
 
-      OUTPUT%DATA%S_VECT_CONT2 = (MIN(1,ANIM_V(13)+H3D_DATA%N_VECT_CONT2))
-      OUTPUT%DATA%S_VECT_PCONT2 =(MIN(1,ANIM_V(27)+H3D_DATA%N_VECT_PCONT2))
-      OUTPUT%DATA%S_VECT_PCONT2_2 =(MIN(1,ANIM_V(27)+H3D_DATA%N_VECT_PCONT2))
+      OUTPUT%DATA%S_VECT_CONT2 =(MIN(1,ANIM_V(13)))
+      OUTPUT%DATA%S_VECT_PCONT2 =(MIN(1,ANIM_V(27)))
+      OUTPUT%DATA%S_VECT_PCONT2_2 =(MIN(1,ANIM_V(27)))
 
 
       SXCUT = 7*NCUTS
@@ -560,14 +550,14 @@ C---------------------------------------------------------
 !    .              + MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER))
 !    .              + NUMELR*(ANIM_FE(11)+ANIM_FE(12)+ANIM_FE(13)) 
 !    .              + 2*NUMNOD*MIN(1,ANIM_N(15)*ANIM_N(16)+H3D_DATA%N_SCAL_DAMA2)
-      OUTPUT%DATA%S_SCAL_DT = (MIN(1,ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT))
-      OUTPUT%DATA%S_SCAL_DMAS = (MIN(1,ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS))
-      OUTPUT%DATA%S_SCAL_DINER = (MIN(1,ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER))
-      OUTPUT%DATA%S_SCAL_DAMA2 = 2*(MIN(1,ANIM_N(15)*ANIM_N(16)+H3D_DATA%N_SCAL_DAMA2))
+      OUTPUT%DATA%S_SCAL_DT =(MIN(1,ANIM_N(1)+OUTP_N(1)))
+      OUTPUT%DATA%S_SCAL_DMAS =(MIN(1,ANIM_N(2)+OUTP_N(2)))
+      OUTPUT%DATA%S_SCAL_DINER =(MIN(1,ANIM_N(12)+OUTP_N(3)))
+      OUTPUT%DATA%S_SCAL_DAMA2 =2*(MIN(1,ANIM_N(15)*ANIM_N(16)))
       OUTPUT%DATA%S_SCAL_SPRING = MAX(1,NUMELR)*(ANIM_FE(11)+ANIM_FE(12)+ANIM_FE(13))
       SANIN = MAX(1,NUMELR*(ANIM_FE(11)+ANIM_FE(12)+ANIM_FE(13)))
       CALl ALLOCATE_OUTPUT_DATA(OUTPUT,NUMNOD)
-      STANI = 6*(NUMELC+NUMELTG)*IEPSDOT + 15*(NUMELT+NUMELP+NUMELR)*(MAX(ANIM_FT(1),H3D_DATA%UND_FORC))
+      STANI =6*(NUMELC+NUMELTG)*IEPSDOT+15*(NUMELT+NUMELP+NUMELR)*(MAX(ANIM_FT(1),0))
 
 
 C
@@ -579,19 +569,13 @@ C
       output%data%fani_cell%is_vort_x_requested = .FALSE.
       output%data%fani_cell%is_vort_y_requested = .FALSE.
       output%data%fani_cell%is_vort_z_requested = .FALSE.
-      IF(ANIM_SE(10) == 1   .OR. H3D_DATA%SOL_SCAL_VORTX == 1)
-     .  output%data%fani_cell%is_vort_x_requested=.TRUE.
-      IF(ANIM_SE(4960) == 1 .OR. H3D_DATA%SOL_SCAL_VORTY == 1)
-     .  output%data%fani_cell%is_vort_y_requested=.TRUE.
-      IF(ANIM_SE(4961) == 1 .OR. H3D_DATA%SOL_SCAL_VORTZ == 1)
-     .  output%data%fani_cell%is_vort_z_requested=.TRUE.
+      IF(ANIM_SE(10)==1) output%data%fani_cell%is_vort_x_requested=.TRUE.
+      IF(ANIM_SE(4960)==1) output%data%fani_cell%is_vort_y_requested=.TRUE.
+      IF(ANIM_SE(4961)==1) output%data%fani_cell%is_vort_z_requested=.TRUE.
 
       ! /H3D/ELEM/VECT/CONT
       ! INTER18 REACTION FORCES ON CELL CENTROIDS
       output%data%fani_cell%is_f18_fvm_requested = .FALSE.
-      IF(H3D_DATA%N_VECT_CONT == 1)
-     .  output%data%fani_cell%is_f18_fvm_requested = .TRUE.
-
       M16STAK = 0
       IF(NUMELS16/=0)THEN
         NPE = 16

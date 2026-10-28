@@ -48,20 +48,11 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE SPSTRES(TIMERS, ELBUF_TAB,NG     , 
-     1    PM        ,GEO       ,X         ,V         ,MS        ,
-     2    W         ,SPBUF     ,WA        ,NLOC_DMG  ,
-     3    ITAB      ,PLD       ,BUFMAT    ,BUFGEO    ,PARTSAV   ,
-     4    FSAV      ,DT2T      ,IPARG     ,NPC       ,KXSP      ,
-     5    IXSP      ,NOD2SP    ,NELTST    ,ITYPTST   ,IPART     ,
-     6    IPARTSP   ,FV        ,NEL       ,IPM       ,GRESAV    ,
-     7    GRTH      ,IGRTH     ,TABLE     ,ISTRAIN   ,VOLN      ,
-     8    IGEO      ,IEXPAN    ,TEMP      ,ITASK     ,SPH2SOL   ,
-     9    MAT_ELEM  ,H3D_STRAIN,OUTPUT    ,SNPC      ,STF,
-     A    SBUFMAT   ,SVIS,NSVOIS,IDTMINS, IRESP,      
-     .    IDEL7NG,   IDEL7NOK,    IDTMIN,     MAXFUNC,LIPART1,
-     .    IMON_MAT,  USERL_AVAIL, impl_s,
-     V    idyna,     DT         , GLOB_THERM,sensors)
+      SUBROUTINE SPSTRES(TIMERS, ELBUF_TAB, NG, PM, GEO, X, V, MS, W, SPBUF, WA, NLOC_DMG, ITAB, PLD, BUFMAT, BUFGEO,
+     . PARTSAV, FSAV, DT2T, IPARG, NPC, KXSP, IXSP, NOD2SP, NELTST, ITYPTST, IPART, IPARTSP, FV, NEL, IPM, GRESAV, GRTH,
+     . IGRTH, TABLE, ISTRAIN, VOLN, IGEO, IEXPAN, TEMP, ITASK, SPH2SOL, MAT_ELEM, OUTPUT, SNPC, STF, SBUFMAT, SVIS,
+     . NSVOIS, IDTMINS, IRESP, IDEL7NG, IDEL7NOK, IDTMIN, MAXFUNC, LIPART1, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT,
+     . GLOB_THERM, sensors)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -114,10 +105,8 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: IDYNA
       INTEGER, INTENT(IN) :: USERL_AVAIL
       INTEGER, INTENT(IN) :: IMON_MAT
-      INTEGER KXSP(NISP,*),IXSP(KVOISPH,*),NOD2SP(*),ITAB(*),
-     .   IPART(LIPART1,*) ,IPARTSP(*), NPC(*), IPARG(NPARG,*),NG,
-     .   NELTST,ITYPTST,NEL,GRTH(*),IGRTH(*) , ISTRAIN,
-     .   IPM(NPROPMI,*),IGEO(*),IEXPAN,ITASK,SPH2SOL(*),H3D_STRAIN
+      INTEGER KXSP(NISP,*),IXSP(KVOISPH,*),NOD2SP(*),ITAB(*), IPART(LIPART1,*) ,IPARTSP(*), NPC(*), IPARG(NPARG,*),NG,
+     . NELTST,ITYPTST,NEL,GRTH(*),IGRTH(*) , ISTRAIN, IPM(NPROPMI,*),IGEO(*),IEXPAN,ITASK,SPH2SOL(*)
       my_real
      .   X(3,*)    ,V(3,*)   ,MS(*)   ,
      .   PM(NPROPM,*),GEO(NPROPG,*),BUFMAT(*) ,BUFGEO(*) ,W(3,*)  ,
@@ -245,42 +234,14 @@ C------------------------------------------------------
 C     LAW 11 uses IELVS=IBIDON and IXS=IBIDON should not be used.
       IBIDON(1)=0
       OFFSET=0
-      CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IBIDON,      IPARG,
-     3   V,           PLD,         NPC,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   OFF,         NGEO,        MXT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        CXX,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          DXX,         DYY,         DZZ,
-     B   D4,          D5,          D6,          WXX,
-     C   WYY,         WZZ,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDX,         VDY,         VDZ,         MUMAX,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   R1_FREE,     LBUF%PLA,    R3_FREE,     R4_FREE,
-     H   DXX,         DXY,         DXZ,         DYX,
-     I   DYY,         DYZ,         DZX,         DZY,
-     J   DZZ,         IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         ISTRAIN,     TEMPEL,
-     M   DIE,         IEXPAN,      ILAY,           BID,
-     N   BID,         1,           1,           1,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         IPARG(1,NG), IGEO,        BID,
-     Q   ITASK,       NLOC_DMG,    VARNL,       MAt_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        SZ_R1_FREE,
-     S   SNPC,        STF,         SBUFMAT,     GLOB_THERM,
-     *   SVIS,        SZ_IX,       IRESP,
-     T   N2D,         th_strain,   NGROUP,      TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT         , BID   ,sensors)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IBIDON, IPARG, V, PLD, NPC, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, OFF, NGEO, MXT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, CXX, S1, S2, S3, S4,
+     . S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, WYY, WZZ, RX, RY, RZ, SX, SY, SZ, VDX, VDY, VDZ, MUMAX, SSP_EQ, AIRE,
+     . SIGY, ET, R1_FREE, LBUF%PLA, R3_FREE, R4_FREE, DXX, DXY, DXZ, DYX, DYY, DYZ, DZX, DZY, DZZ, IPM, GAMA, BID, BID,
+     . BID, BID, BID, BID, BID, ISTRAIN, TEMPEL, DIE, IEXPAN, ILAY, BID, BID, 1, 1, 1, TABLE, BID, BID, BID, BID,
+     . IPARG(1,NG), IGEO, BID, ITASK, NLOC_DMG, VARNL, MAt_ELEM, JPLASOL, JSPH, SZ_R1_FREE, SNPC, STF, SBUFMAT,
+     . GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ, nummat, numgeo, numnod, numels,
+     . IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, BID, sensors)
 C-----------------------------
       IF(ISTRAIN==1)THEN 
         CALL SSTRA3(DXX,DYY      ,DZZ ,D4  ,D5  ,

@@ -28,26 +28,19 @@ Copyright>        copyright and attribution statement.
 !||    pblast_parameters__air_burst   ../common_source/modules/loads/pblast_mod.F90
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod                   ../common_source/modules/groupdef_mod.F
-!||    h3d_inc_mod                    ../engine/share/modules/h3d_inc_mod.F
-!||    h3d_mod                        ../engine/share/modules/h3d_mod.F
 !||    names_and_titles_mod           ../common_source/modules/names_and_titles_mod.F
 !||    output_mod                     ../common_source/modules/output/output_mod.F90
 !||    pblast_mod                     ../common_source/modules/loads/pblast_mod.F90
 !||    th_mod                         ../engine/share/modules/th_mod.F
 !||    th_surf_mod                    ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-      SUBROUTINE PBLAST_3(OUTPUT, PBLAST,
-     *                    ILOADP  ,FAC      ,A       ,V         ,X       ,
-     1                    IADC    ,FSKY     ,LLOADP  ,FEXT      ,NODA_SURF,NODA_PEXT,
-     2                    ITAB    ,H3D_DATA ,NL      ,DTMIN_LOC ,WFEXT_LOC,
-     4                    TH_SURF ,NSEGPL)
+      SUBROUTINE PBLAST_3(OUTPUT, PBLAST, ILOADP, FAC, A, V, X, IADC, FSKY, LLOADP, FEXT, NODA_SURF, NODA_PEXT, ITAB,
+     . NL, DTMIN_LOC, WFEXT_LOC, TH_SURF, NSEGPL)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE PBLAST_MOD
       USE GROUPDEF_MOD
-      USE H3D_INC_MOD
       USE TH_SURF_MOD , ONLY : TH_SURF_
       USE NAMES_AND_TITLES_MOD , ONLY : NCHARLINE
       USE TH_MOD ,ONLY : TH_HAS_NODA_PEXT
@@ -86,7 +79,6 @@ C-----------------------------------------------
       my_real,INTENT(INOUT) :: FEXT(3,NUMNOD)
       my_real,INTENT(INOUT) :: NODA_SURF(NUMNOD)
       my_real,INTENT(INOUT) :: NODA_PEXT(NUMNOD)
-      TYPE(H3D_DATABASE),INTENT(IN) :: H3D_DATA
       TYPE (TH_SURF_) , INTENT(INOUT) :: TH_SURF
       INTEGER, INTENT(INOUT) :: NSEGPL
       TYPE(PBLAST_),INTENT(INOUT) :: PBLAST
@@ -95,7 +87,7 @@ C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
       CHARACTER(LEN=NCHARLINE) ::  MSGOUT1,MSGOUT2
       TYPE(FRIEDLANDER_PARAMS_) :: FRIEDLANDER_PARAMS
-      INTEGER N1, N2, N3, N4,IL,IS,IAD,I,IANIM_OR_H3D,IZ_UPDATE,ABAC_ID,ISIZ_SEG,IERR1
+      INTEGER N1, N2, N3, N4,IL,IS,IAD,I,IANIM_REQUEST,IZ_UPDATE,ABAC_ID,ISIZ_SEG,IERR1
       INTEGER  ID, ITA_SHIFT,IMODEL
       INTEGER :: NS,KSURF
       INTEGER :: curve_id1, curve_id2, NN(4), NDT
@@ -185,7 +177,7 @@ C-----------------------------------------------,
 C   S o u r c e   C o d e
 C-----------------------------------------------
       WFEXT_LOC = ZERO
-      IANIM_OR_H3D = ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT + ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT  !output
+      IANIM_REQUEST =ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)
 
       !Z Range (tables)
       Z1_ = 0.500000000000000
@@ -604,7 +596,7 @@ C----- /TH/SURF -------
       !-------------------------------------------!
 
 !$OMP SINGLE
-      IF(IANIM_OR_H3D > 0) THEN
+      IF(IANIM_REQUEST > 0) THEN
         DO I = 1,ISIZ_SEG
           N1=PBLAST%PBLAST_TAB(IL)%N(1,I)
           N2=PBLAST%PBLAST_TAB(IL)%N(2,I)
@@ -626,7 +618,7 @@ C----- /TH/SURF -------
           ENDIF
         ENDDO
        ENDIF
-      IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%ANIM_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%H3D_HAS_NODA_PEXT > 0) THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0) THEN
         DO I = 1,ISIZ_SEG
           N1 = PBLAST%PBLAST_TAB(IL)%N(1,I)
           N2 = PBLAST%PBLAST_TAB(IL)%N(2,I)

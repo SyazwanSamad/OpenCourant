@@ -26,27 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    i2for28p_cin   ../engine/source/interfaces/interf/i2for28p_cin.F
 !||    i2for28p_pen   ../engine/source/interfaces/interf/i2for28p_pen.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR28P(
-     .           X           ,V           ,VR          ,A           ,AR          ,
-     .           MS          ,IN          ,STIFN       ,STIFR       ,WEIGHT      ,
-     .           IRECTM      ,NSV         ,IRTLM       ,CSTS        ,SKEW        ,
-     .           DR          ,DL          ,FINI        ,FSAV        ,FNCONT      ,
-     .           NSN         ,I0          ,I2SIZE      ,IADI2       ,FSKYI2      ,
-     .           STFN_PEN    ,STFR_PEN    ,VISC        ,PENFLAG     ,IROT        ,
-     .           NOINT       ,NODNX_SMS   ,DMINT2      ,DT2T        ,NELTST      ,
-     .           ITYPTST     ,MMAS        ,SMAS        ,SINER       ,MINER       ,
-     .           MSR         ,IPENA       ,ADI         ,IDEL2       ,NIR         ,
-     .           NMN         ,DPARA       ,
-     .           NMAS        ,DMAST       ,ADM         ,H3D_DATA    ,FNCONTP     ,
-     .           FTCONTP     )
+      SUBROUTINE I2FOR28P(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, IRECTM, NSV, IRTLM, CSTS, SKEW, DR, DL, FINI,
+     . FSAV, FNCONT, NSN, I0, I2SIZE, IADI2, FSKYI2, STFN_PEN, STFR_PEN, VISC, PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2,
+     . DT2T, NELTST, ITYPTST, MMAS, SMAS, SINER, MINER, MSR, IPENA, ADI, IDEL2, NIR, NMN, DPARA, NMAS, DMAST, ADM,
+     . FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -64,10 +50,6 @@ C-----------------------------------------------
      .   CSTS(2,*),SMAS(*),MMAS(*),SINER(*),MINER(*),ADI(*),SKEW(9,*),
      .   FSKYI2(I2SIZE,*),
      .   DPARA(7,*),DMAST,ADM(*),NMAS(*),FNCONTP(3,*)   ,FTCONTP(3,*) 
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,ISN,NI,I0BASE,NINDXC,NINDXP
       INTEGER IADX(NSN),INDXC(NSN),INDXP(NSN)
 C===============================================
@@ -97,29 +79,16 @@ c
 c-----------
       IF (NINDXC > 0) THEN
         I0 = I0BASE
-        CALL I2FOR28P_CIN(
-     1       NSN      ,NMN     ,A      ,IRECTM  ,DPARA   ,
-     2       MSR      ,NSV     ,IRTLM  ,MS      ,WEIGHT  ,
-     3       AR       ,IN      ,X      ,STIFN   ,STIFR   ,
-     4       FSKYI2   ,IADI2   ,FSAV   ,DMAST   ,ADM     ,
-     5       MMAS     ,I0      ,NIR    ,I2SIZE  ,IDEL2   ,
-     6       SMAS     ,SINER   ,CSTS   ,FNCONT  ,INDXC   ,
-     7       IADX     ,H3D_DATA,FNCONTP,FTCONTP)
+      CALL I2FOR28P_CIN(NSN, NMN, A, IRECTM, DPARA, MSR, NSV, IRTLM, MS, WEIGHT, AR, IN, X, STIFN, STIFR, FSKYI2,
+     . IADI2, FSAV, DMAST, ADM, MMAS, I0, NIR, I2SIZE, IDEL2, SMAS, SINER, CSTS, FNCONT, INDXC, IADX, FNCONTP, FTCONTP)
 c
       ENDIF
 c
       IF (NINDXP > 0) THEN
         I0 = I0BASE
-        CALL I2FOR28P_PEN(                                               
-     .       X         ,V         ,VR        ,A         ,AR        ,
-     .       MS        ,IN        ,STIFN     ,STIFR     ,WEIGHT    ,
-     .       NSV       ,IRTLM     ,CSTS      ,SKEW      ,DL        ,
-     .       DR        ,FINI      ,FSAV      ,FNCONT    ,NSN       ,
-     .       I0        ,I2SIZE    ,IADI2     ,FSKYI2    ,STFN_PEN  ,
-     .       STFR_PEN  ,VISC      ,PENFLAG   ,IROT      ,NOINT     ,
-     .       NODNX_SMS ,DMINT2    ,DT2T      ,NELTST    ,ITYPTST   ,
-     .       IRECTM    ,INDXP     ,IADX      ,
-     .       H3D_DATA  ,FNCONTP   ,FTCONTP)
+      CALL I2FOR28P_PEN(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, NSV, IRTLM, CSTS, SKEW, DL, DR, FINI, FSAV,
+     . FNCONT, NSN, I0, I2SIZE, IADI2, FSKYI2, STFN_PEN, STFR_PEN, VISC, PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2, DT2T,
+     . NELTST, ITYPTST, IRECTM, INDXP, IADX, FNCONTP, FTCONTP)
 c
       ENDIF 
       I0 = I0BASE + NI                                                         

@@ -151,7 +151,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_lecgrn                              ../starter/source/groups/hm_lecgrn.F
 !||    hm_linengr                             ../starter/source/groups/hm_linengr.F
 !||    hm_lines_of_lines                      ../starter/source/groups/hm_lines_of_lines.F
-!||    hm_messages                            ../starter/source/devtools/hm_reader/hm_messages.F
+!||    hm_messages                            ../starter/source/devtools/reader/hm_messages.F
 !||    hm_prelce16s                           ../starter/source/elements/reader/hm_read_solid.F
 !||    hm_preread_bcscyc                      ../starter/source/constraints/general/bcs/lecbcscyc.F
 !||    hm_preread_bem                         ../starter/source/loads/bem/hm_read_bem.F
@@ -166,7 +166,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_preread_xelem                       ../starter/source/elements/reader/hm_preread_xelem.F
 !||    hm_print_inter_guided_cable            ../starter/source/tools/seatbelts/hm_print_inter_guided_cable.F90
 !||    hm_prop_read21                         ../starter/source/properties/thickshell/hm_read_prop21.F
-!||    hm_rbodies_add_main_node               ../starter/source/devtools/hm_reader/hm_rbodies_add_main_node.F90
+!||    hm_rbodies_add_main_node               ../starter/source/devtools/reader/hm_rbodies_add_main_node.F90
 !||    hm_read_activ                          ../starter/source/tools/activ/hm_read_activ.F
 !||    hm_read_admas                          ../starter/source/tools/admas/hm_read_admas.F
 !||    hm_read_ale_grid                       ../starter/source/general_controls/ale_grid/hm_read_ale_grid.F

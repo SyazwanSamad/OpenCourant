@@ -77,26 +77,12 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE SCFORC3(TIMERS, OUTPUT, ELBUF_TAB,NG      ,
-     1                   PM       ,GEO     ,IXS      ,X       ,
-     2                   A        ,V       ,MS       ,W       ,
-     3                   FLU1     ,VEUL    ,FV       ,ALE_CONNECT   ,IPARG    ,
-     4                   TF       ,NPF     ,BUFMAT   ,PARTSAV ,NLOC_DMG ,
-     5                   DT2T     ,NELTST  ,ITYPTST  ,STIFN   ,FSKY     ,
-     6                   IADS     ,OFFSET  ,EANI     ,IPARTS  ,
-     7                   F11      ,F21     ,F31      ,F12     ,F22      ,
-     8                   F32      ,F13     ,F23      ,F33     ,F14      ,
-     9                   F24      ,F34     ,F15      ,F25     ,F35      ,
-     A                   F16      ,F26     ,F36      ,F17     ,F27      ,
-     B                   F37      ,F18     ,F28      ,F38     ,NEL      ,
-     C                   ICP      ,ICSIG   ,NVC      ,
-     D                   IPM      ,ISTRAIN ,TEMP     ,FTHE    ,FTHESKY  ,
-     E                   IEXPAN   ,IGEO    ,GRESAV   ,GRTH    ,IGRTH    ,
-     F                   MSSA     ,DMELS   ,TABLE    ,XDP     ,VOLN     ,
-     G                   CONDN    ,CONDNSKY,ITASK    ,IOUTPRT ,MAT_ELEM ,
-     H                   H3D_STRAIN,DT,SNPC ,STF,SBUFMAT,SVIS,NSVOIS,IDTMINS,
-     I                   IRESP    ,IDEL7NG  ,IDEL7NOK,MAXFUNC,IMON_MAT,
-     J                   USERL_AVAIL, GLOB_THERM, impl_s,     idyna,SENSORS) 
+      SUBROUTINE SCFORC3(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, IXS, X, A, V, MS, W, FLU1, VEUL, FV, ALE_CONNECT,
+     . IPARG, TF, NPF, BUFMAT, PARTSAV, NLOC_DMG, DT2T, NELTST, ITYPTST, STIFN, FSKY, IADS, OFFSET, EANI, IPARTS, F11,
+     . F21, F31, F12, F22, F32, F13, F23, F33, F14, F24, F34, F15, F25, F35, F16, F26, F36, F17, F27, F37, F18, F28,
+     . F38, NEL, ICP, ICSIG, NVC, IPM, ISTRAIN, TEMP, FTHE, FTHESKY, IEXPAN, IGEO, GRESAV, GRTH, IGRTH, MSSA, DMELS,
+     . TABLE, XDP, VOLN, CONDN, CONDNSKY, ITASK, IOUTPRT, MAT_ELEM, DT, SNPC, STF, SBUFMAT, SVIS, NSVOIS, IDTMINS,
+     . IRESP, IDEL7NG, IDEL7NOK, MAXFUNC, IMON_MAT, USERL_AVAIL, GLOB_THERM, impl_s, idyna, SENSORS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -156,7 +142,7 @@ C-----------------------------------------------
       INTEGER IXS(NIXS,*),IPARG(NPARG,NGROUP),NPF(*),IADS(8,*),
      .        IPARTS(*), IPM(NPROPMI,*),IGEO(NPROPGI,*),GRTH(*),
      .        IGRTH(*),ITASK,IOUTPRT
-      INTEGER NELTST,ITYPTST,OFFSET,ICP,ICSIG,NVC,NEL,ISTRAIN,IEXPAN,NG,H3D_STRAIN
+      INTEGER NELTST,ITYPTST,OFFSET,ICP,ICSIG,NVC,NEL,ISTRAIN,IEXPAN,NG
       DOUBLE PRECISION 
      .        XDP(3,*)
       my_real
@@ -769,43 +755,15 @@ C Compute new stresses according to constitutive laws
 C Compute time step DT2T
 C------------------------------------------------------
         CURRENT_LAYER=ILAY
-        CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,    NG,          PM,        GEO,
-     2                 ALE_CONNECT, IXS,       IPARG,
-     3   V,            TF,          NPF,       BUFMAT,
-     4   STI,          X,           DT2T,      NELTST,
-     5   ITYPTST,      OFFSET,      NEL,       W,
-     6   OFF,          NGEO,        MXT,       NGL,
-     7   VOLN,         VD2,         DVOL,      DELTAX,
-     8   VIS,          QVIS,        CXX,       S1,
-     9   S2,           S3,          S4,        S5,
-     A   S6,           DXX,         DYY,       DZZ,
-     B   D4,           D5,          D6,        WXX,
-     C   WYY,          WZZ,         JAC1,      JAC2,
-     D   JAC3,         JAC4,        JAC5,      JAC6,
-     E   VDX,          VDY,         VDZ,       MUVOID,
-     F   SSP_EQ,       AIRE,        SIGY,      ET,
-     G   R1_FREE,      LBUF%PLA,    R3_FREE,   AMU,
-     H   DXX,          DXY,         DXZ,       DYX,
-     I   DYY,          DYZ,         DZX,       DZY,
-     J   DZZ,          IPM,         GAMA,      BID,
-     K   BID,          BID,         BID,       BID,
-     L   BID,          BID,         ISTRAIN,   TEMPEL,
-     M   DIE,          IEXPAN,      CURRENT_LAYER,MSSA,
-     N   DMELS,        IR,          IS,        IT,
-     O   TABLE,        BID,         BID,       BID,
-     P   BID,          IPARG(1,NG), IGEO,      CONDE,
-     Q   ITASK,        NLOC_DMG,    VAR_REG(1,ILAY),   MAT_ELEM,
-     R   H3D_STRAIN,   JPLASOL,     JSPH,      SZ_R1_FREE,
-     *   SNPC,        STF,       SBUFMAT,      GLOB_THERM,
-     *   SVIS,         SZ_IX,       IRESP,
-     *   N2D,          th_strain,   NGROUP,    TT, 
-     .   DT1,          NTABLE,      NUMELQ,    nummat,
-     .   numgeo,       numnod,      numels,      
-     .   IDEL7NOK,     IDTMIN,      MAXFUNC,
-     .   IMON_MAT,     USERL_AVAIL, impl_s,
-     .   idyna,        DT,         fheat   ,sensors, OPT_MTN=MTN,OPT_JCVT=JCVT,
-     .   OPT_ISORTH=ISORTH,OPT_ISORTHG=ISORTHG)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IXS, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, OFF, NGEO, MXT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, CXX, S1, S2, S3, S4,
+     . S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, WYY, WZZ, JAC1, JAC2, JAC3, JAC4, JAC5, JAC6, VDX, VDY, VDZ, MUVOID,
+     . SSP_EQ, AIRE, SIGY, ET, R1_FREE, LBUF%PLA, R3_FREE, AMU, DXX, DXY, DXZ, DYX, DYY, DYZ, DZX, DZY, DZZ, IPM, GAMA,
+     . BID, BID, BID, BID, BID, BID, BID, ISTRAIN, TEMPEL, DIE, IEXPAN, CURRENT_LAYER, MSSA, DMELS, IR, IS, IT, TABLE,
+     . BID, BID, BID, BID, IPARG(1,NG), IGEO, CONDE, ITASK, NLOC_DMG, VAR_REG(1,ILAY), MAT_ELEM, JPLASOL, JSPH,
+     . SZ_R1_FREE, SNPC, STF, SBUFMAT, GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ,
+     . nummat, numgeo, numnod, numels, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, fheat,
+     . sensors, OPT_MTN=MTN, OPT_JCVT=JCVT, OPT_ISORTH=ISORTH, OPT_ISORTHG=ISORTHG)
 C
         DO I=1,NEL
           SIGYM(I) = MIN(SIGYM(I),SIGY(I))

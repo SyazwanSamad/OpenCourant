@@ -34,11 +34,8 @@ Copyright>        copyright and attribution statement.
 !||    tri25ebox         ../engine/share/modules/tri25ebox.F
 !||    tri7box           ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_EXCH_PRESS(OUTPUT,
-     1    IPARI   ,INTLIST ,NBINTC  ,FNCONT ,
-     2    FTCONT  ,ISLEN7 ,IRLEN7  ,IRLEN7T ,ISLEN7T,
-     3    IRLEN20 ,ISLEN20,IRLEN20T,ISLEN20T,INTBUF_TAB,
-     4    N_CSE_FRIC_INTER, N_SCAL_CSE_EFRIC  )
+      SUBROUTINE SPMD_EXCH_PRESS(OUTPUT, IPARI, INTLIST, NBINTC, FNCONT, FTCONT, ISLEN7, IRLEN7, IRLEN7T, ISLEN7T,
+     . IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, INTBUF_TAB)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -69,10 +66,8 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       TYPE (OUTPUT_) :: OUTPUT
-      INTEGER NBINTC,ISLEN7, IRLEN7,IRLEN7T, ISLEN7T,
-     .        IRLEN20, ISLEN20, IRLEN20T, ISLEN20T,
-     .        IPARI(NPARI,*), INTLIST(*)
-      INTEGER  , INTENT(IN) :: N_SCAL_CSE_EFRIC,N_CSE_FRIC_INTER(NINTER)
+      INTEGER NBINTC, ISLEN7, IRLEN7, IRLEN7T, ISLEN7T, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IPARI(NPARI,*), INTLIST(*
+     . )
       my_real
      .        FNCONT(3,*), FTCONT(3,*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
@@ -80,12 +75,9 @@ C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
 C-----------------------------------------------
 #ifdef MPI
-      INTEGER P, L, ADD, LL, NB, LEN, SIZ, LOC_PROC, II,
-     . NIN, IDEB, N, MSGTYP, IERROR, NOD, I,
-     .        NTY, IALLOCS, IALLOCR, MSGOFF,INTERFRIC,LF,
-     .        STATUS(MPI_STATUS_SIZE),DEBUT(NINTER),
-     .        ADDS(NSPMD+1), ADDR(NSPMD+1),
-     .        REQ_SI(NSPMD),REQ_RI(NSPMD)
+      INTEGER P, L, ADD, LL, NB, LEN, SIZ, LOC_PROC, II, NIN, IDEB, N, MSGTYP, IERROR, NOD, I, NTY, IALLOCS, IALLOCR,
+     . MSGOFF, LF, STATUS(MPI_STATUS_SIZE), DEBUT(NINTER), ADDS(NSPMD+1), ADDR(NSPMD+1), REQ_SI(NSPMD),
+     . REQ_RI(NSPMD)
       DATA MSGOFF/190/
       my_real       ,DIMENSION(:), ALLOCATABLE :: BBUFS, BBUFR
 C-----------------------------------------------
@@ -95,10 +87,6 @@ C-----------------------------------------------
 C
         LEN = 7
         IF(OUTPUT%DATA%NINEFRIC > 0) LEN = LEN +1
-        IF(N_SCAL_CSE_EFRIC > 0)  LEN = LEN +1
-C
-C Partie 1 envoi et preparation buffer reception
-C
         DO II = 1, NBINTC
           NIN = INTLIST(II)
           DEBUT(NIN) = 0
@@ -167,7 +155,6 @@ C   In addition test to know if global compartment required between the 2 procs
               IDEB = DEBUT(NIN)
               NB = NSNFI(NIN)%P(P)
               NTY  = IPARI(7,NIN)
-              INTERFRIC = N_CSE_FRIC_INTER(NIN)
               IF(NTY==7.OR.NTY==10.OR.NTY==20.OR.NTY==22.OR.
      .           NTY==23.OR.NTY==24.OR.NTY==25) THEN
                IF(NB>0) THEN
@@ -184,17 +171,9 @@ C node generating force
                     BBUFS(L+6) = FTCONTI(NIN)%P(2,IDEB+N)
                     BBUFS(L+7) = FTCONTI(NIN)%P(3,IDEB+N)
                     LF = 7
-                    IF(INTERFRIC>0) THEN
-                        BBUFS(L+LF+1) = EFRICFI(NIN)%P(IDEB+N)
-                        EFRICFI(NIN)%P(IDEB+N) = ZERO
-                        LF=LF+1
-                    ELSEIF(OUTPUT%DATA%NINEFRIC>0) THEN
+      IF(OUTPUT%DATA%NINEFRIC>0) THEN
                         BBUFS(L+LF+1) = ZERO
                         LF=LF+1
-                    ENDIF
-                    IF(N_SCAL_CSE_EFRIC>0) THEN
-                        BBUFS(L+LF+1) = EFRICGFI(NIN)%P(IDEB+N)
-                        EFRICGFI(NIN)%P(IDEB+N) = ZERO
                     ENDIF
                     FNCONTI(NIN)%P(1,IDEB+N) = ZERO
                     FNCONTI(NIN)%P(2,IDEB+N) = ZERO
@@ -202,29 +181,6 @@ C node generating force
                     FTCONTI(NIN)%P(1,IDEB+N) = ZERO
                     FTCONTI(NIN)%P(2,IDEB+N) = ZERO
                     FTCONTI(NIN)%P(3,IDEB+N) = ZERO  
-                    L = L + LEN
-                  ELSEIF(INTERFRIC > 0.OR.N_SCAL_CSE_EFRIC>0) THEN
-C node not generating force but energy is cumulated
-                    BBUFS(L+1) = NSVFI(NIN)%P(IDEB+N)
-                    BBUFS(L+2) = ZERO
-                    BBUFS(L+3) = ZERO
-                    BBUFS(L+4) = ZERO
-                    BBUFS(L+5) = ZERO
-                    BBUFS(L+6) = ZERO
-                    BBUFS(L+7) = ZERO
-                    LF = 7
-                    IF(INTERFRIC>0) THEN
-                        BBUFS(L+LF+1) = EFRICFI(NIN)%P(IDEB+N)
-                        EFRICFI(NIN)%P(IDEB+N) = ZERO
-                        LF=LF+1
-                    ELSEIF(OUTPUT%DATA%NINEFRIC>0) THEN
-                        BBUFS(L+LF+1) = ZERO
-                        LF=LF+1
-                    ENDIF
-                    IF(N_SCAL_CSE_EFRIC>0) THEN
-                        BBUFS(L+LF+1) = EFRICGFI(NIN)%P(IDEB+N)
-                        EFRICGFI(NIN)%P(IDEB+N) = ZERO
-                    ENDIF
                     L = L + LEN
                   ENDIF
                 ENDDO
@@ -258,7 +214,6 @@ C
               NIN = INTLIST(II)
               IF(NSNSI(NIN)%P(P)>0)THEN
                 NTY   =IPARI(7,NIN)
-                INTERFRIC = N_CSE_FRIC_INTER(NIN)
                 IF(NTY==7.OR.NTY==10.OR.NTY==20.OR.NTY==22.OR.
      .             NTY==23.OR.NTY==24.OR.NTY==25)THEN
                   NB = NINT(BBUFR(L))
@@ -277,14 +232,8 @@ C
                       FTCONT(2,NOD) = FTCONT(2,NOD) + BBUFR(L+LEN*(I-1)+5)
                       FTCONT(3,NOD) = FTCONT(3,NOD) + BBUFR(L+LEN*(I-1)+6)
                       LF = 6
-                      IF(INTERFRIC>0) THEN
-                          OUTPUT%DATA%EFRIC(INTERFRIC,NOD)= OUTPUT%DATA%EFRIC(INTERFRIC,NOD)+ BBUFR(L+LEN*(I-1)+LF+1)
-                          LF = LF+1
-                      ELSEIF(OUTPUT%DATA%NINEFRIC>0) THEN
+      IF(OUTPUT%DATA%NINEFRIC>0) THEN
                         LF=LF+1
-                      ENDIF
-                      IF(N_SCAL_CSE_EFRIC>0) THEN
-                         OUTPUT%DATA%EFRICG(NOD)= OUTPUT%DATA%EFRICG(NOD)+ BBUFR(L+LEN*(I-1)+LF+1)
                       ENDIF
                     ENDIF
                   ENDDO

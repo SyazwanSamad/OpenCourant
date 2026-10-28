@@ -24,18 +24,14 @@ Copyright>        copyright and attribution statement.
 !||    monvol0            ../engine/source/airbag/monvol0.F
 !||--- uses       -----------------------------------------------------
 !||    finter_mixed_mod   ../engine/source/tools/finter_mixed.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE VOLPRE(IVOLU ,RVOLU   ,NJET    ,IBAGJET ,RBAGJET  ,
-     2                NSENSOR ,SENSOR_TAB,X       ,V       ,A        ,
-     3                NORMAL  ,NPC     ,TF      ,NN      ,SURF_NODES,
-     4                FEXT    ,H3D_DATA,SURF_ELTYP,SURF_ELEM,WFEXT,PYTHON)
+      SUBROUTINE VOLPRE(IVOLU, RVOLU, NJET, IBAGJET, RBAGJET, NSENSOR, SENSOR_TAB, X, V, A, NORMAL, NPC, TF, NN,
+     . SURF_NODES, FEXT, SURF_ELTYP, SURF_ELEM, WFEXT, PYTHON)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
       USE SENSOR_MOD
       USE python_funct_mod
       USE finter_mixed_mod
@@ -58,7 +54,6 @@ C-----------------------------------------------
       INTEGER ,INTENT(IN) :: NSENSOR
       INTEGER IVOLU(*),NJET,IBAGJET(NIBJET,*),NPC(*),NN,SURF_NODES(NN,4),SURF_ELTYP(NN),SURF_ELEM(NN)
       my_real RVOLU(*),RBAGJET(NRBJET,*), X(3,*), V(3,*), A(3,*), NORMAL(3,NN),TF(*),FEXT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       DOUBLE PRECISION, INTENT(INOUT) :: WFEXT
       TYPE(PYTHON_), intent(inout) :: PYTHON
@@ -113,7 +108,7 @@ C
           A(1,N4)=A(1,N4)+FX
           A(2,N4)=A(2,N4)+FY
           A(3,N4)=A(3,N4)+FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ
@@ -150,7 +145,7 @@ C
           A(1,N3)=A(1,N3)+FX
           A(2,N3)=A(2,N3)+FY
           A(3,N3)=A(3,N3)+FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ
@@ -189,7 +184,7 @@ C
           A(1,N4)=A(1,N4)+FX
           A(2,N4)=A(2,N4)+FY
           A(3,N4)=A(3,N4)+FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ
@@ -310,7 +305,7 @@ C
           A(2,N4)=A(2,N4)+FY
           A(3,N4)=A(3,N4)+FZ
 C
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ
@@ -399,8 +394,7 @@ C
           A(2,N3)=A(2,N3)+FY
           A(3,N3)=A(3,N3)+FZ
 C
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ
@@ -495,8 +489,7 @@ C
           A(2,N4)=A(2,N4)+FY
           A(3,N4)=A(3,N4)+FZ
 C
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             FEXT(1,N1) = FEXT(1,N1)+FX
             FEXT(2,N1) = FEXT(2,N1)+FY
             FEXT(3,N1) = FEXT(3,N1)+FZ

@@ -24,8 +24,8 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_inter_struct   ../starter/source/interfaces/reader/hm_read_inter_struct.F
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                 ../starter/source/output/message/message.F
-!||    hm_get_floatv          ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv            ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv          ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv            ../starter/source/devtools/reader/hm_get_intv.F
 !||    ngr2usr                ../starter/source/system/nintrr.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod           ../starter/share/modules1/elbuftag_mod.F

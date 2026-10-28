@@ -49,10 +49,8 @@ Copyright>        copyright and attribution statement.
 !||    forintc            ../engine/source/elements/forintc.F
 !||    genani             ../engine/source/output/anim/generate/genani.F
 !||    gendynain          ../engine/source/output/dynain/gendynain.F
-!||    genh3d             ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    genoutp            ../engine/source/output/sty/genoutp.F
 !||    genstat            ../engine/source/output/sta/genstat.F
-!||    h3d_shell_tensor   ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
 !||    imp_buck           ../engine/source/implicit/imp_buck.F
 !||    imp_chkm           ../engine/source/implicit/imp_solv.F
 !||    imp_glob_k         ../engine/source/implicit/imp_glob_k.F

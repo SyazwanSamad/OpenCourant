@@ -1,0 +1,1335 @@
+{
+  "status": "passed",
+  "comparison_tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  },
+  "models": [
+    {
+      "name": "accelerometer",
+      "source": "C:\\Programming\\OpenCourant\\qa-tests\\miniqa\\ACCELEROMETRES\\data\\ACCELERO_0000.rad",
+      "engine_run": true,
+      "variants": [
+        {
+          "reader": "v82",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+                "-i",
+                "ACCELERO_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.8163176999996722
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "ACCELERO_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.08623390000002473
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2017,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 207,
+            "NUMSKW": 0,
+            "NUMBCS": 2,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 160,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 2,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 2,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 1,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 1
+          },
+          "rigid_bodies": {
+            "207": {
+              "mass": 0.0007607141,
+              "center": [
+                -67.11585,
+                8.576759e-07,
+                1.172344e-25
+              ],
+              "diagonal": [
+                0.0277621,
+                0.06398577,
+                0.08973119
+              ],
+              "off_diagonal": [
+                6.479154e-11,
+                1.240169e-29,
+                -8.575595e-28
+              ],
+              "nodes": {
+                "count": 35,
+                "sorted_ids_sha256": "dcfa217d5c1ef84076831d544834ff9b0ec46a8ff5d24acfdb846c908071b58f"
+              }
+            },
+            "208": {
+              "mass": 0.0007607138,
+              "center": [
+                67.11586,
+                -6.283512e-08,
+                1.172344e-25
+              ],
+              "diagonal": [
+                0.02776209,
+                0.06398571,
+                0.08973112
+              ],
+              "off_diagonal": [
+                2.633414e-09,
+                1.240168e-29,
+                8.575596e-28
+              ],
+              "nodes": {
+                "count": 35,
+                "sorted_ids_sha256": "278681b013dd1c218b90cefeba1e511b319fb22e9b464cb2a6e8c175f31b2476"
+              }
+            }
+          },
+          "warnings": [
+            "100214",
+            "680",
+            "100214",
+            "680"
+          ],
+          "errors": [],
+          "warning_total": 2,
+          "error_total": 0,
+          "listing_sha256": "ecff405ef9b171fc6d0a5713b35d20b51126469edfee26490c61185ebc77574d",
+          "restart_files": [
+            {
+              "name": "ACCELERO_0000_0001.rst",
+              "bytes": 503538,
+              "sha256": "583aeb511edb6ea40b8cbc07c4e2259123cf4a74252050f9022956f0a9f40a8b"
+            },
+            {
+              "name": "ACCELERO_0001_0001.rst",
+              "bytes": 503858,
+              "sha256": "fd1d4aa4d7ad2bfda3c486c63e2bc31bcad183e4deb45e77b40e01a54c787074"
+            }
+          ],
+          "history": {
+            "samples": 11,
+            "record_widths": [
+              1,
+              23,
+              3,
+              12,
+              55,
+              18
+            ],
+            "final_time": 0.02538391388952732,
+            "sha256": "29fc20edbe70a0643e9b3700401c1c18f0b989c3058a76b548e45719f7420c13"
+          }
+        },
+        {
+          "reader": "openreader",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+                "-i",
+                "ACCELERO_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.793138099999851
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "ACCELERO_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.07739959999980783
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2017,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 207,
+            "NUMSKW": 0,
+            "NUMBCS": 2,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 160,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 2,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 2,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 1,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 1
+          },
+          "rigid_bodies": {
+            "207": {
+              "mass": 0.0007607141,
+              "center": [
+                -67.11585,
+                8.576759e-07,
+                1.172344e-25
+              ],
+              "diagonal": [
+                0.0277621,
+                0.06398577,
+                0.08973119
+              ],
+              "off_diagonal": [
+                6.479154e-11,
+                1.240169e-29,
+                -8.575595e-28
+              ],
+              "nodes": {
+                "count": 35,
+                "sorted_ids_sha256": "dcfa217d5c1ef84076831d544834ff9b0ec46a8ff5d24acfdb846c908071b58f"
+              }
+            },
+            "208": {
+              "mass": 0.0007607138,
+              "center": [
+                67.11586,
+                -6.283512e-08,
+                1.172344e-25
+              ],
+              "diagonal": [
+                0.02776209,
+                0.06398571,
+                0.08973112
+              ],
+              "off_diagonal": [
+                2.633414e-09,
+                1.240168e-29,
+                8.575596e-28
+              ],
+              "nodes": {
+                "count": 35,
+                "sorted_ids_sha256": "278681b013dd1c218b90cefeba1e511b319fb22e9b464cb2a6e8c175f31b2476"
+              }
+            }
+          },
+          "warnings": [
+            "680",
+            "680"
+          ],
+          "errors": [],
+          "warning_total": 1,
+          "error_total": 0,
+          "listing_sha256": "35bda169b1409ef2e2c6112ee61a370df9f492c127f36c4bb09c592c8cc19622",
+          "restart_files": [
+            {
+              "name": "ACCELERO_0000_0001.rst",
+              "bytes": 503538,
+              "sha256": "78261d094c2bd8601eab72d7a89774bdbfe85c65b73b35f73ace68a300ed83a2"
+            },
+            {
+              "name": "ACCELERO_0001_0001.rst",
+              "bytes": 503858,
+              "sha256": "fd826b59055715d1e9220b6c29792a3bc32525eecd20c72bc41f0bc8974c1000"
+            }
+          ],
+          "history": {
+            "samples": 11,
+            "record_widths": [
+              1,
+              23,
+              3,
+              12,
+              55,
+              18
+            ],
+            "final_time": 0.02538391388952732,
+            "sha256": "e444b951b87230a9586169b9051e7cb0602d937c19ccd7a55bee7104d269d842"
+          }
+        }
+      ],
+      "source_hashes": {
+        "ACCELERO_0000.rad": "55767fa07a9642cc61fdc3f881254e3da5bea802232b157b3bfd74e27795a63b",
+        "ACCELERO_0001.rad": "ad9734994ae5a630dfe6eda700cf974573376a735ea64fe79b826ecb57dcefa5",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "max_history_absolute_difference": 0.0,
+      "status": "passed"
+    },
+    {
+      "name": "friction",
+      "source": "C:\\Programming\\OpenCourant\\qa-tests\\miniqa\\INTERF\\INT_7\\friction\\data\\FRICT41_0000.rad",
+      "engine_run": true,
+      "variants": [
+        {
+          "reader": "v82",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+                "-i",
+                "FRICT41_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.7262511999997514
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "FRICT41_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.2345607000002019
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2019,
+            "NSUBS": 1,
+            "NPART": 3,
+            "NUMMAT": 1,
+            "NUMGEO": 3,
+            "NUMNOD": 12,
+            "NUMSKW": 0,
+            "NUMBCS": 1,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 3,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 2,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 2,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 1,
+            "NRWALL": 1,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 3
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "100214",
+            "1912",
+            "1912",
+            "100214",
+            "1912"
+          ],
+          "errors": [],
+          "warning_total": 3,
+          "error_total": 0,
+          "listing_sha256": "0991b7693666505c2e3e8d4805dc36fa12c6634d8582fa63911c42523be0a9cb",
+          "restart_files": [
+            {
+              "name": "FRICT41_0000_0001.rst",
+              "bytes": 329653,
+              "sha256": "d8c90ec7b59bba4596e50e7ee67fc7179b39573533947f08c58d130ed093b55f"
+            },
+            {
+              "name": "FRICT41_0001_0001.rst",
+              "bytes": 330453,
+              "sha256": "1964d36815aaf3996e8902e27161a8a68e703da160ff645550b399784a85ec46"
+            }
+          ],
+          "history": {
+            "samples": 100,
+            "record_widths": [
+              1,
+              23,
+              27,
+              6,
+              6,
+              36,
+              33
+            ],
+            "final_time": 0.0009905647020787,
+            "sha256": "2717ab0587cb579758e1c70794f86d779bc468093ac61f69243142e3ac491492"
+          }
+        },
+        {
+          "reader": "openreader",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+                "-i",
+                "FRICT41_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.7558823999997912
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "FRICT41_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.2125970000001871
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2019,
+            "NSUBS": 1,
+            "NPART": 3,
+            "NUMMAT": 1,
+            "NUMGEO": 3,
+            "NUMNOD": 12,
+            "NUMSKW": 0,
+            "NUMBCS": 1,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 3,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 2,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 2,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 1,
+            "NRWALL": 1,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 3
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "1912",
+            "1912",
+            "1912"
+          ],
+          "errors": [],
+          "warning_total": 2,
+          "error_total": 0,
+          "listing_sha256": "266c2482f167d335fc936986d832841008fd47602d20cdf759e8c0eaceac0e72",
+          "restart_files": [
+            {
+              "name": "FRICT41_0000_0001.rst",
+              "bytes": 329653,
+              "sha256": "cebdfc3c7ccba91cecba54c1d3707f5832b24db94d98b86eaedfb10912633b41"
+            },
+            {
+              "name": "FRICT41_0001_0001.rst",
+              "bytes": 330453,
+              "sha256": "c656aca3dce11fb6df172a1ec7cacb77bb304ce90c56dc57fdeef996a9302c80"
+            }
+          ],
+          "history": {
+            "samples": 100,
+            "record_widths": [
+              1,
+              23,
+              27,
+              6,
+              6,
+              36,
+              33
+            ],
+            "final_time": 0.0009905647020787,
+            "sha256": "c5dd7870e4e452eb848e2769f72bf4dece81b989fc62b9360daf66e4b9301d3c"
+          }
+        }
+      ],
+      "source_hashes": {
+        "FRICT41_0000.rad": "4cf18747d6c3dee6ee63bcf5dfc556250db8f14235cc05b8a7c0d3b1b13c6314",
+        "FRICT41_0001.rad": "99d4fddcf9e42e5ddcde4e158090e64e6d91ea8f56bb4ffde56fe84843415ceb",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "max_history_absolute_difference": 0.0,
+      "status": "passed"
+    },
+    {
+      "name": "shell3",
+      "source": "C:\\Programming\\OpenCourant\\qa-tests\\miniqa\\COQUES3N\\ct3a\\data\\CT3AV4_0000.rad",
+      "engine_run": true,
+      "variants": [
+        {
+          "reader": "v82",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+                "-i",
+                "CT3AV4_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.6903320999999778
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "CT3AV4_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.24021140000013474
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2019,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 32,
+            "NUMSKW": 0,
+            "NUMBCS": 6,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 0,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 40,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 1,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 1
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "100214",
+            "100214"
+          ],
+          "errors": [],
+          "warning_total": 1,
+          "error_total": 0,
+          "listing_sha256": "57a530b2a4dab58f661fa10ac9735bcb562c1ad1822703148e0b1aa22f89ea7e",
+          "restart_files": [
+            {
+              "name": "CT3AV4_0000_0001.rst",
+              "bytes": 359600,
+              "sha256": "91a09d765e4b5d93cc0a7e26b16f5668e185ae79affd4f850d464bd6fd20308f"
+            },
+            {
+              "name": "CT3AV4_0001_0001.rst",
+              "bytes": 359872,
+              "sha256": "02b09f0417b7be6a7de5a7d288f626c410d5bc6a8a9161216f5a11c4dfe19d52"
+            }
+          ],
+          "history": {
+            "samples": 100,
+            "record_widths": [
+              1,
+              23,
+              9,
+              192,
+              440
+            ],
+            "final_time": 1980.2359619140625,
+            "sha256": "339ded02a2e48694393b34a3bdc9d3016727c5146ed9525f87cff0620ec8330f"
+          }
+        },
+        {
+          "reader": "openreader",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+                "-i",
+                "CT3AV4_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.6995173999998769
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "CT3AV4_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.24792370000022856
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2019,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 32,
+            "NUMSKW": 0,
+            "NUMBCS": 6,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 0,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 40,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 1,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2,
+            "PART": 1
+          },
+          "rigid_bodies": {},
+          "warnings": [],
+          "errors": [],
+          "warning_total": 0,
+          "error_total": 0,
+          "listing_sha256": "8bd28a294fbfa9c16541c2eb256cab3f76a7dfc445a69bb9ba483ddc20b7f444",
+          "restart_files": [
+            {
+              "name": "CT3AV4_0000_0001.rst",
+              "bytes": 359600,
+              "sha256": "ca4cb51e13505620cf61ed90992dc4a9bf44add7bcd2a202a18254370848ba5b"
+            },
+            {
+              "name": "CT3AV4_0001_0001.rst",
+              "bytes": 359872,
+              "sha256": "2298cfb837dd4df683215d3780454c5ba2cbb4ae7a5f980765a71293a053b4e9"
+            }
+          ],
+          "history": {
+            "samples": 100,
+            "record_widths": [
+              1,
+              23,
+              9,
+              192,
+              440
+            ],
+            "final_time": 1980.2359619140625,
+            "sha256": "998553a01b0681f3b1f335a1017d431873e9af507007211d0ad280391f3d1e31"
+          }
+        }
+      ],
+      "source_hashes": {
+        "CT3AV4_0000.rad": "748bc6cc7c4bb8216e7db5c04fde89247acebcd5963864024d8d2a083cc2ebf3",
+        "CT3AV4_0001.rad": "1d918d902b2db9b3301c44de8df8ae7d3631dc23175624d369633a5a12cdd498",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "max_history_absolute_difference": 0.0,
+      "status": "passed"
+    },
+    {
+      "name": "ale2d",
+      "source": "C:\\Programming\\OpenCourant\\qa-tests\\miniqa\\ALE2D\\bar2_v41\\data\\BAR2V41B_0000.rad",
+      "engine_run": true,
+      "variants": [
+        {
+          "reader": "v82",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+                "-i",
+                "BAR2V41B_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.6942393999997876
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "BAR2V41B_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.4985881999996309
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2017,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 306,
+            "NUMSKW": 1,
+            "NUMBCS": 7,
+            "NUMFRAM": 0,
+            "NUMELQ": 250,
+            "NUMELS": 0,
+            "NUMELC": 0,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 2,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "ISFINT": 3,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "100214",
+            "100214"
+          ],
+          "errors": [],
+          "warning_total": 1,
+          "error_total": 0,
+          "listing_sha256": "2a001bfada6259699ee853aec2f305b1c6720e462bdcee39c3e4c6fb49c0ac41",
+          "restart_files": [
+            {
+              "name": "BAR2V41B_0000_0001.rst",
+              "bytes": 451866,
+              "sha256": "da5ff67831fed07afec5c4f5e2a63713706a8f3a855974394ed726be551a42a6"
+            },
+            {
+              "name": "BAR2V41B_0001_0001.rst",
+              "bytes": 452138,
+              "sha256": "45f974c13881d5dfdcf2be3a3a85fbe9004fa53081bc4192f7aa167bd9244b1a"
+            }
+          ],
+          "history": {
+            "samples": 800,
+            "record_widths": [
+              1,
+              23,
+              9,
+              36,
+              55
+            ],
+            "final_time": 79.9017333984375,
+            "sha256": "822d01ae64de3011a82cf4e53a1c81fc8fde7c460686ae56b6bce6077fa55bab"
+          }
+        },
+        {
+          "reader": "openreader",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+                "-i",
+                "BAR2V41B_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.75115199999982
+            },
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+                "-i",
+                "BAR2V41B_0001.rad",
+                "-nt",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 0.49352790000011737
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2017,
+            "NSUBS": 1,
+            "NPART": 1,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 306,
+            "NUMSKW": 1,
+            "NUMBCS": 7,
+            "NUMFRAM": 0,
+            "NUMELQ": 250,
+            "NUMELS": 0,
+            "NUMELC": 0,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 2,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 0,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "ISFINT": 3,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 2
+          },
+          "rigid_bodies": {},
+          "warnings": [],
+          "errors": [],
+          "warning_total": 0,
+          "error_total": 0,
+          "listing_sha256": "66d26d6c3fef7ef7b778803d2e57f049ec0c62566a15bab08e10a5cf38beb938",
+          "restart_files": [
+            {
+              "name": "BAR2V41B_0000_0001.rst",
+              "bytes": 451866,
+              "sha256": "6b7e8e63229d571c43ba7ffb7f29ecc113e924ab71bdcf48bbc84eb8900ecc8b"
+            },
+            {
+              "name": "BAR2V41B_0001_0001.rst",
+              "bytes": 452138,
+              "sha256": "48ae0b22e9cb77d66227b3cff722a6cdbecb67bd348a3c55639a3cc15943de7c"
+            }
+          ],
+          "history": {
+            "samples": 800,
+            "record_widths": [
+              1,
+              23,
+              9,
+              36,
+              55
+            ],
+            "final_time": 79.9017333984375,
+            "sha256": "426a99af3abcbbe795331d9f8831a2fbcf774545b6736445672dc719d28164de"
+          }
+        }
+      ],
+      "source_hashes": {
+        "BAR2V41B_0000.rad": "2d37d3882fa1f6954d545485c9d5db2af73ea81403dd663030f66b166085bf17",
+        "BAR2V41B_0001.rad": "d9e2236447880e2a7382d282da3389a7d75433a5ce7881050a44af68efd4e3b5",
+        "qadiags.inc": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+      },
+      "max_history_absolute_difference": 0.0,
+      "status": "passed"
+    },
+    {
+      "name": "lsdyna-contact",
+      "source": "C:\\Programming\\OpenCourant\\qa-tests\\reader\\contact_groups\\case_0000.rad",
+      "engine_run": false,
+      "variants": [
+        {
+          "reader": "v82",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+                "-i",
+                "case_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 2.145951999999852
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2612,
+            "NSUBS": 1,
+            "NPART": 2,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 8,
+            "NUMSKW": 0,
+            "NUMBCS": 0,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 2,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 1,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 0
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "1084",
+            "1084",
+            "1084"
+          ],
+          "errors": [],
+          "warning_total": 2,
+          "error_total": 0,
+          "listing_sha256": "3afe1301cd5fa8d6d5a49c74a28cf9ab8c3509ef632393c7defe45b195bcbf13",
+          "restart_files": [
+            {
+              "name": "case_0000_0001.rst",
+              "bytes": 286254,
+              "sha256": "9304d27a8e6f154b98e47831f40cf2046798aec8875e4df4abe3da9042fe23b4"
+            }
+          ]
+        },
+        {
+          "reader": "openreader",
+          "runs": [
+            {
+              "command": [
+                "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+                "-i",
+                "case_0000.rad",
+                "-np",
+                "1"
+              ],
+              "exit_code": 0,
+              "elapsed_seconds": 2.192309000000023
+            }
+          ],
+          "model_counts": {
+            "INVERS": 2612,
+            "NSUBS": 1,
+            "NPART": 2,
+            "NUMMAT": 1,
+            "NUMGEO": 1,
+            "NUMNOD": 8,
+            "NUMSKW": 0,
+            "NUMBCS": 0,
+            "NUMFRAM": 0,
+            "NUMELQ": 0,
+            "NUMELS": 0,
+            "NUMELC": 2,
+            "NUMELT": 0,
+            "NUMELP": 0,
+            "NUMELR": 0,
+            "NUMELTG": 0,
+            "NUMELX": 0,
+            "NUMELIG3D": 0,
+            "NSPHBCS": 0,
+            "NFUNCT": 0,
+            "NGRAV": 0,
+            "NFUNC2D": 0,
+            "NINIGRV": 0,
+            "NCONLD": 0,
+            "NINVEL": 0,
+            "NPRELD": 0,
+            "NINIMAP1D": 0,
+            "NINIMAP2D": 0,
+            "NINTER": 1,
+            "NRWALL": 0,
+            "NRBODY": 0,
+            "NFXBODY": 0,
+            "NODMAS": 0,
+            "NIMPDISP": 0,
+            "NIMPVEL": 0,
+            "NIMPACC": 0,
+            "NRIVET": 0,
+            "NJOINT": 0,
+            "NACTIV": 0,
+            "NDAMP": 0,
+            "NGJOINT": 0,
+            "NUMMPC": 0,
+            "NR2RLNK": 0,
+            "NSUBDOM": 0,
+            "NVOLU": 0,
+            "NEIG": 0,
+            "NBEM": 0,
+            "NRBE2": 0,
+            "NRBE3": 0,
+            "IPARITH": 1,
+            "IOFFSET": 0,
+            "ICONTROL": 0,
+            "ISHFRAM": 0
+          },
+          "rigid_bodies": {},
+          "warnings": [
+            "1084",
+            "1084",
+            "1084"
+          ],
+          "errors": [],
+          "warning_total": 2,
+          "error_total": 0,
+          "listing_sha256": "25544e94b879c194da05b5e0822e39fa23da8f325dc45cad38c1b4fcc4449a42",
+          "restart_files": [
+            {
+              "name": "case_0000_0001.rst",
+              "bytes": 286206,
+              "sha256": "ad2ca855e7f5c189e615732efb76f4e1e9e98dea92ad0bead35c850d6ba79e17"
+            }
+          ]
+        }
+      ],
+      "source_hashes": {
+        "case_0000.rad": "544c5c921facc8883894c8e9c220418a6fe5472599e67e18531c0c5996a06fbe",
+        "contact.key": "1a534c97bcb19e62f7a6bcafcf3866ad8b980798681b3ddf81911b39723b771c"
+      },
+      "status": "passed"
+    }
+  ],
+  "failed_input_checks": [
+    {
+      "case": "missing-native",
+      "reader": "v82",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+        "-i",
+        "absent_0000.rad",
+        "-np",
+        "1"
+      ],
+      "exit_code": 2,
+      "restart_files": 0,
+      "log_sha256": "ebc3645a8faf27dd82456dbad8320d51b0a31b2315dc718c386e8dd5d4678b2e"
+    },
+    {
+      "case": "missing-native",
+      "reader": "openreader",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+        "-i",
+        "absent_0000.rad",
+        "-np",
+        "1"
+      ],
+      "exit_code": 2,
+      "restart_files": 0,
+      "log_sha256": "ebc3645a8faf27dd82456dbad8320d51b0a31b2315dc718c386e8dd5d4678b2e"
+    },
+    {
+      "case": "missing-keyword-include",
+      "reader": "v82",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-v82.exe",
+        "-i",
+        "case_0000.rad",
+        "-np",
+        "1"
+      ],
+      "exit_code": 2,
+      "restart_files": 0,
+      "log_sha256": "12310740071841ee0ea13b6670be14760d7057ccacc192fb2e2b0a0f6f5c0c1c"
+    },
+    {
+      "case": "missing-keyword-include",
+      "reader": "openreader",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_baseline_20261028\\binaries\\starter-openreader.exe",
+        "-i",
+        "case_0000.rad",
+        "-np",
+        "1"
+      ],
+      "exit_code": 2,
+      "restart_files": 0,
+      "log_sha256": "c0835e850715aa398f70722c0047839040efaa831a193c834258b9fa5b923690"
+    }
+  ]
+}

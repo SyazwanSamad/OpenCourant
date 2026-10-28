@@ -23,13 +23,13 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    st_qaprint_driver           ../starter/source/output/qaprint/st_qaprint_driver.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
-!||    hm_get_int_array_index      ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv                 ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_get_string               ../starter/source/devtools/hm_reader/hm_get_string.F
-!||    hm_get_string_index         ../starter/source/devtools/hm_reader/hm_get_string_index.F
-!||    hm_option_read_key          ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start             ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_index      ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv                 ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_get_string               ../starter/source/devtools/reader/hm_get_string.F
+!||    hm_get_string_index         ../starter/source/devtools/reader/hm_get_string_index.F
+!||    hm_option_read_key          ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start             ../starter/source/devtools/reader/hm_option_start.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod                ../starter/share/modules1/submodel_mod.F

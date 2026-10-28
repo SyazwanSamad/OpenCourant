@@ -28,21 +28,12 @@ Copyright>        copyright and attribution statement.
 !||    i2rep         ../common_source/interf/i2rep.F
 !||    i2sms26       ../engine/source/interfaces/interf/i2sms26.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR26P(X       ,V       ,VR      ,A        ,AR      ,
-     .                   MS      ,STIFN    ,STIFR   ,WEIGHT   ,IRECT   ,
-     .                   NSV     ,IRTL     ,DR      ,DL       ,FINI    ,
-     .                   FSAV    ,FNCONT   ,NSN     ,I0       ,I2SIZE  ,
-     .                   IADI2   ,FSKYI2   ,STFN    ,STFR     ,VISC    ,
-     .                   NOINT   ,NODNX_SMS,DMINT2  ,IN       ,DT2T    ,
-     .                   NELTST  ,ITYPTST  ,H3D_DATA,FNCONTP  ,FTCONTP )
+      SUBROUTINE I2FOR26P(X, V, VR, A, AR, MS, STIFN, STIFR, WEIGHT, IRECT, NSV, IRTL, DR, DL, FINI, FSAV, FNCONT, NSN,
+     . I0, I2SIZE, IADI2, FSKYI2, STFN, STFR, VISC, NOINT, NODNX_SMS, DMINT2, IN, DT2T, NELTST, ITYPTST, FNCONTP,
+     . FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
@@ -64,10 +55,6 @@ C     REAL
      .   DL(3,4,*),DR(3,4,*),STIFN(*),STIFR(*),STFN(*),STFR(*),
      .   FSAV(*),FNCONT(3,*),FSKYI2(I2SIZE,*),DMINT2(4,*),FNCONTP(3,*),
      .   FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "com06_c.inc"
 #include      "com08_c.inc"
@@ -457,7 +444,7 @@ C
            FSAV(5) = FSAV(5) + FT(2)*DT1*W
            FSAV(6) = FSAV(6) + FT(3)*DT1*W
 C
-           IF (ANIM_V(13)+H3D_DATA%N_VECT_CONT2 > 0) THEN
+      IF (ANIM_V(13)>0) THEN
              FNCONT(1,I)  = FNCONT(1,I)  - FX(IR) * W
              FNCONT(2,I)  = FNCONT(2,I)  - FY(IR) * W
              FNCONT(3,I)  = FNCONT(3,I)  - FZ(IR) * W
@@ -466,7 +453,7 @@ C
              FNCONT(3,IRECT(IR,L)) = FNCONT(3,IRECT(IR,L)) + FZ(IR)*W
            ENDIF
 
-          IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2>0) THEN ! Normal/Tangential forces output
+      IF(ANIM_V(27)>0) THEN
             FNCONTP(1,I) = FNCONTP(1,I)  - FN(1) * W
             FNCONTP(2,I) = FNCONTP(2,I)  - FN(2) * W
             FNCONTP(3,I) = FNCONTP(3,I)  - FN(3) * W

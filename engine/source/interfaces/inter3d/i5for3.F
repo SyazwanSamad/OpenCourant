@@ -25,23 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I5FOR3(OUTPUT,LFT   ,LLT   ,NFT   ,
-     2                  E     ,MSR   ,NSV   ,IRTL  ,STF   ,
-     3                  STFN  ,IBC   ,ICODT ,FSAV  ,IGIMP ,
-     4                  FSKYI ,ISKY  ,FCONT ,FNCONT,ICONTACT,
-     5                  IBAG  ,IADM  ,H3D_DATA,
-     6                  IX1   ,IX2   ,IX3     ,IX4    ,N1    ,
-     7                  N2    ,N3    ,XFACE   ,H1     ,H2    ,
-     8                  H3    ,H4    ,THK     ,ANS    ,STIF  ,
-     9                  FNI )
+      SUBROUTINE I5FOR3(OUTPUT, LFT, LLT, NFT, E, MSR, NSV, IRTL, STF, STFN, IBC, ICODT, FSAV, IGIMP, FSKYI, ISKY,
+     . FCONT, FNCONT, ICONTACT, IBAG, IADM, IX1, IX2, IX3, IX4, N1, N2, N3, XFACE, H1, H2, H3, H4, THK, ANS, STIF, FNI)
 
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD 
       USE OUTPUT_MOD, ONLY: OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -72,7 +63,6 @@ C-----------------------------------------------
       my_real 
      .  E(*), STF(*), STFN(*), FSAV(*),FSKYI(LSKYI,4),FCONT(3,*),
      .  FNCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       INTEGER, DIMENSION(MVSIZ), INTENT(IN) :: IX1,IX2,IX3,IX4
       my_real, DIMENSION(MVSIZ), INTENT(IN) :: N1,N2,N3
       my_real, DIMENSION(MVSIZ), INTENT(IN) :: H1,H2,H3,H4,THK
@@ -264,9 +254,8 @@ C
 #include "lockoff.inc"
       ENDIF
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
            DO I=1,LLT
             FNCONT(1,IX1(I)) =FNCONT(1,IX1(I)) + FX1(I)

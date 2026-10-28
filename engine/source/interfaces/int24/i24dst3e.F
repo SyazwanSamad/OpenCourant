@@ -25,24 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    bitget     ../engine/source/interfaces/intsort/i20sto.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||    tri7box    ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I24DST3E(
-     1                  JLT    ,A      ,X      ,CAND_N ,CAND_E ,
-     2                  MBINFLG,ISEADD ,ISEDGE ,NSVG   ,NIN    ,
-     3                  IXX    ,STIF   ,
-     4                  JLT_NEW,INACTI ,XI     ,YI     ,ZI     ,
-     5                  XX     ,YY     ,ZZ     ,PMAX_GAP,
-     6                  FSKYI  ,ISKY   ,CAND_T ,FCONT   ,H3D_DATA) 
+      SUBROUTINE I24DST3E(JLT, A, X, CAND_N, CAND_E, MBINFLG, ISEADD, ISEDGE, NSVG, NIN, IXX, STIF, JLT_NEW, INACTI,
+     . XI, YI, ZI, XX, YY, ZZ, PMAX_GAP, FSKYI, ISKY, CAND_T, FCONT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
 C-----------------------------------------------
@@ -60,10 +50,6 @@ C-----------------------------------------------
      .     XI(MVSIZ), YI(MVSIZ), ZI(MVSIZ), STIF(MVSIZ),
      .     FSKYI(LSKYI,NFSKYI),X(3,*),A(3,*),FCONT(3,*),
      .     XX(MVSIZ,17),YY(MVSIZ,17),ZZ(MVSIZ,17)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
 #include      "parit_c.inc"
@@ -451,7 +437,7 @@ c save FJ
               FSKYI(NISKYL,3) = FZ
               FSKYI(NISKYL,4)=STIF(I)*ABS(H2S)
               ISKY(NISKYL) = JG
-              IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT > 0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
                 FCONT(1,JG) =FCONT(1,JG) + FX
                 FCONT(2,JG) =FCONT(2,JG) + FY
                 FCONT(3,JG) =FCONT(3,JG) + FZ
@@ -492,7 +478,7 @@ c save F(Ki) and FSI
             ISKY(NISKYL) = NSVG(I)
         ENDIF
 
-        IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT > 0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
           DO K=1,4
             IF(FM(4,K)/=ZERO)THEN
               IG=IX(K)

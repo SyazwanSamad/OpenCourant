@@ -48,7 +48,6 @@ Copyright>        copyright and attribution statement.
 !||    check_sorting_criteria_mod    ../engine/source/interfaces/intsort/check_sorting_criteria.F90
 !||    element_mod                   ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod                ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                       ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                 ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    inter_sorting_mod             ../engine/share/modules/inter_sorting_mod.F
 !||    ists_sts_bp_algo_mod          ../engine/source/interfaces/ists/ists_sts_bp_algo_mod.F90
@@ -59,13 +58,9 @@ Copyright>        copyright and attribution statement.
 !||    timer_mod                     ../engine/source/system/timer_mod.F90
 !||    tri7box                       ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I7MAIN_TRI(TIMERS,
-     1                  IPARI   ,X       ,V       ,
-     2                  MS      ,NIN     ,ITASK   ,WEIGHT  ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM ,
-     4                  ITAB    ,KINET   ,TEMP    ,NRTM_T  ,RENUM   ,
-     5                  NSNFIOLD,ESHIFT  ,NUM_IMP ,IND_IMP ,NODNX_SMS,
-     6                  INTBUF_TAB,H3D_DATA,IXS,MULTI_FVM,GLOB_THERM)
+      SUBROUTINE I7MAIN_TRI(TIMERS, IPARI, X, V, MS, NIN, ITASK, WEIGHT, ISENDTO, IRCVFROM, RETRI, IAD_ELEM, FR_ELEM,
+     . ITAB, KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP, IND_IMP, NODNX_SMS, INTBUF_TAB, IXS, MULTI_FVM,
+     . GLOB_THERM)
 C============================================================================
 C   M o d u l e s
 C-----------------------------------------------
@@ -73,7 +68,6 @@ C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE INTER_SORTING_MOD
       USE ISTS_STS_BP_ALGO_MOD, ONLY : STS_BP_ALGO,
@@ -120,7 +114,6 @@ C     REAL
      .   X(*), V(*), MS(*),TEMP(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
       TYPE(GLOB_THERM_), INTENT(IN) :: GLOB_THERM
 C-----------------------------------------------
@@ -601,11 +594,8 @@ C single task
         IF (IMONM > 0) CALL STARTIME(TIMERS,26)
         INTBUF_TAB%VARIABLES(distance_index) = -INTBUF_TAB%VARIABLES(distance_index)
 C
-        CALL SPMD_TRI7GAT(
-     1      RESULT       ,NSN     ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2      IPARI(21,NIN),NSNR    ,MULTIMP        ,NTY         ,IPARI(47,NIN),  
-     3      IDUM1        ,NSNFIOLD, IPARI        , H3D_DATA    ,IPARI(72,NIN),
-     4      MULTI_FVM,GLOB_THERM%NODADT_THERM)
+      CALL SPMD_TRI7GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), IDUM1, NSNFIOLD, IPARI, IPARI(72,NIN), MULTI_FVM, GLOB_THERM%NODADT_THERM)
         IPARI(24,NIN) = NSNR
 C
         IF (NUM_IMP>0) 

@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lectur                       ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_option_count              ../starter/source/devtools/hm_reader/hm_option_count.F
+!||    hm_option_count              ../starter/source/devtools/reader/hm_option_count.F
 !||    hm_read_perturb_fail         ../starter/source/general_controls/computation/hm_read_perturb_fail.F
 !||    hm_read_perturb_part_shell   ../starter/source/general_controls/computation/hm_read_perturb_part_shell.F
 !||    hm_read_perturb_part_solid   ../starter/source/general_controls/computation/hm_read_perturb_part_solid.F

@@ -51,11 +51,9 @@ Copyright>        copyright and attribution statement.
 !||    dfuncs                       ../engine/source/output/anim/generate/dfunc6.F
 !||    eflux3_int22_fvm             ../engine/source/ale/alefvm/cut_cells/eflux3_int22_fvm.F
 !||    epxle3                       ../engine/source/elements/solid/solide/epxle3.F
-!||    h3d_quad_scalar_1            ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
-!||    h3d_quad_vector              ../engine/source/output/h3d/h3d_results/h3d_quad_vector.F
-!||    h3d_shell_scalar_1           ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_shell_vector_1           ../engine/source/output/h3d/h3d_results/h3d_shell_vector_1.F
-!||    h3d_solid_scalar_1           ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
+!||    result_quad_scalar            ../engine/source/tools/element_results/result_quad_scalar.F90
+!||    result_shell_scalar           ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar           ../engine/source/tools/element_results/result_solid_scalar.F
 !||    hm_read_mat11_k_eps          ../starter/source/materials/mat/mat011/hm_read_mat11_k_eps.F
 !||    ini_inimap1d                 ../starter/source/initial_conditions/inimap/ini_inimap1d.F
 !||    inimom_fvm                   ../starter/source/elements/solid/solide/inimom_fvm.F

@@ -29,35 +29,19 @@ Copyright>        copyright and attribution statement.
 !||    i7ass2       ../engine/source/interfaces/int07/i7ass3.F
 !||    i7ass25      ../engine/source/interfaces/int07/i7ass3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||    tri7box      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I10FOR3(OUTPUT,
-     1    JLT    ,A      ,MS     ,V     ,FSAV  ,
-     2    CAND_F ,STIFN  ,STIF   ,FSKYI ,ISKY  ,
-     3    ITIED  ,VISC   ,X1     ,X2    ,X3    ,
-     4    X4     ,Y1     ,Y2     ,Y3    ,Y4    ,
-     5    Z1     ,Z2     ,Z3     ,Z4    ,NSVG  ,
-     6    NX1    ,NX2    ,NX3    ,NX4   ,NY1   ,
-     7    NY2    ,NY3    ,NY4    ,NZ1   ,NZ2   ,
-     8    NZ3    ,NZ4    ,LB1    ,LB2   ,LB3   ,
-     9    LB4    ,LC1    ,LC2    ,LC3   ,LC4   ,
-     A    P1     ,P2     ,P3     ,P4    ,FCONT ,
-     B    IX1    ,IX2    ,IX3    ,IX4   ,GAPV  ,
-     C    INDEX  ,NISKYFI,ISECIN,NSTRF ,SECFCUM,
-     D    NOINT  ,VISCN  ,VXI    ,VYI   ,VZI   ,
-     E    MSI    ,NIN    ,NISUB  ,LISUB ,ADDSUBS,
-     F    ADDSUBM,LISUBS ,LISUBM ,CN_LOC,CE_LOC,
-     G    FSAVSUB,FNCONT ,FTCONT ,MSKYI_SMS ,ISKYI_SMS ,
-     H    NSMS   ,XI     ,YI     ,ZI    ,ICONTACT,
-     I    DT2T   ,NELTST ,ITYPTST,JTASK ,ISENSINT,
-     J    FSAVPARIT,NFT  ,H3D_DATA,NODADT_THERM)
+      SUBROUTINE I10FOR3(OUTPUT, JLT, A, MS, V, FSAV, CAND_F, STIFN, STIF, FSKYI, ISKY, ITIED, VISC, X1, X2, X3, X4,
+     . Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, NSVG, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3,
+     . LB4, LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, GAPV, INDEX, NISKYFI, ISECIN, NSTRF, SECFCUM,
+     . NOINT, VISCN, VXI, VYI, VZI, MSI, NIN, NISUB, LISUB, ADDSUBS, ADDSUBM, LISUBS, LISUBM, CN_LOC, CE_LOC, FSAVSUB,
+     . FNCONT, FTCONT, MSKYI_SMS, ISKYI_SMS, NSMS, XI, YI, ZI, ICONTACT, DT2T, NELTST, ITYPTST, JTASK, ISENSINT,
+     . FSAVPARIT, NFT, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -113,10 +97,6 @@ C-----------------------------------------------
      .   FNCONT(3,*), FTCONT(3,*), MSKYI_SMS(*),
      .     XI(MVSIZ),YI(MVSIZ),ZI(MVSIZ),DT2T,
      .   FSAVPARIT(NISUB+1,11,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, II , K0,NBINTER,K1S,K,J,NN,JG
       INTEGER NOINT
       INTEGER JSUB,KSUB,JJ,KK,IN,IE,NSUB,IBID
@@ -733,7 +713,7 @@ C
         END IF
       END IF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT
@@ -761,11 +741,8 @@ C In SPMD: Treatment to be redone after reception node Remote if JG <0
         END IF !(INCONV==1) THEN
       ENDIF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP)
-     .           .OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
         IF (INCONV==1) THEN
 #include "lockon.inc"
           DO I=1,JLT

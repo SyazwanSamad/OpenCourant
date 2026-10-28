@@ -25,20 +25,18 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg        ../engine/source/output/message/message.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||    imp_dyna      ../engine/share/modules/impbufdef_mod.F
 !||    message_mod   ../engine/share/message_module/message_mod.F
 !||    output_mod    ../common_source/modules/output/output_mod.F90
 !||    sensor_mod    ../common_source/modules/sensor_mod.F90
 !||    state_mod     ../common_source/modules/state_mod.F
 !||====================================================================
-      SUBROUTINE STOP_SENSOR(SENSORS   ,H3D_DATA  ,DYNAIN_DATA,OUTPUT)
+      SUBROUTINE STOP_SENSOR(SENSORS, DYNAIN_DATA, OUTPUT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE IMP_DYNA
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       USE OUTPUT_MOD
       USE STATE_MOD
@@ -60,7 +58,6 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       TYPE (SENSORS_)       ,INTENT(INOUT)    :: SENSORS
-      TYPE (H3D_DATABASE)   ,INTENT(INOUT) :: H3D_DATA
       TYPE (DYNAIN_DATABASE),INTENT(INOUT) :: DYNAIN_DATA
       TYPE(OUTPUT_) ,INTENT(INOUT) :: OUTPUT !< output structure
 C-----------------------------------------------
@@ -86,7 +83,6 @@ C-----------------------------------------------
             IF (SENSORS%STOP_NSANIM > 0) OUTPUT%TANIM = TT
             IF (SENSORS%STOP_NSSTAT > 0) TSTAT = TT
             IF (SENSORS%STOP_NSOUTP > 0) TOUTP = TT
-            IF (SENSORS%STOP_NSH3D  > 0) H3D_DATA%TH3D = TT
             IF (NSDYNANIN > 0) DYNAIN_DATA%TDYNAIN = TT
             IF (SENSORS%STOP_NSABF > 0) THEN   !IF ABF FILE
               DO J=1,10 

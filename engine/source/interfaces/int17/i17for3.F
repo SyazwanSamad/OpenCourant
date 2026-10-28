@@ -31,7 +31,6 @@ Copyright>        copyright and attribution statement.
 !||    spmd_i17frots_pon   ../engine/source/mpi/interfaces/spmd_i17frots_pon.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    icontact_mod        ../engine/share/modules/icontact_mod.F
 !||    message_mod         ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod        ../common_source/tools/memory/my_alloc.F90
@@ -39,21 +38,14 @@ Copyright>        copyright and attribution statement.
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||    tri7box             ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I17FOR3(OUTPUT,
-     1   X      ,V       ,CANDN    ,CANDE        ,I_STOK  ,
-     2   IXS    ,IXS16   ,EMINXM   ,NELES        ,NELEM   ,
-     3   ITASK  ,A       ,ITIED    ,NINT         ,EMINXS  ,
-     4   STIFN  ,FSKYI   ,ISKY     ,NME          ,NSE     ,
-     5   FROTM  ,FROTS   ,KM       ,KS           ,FRIC    ,
-     6   FSAV   ,FCONT   ,MS       ,NISKYFI      ,LSKYI17 ,
-     7   NOINT  ,H3D_DATA)
+      SUBROUTINE I17FOR3(OUTPUT, X, V, CANDN, CANDE, I_STOK, IXS, IXS16, EMINXM, NELES, NELEM, ITASK, A, ITIED, NINT,
+     . EMINXS, STIFN, FSKYI, ISKY, NME, NSE, FROTM, FROTS, KM, KS, FRIC, FSAV, FCONT, MS, NISKYFI, LSKYI17, NOINT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE ICONTACT_MOD
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD, ONLY : OUTPUT_
       use element_mod , only : nixs
 C-----------------------------------------------
@@ -88,10 +80,6 @@ C     REAL
      .  X(3,*),V(3,*),EMINXM(6,*),EMINXS(6,*),A(3,*),STIFN(*),
      .  FSKYI(LSKYI,NFSKYI)   ,FROTM(7,*),FROTS(7,*),KM(*),KS(*),FRIC(*), FSAV(*),
      .  FCONT(3,*), MS(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,K,IE,IC,III(MVSIZ,17),LLT,NFT,LE,FIRST,LAST,
      .        LES,IES,IIIS(MVSIZ,16),LEL(MVSIZ),LESL(MVSIZ),
      .        IE_MIN,IES_MIN, IERR1, IERR2
@@ -221,14 +209,8 @@ C-----------------------------------------------------------------------
 C     calculation of F by mvsiz packet
 C-----------------------------------------------------------------------
           IF(LLT==MVSIZ-1)THEN
-            CALL I17LLL_PENA(OUTPUT,
-     1       LLT     ,V         ,STIFN     ,XX        ,FRIC    ,
-     2       YY      ,ZZ        ,III       ,FSKYI     ,ISKY    ,
-     3       A       ,X         ,ITIED     ,NINT      ,
-     4       XXS     ,YYS       ,ZZS       ,IIIS      ,VIT_MIN ,
-     5       LEL     ,LESL      ,IE_MIN    ,IES_MIN   ,ITASK   ,
-     6       FROTM   ,FROTS     ,KM        ,KS        ,FSAV    ,
-     7       FCONT   ,MS        ,NISKYFI   ,NOINT     ,H3D_DATA )
+      CALL I17LLL_PENA(OUTPUT, LLT, V, STIFN, XX, FRIC, YY, ZZ, III, FSKYI, ISKY, A, X, ITIED, NINT, XXS, YYS, ZZS,
+     . IIIS, VIT_MIN, LEL, LESL, IE_MIN, IES_MIN, ITASK, FROTM, FROTS, KM, KS, FSAV, FCONT, MS, NISKYFI, NOINT)
             NFT=LLT+1
             LLT = 0
           ENDIF
@@ -236,14 +218,9 @@ C-----------------------------------------------------------------------
 C-----------------------------------------------------------------------
 C     calculation of F for last packet
 C-----------------------------------------------------------------------        
-      IF(LLT/=0) CALL I17LLL_PENA(OUTPUT,
-     1       LLT     ,V         ,STIFN     ,XX        ,FRIC    ,
-     2       YY      ,ZZ        ,III       ,FSKYI     ,ISKY    ,
-     3       A       ,X         ,ITIED     ,NINT      ,
-     4       XXS     ,YYS       ,ZZS       ,IIIS      ,VIT_MIN ,
-     5       LEL     ,LESL      ,IE_MIN    ,IES_MIN   ,ITASK   ,
-     6       FROTM   ,FROTS     ,KM        ,KS        ,FSAV    ,
-     7       FCONT   ,MS        ,NISKYFI   ,NOINT     ,H3D_DATA )
+      IF(LLT/=0) CALL I17LLL_PENA(OUTPUT, LLT, V, STIFN, XX, FRIC, YY, ZZ, III, FSKYI, ISKY, A, X, ITIED, NINT, XXS,
+     . YYS, ZZS, IIIS, VIT_MIN, LEL, LESL, IE_MIN, IES_MIN, ITASK, FROTM, FROTS, KM, KS, FSAV, FCONT, MS, NISKYFI,
+     . NOINT)
 C-----------------------------------------------------------------------
 C     parallel Arithmetic for assembly (frots)
 C-----------------------------------------------------------------------
@@ -279,21 +256,13 @@ C
 !||    i17rst         ../engine/source/interfaces/int17/i17lagm.F
 !||    i17vit_pena    ../engine/source/interfaces/int17/i17for3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    output_mod     ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I17LLL_PENA( OUTPUT,
-     .         LLT     ,V      ,STIFN   ,XX        ,FRIC   ,
-     2         YY      ,ZZ     ,III     ,FSKYI     ,ISKY   ,
-     3         A       ,X      ,ITIED   ,NINT      ,
-     4         XXS     ,YYS    ,ZZS     ,IIIS      ,VIT_MIN,
-     5         LE      ,LES    ,IE_MIN  ,IES_MIN   ,ITASK  ,
-     6         FROTM   ,FROTS  ,KM      ,KS        ,FSAV   ,
-     7         FCONT   ,MS     ,NISKYFI ,NOINT     ,H3D_DATA)
+      SUBROUTINE I17LLL_PENA(OUTPUT, LLT, V, STIFN, XX, FRIC, YY, ZZ, III, FSKYI, ISKY, A, X, ITIED, NINT, XXS, YYS,
+     . ZZS, IIIS, VIT_MIN, LE, LES, IE_MIN, IES_MIN, ITASK, FROTM, FROTS, KM, KS, FSAV, FCONT, MS, NISKYFI, NOINT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -319,10 +288,6 @@ C     REAL
      .   XX(MVSIZ,17),YY(MVSIZ,17),ZZ(MVSIZ,17),X(3,*),
      .   XXS(MVSIZ,16) ,YYS(MVSIZ,16) ,ZZS(MVSIZ,16) ,VIT_MIN,
      .   STIFN(*) ,FSKYI(LSKYI,NFSKYI) ,FROTM(7,*),FROTS(7,*),FSAV(*) ,FCONT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J,
      +        ICONT(MVSIZ,4)
       my_real
@@ -475,15 +440,9 @@ C         face 5 6 7 8
 C-----------------------------------------------------------------------
 C     contact calculation
 C-----------------------------------------------------------------------
-      CALL I17LLL4_PENA(output,
-     1      LLT       ,ITIED     ,NINT    ,V       ,A       ,FRIC    ,
-     3      III       ,IIIS      ,NI_M    ,NI_S    ,S_CM    ,S_CS    ,
-     4      NX        ,NY        ,NZ      ,VIT     ,LE      ,LES     ,
-     5      ICONT(1,1),R_CM      ,T_CM    ,R_CS    ,T_CS    ,XX      ,
-     6      YY        ,ZZ        ,STIFN   ,FSKYI   ,ISKY    ,
-     7      FROTM     ,FROTS     ,AREA    ,AREA_TOT,KM      ,KS      ,
-     8      FSAV      ,FCONT     ,MS      ,AREA_EL ,NISKYFI ,NOINT   ,
-     9      H3D_DATA  )
+      CALL I17LLL4_PENA(output, LLT, ITIED, NINT, V, A, FRIC, III, IIIS, NI_M, NI_S, S_CM, S_CS, NX, NY, NZ, VIT, LE,
+     . LES, ICONT(1,1), R_CM, T_CM, R_CS, T_CS, XX, YY, ZZ, STIFN, FSKYI, ISKY, FROTM, FROTS, AREA, AREA_TOT, KM, KS,
+     . FSAV, FCONT, MS, AREA_EL, NISKYFI, NOINT)
       RETURN
       END
 !||====================================================================
@@ -1494,28 +1453,20 @@ C
 !||    ancmsg         ../engine/source/output/message/message.F
 !||    arret          ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    icontact_mod   ../engine/share/modules/icontact_mod.F
 !||    message_mod    ../engine/share/message_module/message_mod.F
 !||    output_mod     ../common_source/modules/output/output_mod.F90
 !||    tri7box        ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I17LLL4_PENA(OUTPUT,
-     1      LLT       ,ITIED     ,NINT    ,V       ,A       ,FRIC    ,
-     3      III       ,IIIS      ,NI_M    ,NI_S    ,S_CM    ,S_CS    ,
-     4      NX        ,NY        ,NZ      ,VIT     ,LE      ,LES     ,
-     5      ICONT     ,RM        ,TM      ,RS      ,TS      ,XX      ,
-     6      YY        ,ZZ        ,STIFN   ,FSKYI   ,ISKY    ,
-     7      FROTM     ,FROTS     ,AREA    ,AREA_TOT,KM      ,KS      ,
-     8      FSAV      ,FCONT     ,MS      ,AREA_EL ,NISKYFI ,NOINT   ,
-     9      H3D_DATA  )
+      SUBROUTINE I17LLL4_PENA(OUTPUT, LLT, ITIED, NINT, V, A, FRIC, III, IIIS, NI_M, NI_S, S_CM, S_CS, NX, NY, NZ, VIT,
+     . LE, LES, ICONT, RM, TM, RS, TS, XX, YY, ZZ, STIFN, FSKYI, ISKY, FROTM, FROTS, AREA, AREA_TOT, KM, KS, FSAV,
+     . FCONT, MS, AREA_EL, NISKYFI, NOINT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE ICONTACT_MOD
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -1554,10 +1505,6 @@ C     REAL
      .   STIFN(*),FSKYI(LSKYI,NFSKYI),FROTM(7,*),FROTS(7,*),
      .   AREA(MVSIZ),AREA_TOT(MVSIZ),AREA_EL(MVSIZ),KM(2,*),KS(2,*),
      .   FRIC(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,IK,LEM,J1,J2,NISKYL,IES,IIS,
      .        NISKYFIL
       my_real
@@ -1941,9 +1888,8 @@ C-----------------------------------------------
             ENDDO
            ENDIF
 C
-           IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
             DO IK=1,8
               J1 = III(I,IK)
@@ -2015,9 +1961,8 @@ C
             ENDDO
            ENDIF
 C
-           IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
             DO IK=1,8
               J1 = III(I,IK)

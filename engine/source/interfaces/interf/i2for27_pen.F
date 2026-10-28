@@ -29,21 +29,14 @@ Copyright>        copyright and attribution statement.
 !||    i2rep         ../common_source/interf/i2rep.F
 !||    i2sms27       ../engine/source/interfaces/interf/i2sms27.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||    outmax_mod    ../common_source/modules/outmax_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR27_PEN(X       ,V       ,VR      ,A       ,AR      ,
-     .                   MS_PENA ,IN      ,STIFN   ,STIFR   ,WEIGHT  ,
-     .                   NSV     ,IRTL    ,CRST    ,SKEW    ,DX      ,
-     .                   DR      ,FINI    ,FSAV    ,FNCONT  ,NSN     ,
-     .                   STFN    ,STFR    ,VISC    ,PENFLAG ,IROTB   ,
-     .                   NOINT   ,NODNX_SMS,DMINT2 ,SAV_FOR_PENA,IRECT,
-     .                   DT2T    ,NELTST  ,ITYPTST ,INDXP   ,SAV_INER_POFF,
-     .                   H3D_DATA,MSEGTYP2,FNCONTP ,FTCONTP)
+      SUBROUTINE I2FOR27_PEN(X, V, VR, A, AR, MS_PENA, IN, STIFN, STIFR, WEIGHT, NSV, IRTL, CRST, SKEW, DX, DR, FINI,
+     . FSAV, FNCONT, NSN, STFN, STFR, VISC, PENFLAG, IROTB, NOINT, NODNX_SMS, DMINT2, SAV_FOR_PENA, IRECT, DT2T, NELTST,
+     . ITYPTST, INDXP, SAV_INER_POFF, MSEGTYP2, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTMAX_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -70,10 +63,6 @@ C     REAL
      .   DMINT2(4,*),SAV_FOR_PENA(8,*),FNCONTP(3,*)   ,FTCONTP(3,*) 
       my_real
      .   SAV_INER_POFF(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "com06_c.inc"
 #include      "com08_c.inc"
@@ -635,29 +624,8 @@ C------------------------------------------------
 C         n/t components of the nodal forces -> output
 C------------------------------------------------
           HL(1:4) = H(1:4,K)
-          CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                  IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                  FTCONTP ,WEIGHT ,H3D_DATA,I      ,HL) 
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, HL)
 C
-          IF ((H3D_DATA%N_VECT_CONT2M > 0).AND.(IROT > 0)) THEN ! Moment output in h3d
-             MCONT2(1,I) =  (-MGX + MRX)*W
-             MCONT2(2,I) =  (-MGY + MRY)*W
-             MCONT2(3,I) =  (-MGZ + MRZ)*W
-             MCONT2(1,IX1(K)) = MCONT2(1,IX1(K)) + MX(1)*H(1,K)*W
-             MCONT2(2,IX1(K)) = MCONT2(2,IX1(K)) + MY(1)*H(1,K)*W
-             MCONT2(3,IX1(K)) = MCONT2(3,IX1(K)) + MZ(1)*H(1,K)*W
-             MCONT2(1,IX2(K)) = MCONT2(1,IX2(K)) + MX(2)*H(2,K)*W
-             MCONT2(2,IX2(K)) = MCONT2(2,IX2(K)) + MY(2)*H(2,K)*W
-             MCONT2(3,IX2(K)) = MCONT2(3,IX2(K)) + MZ(2)*H(2,K)*W
-             MCONT2(1,IX3(K)) = MCONT2(1,IX3(K)) + MX(3)*H(3,K)*W
-             MCONT2(2,IX3(K)) = MCONT2(2,IX3(K)) + MY(3)*H(3,K)*W
-             MCONT2(3,IX3(K)) = MCONT2(3,IX3(K)) + MZ(3)*H(3,K)*W
-             MCONT2(1,IX4(K)) = MCONT2(1,IX4(K)) + MX(4)*H(4,K)*W
-             MCONT2(2,IX4(K)) = MCONT2(2,IX4(K)) + MY(4)*H(4,K)*W
-             MCONT2(3,IX4(K)) = MCONT2(3,IX4(K)) + MZ(4)*H(4,K)*W
-          ENDIF    
-
-C----------
         ELSE
           NSVG(K)= -I
           L = IRTL(II)

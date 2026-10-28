@@ -81,20 +81,15 @@
 !||    funct_python_update_elements               ../engine/source/tools/curve/funct_python_update_elements.F90
 !||    genani                                     ../engine/source/output/anim/generate/genani.F
 !||    gendynain                                  ../engine/source/output/dynain/gendynain.F
-!||    genh3d                                     ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    get_element_group                          ../starter/source/elements/get_element_group.F90
 !||    get_sort_key_shell                         ../starter/source/elements/shell/get_sort_key_shell.F90
 !||    get_sort_key_shell3n                       ../starter/source/elements/sh3n/get_sort_key_shell3n.F90
 !||    get_sort_key_solid                         ../starter/source/elements/solid/get_sort_key_solid.F90
 !||    globmat                                    ../starter/source/materials/globmat.F
 !||    granular51                                 ../engine/source/materials/mat/mat051/granular51.F90
-!||    h3d_quad_scalar                            ../engine/source/output/h3d/h3d_results/h3d_quad_scalar.F
-!||    h3d_quad_scalar_1                          ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
-!||    h3d_shell_scalar                           ../engine/source/output/h3d/h3d_results/h3d_shell_scalar.F
-!||    h3d_shell_scalar_1                         ../engine/source/output/h3d/h3d_results/h3d_shell_scalar_1.F
-!||    h3d_shell_tensor                           ../engine/source/output/h3d/h3d_results/h3d_shell_tensor.F
-!||    h3d_solid_scalar                           ../engine/source/output/h3d/h3d_results/h3d_solid_scalar.F
-!||    h3d_solid_scalar_1                         ../engine/source/output/h3d/h3d_results/h3d_solid_scalar_1.F
+!||    result_quad_scalar                          ../engine/source/tools/element_results/result_quad_scalar.F90
+!||    result_shell_scalar                         ../engine/source/tools/element_results/result_shell_scalar.F
+!||    result_solid_scalar                         ../engine/source/tools/element_results/result_solid_scalar.F
 !||    hist2                                      ../engine/source/output/th/hist2.F
 !||    hm_read_elasticity                         ../starter/source/materials/mat/mat131/elasticity/hm_read_elasticity.F90
 !||    hm_read_elasticity_anisotropic             ../starter/source/materials/mat/mat131/elasticity/hm_read_elasticity_anisotropic.F90
@@ -295,7 +290,6 @@
 !||    inigrav_load                               ../starter/source/initial_conditions/inigrav/inigrav_load.F
 !||    inigrav_m51_any_eos                        ../starter/source/initial_conditions/inigrav/inigrav_m51_any_eos.F90
 !||    init_bcs_nrf                               ../starter/source/boundary_conditions/init_bcs_nrf.F90
-!||    init_h3d_engine                            ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    init_inivol                                ../starter/source/initial_conditions/inivol/init_inivol.F90
 !||    init_inivol_2d_polygons                    ../starter/source/initial_conditions/inivol/init_inivol_2D_polygons.F90
 !||    init_mat_keyword                           ../starter/source/materials/mat/init_mat_keyword.F
@@ -326,7 +320,6 @@
 !||    law81_upd                                  ../starter/source/materials/mat/mat081/law81_upd.F90
 !||    law87_upd                                  ../starter/source/materials/mat/mat087/law87_upd.F90
 !||    lec_inistate                               ../starter/source/elements/initia/lec_inistate.F
-!||    lech3d                                     ../engine/source/output/h3d/h3d_build_fortran/lech3d.F
 !||    m12law                                     ../engine/source/materials/mat/mat012/m12law.F
 !||    m20dcod                                    ../starter/source/system/fsdcod.F
 !||    m25law                                     ../engine/source/materials/mat/mat025/m25law.F
@@ -371,7 +364,6 @@
 !||    nloc_dmg_init                              ../starter/source/materials/fail/nloc_dmg_init.F
 !||    pgrtails                                   ../starter/source/elements/beam/pgrtails.F
 !||    powder_burn                                ../common_source/eos/powder_burn.F
-!||    prelech3d                                  ../engine/source/output/h3d/h3d_build_fortran/prelech3d.F90
 !||    q4init2                                    ../starter/source/elements/solid_2d/quad4/q4init2.F
 !||    qgrhead                                    ../starter/source/elements/solid_2d/quad/qgrhead.F
 !||    qgrtails                                   ../starter/source/elements/solid_2d/quad/qgrtails.F

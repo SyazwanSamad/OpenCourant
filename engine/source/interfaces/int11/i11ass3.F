@@ -29,31 +29,16 @@ Copyright>        copyright and attribution statement.
 !||    i11ass25   ../engine/source/interfaces/int11/i11ass3.F
 !||    i11sms2    ../engine/source/interfaces/int11/i11sms2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||    tri7box    ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I11ASS3(
-     1                  JLT    ,A      ,NIN     ,NOINT  ,CS_LOC   ,
-     2                  STIFN  ,STIF   ,FSKYI   ,ISKY   ,FCONT    ,
-     3                  HS1    ,HS2     ,HM1    ,HM2    ,N1       ,
-     4                  N2     ,M1      ,M2     ,NISKYFI,ISECIN   , 
-     5                  NSTRF  ,SECFCUM,VISCN   ,NRTS   ,ISKYI_SMS,
-     6                  NSMS ,ICONTACT,MSKYI_SMS,FX1    ,FY1      ,
-     7                  FZ1     ,FX2    ,FY2    ,FZ2    ,FX3      ,
-     8                  FY3     ,FZ3    ,FX4    ,FY4    ,FZ4      ,
-     9                  K1      ,K2     ,K3     ,K4     ,C1       ,
-     A                  C2      ,C3     ,C4     ,INTTH  ,PHIS1    ,
-     B                  PHIS2   ,PHIM1  ,PHIM2  ,FTHE  ,FTHESKYI  ,
-     C                  CONDINTS1,CONDINTS2,CONDINTM1,CONDINTM2,CONDN,
-     D                  CONDNSKYI,JTASK ,H3D_DATA,NODADT_THERM) 
+      SUBROUTINE I11ASS3(JLT, A, NIN, NOINT, CS_LOC, STIFN, STIF, FSKYI, ISKY, FCONT, HS1, HS2, HM1, HM2, N1, N2, M1,
+     . M2, NISKYFI, ISECIN, NSTRF, SECFCUM, VISCN, NRTS, ISKYI_SMS, NSMS, ICONTACT, MSKYI_SMS, FX1, FY1, FZ1, FX2, FY2,
+     . FZ2, FX3, FY3, FZ3, FX4, FY4, FZ4, K1, K2, K3, K4, C1, C2, C3, C4, INTTH, PHIS1, PHIS2, PHIM1, PHIM2, FTHE,
+     . FTHESKYI, CONDINTS1, CONDINTS2, CONDINTM1, CONDINTM2, CONDN, CONDNSKYI, JTASK, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
 C-----------------------------------------------
@@ -95,10 +80,6 @@ C-----------------------------------------------
      .   PHIS1(MVSIZ),PHIS2(MVSIZ),FTHE(*),FTHESKYI(*),CONDN(*),
      .   CONDINTS1(MVSIZ),CONDINTS2(MVSIZ),CONDINTM1(MVSIZ),CONDINTM2(MVSIZ),
      .   CONDNSKYI(*),MSKYI_SMS(*),PHIM1(MVSIZ),PHIM2(MVSIZ)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, K0, NBINTER, K1S, K
 C---------------------------------
       IF(IDTMINS==2.OR.IDTMINS_INT/=0)
@@ -160,7 +141,7 @@ C
        END IF
       END IF            
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
          IF (INCONV==1) THEN
 #include "lockon.inc"
            DO I=1,JLT

@@ -43,8 +43,6 @@ Copyright>        copyright and attribution statement.
 !||    destroy_cell                 ../engine/source/interfaces/int22/destroy_cell.F
 !||    eflux3_int22_fvm             ../engine/source/ale/alefvm/cut_cells/eflux3_int22_fvm.F
 !||    get_unique_main_cell         ../engine/source/interfaces/int22/get_unique_master_cell.F
-!||    h3d_velvecc22                ../engine/source/output/h3d/h3d_results/h3d_velvecc22.F
-!||    h3d_velvecz22                ../engine/source/output/h3d/h3d_results/h3d_velvecz22.F
 !||    i22ass2                      ../engine/source/interfaces/int22/i22assembly.F
 !||    i22buce                      ../engine/source/interfaces/intsort/i22buce.F
 !||    i22cor3                      ../engine/source/interfaces/int22/i22cor3.F
@@ -158,8 +156,6 @@ C
 !||    eflux3                       ../engine/source/ale/euler3d/eflux3.F
 !||    eflux3_int22_fvm             ../engine/source/ale/alefvm/cut_cells/eflux3_int22_fvm.F
 !||    get_unique_main_cell         ../engine/source/interfaces/int22/get_unique_master_cell.F
-!||    h3d_velvecc22                ../engine/source/output/h3d/h3d_results/h3d_velvecc22.F
-!||    h3d_velvecz22                ../engine/source/output/h3d/h3d_results/h3d_velvecz22.F
 !||    i22ass2                      ../engine/source/interfaces/int22/i22assembly.F
 !||    i22buce                      ../engine/source/interfaces/intsort/i22buce.F
 !||    i22cor3                      ../engine/source/interfaces/int22/i22cor3.F

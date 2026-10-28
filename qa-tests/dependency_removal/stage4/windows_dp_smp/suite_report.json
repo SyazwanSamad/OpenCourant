@@ -1,0 +1,783 @@
+{
+  "captured_utc": "2026-10-28T09:41:41.527106+00:00",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "scope": "Windows x64, double precision, SMP; integration conversion enabled",
+  "status": "passed",
+  "runs": [
+    {
+      "name": "ifx-version",
+      "command": [
+        "ifx",
+        "--version"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.10837639999954263,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/ifx-version.log"
+    },
+    {
+      "name": "icx-version",
+      "command": [
+        "icx",
+        "--version"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.1563583999995899,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/icx-version.log"
+    },
+    {
+      "name": "cmake-version",
+      "command": [
+        "cmake",
+        "--version"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.04236490000039339,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/cmake-version.log"
+    },
+    {
+      "name": "reader-build",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\dependency_removal\\test_reader_build.py"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.3251032000007399,
+      "pass_lines": 3,
+      "status": "passed",
+      "log": "logs/reader-build.log"
+    },
+    {
+      "name": "starter-api",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\test_starter_api.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 1.3490606999985175,
+      "pass_lines": 1,
+      "status": "passed",
+      "log": "logs/starter-api.log"
+    },
+    {
+      "name": "reader-open-contract",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 12.228588699999818,
+      "pass_lines": 14,
+      "status": "passed",
+      "log": "logs/reader-open-contract.log"
+    },
+    {
+      "name": "reader-api",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\test_model_queries.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 2.7390519000000495,
+      "pass_lines": 2,
+      "status": "passed",
+      "log": "logs/reader-api.log"
+    },
+    {
+      "name": "reader-loading",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\test_model_loading.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--starter",
+        "C:\\Programming\\OpenCourant\\exec\\starter_win64.exe"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 23.586260899999616,
+      "pass_lines": 27,
+      "status": "passed",
+      "log": "logs/reader-loading.log"
+    },
+    {
+      "name": "reader-contact",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\test_contact_groups.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--starter",
+        "C:\\Programming\\OpenCourant\\exec\\starter_win64.exe"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 6.900396699998964,
+      "pass_lines": 4,
+      "status": "passed",
+      "log": "logs/reader-contact.log"
+    },
+    {
+      "name": "reader-conversion",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_openreader_conversion.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 28.361621600000944,
+      "pass_lines": 32,
+      "status": "passed",
+      "log": "logs/reader-conversion.log"
+    },
+    {
+      "name": "starter-integration",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_starter_integration.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--binaries",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\binaries"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 36.22978370000055,
+      "pass_lines": 30,
+      "status": "passed",
+      "log": "logs/starter-integration.log"
+    },
+    {
+      "name": "numerical",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_numerical.py",
+        "--binaries",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\binaries",
+        "--engine",
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\numerical"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 41.339185500000895,
+      "pass_lines": 29,
+      "status": "passed",
+      "log": "logs/numerical.log"
+    },
+    {
+      "name": "mode2-numerical",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_mode2_numerical.py",
+        "--binaries",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\binaries",
+        "--engine",
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\mode2-numerical"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 8.137123900000006,
+      "pass_lines": 6,
+      "status": "passed",
+      "log": "logs/mode2-numerical.log"
+    },
+    {
+      "name": "snapshot-openreader-disconnected_one",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\disconnected_one.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-disconnected_one.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.620632400001341,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-disconnected_one.log"
+    },
+    {
+      "name": "snapshot-openreader-disconnected_two",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\disconnected_two.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-disconnected_two.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6116913999976532,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-disconnected_two.log"
+    },
+    {
+      "name": "snapshot-openreader-empty",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\empty.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-empty.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6208513999990828,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-empty.log"
+    },
+    {
+      "name": "snapshot-openreader-existing",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\existing.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-existing.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6171295999993163,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-existing.log"
+    },
+    {
+      "name": "snapshot-openreader-explicit_fields",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\explicit_fields.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-explicit_fields.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6228705000030459,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-explicit_fields.log"
+    },
+    {
+      "name": "snapshot-openreader-flag_negative",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\flag_negative.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-flag_negative.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6129679999976361,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-flag_negative.log"
+    },
+    {
+      "name": "snapshot-openreader-flag_three",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\flag_three.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-flag_three.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6166249000016251,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-flag_three.log"
+    },
+    {
+      "name": "snapshot-openreader-flag_two_single",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\flag_two_single.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-flag_two_single.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6113831000002392,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-flag_two_single.log"
+    },
+    {
+      "name": "snapshot-openreader-mixed",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\mixed.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-mixed.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6230533000016294,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-mixed.log"
+    },
+    {
+      "name": "snapshot-openreader-no_parts",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\no_parts.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-no_parts.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6113837000011699,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-no_parts.log"
+    },
+    {
+      "name": "snapshot-openreader-ordinary_missing",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\ordinary_missing.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-ordinary_missing.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6228575999994064,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-ordinary_missing.log"
+    },
+    {
+      "name": "snapshot-openreader-ordinary_zero",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\ordinary_zero.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-ordinary_zero.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6235224999982165,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-ordinary_zero.log"
+    },
+    {
+      "name": "snapshot-openreader-shared",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\shared.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-shared.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6226158999998006,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-shared.log"
+    },
+    {
+      "name": "snapshot-openreader-single",
+      "command": [
+        "C:\\Python\\Python311\\python.exe",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\test_reader_contract.py",
+        "--reader",
+        "C:\\Programming\\OpenCourant\\exec\\open_reader_win64.dll",
+        "--case",
+        "C:\\Programming\\OpenCourant\\qa-tests\\reader\\rigid_parts\\data\\single.rad",
+        "--output",
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots\\openreader-single.json"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\reader_snapshots",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6109354000000167,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/snapshot-openreader-single.log"
+    },
+    {
+      "name": "restart-openreader-h3d-0-starter",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\binaries\\starter-openreader.exe",
+        "-i",
+        "rigid_0000.rad",
+        "-np",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-0",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6601095000005444,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-0-starter.log"
+    },
+    {
+      "name": "restart-openreader-h3d-0-engine1",
+      "command": [
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "-i",
+        "rigid_0001.rad",
+        "-nt",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-0",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.08600040000237641,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-0-engine1.log"
+    },
+    {
+      "name": "restart-openreader-h3d-0-engine2",
+      "command": [
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "-i",
+        "rigid_0002.rad",
+        "-nt",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-0",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.07878010000058566,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-0-engine2.log"
+    },
+    {
+      "name": "restart-openreader-h3d-1-starter",
+      "command": [
+        "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\binaries\\starter-openreader.exe",
+        "-i",
+        "rigid_0000.rad",
+        "-np",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-1",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.6559957999998005,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-1-starter.log"
+    },
+    {
+      "name": "restart-openreader-h3d-1-engine1",
+      "command": [
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "-i",
+        "rigid_0001.rad",
+        "-nt",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-1",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.08387690000017756,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-1-engine1.log"
+    },
+    {
+      "name": "restart-openreader-h3d-1-engine2",
+      "command": [
+        "C:\\Programming\\OpenCourant\\exec\\engine_win64.exe",
+        "-i",
+        "rigid_0002.rad",
+        "-nt",
+        "1"
+      ],
+      "cwd": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage4\\regression\\restarts\\restart-openreader-h3d-1",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 0.08366380000006757,
+      "pass_lines": 0,
+      "status": "passed",
+      "log": "logs/restart-openreader-h3d-1-engine2.log"
+    }
+  ],
+  "commit": "d0a844f7270ae3c0666c1360700be42708a7694b",
+  "working_tree_dirty": true,
+  "input_manifest_sha256": "a2433868a202a1e4c1d7fbbd6d40c9ff2e6145190e357e08a01867fec916029c",
+  "configuration_files": 2495,
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "tracked_h3d_directives": [],
+  "mixed_cards_to_review": [
+    {
+      "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/mapSimple_0001.rad",
+      "line": 17,
+      "kind": "mixed_card_review",
+      "text": "/STOP",
+      "following_lines": [
+        "0.000000000000000    0.000000000000000    0.000000000000000    1          1         ",
+        "/DTIX",
+        "0.002000000000000    0.002000000000000   ",
+        "/DT/NODA/CST/0"
+      ]
+    }
+  ],
+  "binaries": [
+    {
+      "path": "exec\\open_reader_win64.dll",
+      "bytes": 17494016,
+      "sha256": "5e5259fbdcd59ab5e5d547ff74e00fe3632432f82314dd02d9b57080e68027af"
+    },
+    {
+      "path": "exec\\starter_win64.exe",
+      "bytes": 45913600,
+      "sha256": "767f18bdc4829f53ab5cac1678268589ae407fbafee2e47a2986ee1a71517a01"
+    },
+    {
+      "path": "exec\\engine_win64.exe",
+      "bytes": 136400384,
+      "sha256": "9e14dda825db7fe63af2568d1089c2a5c780a7c1906a8e3c68fc92675a67a657"
+    },
+    {
+      "path": "extlib\\h3d\\lib\\win64\\h3dreader.dll",
+      "bytes": 804208,
+      "sha256": "b3de1e636d2c290a8c2e95f50a6dff7036af03cb8dfae62522f986d994e01836"
+    },
+    {
+      "path": "extlib\\h3d\\lib\\win64\\h3dwriter.dll",
+      "bytes": 672384,
+      "sha256": "cbe2ef4362095e1d952d17b69c0f6a023c830500595ce00d137365f7f741e483"
+    },
+    {
+      "path": "cbuild_dependency_stage4\\binaries\\driver-openreader.exe",
+      "bytes": 1182208,
+      "sha256": "e4d410a0090201aadb1b6e380df81ccc54b9c2b7200986fb0aef452dee2cb0ba"
+    },
+    {
+      "path": "cbuild_dependency_stage4\\binaries\\starter-openreader.exe",
+      "bytes": 46057984,
+      "sha256": "50f212f03a0469b3c48ce76e38e3fc4e863eefc5bbe5ff4d00b837ea7299e694"
+    }
+  ],
+  "reader_build_ids": {
+    "open_reader_win64.dll": "or_20261028121134_d0a844f7"
+  },
+  "build_settings": {
+    "starter": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_C_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/ifx.exe",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ],
+    "engine": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_C_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:UNINITIALIZED=ifx.exe",
+      "MPI:UNINITIALIZED=smp",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ]
+  },
+  "restart_checks": [
+    {
+      "reader": "openreader",
+      "h3d_enabled": false,
+      "initialization": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "diagonal": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "off_diagonal": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "nodes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "checkpoint_sha256": "c09d57ac2fe65a170a34fb54160e0d89f170d5c77f5808a91329691d440a5992",
+      "checkpoint_bytes": 294627,
+      "history_samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_velocity_error": 5.000084638595581e-05,
+      "max_position_error": 5.9407472718930876e-08,
+      "max_energy_error": 4.1577219445088076e-10,
+      "h3d_import_checks": [],
+      "h3d_files": []
+    },
+    {
+      "reader": "openreader",
+      "h3d_enabled": true,
+      "initialization": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "diagonal": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "off_diagonal": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "nodes": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "checkpoint_sha256": "49fb5caea3cc81277dfc4fdd8c11cc20d5a3899a8fb7fd51068d7eb6b5cdd3ce",
+      "checkpoint_bytes": 294627,
+      "history_samples": 50,
+      "final_time": 0.0989999994635582,
+      "max_velocity_error": 5.000084638595581e-05,
+      "max_position_error": 5.9407472718930876e-08,
+      "max_energy_error": 4.1577219445088076e-10,
+      "h3d_import_checks": [
+        {
+          "name": "rigid.h3d",
+          "string_count": 29,
+          "checksum_tags": []
+        }
+      ],
+      "h3d_files": [
+        {
+          "name": "rigid.h3d",
+          "bytes": 15191,
+          "sha256": "c38b91cee6b753cfa9ef631aa2ce922e5f61c7393cd7b02df83fc08068f4caf7"
+        }
+      ]
+    }
+  ],
+  "generated_input_manifest_sha256": "058ab334a6697dc356e2698eda35c724e467f13f0485855fb086e61748de6486"
+}

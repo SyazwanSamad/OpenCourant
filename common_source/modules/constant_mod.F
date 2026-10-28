@@ -154,8 +154,6 @@ Copyright>        copyright and attribution statement.
 !||    find_segment_in_list                       ../engine/source/engine/node_spliting/detach_node.F90
 !||    force                                      ../engine/source/loads/general/force.F90
 !||    forintc_prepare_gpu                        ../engine/source/elements/shell/coque/shell_internal_forces.F90
-!||    fpcont2_max_output                         ../engine/source/output/h3d/h3d_results/fpcont2_max_output.F90
-!||    fpcont2_min_output                         ../engine/source/output/h3d/h3d_results/fpcont2_min_output.F90
 !||    fractal_dmg_init                           ../starter/source/materials/fail/fractal/fractal_dmg_init.F90
 !||    fractal_elem_renum                         ../starter/source/materials/fail/fractal/fractal_elem_spmd_renum.F90
 !||    fractal_element_neighbor                   ../starter/source/materials/fail/fractal/fractal_element_neighbor.F90
@@ -175,8 +173,7 @@ Copyright>        copyright and attribution statement.
 !||    gradient_reconstruction_new                ../engine/source/ale/alemuscl/gradient_reconstruction.F90
 !||    granular51                                 ../engine/source/materials/mat/mat051/granular51.F90
 !||    guided_cable_force_mod                     ../engine/source/tools/seatbelts/guided_cable_force.F90
-!||    h3d_oned_scalar                            ../engine/source/output/h3d/h3d_results/h3d_oned_scalar.F90
-!||    h3d_quad_scalar_1                          ../engine/source/output/h3d/h3d_results/h3d_quad_scalar_1.F90
+!||    result_quad_scalar                          ../engine/source/tools/element_results/result_quad_scalar.F90
 !||    hm_preread_inivel                          ../starter/source/initial_conditions/general/inivel/hm_preread_inivel.F90
 !||    hm_preread_skw                             ../starter/source/tools/skew/hm_preread_skw.F90
 !||    hm_read_bcs_nrf                            ../starter/source/boundary_conditions/hm_read_bcs_nrf.F90
@@ -281,7 +278,6 @@ Copyright>        copyright and attribution statement.
 !||    iniphase                                   ../starter/source/initial_conditions/inivol/iniphase.F
 !||    init                                       ../common_source/modules/ale/ale_mod.F
 !||    init_bcs_nrf                               ../starter/source/boundary_conditions/init_bcs_nrf.F90
-!||    init_h3d_engine                            ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    init_idel_brick                            ../engine/source/modules/dt_mod.F
 !||    init_inivol                                ../starter/source/initial_conditions/inivol/init_inivol.F90
 !||    init_inivol_2d_polygons                    ../starter/source/initial_conditions/inivol/init_inivol_2D_polygons.F90

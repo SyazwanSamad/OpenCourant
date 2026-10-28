@@ -132,22 +132,22 @@ def set_or_variables():
   set_variable('RAD_H3D_PATH',rad_h3d_path)
 
   #
-  # PATH/LD_LIBRARY_PATH : add path to extlib in PATH
+  # PATH/LD_LIBRARY_PATH : find the built OpenReader next to the solver
   #
   if arch == 'win64':
     path=os.getenv('PATH')
     wd=os.getcwd()
-    hm_reader_path=wd+slash+'..'+slash+'..'+slash+'..'+slash+'extlib'+slash+'hm_reader'+slash+arch
-    new_path=hm_reader_path+sep+path
+    reader_path=wd+slash+'..'+slash+'..'+slash+'..'+slash+'exec'
+    new_path=reader_path+sep+path
     os.environ['PATH']=new_path
   else:
     wd=os.getcwd()
-    hm_reader_path=wd+slash+'..'+slash+'..'+slash+'..'+slash+'extlib'+slash+'hm_reader'+slash+arch
+    reader_path=wd+slash+'..'+slash+'..'+slash+'..'+slash+'exec'
     try:
       path=os.getenv('LD_LIBRARY_PATH')
-      new_path=hm_reader_path+sep+path
+      new_path=reader_path+sep+path
     except:
-      new_path=hm_reader_path
+      new_path=reader_path
     os.environ['LD_LIBRARY_PATH']=new_path
 
 

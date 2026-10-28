@@ -12,8 +12,6 @@ set (source_directory ${CMAKE_CURRENT_SOURCE_DIR})
 #Include the CMake configuration file
 include ( CMake_arch/CMake_${arch}.cmake )
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${open_reader_root_dir}/${build_dir}/libopen_reader/${arch}" )
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${open_reader_root_dir}/${build_dir}/libopen_reader/${arch}" )
 
 # Add includes for project
 include ( ${open_reader_root_dir}/CMake_arch/CMake_includes.cmake )
@@ -55,7 +53,6 @@ set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${c_flag
 message ( STATUS "cfgio module: ${libp}${library_name}.${lib}")
 
 
-#add_library(hm_reader/libs_${arch}/libhm_reader_rd_${arch} STATIC ${cpp_source_files} )
 add_library(${library_name} STATIC ${cpp_source_files} ${c_source_files})
 target_include_directories(${library_name} PRIVATE ${include_dir_list}  )
 

@@ -26,18 +26,14 @@ Copyright>        copyright and attribution statement.
 !||    i3for2          ../engine/source/interfaces/inter2d/i3for2.F
 !||    invoi2          ../engine/source/interfaces/inter2d/invoi2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE INTVO2(output,IPARI,INTBUF_TAB ,X   ,A    ,
-     .                  ICODT,FSAV       ,FSKYI,ISKY,
-     .                  FCONT,FNCONT    , FTCONT,H3D_DATA      )
+      SUBROUTINE INTVO2(output, IPARI, INTBUF_TAB, X, A, ICODT, FSAV, FSKYI, ISKY, FCONT, FNCONT, FTCONT)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE INTBUFDEF_MOD 
-      USE H3D_MOD 
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -54,10 +50,6 @@ C     REAL
      .   FCONT(3,*),FNCONT(3,*), FTCONT(3,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com08_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -88,19 +80,15 @@ C
        CALL INVOI2(X      ,INTBUF_TAB%IRECTS,INTBUF_TAB%LNSV,INTBUF_TAB%NSV,INTBUF_TAB%MSR,
      1          INTBUF_TAB%ILOCM,INTBUF_TAB%IRTLS,INTBUF_TAB%NSEGS,NMN       )
       ENDIF
-      CALL I3FOR2(output, X      ,A         ,INTBUF_TAB%IRECTM,INTBUF_TAB%LMSR,INTBUF_TAB%MSR,
-     1          INTBUF_TAB%NSV,INTBUF_TAB%ILOCS,INTBUF_TAB%IRTLM,INTBUF_TAB%STFM,NSN   ,
-     2          NMN       ,NTY       ,INTBUF_TAB%CSTS,INTBUF_TAB%IRTLOM,INTBUF_TAB%FRICOS,
-     3          INTBUF_TAB%VARIABLES(1),INTBUF_TAB%STFNS,IBC       ,ICODT     ,1         ,
-     4          FSAV      ,FSKYI     ,ISKY             ,PTMAX      , INTBUF_TAB%AREAS    ,
-     5          FCONT     ,FNCONT    , FTCONT, H3D_DATA          )
+      CALL I3FOR2(output, X, A, INTBUF_TAB%IRECTM, INTBUF_TAB%LMSR, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%ILOCS,
+     . INTBUF_TAB%IRTLM, INTBUF_TAB%STFM, NSN, NMN, NTY, INTBUF_TAB%CSTS, INTBUF_TAB%IRTLOM, INTBUF_TAB%FRICOS,
+     . INTBUF_TAB%VARIABLES(1), INTBUF_TAB%STFNS, IBC, ICODT, 1, FSAV, FSKYI, ISKY, PTMAX, INTBUF_TAB%AREAS, FCONT,
+     . FNCONT, FTCONT)
       IF(NTY==3)THEN
-       CALL I3FOR2(output, X      ,A         ,INTBUF_TAB%IRECTS,INTBUF_TAB%LNSV,INTBUF_TAB%NSV,
-     1          INTBUF_TAB%MSR,INTBUF_TAB%ILOCM,INTBUF_TAB%IRTLS,INTBUF_TAB%STFS,NMN       ,
-     2          NSN       ,NTY       ,INTBUF_TAB%CSTM,INTBUF_TAB%IRTLOS,INTBUF_TAB%FRICOM,
-     3          INTBUF_TAB%VARIABLES(1),INTBUF_TAB%STFNM,0         ,ICODT     ,-1        ,
-     4          FSAV      ,FSKYI       ,ISKY            ,PTMAX     ,INTBUF_TAB%AREAM     ,
-     5          FCONT     ,FNCONT    , FTCONT, H3D_DATA          )
+      CALL I3FOR2(output, X, A, INTBUF_TAB%IRECTS, INTBUF_TAB%LNSV, INTBUF_TAB%NSV, INTBUF_TAB%MSR, INTBUF_TAB%ILOCM,
+     . INTBUF_TAB%IRTLS, INTBUF_TAB%STFS, NMN, NSN, NTY, INTBUF_TAB%CSTM, INTBUF_TAB%IRTLOS, INTBUF_TAB%FRICOM,
+     . INTBUF_TAB%VARIABLES(1), INTBUF_TAB%STFNM, 0, ICODT, -1, FSAV, FSKYI, ISKY, PTMAX, INTBUF_TAB%AREAM, FCONT,
+     . FNCONT, FTCONT)
       ENDIF
 C
       RETURN

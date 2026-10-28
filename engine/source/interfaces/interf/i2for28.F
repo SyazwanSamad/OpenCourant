@@ -26,26 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    i2for28_cin   ../engine/source/interfaces/interf/i2for28_cin.F
 !||    i2for28_pen   ../engine/source/interfaces/interf/i2for28_pen.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR28(
-     .           X           ,V           ,VR          ,A           ,AR          ,
-     .           MS          ,IN          ,STIFN       ,STIFR       ,WEIGHT      ,
-     .           IRECTM      ,NSV         ,IRTLM       ,DR          ,DL          ,
-     .           FINI        ,STFN_PEN    ,STFR_PEN    ,FSAV        ,FNCONT      ,
-     .           IPENA       ,VISC        ,CSTS        ,MSR         ,ADI         ,
-     .           SMAS        ,SINER       ,MMAS        ,SAV_FOR_PENA,MS_PENA     ,                                                        
-     .           NOINT       ,NODNX_SMS   ,DMINT2      ,DT2T        ,NELTST      ,
-     .           ITYPTST     ,NSN         ,NMN         ,IDEL2       ,PENFLAG     ,
-     .           IROT        ,SKEW        ,
-     .           DPARA       ,NMAS        ,DMAST       ,ADM        ,SAV_INER_POFF,
-     .           H3D_DATA    ,FNCONTP     ,FTCONTP     )
+      SUBROUTINE I2FOR28(X, V, VR, A, AR, MS, IN, STIFN, STIFR, WEIGHT, IRECTM, NSV, IRTLM, DR, DL, FINI, STFN_PEN,
+     . STFR_PEN, FSAV, FNCONT, IPENA, VISC, CSTS, MSR, ADI, SMAS, SINER, MMAS, SAV_FOR_PENA, MS_PENA, NOINT, NODNX_SMS,
+     . DMINT2, DT2T, NELTST, ITYPTST, NSN, NMN, IDEL2, PENFLAG, IROT, SKEW, DPARA, NMAS, DMAST, ADM, SAV_INER_POFF,
+     . FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -65,10 +52,6 @@ C-----------------------------------------------
       my_real
      .   DPARA(7,*),DMAST,ADM(*),
      .   NMAS(*),SAV_INER_POFF(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,NINDXC,NINDXP
       INTEGER INDXC(NSN),INDXP(NSN)
 C=======================================================================
@@ -88,26 +71,15 @@ C----------------
       ENDDO
 c-----------
       IF (NINDXC > 0) THEN
-        CALL I2FOR28_CIN(
-     1   NSN       ,NMN       ,A         ,IRECTM     ,DPARA     ,
-     2   MSR       ,NSV       ,IRTLM     ,MS         ,WEIGHT    ,
-     3   AR        ,IN        ,X         ,STIFN      ,STIFR     ,
-     4   FSAV      ,DMAST     ,ADM       ,NMAS       ,IDEL2     ,
-     5   SMAS      ,SINER     ,CSTS      ,FNCONT     ,INDXC     ,
-     6   SAV_INER_POFF,H3D_DATA,FNCONTP  ,FTCONTP   )
+      CALL I2FOR28_CIN(NSN, NMN, A, IRECTM, DPARA, MSR, NSV, IRTLM, MS, WEIGHT, AR, IN, X, STIFN, STIFR, FSAV, DMAST,
+     . ADM, NMAS, IDEL2, SMAS, SINER, CSTS, FNCONT, INDXC, SAV_INER_POFF, FNCONTP, FTCONTP)
 C
       ENDIF
 c
       IF (NINDXP > 0) THEN
-         CALL I2FOR28_PEN(                                               
-     .       X         ,V         ,VR        ,A           ,AR        ,
-     .       MS_PENA   ,IN        ,STIFN     ,STIFR       ,WEIGHT    ,
-     .       NSV       ,IRTLM     ,CSTS      ,SKEW        ,DL        ,
-     .       DR        ,FINI      ,FSAV      ,FNCONT      ,NSN       ,
-     .       STFN_PEN  ,STFR_PEN  ,VISC      ,PENFLAG     ,IROT      ,
-     .       NOINT     ,NODNX_SMS ,DMINT2    ,SAV_FOR_PENA,IRECTM    ,
-     .       DT2T      ,NELTST    ,ITYPTST   ,INDXP       ,SAV_INER_POFF,
-     .       H3D_DATA  ,FNCONTP   ,FTCONTP)
+      CALL I2FOR28_PEN(X, V, VR, A, AR, MS_PENA, IN, STIFN, STIFR, WEIGHT, NSV, IRTLM, CSTS, SKEW, DL, DR, FINI, FSAV,
+     . FNCONT, NSN, STFN_PEN, STFR_PEN, VISC, PENFLAG, IROT, NOINT, NODNX_SMS, DMINT2, SAV_FOR_PENA, IRECTM, DT2T,
+     . NELTST, ITYPTST, INDXP, SAV_INER_POFF, FNCONTP, FTCONTP)
 c
       ENDIF                                                            
 c-----------

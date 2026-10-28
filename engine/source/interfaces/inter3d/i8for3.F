@@ -25,37 +25,16 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ibcoff       ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I8FOR3(OUTPUT,LFT   ,LLT   ,NFT   ,
-     2                  E     ,MSR   ,NSV   ,IRTL  ,STF   ,
-     .                  NSVGLO,NSV2   ,ILOC,
-     3                  STFN  ,IBC   ,ICODT ,FSAV  ,IGIMP ,
-     4                  X     ,V     ,MS    ,FMAX  ,NSN   ,
-     5                  FSKYI ,ISKY  ,FCONT ,RCONTACT,IFORM,
-     6                  FTSAVX,FTSAVY,FTSAVZ,VISC  ,FNOR  ,
-     7                  DEPTH ,DIST  ,GAPN  ,SLOPEN,STIFN ,
-     8                  FNCONT,FTCONT,ITAB  ,IFT0, 
-     9                  IX1   ,IX2   ,IX3   ,IX4,
-     A                  XI    ,YI    ,ZI,
-     B                  N1    ,N2    ,N3,
-     C                  ANS   ,SSC   ,TTC,
-     D                  H1    ,H2    ,H3    ,H4,
-     E                  XFACE ,STIF  ,FNI,
-     F                  FXI   ,FYI   ,FZI,
-     G                  FX1   ,FY1   ,FZ1,
-     H                  FX2   ,FY2   ,FZ2,
-     I                  FX3   ,FY3   ,FZ3,
-     J                  FX4   ,FY4   ,FZ4,
-     K                  THK   ,H3D_DATA,NINSKID,
-     L                  NINTERSKID,PSKIDS,IRECT,NIN,
-     M                  TAGNCONT ,KLOADPINTER,LOADPINTER ,LOADP_HYD_INTER,
-     O                  IFLINEAR ,FRIC_LAST,FNOR_LAST,DISTLIN)
+      SUBROUTINE I8FOR3(OUTPUT, LFT, LLT, NFT, E, MSR, NSV, IRTL, STF, NSVGLO, NSV2, ILOC, STFN, IBC, ICODT, FSAV,
+     . IGIMP, X, V, MS, FMAX, NSN, FSKYI, ISKY, FCONT, RCONTACT, IFORM, FTSAVX, FTSAVY, FTSAVZ, VISC, FNOR, DEPTH, DIST,
+     . GAPN, SLOPEN, STIFN, FNCONT, FTCONT, ITAB, IFT0, IX1, IX2, IX3, IX4, XI, YI, ZI, N1, N2, N3, ANS, SSC, TTC, H1,
+     . H2, H3, H4, XFACE, STIF, FNI, FXI, FYI, FZI, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3, FY3, FZ3, FX4, FY4, FZ4, THK,
+     . IRECT, NIN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, IFLINEAR, FRIC_LAST, FNOR_LAST, DISTLIN)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD, ONLY: OUTPUT_
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -77,48 +56,34 @@ C-----------------------------------------------
 C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
-      INTEGER IBC, IGIMP, NSN,LFT, LLT, NFT, IFORM,IFT0,NINSKID ,NINTERSKID,NIN
-      INTEGER MSR(*), NSV(*), IRTL(*), ICODT(*), ISKY(*),ITAB(*)
-      INTEGER NSVGLO(*),NSV2(*),ILOC(*),IRECT(4,*)
+      INTEGER IBC, IGIMP, NSN, LFT, LLT, NFT, IFORM, IFT0, NIN
+      INTEGER MSR(*), NSV(*), IRTL(*), ICODT(*), ISKY(*), ITAB(*)
+      INTEGER NSVGLO(*), NSV2(*), ILOC(*), IRECT(4,*)
 C     REAL
-      INTEGER IX1(*), IX2(*), IX3(*), IX4(*),
-     .  TAGNCONT(NLOADP_HYD_INTER,NUMNOD),
-     .  KLOADPINTER(NINTER+1),LOADPINTER(NINTER*NLOADP_HYD),
-     .  LOADP_HYD_INTER(NLOADP_HYD)
-      INTEGER  , INTENT(IN) :: IFLINEAR
-      my_real 
-     .  E(*), STF(*), STFN(*), FSAV(*), X(3,*),V(3,*),MS(*),
-     .  FSKYI(LSKYI,NFSKYI),FCONT(3,*),FMAX, RCONTACT(*),
-     .  FTSAVX(*), FTSAVY(*), FTSAVZ(*), VISC,SLOPEN(*),
-     .  FNOR,DEPTH,DIST(*),GAPN(*),STIFN(*),FNCONT(3,*),FTCONT(3,*),
-     .  PSKIDS(NINTERSKID,*)
+      INTEGER IX1(*), IX2(*), IX3(*), IX4(*), TAGNCONT(NLOADP_HYD_INTER,NUMNOD), KLOADPINTER(NINTER+1),
+     . LOADPINTER(NINTER*NLOADP_HYD), LOADP_HYD_INTER(NLOADP_HYD)
+      INTEGER  , INTENT(IN) ::   IFLINEAR
+      my_real E(*), STF(*), STFN(*), FSAV(*), X(3,*), V(3,*), MS(*), FSKYI(LSKYI,NFSKYI), FCONT(3,*), FMAX, RCONTACT(*)
+     . , FTSAVX(*), FTSAVY(*), FTSAVZ(*), VISC, SLOPEN(*), FNOR, DEPTH, DIST(*), GAPN(*), STIFN(*), FNCONT(3,*),
+     . FTCONT(3,*)
       my_real
      .   XI(*), YI(*), ZI(*), N1(*), N2(*), N3(*), ANS(*), SSC(*),
      .   TTC(*), THK(*), H1(*), H2(*), H3(*), H4(*), XFACE(*), STIF(*),
      .   FXI(*), FYI(*), FZI(*), FNI(*), FX1(*), FX2(*), FX3(*), FX4(*),
      .   FY1(*), FY2(*), FY3(*), FY4(*), FZ1(*), FZ2(*), FZ3(*), FZ4(*)
-      my_real  , INTENT(IN) :: FRIC_LAST,FNOR_LAST,DISTLIN(NSN)
-      TYPE(H3D_DATABASE) :: H3D_DATA
+      my_real  , INTENT(IN) :: FRIC_LAST, FNOR_LAST, DISTLIN(NSN)
       TYPE(OUTPUT_), INTENT(inout) :: OUTPUT
 
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
 C-----------------------------------------------
-      INTEGER I, IL, L, J3, J2, J1, IG,
-     .   I3, I2, I1,J,NN, PP, PPL,K
-      INTEGER NISKYL
-      my_real
-     .   NX,NY,NZ,LX,LY,LZ,NX2,CC2,ST,LI2(NSN),
-     .   VX(NSN),VY(NSN),VZ(NSN),VV(NSN),
-     .   NN1(NSN),NN2(NSN),NN3(NSN),FNNI(NSN), 
-     .   FELAST, FTRY, DELTAG, DT1INV, VIS2,PEN(NSN),FFAC,
-     .   FNLIM, FTLIM,
-     .   FNXI(NSN),FNYI(NSN),FNZI(NSN),FNX1(NSN),FNY1(NSN),
-     .   FNZ1(NSN),FNX2(NSN),FNY2(NSN),FNZ2(NSN),FNX3(NSN),
-     .   FNY3(NSN),FNZ3(NSN),FNX4(NSN),FNY4(NSN),FNZ4(NSN),
-     .   FTXI(NSN),FTYI(NSN),FTZI(NSN),FTX1(NSN),FTY1(NSN),
-     .   FTZ1(NSN),FTX2(NSN),FTY2(NSN),FTZ2(NSN),FTX3(NSN),
-     .   FTY3(NSN),FTZ3(NSN),FTX4(NSN),FTY4(NSN),FTZ4(NSN)
+      INTEGER I, IL, L, J3, J2, J1, IG, I3, I2, I1, J, NN, PP, PPL, K
+      INTEGER   NISKYL
+      my_real NX, NY, NZ, LX, LY, LZ, NX2, CC2, ST, LI2(NSN), VX(NSN), VY(NSN), VZ(NSN), VV(NSN), NN1(NSN), NN2(NSN),
+     . NN3(NSN), FNNI(NSN), FELAST, FTRY, DELTAG, DT1INV, VIS2, PEN(NSN), FFAC, FNLIM, FTLIM, FNXI(NSN), FNYI(NSN),
+     . FNZI(NSN), FNX1(NSN), FNY1(NSN), FNZ1(NSN), FNX2(NSN), FNY2(NSN), FNZ2(NSN), FNX3(NSN), FNY3(NSN), FNZ3(NSN),
+     . FNX4(NSN), FNY4(NSN), FNZ4(NSN), FTXI(NSN), FTYI(NSN), FTZI(NSN), FTX1(NSN), FTY1(NSN), FTZ1(NSN), FTX2(NSN),
+     . FTY2(NSN), FTZ2(NSN), FTX3(NSN), FTY3(NSN), FTZ3(NSN), FTX4(NSN), FTY4(NSN), FTZ4(NSN)
 C---------------------------------------------
       FTLIM = FMAX
       FNLIM = FNOR
@@ -148,20 +113,6 @@ C--------------Pene computation----
         END IF 
 
 C-------Output Skid line for type 8 ----
-      IF(NINSKID > 0) THEN
-         DO I=LFT,LLT
-            IL=I+NFT
-            L=IRTL(IL)
-            IF(L > 0.AND.PEN(I)>ZERO) THEN
-              DO J=1,4
-                 NN=MSR(IRECT(J,L))
-                 PSKIDS(NINSKID,NN) = ONE
-              ENDDO
-            ENDIF
-         ENDDO
-      ENDIF
-
-C------------For /LOAD/PRESSURE tag nodes in contact-------------
       IF(NINTLOADP > 0) THEN
          DO K = KLOADPINTER(NIN)+1, KLOADPINTER(NIN+1) 
             PP = LOADPINTER(K)
@@ -633,9 +584,8 @@ C
 #include "lockoff.inc"
       END IF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
 #include "lockon.inc"
            DO I=1,LLT
             FCONT(1,IX1(I)) =FCONT(1,IX1(I)) + FX1(I)
@@ -657,10 +607,8 @@ C
            ENDDO
 #include "lockoff.inc"
         ENDIF
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .    ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .   (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
 #include "lockon.inc"
            DO I=1,LLT
             FNCONT(1,IX1(I)) =FNCONT(1,IX1(I)) + FNX1(I)

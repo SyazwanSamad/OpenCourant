@@ -23,9 +23,8 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    resol                                        ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                                      ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE REACTION_FORCES_CHECK_FOR_REQUESTED_OUTPUT(NPBY,H3D_DATA,COMPTREAC)
+      SUBROUTINE REACTION_FORCES_CHECK_FOR_REQUESTED_OUTPUT(NPBY, COMPTREAC)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -54,10 +53,6 @@ C                          --> FREAC = FTOT - (FEXT+FINT) - (Fgrav,Fbcs_cyclic,F
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   C o m m o n   B l o c k s
@@ -71,10 +66,6 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER,INTENT(IN) :: NPBY(NNPBY,*)
       INTEGER,INTENT(INOUT) :: COMPTREAC
-      TYPE(H3D_DATABASE),INTENT(IN) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER  N, IFAIL
 C-----------------------------------------------
 C   S o u r c e   L i n e s
@@ -97,7 +88,7 @@ C-----------------------------------------------
       !-----------------------------------------------------!
       ! CRITERION BASED ON OUTPUT REQUEST (ANIM, OUTP, H3D) !
       !-----------------------------------------------------!
-      IF (ANIM_V(17) == 1 .OR. H3D_DATA%N_VECT_FREAC == 1 .OR. ANIM_V(18) == 1 .OR. H3D_DATA%N_VECT_MREAC == 1 ) THEN
+      IF (ANIM_V(17)==1.OR.ANIM_V(18)==1) THEN
         COMPTREAC = 1
       END IF
 

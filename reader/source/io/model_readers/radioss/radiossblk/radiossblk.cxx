@@ -468,17 +468,28 @@ void RadiossblkSetUserProfileVersion(unsigned int version)
 static hwReaderMessageList radiossblkmessages;
 
 static
-void RadiossblkReadMessageFile()
+bool RadiossblkReadMessageFile()
 {
     if(!radiossblkmessages.IsInitialized())
     {
-        std::string msgfilename = getenv("HM_MSG_DIR");
+        const char *message_dir = getenv("HM_MSG_DIR");
+        if(!message_dir)
+        {
+            fprintf(stderr, "OpenReader: HM_MSG_DIR is not set\n");
+            return false;
+        }
+        std::string msgfilename = message_dir;
         msgfilename += "/CONFIG/msg_hw_radioss_reader.txt";
 
         // Initialize message pool
-        radiossblkmessages.ReadMessageFile(msgfilename);
+        if(!radiossblkmessages.ReadMessageFile(msgfilename))
+        {
+            fprintf(stderr, "OpenReader: Cannot open message file %s\n", msgfilename.c_str());
+            return false;
+        }
         radiossblkmessages.SetOffset(100000);
     }
+    return true;
 }
 
 static bool RadiossblkInitCFGKernel()
@@ -509,8 +520,7 @@ extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
 {
     usedGroups.clear();
-    RadiossblkReadMessageFile();
-    if(!RadiossblkInitCFGKernel()) return nullptr;
+    if(!RadiossblkReadMessageFile() || !RadiossblkInitCFGKernel()) return nullptr;
 
     FILE* input = fopen(filename, "rb");
     if(!input)
@@ -534,7 +544,16 @@ sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
         for(IMECPreObject *object : objects) delete object;
         objects.clear();
     }
-    reader.ReadModel(filename, pre_obj_lst);
+    try
+    {
+        reader.ReadModel(filename, pre_obj_lst);
+    }
+    catch(const std::exception& error)
+    {
+        radiossblkmessages.Add(9001, 3, filename, 0, error.what());
+        fprintf(stderr, "OpenReader: %s\n", error.what());
+        return nullptr;
+    }
 
     //Apply id offsets (of includes and submodels)
     std::unordered_map<std::string, cfglnksubdescriptor> cfglnksubdescriptor_map;
@@ -608,8 +627,7 @@ extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkNewModel()
 {
     usedGroups.clear();
-    RadiossblkReadMessageFile(); // in case there is a problem in InitCFGKernel
-    if(!RadiossblkInitCFGKernel()) return nullptr;
+    if(!RadiossblkReadMessageFile() || !RadiossblkInitCFGKernel()) return nullptr;
 
     // Create root preobject
     IMECPreObject *pObj = HCDI_GetPreObjectHandle("", "#include", "", 0, 0);

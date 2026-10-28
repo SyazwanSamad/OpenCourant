@@ -481,9 +481,6 @@ C
 !||    fr_rlink1                         ../engine/source/mpi/kinematic_conditions/fr_rlink1.F
 !||    fxbypid                           ../engine/source/constraints/fxbody/fxbypid.F
 !||    genani                            ../engine/source/output/anim/generate/genani.F
-!||    h3d_create_rbe2_impi              ../engine/source/output/h3d/h3d_build_fortran/h3d_create_rbe2_impi.F
-!||    h3d_create_rbe3_impi              ../engine/source/output/h3d/h3d_build_fortran/h3d_create_rbe3_impi.F
-!||    h3d_create_rbodies_impi           ../engine/source/output/h3d/h3d_build_fortran/h3d_create_rbodies_impi.F
 !||    i21_icrit                         ../engine/source/interfaces/intsort/i21_icrit.F
 !||    i9wal2                            ../engine/source/interfaces/int09/i9wal2.F
 !||    i9wal3                            ../engine/source/interfaces/int09/i9wal3.F

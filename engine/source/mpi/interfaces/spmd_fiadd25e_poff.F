@@ -26,22 +26,15 @@ Copyright>        copyright and attribution statement.
 !||    ibcoff               ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
 !||    debug_mod            ../engine/share/modules/debug_mod.F
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    multi_fvm_mod        ../common_source/modules/ale/multi_fvm_mod.F90
 !||    output_mod           ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_FIADD25E_POFF(OUTPUT,
-     1       NB    ,LEN     ,BUFR   ,NSV    ,A       ,
-     2       STIFN ,VISCN   ,IBC    ,ISECIN ,NOINT   ,
-     3       IBAG  ,ICODT   ,SECFCUM,NSTRF  ,ICONTACT,
-     4       FCONT ,INACTI  ,IADM   ,INTTH  ,FTHE    ,
-     5       CONDN ,H3D_DATA, MULTI_FVM,LEDGE,NEDGE  ,
-     6       NIN   ,TAGNCONT,KLOADPINTER,LOADPINTER  ,
-     7       LOADP_HYD_INTER,NODADT_THERM)
+      SUBROUTINE SPMD_FIADD25E_POFF(OUTPUT, NB, LEN, BUFR, NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG, ICODT,
+     . SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHE, CONDN, MULTI_FVM, LEDGE, NEDGE, NIN, TAGNCONT,
+     . KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE DEBUG_MOD
       USE OUTPUT_MOD
@@ -79,7 +72,6 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: NODADT_THERM
       INTEGER, INTENT(IN) :: NEDGE
       INTEGER, INTENT(IN) :: LEDGE(NLEDGE,NEDGE)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -135,10 +127,8 @@ C
 C     continuation of i7for3 and i10for3 processing on secondary node
 C     
          IF (INCONV == 1) THEN
-            IF((ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT >0.AND.
-     .         ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .         (MANIM>=4.AND.MANIM<=15).OR. H3D_DATA%MH3D /= 0))
-     .        .OR.ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX>0)THEN
+      IF((ANIM_V(4)+OUTP_V(4)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))).OR.ANIM_V(26)>0)THEN
 C     Anim FCONT
                DO I = 1, NB
                   N = NINT(BUFR(1,I))

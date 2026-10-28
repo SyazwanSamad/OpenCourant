@@ -2222,23 +2222,19 @@ c END TRI24VOX
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||    spmd_mod         ../engine/source/mpi/spmd_mod.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_TRI24GAT(RESULT,NSN ,CAND_N ,I_STOK,NIN,
-     2                        IGAP  ,NSNR,MULTIMP,ITY,INTTH ,
-     3                        ILEV  ,IEDGE4, H3D_DATA,INTFRIC,
-     4                        INTNITSCHE,ISTIF_MSDT,IFSUB_CAREA,NODADT_THERM)
+      SUBROUTINE SPMD_TRI24GAT(RESULT, NSN, CAND_N, I_STOK, NIN, IGAP, NSNR, MULTIMP, ITY, INTTH, ILEV, IEDGE4,
+     . INTFRIC, INTNITSCHE, ISTIF_MSDT, IFSUB_CAREA, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE SPMD_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -2264,10 +2260,6 @@ C-----------------------------------------------
      .        CAND_N(*),INTTH,ILEV,IEDGE4,INTFRIC,INTNITSCHE
       INTEGER , INTENT(IN) :: ISTIF_MSDT, IFSUB_CAREA
       INTEGER , INTENT(IN) :: NODADT_THERM
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef  MPI
       INTEGER OLDNSNR,NODFI,NNP,LSKYFI,
      .        NOD, LOC_PROC, I, N, NN, P, IDEB, J, K,
@@ -2929,7 +2921,7 @@ C
 C
 C Output Pressure / Friction Energy conditional allowances
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)
@@ -2949,36 +2941,6 @@ C
         END IF            
       END IF
 
-      IF(H3D_DATA%N_SCAL_CSE_FRICINT >0)THEN
-       IF(H3D_DATA%N_CSE_FRIC_INTER (NIN) >0)THEN
-        IF(ASSOCIATED(EFRICFI(NIN)%P)) call my_dealloc(EFRICFI(NIN)%P)
-        ALLOCATE(EFRICFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-       END IF
-      ENDIF
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF(ASSOCIATED(EFRICGFI(NIN)%P)) call my_dealloc(EFRICGFI(NIN)%P)
-        ALLOCATE(EFRICGFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICGFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-      END IF
-C
-C
-C renumbering of candidates
-C
       DO I = 1, I_STOK
         N = CAND_N(I)
         NN = N-NSN
@@ -3003,7 +2965,6 @@ C END TRI24GAT
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    multi_fvm_mod    ../common_source/modules/ale/multi_fvm_mod.F90
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
@@ -3011,16 +2972,13 @@ C END TRI24GAT
 !||    spmd_mod         ../engine/source/mpi/spmd_mod.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_TRI7GAT(RESULT ,NSN    ,CAND_N  ,I_STOK  ,NIN    ,
-     2                        IGAP   ,NSNR   ,MULTIMP ,ITY     ,INTTH  ,
-     3                        ILEV   ,NSNFIOLD,IPARI  ,H3D_DATA,INTFRIC,
-     4                        MULTI_FVM,NODADT_THERM)
+      SUBROUTINE SPMD_TRI7GAT(RESULT, NSN, CAND_N, I_STOK, NIN, IGAP, NSNR, MULTIMP, ITY, INTTH, ILEV, NSNFIOLD, IPARI,
+     . INTFRIC, MULTI_FVM, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE SPMD_MOD
 C-----------------------------------------------
@@ -3049,7 +3007,6 @@ C-----------------------------------------------
      .        CAND_N(*),INTTH,ILEV, INTFRIC,
      .        NSNFIOLD(*), IPARI(NPARI,NINTER)
       INTEGER , INTENT(IN) :: NODADT_THERM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT) :: MULTI_FVM
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -3481,7 +3438,7 @@ C
 C
 C Output Pressure conditional allowances
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)
@@ -3501,36 +3458,6 @@ C
         END IF            
       END IF
 
-      IF(H3D_DATA%N_SCAL_CSE_FRICINT >0)THEN
-       IF(H3D_DATA%N_CSE_FRIC_INTER (NIN) >0)THEN
-        IF(ASSOCIATED(EFRICFI(NIN)%P)) call my_dealloc(EFRICFI(NIN)%P)
-        ALLOCATE(EFRICFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-       END IF
-      ENDIF
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-        IF(ASSOCIATED(EFRICGFI(NIN)%P)) call my_dealloc(EFRICGFI(NIN)%P)
-        ALLOCATE(EFRICGFI(NIN)%P(NODFI),STAT=IERROR1)
-        IF(IERROR1/=0) THEN
-          CALL ANCMSG(MSGID=20,ANMODE=ANINFO)
-          CALL ARRET(2)
-        ELSE
-          DO J = 1, NODFI
-            EFRICGFI(NIN)%P(J)=ZERO
-          END DO                  
-        END IF            
-      END IF
-C
-C
-C renumbering of candidates
-C
       DO I = 1, I_STOK
         N = CAND_N(I)
         NN = N-NSN
@@ -3933,21 +3860,18 @@ C END SPMD_TRI10BOX
 !||    ancmsg           ../engine/source/output/message/message.F
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||    spmd_mod         ../engine/source/mpi/spmd_mod.F90
 !||    tri7box          ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_TRI10GAT(RESULT,NSN ,CAND_N ,I_STOK,NIN,
-     2                        IGAP  ,NSNR,MULTIMP,ITY,INTTH,H3D_DATA)
+      SUBROUTINE SPMD_TRI10GAT(RESULT, NSN, CAND_N, I_STOK, NIN, IGAP, NSNR, MULTIMP, ITY, INTTH)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE SPMD_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -3971,10 +3895,6 @@ C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER RESULT, NIN, NSN, I_STOK, IGAP, NSNR, MULTIMP, ITY,
      .        CAND_N(*),INTTH
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l  V a r i a b l e s
-C-----------------------------------------------
 #ifdef MPI
       INTEGER OLDNSNR,NODFI,NNP,LSKYFI,
      .        NOD, LOC_PROC, I, N, NN, P, IDEB, J, K,
@@ -4217,7 +4137,7 @@ C
 C
 C Output Pressure conditional allowances
 C
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0)THEN
+      IF(ANIM_V(12)+OUTP_V(12)>0)THEN
         IF(ASSOCIATED(FNCONTI(NIN)%P)) call my_dealloc(FNCONTI(NIN)%P)
         IF(ASSOCIATED(FTCONTI(NIN)%P)) call my_dealloc(FTCONTI(NIN)%P)
         ALLOCATE(FNCONTI(NIN)%P(3,NODFI),STAT=IERROR1)

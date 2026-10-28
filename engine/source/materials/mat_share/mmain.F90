@@ -181,43 +181,15 @@
 !||    table_mod               ../engine/share/modules/table_mod.F
 !||    timer_mod               ../engine/source/system/timer_mod.F90
 !||====================================================================
-        subroutine mmain(timers, output,&
-        &elbuf_tab,   ng,          pm,          geo,&
-        &ale_connect, ix,          iparg,&
-        &v,           tf,          npf,         bufmat,&
-        &stifn,       x,           dt2t,        neltst,&
-        &ityptst,     offset,      nel,         w,&
-        &off,         pid,         mat,         ngl,&
-        &voln,        vd2,         dvol,        deltax,&
-        &vis,         qvis,        cxx,         s1,&
-        &s2,          s3,          s4,          s5,&
-        &s6,          dxx,         dyy,         dzz,&
-        &d4,          d5,          d6,          wxx,&
-        &wyy,         wzz,         rx,          ry,&
-        &rz,          sx,          sy,          sz,&
-        &vdx,         vdy,         vdz,         mumax,&
-        &ssp_eq,      aire,        sigy,        et,&
-        &bufvois,     defp,        r3_dam,      r4_amu,&
-        &mfxx,        mfxy,        mfxz,        mfyx,&
-        &mfyy,        mfyz,        mfzx,        mfzy,&
-        &mfzz,        ipm,         gama,        fr_wav,&
-        &dxy,         dyx,         dyz,         dzy,&
-        &dzx,         dxz,         istrain,     tempel,&
-        &die,         iexpan,      ilay,        mssa,&
-        &dmels,       iptr,        ipts,        iptt,&
-        &table,       fvd2,        fdeltax,     fssp,&
-        &fqvis,       iparg1,      igeo,        conde,&
-        &itask,       nloc_dmg,    varnl,       mat_elem,&
-        &h3d_strain,  jplasol,     jsph,        sz_bufvois,   &
-        &snpc,        stf,         sbufmat,     glob_therm,   &
-        &svis,        sz_ix,       iresp,                     &
-        &n2d,         th_strain,   ngroup,      tt,&
-        &dt1,         ntable,      numelq,      nummat,&
-        &numgeo,      numnod,      numels,            &
-        &idel7nok,    idtmin,      maxfunc    ,        &
-        &imon_mat,    userl_avail, impl_s,&
-        &idyna,       dt,          fheat      ,sensors ,   &
-        &opt_mtn,     opt_jcvt,opt_isorth,  opt_isorthg  )
+      subroutine mmain(timers, output, elbuf_tab, ng, pm, geo, ale_connect, ix, iparg, v, tf, npf, bufmat, stifn, x, &
+     & dt2t, neltst, ityptst, offset, nel, w, off, pid, mat, ngl, voln, vd2, dvol, deltax, vis, qvis, cxx, s1, s2, s3, &
+     & s4, s5, s6, dxx, dyy, dzz, d4, d5, d6, wxx, wyy, wzz, rx, ry, rz, sx, sy, sz, vdx, vdy, vdz, mumax, ssp_eq, aire, &
+     & sigy, et, bufvois, defp, r3_dam, r4_amu, mfxx, mfxy, mfxz, mfyx, mfyy, mfyz, mfzx, mfzy, mfzz, ipm, gama, fr_wav, &
+     & dxy, dyx, dyz, dzy, dzx, dxz, istrain, tempel, die, iexpan, ilay, mssa, dmels, iptr, ipts, iptt, table, fvd2, &
+     & fdeltax, fssp, fqvis, iparg1, igeo, conde, itask, nloc_dmg, varnl, mat_elem, jplasol, jsph, sz_bufvois, snpc, &
+     & stf, sbufmat, glob_therm, svis, sz_ix, iresp, n2d, th_strain, ngroup, tt, dt1, ntable, numelq, nummat, numgeo, &
+     & numnod, numels, idel7nok, idtmin, maxfunc, imon_mat, userl_avail, impl_s, idyna, dt, fheat, sensors, opt_mtn, &
+     & opt_jcvt, opt_isorth, opt_isorthg)
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Modules
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -305,7 +277,6 @@
           integer,intent(in) :: ipts
           integer,intent(in) :: iptt
           integer,intent(in) :: itask
-          integer,intent(in) :: h3d_strain
           integer,intent(in) :: offset
           integer,dimension(n_var_iparg),intent(in) :: iparg1
           !
@@ -921,8 +892,7 @@
               npg ,     dpdm  ,   fheat ,   glob_therm,&
               numgeo,   igeo)
 !----------------
-            if (istrain > 0 .and.&
-            &(h3d_strain == 1 .or. th_strain == 1 )) then
+      if (istrain>0.AND.(th_strain==1)) then
             end if ! no need in mmain now
 !
 !----------------

@@ -23,10 +23,9 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    resol        ../engine/source/engine/resol.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod      ../engine/share/modules/h3d_mod.F
 !||    output_mod   ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE FORANI3(OUTPUT,A,MS,NODFT,NODLT,H3D_DATA)
+      SUBROUTINE FORANI3(OUTPUT, A, MS, NODFT, NODLT)
 C-----------------------------------------------
 C   D e s c r i p t i o n
 C-----------------------------------------------
@@ -50,10 +49,6 @@ C  H3D_DATA%N_VECT_FEXT : /H3D/NODA/FEXT
 C
 C-----------------------------------------------
       USE output_mod, only : OUTPUT_
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   C o m m o n   B l o c k s
@@ -68,15 +63,11 @@ C-----------------------------------------------
       TYPE(OUTPUT_) :: OUTPUT
       INTEGER NODFT,NODLT
       my_real A(3,*),MS(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER N
 C-----------------------------------------------
 C   S o u r c e   L i n e s
 C-----------------------------------------------
-      IF(ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT > 0) THEN
+      IF(ANIM_V(6)+OUTP_V(6)>0) THEN
       !if FEXT is requested (ANIM or OUTP or H3D)
 #include      "vectorize.inc"
         DO N=NODFT,NODLT

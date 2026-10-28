@@ -25,19 +25,12 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    my_alloc_mod           ../common_source/tools/memory/my_alloc.F90
 !||    spmd_mod               ../engine/source/mpi/spmd_mod.F90
 !||====================================================================
-      SUBROUTINE SPMD_EXCH_A_AMS_POFF(
-     1   A        ,AR     ,STIFN,STIFR ,MS  ,
-     2   IAD_ELEM ,FR_ELEM,MSNF ,IFSUBM,SIZE,
-     3   LENR     ,FTHE   ,MCP  ,FR_LOC,NB_FR,
-     4   MS_2D    , MCP_OFF,FORNEQS,NFACNIT  ,
-     5   LENC     ,FCONT   ,H3D_DATA,FNCONT  ,
-     6   FTCONT   ,GLOB_THERM )
+      SUBROUTINE SPMD_EXCH_A_AMS_POFF(A, AR, STIFN, STIFR, MS, IAD_ELEM, FR_ELEM, MSNF, IFSUBM, SIZE, LENR, FTHE, MCP,
+     . FR_LOC, NB_FR, MS_2D, MCP_OFF, FORNEQS, NFACNIT, LENC, FCONT, FNCONT, FTCONT, GLOB_THERM)
 C--------------------------------------
-      USE H3D_MOD
       USE GLOB_THERM_MOD
       use my_alloc_mod
 C-----------------------------------------------
@@ -67,7 +60,6 @@ C-----------------------------------------------
      .        FTHE(*),MCP(*),MCP_OFF(*),MS_2D(*),FORNEQS(3,*)
       my_real  , INTENT(INOUT) :: FCONT(3,NUMNOD),FNCONT(3,NUMNOD),
      .        FTCONT(3,NUMNOD)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(GLOB_THERM_) ,INTENT(IN) :: GLOB_THERM
 C-----------------------------------------------
 C   L o c a l  V a r i a b l e s
@@ -162,7 +154,7 @@ C-----------------------------------------------
           ENDIF
 
 C --- /CONT/MAX output
-          IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
             SBUF(SHIFT+1) = FCONT(1,NOD)
             SBUF(SHIFT+2) = FCONT(2,NOD)
             SBUF(SHIFT+3) = FCONT(3,NOD)
@@ -276,7 +268,7 @@ C SAUVEGARGE VALEURS ACCEL
             SHIFT = SHIFT+NFACNIT
           ENDIF
 
-         IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
             SAV_A(SHIFT+1,J) = FCONT(1,NOD)
             SAV_A(SHIFT+2,J) = FCONT(2,NOD)
             SAV_A(SHIFT+3,J) = FCONT(3,NOD)
@@ -286,21 +278,6 @@ C SAUVEGARGE VALEURS ACCEL
             FCONT(3,NOD) = ZERO
 
             SHIFT = SHIFT+3
-          ENDIF
-
-         IF(H3D_DATA%N_VECT_PCONT_MAX /=0.AND.NINTSTAMP==0) THEN
-            SAV_A(SHIFT+1,J) = FNCONT(1,NOD)
-            SAV_A(SHIFT+2,J) = FNCONT(2,NOD)
-            SAV_A(SHIFT+3,J) = FNCONT(3,NOD)
-            SAV_A(SHIFT+4,J) = FTCONT(1,NOD)
-            SAV_A(SHIFT+5,J) = FTCONT(2,NOD)
-            SAV_A(SHIFT+6,J) = FTCONT(3,NOD)
-
-            FNCONT(1,NOD) = ZERO
-            FNCONT(2,NOD) = ZERO
-            FNCONT(3,NOD) = ZERO
-
-            SHIFT = SHIFT+6
           ENDIF
 
         ENDDO
@@ -368,21 +345,11 @@ C   test if msg requires to send to complete by test interface
                  SHIFT = SHIFT+NFACNIT
                ENDIF
 
-              IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
                  FCONT(1,NOD)= FCONT(1,NOD)+ RBUF(SHIFT+1)
                  FCONT(2,NOD)= FCONT(2,NOD)+ RBUF(SHIFT+2)
                  FCONT(3,NOD)= FCONT(3,NOD)+ RBUF(SHIFT+3)
                  SHIFT = SHIFT+3
-               ENDIF
-
-               IF(H3D_DATA%N_VECT_PCONT_MAX /=0.AND.NINTSTAMP==0) THEN
-                 FNCONT(1,NOD)= FNCONT(1,NOD)+ RBUF(SHIFT+1)
-                 FNCONT(2,NOD)= FNCONT(2,NOD)+ RBUF(SHIFT+2)
-                 FNCONT(3,NOD)= FNCONT(3,NOD)+ RBUF(SHIFT+3)
-                 FTCONT(1,NOD)= FTCONT(1,NOD)+ RBUF(SHIFT+4)
-                 FTCONT(2,NOD)= FTCONT(2,NOD)+ RBUF(SHIFT+5)
-                 FTCONT(3,NOD)= FTCONT(3,NOD)+ RBUF(SHIFT+6)
-                 SHIFT = SHIFT+6
                ENDIF
 
                L = L + SIZE +NFACNIT +LENC
@@ -440,7 +407,7 @@ C   test if msg requires to send to complete by test interface
            ENDIF
 
 C --- /CONT/MAX output
-           IF(ANIM_V(26)+H3D_DATA%N_VECT_CONT_MAX /=0.AND.NINTSTAMP==0) THEN
+      IF(ANIM_V(26)/=0.AND.NINTSTAMP==0) THEN
              FCONT(1,NOD) = FCONT(1,NOD) + SAV_A(SHIFT+1,J)
              FCONT(2,NOD) = FCONT(2,NOD) + SAV_A(SHIFT+2,J)
              FCONT(3,NOD) = FCONT(3,NOD) + SAV_A(SHIFT+3,J)

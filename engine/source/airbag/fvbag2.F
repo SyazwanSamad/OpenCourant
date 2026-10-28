@@ -29,14 +29,11 @@ Copyright>        copyright and attribution statement.
 !||    elbufdef_mod             ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    fvbag_mod                ../engine/share/modules/fvbag_mod.F
 !||    fvmbag_meshcontrol_mod   ../common_source/modules/airbag/fvmbag_meshcontrol_mod.F
-!||    h3d_mod                  ../engine/share/modules/h3d_mod.F
 !||    message_mod              ../engine/share/message_module/message_mod.F
 !||    my_dealloc_mod           ../common_source/tools/memory/my_dealloc.F90
 !||====================================================================
-      SUBROUTINE FVBAG2(IFV,   ITYP, NNA,  NVENT, NJET, IVOLU, IBAGHOL, RBAGHOL,
-     .                  X,    RVOLU, XXXA, NCONA, RBAGJET ,
-     .                  A,    LGAUGE , GAUGE , NNT   ,FEXT   , NSKIP,
-     .                  H3D_DATA, WEIGHT) 
+      SUBROUTINE FVBAG2(IFV, ITYP, NNA, NVENT, NJET, IVOLU, IBAGHOL, RBAGHOL, X, RVOLU, XXXA, NCONA, RBAGJET, A,
+     . LGAUGE, GAUGE, NNT, FEXT, NSKIP, WEIGHT)
 C
 C Broadcast data from PMAIN to other processors
 C Arrays sent:
@@ -52,10 +49,6 @@ C-----------------------------------------------
       USE MESSAGE_MOD
       USE ELBUFDEF_MOD
       USE FVMBAG_MESHCONTROL_MOD
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
       use my_dealloc_mod, only : my_dealloc
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -82,10 +75,6 @@ C-----------------------------------------------
      .        A(3,*),
      .        FEXT(3,*), 
      .        GAUGE(LLGAUGE,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER II,J,N21,N22,N1
       INTEGER I, I1, I2, IFVENT, NPOLH  
       INTEGER IDEF(NVENT) 
@@ -160,8 +149,7 @@ C Point input (by coordinates) -not available
            A(2,I2)=A(2,I2)+FVSPMD(IFV)%AAA(2,I1)
            A(3,I2)=A(3,I2)+FVSPMD(IFV)%AAA(3,I1)
          ENDIF
-         IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT
-     .       +ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
              FEXT(1,I2) = FEXT(1,I2)+FVSPMD(IFV)%AAA(1,I1)
              FEXT(2,I2) = FEXT(2,I2)+FVSPMD(IFV)%AAA(2,I1)
              FEXT(3,I2) = FEXT(3,I2)+FVSPMD(IFV)%AAA(3,I1)

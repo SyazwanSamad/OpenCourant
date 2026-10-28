@@ -24,10 +24,10 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_mat                  ../starter/source/materials/mat/hm_read_mat.F90
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                       ../starter/source/output/message/message.F
-!||    hm_get_floatv                ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_floatv_dim            ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_intv                  ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted       ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv                ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_floatv_dim            ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_intv                  ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted       ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    init_mat_keyword             ../starter/source/materials/mat/init_mat_keyword.F
 !||    law76_func_comp              ../starter/source/materials/mat/mat076/law76_func_comp.F90
 !||    mat_func_deintersect         ../starter/source/materials/tools/mat_func_deintersect.F90

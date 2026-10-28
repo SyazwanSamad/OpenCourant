@@ -116,29 +116,15 @@
 !||    table_mod               ../engine/share/modules/table_mod.F
 !||    timer_mod               ../engine/source/system/timer_mod.F90
 !||====================================================================
-        subroutine s6zforc3(                                                     &
-          timers   ,output   ,ngroup   ,elbuf_tab,npropm   ,nummat   ,pm       , &
-          ng       ,npropg   ,numgeo   ,geo      ,nixs     ,numels   ,numelq   , &
-          nsvois   ,ixs      ,numnod   ,x        ,a        ,v        ,           &
-          w        ,flu1     ,ale_connect,nparg  ,iparg    ,                     &
-          stf      ,tf       ,snpc     ,npf      ,sbufmat  ,bufmat   ,npsav    , &
-          npart    ,partsav  ,dt2t     ,neltst   ,ityptst  ,stifn    ,lsky     , &
-          fsky     ,iads     ,offset   ,nel      ,iparts   ,                     &
-          f11      ,f21      ,f31      ,f12      ,f22      ,f32      ,           &
-          f13      ,f23      ,f33      ,f14      ,f24      ,f34      ,           &
-          f15      ,f25      ,f35      ,f16      ,f26      ,f36      ,           &
-          nloc_dmg ,npropmi  ,ipm      ,istrain  ,npropgi  ,igeo     ,ngpe     , &
-          nthread  ,gresav   ,ngrth    ,nelem    ,grth     ,igrth    ,ntable   , &
-          table    ,mssa     ,dmels    ,voln     ,itask    ,ioutprt  ,mat_elem , &
-          h3d_strain,ifthe   ,fthe     ,fthesky  ,icondn   ,condn    ,condnsky , &
-          iexpan   ,dt       ,svis     ,iresp    ,idel7nok ,maxfunc  ,imon_mat , &
-          userl_avail,glob_therm,xdp   ,sensors  ,dt1      ,th_strain, &
-          idtmin   ,tt       ,idyna    ,impl_s   ,iparit   ,irep     , &
-          iscau    ,ismdisp  ,ismstr   ,isorth   ,isorthg  ,jale     ,jcvt     , &
-          jeul     ,jlag     ,jsph     ,jplasol  ,jthe     ,mtn      , &
-          n2d      ,ncpri    ,ncycle   ,nfilsol  ,nft      ,iint     ,nodadt   , &
-          dtfac1   ,d        ,imatvis  ,invstr   ,icp                          , &
-          jhbe  )
+      subroutine s6zforc3(timers, output, ngroup, elbuf_tab, npropm, nummat, pm, ng, npropg, numgeo, geo, nixs, numels, &
+     & numelq, nsvois, ixs, numnod, x, a, v, w, flu1, ale_connect, nparg, iparg, stf, tf, snpc, npf, sbufmat, bufmat, &
+     & npsav, npart, partsav, dt2t, neltst, ityptst, stifn, lsky, fsky, iads, offset, nel, iparts, f11, f21, f31, f12, &
+     & f22, f32, f13, f23, f33, f14, f24, f34, f15, f25, f35, f16, f26, f36, nloc_dmg, npropmi, ipm, istrain, npropgi, &
+     & igeo, ngpe, nthread, gresav, ngrth, nelem, grth, igrth, ntable, table, mssa, dmels, voln, itask, ioutprt, &
+     & mat_elem, ifthe, fthe, fthesky, icondn, condn, condnsky, iexpan, dt, svis, iresp, idel7nok, maxfunc, imon_mat, &
+     & userl_avail, glob_therm, xdp, sensors, dt1, th_strain, idtmin, tt, idyna, impl_s, iparit, irep, iscau, ismdisp, &
+     & ismstr, isorth, isorthg, jale, jcvt, jeul, jlag, jsph, jplasol, jthe, mtn, n2d, ncpri, ncycle, nfilsol, nft, &
+     & iint, nodadt, dtfac1, d, imatvis, invstr, icp, jhbe)
 !-------------------------------------------------------------------------------
 !   m o d u l e s
 !-------------------------------------------------------------------------------
@@ -275,7 +261,6 @@
           integer,                            intent(in)    :: itask     !< task identifier
           integer,                            intent(in)    :: ioutprt   !< output print flag
           type(mat_elem_),                    intent(inout) :: mat_elem  !< material data structure
-          integer,                            intent(in)    :: h3d_strain !< 3d strain output flag
           integer,                            intent(in)    :: ifthe     !< size of the thermal force array
           real(kind=wp), dimension(ifthe)  ,  intent(inout) :: fthe      !< thermal force array
           real(kind=wp), dimension(lsky)   ,  intent(inout) :: fthesky   !< skyline thermal force
@@ -767,32 +752,15 @@
 !  compute new stresses according to constitutive laws
 !-------------------------------------------------------------------------------
 
-          call mmain(                                                              &
-            timers   ,output   ,elbuf_tab,ng       ,pm       ,geo      ,           &
-            ale_connect, ixs,  iparg,                                              &
-            v        ,tf       ,npf      ,bufmat   ,sti      ,x        ,           &
-            dt2t     ,neltst   ,ityptst  ,offset   ,nel      ,w        ,           &
-            off      ,ngeo     ,mxt      ,ngl      ,voln     ,vd2      ,           &
-            dvol     ,deltax   ,vis      ,qvis     ,cxx      ,                     &
-            s1       ,s2       ,s3       ,s4       ,s5       ,s6       ,           &
-            dxx      ,dyy      ,dzz      ,d4       ,d5       ,d6       ,           &
-            wxx      ,wyy      ,wzz      ,                                         &
-            jac1     ,jac2     ,jac3     ,jac4     ,jac5     ,jac6     ,           &
-            vdx      ,vdy      ,vdz      ,muvoid   ,ssp_eq   ,aire     ,           &
-            sigy     ,et       ,r1_free  ,lbuf%pla ,r3_free  ,amu      ,           &
-            mfxx     ,mfxy     ,mfxz     ,mfyx     ,mfyy     ,mfyz     ,           &
-            mfzx     ,mfzy     ,mfzz     ,ipm      ,gama     ,bid      ,           &
-            bid      ,bid      ,bid      ,bid      ,bid      ,bid      ,           &
-            istrain  ,tempel   ,die      ,iexpan   ,ilay     ,mssa     ,           &
-            dmels    ,ir       ,is       ,it       ,table    ,bid      ,           &
-            bid      ,bid      ,bid      ,iparg(1,ng),igeo   ,conde    ,           &
-            itask    ,nloc_dmg ,var_reg(1),mat_elem,h3d_strain,jplasol ,           &
-            jsph     ,sz_r1_free,snpc    ,stf      ,sbufmat  ,glob_therm,          &
-            svis     ,sz_ix    ,iresp    ,n2d      ,th_strain,ngroup   ,           &
-            tt       ,dt1      ,ntable   ,numelq   ,nummat   ,numgeo   ,           &
-            numnod   ,numels   ,idel7nok ,idtmin   ,maxfunc  ,imon_mat ,           &
-            userl_avail,impl_s ,idyna    ,dt       ,fheat    ,sensors  ,           &
-            opt_mtn=mtn,opt_jcvt=jcvt,opt_isorth=isorth,opt_isorthg=isorthg)
+      call mmain(timers, output, elbuf_tab, ng, pm, geo, ale_connect, ixs, iparg, v, tf, npf, bufmat, sti, x, dt2t, &
+     & neltst, ityptst, offset, nel, w, off, ngeo, mxt, ngl, voln, vd2, dvol, deltax, vis, qvis, cxx, s1, s2, s3, s4, &
+     & s5, s6, dxx, dyy, dzz, d4, d5, d6, wxx, wyy, wzz, jac1, jac2, jac3, jac4, jac5, jac6, vdx, vdy, vdz, muvoid, &
+     & ssp_eq, aire, sigy, et, r1_free, lbuf%pla, r3_free, amu, mfxx, mfxy, mfxz, mfyx, mfyy, mfyz, mfzx, mfzy, mfzz, &
+     & ipm, gama, bid, bid, bid, bid, bid, bid, bid, istrain, tempel, die, iexpan, ilay, mssa, dmels, ir, is, it, table, &
+     & bid, bid, bid, bid, iparg(1,ng), igeo, conde, itask, nloc_dmg, var_reg(1), mat_elem, jplasol, jsph, sz_r1_free, &
+     & snpc, stf, sbufmat, glob_therm, svis, sz_ix, iresp, n2d, th_strain, ngroup, tt, dt1, ntable, numelq, nummat, &
+     & numgeo, numnod, numels, idel7nok, idtmin, maxfunc, imon_mat, userl_avail, impl_s, idyna, dt, fheat, sensors, &
+     & opt_mtn=mtn, opt_jcvt=jcvt, opt_isorth=isorth, opt_isorthg=isorthg)
 
           !< update the total strain tensor for output
 

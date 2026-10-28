@@ -47,7 +47,6 @@ Copyright>        copyright and attribution statement.
 !||    upgrade_multimp              ../common_source/interf/upgrade_multimp.F
 !||--- uses       -----------------------------------------------------
 !||    check_sorting_criteria_mod   ../engine/source/interfaces/intsort/check_sorting_criteria.F90
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    i25xsave_mod                 ../engine/source/interfaces/intsort/i25xsave.F90
 !||    imp_intbuf                   ../engine/share/modules/imp_mod_def.F90
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
@@ -59,14 +58,9 @@ Copyright>        copyright and attribution statement.
 !||    tri25ebox                    ../engine/share/modules/tri25ebox.F
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I25MAIN_TRI(TIMERS,
-     1                  IPARI   ,X       ,V       ,INTBUF_TAB,
-     2                  MS      ,NIN     ,ITASK   ,WEIGHT  ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM ,
-     4                  ITAB    ,KINET   ,TEMP    ,RENUM   ,
-     5                  NSNFIOLD,NUM_IMP ,IND_IMP ,NODNX_SMS,
-     6                  H3D_DATA,ESHIFT  ,NEDGE_T ,SSHIFT   ,NRTM_T ,
-     7                  ICODT   ,ISKEW   ,PARAMETERS,NODADT_THERM,INCONV)
+      SUBROUTINE I25MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB, MS, NIN, ITASK, WEIGHT, ISENDTO, IRCVFROM, RETRI,
+     . IAD_ELEM, FR_ELEM, ITAB, KINET, TEMP, RENUM, NSNFIOLD, NUM_IMP, IND_IMP, NODNX_SMS, ESHIFT, NEDGE_T, SSHIFT,
+     . NRTM_T, ICODT, ISKEW, PARAMETERS, NODADT_THERM, INCONV)
 C============================================================================
 C   M o d u l e s
 C-----------------------------------------------
@@ -76,7 +70,6 @@ C-----------------------------------------------
       USE MESSAGE_MOD
       USE IMP_INTBUF
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE PARAMETERS_MOD
       use check_sorting_criteria_mod , only : check_sorting_criteria
       USE i25xsave_mod
@@ -117,7 +110,6 @@ C     REAL
       my_real 
      .    X(3,*), V(*), MS(*),TEMP(*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -567,12 +559,9 @@ C Negative value in "dist" : tag boundary part
         IF (IMONM > 0) CALL STARTIME(TIMERS,26)
         INTBUF_TAB%VARIABLES(distance_index) = - ONE
 C
-        CALL SPMD_TRI25GAT(
-     1      RESULT       ,NSN ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2      IPARI(21,NIN),NSNR,MULTIMP      ,NTY,IPARI(47,NIN),
-     3      ILEV         ,NSNFIOLD,IPARI   ,NSNROLD, RENUM, H3D_DATA ,
-     4      IPARI(72,NIN),FLAGREMN,LREMNORMAX,NRTM ,INTBUF_TAB%KREMNODE,
-     5      INTBUF_TAB%REMNODE,IVIS2,IPARI(97,NIN),IFSUB_CAREA ,NODADT_THERM)
+      CALL SPMD_TRI25GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), ILEV, NSNFIOLD, IPARI, NSNROLD, RENUM, IPARI(72,NIN), FLAGREMN, LREMNORMAX, NRTM,
+     . INTBUF_TAB%KREMNODE, INTBUF_TAB%REMNODE, IVIS2, IPARI(97,NIN), IFSUB_CAREA, NODADT_THERM)
         IPARI(24,NIN) = NSNR
 
         NEDGE_REMOTE_OLD = NEDGE_REMOTE

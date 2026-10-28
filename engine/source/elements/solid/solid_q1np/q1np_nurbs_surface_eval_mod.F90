@@ -30,7 +30,6 @@
 !||====================================================================
 !||    q1np_nurbs_surface_evaluation_mod   ../engine/source/elements/solid/solid_q1np/q1np_nurbs_surface_eval_mod.F90
 !||--- called by ------------------------------------------------------
-!||    genh3d                              ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    q1np_contact_algorithms_mod         ../engine/source/interfaces/ists_q1np/q1np_contact_algorithms.F90
 !||--- uses       -----------------------------------------------------
 !||    constant_mod                        ../common_source/modules/constant_mod.F
@@ -198,7 +197,6 @@
 !||====================================================================
 !||    q1np_evaluate_nurbs_shape_values   ../engine/source/elements/solid/solid_q1np/q1np_nurbs_surface_eval_mod.F90
 !||--- called by ------------------------------------------------------
-!||    genh3d                             ../engine/source/output/h3d/h3d_results/genh3d.F
 !||    q1np_contact_evaluate_side         ../engine/source/interfaces/ists_q1np/q1np_contact_algorithms.F90
 !||--- calls      -----------------------------------------------------
 !||    q1np_shape_functions               ../common_source/modules/q1np_geom_mod.F90

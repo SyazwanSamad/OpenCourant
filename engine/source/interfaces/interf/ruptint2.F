@@ -25,30 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    finter        ../engine/source/tools/curve/finter.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||    uintbuf_mod   ../engine/source/user_interface/uintbuf_mod.F
 !||====================================================================
-      SUBROUTINE RUPTINT2(
-     1             NSL     ,ISL     ,NUVAR   ,UVAR    ,USERBUF ,
-     2             PROP    ,IFUNS   ,IFUNN   ,IFUNT   ,IMOD    ,
-     3             IFILTR  ,IDBG    ,NPF     ,TF      ,NOINT   ,
-     4             ITAB    ,PDAMA2  ,ISYM    ,H3D_DATA)
+      SUBROUTINE RUPTINT2(NSL, ISL, NUVAR, UVAR, USERBUF, PROP, IFUNS, IFUNN, IFUNT, IMOD, IFILTR, IDBG, NPF, TF,
+     . NOINT, ITAB, PDAMA2, ISYM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE UINTBUF_MOD
-      USE H3D_MOD
-C----------+---------+---+---+--------------------------------------------
-C VAR      | SIZE    |TYP| RW| DEFINITION
-C----------+---------+---+---+--------------------------------------------
-C NSL      |  1      | I | R | NUMBER OF SECONDARY NODES
-C NUVAR    |  1      | I | R | NUMBER OF USER VARIABLES
-C PROP     |  6      | F | R | PROPERTY BUFFER
-C UVAR     |NUVAR    | F |R/W| USER SECONDARY NODE VARIABLES
-C USERBUF  |         | F |R/W| SECONDARY NODE DATA STRUCTURE
-C=======================================================================
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   C o m m o n   B l o c k s
@@ -65,10 +49,6 @@ C----------------------------------------------------------
       my_real
      .        PROP(*),UVAR(*), TF(*),PDAMA2(2,*)
       type(UINTBUF) :: USERBUF
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER  IRUPT,IRUPT0,ISECND
       my_real
      .   DTIM,SIGN,SIGT,SIGN1,SIGT1,AREA,DFSIGN,DFSIGT,DSIG,
@@ -138,10 +118,8 @@ C
             FACN = ZERO
             FACT = ZERO
           ENDIF
-          IF (ANIM_N(15)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA/DNMAX,HUNDRED)
-          IF (ANIM_N(16)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T/DTMAX,HUNDRED)
+      IF (ANIM_N(15)==1) PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA/DNMAX,HUNDRED)
+      IF (ANIM_N(16)==1) PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T/DTMAX,HUNDRED)
         ELSEIF (IMOD == 1) THEN
           DIS_NA = DIS_NA / DNMAX
           DIS_T  = DIS_T  / DTMAX
@@ -150,10 +128,8 @@ C
             FACN = ZERO
             FACT = ZERO
           ENDIF
-          IF (ANIM_N(15)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA,HUNDRED)
-          IF (ANIM_N(16)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T,HUNDRED)
+      IF (ANIM_N(15)==1) PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA,HUNDRED)
+      IF (ANIM_N(16)==1) PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T,HUNDRED)
         ENDIF
 C
       ELSE    ! ISYM == 1 .AND. IRUPT == 0)
@@ -164,10 +140,8 @@ C
             FACN = ZERO
             FACT = ZERO
           ENDIF
-          IF (ANIM_N(15)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA/DNMAX,HUNDRED)
-          IF (ANIM_N(16)==1 .OR. H3D_DATA%N_SCAL_DAMA2 == 1) 
-     .            PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T/DTMAX,HUNDRED)
+      IF (ANIM_N(15)==1) PDAMA2(1,ISECND)=MIN(HUNDRED*DIS_NA/DNMAX,HUNDRED)
+      IF (ANIM_N(16)==1) PDAMA2(2,ISECND)=MIN(HUNDRED*DIS_T/DTMAX,HUNDRED)
         ENDIF
       ENDIF  ! ISYM
 C-----

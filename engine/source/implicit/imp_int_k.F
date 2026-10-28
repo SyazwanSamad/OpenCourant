@@ -705,7 +705,6 @@ C
 !||--- uses       -----------------------------------------------------
 !||    glob_therm_mod   ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod     ../common_source/modules/groupdef_mod.F
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod    ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    interfaces_mod   ../common_source/modules/interfaces/interfaces_mod.F90
 !||    multi_fvm_mod    ../common_source/modules/ale/multi_fvm_mod.F90
@@ -713,27 +712,17 @@ C
 !||    sensor_mod       ../common_source/modules/sensor_mod.F90
 !||    timer_mod        ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_INTTD0(output, TIMERS,
-     1       IPARI ,INTBUF_TAB     ,X       ,D       ,
-     2       MS    ,ITAB   ,IN    ,D_IMP   ,DR_IMP  ,
-     3       IMSCH ,I2MSCH ,ISIZXV,ILENXV  ,IGRBRIC ,
-     4       ISLEN7,IRLEN7 ,ISLEN11,IRLEN11,ISLEN17 ,
-     5       IRLEN17,IRLEN7T,ISLEN7T,IAD_ELEM,FR_ELEM ,
-     6       NBINTC,INTLIST,ITASK ,KINET   ,NEWFRONT,
-     7       NUM_IMP,NS_IMP,NE_IMP,IND_IMP ,ISENDTO ,
-     8       IRECVFROM,WEIGHT ,IXS  ,TEMP    ,
-     9       DT2PREV,WA,NUM_IMP1,IRLEN20,ISLEN20,
-     A       IRLEN20T,ISLEN20T,IRLEN20E,ISLEN20E,
-     B       IKINE,DIAG_SMS,COUNT_REMSLV,COUNT_REMSLVE,
-     C       NSENSOR,SENSOR_TAB,XDP,H3D_DATA,MULTI_FVM,FORNEQS,
-     D       MAXDGAP,INTERFACES,GLOB_THERM)
+      SUBROUTINE IMP_INTTD0(output, TIMERS, IPARI, INTBUF_TAB, X, D, MS, ITAB, IN, D_IMP, DR_IMP, IMSCH, I2MSCH,
+     . ISIZXV, ILENXV, IGRBRIC, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, IAD_ELEM, FR_ELEM,
+     . NBINTC, INTLIST, ITASK, KINET, NEWFRONT, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, ISENDTO, IRECVFROM, WEIGHT, IXS, TEMP,
+     . DT2PREV, WA, NUM_IMP1, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, IKINE, DIAG_SMS, COUNT_REMSLV,
+     . COUNT_REMSLVE, NSENSOR, SENSOR_TAB, XDP, MULTI_FVM, FORNEQS, MAXDGAP, INTERFACES, GLOB_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       use output_mod
       USE TIMER_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE GROUPDEF_MOD
       USE SENSOR_MOD
@@ -778,7 +767,6 @@ C-----------------------------------------------
      .   FORNEQS(3,*),MAXDGAP(NINTER)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 !
       TYPE (GROUP_)  , DIMENSION(NGRBRIC) :: IGRBRIC
@@ -875,20 +863,11 @@ C
      2  INTBUF_TAB(N)%STFNS,X_TMP       ,D_IMP   ,DR_IMP       ,V     ,
      3  VR           ,FAC          ,FAC1         )
         ENDIF
-        CALL IMP_TRIPI(output, TIMERS,
-     1       IPARI ,INTBUF_TAB,X_TMP   ,D       ,
-     2       V     ,MS     ,ITAB ,VR      ,IN      ,
-     3       IMSCH ,I2MSCH ,ISIZXV,ILENXV ,IGRBRIC ,
-     4       ISLEN7,IRLEN7 ,ISLEN11,IRLEN11,ISLEN17,
-     5       IRLEN17,IRLEN7T,ISLEN7T,IAD_ELEM,FR_ELEM ,
-     6       NB     ,ILIST  ,ITASK ,KINET,NEWFRONT,
-     7       NUM_IMP,NS_IMP,NE_IMP,IND_IMP,IAD   ,
-     8       ISENDTO ,IRECVFROM ,RETRI,WEIGHT,
-     9       IXS    ,TEMP  ,DT2PREV,WA     ,N    ,NTY,
-     A       IRLEN20,ISLEN20,IRLEN20T,ISLEN20T,IRLEN20E,
-     B       ISLEN20E,IKINE,DIAG_SMS,COUNT_REMSLV,COUNT_REMSLVE,
-     C       SENSOR_TAB,XDP  ,H3D_DATA, MULTI_FVM  ,FORNEQS,
-     D       INTERFACES,NSENSOR,GLOB_THERM)
+      CALL IMP_TRIPI(output, TIMERS, IPARI, INTBUF_TAB, X_TMP, D, V, MS, ITAB, VR, IN, IMSCH, I2MSCH, ISIZXV, ILENXV,
+     . IGRBRIC, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, IAD_ELEM, FR_ELEM, NB, ILIST,
+     . ITASK, KINET, NEWFRONT, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, IAD, ISENDTO, IRECVFROM, RETRI, WEIGHT, IXS, TEMP,
+     . DT2PREV, WA, N, NTY, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, IKINE, DIAG_SMS, COUNT_REMSLV,
+     . COUNT_REMSLVE, SENSOR_TAB, XDP, MULTI_FVM, FORNEQS, INTERFACES, NSENSOR, GLOB_THERM)
  999   CONTINUE
       ENDDO
 C
@@ -1087,7 +1066,6 @@ C
 !||    element_mod       ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod    ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod      ../common_source/modules/groupdef_mod.F
-!||    h3d_mod           ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod     ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    interfaces_mod    ../common_source/modules/interfaces/interfaces_mod.F90
 !||    multi_fvm_mod     ../common_source/modules/ale/multi_fvm_mod.F90
@@ -1095,27 +1073,17 @@ C
 !||    sensor_mod        ../common_source/modules/sensor_mod.F90
 !||    timer_mod         ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE IMP_TRIPI(output, TIMERS,
-     1       IPARI ,INTBUF_TAB   ,X       ,D       ,
-     2       V     ,MS     ,ITAB ,VR      ,IN      ,
-     3       IMSCH ,I2MSCH ,ISIZXV,ILENXV ,IGRBRIC ,
-     4       ISLEN7,IRLEN7 ,ISLEN11,IRLEN11,ISLEN17,
-     5       IRLEN17,IRLEN7T,ISLEN7T,IAD_ELEM,FR_ELEM ,
-     6       NBINTC,INTLIST,ITASK ,KINET,NEWFRONT,
-     7       NUM_IMP,NS_IMP,NE_IMP,IND_IMP,IAD   ,
-     8       ISENDTO ,IRECVFROM ,RETRI,WEIGHT,
-     9       IXS    ,TEMP  ,DT2PREV,WAG    ,N   ,NTY ,
-     A       IRLEN20,ISLEN20,IRLEN20T,ISLEN20T,IRLEN20E,
-     B       ISLEN20E,IKINE,DIAG_SMS,COUNT_REMSLV,COUNT_REMSLVE,  
-     C       SENSOR_TAB,XDP,H3D_DATA,MULTI_FVM,FORNEQS,
-     D       INTERFACES,NSENSOR ,GLOB_THERM)
+      SUBROUTINE IMP_TRIPI(output, TIMERS, IPARI, INTBUF_TAB, X, D, V, MS, ITAB, VR, IN, IMSCH, I2MSCH, ISIZXV, ILENXV,
+     . IGRBRIC, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, IAD_ELEM, FR_ELEM, NBINTC,
+     . INTLIST, ITASK, KINET, NEWFRONT, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, IAD, ISENDTO, IRECVFROM, RETRI, WEIGHT, IXS,
+     . TEMP, DT2PREV, WAG, N, NTY, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, IKINE, DIAG_SMS,
+     . COUNT_REMSLV, COUNT_REMSLVE, SENSOR_TAB, XDP, MULTI_FVM, FORNEQS, INTERFACES, NSENSOR, GLOB_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE OUTPUT_MOD
       USE TIMER_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE GROUPDEF_MOD
       USE SENSOR_MOD
@@ -1158,7 +1126,6 @@ C-----------------------------------------------
      .   VR(3,*),DT2PREV, TEMP(*),IN(*), DIAG_SMS(*),FORNEQS(3,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
 !
       TYPE (GROUP_)  , DIMENSION(NGRBRIC) :: IGRBRIC
@@ -1224,23 +1191,13 @@ C
           ENDIF
 C
           IF(TT>=TS) THEN  ! If interface is activated
-            CALL I7MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V         ,
-     2 MS      ,N            ,ITASK        ,WEIGHT    ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,IAD_ELEM,FR_ELEM   ,
-     4 ITAB    ,KINET        ,TEMP         ,NRTM_T  ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,IBID         ,IBID    ,IBID      ,
-     6 INTBUF_TAB,H3D_DATA,IXS,MULTI_FVM,GLOB_THERM)
+      CALL I7MAIN_TRI(TIMERS, IPARI, X, V, MS, N, ITASK, WEIGHT, ISENDTO, IRECVFROM, RETRI, IAD_ELEM, FR_ELEM, ITAB,
+     . KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IBID, IBID, IBID, INTBUF_TAB, IXS, MULTI_FVM, GLOB_THERM)
          ENDIF
         ELSEIF(NTY==10)THEN
 C 
-          CALL I10MAIN_TRI(TIMERS,
-     1 npari     ,IPARI(1,N),X       ,V         ,
-     2 MS        ,N            ,ITASK        ,WAG     ,WEIGHT    ,
-     3 ISENDTO   ,IRECVFROM    ,RETRI        ,IAD_ELEM,FR_ELEM   ,
-     4 NRTM_T    ,RENUM        ,NSNFIOLD     ,ESHIFT  ,IBID      ,
-     5 IBID      ,IBID         ,ITAB         ,INTBUF_TAB         ,
-     6 H3D_DATA  ,GLOB_THERM   )
+      CALL I10MAIN_TRI(TIMERS, npari, IPARI(1,N), X, V, MS, N, ITASK, WAG, WEIGHT, ISENDTO, IRECVFROM, RETRI, IAD_ELEM,
+     . FR_ELEM, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IBID, IBID, IBID, ITAB, INTBUF_TAB, GLOB_THERM)
         ELSEIF(NTY==11)THEN
 C
          ISENS = IPARI(64,N)
@@ -1261,13 +1218,8 @@ C
 
         ELSEIF(NTY == 20)THEN
 C 
-          CALL I20MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V       ,
-     2 MS      ,N            ,ITASK        ,WAG     ,WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,IAD_ELEM,FR_ELEM ,
-     4 ITAB    ,KINET        ,TEMP         ,NRTM_T  ,RENUM   ,
-     5 NSNFIOLD,ESHIFT       ,IBID         ,IBID    ,DIAG_SMS,
-     5 IBID    ,INTBUF_TAB   ,H3D_DATA     ,GLOB_THERM)
+      CALL I20MAIN_TRI(TIMERS, IPARI, X, V, MS, N, ITASK, WAG, WEIGHT, ISENDTO, IRECVFROM, RETRI, IAD_ELEM, FR_ELEM,
+     . ITAB, KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IBID, IBID, DIAG_SMS, IBID, INTBUF_TAB, GLOB_THERM)
         ENDIF
 C
         IF (NSPMD>1.AND.RETRI==1) THEN

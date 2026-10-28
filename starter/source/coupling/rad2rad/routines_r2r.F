@@ -289,7 +289,7 @@ C-----------------------------------------------
 !||    read_monvol            ../starter/source/airbag/read_monvol.F
 !||    setrbyon               ../starter/source/constraints/general/rbody/hm_read_rbody.F
 !||--- calls      -----------------------------------------------------
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod     ../starter/share/modules1/hm_option_read_mod.F
 !||    submodel_mod           ../starter/share/modules1/submodel_mod.F

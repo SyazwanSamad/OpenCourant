@@ -32,8 +32,8 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    freerr                   ../starter/source/starter/freform.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||    monvol_check_surfclose   ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_compute_volume    ../starter/share/modules1/monvol_struct_mod.F
 !||    monvol_orient_surf       ../starter/share/modules1/monvol_struct_mod.F

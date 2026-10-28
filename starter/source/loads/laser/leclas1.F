@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    leclas                   ../starter/source/loads/laser/leclas.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    format_mod               ../starter/share/modules1/format_mod.F90
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F

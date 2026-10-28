@@ -88,6 +88,9 @@ CDECL void cpp_node_read__(int *ITAB, double *X, double *W, int *SUBID_NOD, int 
 CDECL void c_node_read(int *ITAB, double *X, double *W, int *SUBID_NOD, int *UID_NOD)
 {cpp_node_read_ (ITAB, X, W, SUBID_NOD, UID_NOD);}
 
+CDECL void cpp_node_read(int *ITAB, double *X, double *W, int *SUBID_NOD, int *UID_NOD)
+{cpp_node_read_ (ITAB, X, W, SUBID_NOD, UID_NOD);}
+
 
 CDECL void cpp_nodes_read_(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD, int *UID_NOD)
 {
@@ -187,6 +190,9 @@ CDECL void cpp_nodes_read__(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD
 {cpp_nodes_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
 
 CDECL void c_nodes_read(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD, int *UID_NOD)
+{cpp_nodes_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
+
+CDECL void cpp_nodes_read(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD, int *UID_NOD)
 {cpp_nodes_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
 
 
@@ -296,6 +302,9 @@ CDECL void cpp_cnode_read__(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD
 {cpp_cnode_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
 
 CDECL void c_cnode_read(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD, int *UID_NOD)
+{cpp_cnode_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
+
+CDECL void cpp_cnode_read(int *ITAB, double *X, double *CMERGE, int *SUBID_NOD, int *UID_NOD)
 {cpp_cnode_read_ (ITAB, X, CMERGE, SUBID_NOD, UID_NOD);}
 
 

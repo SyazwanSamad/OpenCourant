@@ -26,9 +26,9 @@ Copyright>        copyright and attribution statement.
 !||    ancmsg                      ../starter/source/output/message/message.F
 !||    bbc2005_calcul_coeffs       ../starter/source/materials/mat/mat131/yield_criterion/bbc2005_calcul_coeffs.F90
 !||    calculp2                    ../starter/source/materials/mat/mat057/calculp2.F90
-!||    hm_get_floatv               ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv                 ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted      ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv               ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv                 ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted      ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    init_mat_keyword            ../starter/source/materials/mat/init_mat_keyword.F
 !||--- uses       -----------------------------------------------------
 !||    bbc2005_calcul_coeffs_mod   ../starter/source/materials/mat/mat131/yield_criterion/bbc2005_calcul_coeffs.F90

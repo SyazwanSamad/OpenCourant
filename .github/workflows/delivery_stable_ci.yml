@@ -13,9 +13,7 @@ name: Delivery stable CI
 # TODO(windows): win64 builds need self-hosted Windows runners with the
 # Intel oneAPI toolchain. Disabled until OpenCourant has Windows
 # infrastructure.
-# TODO(arm): linuxa64 builds need an aarch64 build image and, more
-# importantly, a linuxa64 hm_reader, which the v67-compat extlib package
-# does not contain. Disabled until a newer extlib is available.
+# ARM builds use the in-tree OpenReader on the native build image.
 
 on:
   workflow_dispatch:
@@ -234,8 +232,8 @@ jobs:
         - /etc/localtime:/etc/localtime:ro
 
     env:
-      hm_reader_extlib: ../../extlib/hm_reader
-      hm_reader_cfgfiles: ../../hm_cfg_files
+      reader_runtime: ../../exec
+      reader_cfgfiles: ../../hm_cfg_files
       homeuser: /root
       mpi: ompi
       QA_NB_PROC: 2
@@ -274,7 +272,7 @@ jobs:
 
       - name: Unzip extlib
         run: |
-          unzip extlib.zip
+          unzip extlib.zip -x "extlib/hm_reader/*"
 
       - name: Running qa
         run: |
@@ -296,9 +294,9 @@ jobs:
           export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
           source ${{ env.homeuser }}/.bashrc
-          export LD_LIBRARY_PATH=${{ env.hm_reader_extlib }}/${{ matrix.os }}:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=${{ env.reader_runtime }}:$LD_LIBRARY_PATH
 
-          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.hm_reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST_LINUX }}' "
+          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST_LINUX }}' "
           echo "========================================="
           echo "--  QA ${{ matrix.os }}_${{ matrix.precision }} --"
           echo "--  $cmd --"
@@ -529,7 +527,7 @@ jobs:
           cd qa-tests/scripts;
           rm -f QA.summary;
           chmod 755 or_qa_script or_radioss.pl;
-          export PATH=../../extlib/hm_reader/win64:../../extlib/h3d/lib/win64:$PATH;
+          export PATH=../../exec:../../extlib/h3d/lib/win64:$PATH;
           cmd=\"./or_qa_script ../../exec/engine_win64_impi.exe 1.0 --env:RAD_CFG_PATH=../../hm_cfg_files --system_run --env:KMP_STACKSIZE=400m --exec_script_args='mpiexec -np %QA_NB_PROC%' --env:OMP_NUM_THREADS=%QA_NB_THREAD% --output_failures_stdout --xtra_args='--timeoutscript=%QA_TIMEOUT_PER_TEST_WIN%' \";
           echo \"--  $cmd --\";
           eval $cmd;
@@ -590,18 +588,17 @@ jobs:
       - name: Assemble Windows package
         run: |
           set -e
-          unzip -q extlib.zip
+          unzip -q extlib.zip -x "extlib/hm_reader/*"
 
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
                    todeliver/${MAINDIR}/extlib/h3d/lib/win64 \
-                   todeliver/${MAINDIR}/extlib/hm_reader \
                    todeliver/${MAINDIR}/extlib/intelOneAPI_runtime \
                    todeliver/${MAINDIR}/licenses
 
           cp -a exec_win/* todeliver/${MAINDIR}/exec/
           cp -a extlib/h3d/lib/win64/* todeliver/${MAINDIR}/extlib/h3d/lib/win64/
-          cp -a extlib/hm_reader/win64 todeliver/${MAINDIR}/extlib/hm_reader/
+
           cp -a intelOneAPI_runtime/* todeliver/${MAINDIR}/extlib/intelOneAPI_runtime/
           cp -a hm_cfg_files todeliver/${MAINDIR}/
           cp -a extlib/license/* todeliver/${MAINDIR}/licenses/
@@ -645,7 +642,7 @@ jobs:
           mkdir pkg
           tar -xf OpenCourant_win64.zip -C pkg
           set OPENCOURANT_PATH=%CD%\pkg\OpenCourant
-          set PATH=%OPENCOURANT_PATH%\extlib\hm_reader\win64;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%
+          set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%
           set RAD_CFG_PATH=%OPENCOURANT_PATH%\hm_cfg_files
           set KMP_STACKSIZE=400m
           set OMP_NUM_THREADS=2
@@ -793,8 +790,8 @@ jobs:
         - /etc/localtime:/etc/localtime:ro
 
     env:
-      hm_reader_extlib: ../../extlib/hm_reader
-      hm_reader_cfgfiles: ../../hm_cfg_files
+      reader_runtime: ../../exec
+      reader_cfgfiles: ../../hm_cfg_files
       homeuser: /root
       mpi: ompi
       QA_NB_PROC: 2
@@ -851,9 +848,9 @@ jobs:
           export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
           source ${{ env.homeuser }}/.bashrc
-          export LD_LIBRARY_PATH=${{ env.hm_reader_extlib }}/${{ matrix.os }}:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=${{ env.reader_runtime }}:$LD_LIBRARY_PATH
 
-          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.hm_reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST_LINUX }}' "
+          cmd="./or_qa_script ../../exec/engine_${{ matrix.os }}_gf_${{ env.mpi }}${precision_ext} 1.0 --env:RAD_CFG_PATH=${{ env.reader_cfgfiles }} --system_run --env:OMP_STACKSIZE=400m --exec_script_args='mpiexec -np ${{ env.QA_NB_PROC }}' --env:OMP_NUM_THREADS=${{ env.QA_NB_THREAD }} --output_failures_stdout --xtra_args='--timeoutscript=${{ env.QA_TIMEOUT_PER_TEST_LINUX }}' "
           echo "========================================="
           echo "--  QA ${{ matrix.os }}_${{ matrix.precision }} --"
           echo "--  $cmd --"
@@ -920,13 +917,13 @@ jobs:
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
                    todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64 \
-                   todeliver/${MAINDIR}/extlib/hm_reader \
+                   todeliver/${MAINDIR}/extlib/runtime/linuxa64 \
                    todeliver/${MAINDIR}/licenses
 
           cp -a exec_arm/* todeliver/${MAINDIR}/exec/
           cp -a extlib/h3d/lib/linuxa64/* todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64/
-          cp -a extlib/hm_reader/linuxa64 todeliver/${MAINDIR}/extlib/hm_reader/
-          cp -a gcc_runtime_arm/* todeliver/${MAINDIR}/extlib/hm_reader/linuxa64/
+
+          cp -a gcc_runtime_arm/* todeliver/${MAINDIR}/extlib/runtime/linuxa64/
           cp -a hm_cfg_files todeliver/${MAINDIR}/
           cp -a extlib/license/* todeliver/${MAINDIR}/licenses/
           cp -a TOOLS/openradioss_gui todeliver/${MAINDIR}/
@@ -936,7 +933,7 @@ jobs:
           cat > todeliver/${MAINDIR}/licenses/gcc_runtime_notice.txt << 'EOF'
           GCC runtime libraries (libgomp, libquadmath)
 
-          The GCC runtime shared libraries under extlib/hm_reader/linuxa64/
+          The GCC runtime shared libraries under extlib/runtime/linuxa64/
           are unmodified copies from Rocky Linux 8 (gcc 8.5.0), bundled so
           that the OpenCourant binaries run on systems where they are not
           installed. They are licensed under the GNU General Public License
@@ -989,7 +986,7 @@ jobs:
           set -e
           unzip -q OpenCourant_linuxa64.zip -d /opt
           export OPENCOURANT_PATH=/opt/OpenCourant
-          export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64
+          export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64
           export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files
           export OMP_NUM_THREADS=2
           cd qa-tests/miniqa/ACCELEROMETRES/data
@@ -1037,12 +1034,12 @@ jobs:
           echo "List exec_tmp:"
           find exec_tmp -type f
 
-          unzip -q exec_tmp/extlib.zip/extlib.zip
+          unzip -q exec_tmp/extlib.zip/extlib.zip -x "extlib/hm_reader/*"
 
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
                    todeliver/${MAINDIR}/extlib/h3d/lib/linux64 \
-                   todeliver/${MAINDIR}/extlib/hm_reader \
+                   todeliver/${MAINDIR}/extlib/runtime/linux64 \
                    todeliver/${MAINDIR}/licenses
 
           # Solver binaries + output converters
@@ -1051,12 +1048,11 @@ jobs:
 
           # Runtime libraries from the extlib package
           cp -a extlib/h3d/lib/linux64/* todeliver/${MAINDIR}/extlib/h3d/lib/linux64/
-          cp -a extlib/hm_reader/linux64 todeliver/${MAINDIR}/extlib/hm_reader/
+
 
           # GCC runtime libraries (-static-link leaves libgomp/libquadmath
-          # dynamic); placed on the same documented LD_LIBRARY_PATH entry
-          # as the hm_reader, like upstream did with libapr
-          cp -a exec_tmp/gcc-runtime-linux64/* todeliver/${MAINDIR}/extlib/hm_reader/linux64/
+          # dynamic); shipped alongside the documented runtime search path
+          cp -a exec_tmp/gcc-runtime-linux64/* todeliver/${MAINDIR}/extlib/runtime/linux64/
 
           # Reader configuration, licenses, GUI, input converter
           cp -a hm_cfg_files todeliver/${MAINDIR}/
@@ -1068,8 +1064,8 @@ jobs:
           cat > todeliver/${MAINDIR}/licenses/gcc_runtime_notice.txt << 'EOF'
           GCC runtime libraries (libgomp, libquadmath)
 
-          The files extlib/hm_reader/linux64/libgomp.so.1* and
-          extlib/hm_reader/linux64/libquadmath.so.0* are unmodified copies of
+          The files extlib/runtime/linux64/libgomp.so.1* and
+          extlib/runtime/linux64/libquadmath.so.0* are unmodified copies of
           the GCC runtime libraries from Rocky Linux 8 (gcc 8.5.0), bundled so
           that the OpenCourant binaries run on systems where they are not
           installed.
@@ -1117,7 +1113,7 @@ jobs:
             echo ""
             echo '```sh'
             echo 'export OPENCOURANT_PATH=/path/to/OpenCourant'
-            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linux64:$OPENCOURANT_PATH/extlib/h3d/lib/linux64:$LD_LIBRARY_PATH'
+            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linux64:$OPENCOURANT_PATH/extlib/h3d/lib/linux64:$LD_LIBRARY_PATH'
             echo 'export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files'
             echo '```'
             echo ""
@@ -1129,7 +1125,7 @@ jobs:
             echo ""
             echo '```bat'
             echo 'set OPENCOURANT_PATH=C:\path\to\OpenCourant'
-            echo 'set PATH=%OPENCOURANT_PATH%\extlib\hm_reader\win64;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%'
+            echo 'set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%'
             echo 'set RAD_CFG_PATH=%OPENCOURANT_PATH%\hm_cfg_files'
             echo 'set KMP_STACKSIZE=400m'
             echo '```'
@@ -1163,7 +1159,7 @@ jobs:
             echo ""
             echo '```sh'
             echo 'export OPENCOURANT_PATH=/path/to/OpenCourant'
-            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64:$LD_LIBRARY_PATH'
+            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64:$LD_LIBRARY_PATH'
             echo 'export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files'
             echo '```'
             echo ""

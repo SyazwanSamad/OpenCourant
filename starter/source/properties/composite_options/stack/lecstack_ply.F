@@ -28,8 +28,8 @@ Copyright>        copyright and attribution statement.
 !||    bidon2                 ../starter/source/system/machine.F
 !||    fretitl                ../starter/source/starter/freform.F
 !||    fretitl2               ../starter/source/starter/freform.F
-!||    hm_option_read_key     ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start        ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_option_read_key     ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start        ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_read_stack          ../starter/source/stack/hm_read_stack.F
 !||    lcgeo19                ../starter/source/elements/shell/coque/lcgeo19.F
 !||    vdouble                ../starter/source/system/sysfus.F

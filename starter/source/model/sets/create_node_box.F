@@ -25,7 +25,7 @@ Copyright>        copyright and attribution statement.
 !||    create_node_clause       ../starter/source/model/sets/create_node_clause.F
 !||--- calls      -----------------------------------------------------
 !||    fill_clause_node_box     ../starter/source/model/sets/fill_clause_node_box.F
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||    read_clause_box          ../starter/source/model/sets/read_clause_box.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F

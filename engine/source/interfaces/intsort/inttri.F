@@ -84,7 +84,6 @@ Copyright>        copyright and attribution statement.
 !||    element_mod                  ../common_source/modules/elements/element_mod.F90
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod                 ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    i22bufbric_mod               ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    i22tri_mod                   ../common_source/modules/interfaces/cut-cell-search_mod.F
 !||    int18_law151_nsv_shift_mod   ../common_source/interf/int18_law151_nsv_shift.F
@@ -105,32 +104,15 @@ Copyright>        copyright and attribution statement.
 !||    tri25ebox                    ../engine/share/modules/tri25ebox.F
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE INTTRI(OUTPUT ,TIMERS,
-     1       IPARI    ,X,V,W,ERRORS, 
-     3       ISENDTO ,IRECVFROM,
-     4       NEWFRONT ,ITASK   ,WAG     ,DT2T     ,
-     5       NELTST  ,ITYPTST ,
-     6       INTLIST  ,NBINTC  ,DRETRI   ,
-     7       ISLEN7   ,IRLEN7  ,ISLEN11 ,IRLEN11  ,
-     8       IGRBRIC ,IGRSH3N ,EMINX    ,
-     9       IXS      ,IXS16   ,IXS20   ,ISLEN17  ,
-     A       IRLEN17  ,IRLEN7T ,ISLEN7T ,NUM_IMP  ,
-     B       IND_IMP  ,INTSTAMP,THKNOD  ,IRLEN20  ,
-     C       ISLEN20  ,IRLEN20T,ISLEN20T,IRLEN20E ,
-     D       ISLEN20E ,RENUM   ,NSNFIOLD,XSLV     ,
-     E       XMSR     ,VSLV    ,VMSR    ,SIZE_T   ,
-     F       NODNX_SMS,DXANCG  ,DIAG_SMS ,
-     G       COUNT_REMSLV, COUNT_REMSLVE,ALE_CONNECTIVITY,
-     H       IXTG     ,SENSORS  ,DELTA_PMAX_GAP    ,
-     I       INTBUF_TAB ,DELTA_PMAX_GAP_NODE,
-     .                                IAD_FRNOR,FR_NOR,
-     J       NB25_CANDT,NB25_IMPCT,NB25_DST1,NB25_DST2,INTLIST25,
-     K       IAD_FREDG,FR_EDG,NATIV_SMS,I_OPT_STOK ,
-     L       MULTI_FVM,IPARG  ,ELBUF_TAB, H3D_DATA ,T2MAIN_SMS,
-     M       LSKYI_SMS_NEW,FORNEQS,INT7ITIED,IDEL7NOK_SAV,MAXDGAP,
-     N       T2FAC_SMS,FSKYN25,ADDCSRECT,PROCNOR,
-     O       INTER_STRUCT,SORT_COMM,RENUM_SIZ,NODNX_SMS_SIZ,TEMP_SIZ,
-     P       INTERFACES,GLOB_THERM,component,nodes)
+      SUBROUTINE INTTRI(OUTPUT, TIMERS, IPARI, X, V, W, ERRORS, ISENDTO, IRECVFROM, NEWFRONT, ITASK, WAG, DT2T, NELTST,
+     . ITYPTST, INTLIST, NBINTC, DRETRI, ISLEN7, IRLEN7, ISLEN11, IRLEN11, IGRBRIC, IGRSH3N, EMINX, IXS, IXS16, IXS20,
+     . ISLEN17, IRLEN17, IRLEN7T, ISLEN7T, NUM_IMP, IND_IMP, INTSTAMP, THKNOD, IRLEN20, ISLEN20, IRLEN20T, ISLEN20T,
+     . IRLEN20E, ISLEN20E, RENUM, NSNFIOLD, XSLV, XMSR, VSLV, VMSR, SIZE_T, NODNX_SMS, DXANCG, DIAG_SMS, COUNT_REMSLV,
+     . COUNT_REMSLVE, ALE_CONNECTIVITY, IXTG, SENSORS, DELTA_PMAX_GAP, INTBUF_TAB, DELTA_PMAX_GAP_NODE, IAD_FRNOR,
+     . FR_NOR, NB25_CANDT, NB25_IMPCT, NB25_DST1, NB25_DST2, INTLIST25, IAD_FREDG, FR_EDG, NATIV_SMS, I_OPT_STOK,
+     . MULTI_FVM, IPARG, ELBUF_TAB, T2MAIN_SMS, LSKYI_SMS_NEW, FORNEQS, INT7ITIED, IDEL7NOK_SAV, MAXDGAP, T2FAC_SMS,
+     . FSKYN25, ADDCSRECT, PROCNOR, INTER_STRUCT, SORT_COMM, RENUM_SIZ, NODNX_SMS_SIZ, TEMP_SIZ, INTERFACES, GLOB_THERM,
+     . component, nodes)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -143,7 +125,6 @@ C-----------------------------------------------
       USE I22TRI_MOD
       USE I22BUFBRIC_MOD      
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE METRIC_MOD
       USE GROUPDEF_MOD
       USE ALE_CONNECTIVITY_MOD
@@ -225,7 +206,6 @@ C-----------------------------------------------
       TYPE(INTBUF_STRUCT_),DIMENSION(NINTER) :: INTBUF_TAB
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT), TARGET     :: MULTI_FVM
       TYPE(ELBUF_STRUCT_) ,DIMENSION(NGROUP) :: ELBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(t_ale_connectivity), INTENT(IN) :: ALE_CONNECTIVITY
       INTEGER, INTENT(in) :: RENUM_SIZ
       TYPE(inter_struct_type), DIMENSION(NINTER), INTENT(inout) :: INTER_STRUCT   !   structure for interface
@@ -559,11 +539,8 @@ C-----------------------------------------------
 C-----------------------------------------------
           I7KGLO = 1
 C         IPARI(4,N) = NRTM ; IPARI(5,N)=NSN
-          CALL I20MAIN_CRIT_TRI(OUTPUT ,
-     1      IPARI ,X        ,N        ,
-     2      ITASK ,V            ,XSLV(1,N)    ,XMSR(1,N),VSLV(1,N),
-     3      VMSR(1,N),nodes%MS        ,DXANCG       ,nodes%IKINE    ,DIAG_SMS ,
-     4      INTBUF_TAB(N)   ,H3D_DATA)
+      CALL I20MAIN_CRIT_TRI(OUTPUT, IPARI, X, N, ITASK, V, XSLV(1,N), XMSR(1,N), VSLV(1,N), VMSR(1,N), nodes%MS,
+     . DXANCG, nodes%IKINE, DIAG_SMS, INTBUF_TAB(N))
 C-----------------------------------------------
         ELSEIF(NTY == 22)THEN
 C-----------------------------------------------
@@ -665,11 +642,7 @@ C End non -parallel part SMT
 
       IF(IMPL_S/=1)THEN
 
-       IF((NSPMD>1.AND.ITASK==0).AND.(H3D_DATA%N_SCAL_CSE_FRIC > 0.OR.OUTPUT%DATA%NINEFRIC > 0).AND.TT > ZERO) THEN
-         CALL SPMD_EXCH_SORTING_EFRIC(output,
-     1        IPARI   ,INTLIST ,NBINTC  ,ISLEN7 ,IRLEN7  ,
-     2        IRLEN7T ,ISLEN7T ,IRLEN20 ,ISLEN20,IRLEN20T,
-     3        ISLEN20T,INTBUF_TAB,H3D_DATA  )
+      IF((NSPMD>1.AND.ITASK==0).AND.(OUTPUT%DATA%NINEFRIC>0).AND.TT>ZERO) THEN
        ENDIF
       ENDIF
 
@@ -719,10 +692,9 @@ C End non -parallel part SMT
      .                               TEMP_SIZ,component )
             ! -----------
             ! sorting computation
-            CALL INTER_SORT(TIMERS, ITASK,NB_INTER_SORTED,LIST_INTER_SORTED,RETRI,IPARI,
-     1                       NSENSOR,ISENDTO,IRECVFROM,INTBUF_TAB,X,nodes%ITAB,
-     2                       RENUM,NSNFIOLD,MULTI_FVM,H3D_DATA,SENSORS%SENSOR_TAB,
-     3                       INTER_STRUCT,SORT_COMM ,RENUM_SIZ,GLOB_THERM)
+      CALL INTER_SORT(TIMERS, ITASK, NB_INTER_SORTED, LIST_INTER_SORTED, RETRI, IPARI, NSENSOR, ISENDTO, IRECVFROM,
+     . INTBUF_TAB, X, nodes%ITAB, RENUM, NSNFIOLD, MULTI_FVM, SENSORS%SENSOR_TAB, INTER_STRUCT, SORT_COMM, RENUM_SIZ,
+     . GLOB_THERM)
       ENDIF
       ! end : new sorting algorithm
       ! ------------------------  
@@ -786,26 +758,18 @@ c-----------------------------------------------------------------------
             call assign_ptr(ptr_ms,nodes%ms,numnod)            
             call assign_ptr(ptr_kinet,nodes%kinet,numnod)            
           ENDIF
-       CALL I7MAIN_TRI(TIMERS,
-     1 IPARI   ,PTR_X   ,PTR_V   ,
-     2 PTR_MS  ,N            ,ITASK        ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,PTR_KINET    ,nodes%TEMP         ,NRTM_T ,RENUM   ,
-     5 NSNFIOLD,ESHIFT       ,IDUM         ,IDUM    ,NODNX_SMS ,
-     6 INTBUF_TAB(N),H3D_DATA,IXS,MULTI_FVM,GLOB_THERM)
+      CALL I7MAIN_TRI(TIMERS, IPARI, PTR_X, PTR_V, PTR_MS, N, ITASK, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, PTR_KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IDUM,
+     . IDUM, NODNX_SMS, INTBUF_TAB(N), IXS, MULTI_FVM, GLOB_THERM)
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 10)THEN
 c-----------------------------------------------------------------------
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I10MAIN_TRI(TIMERS,
-     1 npari     ,IPARI(1,N),X       ,V         ,
-     2 nodes%MS        ,N            ,ITASK        ,WAG     ,nodes%WEIGHT    ,
-     3 ISENDTO   ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY   ,
-     4 NRTM_T    ,RENUM        ,NSNFIOLD     ,ESHIFT  ,IDUM      ,
-     5 IDUM      ,NODNX_SMS    ,nodes%ITAB         ,INTBUF_TAB(N)      ,
-     6 H3D_DATA  ,GLOB_THERM)
+      CALL I10MAIN_TRI(TIMERS, npari, IPARI(1,N), X, V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IDUM, IDUM, NODNX_SMS, nodes%ITAB,
+     . INTBUF_TAB(N), GLOB_THERM)
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 11.AND.TT>=TS)THEN
 c-----------------------------------------------------------------------
@@ -855,27 +819,19 @@ c-----------------------------------------------------------------------
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I20MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V       ,
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T  ,RENUM   ,
-     5 NSNFIOLD,ESHIFT       ,IDUM         ,IDUM    ,DIAG_SMS,
-     6 NODNX_SMS,INTBUF_TAB(N),H3D_DATA,GLOB_THERM )
+      CALL I20MAIN_TRI(TIMERS, IPARI, X, V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IDUM,
+     . IDUM, DIAG_SMS, NODNX_SMS, INTBUF_TAB(N), GLOB_THERM)
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 22)THEN
 c-----------------------------------------------------------------------         
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I22MAIN_TRI(TIMERS,
-     1                     IPARI       ,X            ,V            ,
-     2                     nodes%MS          ,N            ,ITASK        ,WAG            ,nodes%WEIGHT       ,
-     3                     ISENDTO     ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD       ,NODES%BOUNDARY      ,
-     4                     nodes%ITAB        ,nodes%KINET        ,nodes%TEMP         ,NRTM_T         ,RENUM        ,
-     5                     NSNFIOLD    ,ESHIFT       ,IDUM         ,IDUM           ,NODNX_SMS    ,
-     6                     IXS         ,IGRBRIC      ,ALE_CONNECTIVITY  ,INTBUF_TAB(N),
-     7                     COUNT_REMSLV,H3D_DATA     ,MULTI_FVM,GLOB_THERM%NODADT_THERM)
+      CALL I22MAIN_TRI(TIMERS, IPARI, X, V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IDUM,
+     . IDUM, NODNX_SMS, IXS, IGRBRIC, ALE_CONNECTIVITY, INTBUF_TAB(N), COUNT_REMSLV, MULTI_FVM, GLOB_THERM%NODADT_THERM)
+     .
 
           CALL I22SUBVOL(
      1                   X       ,N            ,ITASK        ,IPARI(48:50,N) ,nodes%ITAB         ,
@@ -918,13 +874,9 @@ c-----------------------------------------------------------------------
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I23MAIN_TRI(TIMERS,
-     1 IPARI   ,X            ,INTBUF_TAB(N),V       ,
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,NRTM_T       ,RENUM   ,
-     5 NSNFIOLD,ESHIFT       ,IDUM         ,IDUM    ,NODNX_SMS ,
-     6 H3D_DATA,MULTI_FVM,GLOB_THERM%INTHEAT,GLOB_THERM%IDT_THERM,GLOB_THERM%NODADT_THERM)
+      CALL I23MAIN_TRI(TIMERS, IPARI, X, INTBUF_TAB(N), V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, NRTM_T, RENUM, NSNFIOLD, ESHIFT, IDUM, IDUM,
+     . NODNX_SMS, MULTI_FVM, GLOB_THERM%INTHEAT, GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 24.AND.TT>=TS)THEN
 c-----------------------------------------------------------------------
@@ -942,23 +894,15 @@ c          IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
          XE(NNOD3+1:(NNOD3+NSNE3)) = INTBUF_TAB(N)%XFIC(1:NSNE3)
          VE(NNOD3+1:(NNOD3+NSNE3)) = INTBUF_TAB(N)%VFIC(1:NSNE3)
 !$OMP END SINGLE
-         CALL I24MAIN_TRI(TIMERS,
-     1 IPARI   ,XE      ,VE  ,INTBUF_TAB(N),
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T  ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,IDUM         ,IDUM    ,NODNX_SMS ,
-     6 H3D_DATA,T2MAIN_SMS ,FORNEQS      ,T2FAC_SMS,INTERFACES%PARAMETERS,
-     7 GLOB_THERM%INTHEAT,GLOB_THERM%IDT_THERM,GLOB_THERM%NODADT_THERM)
+      CALL I24MAIN_TRI(TIMERS, IPARI, XE, VE, INTBUF_TAB(N), nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . IDUM, IDUM, NODNX_SMS, T2MAIN_SMS, FORNEQS, T2FAC_SMS, INTERFACES%PARAMETERS, GLOB_THERM%INTHEAT,
+     . GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
         ELSE
-       CALL I24MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V   ,INTBUF_TAB(N),
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T  ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,IDUM         ,IDUM    ,NODNX_SMS ,
-     6 H3D_DATA,T2MAIN_SMS ,FORNEQS      ,T2FAC_SMS ,INTERFACES%PARAMETERS,
-     7 GLOB_THERM%INTHEAT,GLOB_THERM%IDT_THERM,GLOB_THERM%NODADT_THERM)
+      CALL I24MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB(N), nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . IDUM, IDUM, NODNX_SMS, T2MAIN_SMS, FORNEQS, T2FAC_SMS, INTERFACES%PARAMETERS, GLOB_THERM%INTHEAT,
+     . GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
         END IF !(NSNE >0 ) THEN
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 25.AND.TT>=TS)THEN
@@ -971,15 +915,10 @@ c-----------------------------------------------------------------------
           SSHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=(IPARI(4,N)-IPARI(42,N))
      +                                -(NTHREAD-1)*NRTM_T
-          CALL I25MAIN_TRI(TIMERS,
-     1      IPARI   ,X       ,V   ,INTBUF_TAB(N),
-     2      nodes%MS      ,N            ,ITASK        ,nodes%WEIGHT  ,
-     3      ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4      nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,RENUM     ,
-     5      NSNFIOLD,IDUM         ,IDUM         ,NODNX_SMS ,
-     6      H3D_DATA,ESHIFT       ,NEDGE_T      ,SSHIFT    ,NRTM_T ,
-     7      nodes%icodt   ,nodes%iskew        ,INTERFACES%PARAMETERS,GLOB_THERM%NODADT_THERM,
-     .                                                              INCONV)
+      CALL I25MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB(N), nodes%MS, N, ITASK, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, RENUM, NSNFIOLD, IDUM, IDUM, NODNX_SMS,
+     . ESHIFT, NEDGE_T, SSHIFT, NRTM_T, nodes%icodt, nodes%iskew, INTERFACES%PARAMETERS, GLOB_THERM%NODADT_THERM,
+     . INCONV)
 C-----------------------------------------------------------------------
         ENDIF
         IF(IMONM > 0) THEN
@@ -1050,13 +989,9 @@ C-----------------------------------------------------------------------
             call assign_ptr(ptr_ms,nodes%ms,numnod)            
             call assign_ptr(ptr_kinet,nodes%kinet,numnod)
           ENDIF
-      CALL I7MAIN_TRI(TIMERS,
-     1 IPARI   ,PTR_X   ,PTR_V   ,
-     2 PTR_MS  ,N            ,ITASK        ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,PTR_KINET    ,nodes%TEMP         ,NRTM_T        ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,NUM_IMP(N)   ,IND_IMP(IADI) ,NODNX_SMS ,
-     6 INTBUF_TAB(N),H3D_DATA,IXS,MULTI_FVM,GLOB_THERM)
+      CALL I7MAIN_TRI(TIMERS, IPARI, PTR_X, PTR_V, PTR_MS, N, ITASK, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, PTR_KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . NUM_IMP(N), IND_IMP(IADI), NODNX_SMS, INTBUF_TAB(N), IXS, MULTI_FVM, GLOB_THERM)
             IADI = IADI+NUM_IMP(N)
 c-----------------------------------------------------------------------
         ELSEIF(NTY == 24.AND.TT>=TS)THEN
@@ -1076,24 +1011,16 @@ C-------  KINET,MS used for commu remot second, for the moment no need.
          XE(NNOD3+1:(NNOD3+NSNE3)) = INTBUF_TAB(N)%XFIC(1:NSNE3)
          VE(NNOD3+1:(NNOD3+NSNE3)) = INTBUF_TAB(N)%VFIC(1:NSNE3)
 !$OMP END SINGLE
-       CALL I24MAIN_TRI(TIMERS,
-     1 IPARI   ,XE      ,VE      ,INTBUF_TAB(N),
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T  ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,NUM_IMP(N)   ,IND_IMP(IADI),NODNX_SMS ,
-     6 H3D_DATA,T2MAIN_SMS ,FORNEQS        ,T2FAC_SMS,INTERFACES%PARAMETERS,
-     7 GLOB_THERM%INTHEAT,GLOB_THERM%IDT_THERM,GLOB_THERM%NODADT_THERM)
+      CALL I24MAIN_TRI(TIMERS, IPARI, XE, VE, INTBUF_TAB(N), nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . NUM_IMP(N), IND_IMP(IADI), NODNX_SMS, T2MAIN_SMS, FORNEQS, T2FAC_SMS, INTERFACES%PARAMETERS, GLOB_THERM%INTHEAT,
+     . GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
             IADI = IADI+NUM_IMP(N)
         ELSE
-       CALL I24MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V       ,INTBUF_TAB(N),
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T  ,RENUM     ,
-     5 NSNFIOLD,ESHIFT       ,NUM_IMP(N)   ,IND_IMP(IADI),NODNX_SMS ,
-     6 H3D_DATA,T2MAIN_SMS ,FORNEQS        ,T2FAC_SMS,INTERFACES%PARAMETERS,
-     7 GLOB_THERM%INTHEAT,GLOB_THERM%IDT_THERM,GLOB_THERM%NODADT_THERM)
+      CALL I24MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB(N), nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . NUM_IMP(N), IND_IMP(IADI), NODNX_SMS, T2MAIN_SMS, FORNEQS, T2FAC_SMS, INTERFACES%PARAMETERS, GLOB_THERM%INTHEAT,
+     . GLOB_THERM%IDT_THERM, GLOB_THERM%NODADT_THERM)
             IADI = IADI+NUM_IMP(N)
         END IF !(NSNE >0 ) THEN
 c-----------------------------------------------------------------------
@@ -1108,15 +1035,10 @@ c-----------------------------------------------------------------------
           IF(ITASK==NTHREAD-1)NRTM_T=(IPARI(4,N)-IPARI(42,N))
      +                                -(NTHREAD-1)*NRTM_T
 C-------  KINET,MS used for commu remot second, for the moment no need.   
-          CALL I25MAIN_TRI(TIMERS,
-     1      IPARI   ,X       ,V       ,INTBUF_TAB(N),
-     2      nodes%MS      ,N            ,ITASK        ,nodes%WEIGHT  ,
-     3      ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4      nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,RENUM     ,
-     5      NSNFIOLD,NUM_IMP(N)   ,IND_IMP(IADI),NODNX_SMS ,
-     6      H3D_DATA,ESHIFT,NEDGE_T ,SSHIFT     ,NRTM_T    ,
-     7      nodes%icodt   ,nodes%iskew        ,INTERFACES%PARAMETERS,GLOB_THERM%NODADT_THERM,
-     .                                                              INCONV)
+      CALL I25MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB(N), nodes%MS, N, ITASK, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, RENUM, NSNFIOLD, NUM_IMP(N),
+     . IND_IMP(IADI), NODNX_SMS, ESHIFT, NEDGE_T, SSHIFT, NRTM_T, nodes%icodt, nodes%iskew, INTERFACES%PARAMETERS,
+     . GLOB_THERM%NODADT_THERM, INCONV)
             IADI = IADI+NUM_IMP(N)
 C-----------------------------------------------------------------------
         ELSEIF(NTY == 10)THEN
@@ -1124,13 +1046,9 @@ C-----------------------------------------------------------------------
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I10MAIN_TRI(TIMERS,
-     1 npari     ,IPARI(1,N),X       ,V         ,
-     2 nodes%MS        ,N            ,ITASK        ,WAG     ,nodes%WEIGHT    ,
-     3 ISENDTO   ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY   ,
-     4 NRTM_T    ,RENUM        ,NSNFIOLD     ,ESHIFT  ,NUM_IMP(N),
-     5 IND_IMP(IADI) ,NODNX_SMS,nodes%ITAB         ,INTBUF_TAB(N)      ,
-     6 H3D_DATA, GLOB_THERM)
+      CALL I10MAIN_TRI(TIMERS, npari, IPARI(1,N), X, V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM,
+     . RETRI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP(N), IND_IMP(IADI), NODNX_SMS,
+     . nodes%ITAB, INTBUF_TAB(N), GLOB_THERM)
         IADI = IADI+NUM_IMP(N)
 C-----------------------------------------------------------------------
         ELSEIF(NTY == 11.AND.TT>=TS)THEN
@@ -1169,13 +1087,9 @@ C-----------------------------------------------------------------------
           NRTM_T = IPARI(4,N)/NTHREAD
           ESHIFT = ITASK*NRTM_T
           IF(ITASK==NTHREAD-1)NRTM_T=IPARI(4,N)-(NTHREAD-1)*NRTM_T
-          CALL I20MAIN_TRI(TIMERS,
-     1 IPARI   ,X       ,V       ,
-     2 nodes%MS      ,N            ,ITASK        ,WAG     ,nodes%WEIGHT  ,
-     3 ISENDTO ,IRECVFROM    ,RETRI        ,NODES%BOUNDARY_ADD,NODES%BOUNDARY ,
-     4 nodes%ITAB    ,nodes%KINET        ,nodes%TEMP         ,NRTM_T    ,RENUM        ,
-     5 NSNFIOLD,ESHIFT       ,NUM_IMP(N)   ,IND_IMP(IADI),DIAG_SMS,
-     6 NODNX_SMS,INTBUF_TAB(N),H3D_DATA,GLOB_THERM)
+      CALL I20MAIN_TRI(TIMERS, IPARI, X, V, nodes%MS, N, ITASK, WAG, nodes%WEIGHT, ISENDTO, IRECVFROM, RETRI,
+     . NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, nodes%KINET, nodes%TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT,
+     . NUM_IMP(N), IND_IMP(IADI), DIAG_SMS, NODNX_SMS, INTBUF_TAB(N), GLOB_THERM)
 
             IADI = IADI+NUM_IMP(N)
 C-----------------------------------------------------------------------
@@ -1304,14 +1218,10 @@ C Interface Statistics
           NB25_DST2(ITASK+1)  = 0
         ENDIF
 
-        CALL I25MAIN_SLID(
-     1      IPARI    ,NODES%BOUNDARY_ADD ,NODES%BOUNDARY   ,nodes%ITAB     ,SENSORS%SENSOR_TAB,
-     2      NSENSOR  ,INTLIST25,INTBUF_TAB ,IAD_FRNOR,FR_NOR ,
-     3      X        ,V       ,nodes%MS      ,nodes%TEMP   ,nodes%KINET      ,
-     4      NATIV_SMS,ITASK+1 ,NB25_DST2, nodes%MAIN_PROC,
-     5      NEWFRONT ,ISENDTO ,IRECVFROM ,NBINTC,
-     6      INTLIST  ,ISLEN7   ,IRLEN7  ,IRLEN7T  ,ISLEN7T,
-     7      NB25_DST1,H3D_DATA,  nodes%icodt,nodes%iskew,INTERFACES%PARAMETERS,GLOB_THERM%NODADT_THERM)
+      CALL I25MAIN_SLID(IPARI, NODES%BOUNDARY_ADD, NODES%BOUNDARY, nodes%ITAB, SENSORS%SENSOR_TAB, NSENSOR, INTLIST25,
+     . INTBUF_TAB, IAD_FRNOR, FR_NOR, X, V, nodes%MS, nodes%TEMP, nodes%KINET, NATIV_SMS, ITASK+1, NB25_DST2,
+     . nodes%MAIN_PROC, NEWFRONT, ISENDTO, IRECVFROM, NBINTC, INTLIST, ISLEN7, IRLEN7, IRLEN7T, ISLEN7T, NB25_DST1,
+     . nodes%icodt, nodes%iskew, INTERFACES%PARAMETERS, GLOB_THERM%NODADT_THERM)
 C
         CALL MY_BARRIER
 C

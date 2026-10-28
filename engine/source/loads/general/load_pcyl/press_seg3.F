@@ -21,8 +21,6 @@ Copyright>        copyright and attribution statement.
 !||====================================================================
 !||    press_seg3            ../engine/source/loads/general/load_pcyl/press_seg3.F
 !||--- called by ------------------------------------------------------
-!||    h3d_pre_skin_scalar   ../engine/source/output/h3d/h3d_results/h3d_skin_scalar.F
-!||    h3d_skin_vector       ../engine/source/output/h3d/h3d_results/h3d_skin_vector.F
 !||    pressure_cyl          ../engine/source/loads/general/load_pcyl/pressure_cyl.F
 !||--- calls      -----------------------------------------------------
 !||    table_interp_dydx     ../engine/source/tools/curve/table_tools.F

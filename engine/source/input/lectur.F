@@ -62,7 +62,6 @@ Copyright>        copyright and attribution statement.
 !||    fxb_mod                ../engine/share/modules/fxb_mod.F
 !||    glob_therm_mod         ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    groupdef_mod           ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod          ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    intstamp_glob_mod      ../engine/share/modules/intstamp_glob_mod.F
 !||    loads_mod              ../common_source/modules/loads/loads_mod.F90
@@ -74,31 +73,16 @@ Copyright>        copyright and attribution statement.
 !||    names_and_titles_mod   ../common_source/modules/names_and_titles_mod.F
 !||    output_mod             ../common_source/modules/output/output_mod.F90
 !||    pblast_mod             ../common_source/modules/loads/pblast_mod.F90
-!||    prelech3d_mod          ../engine/source/output/h3d/h3d_build_fortran/prelech3d.F90
 !||    sensor_mod             ../common_source/modules/sensor_mod.F90
 !||    stack_mod              ../engine/share/modules/stack_mod.F
 !||    state_mod              ../common_source/modules/state_mod.F
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||====================================================================
-      SUBROUTINE LECTUR(ICODE   ,ISKEW ,ISKWN  ,IXTG   ,IXS   ,
-     2                  IXQ     ,IXC   ,IXT    ,IXP    ,IXR   ,
-     3                  ITAB    ,ITABM1,NPC    ,IPARG  ,IGRV  ,
-     4                  IBGR    ,IPARI ,
-     5                  NPBY    ,LPBY  ,NNLINK ,LLINK  ,LINALE,
-     6                  NEFLSW  ,NNFLSW,ICUT   ,INOISE ,
-     7                  X       ,V     ,VR     ,MS     ,IN    ,
-     8                  SKEW    ,PLD           ,RBY    ,
-     9                  WA      ,CRFLSW,XCUT   ,DAMPR ,
-     A                  IGRNOD  ,KXSP  ,WEIGHT ,FR_RBY2,FR_RL ,
-     B                  PARTSAV,IPART  ,PM    ,
-     C                  MONVOL  ,VOLMON,IPART_STATE,GEO,TABLE ,
-     D                  IFRAME  ,XFRAME,ELBUF_STR,IGEO ,INTBUF_TAB,
-     E                  IPM     ,H3D_DATA, MULTI_FVM,
-     F                  IGRPART ,ICFIELD,LCFIELD,TAGSLV_RBY,
-     G                  MDS_NMAT,
-     H                  SENSORS,MAT_ELEM,
-     I                  DYNAIN_DATA,DT ,OUTPUT,NAMES_AND_TITLES,
-     J                  GLOB_THERM)
+      SUBROUTINE LECTUR(ICODE, ISKEW, ISKWN, IXTG, IXS, IXQ, IXC, IXT, IXP, IXR, ITAB, ITABM1, NPC, IPARG, IGRV, IBGR,
+     . IPARI, NPBY, LPBY, NNLINK, LLINK, LINALE, NEFLSW, NNFLSW, ICUT, INOISE, X, V, VR, MS, IN, SKEW, PLD, RBY, WA,
+     . CRFLSW, XCUT, DAMPR, IGRNOD, KXSP, WEIGHT, FR_RBY2, FR_RL, PARTSAV, IPART, PM, MONVOL, VOLMON, IPART_STATE, GEO,
+     . TABLE, IFRAME, XFRAME, ELBUF_STR, IGEO, INTBUF_TAB, IPM, MULTI_FVM, IGRPART, ICFIELD, LCFIELD, TAGSLV_RBY,
+     . MDS_NMAT, SENSORS, MAT_ELEM, DYNAIN_DATA, DT, OUTPUT, NAMES_AND_TITLES, GLOB_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -107,7 +91,6 @@ C-----------------------------------------------
       USE MAT_ELEM_MOD
       USE INTBUFDEF_MOD
       USE STACK_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE GROUPDEF_MOD
       USE INTSTAMP_GLOB_MOD
@@ -126,7 +109,6 @@ C-----------------------------------------------
       USE ELBUFDEF_MOD
       USE glob_therm_mod
       USE PBLAST_MOD
-      USE PRELECH3D_MOD
       use element_mod , only : nixs,nixq,nixc,nixt,nixp,nixr,nixtg
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -197,7 +179,6 @@ C-----------------------------------------------
       TYPE(TTABLE) TABLE(*)
       TYPE(ELBUF_STRUCT_), TARGET, DIMENSION(NGROUP) :: ELBUF_STR
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
       TYPe (MULTI_FVM_STRUCT) :: MULTI_FVM
       TYPE(GROUP_)  ,DIMENSION(NGRNOD)  :: IGRNOD
       TYPE(GROUP_)  ,DIMENSION(NGRPART) :: IGRPART
@@ -2653,8 +2634,7 @@ C------------------------------------------------
      .    + INT((TT-DT2-OUTPUT%TANIM)/OUTPUT%DTANIM)*OUTPUT%DTANIM
       IF (OUTPUT%TANIM < TT-DT2)OUTPUT%TANIM = OUTPUT%TANIM+OUTPUT%DTANIM
 C-----------------------
-      IF(ANIM_V(14)+H3D_DATA%N_VECT_DROT > 0 .AND.
-     .      ((ISECUT == 0 .AND. IISROT == 0 .AND. IMPOSE_DR == 0 .AND. IDROT == 0) .OR. IRODDL == 0)) THEN
+      IF(ANIM_V(14)>0.AND.((ISECUT==0.AND.IISROT==0.AND.IMPOSE_DR==0.AND.IDROT==0).OR.IRODDL==0)) THEN
        IF(ISPMD == 0) THEN
          WRITE(IOUT,*) ' ** WARNING ** : /ANIM/DROT OPTION USED',
      .                 '    WHILE ROTATIONAL DOF ARE NOT COMPUTED',
@@ -3047,10 +3027,6 @@ C
      .  ' ACCURATE TIME STEP FOR 10-NODE TETRAHEDRA IS USED  ',/)
  4800 FORMAT(
      .  ' PART DEACTIVATED FOR ALE / EULER COMPUTATION',2X,I10)
- 5000 FORMAT(/' H3D FILES :                  '/
-     .  ' TIME FOR FIRST H3D-FILE PLOT . . . . . . . . . . ',G14.7/
-     .  ' TIME INTERVAL FOR H3D-FILE PLOTS . . . . . . . . ',G14.7/
-     .  ' VARIABLE SAVED ON H3D FILES : ')
  5001 FORMAT(/
      .  ' KINEMATIC RELAXATION  '   /
      .  ' NODE GROUP ID (=0 ALL NODES) . . . . . . . . . . ',I10/

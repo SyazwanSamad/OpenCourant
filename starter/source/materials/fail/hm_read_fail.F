@@ -25,11 +25,11 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                       ../starter/source/output/message/message.F
 !||    fail_init                    ../starter/source/materials/fail/fail_init.F
-!||    hm_get_boolv                 ../starter/source/devtools/hm_reader/hm_get_boolv.F
-!||    hm_get_intv                  ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_count              ../starter/source/devtools/hm_reader/hm_option_count.F
-!||    hm_option_read_key           ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start              ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_boolv                 ../starter/source/devtools/reader/hm_get_boolv.F
+!||    hm_get_intv                  ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_count              ../starter/source/devtools/reader/hm_option_count.F
+!||    hm_option_read_key           ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start              ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_read_fail_alter           ../starter/source/materials/fail/windshield_alter/hm_read_fail_alter.F
 !||    hm_read_fail_biquad          ../starter/source/materials/fail/biquad/hm_read_fail_biquad.F
 !||    hm_read_fail_chang           ../starter/source/materials/fail/changchang/hm_read_fail_chang.F90

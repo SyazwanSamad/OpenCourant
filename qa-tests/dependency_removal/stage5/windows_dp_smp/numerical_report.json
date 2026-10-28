@@ -1,0 +1,824 @@
+{
+  "engine_sha256": "33c3515912416fd1b7cbb711d43dc77976a048eb33fc12f5fea9448b38551661",
+  "numpy_version": "1.26.4",
+  "time_history_reader_sha256": "45788089db6ca354a5e231092752e758f33553c57e7180574c5c736c8bb5c12a",
+  "status": "passed",
+  "cases": [
+    {
+      "case": "translation",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\translation-openreader-generated-g0sznenv",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "translation",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\translation-openreader-explicit-qopczu_l",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "missing_node",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\missing_node-openreader-generated-fbaj3o6i",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "missing_node",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\missing_node-openreader-explicit-k9mziq9l",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "rotation",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\rotation-openreader-generated-dh16cjg3",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 6.680082442755975e-08,
+        "max_position_error": 6.006832919958072e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "rotation",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\rotation-openreader-explicit-v3fa53ag",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 6.680082442755975e-08,
+        "max_position_error": 6.006832919958072e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "force",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\force-openreader-generated-lc4q3xjm",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "force",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\force-openreader-explicit-3l8c8vab",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "offset",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\offset-openreader-generated-xx_meqe3",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "offset",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\offset-openreader-explicit-_u7nz2wi",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "sensor",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\sensor-openreader-generated-1z86oexm",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.09904278069734573,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "sensor",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\sensor-openreader-explicit-0od086ym",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.09904278069734573,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.960464477539063e-08,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "load_sensor",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\load_sensor-openreader-generated-eyw89tbq",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.9138983488082886e-08,
+        "max_position_error": 2.4500475376844875e-06,
+        "max_energy_error": 2.451328106224584e-06
+      }
+    },
+    {
+      "case": "load_sensor",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\load_sensor-openreader-explicit-6hlk6c8k",
+      "checks": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.9138983488082886e-08,
+        "max_position_error": 2.4500475376844875e-06,
+        "max_energy_error": 2.451328106224584e-06
+      }
+    },
+    {
+      "case": "added",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\added-openreader-generated-3wilf9u_",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "added",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\added-openreader-explicit-mnfuqn3a",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "units",
+      "variant": "openreader-generated",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\units-openreader-generated-s9_fmi6_",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "units",
+      "variant": "openreader-explicit",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\units-openreader-explicit-_4zbm9d7",
+      "checks": {
+        "mass": 1.5,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.8,
+          0.7,
+          0.9
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 0,
+        "max_position_error": 0.0,
+        "max_energy_error": 0.0
+      }
+    },
+    {
+      "case": "explicit_rota",
+      "variant": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\explicit-rota-openreader-ep4p2e5e",
+      "checks": {
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 1.9096501047144443e-09
+      }
+    }
+  ],
+  "structural": [
+    {
+      "case": "ordinary_zero",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-ordinary_zero-openreader-2ru25dl9",
+      "expected_rejection": false,
+      "bodies": {}
+    },
+    {
+      "case": "single",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-single-openreader-aruaesyf",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "disconnected_one",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-disconnected_one-openreader-4jr2ejgj",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 156.0,
+          "center": [
+            1.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            56.33463,
+            212.3346,
+            251.3346
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "mixed",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-mixed-openreader-alcnzms1",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "case": "existing",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-existing-openreader-jbf5b0u2",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "102": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            28.16732
+          ],
+          "off_diagonal": [
+            -1.25e-20,
+            -6.410256e-42,
+            -3.205128e-41
+          ],
+          "nodes": [
+            9
+          ]
+        }
+      }
+    },
+    {
+      "case": "shared",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-shared-openreader-6y96ahvv",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 117.0,
+          "center": [
+            0.6666667,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            42.25097,
+            39.00097,
+            68.25098
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "2": {
+          "mass": 156.0,
+          "center": [
+            1.0,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            53.08463,
+            95.33463,
+            105.0846
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            5,
+            8,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "case": "interleaved",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-interleaved-openreader-y3hz49xw",
+      "expected_rejection": false,
+      "bodies": {
+        "100": {
+          "mass": 78.0,
+          "center": [
+            2.5,
+            0.5,
+            1.282051e-21
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            -9.5e-19,
+            -7.5e-19
+          ],
+          "nodes": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "lagmul",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-lagmul-openreader-ifxrwac2",
+      "expected_rejection": false,
+      "bodies": {
+        "101": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "explicit_fields",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-explicit_fields-openreader-cubv1ysf",
+      "expected_rejection": false,
+      "bodies": {
+        "1": {
+          "mass": 78.0,
+          "center": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "diagonal": [
+            28.16732,
+            28.16732,
+            47.66732
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "case": "empty",
+      "reader": "openreader",
+      "folder": "C:\\Programming\\OpenCourant\\cbuild_dependency_stage5\\regression\\numerical\\structural-empty-openreader-79zcco0r",
+      "expected_rejection": true,
+      "bodies": {}
+    }
+  ]
+}

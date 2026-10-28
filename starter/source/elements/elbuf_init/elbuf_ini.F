@@ -439,7 +439,7 @@ c--------------------------------------------------------
 c-------------------------------------------------
           CALL ZEROVARS_AUTO(ELBUF_TAB(NG))
 c-------------------------------------------------
-          CALL INI_OUTMAX_AUTO(ELBUF_TAB(NG),ITY,NG) 
+          CALL INI_OUTMAX_AUTO(ELBUF_TAB(NG),ITY)
 c
 c---  User Mat Buffer, Fail buffer - structure parameters
 c
@@ -679,12 +679,12 @@ c
 C
 C               Q1NP buffer allocation and initialization (only for Q1NP groups)
                 IF (I_Q1NP_GROUP==1) THEN
-C                 Allocate: 3*NEL for GP_COORD (ξ, η, ζ per element), NEL for GP_WEIGHT
+C                 Allocate: 3*NEL for GP_COORD (Î¾, Î·, Î¶ per element), NEL for GP_WEIGHT
                   CALL MY_ALLOC(ELBUF_TAB(NG)%BUFLY(IL)%Q1NP(IR,IS,IT)%GP_COORD, 3*NEL)
                   CALL MY_ALLOC(ELBUF_TAB(NG)%BUFLY(IL)%Q1NP(IR,IS,IT)%GP_WEIGHT, NEL)
 C
 C                 Compute and store Gauss point coordinates and weights
-C                 Reference coordinates: ξ = Q1NP_GP_U_G(IR), η = Q1NP_GP_V_G(IS), ζ = Q1NP_GP_T_G(IT)
+C                 Reference coordinates: Î¾ = Q1NP_GP_U_G(IR), Î· = Q1NP_GP_V_G(IS), Î¶ = Q1NP_GP_T_G(IT)
 C                 Weight: w = Q1NP_GW_U_G(IR) * Q1NP_GW_V_G(IS) * Q1NP_GW_T_G(IT)
                   IF (Q1NP_NP_U_G > 0 .AND. Q1NP_NP_V_G > 0 .AND. Q1NP_NP_T_G > 0) THEN
                     IF (IR <= Q1NP_NP_U_G .AND. IS <= Q1NP_NP_V_G .AND. IT <= Q1NP_NP_T_G) THEN
@@ -1348,7 +1348,7 @@ C---
 c-------------------------------------------------
           CALL ZEROVARS_AUTO(ELBUF_TAB(NG))
 c-------------------------------------------------
-          CALL INI_OUTMAX_AUTO(ELBUF_TAB(NG),ITY,NG) 
+          CALL INI_OUTMAX_AUTO(ELBUF_TAB(NG),ITY)
 c
 c---  User Mat Buffer, Fail buffer - structure parameters
 c

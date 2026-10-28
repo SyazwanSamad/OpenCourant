@@ -28,20 +28,14 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    ale_mod        ../common_source/modules/ale/ale_mod.F
 !||    groupdef_mod   ../common_source/modules/groupdef_mod.F
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||    message_mod    ../engine/share/message_module/message_mod.F
 !||====================================================================
-      SUBROUTINE DTNODA(NODFT ,NODLT ,NELTST,ITYPTST,ITAB   ,
-     2                  MS    ,IN    ,STIFN ,STIFR  ,DT2T   ,
-     3                  DMAST ,DINERT,ADT   ,ADM    ,IMSCH  ,
-     4                  WEIGHT,A     ,AR    ,IGRNOD ,NODADT_THERM,
-     5                  ADI   ,RBYM  ,ARBY  ,ARRBY  ,WEIGHT_MD,
-     6                  MCP   ,MCP_OFF,CONDN ,NALE  ,H3D_DATA)
+      SUBROUTINE DTNODA(NODFT, NODLT, NELTST, ITYPTST, ITAB, MS, IN, STIFN, STIFR, DT2T, DMAST, DINERT, ADT, ADM,
+     . IMSCH, WEIGHT, A, AR, IGRNOD, NODADT_THERM, ADI, RBYM, ARBY, ARRBY, WEIGHT_MD, MCP, MCP_OFF, CONDN, NALE)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE ALE_MOD
 C-----------------------------------------------
@@ -75,8 +69,6 @@ C-----------------------------------------------
      .   MS(*) ,IN(*) ,STIFN(*), STIFR(*),ADT(*) ,ADM(*) ,
      .   A(3,*) ,AR(3,*) ,ADI(*) ,RBYM(NFRBYM,*),ARBY(3,*),
      .   ARRBY(3,*),CONDN(*),MCP(*),MCP_OFF(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
       TYPE (GROUP_)  , DIMENSION(NGRNOD) :: IGRNOD
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -133,7 +125,7 @@ C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
 cc      IMSCH = 0
-      IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
         DO NN=NODFT,NODLT
           ADT(NN) = EP06
@@ -199,7 +191,7 @@ C
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-         IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
            DO K=1,KMAX
              ADT(INDTN(K))=DTN(K)
@@ -267,7 +259,7 @@ C
             ENDDO
           ELSEIF(IDTMIN(11)==3.OR.IDTMIN(11)==8)THEN
 C----------------------------------------------------------
-            IF (ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF (ANIM_N(2)+OUTP_N(2)>0) THEN
               DO K=1,KMAX
                 IF(DTN(K)<DTMIN1(11))THEN
                   N = INDTN(K) 
@@ -336,7 +328,7 @@ C
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-         IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
            DO K=1,KMAX
              ADT(INDTN(K))=DTN(K)
@@ -435,7 +427,7 @@ c                ENDIF
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-         IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
            DO K=1,KMAX
              ADT(INDTN(K))=DTN(K)
@@ -478,7 +470,7 @@ C
                 ENDIF
               ENDDO
             ELSEIF(IDTMIN(11)==3.OR.IDTMIN(11)==8)THEN
-              IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
 #include      "vectorize.inc"
                 DO K=1,KMAX
                   IF(DTN(K)<DTMIN1(11))THEN
@@ -546,7 +538,7 @@ C
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-           IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
              DO K=1,KMAX
                N = INDTN(K) 
@@ -638,7 +630,7 @@ C
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-           IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
              DO K=1,KMAX
                N = INDTN(K) 
@@ -692,7 +684,7 @@ C
               ENDDO
            ELSEIF(IDTMIN(11)==3.OR.IDTMIN(11)==8)THEN
 C----------------------------------------------------------
-             IF (ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF (ANIM_N(2)+OUTP_N(2)>0) THEN
                DO K=1,KMAX
                 IF(DTN(K)<DTMIN1(11))THEN
                   N = INDTN(K) 
@@ -748,7 +740,7 @@ C
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-        IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
           DO K=1,KMAX
             N = INDTN(K) 

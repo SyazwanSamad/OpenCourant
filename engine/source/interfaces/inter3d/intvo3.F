@@ -35,24 +35,16 @@ Copyright>        copyright and attribution statement.
 !||    i5fri3          ../engine/source/interfaces/inter3d/i3fri3.F
 !||    i5impk3         ../engine/source/interfaces/inter3d/i5impk3.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE INTVO3(output, IPARI,X ,A  ,
-     2                  ICODT,FSAV ,MWA  ,V ,MS ,
-     3                  FSKYI,ISKY ,FCONT,FNCONT,FTCONT,
-     4                  ICONTACT,RCONTACT,NUM_IMP,NS_IMP  ,
-     5                  NE_IMP  ,STIFN,ITAB,INTBUF_TAB,H3D_DATA)
+      SUBROUTINE INTVO3(output, IPARI, X, A, ICODT, FSAV, MWA, V, MS, FSKYI, ISKY, FCONT, FNCONT, FTCONT, ICONTACT,
+     . RCONTACT, NUM_IMP, NS_IMP, NE_IMP, STIFN, ITAB, INTBUF_TAB)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       use output_mod
       USE INTBUFDEF_MOD 
-      USE H3D_MOD 
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   G l o b a l   P a r a m e t e r s
@@ -79,13 +71,6 @@ C     REAL
      .   RCONTACT(*),STIFN(*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
- 
-C     REAL
       my_real
      .   DIST(MVSIZ)
       INTEGER IBC, NCIMP, NRTM4, NOINT, NGROUS, NGROUM, NG,IGIMP 
@@ -198,28 +183,14 @@ C
      8   ZP,      H1,      H2,      H3,
      9   H4,      LFT,     LLT)
        IF(IGIMP==0)GOTO 100
-       CALL I3FOR3(output,LFT   ,LLT   ,NFT   ,
-     2      A ,INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%STFM,
-     3      INTBUF_TAB%STFNS,IBC ,ICODT  ,1   ,FSAV ,
-     4      IGIMP     ,FSKYI     ,ISKY      ,FCONT  ,H3D_DATA,
-     5      N1    ,N2    ,N3    ,IX11  ,IX12     ,
-     6      IX13  ,IX14  ,ANS   ,
-     7      THK   ,H1    ,H2    ,H3    ,H4       ,
-     8      XFACE ,STIF  ,XX3   ,YY3   ,ZZ3      ,
-     7      XX4   ,YY4   ,YI1   ,YI2   ,YI3      ,
-     8      ZZ4   ,ZI1   ,ZI2   ,ZI3   ,XI1      ,
-     9      XI2   ,XI3   ,XI4)
+      CALL I3FOR3(output, LFT, LLT, NFT, A, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM, INTBUF_TAB%STFM,
+     . INTBUF_TAB%STFNS, IBC, ICODT, 1, FSAV, IGIMP, FSKYI, ISKY, FCONT, N1, N2, N3, IX11, IX12, IX13, IX14, ANS, THK,
+     . H1, H2, H3, H4, XFACE, STIF, XX3, YY3, ZZ3, XX4, YY4, YI1, YI2, YI3, ZZ4, ZI1, ZI2, ZI3, XI1, XI2, XI3, XI4)
        IF(FRIC==0.)GOTO 100
        IF(IGIMP==0)GOTO 100
-       CALL I3FRI3(output,LFT   ,LLT   ,NFT   ,X ,A  ,
-     2      INTBUF_TAB%IRECTM,INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,
-     3      NTY,INTBUF_TAB%CSTS,INTBUF_TAB%IRTLOM,INTBUF_TAB%FRICOS,
-     4      INTBUF_TAB%VARIABLES(1),1,FSAV,FSKYI,ISKY,
-     5      FCONT,H3D_DATA,N1   ,N2    ,N3    ,
-     6      IX11  ,IX12  ,IX13  ,IX14  ,H1    ,
-     7      H2    ,H3    ,H4    ,SSC   ,TTC   ,
-     8      XFACE ,STIF  ,XP    ,YP    ,ZP    ,
-     9      XX3   )
+      CALL I3FRI3(output, LFT, LLT, NFT, X, A, INTBUF_TAB%IRECTM, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM,
+     . NTY, INTBUF_TAB%CSTS, INTBUF_TAB%IRTLOM, INTBUF_TAB%FRICOS, INTBUF_TAB%VARIABLES(1), 1, FSAV, FSKYI, ISKY, FCONT,
+     . N1, N2, N3, IX11, IX12, IX13, IX14, H1, H2, H3, H4, SSC, TTC, XFACE, STIF, XP, YP, ZP, XX3)
  100   CONTINUE
        DO 130 NG=1,NGROUM
        NFT=(NG-1)*NVSIZ
@@ -272,28 +243,15 @@ C
      8   ZP,      H1,      H2,      H3,
      9   H4,      LFT,     LLT)
        IF(IGIMP==0)GOTO 130
-       CALL I3FOR3(output, LFT   ,LLT   ,NFT   , A  ,
-     2      INTBUF_TAB%NSV,INTBUF_TAB%MSR,INTBUF_TAB%IRTLS,INTBUF_TAB%STFS,
-     3      INTBUF_TAB%STFNM,IBC  ,ICODT        ,-1        ,FSAV      ,
-     4      IGIMP  ,FSKYI     ,ISKY      ,FCONT     ,H3D_DATA, 
-     5      N1    ,N2    ,N3    ,IX11  ,IX12     ,
-     6      IX13  ,IX14  ,ANS   ,
-     7      THK   ,H1    ,H2    ,H3    ,H4       ,
-     8      XFACE ,STIF  ,XX3   ,YY3   ,ZZ3      ,
-     7      XX4   ,YY4   ,YI1   ,YI2   ,YI3      ,
-     8      ZZ4   ,ZI1   ,ZI2   ,ZI3   ,XI1      ,
-     9      XI2   ,XI3   ,XI4)
+      CALL I3FOR3(output, LFT, LLT, NFT, A, INTBUF_TAB%NSV, INTBUF_TAB%MSR, INTBUF_TAB%IRTLS, INTBUF_TAB%STFS,
+     . INTBUF_TAB%STFNM, IBC, ICODT, -1, FSAV, IGIMP, FSKYI, ISKY, FCONT, N1, N2, N3, IX11, IX12, IX13, IX14, ANS, THK,
+     . H1, H2, H3, H4, XFACE, STIF, XX3, YY3, ZZ3, XX4, YY4, YI1, YI2, YI3, ZZ4, ZI1, ZI2, ZI3, XI1, XI2, XI3, XI4)
        IF(FRIC==0.)GOTO 130
        IF(IGIMP==0)GOTO 130
        IPARI(29) = 1
-       CALL I3FRI3(output, LFT   ,LLT   ,NFT   ,X      ,A    ,
-     2      INTBUF_TAB%IRECTS,INTBUF_TAB%NSV,INTBUF_TAB%MSR,INTBUF_TAB%IRTLS,
-     3      NTY,INTBUF_TAB%CSTM,INTBUF_TAB%IRTLOS,INTBUF_TAB%FRICOM,
-     4      INTBUF_TAB%VARIABLES(1),-1  ,FSAV  ,FSKYI  ,ISKY  ,FCONT,H3D_DATA  ,N1   ,N2    ,N3    ,
-     6      IX11  ,IX12  ,IX13  ,IX14  ,H1    ,
-     7      H2    ,H3    ,H4    ,SSC   ,TTC   ,
-     8      XFACE ,STIF  ,XP    ,YP    ,ZP    ,
-     9      XX3   )
+      CALL I3FRI3(output, LFT, LLT, NFT, X, A, INTBUF_TAB%IRECTS, INTBUF_TAB%NSV, INTBUF_TAB%MSR, INTBUF_TAB%IRTLS,
+     . NTY, INTBUF_TAB%CSTM, INTBUF_TAB%IRTLOS, INTBUF_TAB%FRICOM, INTBUF_TAB%VARIABLES(1), -1, FSAV, FSKYI, ISKY,
+     . FCONT, N1, N2, N3, IX11, IX12, IX13, IX14, H1, H2, H3, H4, SSC, TTC, XFACE, STIF, XP, YP, ZP, XX3)
 
  130   CONTINUE
 C
@@ -356,15 +314,9 @@ C
      8   ZP,      H1,      H2,      H3,
      9   H4,      LFT,     LLT)
         IF(IGIMP==0)GOTO 150
-        CALL I5FOR3(output, LFT   ,LLT   ,NFT   , A ,
-     2          INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,INTBUF_TAB%STFM,
-     3          INTBUF_TAB%STFNS,IBC   ,ICODT     ,FSAV      ,IGIMP     ,
-     4          FSKYI     ,ISKY     ,FCONT     ,FNCONT    ,ICONTACT  ,
-     5          IBAG      ,IADM    ,H3D_DATA,
-     6          IX11  ,IX12  ,IX13    ,IX14   ,N1    ,
-     7          N2    ,N3    ,XFACE   ,H1     ,H2    ,
-     8          H3    ,H4    ,THK     ,ANS    ,STIF  ,
-     9          XX3 )
+      CALL I5FOR3(output, LFT, LLT, NFT, A, INTBUF_TAB%MSR, INTBUF_TAB%NSV, INTBUF_TAB%IRTLM, INTBUF_TAB%STFM,
+     . INTBUF_TAB%STFNS, IBC, ICODT, FSAV, IGIMP, FSKYI, ISKY, FCONT, FNCONT, ICONTACT, IBAG, IADM, IX11, IX12, IX13,
+     . IX14, N1, N2, N3, XFACE, H1, H2, H3, H4, THK, ANS, STIF, XX3)
         IF (IMPL_S==1) THEN
          CALL I5IMPK3(
      1   INTBUF_TAB%IRECTM,INTBUF_TAB%MSR,   INTBUF_TAB%NSV,   INTBUF_TAB%IRTLM,
@@ -374,17 +326,10 @@ C
         IF(FRIC==0.AND.MFROT==0)GOTO 150
         IF(IGIMP==0)GOTO 150
         IPARI(29) = 1
-        CALL I5FRI3(output, LFT    ,LLT    ,NFT    ,IPARI  ,X      ,A      ,
-     2          INTBUF_TAB%IRECTM,INTBUF_TAB%MSR,INTBUF_TAB%NSV,INTBUF_TAB%IRTLM,
-     3          NTY          ,INTBUF_TAB%CSTS,INTBUF_TAB%IRTLOM,INTBUF_TAB%FRICOS,
-     4          FRIC         ,1            ,FSAV         ,FSKYI        ,
-     5          ISKY         ,FCONT        ,V          ,INTBUF_TAB%VARIABLES(4),
-     6          INTBUF_TAB%FRIC_P,INTBUF_TAB%XFILTR,INTBUF_TAB%FTSAV,FTCONT,H3D_DATA ,
-     7          N1    ,N2    ,
-     7          N3    ,IX11  ,IX12    ,IX13  ,IX14  ,
-     8          XP    ,YP    ,ZP      ,SSC   ,TTC   ,
-     9          XFACE ,STIF  ,H1      ,H2    ,H3    ,
-     1          H4    ,AREA  ,XX3)
+      CALL I5FRI3(output, LFT, LLT, NFT, IPARI, X, A, INTBUF_TAB%IRECTM, INTBUF_TAB%MSR, INTBUF_TAB%NSV,
+     . INTBUF_TAB%IRTLM, NTY, INTBUF_TAB%CSTS, INTBUF_TAB%IRTLOM, INTBUF_TAB%FRICOS, FRIC, 1, FSAV, FSKYI, ISKY, FCONT,
+     . V, INTBUF_TAB%VARIABLES(4), INTBUF_TAB%FRIC_P, INTBUF_TAB%XFILTR, INTBUF_TAB%FTSAV, FTCONT, N1, N2, N3, IX11,
+     . IX12, IX13, IX14, XP, YP, ZP, SSC, TTC, XFACE, STIF, H1, H2, H3, H4, AREA, XX3)
  150    CONTINUE
 C
       ELSEIF(NTY==6)THEN

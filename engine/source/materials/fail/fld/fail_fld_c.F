@@ -379,11 +379,9 @@ c
 !||====================================================================
 !||    vinter_1d       ../engine/source/materials/fail/fld/fail_fld_c.F
 !||--- called by ------------------------------------------------------
-!||    dam_fld_sol     ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||    fail_f          ../engine/source/materials/fail/fld/fail_fld_c.F
 !||    fail_fld_tsh    ../engine/source/materials/fail/fld/fail_fld_tsh.F
 !||    fail_fld_xfem   ../engine/source/materials/fail/fld/fail_fld_xfem.F
-!||    idx_fld_sol     ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
 !||====================================================================
       subroutine VINTER_1D(NPOS,NEL,LENF,IPOS,XF,YF,XX,YY)
 C-----------------------------------------------

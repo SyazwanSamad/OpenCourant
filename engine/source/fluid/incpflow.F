@@ -1249,7 +1249,7 @@ C---------------------------------------------------
 C---------------------------------------------------
 C     Populate NODA_PEXT output array for H3D/NODA/PEXT
 C---------------------------------------------------
-      IF(TH_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%ANIM_HAS_NODA_PEXT > 0 .OR. OUTPUT%DATA%H3D_HAS_NODA_PEXT > 0) THEN
+      IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0) THEN
         IF (NSPMD == 1) THEN
           DO I=1,NEL
              N1=ELEM(1,I)

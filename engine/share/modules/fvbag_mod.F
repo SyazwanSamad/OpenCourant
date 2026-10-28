@@ -47,11 +47,6 @@ Copyright>        copyright and attribution statement.
 !||    fvupd1                        ../engine/source/airbag/fvupd.F
 !||    fvwrest                       ../engine/source/output/restart/wrrest.F
 !||    genani                        ../engine/source/output/anim/generate/genani.F
-!||    genh3d                        ../engine/source/output/h3d/h3d_results/genh3d.F
-!||    h3d_create_fvmbag_centroids   ../engine/source/output/h3d/h3d_build_fortran/h3d_create_fvmbag_centroids.F
-!||    h3d_nodal_scalar              ../engine/source/output/h3d/h3d_results/h3d_nodal_scalar.F
-!||    h3d_nodal_vector              ../engine/source/output/h3d/h3d_results/h3d_nodal_vector.F
-!||    h3d_update_fvmbag_centroids   ../engine/source/output/h3d/h3d_build_fortran/h3d_update_fvmbag_centroids.F
 !||    lecfvbag                      ../engine/source/input/lecfvbag.F
 !||    lectur                        ../engine/source/input/lectur.F
 !||    nodald                        ../engine/source/output/anim/generate/nodald.F
@@ -186,7 +181,7 @@ C-----------------------------------------------
 C   G l o b a l   V a r i a b l e s   D e f i n i t i o n
 C-----------------------------------------------
       INTEGER NFVBAG
-      INTEGER AIRBAGS_TOTAL_FVM_IN_H3D ! number of polyhedra/centroids at first cycle (upper bound for following cycle due to merging) Visualization purpose only.
+      INTEGER AIRBAGS_TOTAL_FVM_VIS ! number of polyhedra/centroids at first cycle (upper bound for following cycle due to merging) Visualization purpose only.
       
       TYPE(FVBAG_DATA), DIMENSION(:), ALLOCATABLE :: FVDATA, FVDATA_OLD
       TYPE(FVBAG_SPMD), DIMENSION(:), ALLOCATABLE :: FVSPMD

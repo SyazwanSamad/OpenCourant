@@ -24,10 +24,10 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_fail              ../starter/source/materials/fail/hm_read_fail.F
 !||--- calls      -----------------------------------------------------
 !||    func_table_copy           ../starter/source/materials/tools/func_table_copy.F90
-!||    hm_get_floatv             ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_floatv_dim         ../starter/source/devtools/hm_reader/hm_get_floatv_dim.F
-!||    hm_get_intv               ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted    ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_get_floatv             ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_floatv_dim         ../starter/source/devtools/reader/hm_get_floatv_dim.F
+!||    hm_get_intv               ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted    ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||--- uses       -----------------------------------------------------
 !||    elbuftag_mod              ../starter/share/modules1/elbuftag_mod.F
 !||    func_table_copy_mod       ../starter/source/materials/tools/func_table_copy.F90

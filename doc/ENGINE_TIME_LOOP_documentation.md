@@ -207,7 +207,6 @@ It checks time triggers and calls:
 | Trigger | Output | Sub-call inside `SORTIE_MAIN` |
 |---------|--------|-------------------------------|
 | `/ANIM/dt` | Animation (`.anim` binary) | `GENANI` / `GENSTAT` |
-| `/H3D/dt` | H3D result file | `GENH3D` |
 | `/TH/dt` | Time-history ASCII | `HIST2` → `THSOL`, `THCOQ`, etc. |
 | `/PRINT/dt` | Stats file (`.sta`) | `GENSTAT` |
 | `/DYNAIN/dt` | Dynain restart | `GENDYNAIN` |
@@ -253,7 +252,6 @@ RESOL (resol.F:579)
   ├── DTNODAMP / DTNODARAYL      damping time step corrections
   ├── SORTIE_MAIN                output dispatcher
   │   ├── GENANI / GENSTAT       animation / stats (if triggered)
-  │   ├── GENH3D                 H3D (if triggered)
   │   ├── HIST2                  time-history (if triggered)
   │   └── GENDYNAIN              dynain (if triggered)
   ├── WRRESTP                    restart write (if triggered)
@@ -303,7 +301,7 @@ RESOL (resol.F:579)
 | `engine/source/elements/forintp.F` | SPH particle force loop |
 | `engine/source/interfaces/interf/intfop2.F` | Contact/interface force dispatcher |
 | `engine/source/ale/alemain.F` | ALE advection driver |
-| `engine/source/output/sortie_main.F` | Output dispatcher (anim, H3D, TH, dynain) |
+| `engine/source/output/sortie_main.F` | Output dispatcher (animation, history, DYNAIN) |
 | `engine/source/output/restart/wrrestp.F` | Restart file writer |
 
 ---

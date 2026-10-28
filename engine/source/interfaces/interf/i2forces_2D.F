@@ -24,15 +24,10 @@ Copyright>        copyright and attribution statement.
 !||    i2for3n       ../engine/source/interfaces/interf/i2for3.F
 !||    i2for3pn      ../engine/source/interfaces/interf/i2for3p.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FORCES_2D(X      ,FS      ,FX      ,FY      ,FZ      ,
-     .                       IRECT  ,NIR     ,FSAV    ,FNCONT  ,FNCONTP ,
-     .                       FTCONTP,WEIGHT  ,H3D_DATA,NSL     ,H)
+      SUBROUTINE I2FORCES_2D(X, FS, FX, FY, FZ, IRECT, NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, NSL, H)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD 
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -43,10 +38,6 @@ C-----------------------------------------------
       my_real , INTENT(INOUT) :: FSAV(6),FNCONT(3,NUMNOD),FNCONTP(3,NUMNOD),
      .                           FTCONTP(3,NUMNOD)
       my_real , INTENT(IN)    :: FS(3),FX(4),FY(4),FZ(4)
-      TYPE(H3D_DATABASE),INTENT(IN) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com04_c.inc"
 #include      "com08_c.inc"
 #include      "scr14_c.inc"
@@ -113,7 +104,7 @@ C
 C
 C-------- print of forces in ANIM / H3D
 C 
-        IF(ANIM_V(13)+H3D_DATA%N_VECT_CONT2>0) THEN
+      IF(ANIM_V(13)>0) THEN
           FNCONT(1,NSL) = FNCONT(1,NSL) - FS(1)
           FNCONT(2,NSL) = FNCONT(2,NSL) - FS(2)
           FNCONT(3,NSL) = FNCONT(3,NSL) - FS(3)
@@ -125,7 +116,7 @@ C
           ENDDO
         ENDIF  
 C
-        IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2>0) THEN ! Normal/Tangential forces output
+      IF(ANIM_V(27)>0) THEN
           FNCONTP(1,NSL) = FNCONTP(1,NSL) - FS(1)
           FNCONTP(2,NSL) = FNCONTP(2,NSL) - FS(2)
           FNCONTP(3,NSL) = FNCONTP(3,NSL) - FS(3)

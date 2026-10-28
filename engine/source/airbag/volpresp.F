@@ -24,23 +24,17 @@ Copyright>        copyright and attribution statement.
 !||    monvol0            ../engine/source/airbag/monvol0.F
 !||--- uses       -----------------------------------------------------
 !||    finter_mixed_mod   ../engine/source/tools/finter_mixed.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE VOLPREP(IVOLU  ,RVOLU   ,NJET    ,IBAGJET ,RBAGJET   ,
-     2                   NSENSOR,SENSOR_TAB,X       ,V       ,A         ,
-     3                   NORMAL ,NPC     ,TF      ,NN      ,SURF_NODES,
-     4                   IADMV  ,FSKY    ,FSKYV   ,FEXT    ,H3D_DATA  ,
-     5                   SURF_ELTYP,SURF_ELEM,NODE_NUMBER,TOTAL_CONTRIBUTION_NUMBER, 
-     6                   CONTRIBUTION_INDEX,CONTRIBUTION_NUMBER,
-     7                   NODE_ID,CONTRIBUTION,WFEXT,PYTHON)
+      SUBROUTINE VOLPREP(IVOLU, RVOLU, NJET, IBAGJET, RBAGJET, NSENSOR, SENSOR_TAB, X, V, A, NORMAL, NPC, TF, NN,
+     . SURF_NODES, IADMV, FSKY, FSKYV, FEXT, SURF_ELTYP, SURF_ELEM, NODE_NUMBER, TOTAL_CONTRIBUTION_NUMBER,
+     . CONTRIBUTION_INDEX, CONTRIBUTION_NUMBER, NODE_ID, CONTRIBUTION, WFEXT, PYTHON)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE python_funct_mod
       USE finter_mixed_mod
-      USE H3D_MOD 
       USE SENSOR_MOD
 C-----------------------------------------------
 C     AIRBAGS INPUT FORMAT 4.4
@@ -71,7 +65,6 @@ C-----------------------------------------------
       INTEGER, DIMENSION(NODE_NUMBER), INTENT(in) :: NODE_ID !< node id
       my_real, DIMENSION(TOTAL_CONTRIBUTION_NUMBER,3), INTENT(inout) :: CONTRIBUTION !< contribution array, the force are saved here
       my_real RVOLU(*),RBAGJET(NRBJET,*),X(3,*), V(3,*), A(3,*), NORMAL(3,NN),TF(*),FSKY(8,LSKY),FSKYV(LSKY,8),FEXT(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       DOUBLE PRECISION,INTENT(INOUT) :: WFEXT
       TYPE(PYTHON_), intent(inout) :: PYTHON
@@ -136,8 +129,7 @@ C
           FSKY(1,IADMV(4,I))=FX
           FSKY(2,IADMV(4,I))=FY
           FSKY(3,IADMV(4,I))=FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             ADDRESS = CONTRIBUTION_INDEX(I,1)
             CONTRIBUTION(ADDRESS,1) = FX
             CONTRIBUTION(ADDRESS,2) = FY
@@ -174,8 +166,7 @@ C
           FSKY(1,IADMV(3,I))=FX
           FSKY(2,IADMV(3,I))=FY
           FSKY(3,IADMV(3,I))=FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             ADDRESS = CONTRIBUTION_INDEX(I,1)
             CONTRIBUTION(ADDRESS,1) = FX
             CONTRIBUTION(ADDRESS,2) = FY
@@ -212,8 +203,7 @@ C
           FSKY(1,IADMV(4,I))=FX
           FSKY(2,IADMV(4,I))=FY
           FSKY(3,IADMV(4,I))=FZ
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
             ADDRESS = CONTRIBUTION_INDEX(I,1)
             CONTRIBUTION(ADDRESS,1) = FX
             CONTRIBUTION(ADDRESS,2) = FY
@@ -236,8 +226,7 @@ C
 
 !$OMP END DO
 
-      IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
 !$OMP DO SCHEDULE(guided)
         DO I=1,NODE_NUMBER
           NOD = NODE_ID(I)
@@ -379,8 +368,7 @@ C-------------------------------------------
               FSKY(2,IADMV(4,I))=FSKY(2,IADMV(4,I))+FY
               FSKY(3,IADMV(4,I))=FSKY(3,IADMV(4,I))+FZ
 
-              IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .           ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
                 ADDRESS = CONTRIBUTION_INDEX(I,1)
                 CONTRIBUTION(ADDRESS,1) = FX
                 CONTRIBUTION(ADDRESS,2) = FY
@@ -473,8 +461,7 @@ C-------------------------------------------
               FSKY(2,IADMV(3,I))=FSKY(2,IADMV(3,I))+FY
               FSKY(3,IADMV(3,I))=FSKY(3,IADMV(3,I))+FZ
 
-              IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .           ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
                 ADDRESS = CONTRIBUTION_INDEX(I,1)
                 CONTRIBUTION(ADDRESS,1) = FX
                 CONTRIBUTION(ADDRESS,2) = FY
@@ -568,8 +555,7 @@ C-------------------------------------------
               FSKY(2,IADMV(4,I))=FSKY(2,IADMV(4,I))+FY
               FSKY(3,IADMV(4,I))=FSKY(3,IADMV(4,I))+FZ
 
-              IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .           ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
                 ADDRESS = CONTRIBUTION_INDEX(I,1)
                 CONTRIBUTION(ADDRESS,1) = FX
                 CONTRIBUTION(ADDRESS,2) = FY
@@ -595,8 +581,7 @@ C-------------------------------------------
           ENDDO
 !$OMP END DO
 
-          IF(ANIM_V(5)+OUTP_V(5)+H3D_DATA%N_VECT_FINT+
-     .       ANIM_V(6)+OUTP_V(6)+H3D_DATA%N_VECT_FEXT >0) THEN
+      IF(ANIM_V(5)+OUTP_V(5)+ANIM_V(6)+OUTP_V(6)>0) THEN
 !$OMP DO SCHEDULE(guided)
             DO I=1,NODE_NUMBER
               NOD = NODE_ID(I)

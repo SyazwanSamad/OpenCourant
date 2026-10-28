@@ -1,0 +1,124 @@
+!Copyright>        OpenRadioss
+!Copyright>        Copyright (C) 2026 Siemens
+!Copyright>
+!Copyright>        This program is free software: you can redistribute it and/or modify
+!Copyright>        it under the terms of the GNU Affero General Public License as published by
+!Copyright>        the Free Software Foundation, either version 3 of the License, or
+!Copyright>        (at your option) any later version.
+!Copyright>
+!Copyright>        This program is distributed in the hope that it will be useful,
+!Copyright>        but WITHOUT ANY WARRANTY; without even the implied warranty of
+!Copyright>        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+!Copyright>        GNU Affero General Public License for more details.
+!Copyright>
+!Copyright>        You should have received a copy of the GNU Affero General Public License
+!Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
+!Copyright>
+!Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
+!Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
+!Copyright>        See COPYRIGHT.md at the root of the repository for the full
+!Copyright>        copyright and attribution statement.
+
+module write_include_files_list_mod
+
+! ----------------------------------------------------------------------------------------------------------------------
+!                                                   MODULES
+! ----------------------------------------------------------------------------------------------------------------------
+  use NAMES_AND_TITLES_MOD, only : NCHARLINE
+  use, intrinsic :: iso_c_binding, only : c_char, c_int
+
+! ----------------------------------------------------------------------------------------------------------------------
+!                                                   IMPLICIT NONE
+! ----------------------------------------------------------------------------------------------------------------------
+  implicit none
+
+  private
+  public :: write_include_files_list
+
+  interface
+    subroutine cpp_get_number_of_include_files(is_dyna, num_includes) &
+      bind(C, name='cpp_get_number_of_include_files')
+      import :: c_int
+      integer(c_int), intent(in)  :: is_dyna
+      integer(c_int), intent(out) :: num_includes
+    end subroutine cpp_get_number_of_include_files
+
+    subroutine cpp_get_include_file_by_index(is_dyna, include_index, file_name, bufsize) &
+      bind(C, name='cpp_get_include_file_by_index')
+      import :: c_char, c_int
+      integer(c_int), intent(in)  :: is_dyna
+      integer(c_int), intent(in)  :: include_index
+      character(kind=c_char), intent(out) :: file_name(*)
+      integer(c_int), intent(in)  :: bufsize
+    end subroutine cpp_get_include_file_by_index
+  end interface
+
+contains
+
+! ======================================================================================================================
+!                                                   PROCEDURES
+! ======================================================================================================================
+
+!! \brief Writes the input deck and its included files to the starter output.
+subroutine write_include_files_list(fname, cwd, is_dyna, iout)
+
+! ----------------------------------------------------------------------------------------------------------------------
+!                                                   ARGUMENTS
+! ----------------------------------------------------------------------------------------------------------------------
+  character(len=2048), intent(in) :: fname
+  character(len=NCHARLINE), intent(in) :: cwd
+  integer(c_int),      intent(in) :: is_dyna
+  integer,             intent(in) :: iout
+
+! ----------------------------------------------------------------------------------------------------------------------
+!                                                   LOCAL VARIABLES
+! ----------------------------------------------------------------------------------------------------------------------
+  integer(c_int)             :: bufsize, include_index, num_includes
+  character(kind=c_char)     :: c_file_name(2048)
+  character(len=2048)        :: file_name
+
+! ----------------------------------------------------------------------------------------------------------------------
+!                                                   BODY
+! ----------------------------------------------------------------------------------------------------------------------
+  num_includes = 0
+  call cpp_get_number_of_include_files(is_dyna, num_includes)
+
+  write(iout,'(A)') '* INPUT DECK'
+  write(iout,'(A)') '************************************************************************'
+  write(iout,'(1X)')
+  write(iout,'(1X,A)') ' MAIN DECK  : '
+  write(iout,'(1X)')
+  if (fname(1:1) == '/') then
+    write(iout,'(6X,A)') trim(fname)
+  else
+    write(iout,'(6X,A)') trim(cwd)//'/'//trim(fname)
+  end if
+  if(num_includes > 0) THEN
+    write(iout,'(1X)')
+    write(iout,'(1X,A,I0,A)') ' INCLUDE FILES USED BY THE DECK (', num_includes, ' file(s)):'
+    write(iout,'(1X)')
+  end if
+
+  bufsize = size(c_file_name, kind=c_int)
+  do include_index = 1, num_includes
+    c_file_name = ' '
+    call cpp_get_include_file_by_index(is_dyna, include_index, c_file_name, bufsize)
+    file_name = transfer(c_file_name, file_name)
+    if(len_trim(file_name) == len(file_name)) then
+      write(iout,'(6X,A,A)') file_name, ' [path may be truncated]'
+    else
+      write(iout,'(6X,A)') trim(file_name)
+    endif
+  end do
+  write(iout,'(1X)')
+
+end subroutine write_include_files_list
+
+end module write_include_files_list_mod

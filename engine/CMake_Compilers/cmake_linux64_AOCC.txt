@@ -60,8 +60,6 @@ set ( RELNAME ${arch}${mpi_suf}  )
 # Third party libraries
 # ---------------------
 
-#H3D
-set (h3d_inc "-I${source_directory}/../extlib/h3d/includes")
 
 #ZLIB
 set (zlib_inc "-I${source_directory}/../extlib/zlib/linux64/include")
@@ -114,10 +112,10 @@ if ( debug STREQUAL "1" )
 set_source_files_properties(${source_files}  PROPERTIES COMPILE_FLAGS "${FSANITIZE} -O0 -g  -Wunused ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -Mextend  ${mpi_flag} ${ADF}  " )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  -fopenmp " )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag}  ${cppmach} ${cpprel} -O0 -g  -fopenmp " )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g -fopenmp -std=c++11  " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS "${FSANITIZE} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel}  -O0 -g -fopenmp -std=c++11  " )
 
 else ()
 
@@ -126,10 +124,10 @@ else ()
 set_source_files_properties( ${source_files}  PROPERTIES COMPILE_FLAGS " -O3  ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -DCPP_comp=f90 -Mextend ${mpi_flag} ${ADF} " )
 
 # C source files
-set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -O3 ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} " )
+set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS " -O3 ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} " )
 
 # CXX source files
-set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS " -O3  ${h3d_inc} ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  " )
+set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS " -O3  ${zlib_inc} ${md5_inc} ${opt_flag} ${precision_flag} ${cppmach} ${cpprel} -std=c++11  " )
 
 endif()
 

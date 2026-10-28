@@ -49,32 +49,22 @@ Copyright>        copyright and attribution statement.
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
 !||    extend_array_mod   ../common_source/tools/memory/extend_array.F90
 !||    groupdef_mod       ../common_source/modules/groupdef_mod.F
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    nodal_arrays_mod   ../common_source/modules/nodal_arrays.F90
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||    sensor_mod         ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE LAG_MULT(output,
-     1       IPARI  ,X        ,A        ,
-     2       WAT    ,V       ,MS      ,IN       ,VR       ,
-     3       ITASK  ,WAG     ,ITAB    ,IXS      ,IXS20    ,
-     4       IXS16  ,IGRNOD  ,FANI    ,FSAV     ,
-     5       SKEW   ,AR      ,LAMBDA  ,LAGBUF   ,IBCSLAG  ,
-     6       IXS10  ,GJBUFI  ,GJBUFR  ,IBMPC    ,RBMPC    ,
-     7       NPBYL  ,LPBYL   ,IBFV    ,VEL      ,NPF      ,
-     8       TF     ,NEWFRONT,ICONTACT,RWBUF    ,LPRW     ,
-     9       NPRW   ,RBYL    ,D       ,DR       ,KINET    ,
-     A       NSENSOR,SENSOR_TAB,INTBUF_TAB ,H3D_DATA ,IGRBRIC,
-     B       PYTHON, nodes)
+      SUBROUTINE LAG_MULT(output, IPARI, X, A, WAT, V, MS, IN, VR, ITASK, WAG, ITAB, IXS, IXS20, IXS16, IGRNOD, FANI,
+     . FSAV, SKEW, AR, LAMBDA, LAGBUF, IBCSLAG, IXS10, GJBUFI, GJBUFR, IBMPC, RBMPC, NPBYL, LPBYL, IBFV, VEL, NPF, TF,
+     . NEWFRONT, ICONTACT, RWBUF, LPRW, NPRW, RBYL, D, DR, KINET, NSENSOR, SENSOR_TAB, INTBUF_TAB, IGRBRIC, PYTHON,
+     . nodes)
 C======================================================================|
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE PYTHON_FUNCT_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE SENSOR_MOD
       USE nodal_arrays_mod
@@ -111,7 +101,6 @@ C     REAL
      .   VEL(LFXVELR,*),TF(*),RWBUF(NRWLP,*),RBYL(NRBY,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) ,INTENT(IN) :: SENSOR_TAB
       TYPE(PYTHON_), INTENT(INOUT) :: PYTHON
       TYPE(nodal_arrays_), intent(in) :: nodes 
@@ -398,9 +387,7 @@ C-------------------
 C-------------------
       CALL MY_BARRIER
 C-------------------
-      IF(ITASK==0)
-     .  CALL LAG_ANITH(output,WAG(IP1),WAG(IP2),WAG(IP3),WAG(IP4),WAG(IP5),
-     .                 FANI    ,FSAV    ,N_MULT  ,H3D_DATA )
+      IF(ITASK==0) CALL LAG_ANITH(output, WAG(IP1), WAG(IP2), WAG(IP3), WAG(IP4), WAG(IP5), FANI, FSAV, N_MULT)
 c      IF(ITASK==0 .AND. NRBYLAG>0)
 c     .  CALL LAGTH_RBY(LPBYL ,NPBYL ,FANI  ,FSAV  ,A     ,AR    ,X     )
 C---
@@ -429,26 +416,16 @@ C
 !||--- uses       -----------------------------------------------------
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
 !||    extend_array_mod   ../common_source/tools/memory/extend_array.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod        ../engine/share/message_module/message_mod.F
 !||    nodal_arrays_mod   ../common_source/modules/nodal_arrays.F90
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||    python_funct_mod   ../common_source/modules/python_mod.F90
 !||====================================================================
-      SUBROUTINE LAG_MULTP(output,
-     1       IPARI  ,X        ,A        ,
-     2       WAT    ,V       ,MS      ,IN       ,VR       ,
-     3               WAG     ,ITAB    ,IXS      ,IXS20    ,
-     4       IXS16  ,FANI    ,FSAV    ,
-     5       SKEW   ,AR      ,LAMBDA  ,LAGBUF   ,IBCSLAG  ,
-     6       IXS10  ,GJBUFI  ,GJBUFR  ,IBMPC    ,RBMPC    ,
-     7       NPBYL  ,LPBYL   ,IBFV    ,VEL      ,NPF      ,
-     8       TF     ,NEWFRONT,ICONTACT,RWBUF    ,LPRW     ,
-     9       NPRW   ,RBYL    ,D       ,DR       ,KINET    ,
-     A       NODGLOB,WEIGHT  ,NBNCL   ,NBIKL    ,NBNODL   ,
-     B       NBNODLR,FR_LAGF ,LLAGF   ,IAD_ELEM ,FR_ELEM  ,
-     C       INTBUF_TAB ,H3D_DATA, PYTHON, nodes)
+      SUBROUTINE LAG_MULTP(output, IPARI, X, A, WAT, V, MS, IN, VR, WAG, ITAB, IXS, IXS20, IXS16, FANI, FSAV, SKEW, AR,
+     . LAMBDA, LAGBUF, IBCSLAG, IXS10, GJBUFI, GJBUFR, IBMPC, RBMPC, NPBYL, LPBYL, IBFV, VEL, NPF, TF, NEWFRONT,
+     . ICONTACT, RWBUF, LPRW, NPRW, RBYL, D, DR, KINET, NODGLOB, WEIGHT, NBNCL, NBIKL, NBNODL, NBNODLR, FR_LAGF, LLAGF,
+     . IAD_ELEM, FR_ELEM, INTBUF_TAB, PYTHON, nodes)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -456,7 +433,6 @@ C-----------------------------------------------
       USE nodal_arrays_mod
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE extend_array_mod
       use output_mod
       use element_mod , only : nixs
@@ -495,7 +471,6 @@ C     REAL
      .   VEL(LFXVELR,*),TF(*),RWBUF(NRWLP,*),RBYL(NRBY,*)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(PYTHON_), INTENT(INOUT) :: PYTHON
       TYPE(nodal_arrays_), intent(in) :: nodes 
 C-----------------------------------------------
@@ -814,9 +789,8 @@ C
      3               MS      ,IN      ,RBYL    ,NPBYL   ,LPBYL  ,
      4               N_MULT  ,NCR     )
 C AG => FANIG
-      CALL LAG_ANITHP(output, WAG(IP1),WAG(IP2),WAG(IP3),WAG(IP4),WAG(IP5),
-     2                FANI    ,FSAV    ,N_MULT  ,INDEXLAG,AG      ,
-     3                FR_LAGF ,NBNODL  ,LLAGF   ,NLAGF   ,H3D_DATA)
+      CALL LAG_ANITHP(output, WAG(IP1), WAG(IP2), WAG(IP3), WAG(IP4), WAG(IP5), FANI, FSAV, N_MULT, INDEXLAG, AG,
+     . FR_LAGF, NBNODL, LLAGF, NLAGF)
 C---
       RETURN
       END

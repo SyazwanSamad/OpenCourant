@@ -1,0 +1,47 @@
+{
+  "description": "Original calculation/control bodies before Stage 4; normalized whitespace/comments and renamed result metadata only.",
+  "calculations": {
+    "shell": {
+      "path": "engine/source/tools/element_results/result_shell_scalar.F",
+      "normalized_characters": 106346,
+      "sha256": "b55682bea7860ac9bcbef736e3a871c26e6132d81b85597613a923e6de73f7ef"
+    },
+    "solid": {
+      "path": "engine/source/tools/element_results/result_solid_scalar.F",
+      "normalized_characters": 49489,
+      "sha256": "42539cd6567ecf633413912e0c6ba5bc3e02b82bed2eed8e59cee4ac7ea48b9c"
+    },
+    "quad": {
+      "path": "engine/source/tools/element_results/result_quad_scalar.F90",
+      "normalized_characters": 24636,
+      "sha256": "e5bd7920946d3c7f7a61e12df05065bf48972b6af7754ded86e045e4d1e524a4"
+    }
+  },
+  "unchanged_helpers": {
+    "engine/source/output/anim/generate/fcont_max_output.F": "1b1daee8e9cb2209f3f16dde19aac7c4542d04e54f0abadc6ea6714cbad5393a",
+    "engine/source/tools/element_results/clsys3.F": "3b29a57de9bddf39fc30ad7e8d1d4a8d9f45a3ee60991c553e92c84468608084",
+    "engine/source/mpi/output/spmd_sum_r_nodal_21.F": "411c8e5b39183aba3090aef72be46624b1ed250c911c16be4784c4ed6c2168a2",
+    "engine/source/input/redkey1_output.F": "5d3a2ba9ccab51f7db3faaee8544896a60653d4c250414825af5db70c1486b82",
+    "common_source/modules/python_element_mod.F90": "e6b7051dcff75f404813d46d05d6bf027554b2dfe0bcd16db6381448aefc0eab",
+    "engine/source/tools/curve/python_register.F90": "e13b97ce11f22cd84bd1fb31d9d5f35e4c15ccc9470865007fbb8f41dc7f1922",
+    "engine/source/mpi/python_spmd_mod.F90": "c09f6055fbb535f0e75343f696968b7b9197e68d10ecbd8bb37bf1b85980f5f4"
+  },
+  "unchanged_procedures": [
+    {
+      "name": "THS_MAREA",
+      "path": "engine/source/tools/element_results/result_solid_scalar.F",
+      "sha256": "b1a9489f724c51f3b7ab3f3d8aef8f4f98a87cf825f591c42531bd2513b51cd6"
+    },
+    {
+      "name": "THS_VOL",
+      "path": "engine/source/tools/element_results/result_solid_scalar.F",
+      "sha256": "81867a98aa612fd681537195ce141a93bcd31aba56ac388ae415727b0b5aa870"
+    }
+  ],
+  "retired_in_stage5": {
+    "engine/source/output/anim/generate/fcont2_max_output.F": "45d11336dd43b27d533d722c909266d1e1c7430f840229cff1f214ceda0c139d",
+    "engine/source/output/anim/generate/fcont2_min_output.F": "413466f16f921384939c1de73f33eb1e12eb0ffb802b57669db99ee1de3f950a",
+    "engine/source/output/anim/generate/fpcont2_max_output.F90": "c89279a99b0aa953927e6a4f9786bb2fb737a699496987c32f8c106495d697b3",
+    "engine/source/output/anim/generate/fpcont2_min_output.F90": "41270216fe91132c767d7646e3c3433eba0b76c09b0dfcec2f103608b9f4adca"
+  }
+}

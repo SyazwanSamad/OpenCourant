@@ -23,9 +23,9 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_mat51              ../starter/source/materials/mat/mat051/hm_read_mat51.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_float_array_index   ../starter/source/devtools/hm_reader/hm_get_float_array_index.F
-!||    hm_get_floatv              ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_int_array_index     ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_float_array_index   ../starter/source/devtools/reader/hm_get_float_array_index.F
+!||    hm_get_floatv              ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_int_array_index     ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||--- uses       -----------------------------------------------------
 !||    submodel_mod               ../starter/share/modules1/submodel_mod.F
 !||====================================================================

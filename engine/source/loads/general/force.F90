@@ -46,7 +46,6 @@
 !||    set_u_sens_value              ../engine/source/user_interface/usensor.F
 !||--- uses       -----------------------------------------------------
 !||    constant_mod                  ../common_source/modules/constant_mod.F
-!||    h3d_mod                       ../engine/share/modules/h3d_mod.F
 !||    nodal_arrays_mod              ../common_source/modules/nodal_arrays.F90
 !||    pinchtype_mod                 ../common_source/modules/pinchtype_mod.F
 !||    precision_mod                 ../common_source/modules/precision_mod.F90
@@ -56,24 +55,15 @@
 !||    skew_mod                      ../common_source/modules/skew_mod.F90
 !||    th_surf_mod                   ../common_source/modules/interfaces/th_surf_mod.F
 !||====================================================================
-        subroutine force (                                           &
-        & nibcld     ,ib         ,lfaccld    ,fac       ,snpc       ,&
-        & npc        ,stf        ,tf         ,a         ,v          ,&
-        & x          ,skews      ,ar                                ,&
-        & vr         ,nsensor    ,sensor_tab ,wfexc     ,iadc       ,&
-        & lsky       ,fsky       ,fext       ,h3d_data  ,cptreac    ,&
-        & fthreac    ,nodreac    ,th_surf    ,                       &
-        & dpl0cld    ,vel0cld    ,d          ,dr        ,nconld     ,&
-        & numnod     ,nfunct     ,anim_v     ,outp_v    ,            &
-        & iparit     ,tt         ,dt1        ,n2d       ,wfext      ,&
-        & impl_s     ,python, nodes )
+      subroutine force (nibcld, ib, lfaccld, fac, snpc, npc, stf, tf, a, v, x, skews, ar, vr, nsensor, sensor_tab, &
+     & wfexc, iadc, lsky, fsky, fext, cptreac, fthreac, nodreac, th_surf, dpl0cld, vel0cld, d, dr, nconld, numnod, &
+     & nfunct, anim_v, outp_v, iparit, tt, dt1, n2d, wfext, impl_s, python, nodes)
 ! ----------------------------------------------------------------------------------------------------------------------
 !                                                   Modules
 ! ----------------------------------------------------------------------------------------------------------------------
           use constant_mod ,only : one_over_6,zero,one,half,one_over_8
           use python_funct_mod
           use python_call_funct_cload_mod
-          use h3d_mod
           use pinchtype_mod
           use sensor_mod
           use nodal_arrays_mod
@@ -134,7 +124,6 @@
           type (sensor_str_) ,dimension(nsensor),intent(in) :: sensor_tab !< Sensors type
           type(python_), intent(in), optional :: python        !< Python functions structures
           type(nodal_arrays_), intent(in),optional :: nodes              !< nodal arrays
-          type(h3d_database), intent(in) :: h3d_data           !< H3D output structure
           type (th_surf_) , intent(inout) :: th_surf           !< Time history / surface
           ! Inout / output
           type(skew_), intent(inout) :: skews                  !< Skews structure
@@ -173,8 +162,7 @@
           vel = zero
           disp = zero
           nsegpl = 0
-          ianim  = anim_v(5)+outp_v(5)+h3d_data%n_vect_fint+&
-          &anim_v(6)+outp_v(6)+h3d_data%n_vect_fext
+      ianim  =anim_v(5)+outp_v(5)+anim_v(6)+outp_v(6)
 !
           if(iparit==0) then
 ! spmd parith/off or smp code do not forget the p/on code!

@@ -1,0 +1,258 @@
+{
+  "captured_utc": "2026-10-28T13:38:09.646397+00:00",
+  "commit": "d0a844f7270ae3c0666c1360700be42708a7694b",
+  "working_tree_dirty": true,
+  "scope": "Stage 5 functionality removal; Windows x64 double precision SMP plus focused two-rank Intel MPI comparisons; one OpenMP thread per process",
+  "toolchain": {
+    "fortran_c_cpp": "Intel ifx/icx 2025.2.0 build 20250605",
+    "mkl": "2025.2",
+    "mpi": "Intel MPI 2021.16, local shared memory, two ranks",
+    "vs": "VS 2022 Community, MSVC 14.44.35215",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+  },
+  "reader_build_ids": {
+    "open_reader_win64.dll": "or_20261028155058_d0a844f7"
+  },
+  "build_settings": {
+    "starter": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_C_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/ifx.exe",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ],
+    "engine": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_C_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:UNINITIALIZED=ifx.exe",
+      "MPI:UNINITIALIZED=smp",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ],
+    "engine_mpi": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:UNINITIALIZED=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_C_COMPILER:UNINITIALIZED=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_Fortran_COMPILER:UNINITIALIZED=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/ifx.exe",
+      "MPI:UNINITIALIZED=impi",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ]
+  },
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "suite_pass_lines": 148,
+  "query_families": [
+    "shell",
+    "tria",
+    "quad",
+    "solid"
+  ],
+  "maximum_query_or_history_difference": 0.0,
+  "native_mpi_cases": 2,
+  "native_mpi_animation_bytes_match": true,
+  "removed_and_native_output_cases": 15,
+  "pre_removal_checkpoint_continuations": 6,
+  "subsequent_new_checkpoint_continuations": 2,
+  "packed_pressure_flag_sequence": [
+    11,
+    10,
+    10
+  ],
+  "compiled_discard_helper_check_passed": true,
+  "shared_source_checks_passed": true,
+  "binary_and_build_graph_audit_passed": true,
+  "diff_whitespace_check_passed": true,
+  "changed_python_files_parsed": 23,
+  "changed_workflows_parsed": 6,
+  "frozen_arrays_rechecked_exact": true,
+  "binaries": [
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17495552,
+      "sha256": "623769d123bb58f48d23b67868707243d6aad4609da756a317932a531f7c7286"
+    },
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45873664,
+      "sha256": "14158884751c7d7809621b8a02a7e0dc19f7ca326dffe3f06895ffd88415154e"
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 131674624,
+      "sha256": "33c3515912416fd1b7cbb711d43dc77976a048eb33fc12f5fea9448b38551661"
+    },
+    {
+      "path": "cbuild_dependency_stage5/binaries/driver-openreader.exe",
+      "bytes": 1182208,
+      "sha256": "2aa34276fe36b7260df77ce7e1908a2408211900d60bb78e32555533ae45202d"
+    },
+    {
+      "path": "cbuild_dependency_stage5/binaries/starter-openreader.exe",
+      "bytes": 46018048,
+      "sha256": "6f46a67fd0265c18834ce3bec66cbfce3da84987e225c6bca672a03963fabbc4"
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 139902464,
+      "sha256": "bfe91b1166d07bae8177c390ee12d97ab186562a551ca831ea0d4d686e57f5d1"
+    }
+  ],
+  "pre_stage5_binaries": [
+    {
+      "path": "cbuild_dependency_stage5/before-engine_win64.exe",
+      "bytes": 136400384,
+      "sha256": "9e14dda825db7fe63af2568d1089c2a5c780a7c1906a8e3c68fc92675a67a657"
+    },
+    {
+      "path": "cbuild_dependency_stage5/before-engine_win64_impi.exe",
+      "bytes": 144873984,
+      "sha256": "812e4acd4a822b7425e8d617e56be38b193075d4ae370c927df06d1000c4f7bb"
+    },
+    {
+      "path": "cbuild_dependency_stage5/before-open_reader_win64.dll",
+      "bytes": 17494016,
+      "sha256": "5e5259fbdcd59ab5e5d547ff74e00fe3632432f82314dd02d9b57080e68027af"
+    },
+    {
+      "path": "cbuild_dependency_stage5/before-starter_win64.exe",
+      "bytes": 45913600,
+      "sha256": "767f18bdc4829f53ab5cac1678268589ae407fbafee2e47a2986ee1a71517a01"
+    }
+  ],
+  "source_manifest_scope": "Existing changed/new source and documentation files across cumulative Stages 1-5; evidence directories and deleted paths excluded. Eighteen tracked added-line trailing spaces and thirty new-file trailing spaces removed after compilation; executable statements unchanged.",
+  "pending": [
+    "Stage 6 archive pin/filter, local SDK payload/cache, launcher/package/container cleanup",
+    "Stage 7 Linux/ARM, single precision, hosted CI, multiple OpenMP threads, broader MPI/R2R and old multi-domain checkpoints, implicit/modal, coupled/user-library runs, full miniqa and performance"
+  ],
+  "files": [
+    {
+      "path": "binary_audit.json",
+      "bytes": 2178,
+      "sha256": "6bcb94a828b425d84bcbe837e3f664eabdb718cccbb09125410b4dbedbc7f589"
+    },
+    {
+      "path": "generated_input_manifest.json.gz",
+      "bytes": 4438,
+      "sha256": "8219a2a6c7887d902ab97ebc60bf3eb51863db2f0a6a212b8713bf6ff198f0fc"
+    },
+    {
+      "path": "input_manifest.json.gz",
+      "bytes": 174477,
+      "sha256": "dcaca38ba54f4e5f56a0beaf30f76801b7a6ad8ead9e6ffcb78157ba238e32ec"
+    },
+    {
+      "path": "logs.zip",
+      "bytes": 263867,
+      "sha256": "e030ba4d67eeba2e9cf6c767bfc937dc46cb3259b5bebf2dd5211cbdf944bfe7"
+    },
+    {
+      "path": "mode2_report.json",
+      "bytes": 5942,
+      "sha256": "1d95345fbb17a7aa8c35982e6debf9f76f37ae7979d7a19ce30f32c337aad1cd"
+    },
+    {
+      "path": "models_report.json",
+      "bytes": 21144,
+      "sha256": "73f099df53764914348bb72f46a39af2138c491d7b1e19a9dc2b0ed79e6689e2"
+    },
+    {
+      "path": "native_mpi_before_report.json",
+      "bytes": 971,
+      "sha256": "b6918be8dd666b2fb713ca4c7945318e43bd1a8e997a9200f4d58f865bebbaca"
+    },
+    {
+      "path": "native_mpi_report.json",
+      "bytes": 1123,
+      "sha256": "f46d8a46f1f279ee3b9091a4015358659868938d8b14609dafe8cefb03fb57fb"
+    },
+    {
+      "path": "native_mpi_values.zip",
+      "bytes": 151964,
+      "sha256": "fdbe4bfe4240a409be39dcbc3b97dd2f92de2f2cc24ed02de32fc7cadbea43a0"
+    },
+    {
+      "path": "native_output_before_report.json",
+      "bytes": 535,
+      "sha256": "ac5d723581673964b43ccd4c15bf9f6ea2180aab9d81cb89da19b821da431734"
+    },
+    {
+      "path": "native_output_report.json",
+      "bytes": 535,
+      "sha256": "ac5d723581673964b43ccd4c15bf9f6ea2180aab9d81cb89da19b821da431734"
+    },
+    {
+      "path": "native_outputs.zip",
+      "bytes": 2952981,
+      "sha256": "f0d4ab4b387004f912fb93c2364b913284f1845ef6dc77cbeed8e4ce19cb6b37"
+    },
+    {
+      "path": "numerical_report.json",
+      "bytes": 20772,
+      "sha256": "b45abb9aff42cc605abac77a2dafe69f85fd4c4b643b8f0a826a1896b4d03aaa"
+    },
+    {
+      "path": "old_checkpoints_report.json",
+      "bytes": 1741,
+      "sha256": "6a67da66b945c88824a5032fbd2cdf601a2d2110f842897224466bfa532abaf6"
+    },
+    {
+      "path": "queries_mpi_before_report.json",
+      "bytes": 3524,
+      "sha256": "f7a3e1c1692055cd9e24d2e654e44ee987b2de12d5ec8c84fb8a8aca666bf062"
+    },
+    {
+      "path": "queries_mpi_report.json",
+      "bytes": 3497,
+      "sha256": "91eaa607f154324e4f35615b077f56bd76cb629da2bd7b3c6e012dd57368c1e6"
+    },
+    {
+      "path": "queries_smp_before_report.json",
+      "bytes": 3524,
+      "sha256": "fba3d5651aae247db0dd6ae29a3f43ca81720e1b611c204dc623bc0dbd6e9882"
+    },
+    {
+      "path": "queries_smp_report.json",
+      "bytes": 3497,
+      "sha256": "260c75a8e2049b9a2b7fee26d9989c83e84b6389d206847a764630b79e5fa52b"
+    },
+    {
+      "path": "query_values.zip",
+      "bytes": 3091485,
+      "sha256": "516d23da2af296c31f66d1f7c5a17e1c3f6ae9138f33886efb785525c6a1d7fb"
+    },
+    {
+      "path": "removed_output_inputs.zip",
+      "bytes": 12151,
+      "sha256": "0e47abc5c53f513ae2d93f91dd2a7ab6b12fef503997f3beca4906c48625d2bc"
+    },
+    {
+      "path": "removed_output_report.json",
+      "bytes": 1214,
+      "sha256": "bda33b3fae882f3570ac87724468d59f134c5193558805ee82f7fdffda0493d2"
+    },
+    {
+      "path": "retired_payload_checkpoints.zip",
+      "bytes": 41868,
+      "sha256": "69a726c06eb8e4b8a298f9913e8decd7e4106f94963a4f506c85fc8bacd2459b"
+    },
+    {
+      "path": "source_checks.log",
+      "bytes": 270,
+      "sha256": "67521a054e162b56f1809586b14f3cda8fd7595971fd1ec7027f66d15dda1cb1"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 208399,
+      "sha256": "94bfc884bb29ba9c75976d95137f8bcd68bedc186b95245859aeb020b542a93f"
+    },
+    {
+      "path": "suite_report.json",
+      "bytes": 25488,
+      "sha256": "4892ce40324dec042d387a850d874c89a98e75757676bc20ce255fa9e80ddf92"
+    }
+  ]
+}

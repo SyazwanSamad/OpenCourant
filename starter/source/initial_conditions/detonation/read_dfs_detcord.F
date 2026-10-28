@@ -25,11 +25,11 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    detcord0                 ../starter/source/initial_conditions/detonation/detcord0.F
-!||    hm_get_floatv            ../starter/source/devtools/hm_reader/hm_get_floatv.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start          ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_floatv            ../starter/source/devtools/reader/hm_get_floatv.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start          ../starter/source/devtools/reader/hm_option_start.F
 !||    ifrontplus               ../starter/source/spmd/node/frontplus.F
 !||    nintri                   ../starter/source/system/nintrr.F
 !||    nodgrnr5                 ../starter/source/starter/freform.F

@@ -39,7 +39,7 @@
 !||    ancmsg                   ../starter/source/output/message/message.F
 !||    crityld2000              ../starter/source/materials/mat/mat087/law87_upd.F90
 !||    finter                   ../starter/source/tools/curve/finter.F
-!||    hm_option_is_encrypted   ../starter/source/devtools/hm_reader/hm_option_is_encrypted.F
+!||    hm_option_is_encrypted   ../starter/source/devtools/reader/hm_option_is_encrypted.F
 !||    invert                   ../starter/source/constraints/general/rbe3/hm_read_rbe3.F
 !||    prodmatvect              ../starter/source/materials/mat/mat087/law87_upd.F90
 !||    r_yld2000                ../starter/source/materials/mat/mat087/law87_upd.F90

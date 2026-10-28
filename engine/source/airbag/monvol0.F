@@ -40,28 +40,19 @@ Copyright>        copyright and attribution statement.
 !||    elbufdef_mod          ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    get_volume_area_mod   ../engine/source/airbag/get_volume_area.F90
 !||    groupdef_mod          ../common_source/modules/groupdef_mod.F
-!||    h3d_mod               ../engine/share/modules/h3d_mod.F
 !||    monvol_struct_mod     ../engine/share/modules/monvol_struct_mod.F
 !||    output_mod            ../common_source/modules/output/output_mod.F90
 !||    python_funct_mod      ../common_source/modules/python_mod.F90
 !||    sensor_mod            ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE MONVOL0(MONVOL   ,VOLMON  ,X       ,A      ,
-     2                   NPC      ,TF      ,V       ,NORMAL ,
-     3                   FSAV     ,NSENSOR ,SENSOR_TAB,IGRSURF,
-     4                   FR_MV    ,IADMV   ,SICONTACT,SPORO,
-     5                   FSKY     ,ICONTACT,PORO    ,IPARG  ,
-     6                   ELBUF_TAB,GEO     ,IGEO    ,
-     7                   PM       ,IPM     ,IPART   ,IPARTC ,
-     8                   IPARTTG  ,IGROUPC ,IGROUPTG,FEXT   ,
-     9                   FLAG     ,H3D_DATA ,T_MONVOL,frontier_global_mv,
-     A                   OUTPUT, PYTHON)
+      SUBROUTINE MONVOL0(MONVOL, VOLMON, X, A, NPC, TF, V, NORMAL, FSAV, NSENSOR, SENSOR_TAB, IGRSURF, FR_MV, IADMV,
+     . SICONTACT, SPORO, FSKY, ICONTACT, PORO, IPARG, ELBUF_TAB, GEO, IGEO, PM, IPM, IPART, IPARTC, IPARTTG, IGROUPC,
+     . IGROUPTG, FEXT, FLAG, T_MONVOL, frontier_global_mv, OUTPUT, PYTHON)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE PYTHON_FUNCT_MOD, only : PYTHON_
       USE ELBUFDEF_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE MONVOL_STRUCT_MOD
       USE SENSOR_MOD
@@ -92,7 +83,6 @@ C-----------------------------------------------
       my_real X(3,*), A(3,*), TF(*), V(3,*), NORMAL(3,*), PORO(*),
      .        VOLMON(*),FSAV(NTHVKI,*),FSKY(*),GEO(NPROPG,*),PM(NPROPM,*),FEXT(*)
       TYPE(ELBUF_STRUCT_), DIMENSION(NGROUP) :: ELBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SURF_)   , DIMENSION(NSURF)   :: IGRSURF
       TYPE(MONVOL_STRUCT_), DIMENSION(NVOLU), INTENT(INOUT) :: T_MONVOL
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR), INTENT(IN) :: SENSOR_TAB
@@ -209,19 +199,15 @@ C=======================================================================
 C=======================================================================
         IF(ITYP/=1)THEN
          IF (IPARIT==0) THEN
-            CALL VOLPRE(MONVOL(K1),VOLMON(KK1),NJET ,MONVOL(IADJET),VOLMON(RADJET),
-     2                 NSENSOR ,SENSOR_TAB ,X       ,V       ,A       ,
-     3                 t_monvol(i)%normal  ,NPC     ,TF      ,NN  ,IGRSURF(IS)%NODES,
-     4                 FEXT    ,H3D_DATA,IGRSURF(IS)%ELTYP,IGRSURF(IS)%ELEM, OUTPUT%TH%WFEXT,PYTHON)
+      CALL VOLPRE(MONVOL(K1), VOLMON(KK1), NJET, MONVOL(IADJET), VOLMON(RADJET), NSENSOR, SENSOR_TAB, X, V, A,
+     . t_monvol(i)%normal, NPC, TF, NN, IGRSURF(IS)%NODES, FEXT, IGRSURF(IS)%ELTYP, IGRSURF(IS)%ELEM, OUTPUT%TH%WFEXT,
+     . PYTHON)
          ELSE
-            CALL VOLPREP(MONVOL(K1),VOLMON(KK1),NJET ,MONVOL(IADJET),VOLMON(RADJET),
-     2                 NSENSOR ,SENSOR_TAB  ,X       ,V       ,A       ,
-     3                 t_monvol(i)%normal  ,NPC     ,TF      ,NN  ,IGRSURF(IS)%NODES,
-     4                 IADMV(1,K6),FSKY ,FSKY    ,FEXT, H3D_DATA ,
-     5                 IGRSURF(IS)%ELTYP,IGRSURF(IS)%ELEM,
-     5                 T_MONVOL(I)%OMP_OUTPUT%NODE_NUMBER,T_MONVOL(I)%OMP_OUTPUT%TOTAL_CONTRIBUTION_NUMBER, 
-     6                 T_MONVOL(I)%OMP_OUTPUT%CONTRIBUTION_INDEX,T_MONVOL(I)%OMP_OUTPUT%CONTRIBUTION_NUMBER,
-     7                 T_MONVOL(I)%OMP_OUTPUT%NODE_ID,T_MONVOL(I)%OMP_OUTPUT%CONTRIBUTION,OUTPUT%TH%WFEXT,PYTHON)
+      CALL VOLPREP(MONVOL(K1), VOLMON(KK1), NJET, MONVOL(IADJET), VOLMON(RADJET), NSENSOR, SENSOR_TAB, X, V, A,
+     . t_monvol(i)%normal, NPC, TF, NN, IGRSURF(IS)%NODES, IADMV(1,K6), FSKY, FSKY, FEXT, IGRSURF(IS)%ELTYP, IGRSURF(IS)
+     . %ELEM, T_MONVOL(I)%OMP_OUTPUT%NODE_NUMBER, T_MONVOL(I)%OMP_OUTPUT%TOTAL_CONTRIBUTION_NUMBER, T_MONVOL(I)
+     . %OMP_OUTPUT%CONTRIBUTION_INDEX, T_MONVOL(I)%OMP_OUTPUT%CONTRIBUTION_NUMBER, T_MONVOL(I)%OMP_OUTPUT%NODE_ID,
+     . T_MONVOL(I)%OMP_OUTPUT%CONTRIBUTION, OUTPUT%TH%WFEXT, PYTHON)
          ENDIF
         ENDIF
         T_MONVOL(I)%UID = UID ! store the uid of the monitored volume

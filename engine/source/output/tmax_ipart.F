@@ -24,19 +24,17 @@ Copyright>        copyright and attribution statement.
 !||    resol_init             ../engine/source/engine/resol_init.F
 !||--- calls      -----------------------------------------------------
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod                ../engine/share/modules/h3d_mod.F
 !||    message_mod            ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod           ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod         ../common_source/tools/memory/my_dealloc.F90
 !||    names_and_titles_mod   ../common_source/modules/names_and_titles_mod.F
 !||    outmax_mod             ../common_source/modules/outmax_mod.F
 !||====================================================================
-      SUBROUTINE TMAX_IPART(IPARG ,IPART ,IPARTS ,IPARTC ,IPARTG ,H3D_DATA)
+      SUBROUTINE TMAX_IPART(IPARG, IPART, IPARTS, IPARTC, IPARTG)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
       USE OUTMAX_MOD
-      USE H3D_MOD
       USE MESSAGE_MOD
       USE NAMES_AND_TITLES_MOD, ONLY: NCHARKEY
 C-----------------------------------------------------------------------
@@ -60,12 +58,8 @@ C-----------------------------------------------
       INTEGER ,DIMENSION(NUMELS),INTENT(IN):: IPARTS
       INTEGER ,DIMENSION(NUMELC),INTENT(IN):: IPARTC
       INTEGER ,DIMENSION(NUMELTG),INTENT(IN):: IPARTG
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER  J, K   , IP  , IPRT
-      INTEGER NG,ITY,NFT,ID_INPUT,ID,NH3D_P
+      INTEGER NG,ITY,NFT,ID
 
       INTEGER :: NKPART(NPART,3),NOPART(3)
       CHARACTER(LEN=NCHARKEY) :: KEY2
@@ -86,41 +80,6 @@ C------- IPART_OK(NGROUP,1) for GPS_PART,IPART_OK(NGROUP,2) for GPSRA_PART
           IF (LMAX_NSTRA>0)ALLOCATE(IGPSTRATAG(NUMNOD))
           NKPART(1:NPART,1:3) = 0
           NOPART(1:3) = 1
-          DO ID_INPUT=1,H3D_DATA%N_INPUT_H3D
-c         
-            KEY2 = H3D_DATA%INPUT_LIST(ID_INPUT)%KEY2
-            KEY3 = H3D_DATA%INPUT_LIST(ID_INPUT)%KEY3
-            KEY4 = H3D_DATA%INPUT_LIST(ID_INPUT)%KEY4
-            KEY5 = H3D_DATA%INPUT_LIST(ID_INPUT)%KEY5
-            IF ( KEY2=='PART' ) THEN
-              ID = 3
-              NOPART(ID) = 0
-            ELSEIF ( KEY3=='GPS'.AND. KEY4=='TMAX') THEN
-              ID = 1
-              NOPART(ID) = 0
-              IF (KEY5/=' ') READ (KEY5(3:12),'(I10)',ERR=100) NCY_GPS 
-            ELSEIF ( KEY3=='GPSTRAIN'.AND. KEY4=='TMAX') THEN
-              ID = 2
-              NOPART(ID) = 0
-              IF (KEY5/=' ') READ (KEY5(3:12),'(I10)',ERR=100) NCY_GPSTR 
-            ELSE
-              ID = 0
-            END IF
-            IF ( ID > 0 ) THEN
-              NH3D_P = H3D_DATA%INPUT_LIST(ID_INPUT)%NB_PART
-              IF (NH3D_P==0) THEN
-                NKPART(1:NPART,ID) = 1
-              ELSE
-                DO J=1,NH3D_P
-                  IP = H3D_DATA%INPUT_LIST(ID_INPUT)%PART_LIST(J)
-                  DO K=1,NPART
-                    IF(IP == IPART(4,K)) NKPART(K,ID)=1
-                  END DO
-                END DO
-              END IF
-            END IF
-          END DO 
-c           
           DO ID=1,3
             IF ( NOPART(ID)>0 ) NKPART(1:NPART,ID)=1
           END DO

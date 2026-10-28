@@ -43,7 +43,6 @@ Copyright>        copyright and attribution statement.
 !||    inipar                       ../engine/source/mpi/init/inipar.F
 !||    iniresa                      ../engine/source/output/restart/rdresa.F
 !||    init_dyn_lib_struc           ../engine/share/modules/dynlib_mod.F
-!||    init_h3d_engine              ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    init_th0                     ../engine/source/output/th/init_th0.F
 !||    initime                      ../engine/source/system/timer_mod.F90
 !||    lecinp                       ../engine/source/input/lecinp.F
@@ -104,8 +103,6 @@ Copyright>        copyright and attribution statement.
 !||    glob_therm_mod               ../common_source/modules/mat_elem/glob_therm_mod.F90
 !||    group_mod                    ../engine/share/modules/group_mod.F
 !||    groupdef_mod                 ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
-!||    init_h3d_engine_mod          ../engine/source/output/h3d/h3d_build_fortran/init_h3d_engine.F90
 !||    inoutfile_mod                ../common_source/modules/inoutfile_mod.F
 !||    interfaces_mod               ../common_source/modules/interfaces/interfaces_mod.F90
 !||    intstamp_glob_mod            ../engine/share/modules/intstamp_glob_mod.F
@@ -158,7 +155,6 @@ C-----------------------------------------------
       USE STACK_MOD
       USE ALEFVM_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE GROUP_MOD
       USE GROUPDEF_MOD
       USE MAT_ELEM_MOD
@@ -203,10 +199,6 @@ C-----------------------------------------------
       USE ANIM_MOD
       use rwall_mod
       use sfem_mod
-      use init_h3d_engine_mod
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
 C   G l o b a l   P a r a m e t e r s
@@ -311,8 +303,6 @@ C Madymo Stuff
 
       TYPE (STACK_PLY) :: STACK
       TYPE (MULTI_FVM_STRUCT) :: MULTI_FVM
-      TYPE (H3D_DATABASE) :: H3D_DATA
-
       TYPE (PINCH)  :: PINCH_DATA
       TYPE(DRAPE_), DIMENSION(:), ALLOCATABLE        :: DRAPE_SH4N,DRAPE_SH3N
       TYPE(DRAPEG_)                                  :: DRAPEG
@@ -570,7 +560,6 @@ C Common initialization for arrays size
       RESTARTFILESIZE = 0
       BCSFILESIZE = 0
       MUMPSFILESIZE = 0
-      H3DTOTALSIZE = 0
 C--------------------------------------------------
       IF (GOT_INPUT == 1) THEN
 C Get input numer & run number
@@ -664,8 +653,7 @@ C--------------------------------------------------
 C------------------------------------------------
 C     Standard input reading
 C------------------------------------------------
-      CALL LECINP(IRUNN,IRFL,IRFE,H3D_DATA,FLAG_CST_AMS,DYNAIN_DATA,
-     .            SENSORS,DT,OUTPUT,GLOB_THERM)
+      CALL LECINP(IRUNN, IRFL, IRFE, FLAG_CST_AMS, DYNAIN_DATA, SENSORS, DT, OUTPUT, GLOB_THERM)
 C
 C     Initialize SPMD profiler if /PROFI keyword was found
 C
@@ -873,11 +861,8 @@ C------------------------------------------------------------------
 C------------------------------------------------
 C     .rst file reading 1
 C------------------------------------------------
-      CALL RDRESA(output,ITSTV1 ,LHEADER ,LVARINT ,LVARREA ,PRADIOS ,
-     .            PRESFIL, MULTI_FVM, H3D_DATA,
-     .            PINCH_DATA,DYNAIN_DATA,INTERFACES,SENSORS,LOADS,
-     .            MAT_ELEM,NAMES_AND_TITLES,SKEWS ,GLOB_THERM,PBLAST,
-     .            RBE3,RWALL,SFEM)
+      CALL RDRESA(output, ITSTV1, LHEADER, LVARINT, LVARREA, PRADIOS, PRESFIL, MULTI_FVM, PINCH_DATA, DYNAIN_DATA,
+     . INTERFACES, SENSORS, LOADS, MAT_ELEM, NAMES_AND_TITLES, SKEWS, GLOB_THERM, PBLAST, RBE3, RWALL, SFEM)
 
 C------------------------------------------------
 C     Test of .rst file compatibility
@@ -922,7 +907,7 @@ C      CALL TRACE_OUT(19)
 
       CALL TRACE_IN(17,1,ZERO)
 C end init rdresa after call xtime0
-      CALL INIRESA(OUTPUT,H3D_DATA,PINCH_DATA,GLOB_THERM)
+      CALL INIRESA(OUTPUT, PINCH_DATA, GLOB_THERM)
       CALL TRACE_OUT(17)
 
 
@@ -979,8 +964,8 @@ C
       CALL ALE_CONNECTIVITY%ALE_CONNECTIVITY_INIT()
 
       ! Most of arrays from Restart
-      CALL RESTALLOC(OUTPUT,ELEMENT,NODES,MULTI_FVM,H3D_DATA,PINCH_DATA,ALE_CONNECTIVITY,SEGVAR,INTERFACES,SKEWS,
-     *               GLOB_THERM,RBE3,RWALL,SFEM)
+      CALL RESTALLOC(OUTPUT, ELEMENT, NODES, MULTI_FVM, PINCH_DATA, ALE_CONNECTIVITY, SEGVAR, INTERFACES, SKEWS,
+     . GLOB_THERM, RBE3, RWALL, SFEM)
 
       ! Initialization
       IGEO = 0
@@ -1060,15 +1045,10 @@ C
       ! ---------------------------------------------------------------------------------------------
       !      .rst file reading 2
       ! ---------------------------------------------------------------------------------------------
-      CALL RDRESB(AF             ,IAF        ,LVARREA       ,IRUNN     , 
-     .            MULTI_FVM      ,H3D_DATA   ,PINCH_DATA    ,ALE_CONNECTIVITY ,T_MONVOL  ,
-     .            SENSORS        ,EBCS_TAB   ,DYNAIN_DATA   ,USER_WINDOWS     ,OUTPUT    ,
-     .            INTERFACES     ,LOADS      ,MAT_ELEM      ,PYTHON           ,IFLOW     ,
-     .            SKEWS          ,RFLOW      ,LIFLOW        ,LRFLOW           ,IMPL_S0   ,
-     .            FORNEQS        ,UNITAB     ,DT            ,DTFAC1           ,
-     .            STACK          ,DRAPE_SH4N ,DRAPE_SH3N    ,DRAPEG           ,NDRAPE ,
-     .            GLOB_THERM     ,PBLAST     ,ELEMENT       ,NODES            ,RBE3     ,
-     .            RWALL          ,SFEM       )
+      CALL RDRESB(AF, IAF, LVARREA, IRUNN, MULTI_FVM, PINCH_DATA, ALE_CONNECTIVITY, T_MONVOL, SENSORS, EBCS_TAB,
+     . DYNAIN_DATA, USER_WINDOWS, OUTPUT, INTERFACES, LOADS, MAT_ELEM, PYTHON, IFLOW, SKEWS, RFLOW, LIFLOW, LRFLOW,
+     . IMPL_S0, FORNEQS, UNITAB, DT, DTFAC1, STACK, DRAPE_SH4N, DRAPE_SH3N, DRAPEG, NDRAPE, GLOB_THERM, PBLAST, ELEMENT,
+     . NODES, RBE3, RWALL, SFEM)
       ! Close restart file
        CALL CLOSE_C
  
@@ -1478,25 +1458,12 @@ C------------------------------------------------
 C     engine file reading
 C------------------------------------------------
       CALL TRACE_IN(16,2,ZERO)
-      CALL LECTUR(  NODES%ICODE ,  NODES%ISKEW ,  ISKWN ,  IXTG  ,   IXS  ,
-     2              IXQ ,    ELEMENT%SHELL%IXC ,    IXT ,    IXP ,   IXR  ,
-     3              NODES%ITAB ,   NODES%ITABM1  ,NPC,     IPARG,    IGRV ,
-     4              LGRAV   ,IPARI,
-     5              NPBY ,   LPBY    ,ILINK,   LLINK  ,LINALE ,
-     6              NEFLSW , NNFLSW , ICUT ,   IAF(IF01),
-     7              NODES%X  ,NODES%V,  NODES%VR, NODES%MS   ,NODES%IN  ,
-     8              SKEWS%SKEW  ,TF       ,RBY  ,
-     9              WA  ,CRFLSW  ,XCUT  ,DAMPR  ,
-     A              IGRNOD ,KXSP,NODES%WEIGHT ,FR_RBY2 ,FR_RL,
-     B              PARTSAV,IPART,PM,
-     C              MONVOL ,VOLMON, IPART_STATE,GEO,TABLE,
-     D              IFRAME,XFRAME,MAT_ELEM%ELBUF,IGEO,INTERFACES%INTBUF_TAB,
-     E              IPM   ,H3D_DATA, MULTI_FVM,
-     F              IGRPART,ICFIELD,LCFIELD,NODES%TAG_S_RBY,
-     G              MDS_NMAT,
-     H              SENSORS,MAT_ELEM,
-     I              DYNAIN_DATA,DT ,OUTPUT,NAMES_AND_TITLES,
-     J              GLOB_THERM)
+      CALL LECTUR(NODES%ICODE, NODES%ISKEW, ISKWN, IXTG, IXS, IXQ, ELEMENT%SHELL%IXC, IXT, IXP, IXR, NODES%ITAB,
+     . NODES%ITABM1, NPC, IPARG, IGRV, LGRAV, IPARI, NPBY, LPBY, ILINK, LLINK, LINALE, NEFLSW, NNFLSW, ICUT, IAF(IF01),
+     . NODES%X, NODES%V, NODES%VR, NODES%MS, NODES%IN, SKEWS%SKEW, TF, RBY, WA, CRFLSW, XCUT, DAMPR, IGRNOD, KXSP,
+     . NODES%WEIGHT, FR_RBY2, FR_RL, PARTSAV, IPART, PM, MONVOL, VOLMON, IPART_STATE, GEO, TABLE, IFRAME, XFRAME,
+     . MAT_ELEM%ELBUF, IGEO, INTERFACES%INTBUF_TAB, IPM, MULTI_FVM, IGRPART, ICFIELD, LCFIELD, NODES%TAG_S_RBY,
+     . MDS_NMAT, SENSORS, MAT_ELEM, DYNAIN_DATA, DT, OUTPUT, NAMES_AND_TITLES, GLOB_THERM)
 C------------------------------------------------
 C Close & Delete scratch file
       CLOSE (UNIT=IIN)
@@ -1516,18 +1483,6 @@ C------------------------------------------------
 #endif
 C------------------------------------------------
 C     H3D initialization
-C------------------------------------------------
-      CALL INIT_H3D_ENGINE(OUTPUT,GEO,IGEO,IPM,IPART,H3D_DATA,MULTI_FVM,IPARI,IPARG,TAG_SKINS6,
-     .                     MDS_LABEL,MDS_OUTPUT_TABLE,MDS_NMAT,MAX_DEPVAR,MDS_NDEPSVAR,
-     .                     MAT_ELEM%ELBUF,STACK,IBCL,ILOADP,LLOADP,LOADS,MAT_ELEM%MAT_PARAM,PBLAST,
-     .                     IGRPART,NPC,TF,SNPC,STF,SENSORS,SENSORS%SENSOR_TAB,PSKIDS,
-     .                     NINTSKIDOLD,NINTERSKID,NINTSTAMP,NUMNOD,NUMNODG,NINTER,NUMSPHG,
-     .                     NPROPG,NPROPGI,NPROPMI,LIPART1,NPARI,NPARG,
-     .                     NGROUP,NUMELS,SIBCL,NLOADP,SIZLOADP,SLLOADP,NGRPART,SENSORS%NSENSOR,
-     .                     ISPMD,IOUT,MCHECK,
-     .                     NUMELCG,NUMELTGG,NUMELSG,NUMELTRG,NUMELPG,NUMELRG,
-     .                     NUMELQG,NUMSKING,NUMGEO,NUMMAT,NUMPLY)
-
 C------------------------------------------------
       CALL TRACE_IN(19,0,ZERO)
       CALL TRACE_OUT(19)
@@ -2229,18 +2184,11 @@ C---------------------------------------------------------------------
          ITASK=0
          IRUNN_BIS = IRUNN
 
-         CALL RESOL_HEAD(ELEMENT, NODES, ITASK        ,AF              ,IAF             ,IDATA      ,RDATA,
-     .                   GRAPHE       ,IFLOW           ,RFLOW           ,
-     .                   STACK        ,IRUNN_BIS       , TIMERS,
-     .                   MULTI_FVM    ,H3D_DATA        ,SUBSETS    ,IGRNOD    ,
-     .                   IGRBRIC      ,IGRQUAD         ,IGRSH4N         ,IGRSH3N    ,IGRTRUSS  ,
-     .                   IGRBEAM      ,IGRSPRING       ,IGRPART         ,IGRSURF    ,IGRSLIN   ,
-     .                   FORNEQS      ,PINCH_DATA      ,ALE_CONNECTIVITY,
-     .                   DRAPE_SH4N   ,DRAPE_SH3N      ,T_MONVOL        ,SENSORS    ,EBCS_TAB        ,
-     .                   DIFFUSION    ,SEGVAR          ,DYNAIN_DATA     ,DRAPEG     ,USER_WINDOWS    ,
-     .                   OUTPUT       ,INTERFACES      ,DT              ,LOADS      ,MAT_ELEM  , PYTHON,
-     .                   NAMES_AND_TITLES, UNITAB ,SKEWS,LIFLOW         ,LRFLOW     ,glob_therm,PBLAST,
-     .                   RBE3, coupling,RWALL     ,SFEM)
+      CALL RESOL_HEAD(ELEMENT, NODES, ITASK, AF, IAF, IDATA, RDATA, GRAPHE, IFLOW, RFLOW, STACK, IRUNN_BIS, TIMERS,
+     . MULTI_FVM, SUBSETS, IGRNOD, IGRBRIC, IGRQUAD, IGRSH4N, IGRSH3N, IGRTRUSS, IGRBEAM, IGRSPRING, IGRPART, IGRSURF,
+     . IGRSLIN, FORNEQS, PINCH_DATA, ALE_CONNECTIVITY, DRAPE_SH4N, DRAPE_SH3N, T_MONVOL, SENSORS, EBCS_TAB, DIFFUSION,
+     . SEGVAR, DYNAIN_DATA, DRAPEG, USER_WINDOWS, OUTPUT, INTERFACES, DT, LOADS, MAT_ELEM, PYTHON, NAMES_AND_TITLES,
+     . UNITAB, SKEWS, LIFLOW, LRFLOW, glob_therm, PBLAST, RBE3, coupling, RWALL, SFEM)
 C---------------------------------------------------------------------
       CURRENT_RUN = GLOBAL_COMP_TIME%RUN_NBR
       CALL SPMD_REDUCE_DB(GLOBAL_COMP_TIME%ENGINE_TIME(CURRENT_RUN),RESULT,1,0,"MAX ")

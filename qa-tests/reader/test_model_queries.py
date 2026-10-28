@@ -18,7 +18,7 @@
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
-"""Check Starter's include/part ABI and selection preservation against bundled v82."""
+"""Check Starter's include/part ABI and selection preservation against fixture expectations."""
 
 import argparse
 import ctypes as ct
@@ -119,7 +119,7 @@ def probe(args):
     reader.library.cpp_option_next()
     assert reader.integer('id') == 20 + offset
     result = {'native_includes': [Path(p).name for p in paths], 'parts': [True, False]}
-    if args.reference or args.submodel:
+    if args.submodel:
         args.output.write_text(json.dumps(result, indent=2))
         return
     bulk = reader.library.cpp_get_include_files_list
@@ -170,7 +170,6 @@ def probe(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', required=True, type=lambda p: Path(p).resolve())
-    parser.add_argument('--reference', type=lambda p: Path(p).resolve())
     parser.add_argument('--output', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--submodel', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -178,22 +177,17 @@ def main():
         probe(args)
         return
     results = []
-    for library in [args.reader] + ([args.reference] if args.reference else []):
+    for library in [args.reader]:
         with tempfile.TemporaryDirectory(prefix='opencourant-queries-') as temporary:
             output = Path(temporary) / 'queries.json'
             command = [sys.executable, str(Path(__file__).resolve()), '--reader', str(library),
                        '--output', str(output)]
-            if library == args.reference:
-                command += ['--reference', str(library)]
             result = subprocess.run(command, cwd=temporary, capture_output=True, text=True, timeout=60)
             assert result.returncode == 0, result.stdout + result.stderr
             results.append(json.loads(output.read_text()))
-            scope = 'native includes/parts' if library == args.reference else 'native/keyword includes, bounds, parts, reload'
+            scope = 'native/keyword includes, bounds, parts, reload'
             print(f'PASS {library.name}: exports, selection, {scope}', flush=True)
-    if args.reference:
-        assert {key: results[0][key] for key in results[1]} == results[1], results
-        print('PASS bundled v82 native include/part API compatibility', flush=True)
-    for library in [args.reader] + ([args.reference] if args.reference else []):
+    for library in [args.reader]:
         with tempfile.TemporaryDirectory(prefix='opencourant-submodel-queries-') as temporary:
             command = [sys.executable, str(Path(__file__).resolve()), '--reader', str(library),
                        '--output', str(Path(temporary) / 'queries.json'), '--submodel']

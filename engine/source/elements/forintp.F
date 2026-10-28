@@ -657,20 +657,11 @@ C            Returns GIS, STIF and SSP in WA (1: 8.1: NUMSPH).
 C            a ne pas ecraser avt SPFORC.
 C-----------------------------------------------
              NDSVOID=0
-             CALL SPSTRES(TIMERS,ELBUF_TAB,NG    ,
-     1            PM        ,GEO       ,X         ,V         ,MS        ,
-     2            W         ,SPBUF     ,WA        ,NLOC_DMG  ,
-     3            ITAB      ,PLD       ,BUFMAT    ,BUFGEO    ,PARTSAV   ,
-     4            FSAV      ,DT2T      ,IPARG     ,NPC       ,KXSP      ,
-     5            IXSP      ,NOD2SP    ,NELTST    ,ITYPTST   ,IPART     ,
-     6            IPARTSP   ,FV        ,NEL       ,IPM       ,GRESAV    ,
-     7            GRTH      ,IGRTH     ,TABLE     ,ISTRA     ,VOLN      ,
-     8            IGEO      ,IEXPAN    ,TEMP      ,ITASK     ,SPH2SOL   ,
-     9            MAT_ELEM  ,IBID      ,OUTPUT    ,SNPC      ,STF       ,
-     A            SBUFMAT,   SVIS      ,NSVOIS    ,IDTMINS   ,IRESP,      
-     .            IDEL7NG,   IDEL7NOK  ,IDTMIN    ,MAXFUNC   ,LIPART1,
-     .            IMON_MAT,  USERL_AVAIL,impl_s,
-     V            idyna,     DT        ,GLOB_THERM,sensors)
+      CALL SPSTRES(TIMERS, ELBUF_TAB, NG, PM, GEO, X, V, MS, W, SPBUF, WA, NLOC_DMG, ITAB, PLD, BUFMAT, BUFGEO,
+     . PARTSAV, FSAV, DT2T, IPARG, NPC, KXSP, IXSP, NOD2SP, NELTST, ITYPTST, IPART, IPARTSP, FV, NEL, IPM, GRESAV, GRTH,
+     . IGRTH, TABLE, ISTRA, VOLN, IGEO, IEXPAN, TEMP, ITASK, SPH2SOL, MAT_ELEM, OUTPUT, SNPC, STF, SBUFMAT, SVIS,
+     . NSVOIS, IDTMINS, IRESP, IDEL7NG, IDEL7NOK, IDTMIN, MAXFUNC, LIPART1, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT,
+     . GLOB_THERM, sensors)
             ENDIF
             IF (IDDW>0) CALL STOPTIMEG(NG)
           END DO

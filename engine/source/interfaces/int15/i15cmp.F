@@ -34,23 +34,18 @@ Copyright>        copyright and attribution statement.
 !||    i15tott1        ../engine/source/interfaces/int15/i15tott1.F
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod    ../common_source/modules/groupdef_mod.F
-!||    h3d_mod         ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod   ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod     ../engine/share/message_module/message_mod.F
 !||    output_mod      ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I15CMP(OUTPUT,IPARI,INTBUF_TAB,IGRSURF,BUFSF,
-     2            A, X, V, WA, FSAV,
-     3            IN, STIFN, FCONT, MS, FSKYI,
-     4            ISKY, NPC  , PLD , DT2T, NELTST,
-     5            ITYPTST, ITAB,H3D_DATA)
+      SUBROUTINE I15CMP(OUTPUT, IPARI, INTBUF_TAB, IGRSURF, BUFSF, A, X, V, WA, FSAV, IN, STIFN, FCONT, MS, FSKYI,
+     . ISKY, NPC, PLD, DT2T, NELTST, ITYPTST, ITAB)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE OUTPUT_MOD, ONLY : OUTPUT_
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -83,7 +78,6 @@ C     REAL
      .   DT2T
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SURF_)   , DIMENSION(NSURF)   :: IGRSURF
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -213,11 +207,8 @@ C------
 C-----------------------------------------------
 C      RETURN TO GLOBAL VECTORS.
 C-----------------------------------------------
-       CALL I15ASS(OUTPUT,A   ,X     ,V    ,INTBUF_TAB%KSURF ,IGRSURF  ,
-     2           BUFSF ,STIFN ,FSAV ,FCONT      ,FSKYI  ,
-     3           ISKY  ,DE    ,WA(KWNF) ,WA(KWTF) ,WA(KWNS) ,
-     4           FNORMX ,FNORMY ,FNORMZ ,FTANGX ,FTANGY   ,
-     5           FTANGZ ,NNC    ,WA(KNC),H3D_DATA )
+      CALL I15ASS(OUTPUT, A, X, V, INTBUF_TAB%KSURF, IGRSURF, BUFSF, STIFN, FSAV, FCONT, FSKYI, ISKY, DE, WA(KWNF),
+     . WA(KWTF), WA(KWNS), FNORMX, FNORMY, FNORMZ, FTANGX, FTANGY, FTANGZ, NNC, WA(KNC))
 C-----------------------------------------------
       INTBUF_TAB%VARIABLES(9)=DE
 C-----------------------------------------------

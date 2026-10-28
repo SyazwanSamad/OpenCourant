@@ -53,7 +53,7 @@ ENV OPENCOURANT_PATH=/opt/OpenCourant \
     OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1 \
     PATH=/opt/OpenCourant/exec:/opt/openmpi/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 
-ENV LD_LIBRARY_PATH=/opt/OpenCourant/extlib/hm_reader/${ARCH_DIR}:/opt/OpenCourant/extlib/h3d/lib/${ARCH_DIR}:/opt/openmpi/lib
+ENV LD_LIBRARY_PATH=/opt/OpenCourant/exec:/opt/OpenCourant/extlib/runtime/${ARCH_DIR}:/opt/OpenCourant/extlib/h3d/lib/${ARCH_DIR}:/opt/openmpi/lib
 
 LABEL org.opencontainers.image.source="https://github.com/OpenCourant/OpenCourant" \
       org.opencontainers.image.description="OpenCourant explicit finite element solver (Starter + Engine, SMP and OpenMPI)" \

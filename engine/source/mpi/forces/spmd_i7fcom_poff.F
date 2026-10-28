@@ -35,7 +35,6 @@ C
 !||    spmd_fiadd_poff      ../engine/source/mpi/interfaces/spmd_i7tool.F
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod         ../common_source/modules/groupdef_mod.F
-!||    h3d_mod              ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod        ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    interfaces_mod       ../common_source/modules/interfaces/interfaces_mod.F90
 !||    message_mod          ../engine/share/message_module/message_mod.F
@@ -45,16 +44,10 @@ C
 !||    tri25ebox            ../engine/share/modules/tri25ebox.F
 !||    tri7box              ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE SPMD_I7FCOM_POFF(OUTPUT,
-     1   IPARI   ,A       ,STIFN   ,VISCN   ,
-     2   INTLIST ,NBINTC  ,ICODT   ,SECFCUM ,NSTRF   ,
-     3   ICONTACT,FCONT   ,ISLEN7  ,IRLEN7  ,ISLEN11 ,
-     4   IRLEN11 ,ISLEN17 ,IRLEN17 ,IGRBRIC ,
-     5   IXS     ,IXS16   ,FTHE    ,IRLEN7T ,
-     6   ISLEN7T ,IRLEN20 ,ISLEN20 ,IRLEN20T,ISLEN20T,
-     7   IRLEN20E,ISLEN20E,CONDN   ,IFLAG   ,INTBUF_TAB, 
-     8   H3D_DATA, MULTI_FVM,TAGNCONT,KLOADPINTER,LOADPINTER,
-     9   LOADP_HYD_INTER  ,FSAV    ,INTERFACES,NODADT_THERM)
+      SUBROUTINE SPMD_I7FCOM_POFF(OUTPUT, IPARI, A, STIFN, VISCN, INTLIST, NBINTC, ICODT, SECFCUM, NSTRF, ICONTACT,
+     . FCONT, ISLEN7, IRLEN7, ISLEN11, IRLEN11, ISLEN17, IRLEN17, IGRBRIC, IXS, IXS16, FTHE, IRLEN7T, ISLEN7T, IRLEN20,
+     . ISLEN20, IRLEN20T, ISLEN20T, IRLEN20E, ISLEN20E, CONDN, IFLAG, INTBUF_TAB, MULTI_FVM, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, FSAV, INTERFACES, NODADT_THERM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -62,7 +55,6 @@ C-----------------------------------------------
       USE TRI25EBOX
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MULTI_FVM_MOD
       USE GROUPDEF_MOD
       USE INTERFACES_MOD
@@ -103,7 +95,6 @@ C-----------------------------------------------
       my_real, INTENT(INOUT) :: FSAV(NTHVKI,*) 
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
       TYPE (INTERFACES_)    ,INTENT(IN)     :: INTERFACES
 C-----------------------------------------------
@@ -1141,43 +1132,27 @@ C
      *       .OR.NTY==24.OR.NTY==25 )THEN
                   INTTH = IPARI(47,NIN)
                   IF(INTTH == 0 ) THEN
-                   CALL SPMD_FIADD_POFF(output,
-     1              NB      ,LEN     ,BBUFR(L),INTBUF_TAB(NIN)%NSV,A ,
-     2              STIFN   ,VISCN   ,IBC     ,ISECIN       ,NOINT   ,
-     3              IBAG    ,ICODT   ,SECFCUM , NSTRF       ,ICONTACT,
-     4              FCONT   ,INACTI  ,IADM    ,INTTH , FTHE ,CONDN   ,
-     5              H3D_DATA, MULTI_FVM,NIN   ,TAGNCONT,KLOADPINTER  ,
-     6              LOADPINTER,LOADP_HYD_INTER,INTCAREA,FSAV(1,NIN)  ,
-     7              INTERFACES%PARAMETERS,NODADT_THERM)
+      CALL SPMD_FIADD_POFF(output, NB, LEN, BBUFR(L), INTBUF_TAB(NIN)%NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG,
+     . ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHE, CONDN, MULTI_FVM, NIN, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, INTCAREA, FSAV(1,NIN), INTERFACES%PARAMETERS, NODADT_THERM)
                     L = L + NB*LEN
                   ELSE
-                     CALL SPMD_FIADD_POFF(output,
-     1              NB      ,LEN7T   ,BBUFR(L),INTBUF_TAB(NIN)%NSV,A ,
-     2              STIFN   ,VISCN   ,IBC     ,ISECIN       ,NOINT   ,
-     3              IBAG    ,ICODT   ,SECFCUM , NSTRF       ,ICONTACT,
-     4              FCONT   ,INACTI  ,IADM    ,INTTH , FTHE ,CONDN   ,
-     5              H3D_DATA, MULTI_FVM,NIN   ,TAGNCONT,KLOADPINTER  ,
-     6              LOADPINTER,LOADP_HYD_INTER,INTCAREA,FSAV(1,NIN)  ,
-     7              INTERFACES%PARAMETERS,NODADT_THERM)
+      CALL SPMD_FIADD_POFF(output, NB, LEN7T, BBUFR(L), INTBUF_TAB(NIN)%NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT, IBAG,
+     . ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHE, CONDN, MULTI_FVM, NIN, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, INTCAREA, FSAV(1,NIN), INTERFACES%PARAMETERS, NODADT_THERM)
                     L = L + NB*LEN7T
                   ENDIF
                 ELSEIF(NTY==11)THEN
                   INTTH = IPARI(47,NIN)
                  IF(INTTH==0) THEN
-                  CALL SPMD_FIADD11_POFF(output,
-     1              NB      ,LEN11   ,BBUFR(L),INTBUF_TAB(NIN)%IRECTS,A,
-     2              STIFN   ,VISCN   ,IBC     ,ISECIN       ,NOINT   ,
-     3              IBAG    ,ICODT   ,SECFCUM ,NSTRF        ,ICONTACT,
-     4              FCONT   ,INTTH   ,FTHE    ,CONDN        ,H3D_DATA,
-     5              TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,NODADT_THERM)
+      CALL SPMD_FIADD11_POFF(output, NB, LEN11, BBUFR(L), INTBUF_TAB(NIN)%IRECTS, A, STIFN, VISCN, IBC, ISECIN, NOINT,
+     . IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INTTH, FTHE, CONDN, TAGNCONT, KLOADPINTER, LOADPINTER,
+     . LOADP_HYD_INTER, NODADT_THERM)
                   L = L + NB*LEN11
                  ELSE
-                  CALL SPMD_FIADD11_POFF(output,
-     1              NB      ,LEN11T   ,BBUFR(L),INTBUF_TAB(NIN)%IRECTS,A,
-     2              STIFN   ,VISCN   ,IBC     ,ISECIN       ,NOINT   ,
-     3              IBAG    ,ICODT   ,SECFCUM ,NSTRF        ,ICONTACT,
-     4              FCONT   ,INTTH   ,FTHE    ,CONDN        ,H3D_DATA,
-     5              TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,NODADT_THERM)
+      CALL SPMD_FIADD11_POFF(output, NB, LEN11T, BBUFR(L), INTBUF_TAB(NIN)%IRECTS, A, STIFN, VISCN, IBC, ISECIN, NOINT,
+     . IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INTTH, FTHE, CONDN, TAGNCONT, KLOADPINTER, LOADPINTER,
+     . LOADP_HYD_INTER, NODADT_THERM)
                   L = L + NB*LEN11T
                  ENDIF
                 ELSEIF(NTY==17)THEN
@@ -1186,28 +1161,20 @@ C
                   NME =IGRBRIC(IGE)%NENTITY
                   NMES=IGRBRIC(IGN)%NENTITY
 C
-                  CALL SPMD_FIADD17_POFF(output,
-     1              NB     ,LEN17 ,BBUFR(L),IGRBRIC(IGN)%ENTITY,A             ,
-     2              STIFN  ,FCONT ,IXS     ,IXS16       ,INTBUF_TAB(NIN)%FROTS,
-     3              H3D_DATA)
+      CALL SPMD_FIADD17_POFF(output, NB, LEN17, BBUFR(L), IGRBRIC(IGN)%ENTITY, A, STIFN, FCONT, IXS, IXS16,
+     . INTBUF_TAB(NIN)%FROTS)
                   L = L + NB*LEN17
                 ELSEIF(NTY==20)THEN
                   INTTH = IPARI(47,NIN)
                   IF(INTTH == 0 ) THEN
-                   CALL SPMD_FIADD20_POFF(output,
-     1              NB    ,LEN20 ,BBUFR(L),INTBUF_TAB(NIN)%NSV,A      ,
-     2              STIFN ,VISCN ,IBC     ,ISECIN       ,NOINT        ,
-     3              IBAG  ,ICODT ,SECFCUM ,NSTRF        ,ICONTACT     ,
-     4              FCONT ,INACTI,IADM    ,INTTH        ,INTBUF_TAB(NIN)%DAANC6,
-     5              BID   ,INTBUF_TAB(NIN)%NLG  ,INTBUF_TAB(NIN)%ALPHAK,H3D_DATA )
+      CALL SPMD_FIADD20_POFF(output, NB, LEN20, BBUFR(L), INTBUF_TAB(NIN)%NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT,
+     . IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, INTBUF_TAB(NIN)%DAANC6, BID, INTBUF_TAB(NIN)
+     . %NLG, INTBUF_TAB(NIN)%ALPHAK)
                     L = L + NB*LEN20
                   ELSE
-                   CALL SPMD_FIADD20_POFF(output,
-     1              NB    ,LEN20T,BBUFR(L),INTBUF_TAB(NIN)%NSV,A              ,
-     2              STIFN ,VISCN ,IBC     ,ISECIN       ,NOINT        ,
-     3              IBAG  ,ICODT ,SECFCUM ,NSTRF        ,ICONTACT     ,
-     4              FCONT ,INACTI,IADM    ,INTTH        ,INTBUF_TAB(NIN)%DAANC6,
-     5              FTHE  ,INTBUF_TAB(NIN)%NLG  ,INTBUF_TAB(NIN)%ALPHAK,H3D_DATA)
+      CALL SPMD_FIADD20_POFF(output, NB, LEN20T, BBUFR(L), INTBUF_TAB(NIN)%NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT,
+     . IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, INTBUF_TAB(NIN)%DAANC6, FTHE, INTBUF_TAB(NIN)
+     . %NLG, INTBUF_TAB(NIN)%ALPHAK)
                     L = L + NB*LEN20T
                   ENDIF
                 END IF
@@ -1225,11 +1192,9 @@ C
                   ISECIN=IPARI(28,NIN)
                   IBAG  =IPARI(32,NIN)
                   IADM  =IPARI(44,NIN)
-                  CALL SPMD_FIADD20E_POFF(output,
-     1              NB    ,LEN20E ,BBUFR(L),INTBUF_TAB(NIN)%IXLINS,A           ,
-     2              STIFN ,VISCN  ,IBC     ,ISECIN       ,NOINT        ,
-     3              IBAG  ,ICODT  ,SECFCUM ,NSTRF        ,ICONTACT     ,
-     4           FCONT ,INTBUF_TAB(NIN)%DAANC6,INTBUF_TAB(NIN)%NLG,INTBUF_TAB(NIN)%ALPHAK,H3D_DATA)
+      CALL SPMD_FIADD20E_POFF(output, NB, LEN20E, BBUFR(L), INTBUF_TAB(NIN)%IXLINS, A, STIFN, VISCN, IBC, ISECIN,
+     . NOINT, IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INTBUF_TAB(NIN)%DAANC6, INTBUF_TAB(NIN)%NLG, INTBUF_TAB(NIN)
+     . %ALPHAK)
                     L = L + NB*LEN20E
                 ENDIF
               ENDIF
@@ -1249,14 +1214,9 @@ C
                   INTTH  = IPARI(47,NIN)
                   NEDGE =IPARI(68,NIN)
 
-                  CALL SPMD_FIADD25E_POFF(OUTPUT,
-     1              NB      ,LEN25E     ,BBUFR(L),INTBUF_TAB(NIN)%NSV,A ,
-     2              STIFN   ,VISCN   ,IBC     ,ISECIN       ,NOINT   ,
-     3              IBAG    ,ICODT   ,SECFCUM , NSTRF       ,ICONTACT,
-     4              FCONT   ,INACTI  ,IADM    ,INTTH , FTHE ,CONDN   ,
-     5              H3D_DATA, MULTI_FVM,INTBUF_TAB(NIN)%LEDGE,NEDGE  ,
-     6              NIN     ,TAGNCONT,KLOADPINTER,LOADPINTER,LOADP_HYD_INTER,
-     7              NODADT_THERM)
+      CALL SPMD_FIADD25E_POFF(OUTPUT, NB, LEN25E, BBUFR(L), INTBUF_TAB(NIN)%NSV, A, STIFN, VISCN, IBC, ISECIN, NOINT,
+     . IBAG, ICODT, SECFCUM, NSTRF, ICONTACT, FCONT, INACTI, IADM, INTTH, FTHE, CONDN, MULTI_FVM, INTBUF_TAB(NIN)%LEDGE,
+     . NEDGE, NIN, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, NODADT_THERM)
                     L = L + NB*LEN25E
                 ENDIF ! NSNSIE
               ENDIF ! NTY + IEDGE

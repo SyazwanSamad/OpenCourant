@@ -44,9 +44,9 @@
 !||    ancmsg                           ../starter/source/output/message/message.F
 !||    constit                          ../starter/source/elements/nodes/constit.F
 !||    genq1np                          ../starter/source/elements/solid/solid_q1np/q1np_genelements.F90
-!||    hm_get_intv                      ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key               ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start                  ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_intv                      ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key               ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start                  ../starter/source/devtools/reader/hm_option_start.F
 !||    ini_ifront                       ../starter/source/spmd/node/ddtools.F
 !||    q1np_build_surf_grid             ../starter/source/elements/solid/solid_q1np/q1np_surf_grid.F90
 !||    q1np_export_hex8_csv             ../starter/source/elements/solid/solid_q1np/q1np_export_csv.F90

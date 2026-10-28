@@ -50,7 +50,7 @@
             use, intrinsic :: iso_c_binding
             integer(kind=c_int), value, intent(in) :: nb
             integer(kind=c_int), intent(inout) :: uid !< returns the user id of the nth variable found in the python code
-            character(kind=c_char), dimension(100), intent(inout) :: name !< variable name, as defined in H3D keyword
+            character(kind=c_char), dimension(100), intent(inout) :: name !< variable name, as defined by the scalar result keyword
           end subroutine python_get_elemental_entity
         end interface
 
@@ -59,8 +59,8 @@
 ! ----------------------------------------------------------------------------------------------------------------------
 !! \brief Type to store python elementary values passed to the python interface
         type :: python_element_keyword
-          character(len=NAME_LEN) :: h3d !< h3d keyword
-          character(len=NAME_LEN) :: name !< python name (should be the same as h3d_keyword when possible)
+          character(len=NAME_LEN) :: result !< scalar result keyword
+          character(len=NAME_LEN) :: name !< python name (should be the same as the result keyword when possible)
         end type python_element_keyword
 !! \brief Type to store python elementary values passed to the python interface (local to processor)
         type :: python_element_local
@@ -104,7 +104,7 @@
 !                                                      Body
 ! ----------------------------------------------------------------------------------------------------------------------
           length = 1 ! n
-          length = length + element%n * NAME_LEN ! keyword%h3d
+          length = length + element%n * NAME_LEN ! keyword%result
           length = length + element%n * NAME_LEN ! keyword%name in python code
           length = length + element%n ! user ids
           return
@@ -134,7 +134,7 @@
           buffer(1) = element%n
           call flush(6)
           do i = 1, element%n
-            buffer(pos:pos+NAME_LEN-1) = transfer(element%keyword(i)%h3d, buffer(pos:pos+NAME_LEN-1))
+            buffer(pos:pos+NAME_LEN-1) = transfer(element%keyword(i)%result, buffer(pos:pos+NAME_LEN-1))
             pos = pos + NAME_LEN
             buffer(pos:pos+NAME_LEN-1) = transfer(element%keyword(i)%name, buffer(pos:pos+NAME_LEN-1))
             pos = pos + NAME_LEN
@@ -170,7 +170,7 @@
           allocate(element%keyword(element%n))
           allocate(element%user_ids(element%n))
           do i = 1, element%n
-            element%keyword(i)%h3d = transfer(buffer(pos:pos+NAME_LEN-1), element%keyword(i)%h3d)
+            element%keyword(i)%result = transfer(buffer(pos:pos+NAME_LEN-1), element%keyword(i)%result)
             pos = pos + NAME_LEN
             element%keyword(i)%name = transfer(buffer(pos:pos+NAME_LEN-1), element%keyword(i)%name)
             pos = pos + NAME_LEN

@@ -27,23 +27,16 @@ Copyright>        copyright and attribution statement.
 !||    arret            ../engine/source/system/arret.F
 !||--- uses       -----------------------------------------------------
 !||    groupdef_mod     ../common_source/modules/groupdef_mod.F
-!||    h3d_mod          ../engine/share/modules/h3d_mod.F
 !||    message_mod      ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod     ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod   ../common_source/tools/memory/my_dealloc.F90
 !||====================================================================
-      SUBROUTINE DTNODAMS(NODFT ,NODLT ,NELTST,ITYPTST,ITAB   ,
-     2                    MS    ,IN    ,STIFN ,STIFR  ,DT2T   ,
-     3                    DMAST ,DINERT,ADT   ,ADM    ,IMSCH  ,
-     4                    WEIGHT,A     ,AR    ,IGRNOD ,
-     5                    ADI   ,RBYM  ,ARBY  ,ARRBY  ,ISMSCH ,
-     6                    NODNX_SMS,DIAG_SMS  ,NPBY   ,TAGMSR_RBY_SMS,
-     7                    H3D_DATA )
+      SUBROUTINE DTNODAMS(NODFT, NODLT, NELTST, ITYPTST, ITAB, MS, IN, STIFN, STIFR, DT2T, DMAST, DINERT, ADT, ADM,
+     . IMSCH, WEIGHT, A, AR, IGRNOD, ADI, RBYM, ARBY, ARRBY, ISMSCH, NODNX_SMS, DIAG_SMS, NPBY, TAGMSR_RBY_SMS)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MESSAGE_MOD
-      USE H3D_MOD
       USE GROUPDEF_MOD
       USE MY_ALLOC_MOD
 C-----------------------------------------------
@@ -79,8 +72,6 @@ C     REAL
      .   MS(*) ,IN(*) ,STIFN(*), STIFR(*),ADT(*) ,ADM(*) ,
      .   A(3,*) ,AR(3,*) ,ADI(*) ,RBYM(NFRBYM,*),ARBY(3,*),
      .   ARRBY(3,*), DIAG_SMS(*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
       TYPE (GROUP_)  , DIMENSION(NGRNOD) :: IGRNOD
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -140,7 +131,7 @@ C----------------------------------------------------------
 !$OMP SINGLE
       IMSCH = 0
 !$OMP END SINGLE
-      IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
         DO NN=NODFT,NODLT
           ADT(NN) = EP06
@@ -186,7 +177,7 @@ C              ENDIF
             ENDDO
           ELSEIF(IDTMIN(11)==3.OR.IDTMIN(11)==8)THEN
 C----------------------------------------------------------
-            IF (ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF (ANIM_N(2)+OUTP_N(2)>0) THEN
 #include      "vectorize.inc"
               DO K1=1,KMAX1
                 IF(DTN1(K1)<DTMIN1(11))THEN
@@ -254,7 +245,7 @@ C--------
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-         IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
            DO K1=1,KMAX1
              ADT(INDTN1(K1))=DTN1(K1)
@@ -303,7 +294,7 @@ C                  ISTOP = ITAB(N)
 C                ENDIF
               ENDDO
             ELSEIF(IDTMIN(11)==3.OR.IDTMIN(11)==8)THEN
-              IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
 #include      "vectorize.inc"
                 DO K1=1,KMAX1
                   IF(DTN1(K1)<DTMIN1(11))THEN
@@ -369,7 +360,7 @@ C-----------
            ENDIF
 C-----------
            IF(DTNOD2<DTMINS)THEN
-            IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
 #include    "vectorize.inc"
               DO K2=1,KMAX2
                 IF(DTN2(K2)<DTMINS)THEN
@@ -429,7 +420,7 @@ C-----------
 C----------------------------------------------------------
 C     ANIM TIME STEP 
 C----------------------------------------------------------
-           IF(ANIM_N(1)+OUTP_N(1)+H3D_DATA%N_SCAL_DT >0)THEN
+      IF(ANIM_N(1)+OUTP_N(1)>0)THEN
 #include      "vectorize.inc"
              DO K1=1,KMAX1
                N = INDTN1(K1) 

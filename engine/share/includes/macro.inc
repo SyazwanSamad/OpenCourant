@@ -137,11 +137,6 @@
 #define MACRO_TIMER_SPMDCFD        114
 #define MACRO_TIMER_FRIC           108
 
-#define MACRO_TIMER_LIBH3D         120
-#define MACRO_TIMER_SPMDH3D        121
-#define MACRO_TIMER_GENH3D         122
-#define MACRO_TIMER_GENH3D1         123
-#define MACRO_TIMER_GENH3D2         124
 
 #define MACRO_TIMER_SKEW            125
 #define MACRO_TIMER_FVMBAG          126

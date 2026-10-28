@@ -32,32 +32,15 @@ Copyright>        copyright and attribution statement.
 !||    ruser33       ../engine/source/elements/joint/ruser33.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod   ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||    sensor_mod    ../common_source/modules/sensor_mod.F90
 !||====================================================================
-      SUBROUTINE RGJOINT(
-     1   JFT,       JLT,       IPARTR,    NEL,
-     2   NUVAR,     IOUT,      IPROP,     IADR,
-     3   FSKY,      FSKYV,     OFF,       FORX,
-     4   FORY,      FORZ,      E,         DX,
-     5   DY,        DZ,        RX,        RY,
-     6   RZ,        XMOM,      YMOM,      ZMOM,
-     7   UVAR,      STIFN,     STIFR,     IXR,
-     8   TANI,      RBY,       X,         VX,
-     9   VR,        STI,       STIR,      MS,
-     A   IN,        PARTSAV,   DT1,       DT2T,
-     B   F,         AR,        FX1,       FX2,
-     C   FY1,       FY2,       FZ1,       FZ2,
-     D   MX1,       MX2,       MY1,       MY2,
-     E   MZ1,       MZ2,       GRESAV,    GRTH,
-     F   IGRTH,     MSRT,      DMELRT,    NELTST,
-     G   ITYPTST,   IGTYP,     SENSOR_TAB,NC1,
-     H   NC2,       XDP,       X0_ERR,    H3D_DATA,
-     I   JSMS,      IGRE,      NFT   ,    NSENSOR )
+      SUBROUTINE RGJOINT(JFT, JLT, IPARTR, NEL, NUVAR, IOUT, IPROP, IADR, FSKY, FSKYV, OFF, FORX, FORY, FORZ, E, DX,
+     . DY, DZ, RX, RY, RZ, XMOM, YMOM, ZMOM, UVAR, STIFN, STIFR, IXR, TANI, RBY, X, VX, VR, STI, STIR, MS, IN, PARTSAV,
+     . DT1, DT2T, F, AR, FX1, FX2, FY1, FY2, FZ1, FZ2, MX1, MX2, MY1, MY2, MZ1, MZ2, GRESAV, GRTH, IGRTH, MSRT, DMELRT,
+     . NELTST, ITYPTST, IGTYP, SENSOR_TAB, NC1, NC2, XDP, X0_ERR, JSMS, IGRE, NFT, NSENSOR)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE SENSOR_MOD
       use element_mod , only : nixr
 C-------------------------------------------------------------------------
@@ -91,7 +74,6 @@ C----------------------------------------------------------
      .   PARTSAV(*),TANI(15,*),MS(*),IN(*),FSKY(*),FSKYV(*),GRESAV(*),
      .   MSRT(*), DMELRT(*),X0_ERR(3,*)
       DOUBLE PRECISION XDP(3,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (SENSOR_STR_) ,DIMENSION(NSENSOR) , INTENT(IN) :: SENSOR_TAB
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -134,7 +116,7 @@ C
      2   UMAS,    VX,      IPARTR,  GRESAV,
      3   GRTH,    IGRTH,   NC1,     NC2,
      4   IGRE)
-      CALL RANIM33 (JFT,JLT,FORX,FORY,FORZ,XMOM,YMOM,ZMOM,XL,TANI,H3D_DATA)
+      CALL RANIM33 (JFT, JLT, FORX, FORY, FORZ, XMOM, YMOM, ZMOM, XL, TANI)
 C
       IF(IPARIT==0)THEN
         CALL RCUM33(JFT   ,JLT    ,XL    ,NC1   ,NC2   ,

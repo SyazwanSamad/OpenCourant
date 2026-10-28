@@ -749,7 +749,6 @@ C interface stripped with sub-interfaces ?
               LEN = LEN + NISUBSFI(NIN)%P(P)
             END DO
             IERROR = 0
-            IF(.TRUE.) THEN
               ALLOCATE(LISUBSFI(NIN)%P(LEN))
               IF(IPARI(7,NIN) == 7.OR.IPARI(7,NIN) == 11.OR.IPARI(7,NIN) == 24.OR.IPARI(7,NIN) == 25) THEN
                 IF(ASSOCIATED(INFLG_SUBSFI(NIN)%P)) call my_dealloc(INFLG_SUBSFI(NIN)%P)
@@ -788,9 +787,6 @@ C interface stripped with sub-interfaces ?
                 IDEB3 = IDEB3 + NSNFI(NIN)%P(P)
                ENDIF
               END DO
-            ELSE
-
-            END IF
             IF(IPARI(7,NIN) == 25 .AND. IPARI(58,NIN) > 0) THEN
               !type 25 edge part
               IF(ASSOCIATED(LISUBSFIE(NIN)%P)) call my_dealloc(LISUBSFIE(NIN)%P)
@@ -800,7 +796,6 @@ C interface stripped with sub-interfaces ?
               END DO
               IERROR = 0
 C             WRITE(6,*) NIN,"SIZE LISUBSFIE=",LEN
-              IF(.TRUE.) THEN
                 ALLOCATE(LISUBSFIE(NIN)%P(LEN))
                 IF(IPARI(7,NIN)==25)THEN
                   IF(ASSOCIATED(INFLG_SUBSFIE(NIN)%P)) call my_dealloc(INFLG_SUBSFIE(NIN)%P)
@@ -841,9 +836,6 @@ C                     WRITE(6,*) P-1,"INFLG --- MSGBUF_R(",IDEB2+J,")=", MSGBUF_
                   IDEB3 = IDEB3 + NSNFIE(NIN)%P(P)
                  ENDIF
                 END DO
-              ELSE
-
-              END IF
             ENDIF ! TYPE25 EDGE PART
           END IF
         END DO

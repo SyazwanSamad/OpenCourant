@@ -54,17 +54,12 @@
 !||    table_mod                 ../engine/share/modules/table_mod.F
 !||    timer_mod                 ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE Q1NP_FORC3(TIMERS, OUTPUT, &
-     &                      ELBUF_STR, PM, GEO, IXS, IGEO, X, A, V, W, &
-     &                      FV, ALE_CONNECT, IPARG, TF, NPF, BUFMAT, PARTSAV, NPART, &
-     &                      NLOC_DMG, STIFN, OFFSET, IPARTS, NEL, DT2T, NELTST, &
-     &                      ITYPTST, IPM, ITASK, GRESAV, GRTH, IGRTH, MSSA, DMELS, &
-     &                      TABLE, IPRI, MAT_ELEM, NG, H3D_STRAIN, SVIS, GLOB_THERM, &
-     &                      SNPC, NUMGEO, NUMNOD, NUMELS, NUMELQ, NGROUP, SBUFMAT, STF, &
-     &                      NUMMAT, NTABLE, NSVOIS, IRESP, IDEL7NOK, MAXFUNC, USERL_AVAIL, &
-     &                      IMON_MAT, IMPL_S, IDYNA, IDTMIN, DT, SENSORS, &
-     &                      MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL, &
-     &                      NPARG, NPROPG, NPROPGI, NPROPM, NPROPMI, NPSAV, TT, DT1)
+      SUBROUTINE Q1NP_FORC3(TIMERS, OUTPUT, ELBUF_STR, PM, GEO, IXS, IGEO, X, A, V, W, FV, ALE_CONNECT, IPARG, TF, NPF, &
+     & BUFMAT, PARTSAV, NPART, NLOC_DMG, STIFN, OFFSET, IPARTS, NEL, DT2T, NELTST, ITYPTST, IPM, ITASK, GRESAV, GRTH, &
+     & IGRTH, MSSA, DMELS, TABLE, IPRI, MAT_ELEM, NG, SVIS, GLOB_THERM, SNPC, NUMGEO, NUMNOD, NUMELS, NUMELQ, NGROUP, &
+     & SBUFMAT, STF, NUMMAT, NTABLE, NSVOIS, IRESP, IDEL7NOK, MAXFUNC, USERL_AVAIL, IMON_MAT, IMPL_S, IDYNA, IDTMIN, DT, &
+     & SENSORS, MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL, NPARG, NPROPG, NPROPGI, NPROPM, NPROPMI, NPSAV, TT, &
+     & DT1)
   !-----------------------------------------------
   !   M o d u l e s
   !-----------------------------------------------
@@ -123,7 +118,6 @@
       INTEGER,            INTENT(IN)    :: NPSAV
       INTEGER,            INTENT(IN)    :: MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL
       real(kind=WP),      INTENT(IN)    :: TT, DT1
-      INTEGER,            INTENT(IN)    :: H3D_STRAIN
       INTEGER,            INTENT(IN)    :: SNPC
       INTEGER,            INTENT(IN)    :: NUMGEO
       INTEGER,            INTENT(IN)    :: NUMNOD
@@ -1292,20 +1286,15 @@
           ! main material-law driver
           JSPH_LOC = JSPH
           JPLASOL_LOC = JPLASOL
-          CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB_LOCAL, 1, PM, GEO, ALE_CONNECT, IXS, IPARG_LOCAL, &
-     &                 V, TF, NPF, BUFMAT, STI, X, DT2T, NELTST, ITYPTST, OFFSET, NEL, W, &
-     &                 OFF, PID_ELEM, MAT_ID_ELEM, NGL_ELEM, VOLN, VD2, DVOL, DELTAX, VIS, &
-     &                 QVIS, CXX, S1, S2, S3, S4, S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, &
-     &                 WYY, WZZ, AJ1, AJ2, AJ3, AJ4, AJ5, AJ6, VDX, VDY, VDZ, MUVOID, SSP_EQ, &
-     &                 AIRE, SIGY, ET, BUFVOIS, LBUF%PLA, R3_DAM, AMU, MFXX, MFXY, MFXZ, MFYX, &
-     &                 MFYY, MFYZ, MFZX, MFZY, MFZZ, IPM, GAMA, FR_WAV, DXY, DYX, DYZ, DZY, &
-     &                 DZX, DXZ, ISTRAIN, TEMPEL, DIE, IEXPAN, ILAY, MSSA, DMELS, IU, IV, IT, &
-     &                 TABLE, FVD2, FDELTAX, FSSP, FQVIS, IPARG_LOCAL(:,1), IGEO, CONDE, ITASK, &
-     &                 NLOC_DMG, VARNL, MAT_ELEM, H3D_STRAIN, JPLASOL_LOC, JSPH_LOC, MVSIZ, &
-     &                 SNPC, STF, SBUFMAT, GLOB_THERM, SVIS, SZ_IX, IRESP, 0, TH_STRAIN, &
-     &                 1, TT, DT1, NTABLE, NUMELQ, NUMMAT, NUMGEO, NUMNOD, NUMELS, &
-     &                 IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, IMPL_S, IDYNA, DT, &
-     &                 FHEAT, SENSORS)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB_LOCAL, 1, PM, GEO, ALE_CONNECT, IXS, IPARG_LOCAL, V, TF, NPF, BUFMAT, STI, &
+     & X, DT2T, NELTST, ITYPTST, OFFSET, NEL, W, OFF, PID_ELEM, MAT_ID_ELEM, NGL_ELEM, VOLN, VD2, DVOL, DELTAX, VIS, &
+     & QVIS, CXX, S1, S2, S3, S4, S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, WYY, WZZ, AJ1, AJ2, AJ3, AJ4, AJ5, AJ6, VDX, &
+     & VDY, VDZ, MUVOID, SSP_EQ, AIRE, SIGY, ET, BUFVOIS, LBUF%PLA, R3_DAM, AMU, MFXX, MFXY, MFXZ, MFYX, MFYY, MFYZ, &
+     & MFZX, MFZY, MFZZ, IPM, GAMA, FR_WAV, DXY, DYX, DYZ, DZY, DZX, DXZ, ISTRAIN, TEMPEL, DIE, IEXPAN, ILAY, MSSA, &
+     & DMELS, IU, IV, IT, TABLE, FVD2, FDELTAX, FSSP, FQVIS, IPARG_LOCAL(:,1), IGEO, CONDE, ITASK, NLOC_DMG, VARNL, &
+     & MAT_ELEM, JPLASOL_LOC, JSPH_LOC, MVSIZ, SNPC, STF, SBUFMAT, GLOB_THERM, SVIS, SZ_IX, IRESP, 0, TH_STRAIN, 1, TT, &
+     & DT1, NTABLE, NUMELQ, NUMMAT, NUMGEO, NUMNOD, NUMELS, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, IMPL_S, &
+     & IDYNA, DT, FHEAT, SENSORS)
 
           ! strain history update routine. Used to store the small-strain tensor
           ! Update LBUF%STRA (stored strain components) from current deformation-rate terms
@@ -1606,12 +1595,6 @@
               END DO
             END DO
             ! NOTE: BILAN is currently disabled.
-           IF (.FALSE.) THEN
-             CALL IGE3DBILAN(PARTSAV, GBUF%EINT, GBUF%RHO, VOLG, VX_BAL, VY_BAL, VZ_BAL, IPARTS, &
-    &                      GBUF%VOL, GRESAV, GRTH, IGRTH, XX_BAL, YY_BAL, ZZ_BAL, NCTRL_ELEM(1) + 4, &
-    &                      ITASK, IPARG(1,NG), SENSORS)
-           END IF
-
             CALL MY_DEALLOC(VX_BAL)
             CALL MY_DEALLOC(VY_BAL)
             CALL MY_DEALLOC(VZ_BAL)

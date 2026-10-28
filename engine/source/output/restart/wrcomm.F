@@ -33,7 +33,6 @@ Copyright>        copyright and attribution statement.
 !||    element_mod        ../common_source/modules/elements/element_mod.F90
 !||    eos_param_mod      ../common_source/modules/mat_elem/eos_param_mod.F90
 !||    glob_therm_mod     ../common_source/modules/mat_elem/glob_therm_mod.F90
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    loads_mod          ../common_source/modules/loads/loads_mod.F90
 !||    multi_fvm_mod      ../common_source/modules/ale/multi_fvm_mod.F90
@@ -49,13 +48,12 @@ Copyright>        copyright and attribution statement.
 !||    state_mod          ../common_source/modules/state_mod.F
 !||    th_mod             ../engine/share/modules/th_mod.F
 !||====================================================================
-      SUBROUTINE WRCOMI(OUTPUT,LMXVINT,LVARINT,TABVINT,ISP,MULTI_FVM,H3D_DATA,DYNAIN_DATA,
-     .           INTER_PARAMETERS,SENSORS,LOADS,GLOB_THERM,PBLAST,SFEM)
+      SUBROUTINE WRCOMI(OUTPUT, LMXVINT, LVARINT, TABVINT, ISP, MULTI_FVM, DYNAIN_DATA, INTER_PARAMETERS, SENSORS,
+     . LOADS, GLOB_THERM, PBLAST, SFEM)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE MULTI_FVM_MOD 
-      USE H3D_MOD 
       USE PINCHTYPE_MOD
       USE OUTMAX_MOD
       USE OUTPUT_MOD
@@ -87,7 +85,6 @@ C-----------------------------------------------
       INTEGER LMXVINT,LVARINT,TABVINT(*),ISP
       TYPE(OUTPUT_),INTENT(INOUT) :: OUTPUT
       TYPE(MULTI_FVM_STRUCT) ,INTENT(IN) :: MULTI_FVM
-      TYPE(H3D_DATABASE)     ,INTENT(IN) :: H3D_DATA
       TYPE (DYNAIN_DATABASE) ,INTENT(IN) :: DYNAIN_DATA
       TYPE (PARAMETERS_)     ,INTENT(IN) :: INTER_PARAMETERS
       TYPE (SENSORS_)        ,INTENT(IN) :: SENSORS
@@ -451,7 +448,7 @@ C-----1
       TABVINT(292)=NANIM1D
       TABVINT(293)=NR2RLNK
 C-----
-      TABVINT(294)=OUTPUT%DATA%ANIM_HAS_NODA_PEXT*10 + OUTPUT%DATA%H3D_HAS_NODA_PEXT
+      TABVINT(294)=OUTPUT%DATA%ANIM_HAS_NODA_PEXT*10
       TABVINT(295)=IANIM
       TABVINT(296)=IOUTP
       TABVINT(297)=NHIN2
@@ -1534,7 +1531,7 @@ C---- old Is17
       TABVINT(LVARINT)=IS17_OLD
 C IH3D -> H3D count     
       LVARINT=LVARINT+1
-      TABVINT(LVARINT)=H3D_DATA%IH3D
+      TABVINT(LVARINT)=0
 C    
       LVARINT=LVARINT+1
       TABVINT(LVARINT)=NUMELS10G
@@ -1603,20 +1600,20 @@ C Friction interface
 
 !     H3D -> number of skid lines    
       LVARINT=LVARINT+1
-      TABVINT(LVARINT)=H3D_DATA%N_SCAL_SKID
+      TABVINT(LVARINT)=0
 !     H3D ANIM-> Is maximum contact force/contact pressure computed   
       LVARINT=LVARINT+1
       TABVINT(LVARINT) = IFCONTMAX
       LVARINT=LVARINT+1
-      TABVINT(LVARINT) = IFCONTPMAX
+      TABVINT(LVARINT) =0
       LVARINT=LVARINT+1
-      TABVINT(LVARINT) = IFCONT2MAX
+      TABVINT(LVARINT) =0
       LVARINT=LVARINT+1
-      TABVINT(LVARINT) = IFCONTP2MAX
+      TABVINT(LVARINT) =0
       LVARINT=LVARINT+1
-      TABVINT(LVARINT) = IFCONT2MIN
+      TABVINT(LVARINT) =0
       LVARINT=LVARINT+1
-      TABVINT(LVARINT) = IFCONTP2MIN
+      TABVINT(LVARINT) =0
       LVARINT=LVARINT+1
       TABVINT(LVARINT) = OUTPUT%DATA%S_EFRIC
       LVARINT=LVARINT+1
@@ -1723,7 +1720,7 @@ C
       TABVINT(LVARINT)=LASTANIMCYCLE
 
       LVARINT=LVARINT+1
-      TABVINT(LVARINT)=LASTH3DCYCLE
+      TABVINT(LVARINT)=0
 
       LVARINT=LVARINT+1
       TABVINT(LVARINT)=LASTDYNCYCLE

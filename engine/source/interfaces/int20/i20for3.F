@@ -34,45 +34,22 @@ Copyright>        copyright and attribution statement.
 !||    i7sms2            ../engine/source/interfaces/int07/i7sms2.F
 !||    ibcoff            ../engine/source/interfaces/interf/ibcoff.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod           ../engine/share/modules/h3d_mod.F
 !||    output_mod        ../common_source/modules/output/output_mod.F90
 !||    tri7box           ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I20FOR3(OUTPUT,JLT   ,A      ,VA     ,IBCC  ,ICODT  ,
-     2                  FSAV   ,GAP    ,FRIC   ,MS    ,VISC   ,
-     3                  VISCF  ,NOINT  ,STFA   ,ITAB  ,CN_LOC ,
-     4                  STIGLO ,STIFN  ,STIF   ,FSKYI ,ISKY   ,
-     6                  NX1    ,NX2    ,NX3    ,NX4   ,NY1    ,
-     7                  NY2    ,NY3    ,NY4    ,NZ1   ,NZ2    ,
-     8                  NZ3    ,NZ4    ,LB1    ,LB2   ,LB3    ,
-     9                  LB4    ,LC1    ,LC2    ,LC3   ,LC4    ,
-     A                  P1     ,P2     ,P3     ,P4    ,FCONT  ,
-     B                  IX1L   ,IX2L   ,IX3L   ,IX4L  ,NSVG   ,
-     C                  IVIS2  ,NELTST ,ITYPTST,DT2T  ,
-     D                  GAPV   ,INACTI ,INDEX  ,NISKYFI,
-     E                  KINET  ,NEWFRONT,ISECIN,NSTRF ,SECFCUM,
-     F                  X      ,XA     ,CE_LOC ,MFROT ,IFQ    ,
-     G                  FROT_P ,CAND_FX,CAND_FY,CAND_FZ,ALPHA0,
-     H                  IFPEN  ,GAPR   ,DXANC  ,NLN   ,NLG    ,
-     I                  IBAG  ,ICONTACT,NSV    ,PENIS ,PENIM  ,
-     J                  VISCN  ,VXI    ,VYI    ,VZI   ,MSI    ,
-     K                  KINI   ,NIN    ,NISUB  ,LISUB ,ADDSUBS,
-     L                  ADDSUBM,LISUBS ,LISUBM ,FSAVSUB,CAND_N ,
-     M                  ILAGM  ,ICURV  ,NOD_NORMAL ,FNCONT ,FTCONT ,
-     N                  X1     ,X2     ,X3     ,X4    ,Y1    ,
-     O                  Y2     ,Y3     ,Y4     ,Z1    ,Z2    ,
-     P                  Z3     ,Z4     ,XI     ,YI    ,ZI    ,
-     Q                  IADM   ,RCURVI ,RCONTACT,ACONTACT,PCONTACT,
-     R                  ANGLMI ,PADM   ,INTTH   ,PHI   , FTHE     ,
-     S                  FTHESKYI,DAANC6,TEMP   ,TEMPI  ,RSTIF  ,
-     T                  IFORM  ,GAP_S  ,IGAP   ,ALPHAK ,MSKYI_SMS,
-     U                  ISKYI_SMS,NSMS ,CMAJ   ,JTASK,ISENSINT,
-     V                  FSAVPARIT      ,NFT    ,H3D_DATA)
+      SUBROUTINE I20FOR3(OUTPUT, JLT, A, VA, IBCC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, STFA, ITAB, CN_LOC,
+     . STIGLO, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2, LB3, LB4,
+     . LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1L, IX2L, IX3L, IX4L, NSVG, IVIS2, NELTST, ITYPTST, DT2T, GAPV,
+     . INACTI, INDEX, NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF, SECFCUM, X, XA, CE_LOC, MFROT, IFQ, FROT_P, CAND_FX,
+     . CAND_FY, CAND_FZ, ALPHA0, IFPEN, GAPR, DXANC, NLN, NLG, IBAG, ICONTACT, NSV, PENIS, PENIM, VISCN, VXI, VYI, VZI,
+     . MSI, KINI, NIN, NISUB, LISUB, ADDSUBS, ADDSUBM, LISUBS, LISUBM, FSAVSUB, CAND_N, ILAGM, ICURV, NOD_NORMAL,
+     . FNCONT, FTCONT, X1, X2, X3, X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, XI, YI, ZI, IADM, RCURVI, RCONTACT, ACONTACT,
+     . PCONTACT, ANGLMI, PADM, INTTH, PHI, FTHE, FTHESKYI, DAANC6, TEMP, TEMPI, RSTIF, IFORM, GAP_S, IGAP, ALPHAK,
+     . MSKYI_SMS, ISKYI_SMS, NSMS, CMAJ, JTASK, ISENSINT, FSAVPARIT, NFT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
       USE OUTPUT_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -147,10 +124,6 @@ C-----------------------------------------------
      .     PCONTACT(*),PADM, ANGLMI(*),GAP_S(*),ALPHAK(3,*),CMAJ(MVSIZ)
       DOUBLE PRECISION
      .     DAANC6(3,6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I,J1,IG,J,JG,IM,IS,K0,NBINTER,K1S,K,IL,IE,NN,NI,NA1,NA2,
      .        JSUB,KSUB,JJ,KK,IN,NSUB,ISIGN,IPROJ,IBID
       INTEGER IX1G(MVSIZ), IX2G(MVSIZ), IX3G(MVSIZ), IX4G(MVSIZ)
@@ -1005,10 +978,8 @@ C
         ENDDO
       ENDIF
 c
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP) .OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
 #include "lockon.inc"
         DO I=1,JLT
           FNCONT(1,IX1G(I)) =FNCONT(1,IX1G(I)) + FXI(I)*H1(I)
@@ -1347,10 +1318,8 @@ C-------      total force
         ENDDO
       ENDIF
 C---------------------------------
-      IF((ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT>0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))
-     .   .OR.H3D_DATA%N_VECT_PCONT_MAX>0)THEN
+      IF((ANIM_V(12)+OUTP_V(12)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15))))THEN
 #include "lockon.inc"
         DO I=1,JLT
           FTCONT(1,IX1G(I)) =FTCONT(1,IX1G(I)) + FXT(I)*H1(I)
@@ -2087,7 +2056,7 @@ C
         ENDIF
       ENDIF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
 #include "lockon.inc"
 c         goto 1234
         DO I=1,JLT
@@ -2382,35 +2351,17 @@ c          VISR = 0.1 * TWO * SQRT(STFR * MS(J))
 !||    i20ass25          ../engine/source/interfaces/int20/i20for3.F
 !||    i20sms2e          ../engine/source/interfaces/int20/i20sms2.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod           ../engine/share/modules/h3d_mod.F
 !||    tri7box           ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I20FOR3E(
-     1                  JLT    ,A      ,V      ,IBC     ,ICODT  ,
-     2                  FSAV   ,GAP    ,FRIC   ,MS      ,VISC   ,
-     3                  VISCF  ,NOINT  ,ITAB   ,CS_LOC  ,CM_LOC ,
-     4                  STIGLO ,STIFN  ,STIF   ,FSKYI   ,ISKY   ,
-     5                  FCONT  ,STFS   ,STFM   ,DT2T    ,HS1    ,
-     6                  HS2    ,HM1    ,HM2    ,N1      ,N2     ,
-     7                  M1     ,M2     ,IVIS2  ,NELTST  ,ITYPTST,
-     8                  NX     ,NY     ,NZ     ,GAPV    ,PENISE  ,
-     9                  PENIME ,INACTI,NISKYFIE,NEWFRONT,ISECIN ,
-     A                  NSTRF  ,SECFCUM,VISCN  ,NLINSA  ,MS1    ,
-     B                  MS2    ,MM1    ,MM2    ,VXS1    ,VYS1   ,
-     C                  VZS1   ,VXS2   ,VYS2   ,VZS2    ,VXM1   ,
-     D                  VYM1   ,VZM1   ,VXM2   ,VYM2    ,VZM2   ,
-     E                  NIN    ,N1L    ,N2L    ,M1L     ,M2L    ,
-     F                  DAANC6 ,ALPHAK ,MSKYI_SMS,ISKYI_SMS,NSMS,
-     G                  JTASK  ,ISENSINT,  FSAVPARIT ,NISUB ,NFT,
-     H                  H3D_DATA)
+      SUBROUTINE I20FOR3E(JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, ITAB, CS_LOC, CM_LOC, STIGLO,
+     . STIFN, STIF, FSKYI, ISKY, FCONT, STFS, STFM, DT2T, HS1, HS2, HM1, HM2, N1, N2, M1, M2, IVIS2, NELTST, ITYPTST,
+     . NX, NY, NZ, GAPV, PENISE, PENIME, INACTI, NISKYFIE, NEWFRONT, ISECIN, NSTRF, SECFCUM, VISCN, NLINSA, MS1, MS2,
+     . MM1, MM2, VXS1, VYS1, VZS1, VXS2, VYS2, VZS2, VXM1, VYM1, VZM1, VXM2, VYM2, VZM2, NIN, N1L, N2L, M1L, M2L,
+     . DAANC6, ALPHAK, MSKYI_SMS, ISKYI_SMS, NSMS, JTASK, ISENSINT, FSAVPARIT, NISUB, NFT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
       USE TRI7BOX
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
-C-----------------------------------------------
 #include      "implicit_f.inc"
 #include      "comlock.inc"
 C-----------------------------------------------
@@ -2459,10 +2410,6 @@ C-----------------------------------------------
      .   VZS2(MVSIZ),VXM1(MVSIZ),VYM1(MVSIZ),VZM1(MVSIZ),VXM2(MVSIZ),
      .   VYM2(MVSIZ),VZM2(MVSIZ),FSAVPARIT(NISUB+1,11,*)
       DOUBLE PRECISION DAANC6(3,6,*)
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J , K0,NBINTER,K1S,K, NI, IL
       INTEGER ISIGN
       my_real
@@ -3261,7 +3208,7 @@ C
         ENDIF
       ENDIF
 C
-      IF(ANIM_V(4)+OUTP_V(4)+H3D_DATA%N_VECT_CONT>0)THEN
+      IF(ANIM_V(4)+OUTP_V(4)>0)THEN
 #include "lockon.inc"
 c         goto 1234
         DO I=1,JLT

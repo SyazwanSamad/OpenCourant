@@ -1200,9 +1200,9 @@ C unnecessary variables but defined in machine.cinc
 C-----------------------------------------------
 #include "machine.inc"
 C-----------------------------------------------
-         ! Grab Build ID from hm_reader library
+         ! OpenReader build identity
          READER_COMMIT_ID_SIZE=128
-         CALL HM_BUILD_ID(READER_COMMIT_ID,READER_COMMIT_ID_SIZE,READER_COMMIT_ID_LEN)
+         CALL OPEN_READER_BUILD_ID(READER_COMMIT_ID,READER_COMMIT_ID_SIZE,READER_COMMIT_ID_LEN)
 
 
          WRITE(6,'(A,A)') ' '

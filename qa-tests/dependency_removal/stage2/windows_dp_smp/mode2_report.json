@@ -1,0 +1,432 @@
+{
+  "status": "passed",
+  "engine_sha256": "2a0baa77fbb3d9c4ececec76cac8294a196cd18ef0d11c6d0e95a2e60945b7db",
+  "cases": [
+    {
+      "case": "translation",
+      "variant": "openreader-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "3322523782e23e87b58db40a5a2e075a366dcf338028849d09836ed852a793a4",
+      "max_position_error": 5.960464477539063e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "translation",
+      "variant": "v82-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "3322523782e23e87b58db40a5a2e075a366dcf338028849d09836ed852a793a4",
+      "max_position_error": 5.960464477539063e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "translation",
+      "variant": "v82-explicit",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "ae1449e373203403de5f184be11ab1c6abb33372e7fe6e22589167aa9001573b",
+      "max_position_error": 5.960464477539063e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "rotation",
+      "variant": "openreader-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "da99ee818ec8376ab86d1d58b5d80cf80b4a5c871bdbfedb3aa192e977b5ae8e",
+      "max_position_error": 6.006832919958072e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "rotation",
+      "variant": "v82-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "da99ee818ec8376ab86d1d58b5d80cf80b4a5c871bdbfedb3aa192e977b5ae8e",
+      "max_position_error": 6.006832919958072e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "rotation",
+      "variant": "v82-explicit",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "279c2d5fd6f0240068bfe4b46f842a1eb50dd981cfe10bd19d7e61136a1e87cd",
+      "max_position_error": 6.006832919958072e-08,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "disconnected",
+      "variant": "openreader-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "2": {
+          "mass": 1.0,
+          "center": [
+            3.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "42c48580dab5b4f1d4ea49e0a7b540aa0b4886dfd7da6af86f9f945030d03789",
+      "max_position_error": 1.1920928955078125e-07,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "disconnected",
+      "variant": "v82-mode2",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "2": {
+          "mass": 1.0,
+          "center": [
+            3.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "42c48580dab5b4f1d4ea49e0a7b540aa0b4886dfd7da6af86f9f945030d03789",
+      "max_position_error": 1.1920928955078125e-07,
+      "max_energy_error": 0.0
+    },
+    {
+      "case": "disconnected",
+      "variant": "v82-explicit",
+      "bodies": {
+        "1": {
+          "mass": 1.0,
+          "center": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "2": {
+          "mass": 1.0,
+          "center": [
+            3.5,
+            0.5,
+            0.5
+          ],
+          "diagonal": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "off_diagonal": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nodes": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      },
+      "samples": 100,
+      "input_sha256": "ca3af145d821f5ba14c30aeea39f44e3018444ad33d72d8a64c904ab02271806",
+      "max_position_error": 1.1920928955078125e-07,
+      "max_energy_error": 0.0
+    }
+  ]
+}

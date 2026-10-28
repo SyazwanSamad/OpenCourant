@@ -23,7 +23,6 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    genani             ../engine/source/output/anim/generate/genani.F
 !||    gpstra_solid       ../engine/source/output/outmaxsubr.F
-!||    h3d_nodal_tensor   ../engine/source/output/h3d/h3d_results/h3d_nodal_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf            ../engine/share/resol/initbuf.F
 !||    srota6             ../engine/source/output/anim/generate/srota6.F
@@ -592,8 +591,6 @@ C-----------------------------------------------
 !||====================================================================
 !||    gpsstrain_skin        ../engine/source/output/anim/generate/tensgpstrain.F
 !||--- called by ------------------------------------------------------
-!||    h3d_sol_skin_scalar   ../engine/source/output/h3d/h3d_results/h3d_sol_skin_scalar.F
-!||    h3d_sol_skin_tensor   ../engine/source/output/h3d/h3d_results/h3d_sol_skin_tensor.F
 !||--- calls      -----------------------------------------------------
 !||    initbuf               ../engine/share/resol/initbuf.F
 !||    srota6                ../engine/source/output/anim/generate/srota6.F

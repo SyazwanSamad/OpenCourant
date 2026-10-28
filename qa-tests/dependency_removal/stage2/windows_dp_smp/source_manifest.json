@@ -1,0 +1,112 @@
+[
+  {
+    "path": ".github/workflows/openreader_ci.yml",
+    "bytes": 2699,
+    "sha256": "113d6b28b0e92d4f7585858be187a6f2f7a530fc8b535ae5117148c59c7dc055"
+  },
+  {
+    "path": "qa-tests/dependency_removal/capture_baseline.py",
+    "bytes": 16508,
+    "sha256": "07666adb83cc9b573202d59e16d5d8efa01b41b5f16db1a097214b90ff9a6d3d"
+  },
+  {
+    "path": "qa-tests/dependency_removal/compare_decks.py",
+    "bytes": 9686,
+    "sha256": "7ae85aa5fa6418fe99bd63b3577e3e7c04aaf45cce0726d912fa793c04d54e1d"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/expected.json",
+    "bytes": 7721,
+    "sha256": "0be1f9d2c95269e0f1687d91c048521d070a3d95b46bf8930b0805fa61900fe7"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_mode2_numerical.py",
+    "bytes": 7135,
+    "sha256": "0601db1874a151b3eacde720ddc334f87806a9135eb4923f46f5a76de92b7a24"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_openreader_conversion.py",
+    "bytes": 12913,
+    "sha256": "01f66613ef21192e868659b1ad96d52a0418808f2a8eb37693f733fa0345501c"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_reader_contract.py",
+    "bytes": 12081,
+    "sha256": "ae130b286373bc33584d9eb6d9f4860bdd7754d96ddca71d18479aaf87a4c041"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_starter_integration.py",
+    "bytes": 9651,
+    "sha256": "f8037b337609591bd8da2224ffca78f3f057602cd9610b0e1be9abbce66b5b5b"
+  },
+  {
+    "path": "qa-tests/reader/test_model_loading.py",
+    "bytes": 14190,
+    "sha256": "a53e8828a3932ae6618f79a7ec4b9e482f8c5a08c4a3646af87e2a5734eddae0"
+  },
+  {
+    "path": "qa-tests/reader/test_starter_api.py",
+    "bytes": 3315,
+    "sha256": "ba5499ab6ec4ff6a5ea443a0b16aba3b46020cf4dc510558150e9f007bd25be7"
+  },
+  {
+    "path": "reader/source/cfgio/MODEL_IO/hw_cfg_reader.cpp",
+    "bytes": 97525,
+    "sha256": "25fa548e1fb1d5528465afee3b4887f2643240258f99b25a6c2adfe60d21694c"
+  },
+  {
+    "path": "reader/source/cfgkernel/sdi/sdiModelViewPO.h",
+    "bytes": 177771,
+    "sha256": "59647f46d8546a68e784c88ff1d228322862eef8a32e115592301fd5e87ca2d3"
+  },
+  {
+    "path": "reader/source/io/model_readers/radioss/radiossblk/radiossblk.cxx",
+    "bytes": 44379,
+    "sha256": "2572327b2bebfc43545932fafe3ce3b8bc45735a6810eaac163262927124448d"
+  },
+  {
+    "path": "reader/source/solver_interface/source/cfg_reading/GlobalModelSdi.cpp",
+    "bytes": 127840,
+    "sha256": "6d03700d3e47e03cd235f8fbbb5faefef297684f1bd56b59cd189b313c1f6164"
+  },
+  {
+    "path": "reader/source/solver_interface/source/cfg_reading/cpp_rbodies_from_rigid_parts.cpp",
+    "bytes": 13591,
+    "sha256": "4c1fe316e3eb2b39f0b675890b99843d1236c5427d7da61a9bd873f52737fc97"
+  },
+  {
+    "path": "reader/source/solver_interface/source/messages/cpp_get_message_number_radioss.cpp",
+    "bytes": 2286,
+    "sha256": "9466b280ae45336ced45b89f4c03e432ca82e893891428dd7f7c5123ad576e12"
+  },
+  {
+    "path": "reader/source/solver_interface/source/misc/buildmapping.cpp",
+    "bytes": 16587,
+    "sha256": "e7642de5d5c4972b94359ba6bcc3bf861a2088eb41ae0e139560909834258b0f"
+  },
+  {
+    "path": "reader/source/solver_interface/source/nodes/cpp_nodes_count.cpp",
+    "bytes": 2406,
+    "sha256": "ddf8b01a04c68309bb623a326b1c6bfb1b95d5a09f87163308eae4a0f20e3947"
+  },
+  {
+    "path": "reader/source/solver_interface/source/nodes/cpp_nodes_read.cpp",
+    "bytes": 10852,
+    "sha256": "c89c4eb9971b1708e6cb87a4c02b90d0b761d1e730eb3afeb1c655dbd558e134"
+  },
+  {
+    "path": "reader/source/solver_interface/source/submodels/cpp_nodes_subtag.cpp",
+    "bytes": 5295,
+    "sha256": "84a601059ecbbea0d708f17022f1de895eb253a4df864cef3c1e61e736df83b6"
+  },
+  {
+    "path": "starter/CMakeLists.txt",
+    "bytes": 11683,
+    "sha256": "8e722583b558cef7d0c5106f0b922e1237ab256cf7eeefeee30a25aa48e70495"
+  },
+  {
+    "path": "starter/source/devtools/hm_reader/hm_s_ale.F90",
+    "bytes": 11417,
+    "sha256": "54bfda6c0bd25f1146d8f92a647f230e68adc11d69a1d6bc1c7b5169ed097580"
+  }
+]

@@ -31,23 +31,16 @@ Copyright>        copyright and attribution statement.
 !||    i7cor3             ../engine/source/interfaces/int07/i7cor3.F
 !||    sum_6_float_sens   ../engine/source/system/parit.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod      ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod        ../engine/share/message_module/message_mod.F
 !||    my_alloc_mod       ../common_source/tools/memory/my_alloc.F90
 !||    my_dealloc_mod     ../common_source/tools/memory/my_dealloc.F90
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE I10MAINF(output, IPARI  ,X      ,A      ,
-     2                    ICODT  ,FSAV   ,V      ,MS     ,DT2T    ,
-     3                    NELTST ,ITYPTST,ITAB   ,STIFN  ,FSKYI  ,
-     4                    ISKY   ,FCONT  ,LINDMAX,
-     5                    JTASK  ,NB_JLT ,NB_JLT_NEW ,NB_STOK_N ,
-     6                    NISKYFI,NSTRF  ,SECFCUM,VISCN  ,NIN    ,FSAVSUB,
-     9                    NUM_IMP,NS_IMP ,NE_IMP ,IND_IMP,FNCONT ,
-     A                    FTCONT ,MSKYI_SMS ,ISKYI_SMS ,NODNX_SMS,
-     B                    ICONTACT,INTBUF_TAB,FBSAV6,ISENSINT,DIMFB,
-     C                    H3D_DATA,NODADT_THERM )  
+      SUBROUTINE I10MAINF(output, IPARI, X, A, ICODT, FSAV, V, MS, DT2T, NELTST, ITYPTST, ITAB, STIFN, FSKYI, ISKY,
+     . FCONT, LINDMAX, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, NISKYFI, NSTRF, SECFCUM, VISCN, NIN, FSAVSUB, NUM_IMP,
+     . NS_IMP, NE_IMP, IND_IMP, FNCONT, FTCONT, MSKYI_SMS, ISKYI_SMS, NODNX_SMS, ICONTACT, INTBUF_TAB, FBSAV6, ISENSINT,
+     . DIMFB, NODADT_THERM)
 C============================================================================
 C  this routine is called by : INTFOP2(/interf/intfop2.F)
 C----------------------------------------------------------------------------
@@ -61,7 +54,6 @@ C   M o d u l e s
 C-----------------------------------------------
       use output_mod
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE MESSAGE_MOD
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -107,10 +99,6 @@ C     REAL
       DOUBLE PRECISION FBSAV6(12,6,DIMFB)
 
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER IDUM,
      .        I, J, H, NOINT, ISECIN, I_STOK, 
      .        IGAP, JLT_NEW, JLT , NFT, ITIED, IGSTI, NISUB, IADM,
@@ -283,26 +271,12 @@ C preparation CANDIDATES retenus
             IF (DEBUG(3)>=1)
      .        NB_JLT_NEW = NB_JLT_NEW + JLT_NEW
 C           WRITE(6,*) 'IMPACT ==> CALL I10FOR3'
-            CALL I10FOR3(output,
-     1       JLT       ,A       ,MS      ,V      ,FSAV     ,
-     2       INTBUF_TAB%CAND_F,STIFN,STIF    ,FSKYI  ,ISKY     ,
-     3       ITIED     ,VISC    ,X1      ,X2     ,X3       ,
-     4       X4        ,Y1      ,Y2      ,Y3     ,Y4       ,
-     5       Z1        ,Z2      ,Z3      ,Z4     ,NSVG     ,
-     6       NX1       ,NX2     ,NX3     ,NX4    ,NY1      ,
-     7       NY2       ,NY3     ,NY4     ,NZ1    ,NZ2      ,
-     8       NZ3       ,NZ4     ,LB1     ,LB2    ,LB3      ,
-     9       LB4       ,LC1     ,LC2     ,LC3    ,LC4      ,
-     A       P1        ,P2      ,P3      ,P4     ,FCONT    ,
-     B       IX1       ,IX2     ,IX3     ,IX4    ,GAPV     ,
-     C    INDEX2(NFT+1),NISKYFI ,ISECIN  ,NSTRF  ,SECFCUM  ,
-     D       NOINT     ,VISCN   ,VXI     ,VYI    ,VZI      ,
-     E       MSI       ,NIN     ,NISUB   ,INTBUF_TAB%LISUB,INTBUF_TAB%ADDSUBS,
-     F  INTBUF_TAB%ADDSUBM,INTBUF_TAB%LISUBS,INTBUF_TAB%LISUBM,CN_LOC,CE_LOC,
-     G  FSAVSUB      ,FNCONT    ,FTCONT  ,MSKYI_SMS    ,ISKYI_SMS ,
-     H       NSMS      ,XI      ,YI      ,ZI     ,ICONTACT,
-     I       DT2T      ,NELTST  ,ITYPTST ,JTASK  ,ISENSINT, 
-     J       FSAVPARIT ,NFT     ,H3D_DATA,NODADT_THERM)
+      CALL I10FOR3(output, JLT, A, MS, V, FSAV, INTBUF_TAB%CAND_F, STIFN, STIF, FSKYI, ISKY, ITIED, VISC, X1, X2, X3,
+     . X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, NSVG, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2,
+     . LB3, LB4, LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, GAPV, INDEX2(NFT+1), NISKYFI, ISECIN,
+     . NSTRF, SECFCUM, NOINT, VISCN, VXI, VYI, VZI, MSI, NIN, NISUB, INTBUF_TAB%LISUB, INTBUF_TAB%ADDSUBS,
+     . INTBUF_TAB%ADDSUBM, INTBUF_TAB%LISUBS, INTBUF_TAB%LISUBM, CN_LOC, CE_LOC, FSAVSUB, FNCONT, FTCONT, MSKYI_SMS,
+     . ISKYI_SMS, NSMS, XI, YI, ZI, ICONTACT, DT2T, NELTST, ITYPTST, JTASK, ISENSINT, FSAVPARIT, NFT, NODADT_THERM)
           ENDIF
           IF(IMPL_S==1) THEN
             DO I = 1 ,JLT_NEW

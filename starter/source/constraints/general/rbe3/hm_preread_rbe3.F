@@ -23,10 +23,10 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    lectur                   ../starter/source/starter/lectur.F
 !||--- calls      -----------------------------------------------------
-!||    hm_get_int_array_index   ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
-!||    hm_option_read_key       ../starter/source/devtools/hm_reader/hm_option_read_key.F
-!||    hm_option_start          ../starter/source/devtools/hm_reader/hm_option_start.F
+!||    hm_get_int_array_index   ../starter/source/devtools/reader/hm_get_int_array_index.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
+!||    hm_option_read_key       ../starter/source/devtools/reader/hm_option_read_key.F
+!||    hm_option_start          ../starter/source/devtools/reader/hm_option_start.F
 !||    hm_sz_r2r                ../starter/source/coupling/rad2rad/routines_r2r.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod       ../starter/share/modules1/hm_option_read_mod.F

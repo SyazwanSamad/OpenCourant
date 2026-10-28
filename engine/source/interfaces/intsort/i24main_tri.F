@@ -39,7 +39,6 @@ Copyright>        copyright and attribution statement.
 !||    upgrade_multimp              ../common_source/interf/upgrade_multimp.F
 !||--- uses       -----------------------------------------------------
 !||    check_sorting_criteria_mod   ../engine/source/interfaces/intsort/check_sorting_criteria.F90
-!||    h3d_mod                      ../engine/share/modules/h3d_mod.F
 !||    imp_intbuf                   ../engine/share/modules/imp_mod_def.F90
 !||    intbufdef_mod                ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    message_mod                  ../engine/share/message_module/message_mod.F
@@ -49,14 +48,9 @@ Copyright>        copyright and attribution statement.
 !||    timer_mod                    ../engine/source/system/timer_mod.F90
 !||    tri7box                      ../engine/share/modules/tri7box.F
 !||====================================================================
-      SUBROUTINE I24MAIN_TRI(TIMERS, 
-     1                  IPARI   ,X       ,V       ,INTBUF_TAB,
-     2                  MS      ,NIN     ,ITASK   ,MWAG    ,WEIGHT  ,
-     3                  ISENDTO ,IRCVFROM,RETRI   ,IAD_ELEM,FR_ELEM ,
-     4                  ITAB    ,KINET   ,TEMP    ,NRTM_T  ,RENUM   ,
-     5                  NSNFIOLD,ESHIFT  ,NUM_IMP ,IND_IMP ,NODNX_SMS,
-     6                  H3D_DATA,T2MAIN_SMS,FORNEQS,T2FAC_SMS,PARAMETERS,
-     7                  INTHEAT,IDT_THERM,NODADT_THERM)
+      SUBROUTINE I24MAIN_TRI(TIMERS, IPARI, X, V, INTBUF_TAB, MS, NIN, ITASK, MWAG, WEIGHT, ISENDTO, IRCVFROM, RETRI,
+     . IAD_ELEM, FR_ELEM, ITAB, KINET, TEMP, NRTM_T, RENUM, NSNFIOLD, ESHIFT, NUM_IMP, IND_IMP, NODNX_SMS, T2MAIN_SMS,
+     . FORNEQS, T2FAC_SMS, PARAMETERS, INTHEAT, IDT_THERM, NODADT_THERM)
 C============================================================================
 C   M o d u l e s
 C-----------------------------------------------
@@ -65,7 +59,6 @@ C-----------------------------------------------
       USE MESSAGE_MOD
       USE IMP_INTBUF
       USE INTBUFDEF_MOD
-      USE H3D_MOD
       USE PARAMETERS_MOD
       use check_sorting_criteria_mod , only : check_sorting_criteria
       USE TIMER_MOD
@@ -109,7 +102,6 @@ C     REAL
       my_real 
      .    X(3,*), V(*), MS(*),TEMP(*),T2FAC_SMS(*)
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE (PARAMETERS_) ,INTENT(IN):: PARAMETERS
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -419,11 +411,8 @@ C mono tache
         IF (IMONM > 0) CALL STARTIME(TIMERS,26)
         INTBUF_TAB%VARIABLES(distance_index) = - ONE
 C
-        CALL SPMD_TRI24GAT(
-     1      RESULT       ,NSN ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2      IPARI(21,NIN),NSNR,MULTIMP      ,NTY,IPARI(47,NIN),
-     3      ILEV  ,IPARI(59,NIN) ,H3D_DATA  ,IPARI(72,NIN)    ,INTNITSCHE,
-     4      IPARI(97,NIN) ,IFSUB_CAREA,NODADT_THERM)
+      CALL SPMD_TRI24GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), ILEV, IPARI(59,NIN), IPARI(72,NIN), INTNITSCHE, IPARI(97,NIN), IFSUB_CAREA, NODADT_THERM)
         IPARI(24,NIN) = NSNR
 C
         IF (NTY==24.AND.RESULT==0.AND.IMPL_S>0.AND.IGSTI==6) THEN 

@@ -25,26 +25,14 @@ Copyright>        copyright and attribution statement.
 !||--- calls      -----------------------------------------------------
 !||    spmd_get_penis20   ../engine/source/mpi/interfaces/send_cand.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod            ../engine/share/modules/h3d_mod.F
 !||    output_mod         ../common_source/modules/output/output_mod.F90
 !||====================================================================
-       SUBROUTINE I20BUCE_CRIT(OUTPUT  ,
-     1       ITASK   ,X       ,V       ,MS      ,
-     2       NTY     ,NIN     ,INACTI  ,NSN     ,
-     3       NMN     ,NSV     ,MSR     ,XSAV    ,
-     4       STFA    ,XSLV_G  ,XMSR_G  ,VSLV_G  ,
-     5       VMSR_G  ,DAANC6  ,DXANC   ,DVANC   ,
-     6       NSNE    ,NMNE    ,NLINSA  ,NLINMA  ,
-     7       NSVE    ,MSRE    ,XSAVE   ,PENISE  ,
-     8       PENIME  ,STFES   ,XA      ,VA      ,
-     9       NLN     ,NLG     ,PENIS   ,PENIM   ,
-     A       PENIA   ,NRTM    ,IXLINS  ,DXANCG  ,
-     B       IKINE   ,DIAG_SMS,ALPHAK  ,DAANC   ,
-     C       STFAC   ,H3D_DATA)
+      SUBROUTINE I20BUCE_CRIT(OUTPUT, ITASK, X, V, MS, NTY, NIN, INACTI, NSN, NMN, NSV, MSR, XSAV, STFA, XSLV_G,
+     . XMSR_G, VSLV_G, VMSR_G, DAANC6, DXANC, DVANC, NSNE, NMNE, NLINSA, NLINMA, NSVE, MSRE, XSAVE, PENISE, PENIME,
+     . STFES, XA, VA, NLN, NLG, PENIS, PENIM, PENIA, NRTM, IXLINS, DXANCG, IKINE, DIAG_SMS, ALPHAK, DAANC, STFAC)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD 
       USE OUTPUT_MOD 
 C-----------------------------------------------
 C   I m p l i c i t   T y p e s
@@ -81,10 +69,6 @@ C-----------------------------------------------
      .       VA(3,NSN) ,XA(3,NSN),ALPHAK(3,NLN)
       DOUBLE PRECISION 
      .       DAANC6(3,6,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER NSNF,NMNF,NSNL,NMNL,I, II,NLNF,NLNL,IL,IG,NRTMF,NRTML
       INTEGER NSNEF,NMNEF,NSNEL,NMNEL,NLINSAF,NLINSAL,NLINMAF,NLINMAL
       INTEGER IRBY
@@ -296,9 +280,8 @@ c           delta A parith on
         END DO
       END IF
 
-      IF(ANIM_V(15)+OUTP_V(15)+H3D_DATA%N_VECT_DXANC >0.AND.
-     .          ((TT>=OUTPUT%TANIM .AND. TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(TT>=H3D_DATA%TH3D.AND.TT<=H3D_DATA%TH3D_STOP).OR.
-     .              (MANIM>=4.AND.MANIM<=15).OR.H3D_DATA%MH3D/=0))THEN
+      IF(ANIM_V(15)+OUTP_V(15)>0.AND.((TT>=OUTPUT%TANIM.AND.TT<=OUTPUT%TANIM_STOP).OR.TT>=TOUTP.OR.(MANIM>=4.AND.
+     . MANIM<=15)))THEN
         DO I=NLNF,NLNL
           IG=NLG(I)
           DXANCG(1,IG) = DXANC(1,I)

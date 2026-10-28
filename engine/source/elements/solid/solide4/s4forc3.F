@@ -87,28 +87,12 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE S4FORC3(TIMERS, OUTPUT,
-     1   ELBUF_TAB,  NG,               PM,         GEO,
-     2   IXS,        X,                A,          V,
-     3   MS,         W,                FLUX,       FLU1,
-     4   VEUL,       FV,               ALE_CONNECT,IPARG,
-     5   TF,         NPF,              BUFMAT,     PARTSAV,
-     6   NLOC_DMG,   DT2T,             NELTST,     ITYPTST,
-     7   STIFN,      FSKY,             IADS,       OFFSET,
-     8   EANI,       IPARTS,           F11,        F21,
-     9   F31,        F12,              F22,        F32,
-     A   F13,        F23,              F33,        F14,
-     B   F24,        F34,              NEL,        FSKYM,
-     C   MSNF,       IPM,              IGEO,       BUFVOIS,
-     D   ISTRAIN,    ITASK,            TEMP,       FTHE,
-     E   FTHESKY,    IEXPAN,           GRESAV,     GRTH,
-     F   IGRTH,      MSSA,             DMELS,      TABLE,
-     G   XDP,        SFEM_NODVAR,      VOLN,       CONDN,
-     H   CONDNSKY,   D,                SENSORS,    IOUTPRT,
-     I   MAT_ELEM,   H3D_STRAIN,       DT,         IDEL7NOK,NSVOIS,SZ_BUFVOIS,
-     *   SNPC,       STF,              SBUFMAT,    SVIS,IDTMINS,IRESP,
-     *   IDEL7NG,    MAXFUNC,          USERL_AVAIL, GLOB_THERM,
-     V   impl_s,     idyna,            S_SFEM_NODVAR,s_flux,nv46,need_it)
+      SUBROUTINE S4FORC3(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, IXS, X, A, V, MS, W, FLUX, FLU1, VEUL, FV,
+     . ALE_CONNECT, IPARG, TF, NPF, BUFMAT, PARTSAV, NLOC_DMG, DT2T, NELTST, ITYPTST, STIFN, FSKY, IADS, OFFSET, EANI,
+     . IPARTS, F11, F21, F31, F12, F22, F32, F13, F23, F33, F14, F24, F34, NEL, FSKYM, MSNF, IPM, IGEO, BUFVOIS,
+     . ISTRAIN, ITASK, TEMP, FTHE, FTHESKY, IEXPAN, GRESAV, GRTH, IGRTH, MSSA, DMELS, TABLE, XDP, SFEM_NODVAR, VOLN,
+     . CONDN, CONDNSKY, D, SENSORS, IOUTPRT, MAT_ELEM, DT, IDEL7NOK, NSVOIS, SZ_BUFVOIS, SNPC, STF, SBUFMAT, SVIS,
+     . IDTMINS, IRESP, IDEL7NG, MAXFUNC, USERL_AVAIL, GLOB_THERM, impl_s, idyna, S_SFEM_NODVAR, s_flux, nv46, need_it)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -176,8 +160,7 @@ C-----------------------------------------------
      .        IPARTS(*),IPM(NPROPMI,*),IGEO(NPROPGI,*),ITASK,
      .        GRTH(*),IGRTH(*),IOUTPRT
 C
-      INTEGER NELTST,ITYPTST,OFFSET,NEL,NG, ISTRAIN,
-     .        IEXPAN,H3D_STRAIN
+      INTEGER NELTST,ITYPTST,OFFSET,NEL,NG, ISTRAIN, IEXPAN
      
       DOUBLE PRECISION
      .        XDP(3,*)
@@ -630,42 +613,14 @@ Cfor fluid in spmd: bufvois loi11
      3      IPARG(67,NG),IPARG(68,NG))
       END IF
 
-      CALL MMAIN(TIMERS,OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IXS,         IPARG,
-     3   V,           TF,          NPF,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   OFF,         NGEO,        MXT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        CXX,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          DXX,         DYY,         DZZ,
-     B   D4,          D5,          D6,          WXX,
-     C   WYY,         WZZ,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDX,         VDY,         VDZ,         MUVOID,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   BUFVOIS,     LBUF%PLA,    R3_FREE,     AMU,
-     H   MFXX,        MFXY,        MFXZ,        MFYX,
-     I   MFYY,        MFYZ,        MFZX,        MFZY,
-     J   MFZZ,        IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         ISTRAIN,     TEMPEL,
-     M   DIE,         IEXPAN,      ILAY,        MSSA,
-     N   DMELS,       IPTR,        IPTS,        IPTT,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         IPARG(1,NG), IGEO,        CONDE,
-     Q   ITASK,       NLOC_DMG,    VAR_REG,     MAT_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        SZ_BUFVOIS,
-     T   SNPC,        STF,         SBUFMAT,     GLOB_THERM,   
-     U   SVIS,        SZ_IX,       IRESP,
-     V   N2D,         th_strain,   NGROUP,      TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT,    fheat      ,SENSORS)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IXS, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, OFF, NGEO, MXT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, CXX, S1, S2, S3, S4,
+     . S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, WYY, WZZ, RX, RY, RZ, SX, SY, SZ, VDX, VDY, VDZ, MUVOID, SSP_EQ, AIRE,
+     . SIGY, ET, BUFVOIS, LBUF%PLA, R3_FREE, AMU, MFXX, MFXY, MFXZ, MFYX, MFYY, MFYZ, MFZX, MFZY, MFZZ, IPM, GAMA, BID,
+     . BID, BID, BID, BID, BID, BID, ISTRAIN, TEMPEL, DIE, IEXPAN, ILAY, MSSA, DMELS, IPTR, IPTS, IPTT, TABLE, BID, BID,
+     . BID, BID, IPARG(1,NG), IGEO, CONDE, ITASK, NLOC_DMG, VAR_REG, MAT_ELEM, JPLASOL, JSPH, SZ_BUFVOIS, SNPC, STF,
+     . SBUFMAT, GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT, DT1, NTABLE, NUMELQ, nummat, numgeo, numnod,
+     . numels, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s, idyna, DT, fheat, SENSORS)
 c
       IF ((ITASK==0).AND.(IMON_MAT==1)) CALL STOPTIME(TIMERS,35)
 C-----------  return to global system    

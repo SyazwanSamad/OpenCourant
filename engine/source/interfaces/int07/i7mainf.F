@@ -53,7 +53,6 @@ Copyright>        copyright and attribution statement.
 !||    ale_connectivity_mod        ../common_source/modules/ale/ale_connectivity_mod.F
 !||    elbufdef_mod                ../common_source/modules/mat_elem/elbufdef_mod.F90
 !||    groupdef_mod                ../common_source/modules/groupdef_mod.F
-!||    h3d_mod                     ../engine/share/modules/h3d_mod.F
 !||    i18dst3_mod                 ../engine/source/interfaces/int18/i18dst3.F
 !||    i18for3_mod                 ../engine/source/interfaces/int18/i18for3.F
 !||    intbuf_fric_mod             ../common_source/modules/interfaces/intbuf_fric_mod.F90
@@ -65,27 +64,14 @@ Copyright>        copyright and attribution statement.
 !||    output_mod                  ../common_source/modules/output/output_mod.F90
 !||    timer_mod                   ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE I7MAINF(OUTPUT, TIMERS,
-     1                   IPARI          ,X           ,A              ,ALE_CONNECTIVITY ,XCELL      ,
-     2                   ICODT          ,FSAV        ,V              ,MS               ,DT2T       ,
-     3                   NELTST         ,ITYPTST     ,ITAB           ,STIFN            ,FSKYI      ,
-     4                   ISKY           ,FCONT       ,NIN            ,LINDMAX          ,KINET      ,
-     5                   JTASK          ,NB_JLT      ,NB_JLT_NEW     ,NB_STOK_N        ,ELBUF_TAB  ,
-     6                   NISKYFI        ,NEWFRONT    ,NSTRF          ,SECFCUM          ,IGROUPS    ,
-     7                   ICONTACT       ,VISCN       ,NUM_IMP        ,
-     9                   NS_IMP         ,NE_IMP      ,IND_IMP        ,FSAVSUB          ,NRTMDIM    ,
-     A                   IGRBRIC        ,
-     B                   EMINX          ,IXS         ,IXS16          ,IXS20            ,FNCONT     ,
-     C                   FTCONT         ,IAD_ELEM    ,FR_ELEM        ,RCONTACT         ,ACONTACT   ,
-     D                   PCONTACT       ,TEMP        ,FTHE           ,FTHESKYI         ,
-     E                   PM             ,IPARG       ,IAD17          ,MSKYI_SMS        ,ISKYI_SMS  ,
-     F                   NODNX_SMS      ,MS0         ,QFRICINT       ,NPC              ,TF         ,
-     G                   CONDN          ,CONDNSKYI   ,INTBUF_TAB     ,NODADT_THERM     ,THEACCFACT , 
-     H                   FBSAV6         ,ISENSINT    ,DIMFB          ,IXIG3D           ,KXIG3D     ,
-     I                   WIGE           ,KNOT        ,IGEO           ,MULTI_FVM        ,H3D_DATA   ,
-     J                   INTBUF_FRIC_TAB,KNOTLOCPC   ,KNOTLOCEL      ,ITASK            ,TAGNCONT   ,
-     K                   KLOADPINTER    ,LOADPINTER  ,LOADP_HYD_INTER,DGAPLOADINT      ,S_LOADPINTER,
-     L                   INTEREFRIC     ,S_XCELL_REMOTE,XCELL_REMOTE )
+      SUBROUTINE I7MAINF(OUTPUT, TIMERS, IPARI, X, A, ALE_CONNECTIVITY, XCELL, ICODT, FSAV, V, MS, DT2T, NELTST,
+     . ITYPTST, ITAB, STIFN, FSKYI, ISKY, FCONT, NIN, LINDMAX, KINET, JTASK, NB_JLT, NB_JLT_NEW, NB_STOK_N, ELBUF_TAB,
+     . NISKYFI, NEWFRONT, NSTRF, SECFCUM, IGROUPS, ICONTACT, VISCN, NUM_IMP, NS_IMP, NE_IMP, IND_IMP, FSAVSUB, NRTMDIM,
+     . IGRBRIC, EMINX, IXS, IXS16, IXS20, FNCONT, FTCONT, IAD_ELEM, FR_ELEM, RCONTACT, ACONTACT, PCONTACT, TEMP, FTHE,
+     . FTHESKYI, PM, IPARG, IAD17, MSKYI_SMS, ISKYI_SMS, NODNX_SMS, MS0, QFRICINT, NPC, TF, CONDN, CONDNSKYI,
+     . INTBUF_TAB, NODADT_THERM, THEACCFACT, FBSAV6, ISENSINT, DIMFB, IXIG3D, KXIG3D, WIGE, KNOT, IGEO, MULTI_FVM,
+     . INTBUF_FRIC_TAB, KNOTLOCPC, KNOTLOCEL, ITASK, TAGNCONT, KLOADPINTER, LOADPINTER, LOADP_HYD_INTER, DGAPLOADINT,
+     . S_LOADPINTER, INTEREFRIC, S_XCELL_REMOTE, XCELL_REMOTE)
 C======================================================================
 C-----------------------------------------------
 C   M o d u l e s
@@ -95,7 +81,6 @@ C-----------------------------------------------
       USE MESSAGE_MOD
       USE INTBUFDEF_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE INTBUF_FRIC_MOD
       USE GROUPDEF_MOD
       USE ALE_CONNECTIVITY_MOD
@@ -158,7 +143,6 @@ C-----------------------------------------------
       my_real, DIMENSION(S_XCELL_REMOTE), INTENT(in) :: XCELL_REMOTE
       TYPE(INTBUF_STRUCT_) INTBUF_TAB
       TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
-      TYPE(H3D_DATABASE) :: H3D_DATA
       TYPE(INTBUF_FRIC_STRUCT_), TARGET, DIMENSION(NINTERFRIC) ::  INTBUF_FRIC_TAB
       TYPE (GROUP_)  , DIMENSION(NGRBRIC) :: IGRBRIC
 C-----------------------------------------------
@@ -588,29 +572,14 @@ C!$OMP ORDERED
               IPARI(29,NIN) = 1
               IDIR = IPARI(34,NIN)
               IF (DEBUG(3) >= 1)NB_JLT_NEW = NB_JLT_NEW + JLT_NEW
-              CALL I18FOR3(OUTPUT,
-     1          JLT               ,A                 ,V                 ,IBC                ,ICODT             ,
-     2          FSAV              ,GAP               ,FRIC              ,MS                 ,VISC              ,
-     3          VISCF             ,NOINT             ,INTBUF_TAB%STFNS  ,ITAB               ,CN_LOC            ,
-     4          STIGLO            ,STIFN             ,STIF              ,FSKYI              ,ISKY              ,
-     5          NX1               ,NX2               ,NX3               ,NX4                ,NY1               ,
-     6          NY2               ,NY3               ,NY4               ,NZ1                ,NZ2               ,
-     7          NZ3               ,NZ4               ,LB1               ,LB2                ,LB3               ,
-     8          LB4               ,LC1               ,LC2               ,LC3                ,LC4               ,
-     9          P1                ,P2                ,P3                ,P4                 ,FCONT             ,
-     B          IX1               ,IX2               ,IX3               ,IX4                ,NSVG              ,
-     C          IVIS2             ,NELTST            ,ITYPTST           ,DT2T               ,IXS               ,
-     D          GAPV              ,INTBUF_TAB%CAND_P ,INDEX2(NFT+1)     ,NISKYFI           ,
-     E          KINET             ,NEWFRONT          ,ISECIN            ,NSTRF              ,SECFCUM           ,
-     F          X                 ,INTBUF_TAB%IRECTM ,CE_LOC            ,MFROT              ,IFQ               ,
-     G          INTBUF_TAB%FRIC_P ,INTBUF_TAB%FTSAVX ,INTBUF_TAB%FTSAVY ,INTBUF_TAB%FTSAVZ  ,
-     H          INTBUF_TAB%IFPEN  , ICONTACT         ,IGROUPS           ,IPARG              ,
-     J          VISCN             ,VXI               ,VYI               ,VZI                ,MSI_APPEND        ,
-     K          KINI              ,NIN               ,NISUB             ,INTBUF_TAB%LISUB   ,INTBUF_TAB%ADDSUBS,
-     L          INTBUF_TAB%ADDSUBM,INTBUF_TAB%LISUBS ,INTBUF_TAB%LISUBM ,FSAVSUB            ,INTBUF_TAB%CAND_N ,
-     M          IPARI(33,NIN)     ,IPARI(39,NIN)     ,FNCONT            ,MS0                ,
-     N          JTASK             ,ISENSINT          ,FSAVPARIT         ,NFT                ,MULTI_FVM         ,
-     O          H3D_DATA          ,ELBUF_TAB         ,IDIR             )
+      CALL I18FOR3(OUTPUT, JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, INTBUF_TAB%STFNS, ITAB,
+     . CN_LOC, STIGLO, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2,
+     . LB3, LB4, LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, NSVG, IVIS2, NELTST, ITYPTST, DT2T, IXS,
+     . GAPV, INTBUF_TAB%CAND_P, INDEX2(NFT+1), NISKYFI, KINET, NEWFRONT, ISECIN, NSTRF, SECFCUM, X, INTBUF_TAB%IRECTM,
+     . CE_LOC, MFROT, IFQ, INTBUF_TAB%FRIC_P, INTBUF_TAB%FTSAVX, INTBUF_TAB%FTSAVY, INTBUF_TAB%FTSAVZ, INTBUF_TAB%IFPEN,
+     . ICONTACT, IGROUPS, IPARG, VISCN, VXI, VYI, VZI, MSI_APPEND, KINI, NIN, NISUB, INTBUF_TAB%LISUB,
+     . INTBUF_TAB%ADDSUBS, INTBUF_TAB%ADDSUBM, INTBUF_TAB%LISUBS, INTBUF_TAB%LISUBM, FSAVSUB, INTBUF_TAB%CAND_N,
+     . IPARI(33,NIN), IPARI(39,NIN), FNCONT, MS0, JTASK, ISENSINT, FSAVPARIT, NFT, MULTI_FVM, ELBUF_TAB, IDIR)
             ENDIF
             
           ELSE
@@ -673,50 +642,21 @@ C!$OMP ORDERED
             ENDIF
             IF(ITASK==1) CALL STOPTIME(TIMERS,MACRO_TIMER_FRIC)
 
-              CALL I7FOR3(OUTPUT,
-     1  JLT          ,A         ,V            ,IBC         ,ICODT    ,
-     2  FSAV         ,GAP       ,FRIC         ,MS          ,VISC     ,
-     3  VISCF        ,NOINT     ,INTBUF_TAB%STFNS,ITAB     ,CN_LOC   ,
-     4  STIGLO       ,STIFN     ,STIF         ,FSKYI       ,ISKY     ,
-     5  NX1          ,NX2       ,NX3          ,NX4         ,NY1      ,
-     6  NY2          ,NY3       ,NY4          ,NZ1         ,NZ2      ,
-     7  NZ3          ,NZ4       ,LB1          ,LB2         ,LB3      ,
-     8  LB4          ,LC1       ,LC2          ,LC3         ,LC4      ,
-     9  P1           ,P2        ,P3           ,P4          ,FCONT    ,
-     A  IX1          ,IX2       ,IX3          ,IX4         ,NSVG     ,
-     B  IVIS2        ,NELTST    ,ITYPTST      ,DT2T        ,GAPV     ,
-     C  INACTI,INTBUF_TAB%CAND_P,INDEX2(NFT+1),KINET       ,NEWFRONT  ,
-     D  ISECIN       ,NSTRF     ,X       ,INTBUF_TAB%IRECTM,CE_LOC    ,
-     E  MFROT        ,IFQ       ,INTBUF_TAB%FTSAVX  ,INTBUF_TAB%FTSAVY,
-     F  INTBUF_TAB%FTSAVZ,XFILTR_FRIC,INTBUF_TAB%IFPEN     ,IBAG     ,
-     H  ICONTACT     ,VISCN     ,VXI          ,VYI         ,VZI      ,    
-     I  MSI         ,KINI       ,NIN          ,NISUB   ,INTBUF_TAB%LISUB,
-     J  INTBUF_TAB%ADDSUBS,INTBUF_TAB%ADDSUBM,INTBUF_TAB%LISUBS     ,
-     .                                     INTBUF_TAB%LISUBM,FSAVSUB,
-     K  INTBUF_TAB%CAND_N,IPARI(33,NIN),IPARI(39,NIN),INTBUF_TAB%NODNORM_NORMAL ,FNCONT,     
-     L  FTCONT       ,X1         ,X2          ,X3         ,X4         ,
-     M  Y1           , Y2        ,Y3          ,Y4         ,Z1         ,
-     N  Z2           ,Z3         ,Z4          ,XI         ,YI         ,
-     O  ZI           ,IADM       ,RCURVI      ,RCONTACT   ,ACONTACT   ,
-     P  PCONTACT     ,ANGLMI     ,PADM        ,INTTH      ,TEMP       , 
-     Q  TEMPI        ,IFORM      ,NPC         ,TF         ,CMAJ       ,
-     R  DTMINI       ,DRAD       ,FHEATS      ,FHEATM     ,EFRICT     ,
-     S  QFRICINT(NIN),FNI        ,IFRIC       ,JTASK      ,H1         ,
-     U  H2           ,H3         ,H4          ,KS         ,KT         ,
-     V  K1           ,K2         ,K3          ,K4         ,C1         ,
-     W  C2           ,C3         ,C4          ,CS         ,C          ,
-     X  CF           ,TINT       ,XFRIC       ,FXI        ,FYI        ,
-     Y  FZI          ,FX1        ,FY1         ,FZ1        ,FX2        ,
-     Z  FY2          ,FZ2        ,FX3         ,FY3        ,FZ3        ,
-     1  FX4          ,FY4        ,FZ4         ,ISENSINT    ,FSAVPARIT  ,
-     5  NFT          ,SYM_FLAG_TYPE19,H3D_DATA,FRICC      ,VISCFFRIC  , 
-     6  FRIC_COEFS   ,ITIED      ,JLT_TIED   ,INTBUF_TAB%CAND_F,IORTHFRIC,
-     7  FRIC_COEFS2  ,FRICC2     ,VISCFFRIC2  ,NFORTH      ,NFISOT     ,
-     8  INDEXORTH    ,INDEXISOT  ,DIR1        ,DIR2        ,TAGNCONT   ,
-     9  KLOADPINTER  ,LOADPINTER ,LOADP_HYD_INTER,INTBUF_TAB%TYPSUB    ,  
-     .                                            INTBUF_TAB%INFLG_SUBS,
-     A  INTBUF_TAB%INFLG_SUBM,NINLOADP,DGAPLOADINT,S_LOADPINTER,DGAPLOADP,
-     B  INTEREFRIC   )
+      CALL I7FOR3(OUTPUT, JLT, A, V, IBC, ICODT, FSAV, GAP, FRIC, MS, VISC, VISCF, NOINT, INTBUF_TAB%STFNS, ITAB,
+     . CN_LOC, STIGLO, STIFN, STIF, FSKYI, ISKY, NX1, NX2, NX3, NX4, NY1, NY2, NY3, NY4, NZ1, NZ2, NZ3, NZ4, LB1, LB2,
+     . LB3, LB4, LC1, LC2, LC3, LC4, P1, P2, P3, P4, FCONT, IX1, IX2, IX3, IX4, NSVG, IVIS2, NELTST, ITYPTST, DT2T,
+     . GAPV, INACTI, INTBUF_TAB%CAND_P, INDEX2(NFT+1), KINET, NEWFRONT, ISECIN, NSTRF, X, INTBUF_TAB%IRECTM, CE_LOC,
+     . MFROT, IFQ, INTBUF_TAB%FTSAVX, INTBUF_TAB%FTSAVY, INTBUF_TAB%FTSAVZ, XFILTR_FRIC, INTBUF_TAB%IFPEN, IBAG,
+     . ICONTACT, VISCN, VXI, VYI, VZI, MSI, KINI, NIN, NISUB, INTBUF_TAB%LISUB, INTBUF_TAB%ADDSUBS, INTBUF_TAB%ADDSUBM,
+     . INTBUF_TAB%LISUBS, INTBUF_TAB%LISUBM, FSAVSUB, INTBUF_TAB%CAND_N, IPARI(33,NIN), IPARI(39,NIN),
+     . INTBUF_TAB%NODNORM_NORMAL, FNCONT, FTCONT, X1, X2, X3, X4, Y1, Y2, Y3, Y4, Z1, Z2, Z3, Z4, XI, YI, ZI, IADM,
+     . RCURVI, RCONTACT, ACONTACT, PCONTACT, ANGLMI, PADM, INTTH, TEMP, TEMPI, IFORM, NPC, TF, CMAJ, DTMINI, DRAD,
+     . FHEATS, FHEATM, EFRICT, QFRICINT(NIN), FNI, IFRIC, JTASK, H1, H2, H3, H4, KS, KT, K1, K2, K3, K4, C1, C2, C3, C4,
+     . CS, C, CF, TINT, XFRIC, FXI, FYI, FZI, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3, FY3, FZ3, FX4, FY4, FZ4, ISENSINT,
+     . FSAVPARIT, NFT, SYM_FLAG_TYPE19, FRICC, VISCFFRIC, FRIC_COEFS, ITIED, JLT_TIED, INTBUF_TAB%CAND_F, IORTHFRIC,
+     . FRIC_COEFS2, FRICC2, VISCFFRIC2, NFORTH, NFISOT, INDEXORTH, INDEXISOT, DIR1, DIR2, TAGNCONT, KLOADPINTER,
+     . LOADPINTER, LOADP_HYD_INTER, INTBUF_TAB%TYPSUB, INTBUF_TAB%INFLG_SUBS, INTBUF_TAB%INFLG_SUBM, NINLOADP,
+     . DGAPLOADINT, S_LOADPINTER, DGAPLOADP, INTEREFRIC)
 
               IF( INTTH > 0 ) THEN 
                  CALL I7THERM(JLT   ,IPARG ,PM  ,IXS   ,IFORM ,X      ,   
@@ -731,25 +671,11 @@ C!$OMP ORDERED
      8                        H4    ,theaccfact)      
               ENDIF
 
-      CALL I7ASS33(
-     1  JLT       ,A         ,NOINT     ,ITAB      ,STIFN     ,
-     2 STIF      ,FSKYI      ,ISKY      ,FCONT     ,IX1       ,
-     3  IX2       ,IX3       ,IX4       ,NSVG      ,NELTST    ,
-     4  ITYPTST   ,DT2T      ,NISKYFI   ,ISECIN    ,NSTRF     ,
-     5  SECFCUM   ,VISCN     ,NIN       ,FXI       ,FYI       , 
-     6  FZI       ,FX1       ,FY1       ,FZ1       ,FX2       ,
-     7  FY2       ,FZ2       ,FX3       ,FY3       ,FZ3       ,
-     8  FX4       ,FY4       ,FZ4       ,H1        ,H2        ,
-     9  H3        ,H4        ,KS        ,KT        ,K1        ,
-     A  K2        ,K3        ,K4        ,CS        ,CF        ,
-     B  C1        ,C2        ,C3        ,C4        ,C         ,
-     C  INTTH     ,PHI       ,PHI1      ,PHI2      ,PHI3      ,
-     D  PHI4      ,FTHE      ,FTHESKYI  ,MSKYI_SMS ,ISKYI_SMS ,
-     E  NSMS      ,DTMINI    ,JTASK     ,
-     F  CONDN     ,CONDINT   ,CONDNSKYI ,IXIG3D    ,KXIG3D    ,
-     J  WIGE      ,KNOT      ,IGEO      ,INTBUF_TAB%NIGE      ,
-     K  INTBUF_TAB%RIGE      ,X         ,H3D_DATA  ,KNOTLOCPC ,
-     L  KNOTLOCEL ,IFORM     ,NODADT_THERM) 
+      CALL I7ASS33(JLT, A, NOINT, ITAB, STIFN, STIF, FSKYI, ISKY, FCONT, IX1, IX2, IX3, IX4, NSVG, NELTST, ITYPTST,
+     . DT2T, NISKYFI, ISECIN, NSTRF, SECFCUM, VISCN, NIN, FXI, FYI, FZI, FX1, FY1, FZ1, FX2, FY2, FZ2, FX3, FY3, FZ3,
+     . FX4, FY4, FZ4, H1, H2, H3, H4, KS, KT, K1, K2, K3, K4, CS, CF, C1, C2, C3, C4, C, INTTH, PHI, PHI1, PHI2, PHI3,
+     . PHI4, FTHE, FTHESKYI, MSKYI_SMS, ISKYI_SMS, NSMS, DTMINI, JTASK, CONDN, CONDINT, CONDNSKYI, IXIG3D, KXIG3D, WIGE,
+     . KNOT, IGEO, INTBUF_TAB%NIGE, INTBUF_TAB%RIGE, X, KNOTLOCPC, KNOTLOCEL, IFORM, NODADT_THERM)
 
             ENDIF
           ENDIF
@@ -784,11 +710,8 @@ C!$OMP END ORDERED
         ILAGM = IPARI(33,NIN)
 C       I7KGLO = 1 => mis ds inttri
         IF(ILAGM == 0)THEN
-          CALL I17MAIN_PENA(output,
-     1          NIN    ,IPARI  ,INTBUF_TAB    ,X           ,V  ,
-     2          A      ,JTASK-1,IGRBRIC ,EMINX(IAD17),MS ,
-     3          IXS    ,IXS16  ,IXS20   ,STIFN  ,FSKYI  ,ISKY    ,
-     4          FSAV   ,FCONT  ,NISKYFI ,H3D_DATA)
+      CALL I17MAIN_PENA(output, NIN, IPARI, INTBUF_TAB, X, V, A, JTASK-1, IGRBRIC, EMINX(IAD17), MS, IXS, IXS16, IXS20,
+     . STIFN, FSKYI, ISKY, FSAV, FCONT, NISKYFI)
         ENDIF
       ENDIF
 C

@@ -113,8 +113,7 @@ def main():
     environment = os.environ.copy()
     environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m',
                        RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
-    environment['PATH'] = os.pathsep.join([str(args.reader.parent), str(ROOT / 'extlib/hm_reader/win64'),
-                                         environment.get('PATH', '')])
+    environment['PATH'] = os.pathsep.join([str(args.reader.parent), environment.get('PATH', '')])
     with tempfile.TemporaryDirectory(prefix='opencourant-stage4-') as temporary:
         work = Path(temporary)
 
@@ -126,7 +125,7 @@ def main():
             return result
 
         for name in ['existing', 'explicit_fields', 'interleaved', 'lagmul', 'lagmul_missing_node',
-                     'submodel_missing_node']:
+                     'submodel_missing_node', 'flag_two_single', 'disconnected_two']:
             run([sys.executable, Path(__file__).resolve(), '--reader', args.reader,
                  '--binaries', args.binaries, '--worker', name])
             print(f'PASS connectivity, main nodes, and indexed selection: {name}', flush=True)
@@ -136,16 +135,18 @@ def main():
                           '--binaries', args.binaries, '--worker', mode], expected=1)
             assert diagnostic in result.stderr
             print(f'PASS helper rejection: {mode}', flush=True)
-        for library in ['openreader', 'v82']:
+        for library in ['openreader']:
             driver = args.binaries / f'driver-{library}.exe'
-            for name in ['no_parts', 'mixed', 'interleaved', 'lagmul', 'submodel_missing_node']:
+            for name in ['no_parts', 'mixed', 'interleaved', 'lagmul', 'submodel_missing_node',
+                         'flag_two_single', 'disconnected_two']:
                 run([driver, HERE / 'data' / (name + '.rad')])
                 print(f'PASS bounds-checked Fortran: {library}/{name}', flush=True)
             for mode in ['missing-id', 'duplicate-id']:
                 result = run([driver, mode], expected=2)
                 assert 'IDs do not match' in result.stdout
                 print(f'PASS ordering rejection: {library}/{mode}', flush=True)
-            for name in ['single', 'mixed', 'existing', 'shared', 'interleaved', 'lagmul', 'explicit_fields', 'explicit-rota']:
+            for name in ['single', 'mixed', 'existing', 'shared', 'interleaved', 'lagmul', 'explicit_fields',
+                         'explicit-rota', 'flag_two_single', 'disconnected_two']:
                 folder = work / (library + '-' + name)
                 if name == 'explicit-rota':
                     shutil.copytree(ROOT / 'qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data', folder)

@@ -38,7 +38,6 @@ Copyright>        copyright and attribution statement.
 !||--- uses       -----------------------------------------------------
 !||    check_sorting_criteria_mod       ../engine/source/interfaces/intsort/check_sorting_criteria.F90
 !||    command_line_args_mod            ../engine/share/modules/command_line_args.F
-!||    h3d_mod                          ../engine/share/modules/h3d_mod.F
 !||    intbufdef_mod                    ../common_source/modules/interfaces/intbufdef_mod.F90
 !||    inter7_collision_detection_mod   ../engine/source/interfaces/intsort/inter7_collision_detection.F90
 !||    inter_sorting_mod                ../engine/share/modules/inter_sorting_mod.F
@@ -51,10 +50,8 @@ Copyright>        copyright and attribution statement.
 !||    timer_mod                        ../engine/source/system/timer_mod.F90
 !||    tri7box                          ../engine/share/modules/tri7box.F
 !||====================================================================
-        SUBROUTINE INTER_SORT_07(TIMERS, IPARI,X,NIN,ITASK,ISENDTO,
-     1                            IRCVFROM,RETRI,ITAB,NRTM_T,RENUM,RENUM_SIZ,
-     2                            NSNFIOLD,ESHIFT,MULTI_FVM,INTBUF_TAB,H3D_DATA,
-     3                            INTER_STRUCT,SORT_COMM,INTHEAT, IDT_THERM, NODADT_THERM)
+      SUBROUTINE INTER_SORT_07(TIMERS, IPARI, X, NIN, ITASK, ISENDTO, IRCVFROM, RETRI, ITAB, NRTM_T, RENUM, RENUM_SIZ,
+     . NSNFIOLD, ESHIFT, MULTI_FVM, INTBUF_TAB, INTER_STRUCT, SORT_COMM, INTHEAT, IDT_THERM, NODADT_THERM)
 !$COMMENT
 !       INTER_SORT_07 description
 !       sort computation for interface TYP07
@@ -69,7 +66,6 @@ C-----------------------------------------------
         USE COMMAND_LINE_ARGS_MOD
         USE MESSAGE_MOD
         USE INTBUFDEF_MOD
-        USE H3D_MOD
         USE MULTI_FVM_MOD
         USE INTER_STRUCT_MOD
         USE INTER_SORTING_MOD
@@ -118,7 +114,6 @@ C-----------------------------------------------
         my_real, DIMENSION(3*NUMNOD), INTENT(in) :: X   ! position
 
         TYPE(INTBUF_STRUCT_) INTBUF_TAB
-        TYPE(H3D_DATABASE) :: H3D_DATA
         TYPE(MULTI_FVM_STRUCT), INTENT(INOUT) :: MULTI_FVM
         TYPE(inter_struct_type), DIMENSION(NINTER), INTENT(inout) :: INTER_STRUCT   !   structure for interface
         TYPE(sorting_comm_type), DIMENSION(NINTER), INTENT(inout) :: SORT_COMM   ! structure for interface sorting comm
@@ -411,11 +406,8 @@ C mono tache
             IF (IMONM > 0) CALL STARTIME(TIMERS,26)
             INTBUF_TAB%VARIABLES(distance_index) = -INTBUF_TAB%VARIABLES(distance_index)
 C
-            CALL SPMD_TRI7GAT(
-     1          RESULT       ,NSN     ,INTBUF_TAB%CAND_N,INTBUF_TAB%I_STOK(1),NIN,
-     2          IPARI(21,NIN),NSNR    ,MULTIMP        ,NTY         ,IPARI(47,NIN),  
-     3          IDUM1        ,NSNFIOLD, IPARI        , H3D_DATA    ,IPARI(72,NIN),
-     4          MULTI_FVM,NODADT_THERM)
+      CALL SPMD_TRI7GAT(RESULT, NSN, INTBUF_TAB%CAND_N, INTBUF_TAB%I_STOK(1), NIN, IPARI(21,NIN), NSNR, MULTIMP, NTY,
+     . IPARI(47,NIN), IDUM1, NSNFIOLD, IPARI, IPARI(72,NIN), MULTI_FVM, NODADT_THERM)
             IPARI(24,NIN) = NSNR
 
             IF (IMONM > 0) CALL STOPTIME(TIMERS,26)

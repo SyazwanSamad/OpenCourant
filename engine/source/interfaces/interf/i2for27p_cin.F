@@ -28,22 +28,12 @@ Copyright>        copyright and attribution statement.
 !||    i2loceq_27     ../common_source/interf/i2loceq.F
 !||    i2rep          ../common_source/interf/i2rep.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod        ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR27P_CIN(
-     1           NSN    ,NMN    ,A      ,CRST   ,NSV    ,         
-     2           MS     ,WEIGHT ,STIFN  ,MMASS  ,FSKYI2 ,         
-     3           IADI2  ,I0     ,NIR    ,I2SIZE ,IDEL2  ,         
-     4           SMASS  ,IRECT  ,X      ,V      ,FSAV   ,         
-     5           FNCONT  ,IRTL  ,INDXC  ,IADX   ,H3D_DATA,
-     6           IN      ,SINER ,DPARA  ,MSEGTYP2,AR    ,
-     7           STIFR   ,CSTS_BIS,T2FAC_SMS,FNCONTP,FTCONTP) 
+      SUBROUTINE I2FOR27P_CIN(NSN, NMN, A, CRST, NSV, MS, WEIGHT, STIFN, MMASS, FSKYI2, IADI2, I0, NIR, I2SIZE, IDEL2,
+     . SMASS, IRECT, X, V, FSAV, FNCONT, IRTL, INDXC, IADX, IN, SINER, DPARA, MSEGTYP2, AR, STIFR, CSTS_BIS, T2FAC_SMS,
+     . FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD                                  
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -58,10 +48,6 @@ C     REAL
      .   FSKYI2(I2SIZE,*), SMASS(*),FSAV(*),FNCONT(3,*),IN(*),SINER(*),
      .   DPARA(7,*),AR(3,*),STIFR(*),CSTS_BIS(2,*),T2FAC_SMS(*),
      .   FNCONTP(3,*) ,FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "sms_c.inc"
 C-----------------------------------------------
@@ -347,9 +333,7 @@ C
          ENDIF
 C                                             
 C---     output of tied contact forces
-         CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                 IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                 FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C                      
          IF (IRODDL == 0) THEN                               
            STIFN(I)=EM20                                    

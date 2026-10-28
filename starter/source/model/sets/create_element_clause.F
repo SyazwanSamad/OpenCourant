@@ -133,8 +133,8 @@ C-----------------------------------------------
 !||    create_elt_clause           ../starter/source/model/sets/create_element_clause.F
 !||--- calls      -----------------------------------------------------
 !||    copy_list_in_cause          ../starter/source/model/sets/create_element_clause.F
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
-!||    hm_get_int_array_index      ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_index      ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||    set_usrtos_nearest          ../starter/source/model/sets/ipartm1.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F
@@ -258,8 +258,8 @@ C-------------------------
 !||    ancmsg                      ../starter/source/output/message/message.F
 !||    copy_list_in_cause          ../starter/source/model/sets/create_element_clause.F
 !||    get_elt_name                ../starter/source/model/sets/create_element_clause.F
-!||    hm_get_int_array_2indexes   ../starter/source/devtools/hm_reader/hm_get_int_array_2indexes.F
-!||    hm_get_int_array_index      ../starter/source/devtools/hm_reader/hm_get_int_array_index.F
+!||    hm_get_int_array_2indexes   ../starter/source/devtools/reader/hm_get_int_array_2indexes.F
+!||    hm_get_int_array_index      ../starter/source/devtools/reader/hm_get_int_array_index.F
 !||    set_usrtos                  ../starter/source/model/sets/ipartm1.F
 !||--- uses       -----------------------------------------------------
 !||    hm_option_read_mod          ../starter/share/modules1/hm_option_read_mod.F

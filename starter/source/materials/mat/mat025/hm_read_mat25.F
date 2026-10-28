@@ -23,7 +23,7 @@ Copyright>        copyright and attribution statement.
 !||--- called by ------------------------------------------------------
 !||    hm_read_mat              ../starter/source/materials/mat/hm_read_mat.F90
 !||--- calls      -----------------------------------------------------
-!||    hm_get_intv              ../starter/source/devtools/hm_reader/hm_get_intv.F
+!||    hm_get_intv              ../starter/source/devtools/reader/hm_get_intv.F
 !||    init_mat_keyword         ../starter/source/materials/mat/init_mat_keyword.F
 !||    read_mat25_crasurv       ../starter/source/materials/mat/mat025/read_mat25_crasurv.F90
 !||    read_mat25_tsaiwu        ../starter/source/materials/mat/mat025/read_mat25_tsaiwu.F90

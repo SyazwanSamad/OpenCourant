@@ -31,7 +31,6 @@ Copyright>        copyright and attribution statement.
 !||    spmd_glob_dsum9     ../engine/source/mpi/interfaces/spmd_th.F
 !||    spmd_rbcast         ../engine/source/mpi/generic/spmd_rbcast.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    imp_dyna            ../engine/share/modules/impbufdef_mod.F
 !||    message_mod         ../engine/share/message_module/message_mod.F
 !||    multi_fvm_mod       ../common_source/modules/ale/multi_fvm_mod.F90
@@ -40,12 +39,9 @@ Copyright>        copyright and attribution statement.
 !||    state_mod           ../common_source/modules/state_mod.F
 !||    timer_mod           ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE ECRIT(TIMERS,PARTSAV    ,MS        ,V        ,IN       ,R          ,
-     2                 DMAS       ,WEIGHT    ,ENINTOT  ,EKINTOT  ,
-     3                 A          ,AR        ,FXBIPM   ,FXBRPM   ,MONVOL     ,
-     4                 XMOM_SMS   ,SENSORS   ,QFRICINT ,IPARI    ,WEIGHT_MD  ,
-     5                 WFEXTH     ,IFLAG     ,MS_2D    ,MULTI_FVM,MAS_ND     ,
-     6                 KEND       ,H3D_DATA  ,DYNAIN_DATA,USREINT,OUTPUT)
+      SUBROUTINE ECRIT(TIMERS, PARTSAV, MS, V, IN, R, DMAS, WEIGHT, ENINTOT, EKINTOT, A, AR, FXBIPM, FXBRPM, MONVOL,
+     . XMOM_SMS, SENSORS, QFRICINT, IPARI, WEIGHT_MD, WFEXTH, IFLAG, MS_2D, MULTI_FVM, MAS_ND, KEND, DYNAIN_DATA,
+     . USREINT, OUTPUT)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -53,7 +49,6 @@ C-----------------------------------------------
       USE IMP_DYNA
       USE MESSAGE_MOD
       USE MULTI_FVM_MOD
-      USE H3D_MOD
       USE SENSOR_MOD
       USE STATE_MOD
       USE OUTPUT_MOD , ONLY : OUTPUT_
@@ -101,7 +96,6 @@ C-----------------------------------------------
      .        XMOM_SMS(3,*),QFRICINT(*),MS_2D(*),KEND,MAS_ND
       my_real, INTENT(IN) :: USREINT
       TYPE(MULTI_FVM_STRUCT), INTENT(IN) :: MULTI_FVM
-      TYPE(H3D_DATABASE), INTENT(INOUT)  :: H3D_DATA
       TYPE (SENSORS_)    ,INTENT(IN)     :: SENSORS
       TYPE (DYNAIN_DATABASE), INTENT(INOUT) :: DYNAIN_DATA
       TYPE(OUTPUT_), INTENT(INOUT) :: OUTPUT !< output structure
@@ -617,7 +611,7 @@ C---------------------------------
           RTMP(6)  = TSTAT
           RTMP(7)  = TOUTP
           RTMP(8)  = INFO
-          RTMP(9)  = H3D_DATA%TH3D
+      RTMP(9)  =0
           RTMP(10) = DYNAIN_DATA%TDYNAIN
         ENDIF
 C
@@ -630,7 +624,6 @@ C
         OUTPUT%TH%THIS =  RTMP(5)
         TSTAT = RTMP(6)
         TOUTP = RTMP(7)
-        H3D_DATA%TH3D = RTMP(9)
         DYNAIN_DATA%TDYNAIN = RTMP(10)
 
         IF(INFO > 0) CALL SPMD_EXCH_FVSTATS(MONVOL)

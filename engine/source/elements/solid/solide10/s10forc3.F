@@ -90,28 +90,12 @@ Copyright>        copyright and attribution statement.
 !||    table_mod              ../engine/share/modules/table_mod.F
 !||    timer_mod              ../engine/source/system/timer_mod.F90
 !||====================================================================
-      SUBROUTINE S10FORC3(TIMERS, OUTPUT, 
-     1   ELBUF_TAB,       NG,         PM,         GEO,
-     2   IXS,             X,          A,          V,
-     3   MS,              W,          FLU1,
-     4   VEUL,            FV,         ALE_CONNECT,IPARG,
-     5   TF,              NPF,        BUFMAT,     PARTSAV,
-     6   NLOC_DMG,        DT2T,       NELTST,     ITYPTST,
-     7   STIFN,           FSKY,       IADS,       OFFSET,
-     8   EANI,            IPARTS,     IXS10,      IADS10,
-     9   NEL,             FX,         FY,         FZ,
-     A   AR,              VR,         DR,         IPM,
-     B   ISTRAIN,         ISOLNOD,    ITASK,      TEMP,
-     C   FTHE,            FTHESKY,    IEXPAN,     STIFR,
-     D   D,               GRESAV,     GRTH,       IGRTH,
-     E   TABLE,           MSSA,       DMELS,      IGEO,
-     F   XDP,             VOLN,       CONDN,      CONDNSKY,
-     G   SFEM_NODVAR,     ITAGDN,     SENSORS,    IOUTPRT,
-     H   MAT_ELEM,        H3D_STRAIN, DT,         IDEL7NOK,
-     I   SNPC,            STF,        SBUFMAT,    SVIS,
-     J   NSVOIS,          IDTMINS,    IDEL7NG,    MAXFUNC,
-     V   USERL_AVAIL,     GLOB_THERM, impl_s,     idyna  ,
-     W   S_SFEM_NODVAR,  need_it)
+      SUBROUTINE S10FORC3(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, IXS, X, A, V, MS, W, FLU1, VEUL, FV, ALE_CONNECT,
+     . IPARG, TF, NPF, BUFMAT, PARTSAV, NLOC_DMG, DT2T, NELTST, ITYPTST, STIFN, FSKY, IADS, OFFSET, EANI, IPARTS, IXS10,
+     . IADS10, NEL, FX, FY, FZ, AR, VR, DR, IPM, ISTRAIN, ISOLNOD, ITASK, TEMP, FTHE, FTHESKY, IEXPAN, STIFR, D, GRESAV,
+     . GRTH, IGRTH, TABLE, MSSA, DMELS, IGEO, XDP, VOLN, CONDN, CONDNSKY, SFEM_NODVAR, ITAGDN, SENSORS, IOUTPRT,
+     . MAT_ELEM, DT, IDEL7NOK, SNPC, STF, SBUFMAT, SVIS, NSVOIS, IDTMINS, IDEL7NG, MAXFUNC, USERL_AVAIL, GLOB_THERM,
+     . impl_s, idyna, S_SFEM_NODVAR, need_it)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
@@ -173,9 +157,8 @@ C-----------------------------------------------
       INTEGER, INTENT(IN) :: IMPL_S
       INTEGER, INTENT(IN) :: IDYNA
       INTEGER, INTENT(IN) :: USERL_AVAIL
-      INTEGER IXS(NIXS,*),IPARG(NPARG,NGROUP),NPF(*),IADS(8,*),
-     .        IPARTS(*),IXS10(6,*),IADS10(6,*),IPM(*),ITASK,GRTH(*),
-     .        IGRTH(*),IGEO(NPROPGI,*),IOUTPRT,H3D_STRAIN
+      INTEGER IXS(NIXS,*),IPARG(NPARG,NGROUP),NPF(*),IADS(8,*), IPARTS(*),IXS10(6,*),IADS10(6,*),IPM(*),ITASK,GRTH(*),
+     . IGRTH(*),IGEO(NPROPGI,*),IOUTPRT
       INTEGER NELTST,ITYPTST,OFFSET,NEL,NG,ISTRAIN,ISOLNOD,IEXPAN,ITAGDN(*)      
       integer, dimension(nel), intent(in) :: need_it !< sfem option computation status for each element
       DOUBLE PRECISION  XDP(3,*)
@@ -659,42 +642,15 @@ C
      .                NEL   ,NPT   ,SENSORS%NSENSOR,SENSORS%SENSOR_TAB,
      .                IPARG(67,NG),IPARG(68,NG))
 C
-        CALL MMAIN(TIMERS, OUTPUT,
-     1   ELBUF_TAB,   NG,          PM,          GEO,
-     2                ALE_CONNECT, IXS,         IPARG,
-     3   V,           TF,          NPF,         BUFMAT,
-     4   STI,         X,           DT2T,        NELTST,
-     5   ITYPTST,     OFFSET,      NEL,         W,
-     6   OFF,         NGEO,        MXT,         NGL,
-     7   VOLN,        VD2,         DVOL,        DELTAX,
-     8   VIS,         QVIS,        CXX,         S1,
-     9   S2,          S3,          S4,          S5,
-     A   S6,          DXX,         DYY,         DZZ,
-     B   D4,          D5,          D6,          WXX,
-     C   WYY,         WZZ,         RX,          RY,
-     D   RZ,          SX,          SY,          SZ,
-     E   VDX,         VDY,         VDZ,         MUVOID,
-     F   SSP_EQ,      AIRE,        SIGY,        ET,
-     G   R1_FREE,     LBUF%PLA,    R3_FREE,     AMU,
-     H   MFXX(1,IP),  MFXY(1,IP),  MFXZ(1,IP),  MFYX(1,IP),
-     I   MFYY(1,IP),  MFYZ(1,IP),  MFZX(1,IP),  MFZY(1,IP),
-     J   MFZZ(1,IP),  IPM,         GAMA,        BID,
-     K   BID,         BID,         BID,         BID,
-     L   BID,         BID,         ISTRAIN,     TEMPEL,
-     M   DIE,         IEXPAN,      ILAY,        MSSA,
-     N   DMELS,       IPTR,        IPTS,        IPTT,
-     O   TABLE,       BID,         BID,         BID,
-     P   BID,         IPARG(1,NG), IGEO,        CONDE,
-     Q   ITASK,       NLOC_DMG,    VARNL,       MAT_ELEM,
-     R   H3D_STRAIN,  JPLASOL,     JSPH,        MVSIZ,
-     *   SNPC,        STF,         SBUFMAT,     GLOB_THERM, 
-     S   SVIS,        SZ_IX,       IRESP,
-     T   N2D,         th_strain,   NGROUP,      TT, 
-     .   DT1,         NTABLE,      NUMELQ,      nummat,
-     .   numgeo,      numnod,      numels,
-     .   IDEL7NOK,    IDTMIN,      MAXFUNC,
-     .   IMON_MAT,    USERL_AVAIL, impl_s,
-     .   idyna,       DT,          fheat      ,sensors)
+      CALL MMAIN(TIMERS, OUTPUT, ELBUF_TAB, NG, PM, GEO, ALE_CONNECT, IXS, IPARG, V, TF, NPF, BUFMAT, STI, X, DT2T,
+     . NELTST, ITYPTST, OFFSET, NEL, W, OFF, NGEO, MXT, NGL, VOLN, VD2, DVOL, DELTAX, VIS, QVIS, CXX, S1, S2, S3, S4,
+     . S5, S6, DXX, DYY, DZZ, D4, D5, D6, WXX, WYY, WZZ, RX, RY, RZ, SX, SY, SZ, VDX, VDY, VDZ, MUVOID, SSP_EQ, AIRE,
+     . SIGY, ET, R1_FREE, LBUF%PLA, R3_FREE, AMU, MFXX(1,IP), MFXY(1,IP), MFXZ(1,IP), MFYX(1,IP), MFYY(1,IP), MFYZ(1,IP)
+     . , MFZX(1,IP), MFZY(1,IP), MFZZ(1,IP), IPM, GAMA, BID, BID, BID, BID, BID, BID, BID, ISTRAIN, TEMPEL, DIE, IEXPAN,
+     . ILAY, MSSA, DMELS, IPTR, IPTS, IPTT, TABLE, BID, BID, BID, BID, IPARG(1,NG), IGEO, CONDE, ITASK, NLOC_DMG, VARNL,
+     . MAT_ELEM, JPLASOL, JSPH, MVSIZ, SNPC, STF, SBUFMAT, GLOB_THERM, SVIS, SZ_IX, IRESP, N2D, th_strain, NGROUP, TT,
+     . DT1, NTABLE, NUMELQ, nummat, numgeo, numnod, numels, IDEL7NOK, IDTMIN, MAXFUNC, IMON_MAT, USERL_AVAIL, impl_s,
+     . idyna, DT, fheat, sensors)
 C
       IF ((ITASK==0).AND.(IMON_MAT==1)) CALL STOPTIME(TIMERS,35)
 C-----------  return to global system    

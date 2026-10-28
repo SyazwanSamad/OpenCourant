@@ -27,20 +27,11 @@ C  dev023 dual routine of i2for3 for parith/on spmd
 !||    i2forces      ../engine/source/interfaces/interf/i2forces.F
 !||    i2forces_2d   ../engine/source/interfaces/interf/i2forces_2D.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR3PN(NSN    ,NMN    ,A      ,CRST   ,NSV    ,
-     2                    MS     ,WEIGHT ,STIFN  ,MMASS  ,FSKYI2 ,
-     3                    IADI2  ,I0     ,NIR    ,I2SIZE ,IDEL2  ,
-     4                    SMASS  ,IRECT  ,X      ,V      ,FSAV   ,
-     5                    FNCONT  ,IRTL  ,H3D_DATA, CSTS_BIS,FNCONTP ,
-     6                    FTCONTP)
+      SUBROUTINE I2FOR3PN(NSN, NMN, A, CRST, NSV, MS, WEIGHT, STIFN, MMASS, FSKYI2, IADI2, I0, NIR, I2SIZE, IDEL2,
+     . SMASS, IRECT, X, V, FSAV, FNCONT, IRTL, CSTS_BIS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -53,10 +44,6 @@ C     REAL
      .   X(*),V(*),A(*), CRST(2,*), MS(*), STIFN(*), MMASS(*),
      .   FSKYI2(I2SIZE,*), SMASS(*),FSAV(*),FNCONT(3,*),CSTS_BIS(2,*),
      .   FNCONTP(3,*)   ,FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -126,9 +113,7 @@ C
               FSKYI2(5,NN) = ABS(STIFN(I)*H(2))
             ENDIF
 C---        output of tied contact forces
-            CALL I2FORCES_2D(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                       IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                       FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES_2D(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 c
             STIFN(I)=EM20
             IF(IDEL2/=0.AND.MS(I)/=0.)SMASS(II)=MS(I)
@@ -228,9 +213,7 @@ C
             ENDIF
 C
 C---      output of tied contact forces
-            CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                    IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                    FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C
             IF(IRODDL==0)THEN
               STIFN(I)=EM20
@@ -283,19 +266,11 @@ C
 !||--- calls      -----------------------------------------------------
 !||    i2forces   ../engine/source/interfaces/interf/i2forces.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR3P(NSN    ,NMN    ,A      ,CRST   ,MSR    ,
-     2                   NSV    ,MS     ,WEIGHT ,STIFN  ,MMASS  ,
-     3                   FSKYI2 ,IADI2  ,I0     ,NIR    ,I2SIZE ,
-     4                   IRECT  ,X      ,V      ,FSAV   ,FNCONT    ,
-     5                   IRTL   ,H3D_DATA, CSTS_BIS,FNCONTP,FTCONTP)
+      SUBROUTINE I2FOR3P(NSN, NMN, A, CRST, MSR, NSV, MS, WEIGHT, STIFN, MMASS, FSKYI2, IADI2, I0, NIR, I2SIZE, IRECT,
+     . X, V, FSAV, FNCONT, IRTL, CSTS_BIS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -309,10 +284,6 @@ C     REAL
      .   X(*),V(*),A(*),CRST(2,*),MS(*),STIFN(*), MMASS(*),FSAV(*),
      .   FSKYI2(I2SIZE,*),FNCONT(3,*), CSTS_BIS(2,*),
      .   FNCONTP(3,*),FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 C-----------------------------------------------
 C   L o c a l   V a r i a b l e s
@@ -474,9 +445,7 @@ C
         ENDIF
 C
 C---    output of tied contact forces
-        CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C
         IF(IRODDL==0)THEN
           STIFN(I)=EM20
@@ -526,19 +495,11 @@ C
 !||--- calls      -----------------------------------------------------
 !||    i2forces   ../engine/source/interfaces/interf/i2forces.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR3PO(NSN      ,NMN    ,A       ,CRST   ,MSR     ,
-     2                    NSV      ,MS     ,WEIGHT  ,STIFN  ,MMASS   ,
-     3                    FSKYI2   ,IADI2  ,I0      ,NIR    ,I2SIZE  ,
-     4                    IRECT    ,X      ,V      ,FSAV   ,FNCONT    ,
-     5                    IRTL     ,H3D_DATA, CSTS_BIS,FNCONTP,FTCONTP)
+      SUBROUTINE I2FOR3PO(NSN, NMN, A, CRST, MSR, NSV, MS, WEIGHT, STIFN, MMASS, FSKYI2, IADI2, I0, NIR, I2SIZE, IRECT,
+     . X, V, FSAV, FNCONT, IRTL, CSTS_BIS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -552,10 +513,6 @@ C     REAL
      .   X(*),V(*),A(*), CRST(2,*), MS(*), STIFN(*), MMASS(*),FSAV(*),
      .   FSKYI2(I2SIZE,*),FNCONT(3,*),CSTS_BIS(2,*),
      .   FNCONTP(3,*),FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
       INTEGER I, J, I1, I2, I3, II, NN, L
 C     REAL
       my_real
@@ -693,9 +650,7 @@ C
           ENDIF
 C
 C---    output of tied contact forces
-          CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                  IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                  FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C
           STIFN(I)=EM20
           A(I1)=ZERO
@@ -713,20 +668,11 @@ C
 !||--- called by ------------------------------------------------------
 !||    intti2f    ../engine/source/interfaces/interf/intti2f.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2MOM3PN(NSN  ,NMN  ,AR    ,IRECT,CRST  ,
-     2                    MSR  ,NSV  ,IRTL  ,IN   ,MS    ,
-     3                    A    ,X    ,WEIGHT,STIFR,FSKYI2,
-     4                    STIFN,IADI2,I0    ,NIR  ,I2SIZE,
-     5                    IDEL2,SMASS,SINER ,MINER,ADI   ,
-     6                    H3D_DATA,CSTS_BIS)
+      SUBROUTINE I2MOM3PN(NSN, NMN, AR, IRECT, CRST, MSR, NSV, IRTL, IN, MS, A, X, WEIGHT, STIFR, FSKYI2, STIFN, IADI2,
+     . I0, NIR, I2SIZE, IDEL2, SMASS, SINER, MINER, ADI, CSTS_BIS)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -740,10 +686,6 @@ C     REAL
      .        A(3,*), AR(3,*),CRST(2,*), MS(*),
      .        X(3,*),IN(*),STIFR(*), FSKYI2(I2SIZE,*), STIFN(*),
      .        SMASS(*), SINER(*), MINER(*), ADI(*), CSTS_BIS(2,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
 C-----------------------------------------------
@@ -758,7 +700,7 @@ C     REAL
      .   STF,AI,H(4),H2(4)
 C-----------------------------------------------
 C     MINER(II) initialise a MS(J) in resol_init
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
         DO II=1,NMN
           J=MSR(II)
           ADI(J) = ADI(J)*MINER(II)
@@ -819,7 +761,7 @@ C
               INS = IN(I) + AA * MS(I)
               STF = STIFR(I) + AA * STIFN(I)
 C
-              IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
                 AI=AA * MS(I)
                 ADI(IRECT(1,L))=ADI(IRECT(1,L))+AI*H(1)
                 ADI(IRECT(2,L))=ADI(IRECT(2,L))+AI*H(2)
@@ -940,7 +882,7 @@ C
               INS = IN(I) + AA * MS(I)
               STF = STIFR(I) + AA * STIFN(I)
 C
-              IF (ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF (ANIM_N(12)+OUTP_N(3)>0) THEN
                 AI=AA * MS(I)
                 ADI(IRECT(1,L))=ADI(IRECT(1,L))+AI*H(1)
                 ADI(IRECT(2,L))=ADI(IRECT(2,L))+AI*H(2)
@@ -1020,7 +962,7 @@ C
 C
 C specific processing for adi
 C
-      IF(ANIM_N(12)+OUTP_N(3)+H3D_DATA%N_SCAL_DINER >0) THEN
+      IF(ANIM_N(12)+OUTP_N(3)>0) THEN
 #include "vectorize.inc"
         DO II=1,NMN
           J=MSR(II)
@@ -1221,22 +1163,11 @@ C==========================================================================
 !||--- calls      -----------------------------------------------------
 !||    i2forces   ../engine/source/interfaces/interf/i2forces.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod    ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOMO3P(
-     1             NSN      ,NMN     ,A      ,IRECT   ,DPARA   ,
-     2             MSR      ,NSV     ,IRTL   ,MS      ,WEIGHT  ,
-     3             AR       ,IN      ,X      ,STIFN   ,STIFR   ,
-     4             FSKYI2   ,IADI2   ,ILEV   ,DMAST   ,ADM     ,
-     5             MMASS    ,I0      ,NIR    ,I2SIZE  ,IDEL2   ,
-     6             SMASS    ,SINER   ,V      ,CRST    ,FSAV    ,
-     7             FNCONT   ,H3D_DATA,FNCONTP,FTCONTP )
+      SUBROUTINE I2FOMO3P(NSN, NMN, A, IRECT, DPARA, MSR, NSV, IRTL, MS, WEIGHT, AR, IN, X, STIFN, STIFR, FSKYI2,
+     . IADI2, ILEV, DMAST, ADM, MMASS, I0, NIR, I2SIZE, IDEL2, SMASS, SINER, V, CRST, FSAV, FNCONT, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -1251,10 +1182,6 @@ C     REAL
      .   DPARA(7,*), MS(*), IN(*),STIFN(*),STIFR(*),DMAST,ADM(*),
      .   SMASS(*), SINER(*),FSAV(*), CRST(2,*),FNCONT(3,*),
      .   FNCONTP(3,*),FTCONTP(3,*)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "scr14_c.inc"
 #include      "scr16_c.inc"
 C-----------------------------------------------
@@ -1275,7 +1202,7 @@ C=======================================================================
 C specific processing for dmas
 C
 C MMASS(II) initialise a MS(J) a t=0 in starter
-      IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0.AND.ILEV==1) THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0.AND.ILEV==1) THEN
         DO II=1,NMN
           J=MSR(II)
           ADM(J) = ADM(J)*MMASS(II)
@@ -1483,7 +1410,7 @@ C
             FSKYI2(10,NN)= ZERO
 C
             DMAST = DMAST + 4.*XMSI - MS(I)
-            IF (ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0) THEN
+      IF (ANIM_N(2)+OUTP_N(2)>0) THEN
               ADM(J1) = ADM(J1) + XMSI - FOURTH*MS(I)
               ADM(J2) = ADM(J2) + XMSI - FOURTH*MS(I)
               ADM(J3) = ADM(J3) + XMSI - FOURTH*MS(I)
@@ -1498,9 +1425,7 @@ C
           IN(I)=ZERO
 C
 C---    output of tied contact forces
-          CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                  IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                  FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C----
 C zero storage for nodes deleted by idel2
         ELSEIF(WEIGHT(-I)==1) THEN
@@ -1555,7 +1480,7 @@ C
 C
 C specific processing for adm
 C
-      IF(ANIM_N(2)+OUTP_N(2)+H3D_DATA%N_SCAL_DMAS >0.AND.ILEV==1) THEN
+      IF(ANIM_N(2)+OUTP_N(2)>0.AND.ILEV==1) THEN
 #include "vectorize.inc"
         DO II=1,NMN
           J=MSR(II)

@@ -65,9 +65,9 @@ Copyright>        copyright and attribution statement.
 !||    hm_admlcnt                                 ../starter/source/groups/hm_admlistcnt.F
 !||    hm_admlist                                 ../starter/source/groups/hm_admlist.F
 !||    hm_bigsbox                                 ../starter/source/groups/hm_bigsbox.F
-!||    hm_convert_2d_elements_seatbelt            ../starter/source/devtools/hm_reader/hm_convert_2d_elements_seatbelt.F
-!||    hm_convert_fail_tab                        ../starter/source/devtools/hm_reader/hm_convert_fail_tab.F
-!||    hm_count_2d_element_seatbelt               ../starter/source/devtools/hm_reader/hm_count_2d_element_seatbelt.F
+!||    hm_convert_2d_elements_seatbelt            ../starter/source/devtools/reader/hm_convert_2d_elements_seatbelt.F
+!||    hm_convert_fail_tab                        ../starter/source/devtools/reader/hm_convert_fail_tab.F
+!||    hm_count_2d_element_seatbelt               ../starter/source/devtools/reader/hm_count_2d_element_seatbelt.F
 !||    hm_elngr                                   ../starter/source/groups/hm_elngr.F
 !||    hm_elngrr                                  ../starter/source/groups/hm_elngrr.F
 !||    hm_elngrs                                  ../starter/source/groups/hm_elngr.F
@@ -110,7 +110,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_preread_rbody                           ../starter/source/constraints/general/rbody/hm_preread_rbody.F
 !||    hm_preread_skw                             ../starter/source/tools/skew/hm_preread_skw.F90
 !||    hm_preread_sphio                           ../starter/source/loads/sph/hm_preread_sphio.F
-!||    hm_rbodies_add_main_node                   ../starter/source/devtools/hm_reader/hm_rbodies_add_main_node.F90
+!||    hm_rbodies_add_main_node                   ../starter/source/devtools/reader/hm_rbodies_add_main_node.F90
 !||    hm_read_activ                              ../starter/source/tools/activ/hm_read_activ.F
 !||    hm_read_admas                              ../starter/source/tools/admas/hm_read_admas.F
 !||    hm_read_ale_grid                           ../starter/source/general_controls/ale_grid/hm_read_ale_grid.F
@@ -355,7 +355,7 @@ Copyright>        copyright and attribution statement.
 !||    hm_read_yield_criterion_hershey            ../starter/source/materials/mat/mat131/yield_criterion/hm_read_yield_criterion_hershey.F90
 !||    hm_read_yield_criterion_hill               ../starter/source/materials/mat/mat131/yield_criterion/hm_read_yield_criterion_hill.F90
 !||    hm_read_yield_criterion_vonmises           ../starter/source/materials/mat/mat131/yield_criterion/hm_read_yield_criterion_vonmises.F90
-!||    hm_s_ale                                   ../starter/source/devtools/hm_reader/hm_s_ale.F90
+!||    hm_s_ale                                   ../starter/source/devtools/reader/hm_s_ale.F90
 !||    hm_set                                     ../starter/source/model/sets/hm_set.F
 !||    hm_setfxrbyon                              ../starter/source/constraints/fxbody/hm_setfxrbyon.F
 !||    hm_submodpart                              ../starter/source/groups/hm_submodpart.F

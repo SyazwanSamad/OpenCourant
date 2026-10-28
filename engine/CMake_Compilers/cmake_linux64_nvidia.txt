@@ -152,8 +152,6 @@ endif()
 # Third party libraries
 # ---------------------
 
-#H3D
-set (h3d_inc "-I${source_directory}/../extlib/h3d/includes")
 
 #ZLIB
 set (zlib_inc "-I${source_directory}/../extlib/zlib/linux64/include")
@@ -245,17 +243,17 @@ set_source_files_properties( ${source_files} PROPERTIES COMPILE_FLAGS
 
 # C source files
 set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS
-  "-g -O0 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}" )
+  "-g -O0 -mp ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}" )
 
 # CXX source files
 set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS
-  "-g -O0 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}" )
+  "-g -O0 -mp ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}" )
 
 # CUDA source files (.cu) - compiled as CXX with nvc++
 if (cuda_source_files)
   set_source_files_properties(${cuda_source_files} PROPERTIES LANGUAGE CXX)
   set_source_files_properties(${cuda_source_files} PROPERTIES COMPILE_FLAGS
-    "-g -O0 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}" )
+    "-g -O0 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}" )
 endif()
 
 else ()
@@ -266,17 +264,17 @@ set_source_files_properties( ${source_files} PROPERTIES COMPILE_FLAGS
 
 # C source files
 set_source_files_properties(${c_source_files} PROPERTIES COMPILE_FLAGS
-  "-w -O3 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}" )
+  "-w -O3 -mp ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} ${mpi_flag}" )
 
 # CXX source files
 set_source_files_properties(${cpp_source_files} PROPERTIES COMPILE_FLAGS
-  "-w -O3 -mp ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}" )
+  "-w -O3 -mp ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++14 ${mpi_flag}" )
 
 # CUDA source files (.cu) - compiled as CXX with nvc++
 if (cuda_source_files)
   set_source_files_properties(${cuda_source_files} PROPERTIES LANGUAGE CXX)
   set_source_files_properties(${cuda_source_files} PROPERTIES COMPILE_FLAGS
-    "-w -O3 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${h3d_inc} ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}" )
+    "-w -O3 -cuda -gpu=${gpu_cc} -mp -Minfo=accel --diag_suppress cuda_compile ${zlib_inc} ${md5_inc} ${precision_flag} ${cppmach} ${cpprel} -std=c++17 ${mpi_flag}" )
 endif()
 
 endif()

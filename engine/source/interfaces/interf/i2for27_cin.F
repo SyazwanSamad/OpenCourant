@@ -28,20 +28,11 @@ Copyright>        copyright and attribution statement.
 !||    i2loceq_27    ../common_source/interf/i2loceq.F
 !||    i2rep         ../common_source/interf/i2rep.F
 !||--- uses       -----------------------------------------------------
-!||    h3d_mod       ../engine/share/modules/h3d_mod.F
 !||====================================================================
-      SUBROUTINE I2FOR27_CIN(NSN    ,NMN    ,A      ,IRECT  ,CRST   ,
-     2                   MSR    ,NSV    ,IRTL   ,MS     ,WEIGHT ,
-     3                   STIFN  ,MMASS  ,IDEL2  ,SMASS  ,X      ,
-     4                   V      ,FSAV   ,FNCONT ,INDXC  ,H3D_DATA,
-     5                   IN     ,SINER  ,DPARA  ,MSEGTYP2,AR     ,
-     6                   STIFR  ,CSTS_BIS,T2FAC_SMS,FNCONTP,FTCONTP)
+      SUBROUTINE I2FOR27_CIN(NSN, NMN, A, IRECT, CRST, MSR, NSV, IRTL, MS, WEIGHT, STIFN, MMASS, IDEL2, SMASS, X, V,
+     . FSAV, FNCONT, INDXC, IN, SINER, DPARA, MSEGTYP2, AR, STIFR, CSTS_BIS, T2FAC_SMS, FNCONTP, FTCONTP)
 C-----------------------------------------------
 C   M o d u l e s
-C-----------------------------------------------
-      USE H3D_MOD
-C-----------------------------------------------
-C   I m p l i c i t   T y p e s
 C-----------------------------------------------
 #include      "implicit_f.inc"
 C-----------------------------------------------
@@ -54,10 +45,6 @@ C     REAL
      .    X(3,*),V(3,*),A(3,*),MS(*),CRST(2,*),STIFN(*),MMASS(*),SMASS(*),
      .    FSAV(*),FNCONT(3,*),IN(*),SINER(*),DPARA(7,*),AR(3,*),STIFR(*),CSTS_BIS(2,*),
      .    T2FAC_SMS(*),FNCONTP(3,*)   ,FTCONTP(3,*) 
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   C o m m o n   B l o c k s
-C-----------------------------------------------
 #include      "com01_c.inc"
 #include      "impl1_c.inc"
 #include      "sms_c.inc"
@@ -321,9 +308,7 @@ C
         END IF
 C 
 C---    output of tied contact forces
-        CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C      
         IF(IRODDL==0)THEN
           IF(IDEL2/=0.AND.MS(I)/=0.)SMASS(II)=MS(I)
@@ -588,9 +573,7 @@ C----   For AMS scaling factor on stiffness is stored - only used for solid main
         ENDIF
 C
 C---    output of tied contact forces
-        CALL I2FORCES(X       ,FS     ,FX     ,FY      ,FZ     ,
-     .                IRECT(1,L),NIR  ,FSAV   ,FNCONT  ,FNCONTP,
-     .                FTCONTP ,WEIGHT ,H3D_DATA,I      ,H)
+      CALL I2FORCES(X, FS, FX, FY, FZ, IRECT(1,L), NIR, FSAV, FNCONT, FNCONTP, FTCONTP, WEIGHT, I, H)
 C
         IF(IRODDL==0)THEN
           IF(IDEL2/=0.AND.MS(I)/=0.) SMASS(II)=MS(I)

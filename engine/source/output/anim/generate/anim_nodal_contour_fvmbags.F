@@ -79,7 +79,7 @@ C-----------------------------------------------
       INTEGER :: K1        !< index shift for MONVOL ARRAY
       INTEGER :: NN, II    !< loop
       INTEGER :: ITYP      !< monvol type (refer to read_monvol.F)
-      INTEGER :: IH3D_FLAG !< node group identifier
+      INTEGER :: VIS_FLAG !< node group identifier
  
       INTEGER :: IFV       !< FVMBAG identifier in [1, NFVBAG] where NFVBAG <= NVOLU
       my_real :: VALUE     !< polyhedron value
@@ -97,10 +97,10 @@ C-----------------------------------------------
       DO NN=1,NVOLU
          ITYP=MONVOL(K1-1+2)
          IF (ITYP == 6.OR.ITYP == 8 .OR. ITYP == 11) THEN   ! /MONVOL/FVMBAG, or FVMBAG1, or FVMBAG2
-            IH3D_FLAG = MONVOL(K1-1 +75)  !GRNOD internal identifier in [1:NGRNOD]
+            VIS_FLAG = MONVOL(K1-1 +75)  !GRNOD internal identifier in [1:NGRNOD]
             IFV = MONVOL(K1-1 +45)
             !check if grnod_id was provided, otherwise skip
-            IF(IH3D_FLAG == 1 .AND. IFV /= 0)THEN
+            IF(VIS_FLAG == 1 .AND. IFV /= 0)THEN
               
               IF(FVDATA_P(IFV)%NPOLH > 0)THEN !if GRNOD is not empty and if there are any polyhedron
                                  
@@ -156,7 +156,7 @@ C-----------------------------------------------
  
 
               ENDIF !NPOLH>0>0 
-            ENDIF !IH3D_FLAG>0
+            ENDIF !VIS_FLAG>0
             K_SHIFT = K_SHIFT + FVDATA_P(IFV)%NPOLH
          ENDIF ! ITYP
          K1=K1+NIMV

@@ -31,15 +31,17 @@ OpenCourant is made of:
 
 Download and [build OpenCourant](https://github.com/OpenCourant/OpenCourant/blob/main/HOWTO.md), or download the [binaries](https://github.com/OpenCourant/OpenCourant/releases)
 
+The current source build uses OpenReader and native result outputs. H3D requests
+fail explicitly; see [Stage 5 behavior and validation](qa-tests/dependency_removal/STAGE5.md).
+
 ### Environment variables settings under Linux
 
 Set the following environment variables:
 
         export OPENCOURANT_PATH=[Path to OpenCourant root directory]
         export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files
-        export RAD_H3D_PATH=$OPENCOURANT_PATH/extlib/h3d/lib/linux64
         export OMP_STACKSIZE=400m
-        export LD_LIBRARY_PATH=$OPENCOURANT_PATH/extlib/hm_reader/linux64/:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linux64:$LD_LIBRARY_PATH
 
 ### Environment variables settings under Windows cmd shell
 
@@ -47,9 +49,8 @@ Set the following environment variables:
 
         set OPENCOURANT_PATH=[Path to OpenCourant root directory / Windows Style]
         set RAD_CFG_PATH=%OPENCOURANT_PATH%\hm_cfg_files
-        set RAD_H3D_PATH=%OPENCOURANT_PATH%\extlib\h3d\lib\win64
         set KMP_STACKSIZE=400m
-        set PATH=%OPENCOURANT_PATH%\extlib\hm_reader\win64;%PATH% 
+        set PATH=%OPENCOURANT_PATH%\exec;%PATH%
 
 * If OpenCourant was downloaded from GitHub Releases, add Intel Runtime libraries shipped in the Package to PATH:
 
@@ -78,14 +79,13 @@ Cygwin is translating `PATH` variable into DOS path to execute OpenCourant, but 
 Considering that the OpenCourant directory is placed in `C:\OpenCourant`, then variables should be:
 
         export OPENCOURANT_PATH=/cygdrive/c/OpenCourant
-        export PATH=$OPENCOURANT_PATH/extlib/hm_reader/win64:$OPENCOURANT_PATH/extlib/h3d/lib/win64:$PATH
+        export PATH=$OPENCOURANT_PATH/exec:$PATH
         export PATH=$OPENCOURANT_PATH/extlib/intelOneAPI_runtime/win64:$PATH
         export RAD_CFG_PATH=c:/OpenCourant/hm_cfg_files
-        export RAD_H3D_PATH=c:/OpenCourant/extlib/h3d/lib/win64
         export KMP_STACKSIZE=400m
 
 
-Note that variables `RAD_CFG_PATH` and `RAD_H3D_PATH` start with `c:` unlike the `PATH` that starts with `/cygdrive/c`.
+Note that `RAD_CFG_PATH` starts with `c:` unlike `PATH`, which starts with `/cygdrive/c`.
 
 
 ## Running OpenCourant

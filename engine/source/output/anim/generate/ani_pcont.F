@@ -26,17 +26,13 @@ Copyright>        copyright and attribution statement.
 !||    spmd_exch_nodarea   ../engine/source/mpi/anim/spmd_exch_nodarea.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE ANI_PCONT(OUTPUT, IXS ,IXC    ,IXTG    ,FASOLFR  ,X       ,
-     .                 CONTN   ,CONTT  ,IAD_ELEM,FR_ELEM,WEIGHT    ,
-     .                 IXQ     ,SEGQUADFR,IXS10 ,FNCONTP2,FTCONTP2 ,
-     .                 H3D_DATA,CSEFRIC,CSEFRICG,SZ_NPCONT2,NPCONT2)
+      SUBROUTINE ANI_PCONT(OUTPUT, IXS, IXC, IXTG, FASOLFR, X, CONTN, CONTT, IAD_ELEM, FR_ELEM, WEIGHT, IXQ, SEGQUADFR,
+     . IXS10, FNCONTP2, FTCONTP2, SZ_NPCONT2, NPCONT2)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
       use element_mod , only : nixs,nixc,nixtg
 C-----------------------------------------------
@@ -55,32 +51,18 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       TYPE(OUTPUT_), intent(inout) :: OUTPUT
-      INTEGER  
-     .   IXS(NIXS,*), IXC(NIXC,*), IXTG(NIXTG,*), FASOLFR(2,*),
-     .   IAD_ELEM(2,*), FR_ELEM(*), WEIGHT(*),IXQ(7,*),SEGQUADFR(2,*),
-     .   IXS10(6,*)
-      INTEGER  , INTENT(IN)    :: SZ_NPCONT2
-      my_real
-     .   X(3,*), CONTN(3,*), CONTT(3,*),FNCONTP2(3,*),FTCONTP2(3,*)
-      my_real  , INTENT(INOUT) :: CSEFRIC(OUTPUT%DATA%NINEFRIC,OUTPUT%DATA%S_EFRICINT),CSEFRICG(OUTPUT%DATA%S_EFRIC)
-      my_real  , INTENT(IN)    :: NPCONT2(3,SZ_NPCONT2)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER N1,N2,N3,N4,NN1,NN2,NN3,J,
-     .        I,N,IFAC,ILINE,
-     .         LENR, NI,NNOUT
-       INTEGER, DIMENSION(:), ALLOCATABLE ::  ITAGN
-       my_real
-     .     AREA, 
-     .     X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3,X4,Y4,Z4,
-     .     X31,Y31,Z31,X42,Y42,Z42,X32,Y32,Z32,E3X,E3Y,E3Z,
-     .          
-     .     AREAINV,NORMAL(3),NNN,F_TOTAL(1:3),FN_PROJ
-      INTEGER FACES(4,6),LINES(2,4),FACES10(3,24)
-       my_real, DIMENSION(:), ALLOCATABLE ::  NODAREA
-       my_real, DIMENSION(:,:), ALLOCATABLE ::  NORM_N
+      INTEGER IXS(NIXS,*), IXC(NIXC,*), IXTG(NIXTG,*), FASOLFR(2,*), IAD_ELEM(2,*), FR_ELEM(*), WEIGHT(*), IXQ(7,*),
+     . SEGQUADFR(2,*), IXS10(6,*)
+      INTEGER  , INTENT(IN)    ::  SZ_NPCONT2
+      my_real X(3,*), CONTN(3,*), CONTT(3,*), FNCONTP2(3,*), FTCONTP2(3,*)
+      my_real  , INTENT(IN)    ::  NPCONT2(3,SZ_NPCONT2)
+      INTEGER N1, N2, N3, N4, NN1, NN2, NN3, J, I, N, IFAC, ILINE, LENR, NI, NNOUT
+      INTEGER, DIMENSION(:), ALLOCATABLE ::   ITAGN
+      my_real AREA, X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4, X31, Y31, Z31, X42, Y42, Z42, X32, Y32, Z32, E3X,
+     . E3Y, E3Z, AREAINV, NORMAL(3), NNN, F_TOTAL(1:3), FN_PROJ
+      INTEGER FACES(4,6), LINES(2,4), FACES10(3,24)
+      my_real, DIMENSION(:), ALLOCATABLE ::   NODAREA
+      my_real, DIMENSION(:,:), ALLOCATABLE ::   NORM_N
 C     REAL
       DATA FACES/1,2,3,4,
      .           2,1,5,6,
@@ -124,7 +106,7 @@ C
       END DO
 C
 !    do normal dependent only for CONTN(1:3)>0
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT /=0) THEN
+      IF(ANIM_V(12)+OUTP_V(12)/=0) THEN
         NNOUT = 0
          DO N=1,NUMNOD
              NORMAL(1:3) = CONTN(1:3,N)
@@ -830,7 +812,7 @@ C
         CALL SPMD_EXCH_NODAREA(NODAREA,IAD_ELEM,FR_ELEM,LENR,WEIGHT)
       END IF
 C
-      IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2 /=0) THEN
+      IF(ANIM_V(27)/=0) THEN
          DO N=1,NUMNOD
            IF (NODAREA(N) == ZERO) THEN
              FNCONTP2(1,N)=ZERO
@@ -858,30 +840,6 @@ C--          total force stored in FNCONTP2
          END DO
        ENDIF
 C
-       IF(OUTPUT%DATA%NINEFRIC > 0) THEN
-        DO NI=1,OUTPUT%DATA%NINEFRIC
-         DO N=1,NUMNOD
-           IF (NODAREA(N) == ZERO) THEN
-             CSEFRIC(NI,N)=ZERO
-           ELSE
-             AREAINV = ONE/MAX(EM30,NODAREA(N))
-             CSEFRIC(NI,N)=AREAINV*OUTPUT%DATA%EFRIC(NI,N)
-           ENDIF
-         END DO
-        ENDDO
-       ENDIF
-C
-      IF(H3D_DATA%N_SCAL_CSE_FRIC >0)THEN
-         DO N=1,NUMNOD
-           IF (NODAREA(N) == ZERO) THEN
-             CSEFRICG(N)=ZERO
-           ELSE
-             AREAINV = ONE/MAX(EM30,NODAREA(N))
-             CSEFRICG(N)=AREAINV*OUTPUT%DATA%EFRICG(N)
-           ENDIF
-         END DO
-      ENDIF
-C
       DEALLOCATE(NODAREA)
 C
       RETURN
@@ -895,17 +853,13 @@ C
 !||    spmd_glob_dsum9     ../engine/source/mpi/interfaces/spmd_th.F
 !||--- uses       -----------------------------------------------------
 !||    element_mod         ../common_source/modules/elements/element_mod.F90
-!||    h3d_mod             ../engine/share/modules/h3d_mod.F
 !||    output_mod          ../common_source/modules/output/output_mod.F90
 !||====================================================================
-      SUBROUTINE ANI_PCONT21(OUTPUT,IXS ,IXC    ,IXTG    ,FASOLFR  ,X       ,
-     .                 CONTN   ,CONTT  ,IAD_ELEM,FR_ELEM,WEIGHT      ,
-     .                 NODGLOB ,FNCONTG ,FTCONTG,FNCONTP2,FTCONTP2   ,
-     .                 H3D_DATA,CSEFRIC_STAMP,CSEFRICG_STAMP,SZ_NPCONT2,NPCONT2)
+      SUBROUTINE ANI_PCONT21(OUTPUT, IXS, IXC, IXTG, FASOLFR, X, CONTN, CONTT, IAD_ELEM, FR_ELEM, WEIGHT, NODGLOB,
+     . FNCONTG, FTCONTG, FNCONTP2, FTCONTP2, SZ_NPCONT2, NPCONT2)
 C-----------------------------------------------
 C   M o d u l e s
 C-----------------------------------------------
-      USE H3D_MOD
       USE OUTPUT_MOD
       use element_mod , only : nixs,nixc,nixtg
 C-----------------------------------------------
@@ -929,27 +883,14 @@ C-----------------------------------------------
       INTEGER  
      .   IXS(NIXS,*), IXC(NIXC,*), IXTG(NIXTG,*), FASOLFR(2,*),
      .   IAD_ELEM(2,*), FR_ELEM(*), WEIGHT(*), NODGLOB(*)
-      INTEGER  , INTENT(IN)    :: SZ_NPCONT2
-      my_real
-     .   X(3,*), CONTN(3,*), CONTT(3,*), FNCONTG(3,*), FTCONTG(3,*),
-     .   FNCONTP2(3,*),FTCONTP2(3,*)
-      my_real  , INTENT(INOUT) :: CSEFRIC_STAMP(OUTPUT%DATA%NINEFRIC_STAMP,OUTPUT%DATA%S_EFRICINTG),
-     .   CSEFRICG_STAMP(OUTPUT%DATA%S_EFRICG)
-      my_real  , INTENT(IN)    :: NPCONT2(3,SZ_NPCONT2)
-      TYPE (H3D_DATABASE) :: H3D_DATA
-C-----------------------------------------------
-C   L o c a l   V a r i a b l e s
-C-----------------------------------------------
-      INTEGER N1,N2,N3,N4,
-     .        I,K,N,IFAC,
-     .         LENR, NI
-       my_real
-     .     AREA, 
-     .     X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3,X4,Y4,Z4,
-     .     X31,Y31,Z31,X42,Y42,Z42,X32,Y32,Z32,E3X,E3Y,E3Z,
-     .     TMP,AREAINV,NORMAL(3),NNN,F_TOTAL(1:3),FN_PROJ
-      INTEGER FACES(4,6)
-      my_real, DIMENSION(:), ALLOCATABLE ::  NODAREA,NODAREAG
+      INTEGER  , INTENT(IN)    ::  SZ_NPCONT2
+      my_real X(3,*), CONTN(3,*), CONTT(3,*), FNCONTG(3,*), FTCONTG(3,*), FNCONTP2(3,*), FTCONTP2(3,*)
+      my_real  , INTENT(IN)    ::  NPCONT2(3,SZ_NPCONT2)
+      INTEGER N1, N2, N3, N4, I, K, N, IFAC, LENR, NI
+      my_real AREA, X1, Y1, Z1, X2, Y2, Z2, X3, Y3, Z3, X4, Y4, Z4, X31, Y31, Z31, X42, Y42, Z42, X32, Y32, Z32, E3X,
+     . E3Y, E3Z, TMP, AREAINV, NORMAL(3), NNN, F_TOTAL(1:3), FN_PROJ
+      INTEGER  FACES(4,6)
+      my_real, DIMENSION(:), ALLOCATABLE :: NODAREA, NODAREAG
 C     REAL
       DATA FACES/1,2,3,4,
      .           2,1,5,6,
@@ -1152,8 +1093,7 @@ C
 C-----
 
       IF(NSPMD > 1)THEN
-        IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT+OUTPUT%DATA%NINEFRIC_STAMP
-     .   +H3D_DATA%N_SCAL_CSE_FRIC /=0) THEN
+      IF(ANIM_V(12)+OUTP_V(12)+OUTPUT%DATA%NINEFRIC_STAMP/=0) THEN
 
           ALLOCATE(NODAREAG(NUMNODG))
            DO I=1,NUMNODG
@@ -1166,31 +1106,15 @@ C-----
 
            CALL SPMD_GLOB_DSUM9(NODAREAG,NUMNODG)
 
-           IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT/=0) THEN
+      IF(ANIM_V(12)+OUTP_V(12)/=0) THEN
               CALL SPMD_GLOB_DSUM9(FNCONTG,3*NUMNODG)
               CALL SPMD_GLOB_DSUM9(FTCONTG,3*NUMNODG)
            ENDIF
-           IF(OUTPUT%DATA%NINEFRIC_STAMP > 0) THEN
-             DO NI=1,OUTPUT%DATA%NINEFRIC_STAMP
-               DO I=1,NUMNODG
-                 CSEFRIC_STAMP(NI,I)=OUTPUT%DATA%EFRIC_STAMP(NI,I)
-               ENDDO
-               CALL SPMD_GLOB_DSUM9(CSEFRIC_STAMP(NI,1),NUMNODG)
-             ENDDO
-           ENDIF
-
-           IF(H3D_DATA%N_SCAL_CSE_FRIC > 0) THEN
-              DO I=1,NUMNODG
-                 CSEFRICG_STAMP(I)=OUTPUT%DATA%EFRICG_STAMP(I)
-              ENDDO
-              CALL SPMD_GLOB_DSUM9(CSEFRICG_STAMP,NUMNODG)
-           ENDIF
-           
         ENDIF
 
       ENDIF
 
-      IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT /=0) THEN
+      IF(ANIM_V(12)+OUTP_V(12)/=0) THEN
 C     INTER == 21
         IF (NSPMD == 1) THEN
           DO N=1,NUMNOD
@@ -1246,7 +1170,7 @@ C     INTER == 21
          END IF
        ENDIF
 C
-      IF(ANIM_V(27)+H3D_DATA%N_VECT_PCONT2 /=0) THEN
+      IF(ANIM_V(27)/=0) THEN
          DO N=1,NUMNOD
            IF (NODAREA(N) == ZERO) THEN
              FNCONTP2(1,N)=ZERO
@@ -1274,73 +1198,8 @@ C--          total force stored in FNCONTP2
          END DO
        ENDIF
 C
-       IF(OUTPUT%DATA%NINEFRIC_STAMP > 0) THEN
-        IF (NSPMD == 1) THEN
-            DO NI=1,OUTPUT%DATA%NINEFRIC_STAMP
-             DO N=1,NUMNOD
-                I=NODGLOB(N)
-                IF (NODAREA(N) == ZERO) THEN
-                   CSEFRIC_STAMP(NI,I)=ZERO
-                ELSE
-                  TMP=ONE/MAX(EM30,NODAREA(N))
-                  CSEFRIC_STAMP(NI,I)=TMP*OUTPUT%DATA%EFRIC_STAMP(NI,I)
-                ENDIF
-             END DO
-            ENDDO
-        ELSE
-          IF(ISPMD==0)THEN 
-            DO NI=1,OUTPUT%DATA%NINEFRIC_STAMP
-             DO N=1,NUMNODG
-                IF (NODAREAG(N) == ZERO) THEN
-                   CSEFRIC_STAMP(NI,N)=ZERO
-                ELSE
-                  TMP=ONE/MAX(EM30,NODAREAG(N))
-                  CSEFRIC_STAMP(NI,N)=TMP*CSEFRIC_STAMP(NI,N)
-                ENDIF
-             END DO
-            ENDDO
-          ELSE
-            DO NI=1,OUTPUT%DATA%NINEFRIC_STAMP
-              DO N=1,NUMNODG
-                CSEFRIC_STAMP(NI,N)=ZERO
-              END DO
-            ENDDO
-          ENDIF
-        ENDIF
-       ENDIF
-C
-       IF(H3D_DATA%N_SCAL_CSE_FRIC > 0) THEN
-        IF (NSPMD == 1) THEN
-            DO N=1,NUMNOD
-              I=NODGLOB(N)
-              IF (NODAREA(N) == ZERO) THEN
-                 CSEFRICG_STAMP(I)=ZERO
-              ELSE
-                 TMP=ONE/MAX(EM30,NODAREA(N))
-                 CSEFRICG_STAMP(I)=TMP*OUTPUT%DATA%EFRICG_STAMP(I)
-              ENDIF
-            ENDDO
-        ELSE
-          IF(ISPMD==0)THEN 
-            DO N=1,NUMNODG
-              IF (NODAREAG(N) == ZERO) THEN
-                 CSEFRICG_STAMP(N)=ZERO
-              ELSE
-                 TMP=ONE/MAX(EM30,NODAREAG(N))
-                 CSEFRICG_STAMP(N)=TMP*CSEFRICG_STAMP(N)
-              ENDIF
-            ENDDO
-          ELSE
-            DO N=1,NUMNODG
-              CSEFRICG_STAMP(N)=ZERO
-            END DO
-          ENDIF
-        ENDIF
-       ENDIF
-C
       IF(NSPMD > 1)THEN
-        IF(ANIM_V(12)+OUTP_V(12)+H3D_DATA%N_VECT_PCONT+OUTPUT%DATA%NINEFRIC_STAMP
-     .   +H3D_DATA%N_SCAL_CSE_FRIC /=0) DEALLOCATE(NODAREAG)
+      IF(ANIM_V(12)+OUTP_V(12)+OUTPUT%DATA%NINEFRIC_STAMP/=0) DEALLOCATE(NODAREAG)
       ENDIF
           
       DEALLOCATE(NODAREA)
