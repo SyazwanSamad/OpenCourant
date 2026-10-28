@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "engine_sha256": "bf02df781a8788a1da516fb89667752de42dbd826253a040a1895c94367eca9f",
+  "fixture_sha256": "3c8d11efc9af7baef090f0f6e637186b52d36be61b9e0139bea6e71019d58330",
+  "cases": [
+    {
+      "ranks": 2,
+      "segment": 2,
+      "threads": 1,
+      "samples": 50,
+      "final_time": 4.95012092590332,
+      "max_history_difference": 0.0
+    },
+    {
+      "ranks": 2,
+      "segment": 3,
+      "threads": 1,
+      "samples": 50,
+      "final_time": 7.451125621795654,
+      "max_history_difference": 0.0
+    },
+    {
+      "ranks": 4,
+      "segment": 2,
+      "threads": 1,
+      "samples": 50,
+      "final_time": 4.95012092590332,
+      "max_history_difference": 0.0
+    },
+    {
+      "ranks": 4,
+      "segment": 3,
+      "threads": 1,
+      "samples": 50,
+      "final_time": 7.451125621795654,
+      "max_history_difference": 0.0
+    }
+  ]
+}

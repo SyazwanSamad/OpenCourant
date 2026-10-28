@@ -30,8 +30,12 @@ ARG PKG_ZIP=OpenCourant_linux64.zip
 RUN dnf -y install unzip hostname which libxcrypt-compat openssh-clients && dnf clean all && rm -rf /var/cache/dnf
 
 COPY ${PKG_ZIP} /tmp/opencourant.zip
-RUN unzip -q /tmp/opencourant.zip -d /opt && \
+RUN if unzip -Z1 /tmp/opencourant.zip | grep -Eiq '(^|/)(h3d|hm_reader|libh3d|libhm_reader)'; then \
+        echo 'Retired dependency in solver package' >&2; exit 1; \
+    fi && \
+    unzip -q /tmp/opencourant.zip -d /opt && \
     rm /tmp/opencourant.zip && \
+    test -f /opt/OpenCourant/exec/libopen_reader_${ARCH_DIR}.so && \
     chmod 755 /opt/OpenCourant/exec/*
 
 # OpenMPI 4.1.2 runtime, built with the same toolchain as the solver
@@ -53,7 +57,7 @@ ENV OPENCOURANT_PATH=/opt/OpenCourant \
     OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1 \
     PATH=/opt/OpenCourant/exec:/opt/openmpi/bin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin
 
-ENV LD_LIBRARY_PATH=/opt/OpenCourant/exec:/opt/OpenCourant/extlib/runtime/${ARCH_DIR}:/opt/OpenCourant/extlib/h3d/lib/${ARCH_DIR}:/opt/openmpi/lib
+ENV LD_LIBRARY_PATH=/opt/OpenCourant/exec:/opt/OpenCourant/extlib/runtime/${ARCH_DIR}:/opt/openmpi/lib
 
 LABEL org.opencontainers.image.source="https://github.com/OpenCourant/OpenCourant" \
       org.opencontainers.image.description="OpenCourant explicit finite element solver (Starter + Engine, SMP and OpenMPI)" \

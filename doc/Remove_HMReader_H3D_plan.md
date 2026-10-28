@@ -8,7 +8,13 @@ element queries and native contact/sensor outputs with two Intel MPI ranks. See 
 [Stage 3 results](../qa-tests/dependency_removal/STAGE3.md), and
 [Stage 4 results](../qa-tests/dependency_removal/STAGE4.md), and
 [Stage 5 results and limits](../qa-tests/dependency_removal/STAGE5.md).
-Stages 6-7 remain. Cross-platform validation remains a cutover gate.
+Stage 6 delivery changes and local Windows checks are implemented; the clean
+artifact is published in the approved extlib fork. See
+[Stage 6 status and evidence](../qa-tests/dependency_removal/STAGE6.md).
+Stage 7 Windows x64 validation has found failing physics/reference and parallel
+checksum gates; see [Stage 7 evidence and blockers](../qa-tests/dependency_removal/STAGE7.md).
+Linux x64/ARM64 verification is deferred at the user's request. The solver is
+not approved for release.
 
 ## Target behavior
 
@@ -251,6 +257,11 @@ outputs, restart continuation, shared calculations, and MPI execution pass.
 
 ### 6. Remove the binaries from the complete delivery chain
 
+Implemented with a reproducible clean archive, guarded cache refresh, updated
+delivery/QA/GUI paths and Windows package validation. The approved
+`SyazwanSamad/extlib` fork publishes `v82-openreader-1`; the pin uses that release.
+Native Linux/ARM package/container execution remains unverified.
+
 1. Produce a pinned extlib artifact without `hm_reader/`, `h3d/`, their SDK
    headers/import libraries, or their library-specific license payloads. Update
    `EXTLIB_VERSION.json` required files, URL, checksum, and obsolete reader
@@ -320,8 +331,10 @@ fallback, no proprietary-reference test dependency, preserved solver checks, and
 documented H3D workflow migration. Rollback is a version-control/release rollback,
 not a permanent switch that retains the removed libraries.
 
-Stage 1 records refreshed Windows builds, focused simulations, reference snapshots,
-checkpoints, and PE dependency listings. Package publication and later-stage
-validation remain outstanding. Principal risks are incomplete OpenReader parity
+Stages 1-5 record Windows builds, focused simulations, reference snapshots,
+checkpoints, and dependency listings. Stage 6 publishes the clean dependency
+archive and validates Windows package execution. Stage 7 extends Windows validation
+to SP/DP, OpenMP and MPI, and records unresolved regression failures. Linux/ARM
+verification is deferred at the user's request. Principal risks are incomplete OpenReader parity
 and accidental changes to shared calculations/restart layouts; H3D file workflows
 necessarily change when their implementation is removed.

@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "ignored_workspace_sdk_files": [],
+  "archives_with_sdk_payloads": [],
+  "zip_archives_inspected": 40,
+  "scope": "SDK binaries, import libraries and public headers by filename across tracked and ignored workspace files/ZIP entries; historical source, output data and textual provenance retained"
+}

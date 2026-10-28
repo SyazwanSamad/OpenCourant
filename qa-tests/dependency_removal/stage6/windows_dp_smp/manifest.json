@@ -1,0 +1,251 @@
+{
+  "captured_utc": "2026-10-28T18:17:11.845803+00:00",
+  "commit": "2fef8dac61deaec2367d12a1bf0f35f188a16ad1",
+  "working_tree_dirty": true,
+  "scope": "Stage 6 SDK-free dependency delivery, source build and extracted Windows DP SMP/MPI package; Linux/ARM recipes and GUI environment branches checked without native execution",
+  "toolchain": {
+    "ifx_icx": "2025.2.0 build 20250605",
+    "mkl": "2025.2",
+    "mpi": "Intel MPI 2021.16",
+    "vs": "VS 2022 Community",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]"
+  },
+  "reader_build_ids": {
+    "open_reader_win64.dll": "or_20261028195701_2fef8dac"
+  },
+  "build_settings": {
+    "starter": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_C_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:STRING=C:/Program Files (x86)/Intel/oneAPI/compiler/2025.2/bin/ifx.exe",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ],
+    "engine": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_C_COMPILER:UNINITIALIZED=icx.exe",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=/Qoption,link,/machine:x64",
+      "CMAKE_Fortran_COMPILER:UNINITIALIZED=ifx.exe",
+      "MPI:UNINITIALIZED=smp",
+      "debug:UNINITIALIZED=0",
+      "precision:UNINITIALIZED=dp"
+    ]
+  },
+  "publication": {
+    "status": "passed",
+    "repository": "https://github.com/SyazwanSamad/extlib",
+    "tag": "v82-openreader-1",
+    "release": "https://github.com/SyazwanSamad/extlib/releases/tag/v82-openreader-1",
+    "metadata_commit": "07d6faee9a79c7126c5b3c65f3e895fd09044753",
+    "assets": [
+      {
+        "name": "extlib.zip",
+        "bytes": 26112105,
+        "sha256": "72831a1b3e95910e20e24cceb6fb6c4295cfab1fade01144f2cee53c603442a3",
+        "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/extlib.zip",
+        "server_digest_verified": true,
+        "unauthenticated_download_verified": true
+      },
+      {
+        "name": "extlib.manifest.json",
+        "bytes": 678388,
+        "sha256": "3e84b6898d50281e3dd586aa82300e032cf073103be24d8de659520b1024db9e",
+        "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/extlib.manifest.json",
+        "server_digest_verified": true,
+        "unauthenticated_download_verified": true
+      },
+      {
+        "name": "SHA256SUMS",
+        "bytes": 166,
+        "sha256": "06f36d865c5cb4a3f50e753667d37d7911a59a87668005258a776ed01de0d392",
+        "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/SHA256SUMS",
+        "server_digest_verified": true,
+        "unauthenticated_download_verified": true
+      }
+    ],
+    "published_metadata_matches_pin": true,
+    "public_downloads_verified": true
+  },
+  "configuration_tree_sha256": "b2fab0c9a45842ca02d5ecbce7396603da73d1836a8d4b18fc1ab18954e1464a",
+  "suite_pass_lines": 149,
+  "package_physical_cases": 4,
+  "maximum_history_difference": 0.0,
+  "mpi_native_animation_bytes_match": true,
+  "retired_runtime_modules_loaded": 0,
+  "native_converters_passed": true,
+  "removed_output_rejected": true,
+  "retained_dependency_bytes_unchanged": true,
+  "source_archive_repack_reproducible": true,
+  "ignored_reference_binary_archive_sanitized": true,
+  "windows_package_archive_sha256": "b83584283e9e94dee7680bc3fd995e1fd83de4f2ddea7d9926a56b78d006f7c2",
+  "binary_and_build_graph_audit_passed": true,
+  "source_checks_passed": true,
+  "static_checks": {
+    "status": "passed",
+    "changed_python_files_parsed": 10,
+    "workflows_parsed": 9,
+    "release_assembly_bash_syntax_checked": [
+      "package_windows",
+      "package_linuxa64",
+      "delivery"
+    ],
+    "gui_patch_matches_pinned_source": true,
+    "docker_archive_guard_checked": true,
+    "current_launcher_sdk_paths_absent": true,
+    "diff_check_passed": true
+  },
+  "binaries": [
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45873664,
+      "sha256": "577e634e743767efbbba7eacbab4ccf5ddc8fa2bf3bce6e272c1668dd939093a"
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 131674624,
+      "sha256": "7b416dc02ea0755c9e68b62c3bd927ba2e5440b0d379bc115e5e0a890f06ec0e"
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 139902464,
+      "sha256": "bf02df781a8788a1da516fb89667752de42dbd826253a040a1895c94367eca9f"
+    },
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17495552,
+      "sha256": "2c95f722e5b4a83e4e703eac2a9102a39edb584d4a21e5f5e3fcab6f767b4482"
+    }
+  ],
+  "main_solver_changes_committed_or_pushed": false,
+  "limits": [
+    "No native Linux/ARM package/container execution: Docker absent, WSL not installed",
+    "No SP, multiple OpenMP threads, broader MPI/R2R, old multi-domain restart, coupled/user libraries, implicit/modal, full miniqa or performance sign-off",
+    "Windows package provenance repacked after host approval; all executable/runtime/configuration/GUI bytes preserved",
+    "An immediate Windows cache refresh encountered a transient rename denial, returned nonzero and restored the previous cache; retry and the final full-archive check passed"
+  ],
+  "files": [
+    {
+      "path": "binary_audit.json",
+      "bytes": 2209,
+      "sha256": "053d8bca9158cff95efd2d1cbe0875df3ebc3379718b242c70009012da25a173"
+    },
+    {
+      "path": "delivery-tests-final.log",
+      "bytes": 401,
+      "sha256": "3f610e925768c0435766206357f86a3557c3ccf1565678414458f0e5af4f7a9d"
+    },
+    {
+      "path": "extlib_manifest.json.gz",
+      "bytes": 157282,
+      "sha256": "5c546c3088ad6a785f2ec93bbfcf7a1fd06a75e5abd365b8a143f62b241ca729"
+    },
+    {
+      "path": "generated_input_manifest.json.gz",
+      "bytes": 4444,
+      "sha256": "14b5d06e3663dbd40416ab5567741c91f9fac76cb6b5be113b55af1c452a67e0"
+    },
+    {
+      "path": "gui-test.log",
+      "bytes": 116,
+      "sha256": "3aab6c757fd9736cf22db391f345b57e828a7a4bc182c466db8bcd38500eb46f"
+    },
+    {
+      "path": "input_manifest.json.gz",
+      "bytes": 174643,
+      "sha256": "a51b7d40e94740f1d83bea6e4b4c4a59007979461232254c8aef56d944d35ad8"
+    },
+    {
+      "path": "logs.zip",
+      "bytes": 329955,
+      "sha256": "882db1ebecf86a374456c300014a6980255fda0c21910193fdd701c9a6232cc2"
+    },
+    {
+      "path": "mode2_report.json",
+      "bytes": 5942,
+      "sha256": "6973a62821cfa7af39d3b9a210e7fa7ecbed6bc7e19d5b3019ae18ed68135590"
+    },
+    {
+      "path": "models_report.json",
+      "bytes": 21150,
+      "sha256": "3d86bdac6b46dbe5e1f263b9c22d4a1512ffa994f2ff34b7511ec2d957730815"
+    },
+    {
+      "path": "numerical_report.json",
+      "bytes": 20772,
+      "sha256": "8947fd19949011658c66aa63284667f36e5e83f3d988c24952acd9cdc4dd35e6"
+    },
+    {
+      "path": "package-check.log",
+      "bytes": 190,
+      "sha256": "cef14b4989bfb33af0b7327cce282018c8771eebb6d743a355216e3542557047"
+    },
+    {
+      "path": "package_runtime_report.json",
+      "bytes": 23155,
+      "sha256": "d27b72e358882aee840e9445c74778359e08cf552d459276cc52c4a2d24e24b5"
+    },
+    {
+      "path": "payload_absence.json",
+      "bytes": 332,
+      "sha256": "fd6c22f13dbcb897439a20136dcf697e2447fd124250a3688dabaf72bf64e837"
+    },
+    {
+      "path": "payload_audit.json",
+      "bytes": 6319,
+      "sha256": "87ff17204dd69e92a3bab24bcd36d77d56c257adefec40970eb7668a6686bee7"
+    },
+    {
+      "path": "public_cache_report.json",
+      "bytes": 336,
+      "sha256": "4401d4d2fad4e65e5df127c2137dbed167ef30282b80f0c720510aee54c0a697"
+    },
+    {
+      "path": "publication_report.json",
+      "bytes": 1418,
+      "sha256": "14cb1f7a279ab35218ba93c1b207e720cf91b10ac5fc1acd6c332befc6a0fd9c"
+    },
+    {
+      "path": "real_cache_report.json",
+      "bytes": 439,
+      "sha256": "2c37a180a4a39947d53057cf73f9975756663de78df9b2a63ea2fac5dccf8d7f"
+    },
+    {
+      "path": "reference_archive_cleanup.json",
+      "bytes": 3273,
+      "sha256": "7963e083ca2c7bdf0dcda465f80e0b2fc21afec5df2610c4c44a1429d0d90733"
+    },
+    {
+      "path": "runtime_values.zip",
+      "bytes": 175168,
+      "sha256": "57b597ba7403ffe3cbdf28a2b06ad873bbb0a932b667ce2b1da4ab17648c858e"
+    },
+    {
+      "path": "source_checks.log",
+      "bytes": 270,
+      "sha256": "67521a054e162b56f1809586b14f3cda8fd7595971fd1ec7027f66d15dda1cb1"
+    },
+    {
+      "path": "source_manifest.json",
+      "bytes": 5242,
+      "sha256": "0eb017b0c566113d4f50607b09215186759ec02bed626054ed84e05532b54e6d"
+    },
+    {
+      "path": "static_checks.json",
+      "bytes": 369,
+      "sha256": "c481c930263a7636cb6b71899f4c5ab2105d5f976e38b26b37b68430cfd42a6c"
+    },
+    {
+      "path": "suite_report.json",
+      "bytes": 25501,
+      "sha256": "b43f8cdf48234d7589a81fcc2afe63d789a778a3fc73f1d199192df0315235a8"
+    },
+    {
+      "path": "windows_package_manifest.json.gz",
+      "bytes": 133752,
+      "sha256": "1a4bc0f962d303b2f2ef69ef4f0dc6b75078fd3c69beec2b6b6bd94fcf9574eb"
+    }
+  ]
+}

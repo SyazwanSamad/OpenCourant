@@ -1,0 +1,143 @@
+{
+  "status": "failed",
+  "release_approved": false,
+  "platform": "Windows x64",
+  "deferred_at_user_request": [
+    "Linux x64",
+    "Linux ARM64"
+  ],
+  "suites": [
+    {
+      "suite": "miniqa_dp_smp_complete",
+      "precision": "dp",
+      "layout": "1 MPI rank x 2 OpenMP threads",
+      "registered": 81,
+      "passed": 79,
+      "skipped": [],
+      "failed": [
+        "1.19",
+        "1.59"
+      ],
+      "seconds": 128.0
+    },
+    {
+      "suite": "miniqa_dp_mpi_final",
+      "precision": "dp",
+      "layout": "2 MPI ranks x 2 OpenMP threads",
+      "registered": 81,
+      "passed": 79,
+      "skipped": [],
+      "failed": [
+        "1.19",
+        "1.59"
+      ],
+      "seconds": 261.0
+    },
+    {
+      "suite": "miniqa_sp_smp",
+      "precision": "sp",
+      "layout": "1 MPI rank x 2 OpenMP threads",
+      "registered": 81,
+      "passed": 72,
+      "skipped": [
+        "1.01",
+        "1.42",
+        "1.87"
+      ],
+      "failed": [
+        "1.09",
+        "1.10",
+        "1.19",
+        "1.64",
+        "1.68",
+        "1.71"
+      ],
+      "seconds": 76.0
+    },
+    {
+      "suite": "miniqa_sp_mpi",
+      "precision": "sp",
+      "layout": "2 MPI ranks x 2 OpenMP threads",
+      "registered": 81,
+      "passed": 72,
+      "skipped": [
+        "1.01",
+        "1.42",
+        "1.87"
+      ],
+      "failed": [
+        "1.09",
+        "1.10",
+        "1.19",
+        "1.64",
+        "1.68",
+        "1.71"
+      ],
+      "seconds": 91.0
+    },
+    {
+      "suite": "miniqa_dp_pon",
+      "precision": "dp",
+      "layout": "1x4, 2x2, 4x1",
+      "registered": 78,
+      "passed": 62,
+      "skipped": [
+        "1.80",
+        "1.87",
+        "1.88"
+      ],
+      "failed": [
+        "1.03",
+        "1.05",
+        "1.06",
+        "1.16",
+        "1.19",
+        "1.32",
+        "1.34",
+        "1.38",
+        "1.44",
+        "1.48",
+        "1.51",
+        "1.55",
+        "1.71"
+      ],
+      "seconds": 508.0
+    },
+    {
+      "suite": "miniqa_dp_pon_extra",
+      "precision": "dp",
+      "layout": "1x4, 2x2, 4x1",
+      "registered": 3,
+      "passed": 1,
+      "skipped": [],
+      "failed": [
+        "1.90",
+        "1.91"
+      ],
+      "seconds": 55.0
+    }
+  ],
+  "reference_values_regenerated": false,
+  "tolerances_widened": false,
+  "legacy_TYPE25_rules_carried_verbatim_to_CTest": true,
+  "unverified_Windows_workflows": [
+    "R2R external coupling",
+    "implicit/modal execution",
+    "external user-library/coupled execution",
+    "large-model performance"
+  ],
+  "legacy_keyword_findings": [
+    {
+      "keyword": "/MAT/LAW13",
+      "obsolete_since": "v13.0",
+      "upstream_policy": "Supported but no longer maintained",
+      "classification": "Pre-existing legacy compatibility failure; test retained",
+      "source": "https://help.altair.com/hwsolvers/rad/topics/solvers/rad/obsolete_overview_starter_r.htm"
+    }
+  ],
+  "notes": [
+    "PON checksum failures are reproduced with preserved pre-Stage-5 binaries.",
+    "LAW13 NaN is reproduced with every current/pre-Stage-5 Starter and Engine pairing.",
+    "A near-zero DP mass-error value fails the existing Python zero/relative tolerance rules; no tolerance was changed."
+  ]
+}

@@ -325,8 +325,7 @@ def main():
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
-    environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m',
-                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
+    environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m')
     environment['PATH'] = os.pathsep.join([str(ROOT / 'exec'), environment.get('PATH', '')])
     report = {'engine_sha256': hashlib.sha256(args.engine.read_bytes()).hexdigest(),
               'numpy_version': np.__version__,

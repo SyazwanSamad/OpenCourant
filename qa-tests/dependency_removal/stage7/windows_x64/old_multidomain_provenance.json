@@ -1,0 +1,35 @@
+{
+  "origin": "Preserved pre-Stage-5 GPL Windows DP Starter/OpenReader/Intel MPI Engine; no retired SDK installed or requested",
+  "binaries": {
+    "engine_win64.exe": "9e14dda825db7fe63af2568d1089c2a5c780a7c1906a8e3c68fc92675a67a657",
+    "engine_win64_impi.exe": "812e4acd4a822b7425e8d617e56be38b193075d4ae370c927df06d1000c4f7bb",
+    "open_reader_win64.dll": "5e5259fbdcd59ab5e5d547ff74e00fe3632432f82314dd02d9b57080e68027af",
+    "starter_win64.exe": "767f18bdc4829f53ab5cac1678268589ae407fbafee2e47a2986ee1a71517a01"
+  },
+  "cases": [
+    {
+      "ranks": 2,
+      "segment": 2,
+      "samples": 50,
+      "final_time": 4.95012092590332
+    },
+    {
+      "ranks": 2,
+      "segment": 3,
+      "samples": 50,
+      "final_time": 7.451125621795654
+    },
+    {
+      "ranks": 4,
+      "segment": 2,
+      "samples": 50,
+      "final_time": 4.95012092590332
+    },
+    {
+      "ranks": 4,
+      "segment": 3,
+      "samples": 50,
+      "final_time": 7.451125621795654
+    }
+  ]
+}

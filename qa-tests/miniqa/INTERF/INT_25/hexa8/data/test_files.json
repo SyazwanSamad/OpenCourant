@@ -1,0 +1,30 @@
+{
+    "starter": "model_00_0000.rad",
+    "engines": [
+        "model_00_0001.rad"
+    ],
+    "TOL_CYCLE": [
+        "Abs_tolerance",
+        "1000"
+    ],
+    "TOL_TIME": [
+        "Diff_tolerance",
+        "0.13537505548158"
+    ],
+    "TOL_TSTEP": [
+        "Diff_tolerance",
+        "0.0590138674884438"
+    ],
+    "TOL_ERROR": [
+        "Diff_tolerance",
+        "0.0769230769230769"
+    ],
+    "TOL_IENERGY": [
+        "Diff_tolerance",
+        "0.0164430982258763"
+    ],
+    "TOL_EXTWORK": [
+        "Diff_tolerance",
+        "0.0214030915576694"
+    ]
+}

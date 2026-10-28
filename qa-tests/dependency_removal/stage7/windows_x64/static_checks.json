@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "runtime_source_sdk_matches": 0,
+  "changed_python_files_parsed": [
+    "Compiling_tools/script/check_package.py",
+    "Compiling_tools/script/load_extlib.py",
+    "Compiling_tools/script/repack_extlib.py",
+    "qa-tests/dependency_removal/test_old_multidomain.py",
+    "qa-tests/dependency_removal/test_packaged_gui.py",
+    "qa-tests/dependency_removal/test_qa_comparison.py",
+    "qa-tests/dependency_removal/test_reader_build.py",
+    "qa-tests/qa_tools/execute_solver.py",
+    "qa-tests/qa_tools/or_execute.py",
+    "qa-tests/qa_tools/qa_system.py",
+    "qa-tests/qa_tools/verify_results.py",
+    "qa-tests/reader/rigid_parts/test_mode2_numerical.py",
+    "qa-tests/reader/rigid_parts/test_numerical.py",
+    "qa-tests/reader/rigid_parts/test_starter_integration.py",
+    "qa-tests/reader/test_model_loading.py"
+  ],
+  "changed_workflows_parsed": [
+    ".github/workflows/arm_ci.yml",
+    ".github/workflows/delivery_stable_ci.yml",
+    ".github/workflows/developer_ci.yml",
+    ".github/workflows/openreader_ci.yml",
+    ".github/workflows/prmerge_ci_main.yml",
+    ".github/workflows/windows_ci.yml"
+  ],
+  "json_configurations_parsed": 4
+}

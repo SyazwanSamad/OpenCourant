@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "changed_python_files_parsed": 10,
+  "workflows_parsed": 9,
+  "release_assembly_bash_syntax_checked": [
+    "package_windows",
+    "package_linuxa64",
+    "delivery"
+  ],
+  "gui_patch_matches_pinned_source": true,
+  "docker_archive_guard_checked": true,
+  "current_launcher_sdk_paths_absent": true,
+  "diff_check_passed": true
+}

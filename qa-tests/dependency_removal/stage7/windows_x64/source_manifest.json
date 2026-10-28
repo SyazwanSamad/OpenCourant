@@ -1,0 +1,207 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 209,
+    "sha256": "df44d80d81bb4295db5cf7c1b75115508b81a65092c667e2bc43ebcb276e5f32"
+  },
+  {
+    "path": ".github/workflows/arm_ci.yml",
+    "bytes": 5837,
+    "sha256": "d6db92e3cac87be8f92eef71d9ee3322e878e346f791d132b7f373928b214ab4"
+  },
+  {
+    "path": ".github/workflows/delivery_stable_ci.yml",
+    "bytes": 53977,
+    "sha256": "69a8429083ad52bc9df31783df79ade81a42b0188232a411be2b188019d6ab2d"
+  },
+  {
+    "path": ".github/workflows/developer_ci.yml",
+    "bytes": 10936,
+    "sha256": "f0b34a59cb881b325340403a3ad07a950041b4e53f085b05c4588c6bad03180c"
+  },
+  {
+    "path": ".github/workflows/openreader_ci.yml",
+    "bytes": 2863,
+    "sha256": "a6c9297e284494a310c4a5d8dacccd3889ce824639288a8b7cc6647ac210fc11"
+  },
+  {
+    "path": ".github/workflows/prmerge_ci_main.yml",
+    "bytes": 19540,
+    "sha256": "79a969324e5fc468469faae245d5a2eec951e41730cb27b9bd5ab5c3f5b4556a"
+  },
+  {
+    "path": ".github/workflows/windows_ci.yml",
+    "bytes": 8189,
+    "sha256": "67b49c3295187211c3871654619a1a8ee324f8fff4597fc4e7beaf245ac075a7"
+  },
+  {
+    "path": "Apptainer/opencourant_build.def",
+    "bytes": 3309,
+    "sha256": "6c6f2676bf9c86efcd998b0c518dc5f84ddb913a4543b5dc4a4ad4125914ab16"
+  },
+  {
+    "path": "CMakeSettings.json",
+    "bytes": 5940,
+    "sha256": "1117558bf6666f4e2d88c3a288bc392b957ca3cf6653df8f13dcdad96526da9a"
+  },
+  {
+    "path": "Compiling_tools/patches/openreader_gui.patch",
+    "bytes": 7107,
+    "sha256": "53749ba547a4497fd81a49aa6a96d10569fa0a2878b0197b5f6c0b5caed4477c"
+  },
+  {
+    "path": "Compiling_tools/script/check_package.py",
+    "bytes": 1949,
+    "sha256": "dfcb987ac04877dd2d5dd4abf0bf11332a4ba3d07e68cae7303b048a67615f73"
+  },
+  {
+    "path": "Compiling_tools/script/load_extlib.py",
+    "bytes": 5347,
+    "sha256": "85a5a2898cf7c5cb65360e0ab27f1a15fa2cb756e37dfe7616af4da4bb61ab12"
+  },
+  {
+    "path": "Compiling_tools/script/repack_extlib.py",
+    "bytes": 2107,
+    "sha256": "7a7810ddfd9ff1ac204603e7dcb34063d1059aec8b49302ca609b6dbca321a1d"
+  },
+  {
+    "path": "EXTLIB_VERSION.json",
+    "bytes": 1610,
+    "sha256": "2ff4d00c66b64a04cda93d71cf5496ba9dc28b42cb28ed8df905e6ee7ab9e356"
+  },
+  {
+    "path": "HOWTO.md",
+    "bytes": 36300,
+    "sha256": "73c35c7b0b03f0c9dea5a0cf0b4c908820511e0ed2da1375f4cef22f0c933c8c"
+  },
+  {
+    "path": "INSTALL.md",
+    "bytes": 10247,
+    "sha256": "b84b3a365747f98c009a14296c4cc5354c141cbdc0774c6edd8f4cdbf3855972"
+  },
+  {
+    "path": "containers/solver/Dockerfile",
+    "bytes": 2811,
+    "sha256": "2cbf7649453f967151591ab2a2ec6c5414f440d947b525afd919bbec8fb8bc32"
+  },
+  {
+    "path": "doc/OpenReader_implementation_plan.md",
+    "bytes": 25074,
+    "sha256": "5f52c382fac99fe99e7fddec0971cf983a525f73df87e02744d13c97195931e0"
+  },
+  {
+    "path": "doc/Remove_HMReader_H3D_plan.md",
+    "bytes": 23731,
+    "sha256": "cca0b1b4d47c3cb15cdffb92430cffafb6a2cbc8b8af99f2bd927c51e0695383"
+  },
+  {
+    "path": "qa-tests/dependency_removal/STAGE5.md",
+    "bytes": 8815,
+    "sha256": "5a98141a94e6607bdfda8e38b3dec76015420a191aa6c2d4731e7d9c8617e178"
+  },
+  {
+    "path": "qa-tests/dependency_removal/STAGE6.md",
+    "bytes": 9439,
+    "sha256": "cef83c820df0667ea59cb9013c38300c5963397ce3112981005a724b748b49f7"
+  },
+  {
+    "path": "qa-tests/dependency_removal/STAGE7.md",
+    "bytes": 8801,
+    "sha256": "663320fd33cc3da600fc0b4d1d622080174a978bfa232bdd076a4e14093b932c"
+  },
+  {
+    "path": "qa-tests/dependency_removal/test_old_multidomain.py",
+    "bytes": 3310,
+    "sha256": "5627c319e2ea858b9e069b5a9704202455ee1b631b6c190f0149056a40c8e890"
+  },
+  {
+    "path": "qa-tests/dependency_removal/test_packaged_gui.py",
+    "bytes": 2717,
+    "sha256": "d0b756678bebdf297d44726110acce905988ca0ff21b381f0eeab89e910d1a7d"
+  },
+  {
+    "path": "qa-tests/dependency_removal/test_qa_comparison.py",
+    "bytes": 2707,
+    "sha256": "152dd4d9925fc3604477dab6d45e0d5329dc8d6a0c895f1a94dbee45c91e451b"
+  },
+  {
+    "path": "qa-tests/dependency_removal/test_reader_build.py",
+    "bytes": 10227,
+    "sha256": "b4c4e9ee032d972e940f4b69337aae8087d9da94c530f9732b4ab1d0eaff4c7a"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/hexa8/data/test_files.json",
+    "bytes": 593,
+    "sha256": "a217c24b7762cd07096f7b6cfee25e099bd3f446100b304aba6d1c31158c916f"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/tetra4/data/test_files.json",
+    "bytes": 526,
+    "sha256": "7e73adf80da226946a97a04551e6d0af975fc12b9cf8feb3eb5678b33ac4648a"
+  },
+  {
+    "path": "qa-tests/qa_tools/execute_solver.py",
+    "bytes": 10121,
+    "sha256": "449192e8fac26507f81fa0ddeb8065d11174ec8948fe11f823034b0663220756"
+  },
+  {
+    "path": "qa-tests/qa_tools/miniqa.txt",
+    "bytes": 11256,
+    "sha256": "0753f28c45c4744081edb3939417cc700e7af900d4f967173555dd5b86003197"
+  },
+  {
+    "path": "qa-tests/qa_tools/or_execute.py",
+    "bytes": 12871,
+    "sha256": "6c3ef2c1e6185aa7e0d713e08ba6147a0134e0a09ebf9742afdefc9683e9b712"
+  },
+  {
+    "path": "qa-tests/qa_tools/qa_system.py",
+    "bytes": 6270,
+    "sha256": "3b0f3422211e1f14b7c96ee498b0a065f891b5cf70eaa7bbbd248da2558d3f50"
+  },
+  {
+    "path": "qa-tests/qa_tools/verify_results.py",
+    "bytes": 14372,
+    "sha256": "02dc8525048814051112a419fe8aba23a5ef1bf41157af928ab004584c152205"
+  },
+  {
+    "path": "qa-tests/reader/README.md",
+    "bytes": 7585,
+    "sha256": "215ca004c6b6ec8664a3bab4bb57e500a235361ff574959ee700104706542e30"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_mode2_numerical.py",
+    "bytes": 6969,
+    "sha256": "9d24c10baab0da541140607d4e49f172708dd78cd04ffe5c78201ea3d13913ca"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_numerical.py",
+    "bytes": 20978,
+    "sha256": "fbe14cd8baf7e921026a1030dd077ca7e8c0511a73391b1cf89cd69a1fa70a25"
+  },
+  {
+    "path": "qa-tests/reader/rigid_parts/test_starter_integration.py",
+    "bytes": 9326,
+    "sha256": "ad45f4b900428c0c3231f623d50c27bae3713f09709568155232ec795a0a0901"
+  },
+  {
+    "path": "qa-tests/reader/test_model_loading.py",
+    "bytes": 13888,
+    "sha256": "c70e8201859733e3300629718dc06451ca50d37105b4ac2d9131d85e95dbb6cc"
+  },
+  {
+    "path": "qa-tests/scripts/or_QA.constants",
+    "bytes": 7878,
+    "sha256": "fbed063137ebe76cc92fb683440b24c2268a4e3949cb54c4998dcc9d6ab06d59"
+  },
+  {
+    "path": "qa-tests/scripts/or_qa_script",
+    "bytes": 311076,
+    "sha256": "619799b8df18091452761000e8004334ba4f8ea1bba34b158436549beca3c72d"
+  },
+  {
+    "path": "qa-tests/scripts/or_radioss.pl",
+    "bytes": 84387,
+    "sha256": "70bfce86edc1e4342bc48e7cf206224dbd2f643baa85e5d3eb210dcb3aae7ed4"
+  }
+]

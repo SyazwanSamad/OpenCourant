@@ -1,0 +1,149 @@
+[
+  {
+    "test": "1.89",
+    "deck": "miniqa/PYTHON/FUNCT_PYTHON",
+    "exit_code": 0,
+    "checksums": [
+      [
+        "test_torsion_orthstrain_shell_0001.out_1x4.txt",
+        "-942188602"
+      ],
+      [
+        "test_torsion_orthstrain_shell_0001.out_2x2.txt",
+        "-942188602"
+      ],
+      [
+        "test_torsion_orthstrain_shell_0001.out_4x1.txt",
+        "-942188602"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/PYTHON/FUNCT_PYTHON",
+      "-test_id",
+      "1.89",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.90",
+    "deck": "miniqa/INTERF/INT_25/hexa8",
+    "exit_code": 1,
+    "checksums": [
+      [
+        "model_00_0001.out_1x4.txt",
+        "985120931"
+      ],
+      [
+        "model_00_0001.out_2x2.txt",
+        "-313532572"
+      ],
+      [
+        "model_00_0001.out_4x1.txt",
+        "985120931"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/INTERF/INT_25/hexa8",
+      "-test_id",
+      "1.90",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.91",
+    "deck": "miniqa/INTERF/INT_25/tetra4",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "model_00_0001.out_1x4.txt",
+        "1923105667"
+      ],
+      [
+        "model_00_0001.out_2x2.txt",
+        "1079264933"
+      ],
+      [
+        "model_00_0001.out_4x1.txt",
+        "-1165688406"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/INTERF/INT_25/tetra4",
+      "-test_id",
+      "1.91",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  }
+]

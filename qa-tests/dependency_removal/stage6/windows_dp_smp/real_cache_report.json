@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source": "Local file URI serving the exact new archive; public HTTP download awaits publication",
+  "clean_install": true,
+  "cache_hit": true,
+  "stale_sdk_refreshed": true,
+  "failed_checksum_preserves_previous_cache": true,
+  "archive_sha256": "72831a1b3e95910e20e24cceb6fb6c4295cfab1fade01144f2cee53c603442a3",
+  "installed_files": 3329,
+  "transient_windows_rename_error_preserved_cache": null
+}

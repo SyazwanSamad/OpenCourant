@@ -1,0 +1,2362 @@
+[
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/ACCELERO_0000.rad",
+    "bytes": 54823,
+    "sha256": "55767fa07a9642cc61fdc3f881254e3da5bea802232b157b3bfd74e27795a63b"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/ACCELERO_0001.rad",
+    "bytes": 602,
+    "sha256": "ad9734994ae5a630dfe6eda700cf974573376a735ea64fe79b826ecb57dcefa5"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/motcle",
+    "bytes": 34,
+    "sha256": "3409fa234355dce0c4b7b13b8120783570d3004743f06919708eec57b0a28ec6"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/readme.txt",
+    "bytes": 474,
+    "sha256": "f60ceb942e4233120db30c08fe8338237e779c0b6f9a342f599129960e96b0c8"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/ref.extract",
+    "bytes": 374,
+    "sha256": "6646cae700c3fc8c2f5ab1d5e043feff57e6c3943397d41f9d89ec86faf9d5a7"
+  },
+  {
+    "path": "qa-tests/miniqa/ACCELEROMETRES/data/test_files.json",
+    "bytes": 206,
+    "sha256": "da9b7fae8ef72e04ad6c4ddadee205a24ca475ac881b0ed5cb75620982a40029"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/JETV41B_0000.rad",
+    "bytes": 138735,
+    "sha256": "699923b4df774a09b124a11b634dc5e1afd39affcf497875091b04b8f345dc2c"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/JETV41B_0001.rad",
+    "bytes": 630,
+    "sha256": "b9dd2e78ac351eb7a0b59639755f1f0744590a6c0d5b4003945a6532aac8da1a"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/motcle",
+    "bytes": 14,
+    "sha256": "d206e54c9c4e9fbbafe9f9399aaf1352560b096be5c8edc43bf6b4c5f0e328ec"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/readme.txt",
+    "bytes": 470,
+    "sha256": "07a85ac785071661f493cd206d58f99a4902b278fb190d5ff554d4de9ba0f36b"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/ref.extract",
+    "bytes": 374,
+    "sha256": "badfafe335f13d630781e2e34de1dff7117c05be202cd90a8498bdd989e8adc0"
+  },
+  {
+    "path": "qa-tests/miniqa/AIRBAG/jetting41b/data/test_files.json",
+    "bytes": 275,
+    "sha256": "cfa8865f82f0d9180de698f9c3e41c0d47f1ebf1a4407ef4bab8b330924420ab"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/BAR2V41B_0000.rad",
+    "bytes": 51078,
+    "sha256": "2d37d3882fa1f6954d545485c9d5db2af73ea81403dd663030f66b166085bf17"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/BAR2V41B_0001.rad",
+    "bytes": 518,
+    "sha256": "d9e2236447880e2a7382d282da3389a7d75433a5ce7881050a44af68efd4e3b5"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/BAR2V41BD02",
+    "bytes": 45491,
+    "sha256": "b4d122d25b28c058fadc6bc85f9a849a1f0f7d897d38833912defdfe299ae0d6"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/motcle",
+    "bytes": 22,
+    "sha256": "f6f876b3ede91b9b2bc2fc23f46a6b870661e3b9d409ff1f41ea3b43a9a8a3e2"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/readme.txt",
+    "bytes": 492,
+    "sha256": "13dcd908a910b88342689c4946601f76fd22db8f5815fa7024b82003d2be30ef"
+  },
+  {
+    "path": "qa-tests/miniqa/ALE2D/bar2_v41/data/ref.extract",
+    "bytes": 379,
+    "sha256": "3ae2c4521614b760573802ab8f43dbeb38727f73e709b8f20dcd16fa3b9efed7"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/auto_element_selection/data/readme",
+    "bytes": 519,
+    "sha256": "cbf34d9473d0f07fb180a71925b1d98649c5d75cf7660b5b96f7fe8db8f62597"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/auto_element_selection/data/ref.extract",
+    "bytes": 374,
+    "sha256": "efa1333b5d4fc044b42cedb7b408bc23d985505ce67b3968f61a3759bf68b5e9"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/auto_element_selection/data/test_files.json",
+    "bytes": 155,
+    "sha256": "c41a6cd92d77b54f0ab7a9e096cdf57ef37f270f631dbc3a70f652ccce9a953e"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/auto_element_selection/data/tstpeel_AUTOPART_0000.rad",
+    "bytes": 109247,
+    "sha256": "0b31aa88e5397aa34fbb40674c20378e1357433f7591750856198c023e8d669d"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/auto_element_selection/data/tstpeel_AUTOPART_0001.rad",
+    "bytes": 588,
+    "sha256": "6f6f0c9486e29309a9b9dfac1f9ca8a94ca2dc336114ce40896f110fe5cd518e"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/BOXBEAM_0000.rad",
+    "bytes": 191652,
+    "sha256": "0db22576bf9c2e0223a3110ce633cebd64e561cb5c7cb0c7133d2aa7c4b7a7af"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/BOXBEAM_0001.rad",
+    "bytes": 659,
+    "sha256": "d3a6d7ac68162660b8f18f3de555d8a01e2f751c1968a378d2bb725b6c942e9c"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/readme.txt",
+    "bytes": 482,
+    "sha256": "cce57cf0e305f1b0034cd6c92c4efaf83d2fd001b7f4393363c3656a4363d069"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/ref.extract",
+    "bytes": 374,
+    "sha256": "c4d59eb023fdb82577e792b134db3ccdbba62c15378b967ce1925a95ea2b69d6"
+  },
+  {
+    "path": "qa-tests/miniqa/AMS/boxbeam/data/test_files.json",
+    "bytes": 737,
+    "sha256": "11bab252c62e6e804fc3ceeaffd6cccbaf71384b77d50bd5180aaad9a1b34972"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/CT3AV4_0000.rad",
+    "bytes": 20603,
+    "sha256": "748bc6cc7c4bb8216e7db5c04fde89247acebcd5963864024d8d2a083cc2ebf3"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/CT3AV4_0001.rad",
+    "bytes": 510,
+    "sha256": "1d918d902b2db9b3301c44de8df8ae7d3631dc23175624d369633a5a12cdd498"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/motcle",
+    "bytes": 17,
+    "sha256": "e90efdb0094b26650e3868feea90de1a97174fe19b2e200ff57582056970238c"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/readme.txt",
+    "bytes": 518,
+    "sha256": "78c69d5cb0249711230c90de8ab42f5681e7a9668ed920e34bcd47efb4338200"
+  },
+  {
+    "path": "qa-tests/miniqa/COQUES3N/ct3a/data/ref.extract",
+    "bytes": 374,
+    "sha256": "624215184fea6731ca6ee1215d200e7c1079b7a1da60c903c931cc0415ea9010"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/BOX1BL_0000.rad",
+    "bytes": 39256,
+    "sha256": "6d44e49fc9cb6b3317b71c8162de222ea7e1e52c9f6b4d2fbbd0597db77f0f97"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/BOX1BL_0001.rad",
+    "bytes": 506,
+    "sha256": "efff4c21c906cd7abd36ab0e20eb7ec7507088c3ff2fce4e5feb5bb002bc8b00"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/motcle",
+    "bytes": 33,
+    "sha256": "39af2bf5aa46a4ef934e0114754029704dc214af9da69239c4f922abda621f4c"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/readme.txt",
+    "bytes": 487,
+    "sha256": "688b5cfdec5671344b41c39341ff85c6e1c05c6e7baf01317d4f94f01119ea7e"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashsection/box1_42/data/ref.extract",
+    "bytes": 374,
+    "sha256": "9b9992892312d5c4f355bb62692d6c7013731f0399b3fa5ced587ad62714101c"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/motcle",
+    "bytes": 17,
+    "sha256": "e90efdb0094b26650e3868feea90de1a97174fe19b2e200ff57582056970238c"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/readme.txt",
+    "bytes": 482,
+    "sha256": "bad1f60c86844423b0b0ec775292208273c8a1d2a1ae7c954615d2d9202cf05d"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/ref.extract",
+    "bytes": 374,
+    "sha256": "61b12022f4ce906d942a7469747a4dcb05bec934f2f32f4ae37cb87ef0fa666d"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/TRITUBV4_0000.rad",
+    "bytes": 83245,
+    "sha256": "7e65de8184a1c33c31c9ae6f19869fd76534ae1aee176d17e2220de277344006"
+  },
+  {
+    "path": "qa-tests/miniqa/CRASH/crashtriangles/data/TRITUBV4_0001.rad",
+    "bytes": 507,
+    "sha256": "5ba6aca477e9fb911e13eec2445d00c0774cfc557610db478385db35e214ad29"
+  },
+  {
+    "path": "qa-tests/miniqa/EOS/EOS_PUFF_2/data/EOSPUFFDET3DCU_0000.rad",
+    "bytes": 9066,
+    "sha256": "268a1739673baeec098ff7c5c750aa0aef6a337f5ccb1275706d0cddbef8e17e"
+  },
+  {
+    "path": "qa-tests/miniqa/EOS/EOS_PUFF_2/data/EOSPUFFDET3DCU_0001.rad",
+    "bytes": 366,
+    "sha256": "4c249026dbafc96eb3f9bf9f878bc182433eeebffc42593227f23e96c21589fe"
+  },
+  {
+    "path": "qa-tests/miniqa/EOS/EOS_PUFF_2/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/EOS/EOS_PUFF_2/data/readme.txt",
+    "bytes": 604,
+    "sha256": "e7351ba10722527e2ecf6fdaabd2626eff86360a6f83e3fee86eff402b85ba57"
+  },
+  {
+    "path": "qa-tests/miniqa/EOS/EOS_PUFF_2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "eb350cd65f2e6c47690849039196f72445e2be15ed95f410263e42bdb24be6a6"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/COMPA1B_0000.rad",
+    "bytes": 17048,
+    "sha256": "0973ec85963e01a30059c28e5b64972f14670a565e698630acb1428cee223436"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/COMPA1B_0001.rad",
+    "bytes": 858,
+    "sha256": "e825195057179db39c9d8476bf22e3aa9acd5ec82b09d80302ce7cf3c0e3ce5e"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/motcle",
+    "bytes": 18,
+    "sha256": "9ba879e05cea21c0fb7bf2a7addf8cf011a47b73a5f0ccd72782621b35ad7f19"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/readme.txt",
+    "bytes": 501,
+    "sha256": "09ffa09405130e51c8ea1ecf932d9f639a025fd32d66d58640a4e7fefd0939bf"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/COMPA1B/data/ref.extract",
+    "bytes": 376,
+    "sha256": "32deec97b98f2003a2a556e26b7fbca14ff694eb9bfb15acb079fa8c929e0108"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/INIV_0000.rad",
+    "bytes": 13684,
+    "sha256": "ef5d2088255286ea8681224fc1cf9ca13d94c89ac65aa552e9e16414bd429626"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/INIV_0001.rad",
+    "bytes": 557,
+    "sha256": "4574ecbbc1ed6fcedff3d8189c6417205188df4109b7e343b266f00574c6e49c"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/INIV_0002.rad",
+    "bytes": 430,
+    "sha256": "666c7a9de3b227dd1c3aca0ae8a4ca6e73f423be8d6b366694e8ba611e3e2381"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/INIV_0003.rad",
+    "bytes": 339,
+    "sha256": "49dd4b388c4f29b63735a23e936303f8dc4dec47b64f1923e5e262ae4b6f3965"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/readme.txt",
+    "bytes": 497,
+    "sha256": "8df963a6f83afc9bae5555354ae50ccf2034e9adb6f0273d7130d03e126a4107"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/ref.extract",
+    "bytes": 380,
+    "sha256": "36b8ff8ad3351bedabf03c47516ebb5db27ccd7859640b9fde46f01a26f83fda"
+  },
+  {
+    "path": "qa-tests/miniqa/FLUIDE_NEW/EBCS/INIV/data/test_files.json",
+    "bytes": 115,
+    "sha256": "a525a2a170810c3b4284fa27fecb475ea0eb69fdf7d8bcc8c65e1bb5c500d78c"
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/mapSimple_0000.rad",
+    "bytes": 1755781,
+    "sha256": "ac0f6983559e1f347b637f995525d06d82cd7ca9c413d1b5af8ab26d65361365"
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/mapSimple_0001.rad",
+    "bytes": 638,
+    "sha256": "09407fac9d82c0343480bf5e8dd7a257909e69ed33e03301439cf471f090f890"
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/readme.txt",
+    "bytes": 475,
+    "sha256": "2b185af4ea09f88bcd2b8f3bf3cc8145135bd3a4eb52f1d81033084134b24e66"
+  },
+  {
+    "path": "qa-tests/miniqa/IMPOSED/IMPDISP_FGEO/data/ref.extract",
+    "bytes": 379,
+    "sha256": "9a366659d6081554d8fe2906bf8f3980c68d85e4ccf70c54bbb24e236577e58d"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/INT357_0000.rad",
+    "bytes": 35271,
+    "sha256": "396df1de4a2b5c4d8b68f70bfe81d1b6c7e8684f7c880e36fe49123f042007a6"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/INT357_0001.rad",
+    "bytes": 508,
+    "sha256": "a413cd95d0dc84c40b25d4a4a6f173e886f176c9cf83562ef5b66ba6b963adfa"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/motcle",
+    "bytes": 51,
+    "sha256": "d0a2968267953cd5a3f9aa520c4641c7202b869b68426fe7097d1fa877fb051a"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/readme.txt",
+    "bytes": 503,
+    "sha256": "4a279597b925989287a627f55aaafdf9e8901c1707512367f3700a133fca5983"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/int357/data/ref.extract",
+    "bytes": 374,
+    "sha256": "6a01c6cc2b94e6b75eeec857dc421520270295a8cb6bc53392adfd25d6dadaaa"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/motcle",
+    "bytes": 39,
+    "sha256": "bbbb697e69af26ea6238021c427dc4c9ee48a42b031d78841bfcaa300a2d39ba"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/PLREG41B_0000.rad",
+    "bytes": 19114,
+    "sha256": "5ea78b307de4095abe1306371ffff5a359e791539088bf50c00f2b945f41da69"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/PLREG41B_0001.rad",
+    "bytes": 611,
+    "sha256": "dc8ab5efc4604e692e05db981e2b908e070fd30bc3a9660431835c07e55776e8"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/readme.txt",
+    "bytes": 491,
+    "sha256": "c79f0f5ccb52b7e052e52c82d4a4e69d1b93b1b2b70c6de9ce1ab935c00766d7"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_2/pl_dam_ilev/data/ref.extract",
+    "bytes": 379,
+    "sha256": "a6fe9ee72529a6e958102ef6b9787eb2ebfee55a64500d0ead352067f9698297"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/9BRICKS_0000.rad",
+    "bytes": 17889,
+    "sha256": "dda0ba7a85dbe4abdf2ae1bf78dac16a30a1dfc4d70d8a011974d10cf63fb5b4"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/9BRICKS_0001.rad",
+    "bytes": 506,
+    "sha256": "52de2272b162228296f087d16357b2097777aeb200ffe19232359d7711dd9fe9"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/MAT51.txt",
+    "bytes": 29098,
+    "sha256": "eceb6bb6223fbf4e2114ae33d3090948dc420f4ecca5617849f6a0de07a8f2dc"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/materials.inc",
+    "bytes": 10669,
+    "sha256": "3cc20d874e9e49915d1f9111138752fa5cbf6292602c1259ba3e306200643bb6"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/overview.png",
+    "bytes": 26522,
+    "sha256": "b471d7e9b6c4978e282537517b6d4a962b559601f286358954eecbd945481ba5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/readme.txt",
+    "bytes": 477,
+    "sha256": "f1677e385d86254b6e5c394a98c64c99e0a83440987919270701829a14eafa4e"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/ref.extract",
+    "bytes": 380,
+    "sha256": "eb196db9379571767eef7d825966e4e7106397d1885f2344a5869f6165394508"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_22/1D_U-SURF_9ELEMS_LAW6_Linear_EOS_EULER_0.FVM/data/test_files.json",
+    "bytes": 143,
+    "sha256": "a4601ec3deff4907a2d29030017c0dc91f1af6af4c090b6611c02618040b5082"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/hexa8/data/model_00_0000.rad",
+    "bytes": 61831,
+    "sha256": "d75c6526f3b20a71e888f7d67a8f948c7d4879a590b88cd51036c367b94ce099"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/hexa8/data/model_00_0001.rad",
+    "bytes": 246,
+    "sha256": "fb24047054f9a2f6f625a145326537f5da050066f1dd88845d6a033855feaf1a"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/hexa8/data/ref.extract",
+    "bytes": 374,
+    "sha256": "73c53d1c8dfb535ef45ff5482bdeab475dbad2423fa08bb5399268b302a90f78"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/hexa8/data/test_files.json",
+    "bytes": 593,
+    "sha256": "a217c24b7762cd07096f7b6cfee25e099bd3f446100b304aba6d1c31158c916f"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/tetra4/data/model_00_0000.rad",
+    "bytes": 90223,
+    "sha256": "699e5625788587af019ccbad5f1c6d5b606a9dcb7c2067d41c37ac0ae887db68"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/tetra4/data/model_00_0001.rad",
+    "bytes": 244,
+    "sha256": "628cfe3e1a271c95846c0fd1f5253731754b2ec29ca4958b0efb3e8931468a48"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/tetra4/data/ref.extract",
+    "bytes": 374,
+    "sha256": "67be3316ede21d97d78e723b798ba71c6b98c4e9062dc61cb2cc8cb517e44a92"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_25/tetra4/data/test_files.json",
+    "bytes": 526,
+    "sha256": "7e73adf80da226946a97a04551e6d0af975fc12b9cf8feb3eb5678b33ac4648a"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/fpenmax/data/model_0000.rad",
+    "bytes": 17724,
+    "sha256": "90ef0de4803e3e8a0f4c9bbc7235b988b00b30db1d0174e96c44ee922d961c76"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/fpenmax/data/model_0001.rad",
+    "bytes": 419,
+    "sha256": "4ee0fa65d6edcadae51953b1673493454f52ffdece9cab978f7ef7572be4f13c"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/fpenmax/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/fpenmax/data/readme.txt",
+    "bytes": 490,
+    "sha256": "7e04a8138aa573885eabab7825989b269297793ab9e7acc968ad35779f77a65b"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/fpenmax/data/ref.extract",
+    "bytes": 374,
+    "sha256": "68c06d76b796b8fc1e2d590b1391fa5a23263a45ded4fcadb454d46249dfc638"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/FRICT41_0000.rad",
+    "bytes": 16058,
+    "sha256": "4cf18747d6c3dee6ee63bcf5dfc556250db8f14235cc05b8a7c0d3b1b13c6314"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/FRICT41_0001.rad",
+    "bytes": 507,
+    "sha256": "99d4fddcf9e42e5ddcde4e158090e64e6d91ea8f56bb4ffde56fe84843415ceb"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/FRICT_c",
+    "bytes": 893,
+    "sha256": "abe62b5dd08088b26fff6164329656774572ff597a79e2e77d9c60f0158ad975"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/motcle",
+    "bytes": 33,
+    "sha256": "cf21fc00ea843064780ef441f34dbccbc3b6ea37b7d44d70e81fc2b4b7fcfd02"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/readme.txt",
+    "bytes": 490,
+    "sha256": "2f5a239960707edbb8519213a782f1d90c4c149208cd76c228b2c84a6d68d5c9"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/friction/data/ref.extract",
+    "bytes": 374,
+    "sha256": "3472d5312b74e4e5e69860b11423d09118f6a13ad8b4f302f4f13ddb170c0d83"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/IDEL8_0000.rad",
+    "bytes": 93477,
+    "sha256": "f041641cf284406701bed367ac1ee2338ea33165e25a4d21106a2f6dfbcfc64d"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/IDEL8_0001.rad",
+    "bytes": 791,
+    "sha256": "5a9a48b1f8c710f2c2a1e703ed259c3f35edbab8c4e56c9abba34d7a281c4a39"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/IDEL8_0002.rad",
+    "bytes": 610,
+    "sha256": "e9987a61978462e71c85bda0efec62d778108549692f2949abb7abf604c7fca2"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/lisez_moi",
+    "bytes": 713,
+    "sha256": "2a3f341cfcf3dc4b74f806fd13e8eac0af2c38804a28a5fdce0e4ee542685ef9"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/motcle",
+    "bytes": 22,
+    "sha256": "5d5dd49ee253b985c2c4267127836f080c023379c6df50e08412fa73529e9d2b"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/readme.txt",
+    "bytes": 715,
+    "sha256": "e3a513d6316591ee5836f7a395fd019b2b63c690554de5b254fdbfca5466c2e6"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "6b0f512902b7632c6f0e8b117255cd199a89f3a9b4d10c8b2fae71eb5ea6b81e"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/idel7=2/data/test_files.json",
+    "bytes": 266,
+    "sha256": "46ef091c5b87f67cf4d5770c9d37034b61629d6e7e2a22502c74b0d5bc183beb"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/BOULEV44_0000.rad",
+    "bytes": 33346,
+    "sha256": "77a78a44d3f3e580b0a2e6b854f2d20065838d14e5ac56d9b99544c3c8fad717"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/BOULEV44_0001.rad",
+    "bytes": 551,
+    "sha256": "a19074620b3867834465c613a3c1c3033a6dfe081a1061f778a27621be3ca564"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/motcle",
+    "bytes": 59,
+    "sha256": "d6b1540bce27ee5b1230f920c81792ac70ffe46b3b945151ca242a5b91b15738"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/readme.txt",
+    "bytes": 526,
+    "sha256": "119dac9326a020f42743f74281ae66aadd98a4ced653b9af888eda40575159c2"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/ref.extract",
+    "bytes": 374,
+    "sha256": "f7a2554edbbeadd5aaf1877a57aab441683c89b0e8c598476aae31fb6bc8db9d"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/data/test_files.json",
+    "bytes": 403,
+    "sha256": "91323e07dba8fd01b7c63f7211970c804b42e871bde3ef4755e5cdb118ecb1e0"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/dtmin_02/data/BOULE1V5_0000.rad",
+    "bytes": 31186,
+    "sha256": "3ae554cab622523c8bf1eaee029b2b91fda25239982dfe3befbf1cd8e1ab4d12"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/dtmin_02/data/BOULE1V5_0001.rad",
+    "bytes": 384,
+    "sha256": "87fd18e6b0d7cea9fa47dd23c219277362a8c1e1b18813e1707d5504e1a66f5f"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/dtmin_02/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/dtmin_02/data/readme.txt",
+    "bytes": 482,
+    "sha256": "0f027b960464634b57d990485127f7cb6a381da1e29ccc635932dd5238340263"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/igsti/small_boule_igsti/dtmin_02/data/ref.extract",
+    "bytes": 374,
+    "sha256": "e9a759ae18998d1bb30c80ec20c0c4bbfb5200f1b8a5706c163f7ec054433965"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/BOULE1V4_0000.rad",
+    "bytes": 32936,
+    "sha256": "aba0487348d3d150bfdac7ca8c029ee1261c794ec87f3ffc62b4d91850ca8c5c"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/BOULE1V4_0001.rad",
+    "bytes": 486,
+    "sha256": "dfc78b698c3c516d18c60dd0a8bd8b9ee22bfd9c93a5fddd9b9d6005d901fdf8"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/motcle",
+    "bytes": 34,
+    "sha256": "3fa01d36037e747e84b799372c62864ba7361ac9b86f0f11358a762a7cbe453d"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/readme.txt",
+    "bytes": 492,
+    "sha256": "7a683d5cae5780456c0710c781dbaa8e7ff739744850517451a4b505069e5dea"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/ref.extract",
+    "bytes": 374,
+    "sha256": "ba8b5e96d0e84ee5670111a404a24a3d41ca9fa73b8132cd9da472daf4386c86"
+  },
+  {
+    "path": "qa-tests/miniqa/INTERF/INT_7/small_boule/data/test_files.json",
+    "bytes": 435,
+    "sha256": "9a2c3d2bd67f7dcfe59ac112a0b58a1d06788783c9ea1356f21af5fe23ee33f7"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/BLOCK_0000.rad",
+    "bytes": 7764,
+    "sha256": "f9cb963451de43c542662817c7d67f92e5d640ab706115ec243622842850ce40"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/BLOCK_0001.rad",
+    "bytes": 577,
+    "sha256": "c1213e10d35e3dbbfbec06c495c7a45fad18d3eced7cf191c0a3e60af0677d8d"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/motcle",
+    "bytes": 16,
+    "sha256": "7105b55d5494f2daa3cc47735a69935ff9953dfb065118b3e409990084929fe8"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/readme.txt",
+    "bytes": 502,
+    "sha256": "043a36eca1814eed5c5053d985dd67043ed154b4a344db130d547c5c24646e48"
+  },
+  {
+    "path": "qa-tests/miniqa/KIN_CONSTRAINTS/RBODY/ROTA/data/ref.extract",
+    "bytes": 374,
+    "sha256": "ef29835cc4c0c4ddaf26328ca2a465f2c0ac0eb54b1152e79cb07900e1375311"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/data/FOAM_V10_0000.rad",
+    "bytes": 227554,
+    "sha256": "b96cc4e092a2110b867d1a9f3a1159b30a4600105298d2d0e23913829bc40ce6"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/data/FOAM_V10_0001.rad",
+    "bytes": 622,
+    "sha256": "5e31caad8f79cd42adbe736c3c187d0bfea9370cd9f2f2aaec17bb0b49861ef8"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/data/readme.txt",
+    "bytes": 494,
+    "sha256": "40467b7b27343c4a2ebce6861d188f25fdd99dda78b54bc52a0d49820463867f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101/data/ref.extract",
+    "bytes": 374,
+    "sha256": "2fffc169169fa4cd8e6d4aeab7ed599c0e1cb62b806675489aebc69d9197c5d4"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/RBPLI_0000.rad",
+    "bytes": 132645,
+    "sha256": "cf34082272ab3c4e55b80ca51b7cd75acb639eb249f17212bc4bc85bcee09a6e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/RBPLI_0001.rad",
+    "bytes": 497,
+    "sha256": "d66c59b6466d40a9e9c67b4722bb6c2299ada40666b25d2d57070f199c79a00e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/readme.txt",
+    "bytes": 504,
+    "sha256": "f1fa0334aa15c79d63e459cd4c63be99c95c37022c9ec169d26820c56a23c371"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/ref.extract",
+    "bytes": 374,
+    "sha256": "d98151f0bb4b90a95334cac1c142eca48343d569df46a26e98ded8a6aa1d03ef"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/REFSTA_file",
+    "bytes": 43344,
+    "sha256": "fa594325326573abbd0e8cff0a5c6e5e62fae1789a017efe1a1c6d191931c34f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW19_quads/data/test_files.json",
+    "bytes": 409,
+    "sha256": "56e32bd888bed99a96910099a5ad2a9e6929a24b33a35054ddd777341dc39e21"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/RBPLI_0000.rad",
+    "bytes": 133203,
+    "sha256": "dd44a22ef71b312d3a7cb50a2d91f01cc4f64517cedb9b49fc5a5483bc44a983"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/RBPLI_0001.rad",
+    "bytes": 497,
+    "sha256": "d66c59b6466d40a9e9c67b4722bb6c2299ada40666b25d2d57070f199c79a00e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/readme.txt",
+    "bytes": 505,
+    "sha256": "349f13391f2c8ee1dbe0db39ed322e3174c11354b8f6d524d2f7fedb3bea5b9f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/ref.extract",
+    "bytes": 374,
+    "sha256": "084d85be22f3b785f13d9c9dd9b9b144539471b18579afa16fbd7a5f1de19fd8"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/REFSTA_file",
+    "bytes": 43344,
+    "sha256": "fa594325326573abbd0e8cff0a5c6e5e62fae1789a017efe1a1c6d191931c34f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LEAK_MAT/run2_LAW58_quads/data/test_files.json",
+    "bytes": 666,
+    "sha256": "62ba69caf7f5aaf51b21a0f64762acc4e39e2f6f7be18533fb96b207ee3e739b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI12/test1/data/LOI12_0000.rad",
+    "bytes": 16983,
+    "sha256": "f5316e31e01d4ae417ec95c90505574b87ba896f9036082ca12a01f7c884066a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI12/test1/data/LOI12_0001.rad",
+    "bytes": 634,
+    "sha256": "002997523e65a53787ec6d572555f8f60a6c0467430ea1f971186dd206e4c665"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI12/test1/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI12/test1/data/readme.txt",
+    "bytes": 498,
+    "sha256": "3cce74340ec07f1fed7735a12c81de08968b88c19f43ee9c86575c0e21a6cfbf"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI12/test1/data/ref.extract",
+    "bytes": 374,
+    "sha256": "38554caaf8dd6f7bc97f4dafa834267f3ebcc67d5331027fb01c1b86618ffc0a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI13/solide/data/MODELE_0000.rad",
+    "bytes": 109843,
+    "sha256": "1bea93f58dd75dbbaf3c62814470419a7b2dbf73e5731b0f451e1d66da58d77c"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI13/solide/data/MODELE_0001.rad",
+    "bytes": 389,
+    "sha256": "e4d090ae6368500c2e12537f3b029f9c9c5e7db5b779beeecae4d7059719baca"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI13/solide/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI13/solide/data/readme.txt",
+    "bytes": 467,
+    "sha256": "64c6a693f7314bceed11565fa85072d1e8b9eaaec44f8641322bb6b5384b46ce"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI13/solide/data/ref.extract",
+    "bytes": 374,
+    "sha256": "7d7c459565974c2d698e4ba3a17f8f83d5972a9e0cd4ef844227461e1c8182c9"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/LOI14_0000.rad",
+    "bytes": 16294,
+    "sha256": "1567b3b3dbbfa5a03f36c5cefcaf19579ea44ad0cb1da3b2776cb3d128f796c9"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/LOI14_0001.rad",
+    "bytes": 637,
+    "sha256": "89f508fb8eee9daffe84257bde076bf7373e523d59a7ec8f4698a8a38a911d5b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/motcle",
+    "bytes": 14,
+    "sha256": "24e78a0241a8dad00f632fe76802a8e1b831f44e100a82488631f583dc510c6e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/readme.txt",
+    "bytes": 503,
+    "sha256": "56d88b9007ee0e906a4bb3e9c493e7b83dd3c2eb30f9ed11bc58a814129a95d3"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI14/data/ref.extract",
+    "bytes": 374,
+    "sha256": "38554caaf8dd6f7bc97f4dafa834267f3ebcc67d5331027fb01c1b86618ffc0a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/BESHV44_0000.rad",
+    "bytes": 14030,
+    "sha256": "920c08eaa8bd90dea181124fc8643a47dbb8aa2d9960bf3a058c1b28ccb6d9a1"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/BESHV44_0001.rad",
+    "bytes": 634,
+    "sha256": "d6802888beccfce8439550d7b2b734c9d4ca2f4f35a98b00c447cac07068d866"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/motcle",
+    "bytes": 44,
+    "sha256": "7fc45457dcbea6794fa13367a769ae44ab8ad59f4dd85c683008c7dcc06274da"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/readme.txt",
+    "bytes": 495,
+    "sha256": "be0827eb96598de025163482e79b409841fe2975c9ea5481edb0ab0978ada560"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI2/BESH/input_44/data/ref.extract",
+    "bytes": 374,
+    "sha256": "43530e8220699a80c51b7bb0fccf53fe133ab18279aac4f3826df2ace39df448"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/M21AV31_0000.rad",
+    "bytes": 9690,
+    "sha256": "7fdcadea3943d8ef942d647dd9c02c66a00c0a0706a37d4e8016383572b9653d"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/M21AV31_0001.rad",
+    "bytes": 509,
+    "sha256": "4396aea5f39e5e5d51cf7e810c77a2028efd42dae88c8c0ab5bc7dd9e0d56000"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/motcle",
+    "bytes": 30,
+    "sha256": "3a049c5733c656f462fb307e2151a73bf35f49a3507d2667c8e36ada7e1a2019"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/readme.txt",
+    "bytes": 481,
+    "sha256": "72434bbd56b5a71276460c3888c082b593f8149198815aeb79a598a515f3d2b7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI21/data/ref.extract",
+    "bytes": 374,
+    "sha256": "693cd5c1b2a38dd02c2e2e6047d4c528714e8b5f58991d18f6dcc6b4b1026e23"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/LOI2223_0000.rad",
+    "bytes": 14363,
+    "sha256": "798a51086fa3a9db1b244be5bd53372452f533a101705709db315b62f0a8039c"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/LOI2223_0001.rad",
+    "bytes": 629,
+    "sha256": "0a835642ee13a7ecb106c1947af4894766798c44e2d9df957f82c194c17c716a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/motcle",
+    "bytes": 36,
+    "sha256": "0ac62db72cdf80172c472f2e5dd1eabc6189df384cc26b97022635e7cebf0a2f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/readme.txt",
+    "bytes": 505,
+    "sha256": "59b59b9a634dfc8df9715d69921e8b29618945be5a879db55db1f2eed09a79f7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI22/sol2223/version_100/data/ref.extract",
+    "bytes": 374,
+    "sha256": "82ae102f663e6f7351c67f6817f93ec55dcd29ac0cae797e2258a6d59bf9fa7b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/L25CRASB_0000.rad",
+    "bytes": 16029,
+    "sha256": "920272e456265d114dfea14d26c44529f4098ad94fe853d72f89aba24d1f13d7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/L25CRASB_0001.rad",
+    "bytes": 635,
+    "sha256": "17cae4c887ae11538c16dbf33687ae6a8882e5baaa5114fad074addb54a74460"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/motcle",
+    "bytes": 39,
+    "sha256": "3c07e9c52d84a426cb504ab54efa66e781b8f546c2a6272c26c67b6897083c64"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/readme.txt",
+    "bytes": 490,
+    "sha256": "23168ca36af3daead2261fd1bbe859d59fd03e35c08968afe5d7696cba374378"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/ref.extract",
+    "bytes": 374,
+    "sha256": "25d7046aa2cc1260c554ef69b014ba824af85ee1ff49d3aa857ff52ccd93ee75"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI25/test_crasurv_bloc/input_44/data/test_files.json",
+    "bytes": 233,
+    "sha256": "68162451a39ba73e54f37ea2eda016a99a80da1be0076b84578e27570c05f846"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/B_POKE_9_0000.rad",
+    "bytes": 10667,
+    "sha256": "ff3220e303b18ac35daff7c869c4ecf6c12dba8e64f60236bd9af080a5d8760b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/B_POKE_9_0001.rad",
+    "bytes": 991,
+    "sha256": "ddde932ba13c9f1ce5cc96dba5ad968ad17b9ac7ecabaa412c6a56d18572a8c8"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/motcle",
+    "bytes": 40,
+    "sha256": "457788ed878c18eca0e7da5358ec0c3b6d9d8b397b10980021bd762bb8ea802e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/readme.txt",
+    "bytes": 490,
+    "sha256": "325ef4171336805cbe2cd1ce96d66f59a916754e05eb6a308fe0dc5edf0b9e84"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI27/B_POKE_9/data/ref.extract",
+    "bytes": 374,
+    "sha256": "ed75f93ebabd1991f382772a2bcaa9cf0bae1b8885de1c1acb704765789e8c6a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI35/NewTests/Coques/test2/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI35/NewTests/Coques/test2/data/readme.txt",
+    "bytes": 486,
+    "sha256": "e56c4e9e46ad3db533bf18f3aeaf98dfd0beb3e0ca4e211fb8848fa8d31cda0f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI35/NewTests/Coques/test2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "bb739dac05aef1880f7a84618d4c2f764d63f4d3311567d727253ba2e7d721f7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI35/NewTests/Coques/test2/data/TEST5C_0000.rad",
+    "bytes": 9628,
+    "sha256": "a18bc8014e2712023e86fd873931bf165e3d1e09288e82b32ac4b4a4c0de8786"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI35/NewTests/Coques/test2/data/TEST5C_0001.rad",
+    "bytes": 616,
+    "sha256": "e8211de7b02526a69fc2dc4a0d14273f4e92cca65eec54e35ef9bdbce1eb1b28"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/DMAFNLIN_0000.rad",
+    "bytes": 71698,
+    "sha256": "a5847ee7a9798cd2b5395eb5158eaf32b62fd3bb8280330ec5b07dbdec6a5181"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/DMAFNLIN_0001.rad",
+    "bytes": 597,
+    "sha256": "61b8c94f6039e9767a913a34c567f2ca494475da8f2281a5c758affcfd31dff7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/motcle",
+    "bytes": 66,
+    "sha256": "8a6cfa6ae54b32c1ecb05e20306c4060e788260fb8c034a71143ea336176a0e9"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/readme.txt",
+    "bytes": 500,
+    "sha256": "79819094293357e6596bf6df78e27c0fd439113abc0b09a0f1fa2e50c3a007ed"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI38/DMAFNLIN/input_44/isolid_1/data/ref.extract",
+    "bytes": 374,
+    "sha256": "df56797764d45e9c629f64ce661dbf64a6047a95ca6b79484326cedcae97f04e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/44SLD8_0000.rad",
+    "bytes": 3092,
+    "sha256": "e98167d55bebc1fc1ea4d664750c66743ad1fa7a79b9932079b9832417c46ab1"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/44SLD8_0001.rad",
+    "bytes": 455,
+    "sha256": "4a3b2955a21b31d1989618b66ca07c2f037d3f11559faf66a4f732a2734cb143"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/motcle",
+    "bytes": 14,
+    "sha256": "1dd6f57c6123100857af17415450fcd0875935b5926fa6bd222266c4595d0017"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/readme.txt",
+    "bytes": 482,
+    "sha256": "960319acb700bfce4de4c889403ce8187f0e3ee2f9507b3d06e49661dd16089e"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI44/solides_8pt/data/ref.extract",
+    "bytes": 374,
+    "sha256": "7a07bc3343cfd0a98f1b9d92604babba139a727cf731029ea926becb0f3d0b17"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/BAR2V41B_0000.rad",
+    "bytes": 94625,
+    "sha256": "0432ce73e8b07a69438e8bf308ed3ae7b5394b936922d52321aa155d675c293a"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/BAR2V41B_0001.rad",
+    "bytes": 569,
+    "sha256": "a56a38fa403f23d1c4b9bd845d72a2348db199c030fea71501314d5eb1c7b2b6"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/motcle",
+    "bytes": 16,
+    "sha256": "fd1cb3767040d31e8d3db80f298d0c4610d13f7c509a6a847b5c3eaf835de132"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/readme.txt",
+    "bytes": 482,
+    "sha256": "d8a099c43725cc27331dcc04a0acbba1f12bf1975fa09a03146480900856e434"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI49/bar2_v44/loi_4_49/data/ref.extract",
+    "bytes": 380,
+    "sha256": "02a241868d86e7b0332e447fb3bed98430dd096ad839945d5e3f424fd03c2f49"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/M50B_0000.rad",
+    "bytes": 19504,
+    "sha256": "f86e873bfa2b23e9f41a4dddd7a6633fac43a1484d48bc9afba998137f331a11"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/M50B_0001.rad",
+    "bytes": 581,
+    "sha256": "131fb76504d94e6325eaa1f471dfc5dd58a937e64372a8258e16d08c2a028094"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/motcle",
+    "bytes": 39,
+    "sha256": "bd0ffe91d688500ad3334db3cafb6946fe57fb797edc4842c6f937d6bc2f44cd"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/readme.txt",
+    "bytes": 483,
+    "sha256": "1f3fd39c6b9cf4c561cbf1f828f6150074aa9d7be10f1eae412e68e04ae93f54"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI50/test1/pid_6/input_44/data/ref.extract",
+    "bytes": 374,
+    "sha256": "4ad4e557b26ab21e2ec8460570b202935c1b1a76c4142dc837f5b8d7cec39ea7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/L51_JWL_PG_P-E_0000.rad",
+    "bytes": 15185,
+    "sha256": "d0e7969732d0c3b350ffaa67e3f0d8231984637bc7e33eab9a7d63300ad928df"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/L51_JWL_PG_P-E_0001.rad",
+    "bytes": 350,
+    "sha256": "3d06fd3eb1998e7f8ac573f6b2a2ef2281969490a2497ecd2600e6909ea0232d"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/readme",
+    "bytes": 951,
+    "sha256": "387ef76a81fbaba05ab0ddefd9357e8be07821f5867db69583abc3a40d505a29"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/ref.extract",
+    "bytes": 379,
+    "sha256": "9691767d5c5f6bb4aff327b3580e8adb5082e86239b7473bbd1a988e5e73a598"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/result.png",
+    "bytes": 28406,
+    "sha256": "8c05622dbf0b8656be015e577370b8c3d9accf59f751679cb4a42ea87c6c7b98"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01a_P-E/data/test_files.json",
+    "bytes": 124,
+    "sha256": "1329b081f09f261364d558e6ae75418efdfb3afa99637203671cba3725c2effa"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/L51_JWL_PG_dP-E_0000.rad",
+    "bytes": 15195,
+    "sha256": "f6c04e2a6a0710cf6672c70e001074edd5f026d2dd06053af30e48346603cc96"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/L51_JWL_PG_dP-E_0001.rad",
+    "bytes": 366,
+    "sha256": "838f596f3565eb2bf654824774ff25f4690656d8f62155c95c612282aa2667d5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/readme.txt",
+    "bytes": 951,
+    "sha256": "387ef76a81fbaba05ab0ddefd9357e8be07821f5867db69583abc3a40d505a29"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/ref.extract",
+    "bytes": 380,
+    "sha256": "b7f80af33a4c8ed77b5be4b25aa06d95c69f52fc22a322526018ceefafd9d28f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI51/JWL/01-PG_degenerated/01b_dP-E/data/result.png",
+    "bytes": 28406,
+    "sha256": "8c05622dbf0b8656be015e577370b8c3d9accf59f751679cb4a42ea87c6c7b98"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI62/cisaillement/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI62/cisaillement/data/readme.txt",
+    "bytes": 483,
+    "sha256": "4e0eff6c2593fe28273283e73c2fba7d6c45f57d583831f5ef3405ffd3076910"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI62/cisaillement/data/ref.extract",
+    "bytes": 374,
+    "sha256": "b086256c766918e4e704388ad4abf3bdae1a5572571231b93172eecb79a43437"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI62/cisaillement/data/TEST62_0000.rad",
+    "bytes": 8051,
+    "sha256": "f73ff861c7f37758ebe1771a23f616bb492f248aead9bbf0314139945bd1ddba"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI62/cisaillement/data/TEST62_0001.rad",
+    "bytes": 680,
+    "sha256": "0bc2183a8d4bc5a109d1d1d6e6416a40cc8bf87673626ffb5aa88d66a6bc3b7d"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/DEUXELC_0000.rad",
+    "bytes": 34603,
+    "sha256": "b6f99e6314bcfe387e7dc7c9d4a2362582c659e99b1728820e324f9ee516d48b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/DEUXELC_0001.rad",
+    "bytes": 694,
+    "sha256": "1974f43fb0158a59767f9bc5551531d7d1e7f435bb9db3ecb682f946c7ca8503"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/DEUXELCD0B",
+    "bytes": 1541,
+    "sha256": "95163950ca186861db07c3572b9d6888039077ef72b0b1804a0b5764ab37b9a0"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/readme.txt",
+    "bytes": 547,
+    "sha256": "7f8ed9a8ec93db7b20deb3f279dcb1872507b4b72f49a043e5c40aae95929dce"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI66/test_shell/data/ref.extract",
+    "bytes": 374,
+    "sha256": "2ac8d37271cee230e0c3ad6293185e1319074e468da6e4d3ab797014434b2b7b"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/CISA12_0000.rad",
+    "bytes": 579853,
+    "sha256": "9f6659e27a2dc251df6ddd189c6fee914f94cd88ad9fb824a91ad1e144cbc249"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/CISA12_0001.rad",
+    "bytes": 458,
+    "sha256": "0084bf16e56446e81820b5983aeb72cd03d4aaa6a97a33837d06aae324e4b7a8"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/readme.txt",
+    "bytes": 564,
+    "sha256": "e5693774d4b141099d6bd4857c17c9ba1b973c24d1a39ca704dda166de44f268"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/ref.extract",
+    "bytes": 374,
+    "sha256": "f1188314952f65bd870e25a79a8d1e8ae94208087b15cd6a4186748246236545"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI68/cisaillement/test1/input_51/data/test_files.json",
+    "bytes": 591,
+    "sha256": "1f84f63fb7409edfa477e997c32a216b86a95685b28bcfdbb0bafa5e460415a7"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/COMP_0000.rad",
+    "bytes": 33439,
+    "sha256": "1d0ecc69c77de4434ee0d3b3c3d7159f8b4fc80e8014737c48c5cf817968f014"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/COMP_0001.rad",
+    "bytes": 694,
+    "sha256": "1f290375f6579b0847a286b647543e46e789c3d31764825a473b183ed6ef8e57"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/COMPD0B",
+    "bytes": 1131,
+    "sha256": "23a3ee028bbd2b90bb4a775958305dcc31a601370d1321d64279d5b0cc00f007"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/readme.txt",
+    "bytes": 483,
+    "sha256": "a7dadb712cd6e3d4e243310a844f7f72e05cdee1fc08ec52e5c54ff29615794f"
+  },
+  {
+    "path": "qa-tests/miniqa/LOIS/LOI76/shell/test1/compression/data/ref.extract",
+    "bytes": 374,
+    "sha256": "28a0459fc7b1d8e825a8f281a22df850744fe26ba48a53864b21db84b609ad02"
+  },
+  {
+    "path": "qa-tests/miniqa/onefile_rad/data/CRA2AV4_0000.rad",
+    "bytes": 121142,
+    "sha256": "aa1b82e3eae0d81a1d4c9bdc0bfba8627fe21cd2bd77073734abf924464597fb"
+  },
+  {
+    "path": "qa-tests/miniqa/onefile_rad/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/onefile_rad/data/readme.txt",
+    "bytes": 587,
+    "sha256": "bc3450f086ae41062d47cee8b287d78d775a01ff781acedc5313192fb4c1a9ac"
+  },
+  {
+    "path": "qa-tests/miniqa/onefile_rad/data/ref.extract",
+    "bytes": 374,
+    "sha256": "40461cb6dc9f5ee6cf810e288c158f01f241b0c6cca45f5ccf307bca2908a475"
+  },
+  {
+    "path": "qa-tests/miniqa/onefile_rad/data/test_files.json",
+    "bytes": 353,
+    "sha256": "24fa76bf847345a948624e64ce285f657bba94ed0fa9def99f45f131de761c05"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/damping_all_nodes/input_44/data/DAMPC_0000.rad",
+    "bytes": 18908,
+    "sha256": "57285fd1ec5bda1b271729b4c86a75c5e35d4bacd9eb1ad38eff82c25bc1112c"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/damping_all_nodes/input_44/data/DAMPC_0001.rad",
+    "bytes": 582,
+    "sha256": "e52d5190fcef72a4fcd063a1bbf13eda0a42b4afc3b0832fed6c1347d680ace2"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/damping_all_nodes/input_44/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/damping_all_nodes/input_44/data/readme.txt",
+    "bytes": 484,
+    "sha256": "88aa15c6b7df6ae3c719b74f5914dd965260e021e09512deba562263463796d5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/damping_all_nodes/input_44/data/ref.extract",
+    "bytes": 374,
+    "sha256": "2ef50775a30ceb3210514852d1d06c9bb8206cb1cc0f36f55c1a113763e9881f"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/damp_sv.doc",
+    "bytes": 116736,
+    "sha256": "d15f2403e71b264668f33060c4e9ce0c40d3b76afafefc47d15ad2a880002b3a"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/FFO25SCB_0000.rad",
+    "bytes": 33206,
+    "sha256": "9388fb01c7fd5433952f19ee2f7ad6ed92e15f4ea18f793f253f90b177261bf2"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/FFO25SCB_0001.rad",
+    "bytes": 717,
+    "sha256": "f40e3157d609554aac05e0d253125ab61b56b83be9532fa6d407d6743aa8787a"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/readme.txt",
+    "bytes": 525,
+    "sha256": "7a7abd2064fcff60f1d12be36e4326c73277e886a0f575ed33779afc6312b2ba"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/damp/new_test_v11/data/ref.extract",
+    "bytes": 374,
+    "sha256": "68a33745a0143b0491699d4a9aacb4daeefd8fc5b347c8bf443026526b8d7768"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/HYPE_0000.rad",
+    "bytes": 35453,
+    "sha256": "b50dbb4bd98658d3585acf19f4896a89268c347cf31310cdaa7f34949785b547"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/HYPE_0001.rad",
+    "bytes": 605,
+    "sha256": "63338b542fbc0227082ecdb918ab12bfb95257c056d9d63dd8b74bff4d575166"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/HYPED0B",
+    "bytes": 136594,
+    "sha256": "fd714d67a0ab8c26eaf622e52d2eb9aba1df5945e483cadf725ef13215602a70"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/motcle",
+    "bytes": 24,
+    "sha256": "27e1997e8b3c1f43d8eb1948c32bba789a0508fcd8b7877c7e5e3f8e186e2b79"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/readme.txt",
+    "bytes": 475,
+    "sha256": "2b4a8048a799d35c43e71d553379f74f8fd0a37068ab2cb5ac96d17c4e357434"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/desacti/test2/version_5/data/ref.extract",
+    "bytes": 374,
+    "sha256": "967c7864a53120c876f470f5656491de75d55f5298a926da0f09b40cea519fb2"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/motcle",
+    "bytes": 28,
+    "sha256": "1f428412c9ed68ca37cf78c818fe2854357ae82c7e1d04e85ed9f56e1a3d0359"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/readme.txt",
+    "bytes": 480,
+    "sha256": "4240e18a76fd170eeb37deee6dacf7bbaa0e18a772aa22ec2bdedf19530f09a4"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/ref.extract",
+    "bytes": 374,
+    "sha256": "7a8b7149b539dee63072f2ea2b28e5e81109e7f2b489deb4951beb67843f2002"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/THFRAME_0000.rad",
+    "bytes": 10764,
+    "sha256": "74780b932d493ecc087f852bbc3ae29d13c651f501c602051e895cd8c0f38cbe"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/frame_or_skew/MOV/frame/data/THFRAME_0001.rad",
+    "bytes": 548,
+    "sha256": "396a1200c88257c153413163aa78970ee62f3729003177fd8f854ae514e0b361"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRBRICK/data/FOAM_GRBRICK_0000.rad",
+    "bytes": 829371,
+    "sha256": "d86763fc92aa10f5490914f2dd4af296c18481f9f542819d49b279e5861ec05b"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRBRICK/data/FOAM_GRBRICK_0001.rad",
+    "bytes": 455,
+    "sha256": "857e0bdc2d50471b0796c29f6c8e12b5762f5e9d572cdba48a06ff0d32f0f452"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRBRICK/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRBRICK/data/readme.txt",
+    "bytes": 490,
+    "sha256": "eae1e53062d21cac3332eb5bd871f8fb83ffecbc1f83c9141bf44fa0141e8cea"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRBRICK/data/ref.extract",
+    "bytes": 374,
+    "sha256": "6398a0d1436681dbf6ea3b1daa8c08d465a30052cc0fcb5a776a10d988cf7c9e"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRSHEL/data/FOAM_GRSHEL_0000.rad",
+    "bytes": 829197,
+    "sha256": "29b7478f49db231ae65790702ba4c82e2d3c4eeb5d363c09ae31728b2423e63a"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRSHEL/data/FOAM_GRSHEL_0001.rad",
+    "bytes": 454,
+    "sha256": "47f820718e19d49d2fb04eb93d04c60e4ea6e823aac76c20a500abe3bfd73284"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRSHEL/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRSHEL/data/readme.txt",
+    "bytes": 473,
+    "sha256": "297b7fbf4324082d993962a83b105f73c91f91816d344ba2eb850ad7c739f22a"
+  },
+  {
+    "path": "qa-tests/miniqa/OPTIONS/NEW_BOX_V11/BOX_GRSHEL/data/ref.extract",
+    "bytes": 374,
+    "sha256": "6398a0d1436681dbf6ea3b1daa8c08d465a30052cc0fcb5a776a10d988cf7c9e"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/PROPSOL_ORTH_Istrain/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/PROPSOL_ORTH_Istrain/data/readme.txt",
+    "bytes": 500,
+    "sha256": "ed4abb6dc70816a1116ba2d254b937cdeaef0262de98ab4a70b23e78a58c5138"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/PROPSOL_ORTH_Istrain/data/ref.extract",
+    "bytes": 374,
+    "sha256": "4512389f44de9abcbcd990423f6971a636800c98c1ad77dcc0a319ff4e6b46d1"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/PROPSOL_ORTH_Istrain/data/Test_traction_0000.rad",
+    "bytes": 6742,
+    "sha256": "f92c6e2cd69be720ac253b33b1e228307f465a2fe9f151c4ab16b569e7f0f884"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/PROPSOL_ORTH_Istrain/data/Test_traction_0001.rad",
+    "bytes": 687,
+    "sha256": "8f648a69e144476c415ec6aea3980509d7cd7f47eacc3a8036389babf56381dd"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type13/Hardening7/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type13/Hardening7/data/R01CV3_0000.rad",
+    "bytes": 6368,
+    "sha256": "260f34472bdf0bf90a5b7e0a7dabaa2821324507d293caf9135e0e3fb1d0c03e"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type13/Hardening7/data/R01CV3_0001.rad",
+    "bytes": 349,
+    "sha256": "b04eec64ffa8a8bff61c1a0ed241bf7173ac80bee07edee6209448756836c97f"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type13/Hardening7/data/readme.txt",
+    "bytes": 499,
+    "sha256": "a7de37a1ec536100a9d0a94d219a07baf9f8abd1b8944c81fc5e7dd816e0a7ee"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type13/Hardening7/data/ref.extract",
+    "bytes": 374,
+    "sha256": "4dd2720db4f89c0fd48c3090f1638f350cd7c51a4e08fec637876587ebc22d1e"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/R01CV3_0000.rad",
+    "bytes": 11318,
+    "sha256": "6d55d40da796b0aced1151bd64f093b837dd285e0ef6e8ad447af62c9ec47a02"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/R01CV3_0001.rad",
+    "bytes": 497,
+    "sha256": "19735256744e0183d0ecab7e98fcf517db0c4027164c6055ba340759cd55d376"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/readme.txt",
+    "bytes": 499,
+    "sha256": "a7de37a1ec536100a9d0a94d219a07baf9f8abd1b8944c81fc5e7dd816e0a7ee"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/ref.extract",
+    "bytes": 374,
+    "sha256": "18f7fdf4ad82b6609e19fbcb74168e83a8a5476978bb240d02b8cd3e9d336709"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type4/Hardening7/data/test_files.json",
+    "bytes": 204,
+    "sha256": "133aa9b2d186f26507daa1bfe517447ef63ff39f678415c259d5dfbd8a5d6591"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type8/Hardening6/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type8/Hardening6/data/R01CV3_0000.rad",
+    "bytes": 14514,
+    "sha256": "39a6e64bfc71fa25bccb0f6d0e168ff1be3c44a62d730ae1b353aed6535e7b32"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type8/Hardening6/data/R01CV3_0001.rad",
+    "bytes": 497,
+    "sha256": "cbaec75f947d56dea6dd1f631d57568df837c0b0f37ba4b6461f34dfd69540bd"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type8/Hardening6/data/readme.txt",
+    "bytes": 488,
+    "sha256": "489f08a1eb0a7c27890357e926afbe391ed9f20df3f3f2d4a29c46957d6d743e"
+  },
+  {
+    "path": "qa-tests/miniqa/PROP/spring_beam_Hardening7/Type8/Hardening6/data/ref.extract",
+    "bytes": 374,
+    "sha256": "eef7a6cc02944409575e6ebabd3442ba6d2048260c6839da01d65ad52dd8c5b0"
+  },
+  {
+    "path": "qa-tests/miniqa/PYTHON/FUNCT_PYTHON/data/ref.extract",
+    "bytes": 408,
+    "sha256": "fc7e9c972d7579025689d0e3bf9c5ffdb75a0c8abb68800d83c65165e08698ce"
+  },
+  {
+    "path": "qa-tests/miniqa/PYTHON/FUNCT_PYTHON/data/test_files.json",
+    "bytes": 164,
+    "sha256": "f1901861d0aca440275e2cb18809c79105256c4c270d7d2f3d4288a7304b72bf"
+  },
+  {
+    "path": "qa-tests/miniqa/PYTHON/FUNCT_PYTHON/data/test_torsion_orthstrain_shell_0000.rad",
+    "bytes": 146177,
+    "sha256": "2318ccc83e844f1fdd31426a8537f3d9a734f83bba93c4bac431361059525ea8"
+  },
+  {
+    "path": "qa-tests/miniqa/PYTHON/FUNCT_PYTHON/data/test_torsion_orthstrain_shell_0001.rad",
+    "bytes": 353,
+    "sha256": "41b7dc1fd941fc39f78d941f91a262748600a79534075fbeb02d7d632b01ee55"
+  },
+  {
+    "path": "qa-tests/miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42/data/FILE_0000.rad",
+    "bytes": 330516,
+    "sha256": "ffd45ea47da74e07058effcbbcc943a69966e7042151a6fa0bb9ddcb36ffb7fe"
+  },
+  {
+    "path": "qa-tests/miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42/data/FILE_0001.rad",
+    "bytes": 479,
+    "sha256": "0cfc08a25af1cb4e391dfd8f181eb62ab512d288ed4ac517b5151c9486292b57"
+  },
+  {
+    "path": "qa-tests/miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42/data/readme.txt",
+    "bytes": 583,
+    "sha256": "6cfa11c5fec7b78007464ab84ca61358bf9cf2b091c05fa426d1682aba1004f6"
+  },
+  {
+    "path": "qa-tests/miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42/data/ref.extract",
+    "bytes": 374,
+    "sha256": "3a13900a3c54fa0402fa0a6b6180abccaf15c9dc05a3032b551f38ea800f3828"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/motcle",
+    "bytes": 18,
+    "sha256": "d398fb933151c58de2cab737310d283bf164615ca57ffe95d0af858c6eadde33"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/readme.txt",
+    "bytes": 485,
+    "sha256": "fd361fb27c22244280aeb9926714ae35c656d92ae34b5ca9a1b180a3c63d317d"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/ref.extract",
+    "bytes": 374,
+    "sha256": "93d9cce4751fc91a6061abfd1eba9d138eaffe95bc2f7f5b77ca9210ca6cb588"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/TYPE8M_0000.rad",
+    "bytes": 13036,
+    "sha256": "495cc90524d8dae901a0e29ad4e8e35e2a58b3ebd779beef2f5a2ef007b864e4"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/couple/data/TYPE8M_0001.rad",
+    "bytes": 495,
+    "sha256": "73600d8fa11cf446a2d1a7f63fda61377e533c86691a6e9fc6a8d273476bafe1"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/kjoint2/data/JOINT_0000.rad",
+    "bytes": 15602,
+    "sha256": "f19695c32bb8ee8816d89b04b18beed6fa406b5945ef98a171dd7fc943a99f49"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/kjoint2/data/JOINT_0001.rad",
+    "bytes": 375,
+    "sha256": "6c2055c3e12d4a08a5ee6f742f4d20571f954fc2b350d0ce6ec5d85dc194c9fa"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/kjoint2/data/readme.txt",
+    "bytes": 487,
+    "sha256": "fa70a273a227dfc3a996ebfd7b866d7b978c2781631323bf8cca70dc6229c72d"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/kjoint2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "8a20b09eeabcf9cc34673544c5f3d829f291655e54dd77a3fc18104365c0f61b"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type25/input_51/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type25/input_51/data/readme.txt",
+    "bytes": 486,
+    "sha256": "722ad972e95b873517cd1d5332be2af5eee857f90020906bae4c5dcfc5e4d7de"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type25/input_51/data/ref.extract",
+    "bytes": 374,
+    "sha256": "df17b9eb20816b0886264bd65c89efc4f4e65f89865bc127861c516f992b99ee"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type25/input_51/data/SPR250_0000.rad",
+    "bytes": 7760,
+    "sha256": "a8a68d07aa542cd5d9ea8e781504edf2f6d321aa0107fea52fe6d3887c56ca29"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type25/input_51/data/SPR250_0001.rad",
+    "bytes": 352,
+    "sha256": "a42f1679b57f9d670d041d9b486d9b403b728e8965d185683a1f622fe1fa242b"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/readme.txt",
+    "bytes": 496,
+    "sha256": "c3e1603961e4504be22fe073e11e61b10e7ca2392879e4cbdf91e101a9db84a1"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "f24305320bcaa962d7d05c578fe0ee4a40b374e99f22d79200dd54fbc4579569"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/SPR_PRE_2FLAG_0000.rad",
+    "bytes": 11681,
+    "sha256": "6d39b2e26da4501d76c43094430c6f2f01beeae79d48b272ae4a106062679041"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/SPR_PRE_2FLAG_0001.rad",
+    "bytes": 398,
+    "sha256": "fe28af795b0aa91cf32d7e684849addd44d5400fc58d7745e1dd6cfca4083aa4"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type32/ILOCK2/data/test_files.json",
+    "bytes": 123,
+    "sha256": "cab2d7ad1a4f2b8a5552d8cf3c68d79bf05938bd38bf8b8309ec5a48d85f2271"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/motcle",
+    "bytes": 16,
+    "sha256": "7105b55d5494f2daa3cc47735a69935ff9953dfb065118b3e409990084929fe8"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/readme.txt",
+    "bytes": 525,
+    "sha256": "e0986c3e9d2bbf3ed92f3cdaedd4274fa51e7fd32042b6face1e52090d459f0a"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/ref.extract",
+    "bytes": 374,
+    "sha256": "1168e0ed8c17e952cd8f77714647ed5d2b7e1b5d930d5c4f4ea144b7471d43f4"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/TYPE8H1_0000.rad",
+    "bytes": 13700,
+    "sha256": "bc6d65d416ac3feb7a65ee41da31bcfa1d0dac5ad9ea8406fcc4720e113f30ab"
+  },
+  {
+    "path": "qa-tests/miniqa/RESSORT/prop_type8/ecrouissage/data/TYPE8H1_0001.rad",
+    "bytes": 447,
+    "sha256": "80c67d6f7dc3d9cb8f8905efd2b18f2f742f0b9f0fc3103b6a9660d5e72ba13a"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/CRA2V44_0000.rad",
+    "bytes": 115274,
+    "sha256": "1fb499e22bb63415867feaccd979766191fa28f35e8664164d1a2729e8f2019d"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/CRA2V44_0001.rad",
+    "bytes": 784,
+    "sha256": "69049b7d538cb11c473d48d43f95bb78bfa0c533fa668cfac296bc0296d37405"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/CRA2V44_0002.rad",
+    "bytes": 436,
+    "sha256": "b9d2526d83a42c4f4bda7a684b3fc9828304a6d157f2581f163dd7e22fd02b5c"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/readme.txt",
+    "bytes": 502,
+    "sha256": "fd5ea6d3879363fce133a07849b9f219479665b67b94b29efc47bd51641e4051"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/ref.extract",
+    "bytes": 374,
+    "sha256": "fefe932fe698238e9d3a6c31444f6ae75b3b6350b1570f83c772fa551dc5ace7"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/cra2/data/test_files.json",
+    "bytes": 106,
+    "sha256": "ab39a64f54fc851b9b1024a4f6a73c185d51f843474195416d1a458720380e58"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/BOULE1V4_0000.rad",
+    "bytes": 32936,
+    "sha256": "fe63dea3e9e951a08a4243e21769b78b85fe85ae9b61001f36ed10c666214686"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/BOULE1V4_0001.rad",
+    "bytes": 486,
+    "sha256": "44e874261dc491584bc611801ec2ea6267e35ca7f843d10dfcca3e3bdf472644"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/BOULE1V4_0002.rad",
+    "bytes": 304,
+    "sha256": "996fcfe84bb143f96fb4001c1c80711b601926d20aa20cc43dfb588e4bb97639"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/readme.txt",
+    "bytes": 482,
+    "sha256": "6f1bfaec31de03638b470bfd957e01309431fdd322972579ac6e932aea56fdf6"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/ref.extract",
+    "bytes": 374,
+    "sha256": "de8158d205d0049f36570c6cd5a8380bb3b370a71725358b5fd7113689cd4edc"
+  },
+  {
+    "path": "qa-tests/miniqa/RESTART/int7_small_boule_rst/data/test_files.json",
+    "bytes": 111,
+    "sha256": "b2a4fb8acfe5c0b14670c5aa9ffd3942af365b8d1f16ead5d3f9558431227068"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/FAIL_TAB/ELEM_SAMP/data/1ELEM_SAMP_0000.rad",
+    "bytes": 28309,
+    "sha256": "ea2ec854a59b84a8dc64f4f7a92e42774f410274d11ebf9ee2f62625c2fa5c6f"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/FAIL_TAB/ELEM_SAMP/data/1ELEM_SAMP_0001.rad",
+    "bytes": 669,
+    "sha256": "af3a48f2a5d07503033879a5e58e9f86879fe9df15abc1eadc0530355bb618e2"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/FAIL_TAB/ELEM_SAMP/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/FAIL_TAB/ELEM_SAMP/data/readme.txt",
+    "bytes": 489,
+    "sha256": "bc2268febf0a16aa07572c7696a47b7562808c2d3fbffaabac4c028ab58e560d"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/FAIL_TAB/ELEM_SAMP/data/ref.extract",
+    "bytes": 374,
+    "sha256": "d34ba163a07939cc641a2e98e0998e017514213d631e3fa3840d675bf7ade603"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/Wierzbcki/User_law/shell/input_51/data/1SHELL_0000.rad",
+    "bytes": 18702,
+    "sha256": "dc5f86eeb3b1e64c8f0a0a62548890eaf62f54ccbea07a40034bb7b8d3a82d93"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/Wierzbcki/User_law/shell/input_51/data/1SHELL_0001.rad",
+    "bytes": 480,
+    "sha256": "6ce7527140d9220d712d200fe1b9b89dfa715d4828159e8ba9152a1ca8cfd505"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/Wierzbcki/User_law/shell/input_51/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/Wierzbcki/User_law/shell/input_51/data/readme.txt",
+    "bytes": 593,
+    "sha256": "c0f5e5c94c8da2587e5e7d484f2925464414b29e94a0469a616615b06279db2e"
+  },
+  {
+    "path": "qa-tests/miniqa/RUPTURE/Wierzbcki/User_law/shell/input_51/data/ref.extract",
+    "bytes": 374,
+    "sha256": "ad9e3ed11eee15568cd9ae8c4e591cac65973f865ab72306b0c25710d8e19c35"
+  },
+  {
+    "path": "qa-tests/miniqa/SMOKE_TEST/data/readme.txt",
+    "bytes": 525,
+    "sha256": "2ba8ae47406039e2546bda13d981afcfc039a691b0e169768373234e47505392"
+  },
+  {
+    "path": "qa-tests/miniqa/SMOKE_TEST/data/ref.extract",
+    "bytes": 374,
+    "sha256": "c73a189a09e2c6dcc872aadca2f487e18a96dd6e58df254fea942fb5f7ebae0b"
+  },
+  {
+    "path": "qa-tests/miniqa/SMOKE_TEST/data/TWISBEAM_0000.rad",
+    "bytes": 10433,
+    "sha256": "ae5c24ec2c354ccf2cde219722b53a82b3ff185e6248954a872ccba2068b17c3"
+  },
+  {
+    "path": "qa-tests/miniqa/SMOKE_TEST/data/TWISBEAM_0001.rad",
+    "bytes": 538,
+    "sha256": "e096f4444a7c02e7083becd95678e4fe2d3e30a7126e5378e22c37fc02823810"
+  },
+  {
+    "path": "qa-tests/miniqa/SMOKE_TEST/data/TWISBEAMD0B",
+    "bytes": 25317,
+    "sha256": "8f3a1dc70925b2634be5b1184babcced2193a95d1a8c7b04ad93b1a0ef6a5fe0"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/readme.txt",
+    "bytes": 487,
+    "sha256": "604a2090d0df7febcfa45ae2d29de514eee4098c724716cc79562990bd90008c"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/ref.extract",
+    "bytes": 374,
+    "sha256": "4004dff641817ff8bd88c8041e42f41494123e136ad8d62d3a4a4d7746e63023"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/TEST_002_0000.rad",
+    "bytes": 12107,
+    "sha256": "c7382516aaa7bbb6ceb5f05342036633788993621318a439079b81984f99b545"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/TEST_002_0001.rad",
+    "bytes": 814,
+    "sha256": "7faf5eefe90082157faf51279227fb011dd3cc126e416afba65b7ad4d5d34fe2"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/inibri_stress/data/test_files.json",
+    "bytes": 289,
+    "sha256": "ac151561eedf78841ed48e2c74e85bdf346b92e54a47228253378fa78a2f9787"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/CONV_ELS_0000.rad",
+    "bytes": 52151,
+    "sha256": "8138b1bdef3752af2286f857227b9696b79bc3bf56c03cbdf0a55f45d4ca9e48"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/CONV_ELS_0001.rad",
+    "bytes": 695,
+    "sha256": "343a471bac2b08c654b85db337ab7dd34d2ac0f3ce080d33fab755c41d87f222"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/motcle",
+    "bytes": 30,
+    "sha256": "85f2ff2e081f3d73623acd306876ebdc52c0268e1113751fe0fcee1bb03b3a4a"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/readme.txt",
+    "bytes": 581,
+    "sha256": "940c6ac9f7b4adfbea2db767c172eb469635baf6b30f926f52585b705891c696"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101/data/ref.extract",
+    "bytes": 374,
+    "sha256": "a9e2f28d956077702efd8709ca0961ba8aff862cca8b09aaa4f205a2cb0af153"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/CONV_ELS_0000.rad",
+    "bytes": 52151,
+    "sha256": "b9c1ed654d2685d7cf15fc299310450a3792a3e8254780860c7b6e0c8f0a199f"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/CONV_ELS_0001.rad",
+    "bytes": 695,
+    "sha256": "343a471bac2b08c654b85db337ab7dd34d2ac0f3ce080d33fab755c41d87f222"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/motcle",
+    "bytes": 32,
+    "sha256": "0386d055f177bfd1af85732a5512a1851acb45e663733001f35adff329ef9988"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/readme.txt",
+    "bytes": 595,
+    "sha256": "d2138456f580e89b75a01b38a390209ba2329fda18c4c5f10f17a89511bd8abc"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H112/data/ref.extract",
+    "bytes": 374,
+    "sha256": "d0348ecff1877c83008b3629bdbae06d02055c1c9e904cc73fdbd43ce81c60d9"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/CONV_ELS_0000.rad",
+    "bytes": 52151,
+    "sha256": "b57e95830478e23d679d9e9933742f2ed5df0f850745d61ce9323716749ebc89"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/CONV_ELS_0001.rad",
+    "bytes": 695,
+    "sha256": "343a471bac2b08c654b85db337ab7dd34d2ac0f3ce080d33fab755c41d87f222"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/motcle",
+    "bytes": 38,
+    "sha256": "8e49fdd659cf2dcebab762a7f02227db9adc7f03fcd7a312dd809eb2c1aae700"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/readme.txt",
+    "bytes": 526,
+    "sha256": "a88acc59385b334e1d83a75e963efa785c552e55cb6f5e9fde4c01960f14f73b"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HEPH/icpre_1/data/ref.extract",
+    "bytes": 374,
+    "sha256": "af29a43fb44f5464493adf47052dc6d5653eb9577ff23d641625f7ecc002b03e"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/CONV_ELS_0000.rad",
+    "bytes": 52151,
+    "sha256": "d33fb16916c31b7da19742839c1c561c350f531a374bf5c9c96224edf751596e"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/CONV_ELS_0001.rad",
+    "bytes": 695,
+    "sha256": "343a471bac2b08c654b85db337ab7dd34d2ac0f3ce080d33fab755c41d87f222"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/motcle",
+    "bytes": 37,
+    "sha256": "f8868291803f6fff6d0e2204ce2824ad2521ae326f529f3ee81ef90476153136"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/readme.txt",
+    "bytes": 526,
+    "sha256": "ab11e9d1ea5060bac7eebdff91b96efa81d6ebe54517ee023b507b12f7558a75"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH/data/ref.extract",
+    "bytes": 374,
+    "sha256": "d76aac57c2a9fd19318452b3cfe4bc4e0e8cc0837c9d242956645fcd78d0faff"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/CONV_EL6_0000.rad",
+    "bytes": 62333,
+    "sha256": "0632cbc5a706c0ece39078dde168cb38bba53870fbaeeb75a91020d8f3e156db"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/CONV_EL6_0001.rad",
+    "bytes": 694,
+    "sha256": "10fbf80972f780f32fe32489226573e9399280ae935053ce5ea86f4ef94b4977"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/motcle",
+    "bytes": 35,
+    "sha256": "3cb7fe39b3635176b07828d2373935ca65baed9a0898d7f9721452ccc023902b"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/readme.txt",
+    "bytes": 526,
+    "sha256": "2069829298b6e6d3b4a66a9b35d2028f50e9451a9f7472a65b873c03f1ef5c40"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/nv_elts/poutre_flex/flexion/PA6/data/ref.extract",
+    "bytes": 374,
+    "sha256": "37b769b9109e119e166bd11af489cde81d5cc90da81fa199454402e7c8e1251f"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/LAW28_0000.rad",
+    "bytes": 10775,
+    "sha256": "a9ff4c67d5093224366ca300dcbb1547000ab1b359c1b5294a02d7ec5c906d70"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/LAW28_0001.rad",
+    "bytes": 628,
+    "sha256": "8bdfc67b150979d9958f0c5c9dbaaafd6dcfd5f16cb1dbc59f59c9915b1b022f"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/motcle",
+    "bytes": 46,
+    "sha256": "6a08707569983b7b6dacf04e00a7d5af981487a6713d63f9ad6a2854593492c1"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/readme.txt",
+    "bytes": 483,
+    "sha256": "63f6414e7845c31f657c4ed889827ad0e91dafae5a5018ede48ba90bd87ec55b"
+  },
+  {
+    "path": "qa-tests/miniqa/SOLIDES/TYPE6_LAW28/data/ref.extract",
+    "bytes": 374,
+    "sha256": "dbb68f24235730f7e24a92df6b4839560ca2153de978e8d1047de6d195dbb556"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/CUBC_0000.rad",
+    "bytes": 14489,
+    "sha256": "ffa50c6838f80b4767f077711bd9560652c6a978b4e1bee38d862b1867c5b87e"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/CUBC_0001.rad",
+    "bytes": 731,
+    "sha256": "80f4d15b981bd54f32f2812b489543029fb977ce6c84e119ca49bd7e7ec366d2"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/CUBCD0B",
+    "bytes": 140467,
+    "sha256": "3494fa6fb5d5212357f7a6873903a0093d1e6816ff404404ac03f6167f968089"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/motcle",
+    "bytes": 19,
+    "sha256": "076d4ac1617c2bc2bf5bae8814a10d250e5c027ac676d123688d6e2b5eef110a"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/qadiags.inc",
+    "bytes": 1190,
+    "sha256": "fd03f7c3f5755d1ac77e9a74c4add9e494aaaf20a2fcb442559b23befc5820ce"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/readme.txt",
+    "bytes": 491,
+    "sha256": "bcb868cb98691f26fcd1b98cd54240594335c96e5dced6b736f161c157a9dfc6"
+  },
+  {
+    "path": "qa-tests/miniqa/SPH/WavesCompression/data/ref.extract",
+    "bytes": 374,
+    "sha256": "739fe7c6faa6e54e9bb6675ef79eb37d4f440798e1bad5fd329b9c19dd20066e"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/TRANSF/data/BOULE1V5_0000.rad",
+    "bytes": 30867,
+    "sha256": "131181e9d2dde9f04c7b29ff312f8d20607ccf1055ad3d54ea19cffb368b671b"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/TRANSF/data/BOULE1V5_0001.rad",
+    "bytes": 486,
+    "sha256": "a4e364fa4af89562a27054fcdd74d5ad4f649ff72a86f7285b8f8ce0768a1475"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/TRANSF/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/TRANSF/data/readme.txt",
+    "bytes": 484,
+    "sha256": "f186d248b910ab8e6272b27398d429d588fb365d54b138cfa7b480f488f9481a"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/TRANSF/data/ref.extract",
+    "bytes": 374,
+    "sha256": "75e4a38021344184f913b72d61a2d67d2585a189d201fb51235fefe6e01ec5f9"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/ACTIV/data/HYPE_SUB_0000.rad",
+    "bytes": 170243,
+    "sha256": "3671e9bdea2c861d042a8d06b4e27b7f0f9ffa2c5b21606ddb54a6029f3c28d5"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/ACTIV/data/HYPE_SUB_0001.rad",
+    "bytes": 751,
+    "sha256": "abeb5f30c3067136e6a67cb7b7e9d71e7087a86b37c723b9f6dcced7edda2942"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/ACTIV/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/ACTIV/data/readme.txt",
+    "bytes": 536,
+    "sha256": "6a2c262a7abdac234b2ec988248430b6fe3def1bcae12f8b00349740ecc5e43f"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/ACTIV/data/ref.extract",
+    "bytes": 374,
+    "sha256": "096ef946d79dbe5de10ef083cd47191573bc5a8cb6c0614aa15fd67d1ad40492"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/FAIL/Jonhson_Cook/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/FAIL/Jonhson_Cook/data/readme.txt",
+    "bytes": 504,
+    "sha256": "6e9a1c98349a22c3ea8f9eba6bb1ca20a8373236f9212e560b7519fa3b247e50"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/FAIL/Jonhson_Cook/data/ref.extract",
+    "bytes": 374,
+    "sha256": "427f5fc83e650ee8abd4e430c0b8565d4afdc895ded4a9cdcb47a1e17902afaa"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/FAIL/Jonhson_Cook/data/SPECT_SUB_0000.rad",
+    "bytes": 101063,
+    "sha256": "74e693f306233342554d2977aee4bd6ef793f4e99e950f7e0ded4c7a74a40d0d"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/FAIL/Jonhson_Cook/data/SPECT_SUB_0001.rad",
+    "bytes": 726,
+    "sha256": "e034ef38d1b6be0dd12f73e36ce4f94a96c25844ce0d38e1033ae2ab74d21e5a"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/PLOAD/data/BOXBEAM_SUB_0000.rad",
+    "bytes": 196037,
+    "sha256": "cac5966a4279f267083a9785d8fc349fb923cb27423eeac2fecc6c1c9b7e1e28"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/PLOAD/data/BOXBEAM_SUB_0001.rad",
+    "bytes": 729,
+    "sha256": "eb021f90b0aa1b27ccb57e102c76cbe8801c4521f85a41ba431b6d502d42b3a1"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/PLOAD/data/qadiags.inc",
+    "bytes": 1170,
+    "sha256": "186bc1d3543963457c5a3ee4d035cbdc5200c0f3b2538988ceea16cc66490ed5"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/PLOAD/data/readme.txt",
+    "bytes": 476,
+    "sha256": "e1d5b3a2612aa46ddb5c9c746585003a10aee1eca82f9fff6e694eb09b33ad00"
+  },
+  {
+    "path": "qa-tests/miniqa/SUBMODEL/update_v_100/PLOAD/data/ref.extract",
+    "bytes": 374,
+    "sha256": "63662f8141d586d138055a2f565e493f096b3f4eea58f8a0d4926e0c3d5c2d06"
+  }
+]

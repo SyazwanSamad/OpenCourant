@@ -4,6 +4,7 @@ Stage 5 is implemented and validated on Windows x64, double precision, on
 2026-10-28. Starter and Engine no longer contain H3D SDK bridges, loaders, writer
 or reader integration. Native outputs and Python queries remain available.
 This is a Windows validation result; the complete release gate remains open.
+For subsequent dependency, packaging and launcher work, see [Stage 6](STAGE6.md).
 
 ## Resulting behavior
 

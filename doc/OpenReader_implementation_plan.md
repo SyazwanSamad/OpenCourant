@@ -9,8 +9,14 @@ element/contact cases also pass with two Intel MPI ranks. See
 [the current report](../qa-tests/dependency_removal/STAGE5.md) and
 [current test commands](../qa-tests/reader/README.md). Structured-ALE generation
 remains unsupported and fails explicitly during native loading, with a defensive
-Starter check as well. Hosted CI, Linux/ARM, SP, and broader MPI/R2R execution
-remain unverified.
+Starter check as well. [Stage 7](../qa-tests/dependency_removal/STAGE7.md) records
+Windows SP/DP, OpenMP/MPI and old multi-domain checkpoint checks, together with
+the unresolved physics/reference and parallel-checksum failures. Linux/ARM
+verification is deferred at the user's request; hosted CI and R2R execution
+remain unverified. The solver is not approved for release.
+
+Dependency delivery, the published clean artifact and package evidence are tracked in
+[Stage 6](../qa-tests/dependency_removal/STAGE6.md).
 
 The numbered stages below are the historical OpenReader rollout record, before
 dependency-removal Stages 2-3. Their former mode-2 rejection, automatic bypass, and

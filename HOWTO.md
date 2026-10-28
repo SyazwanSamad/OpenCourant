@@ -787,9 +787,11 @@ Ordinary ALE is separate. See [the regression commands](qa-tests/reader/README.m
 and [Stage 5 results and limits](qa-tests/dependency_removal/STAGE5.md).
 
 H3D functionality is removed; use native animation, history, STATE or DYNAIN
-outputs. Windows DP SMP and two-rank MPI checks do not establish Linux/ARM, SP,
-broader MPI/R2R, multiple OpenMP threads, hosted CI, full model coverage, or
-large-model performance.
+outputs. [Stage 7 Windows validation](qa-tests/dependency_removal/STAGE7.md)
+covers SP/DP, OpenMP/MPI and old multi-domain checkpoints, and records unresolved
+regression failures. The solver is not approved for release. Linux/ARM verification
+is deferred at the user's request; R2R, hosted CI, full model coverage and
+large-model performance remain unverified.
 
 
 ## How to build OpenCourant on Linux with Container using Apptainer
@@ -819,6 +821,16 @@ Linux system with [Apptainer](https://apptainer.org/docs/admin/main/installation
 ## Notes on third party libraries
 
 OpenCourant Starter and Engine use third party libraries in build process.
-Those third party libraries are stored in [OpenCourant/extlib](https://github.com/OpenCourant/extlib) repository.
+The SDK-free package is published in [SyazwanSamad/extlib](https://github.com/SyazwanSamad/extlib).
+Its exact release URL and digest are pinned in `EXTLIB_VERSION.json`.
 
-During compilation process, the needed "Release asset" is downloaded and installed if not already in the repository.
+The build uses the archive URL and SHA-256 in `EXTLIB_VERSION.json`. The loader
+checks package identity and required files, rejects retired dependencies, and
+refreshes stale caches. A failed refresh preserves the previous extracted cache
+and fails the build. A cache directory copied from an older release is not a
+validated dependency package.
+
+The current dependency package excludes HM Reader and H3D. OpenReader is built
+from source; existing compiler, math and MPI runtimes are still required.
+See [Stage 6 delivery status and reproduction](qa-tests/dependency_removal/STAGE6.md)
+for package evidence and the remaining cross-platform release gates.

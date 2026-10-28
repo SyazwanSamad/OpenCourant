@@ -9,7 +9,11 @@ on:
       - 'hm_cfg_files/**'
       - 'qa-tests/reader/**'
       - 'qa-tests/dependency_removal/**'
+      - 'qa-tests/qa_tools/**'
+      - 'qa-tests/miniqa/INTERF/INT_25/**'
+      - 'qa-tests/scripts/or_QA.files_1miniqa'
       - 'Compiling_tools/**'
+      - 'EXTLIB_VERSION.json'
       - '.github/workflows/openreader_ci.yml'
       - '.github/actions/setup-oneapi-win/**'
 
@@ -40,6 +44,8 @@ jobs:
           if errorlevel 1 exit /b 1
           cd ..
           python qa-tests/dependency_removal/test_reader_build.py
+          if errorlevel 1 exit /b 1
+          python qa-tests/dependency_removal/test_qa_comparison.py
           if errorlevel 1 exit /b 1
           python qa-tests/reader/test_starter_api.py --reader exec/open_reader_win64.dll
           if errorlevel 1 exit /b 1

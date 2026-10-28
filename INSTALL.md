@@ -33,6 +33,14 @@ Download and [build OpenCourant](https://github.com/OpenCourant/OpenCourant/blob
 
 The current source build uses OpenReader and native result outputs. H3D requests
 fail explicitly; see [Stage 5 behavior and validation](qa-tests/dependency_removal/STAGE5.md).
+Delivery changes and dependency-archive publication evidence are recorded in
+[Stage 6](qa-tests/dependency_removal/STAGE6.md). Packages ship OpenReader next
+to Starter, the CFG/message tree, retained dependency notices, and the extlib pin
+under `licenses/EXTLIB_VERSION.json`.
+
+[Stage 7 Windows validation](qa-tests/dependency_removal/STAGE7.md) records the
+current SP/DP regression failures and release blockers. Linux/ARM verification
+is deferred at the user's request; no solver release is approved by these checks.
 
 ### Environment variables settings under Linux
 

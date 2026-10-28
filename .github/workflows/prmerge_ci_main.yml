@@ -196,9 +196,9 @@ jobs:
         with:
           name: extlib.zip
 
-      - name: Unzip extlib
+      - name: Validate and extract pinned extlib
         run: |
-          unzip extlib.zip -x "extlib/hm_reader/*"
+          python3 Compiling_tools/script/load_extlib.py
 
       - name: Running qa
         run: |
@@ -383,7 +383,7 @@ jobs:
           cd qa-tests/scripts;
           rm -f QA.summary;
           chmod 755 or_qa_script or_radioss.pl;
-          export PATH=../../exec:../../extlib/h3d/lib/win64:$PATH;
+          export PATH=../../exec:$PATH;
           cmd=\"./or_qa_script ../../exec/engine_win64_impi.exe 1.0 --env:RAD_CFG_PATH=../../hm_cfg_files --system_run --env:KMP_STACKSIZE=400m --exec_script_args='mpiexec -np %QA_NB_PROC%' --env:OMP_NUM_THREADS=%QA_NB_THREAD% --output_failures_stdout --xtra_args='--timeoutscript=%QA_TIMEOUT_PER_TEST_WIN%' \";
           echo \"--  $cmd --\";
           eval $cmd;

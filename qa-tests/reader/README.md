@@ -21,8 +21,10 @@ python qa-tests/reader/test_model_loading.py --reader exec/open_reader_win64.dll
 python qa-tests/reader/test_contact_groups.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
 ```
 
-The build check verifies dependency extraction and source/build invariants without
-network access. The API audit discovers actual Starter calls, resolves local
+The build check verifies clean and stale dependency caches, rejected archives,
+refresh rollback, package layout and source/build invariants without network
+access. [Stage 6](../dependency_removal/STAGE6.md) records delivery validation and
+publication status. The API audit discovers actual Starter calls, resolves local
 C/C++ implementations separately, and checks all four reader export spellings.
 Build identity is now `open_reader_build_id`; retained `hm_reader_variables`
 and `HM_*` adapters are in-tree APIs, with no vendor binary behind them.
@@ -123,5 +125,9 @@ continuations remain covered; retired output is not resumed.
 
 Structured-ALE generation remains unsupported and fails explicitly during native
 loading. The missing generator and its build toggle have been removed.
-Linux x64/ARM64, SP, multiple OpenMP threads, broader MPI/R2R, hosted CI, full miniqa, every element formulation,
-and large-model performance still require validation before release.
+[Stage 7](../dependency_removal/STAGE7.md) records Windows SP/DP MiniQA,
+OpenMP/MPI, old two-/four-rank checkpoint continuations and package checks.
+The physics/reference and parallel-checksum gates have unresolved failures.
+Linux x64/ARM64 verification is deferred at the user's request. R2R,
+implicit/modal, external coupled/user-library execution, hosted CI, every element
+formulation and large-model performance remain unverified.

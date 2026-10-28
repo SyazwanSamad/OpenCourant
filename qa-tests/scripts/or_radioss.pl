@@ -17,6 +17,13 @@
 # Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # Copyright>
 # Copyright>
+# Copyright>        OpenCourant
+# Copyright>        Copyright (C) 2026 OpenCourant contributors
+# Copyright>
+# Copyright>        Modified by the OpenCourant project, 2026.
+# Copyright>        Modifications are licensed under the GNU Affero General Public
+# Copyright>        License, version 3 or (at your option) any later version.
+# Copyright>
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
@@ -67,7 +74,6 @@ my $i_create_extract_starter=0;
 my $selected_values="";
 my $last_go=-1;
 my $parith_on=0;
-my $duplicate_anims2h3d=0;
 my $parith_off=0;
 my $full_test_id;
 # XXXXXX QA ERRORS and WARNINGS
@@ -93,8 +99,7 @@ while (@tmp_argv) {
     shift @tmp_argv;
   }
   elsif    ($my_arg =~ /^--duplicate_anims2h3d$/)          {
-    $duplicate_anims2h3d=1;
-    shift @tmp_argv;
+    die "H3D QA output has been removed; use native animation or history output.\n";
   }
   elsif    ($my_arg =~ /^--parith_off$/)          {
     $parith_off=1;
@@ -1053,15 +1058,8 @@ sub set_vars() {
             }
 
             else {
-                if ($duplicate_anims2h3d == 1 or $parith_off == 1) {
-                  if ($duplicate_anims2h3d == 1) { &add_h3d_2_engine_input_file($input); }
-                  if ($parith_off == 1)          { &switch_engine_input_file_2_poff($input); }
-                  &run_engine($debug_print,$engine,$input,$script_args_engine_pre,$script_args_engine_post,$batch);
-                }
-                else {
-  ########  MAIN CASE
-                  &run_engine($debug_print,$engine,$input,$script_args_engine_pre,$script_args_engine_post,$batch);
-                }
+                if ($parith_off == 1) { &switch_engine_input_file_2_poff($input); }
+                &run_engine($debug_print,$engine,$input,$script_args_engine_pre,$script_args_engine_post,$batch);
             }
             if ($my_arg =~ /^-engine$/ and $chkpt_qa > 0 and $selfref_pass == 2) {
                 print "CHKPT run\n";
@@ -1178,7 +1176,7 @@ sub run_hwsolver() {
   if ($debug_print==1) {print ">>>> hwsolvermanager_args=$hwsolvermanager_args\n";}
 
   print "\n*** USING HWSOLVER (2 PASS), unsetting some environment variable to let the script set them ***\n";
-  my @env2delete = ('KMP_STACKSIZE','HWSOLVERS_TEMPLEX','RAD_H3D_PATH','RAD_CFG_PATH','HM_MSG_DIR','HM_MV_CFG_DIR','HM_MV_UNITS_DIR','ABF_PATH','RADFLEX_PATH');
+  my @env2delete = ('KMP_STACKSIZE','HWSOLVERS_TEMPLEX','RAD_CFG_PATH','HM_MSG_DIR','HM_MV_CFG_DIR','HM_MV_UNITS_DIR','ABF_PATH','RADFLEX_PATH');
   for my $elem (@env2delete) {
     print "  - Unsetting $elem \n";
     delete $ENV{$elem};
@@ -1776,53 +1774,6 @@ sub switch_engine_input_file_2_poff () {
   #general case : add /PARITH/OFF at the end of the temporary file
   if ($i_print_poff == 0) {
     print $fh1 "\n/PARITH/OFF\n";
-  }
-  close($fh1);
-  print "New engine input file $file_name (original saved into $file_name"."_origin) :\n";
-  &print_shifted_file("   >   ",$file_name);
-  print "------------------------\n";
-}
-
-sub add_h3d_2_engine_input_file() {
-  #only $filename is used below normally ...
-  my ($file_name,$number,$root)=@_;
-  print "Duplicate /ANIM keywords to /H3D ...\n";
-  open(INP1,"$file_name");my @file=<INP1>;close(INP1);
-  #back up original engine input file 
-  system("cp $file_name $file_name"."_origin");
-  my @h3d_lines;
-  for (my $i=0;$i<=$#file;$i++) {
-    my $line=$file[$i];
-    if ($line =~ /^\/ANIM\// and not $line =~ /^\/ANIM\/GZIP/) {
-      my $line_h3d=$line;
-      $line_h3d =~ s/\/ANIM\//\/H3D\//;
-      push @h3d_lines,$line_h3d;
-      my $j=$i+1;
-      while(not $file[$j] =~ /^\// and $file[$j]) {
-        push @h3d_lines,$file[$j];
-        $j++;
-      }
-    }
-  }
-  unlink($file_name);
-  open(my $fh1,">$file_name");
-  my $i_print_h3d=0;
-  for my $line (@file) {
-    if ($line =~ /^\/END\/ENGINE/) {
-      for my $h3d_line (@h3d_lines) {
-        print $fh1 $h3d_line; 
-        $i_print_h3d=1;
-      }
-      print $fh1 $line;
-    }
-    else {
-      print $fh1 $line;
-    }
-  }
-  if ($i_print_h3d == 0) {
-    for my $h3d_line (@h3d_lines) {
-      print $fh1 $h3d_line;
-    }
   }
   close($fh1);
   print "New engine input file $file_name (original saved into $file_name"."_origin) :\n";

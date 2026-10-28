@@ -29,6 +29,7 @@ permissions:
   packages: write
 
 env:
+  TOOLS_REF: 1b6bb9200ee7dca899e61c18bd982c3fb1c72fd1
   QA_TIMEOUT_PER_TEST_LINUX: 150
   QA_TIMEOUT_PER_TEST_WIN: 500
 
@@ -192,6 +193,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
 
       - name: Build output converters
@@ -270,9 +272,9 @@ jobs:
         with:
           name: extlib.zip
 
-      - name: Unzip extlib
+      - name: Validate and extract pinned extlib
         run: |
-          unzip extlib.zip -x "extlib/hm_reader/*"
+          python3 Compiling_tools/script/load_extlib.py
 
       - name: Running qa
         run: |
@@ -403,6 +405,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
 
       - name: Set up Intel oneAPI
@@ -527,7 +530,7 @@ jobs:
           cd qa-tests/scripts;
           rm -f QA.summary;
           chmod 755 or_qa_script or_radioss.pl;
-          export PATH=../../exec:../../extlib/h3d/lib/win64:$PATH;
+          export PATH=../../exec:$PATH;
           cmd=\"./or_qa_script ../../exec/engine_win64_impi.exe 1.0 --env:RAD_CFG_PATH=../../hm_cfg_files --system_run --env:KMP_STACKSIZE=400m --exec_script_args='mpiexec -np %QA_NB_PROC%' --env:OMP_NUM_THREADS=%QA_NB_THREAD% --output_failures_stdout --xtra_args='--timeoutscript=%QA_TIMEOUT_PER_TEST_WIN%' \";
           echo \"--  $cmd --\";
           eval $cmd;
@@ -560,8 +563,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
           path: 'TOOLS'
+
+      - name: Remove retired output controls and loader paths from the packaged GUI
+        run: |
+          git -C TOOLS apply ../Compiling_tools/patches/openreader_gui.patch
+          python3 qa-tests/dependency_removal/test_packaged_gui.py --gui TOOLS/openradioss_gui
 
       - name: Download win64 artifacts
         uses: actions/download-artifact@v8
@@ -588,28 +597,28 @@ jobs:
       - name: Assemble Windows package
         run: |
           set -e
-          unzip -q extlib.zip -x "extlib/hm_reader/*"
+          python3 Compiling_tools/script/load_extlib.py
 
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
-                   todeliver/${MAINDIR}/extlib/h3d/lib/win64 \
                    todeliver/${MAINDIR}/extlib/intelOneAPI_runtime \
                    todeliver/${MAINDIR}/licenses
 
           cp -a exec_win/* todeliver/${MAINDIR}/exec/
-          cp -a extlib/h3d/lib/win64/* todeliver/${MAINDIR}/extlib/h3d/lib/win64/
 
           cp -a intelOneAPI_runtime/* todeliver/${MAINDIR}/extlib/intelOneAPI_runtime/
           cp -a hm_cfg_files todeliver/${MAINDIR}/
           cp -a extlib/license/* todeliver/${MAINDIR}/licenses/
+          cp -a EXTLIB_VERSION.json todeliver/${MAINDIR}/licenses/
           cp -a TOOLS/openradioss_gui todeliver/${MAINDIR}/
           cp -a TOOLS/input_converters/inp2rad/inp2rad/inp2rad.py todeliver/${MAINDIR}/openradioss_gui/
-          cp -a COPYRIGHT.md todeliver/${MAINDIR}/
+          cp -a COPYRIGHT.md LICENSE.md todeliver/${MAINDIR}/
 
           cd todeliver
           zip -qr ${MAINDIR}_win64.zip ${MAINDIR}
           cd ..
           ls -l todeliver/${MAINDIR}_win64.zip
+          python3 Compiling_tools/script/check_package.py todeliver/${MAINDIR}_win64.zip --arch win64
 
       - name: Upload Windows package
         uses: actions/upload-artifact@v7
@@ -642,7 +651,7 @@ jobs:
           mkdir pkg
           tar -xf OpenCourant_win64.zip -C pkg
           set OPENCOURANT_PATH=%CD%\pkg\OpenCourant
-          set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%
+          set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%
           set RAD_CFG_PATH=%OPENCOURANT_PATH%\hm_cfg_files
           set KMP_STACKSIZE=400m
           set OMP_NUM_THREADS=2
@@ -751,6 +760,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
 
       - name: Build output converters
@@ -886,8 +896,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
           path: 'TOOLS'
+
+      - name: Remove retired output controls and loader paths from the packaged GUI
+        run: |
+          git -C TOOLS apply ../Compiling_tools/patches/openreader_gui.patch
+          python3 qa-tests/dependency_removal/test_packaged_gui.py --gui TOOLS/openradioss_gui
 
       - name: Download linuxa64 artifacts
         uses: actions/download-artifact@v8
@@ -916,19 +932,18 @@ jobs:
           set -e
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
-                   todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64 \
                    todeliver/${MAINDIR}/extlib/runtime/linuxa64 \
                    todeliver/${MAINDIR}/licenses
 
           cp -a exec_arm/* todeliver/${MAINDIR}/exec/
-          cp -a extlib/h3d/lib/linuxa64/* todeliver/${MAINDIR}/extlib/h3d/lib/linuxa64/
 
           cp -a gcc_runtime_arm/* todeliver/${MAINDIR}/extlib/runtime/linuxa64/
           cp -a hm_cfg_files todeliver/${MAINDIR}/
           cp -a extlib/license/* todeliver/${MAINDIR}/licenses/
+          cp -a EXTLIB_VERSION.json todeliver/${MAINDIR}/licenses/
           cp -a TOOLS/openradioss_gui todeliver/${MAINDIR}/
           cp -a TOOLS/input_converters/inp2rad/inp2rad/inp2rad.py todeliver/${MAINDIR}/openradioss_gui/
-          cp -a COPYRIGHT.md todeliver/${MAINDIR}/
+          cp -a COPYRIGHT.md LICENSE.md todeliver/${MAINDIR}/
 
           cat > todeliver/${MAINDIR}/licenses/gcc_runtime_notice.txt << 'EOF'
           GCC runtime libraries (libgomp, libquadmath)
@@ -949,6 +964,7 @@ jobs:
           zip -qr ${MAINDIR}_linuxa64.zip ${MAINDIR}
           cd ..
           ls -l todeliver/${MAINDIR}_linuxa64.zip
+          python3 Compiling_tools/script/check_package.py todeliver/${MAINDIR}_linuxa64.zip --arch linuxa64
 
       - name: Upload linuxa64 package
         uses: actions/upload-artifact@v7
@@ -986,7 +1002,7 @@ jobs:
           set -e
           unzip -q OpenCourant_linuxa64.zip -d /opt
           export OPENCOURANT_PATH=/opt/OpenCourant
-          export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64
+          export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64
           export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files
           export OMP_NUM_THREADS=2
           cd qa-tests/miniqa/ACCELEROMETRES/data
@@ -1019,8 +1035,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: 'OpenCourant/Tools'
+          ref: ${{ env.TOOLS_REF }}
           lfs: 'true'
           path: 'TOOLS'
+
+      - name: Remove retired output controls and loader paths from the packaged GUI
+        run: |
+          git -C TOOLS apply ../Compiling_tools/patches/openreader_gui.patch
+          python3 qa-tests/dependency_removal/test_packaged_gui.py --gui TOOLS/openradioss_gui
 
       - name: Download ALL artifacts for packaging
         uses: actions/download-artifact@v8
@@ -1034,21 +1056,17 @@ jobs:
           echo "List exec_tmp:"
           find exec_tmp -type f
 
-          unzip -q exec_tmp/extlib.zip/extlib.zip -x "extlib/hm_reader/*"
+          cp exec_tmp/extlib.zip/extlib.zip extlib.zip
+          python3 Compiling_tools/script/load_extlib.py
 
           rm -rf todeliver
           mkdir -p todeliver/${MAINDIR}/exec \
-                   todeliver/${MAINDIR}/extlib/h3d/lib/linux64 \
                    todeliver/${MAINDIR}/extlib/runtime/linux64 \
                    todeliver/${MAINDIR}/licenses
 
           # Solver binaries + output converters
           cp -a exec_tmp/bins-linux64-*/* todeliver/${MAINDIR}/exec/
           cp -a exec_tmp/tools-linux64/*  todeliver/${MAINDIR}/exec/
-
-          # Runtime libraries from the extlib package
-          cp -a extlib/h3d/lib/linux64/* todeliver/${MAINDIR}/extlib/h3d/lib/linux64/
-
 
           # GCC runtime libraries (-static-link leaves libgomp/libquadmath
           # dynamic); shipped alongside the documented runtime search path
@@ -1057,9 +1075,10 @@ jobs:
           # Reader configuration, licenses, GUI, input converter
           cp -a hm_cfg_files todeliver/${MAINDIR}/
           cp -a extlib/license/* todeliver/${MAINDIR}/licenses/
+          cp -a EXTLIB_VERSION.json todeliver/${MAINDIR}/licenses/
           cp -a TOOLS/openradioss_gui todeliver/${MAINDIR}/
           cp -a TOOLS/input_converters/inp2rad/inp2rad/inp2rad.py todeliver/${MAINDIR}/openradioss_gui/
-          cp -a COPYRIGHT.md todeliver/${MAINDIR}/
+          cp -a COPYRIGHT.md LICENSE.md todeliver/${MAINDIR}/
 
           cat > todeliver/${MAINDIR}/licenses/gcc_runtime_notice.txt << 'EOF'
           GCC runtime libraries (libgomp, libquadmath)
@@ -1085,6 +1104,7 @@ jobs:
           zip -qr ${MAINDIR}_linux64.zip ${MAINDIR}
           cd ..
           ls -l todeliver/${MAINDIR}_linux64.zip
+          python3 Compiling_tools/script/check_package.py todeliver/${MAINDIR}_linux64.zip --arch linux64
 
       # Consumed by publish_containers (amd64)
       - name: Upload linux64 package
@@ -1113,7 +1133,7 @@ jobs:
             echo ""
             echo '```sh'
             echo 'export OPENCOURANT_PATH=/path/to/OpenCourant'
-            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linux64:$OPENCOURANT_PATH/extlib/h3d/lib/linux64:$LD_LIBRARY_PATH'
+            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linux64:$LD_LIBRARY_PATH'
             echo 'export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files'
             echo '```'
             echo ""
@@ -1125,7 +1145,7 @@ jobs:
             echo ""
             echo '```bat'
             echo 'set OPENCOURANT_PATH=C:\path\to\OpenCourant'
-            echo 'set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\h3d\lib\win64;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%'
+            echo 'set PATH=%OPENCOURANT_PATH%\exec;%OPENCOURANT_PATH%\extlib\intelOneAPI_runtime\win64;%PATH%'
             echo 'set RAD_CFG_PATH=%OPENCOURANT_PATH%\hm_cfg_files'
             echo 'set KMP_STACKSIZE=400m'
             echo '```'
@@ -1159,11 +1179,12 @@ jobs:
             echo ""
             echo '```sh'
             echo 'export OPENCOURANT_PATH=/path/to/OpenCourant'
-            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64:$OPENCOURANT_PATH/extlib/h3d/lib/linuxa64:$LD_LIBRARY_PATH'
+            echo 'export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/linuxa64:$LD_LIBRARY_PATH'
             echo 'export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files'
             echo '```'
             echo ""
             echo "**Notes**"
+            echo "- OpenReader is the only model reader. H3D requests fail explicitly; use native animation, time histories, STATE or DYNAIN output."
             echo "- The Linux \`_ompi\` Engines require OpenMPI 4.1.2 installed in \`/opt/openmpi\` (see INSTALL.md); the SMP Engines run standalone"
             echo "- \`/ALE/STRUCTURED_MESH\` is rejected explicitly: the feature is non-functional in the shipped input readers (generates degenerate meshes), so an explicit error beats silently wrong results"
             echo ""

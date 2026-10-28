@@ -111,8 +111,7 @@ def main():
         helper_check(args.reader, args.worker)
         return
     environment = os.environ.copy()
-    environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m',
-                       RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
+    environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1', KMP_STACKSIZE='400m')
     environment['PATH'] = os.pathsep.join([str(args.reader.parent), environment.get('PATH', '')])
     with tempfile.TemporaryDirectory(prefix='opencourant-stage4-') as temporary:
         work = Path(temporary)

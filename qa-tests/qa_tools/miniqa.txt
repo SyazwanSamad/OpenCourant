@@ -154,5 +154,9 @@ add_test(NAME 1.87 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/
 
 add_test(NAME 1.88 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/AMS/auto_element_selection -test_id 1.88  ${arguments})
 
-# add_test(NAME 1.89 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/PYTHON/FUNCT_PYTHON -test_id 1.89  ${arguments})
+add_test(NAME 1.89 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/PYTHON/FUNCT_PYTHON -test_id 1.89  ${arguments})
+
+add_test(NAME 1.90 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/INTERF/INT_25/hexa8 -test_id 1.90  ${arguments})
+
+add_test(NAME 1.91 COMMAND ${Python_EXECUTABLE} ${Test_script} -deck_dir miniqa/INTERF/INT_25/tetra4 -test_id 1.91  ${arguments})
 

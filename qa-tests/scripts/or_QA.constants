@@ -146,7 +146,7 @@ save  [.](out|stat|rad)$
 #save_location DATE-TIME-HOST DATE-TIME-HOST DATE-TIME-HOST DATE-TIME-HOST
 
 delete  ^(core.*)$
-delete  [.](h3d|rst)$
+delete  [.]rst$
 delete  .*\.gz
 delete  T0[0-9]$
 delete  [.](his_dat|spcf|prop|vec|hmf|html|igs|log|oslog|hma|grid|sh)$

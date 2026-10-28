@@ -83,7 +83,7 @@ export RAD_CFG_PATH=$OPENCOURANT_PATH/hm_cfg_files
 export OMP_STACKSIZE=400m
 
 export PATH=$OPENCOURANT_PATH/exec:/opt/openmpi/bin:$PATH
-export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/{{ ARCH_DIR }}:$OPENCOURANT_PATH/extlib/h3d/lib/{{ ARCH_DIR }}:/opt/openmpi/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$OPENCOURANT_PATH/exec:$OPENCOURANT_PATH/extlib/runtime/{{ ARCH_DIR }}:/opt/openmpi/lib:$LD_LIBRARY_PATH
 
 %labels
     org.opencontainers.image.source https://github.com/OpenCourant/OpenCourant

@@ -1,0 +1,135 @@
+diff --git a/openradioss_gui/README.md b/openradioss_gui/README.md
+index 13cd898..5e9b3d6 100644
+--- a/openradioss_gui/README.md
++++ b/openradioss_gui/README.md
+@@ -99,7 +99,6 @@ Several buttons permits actions during job execution
+ * **Stop**: stops the job cleanly writing restart (.rst) file(s)
+ * **Kill**: kills the job (no restarts written)
+ * **Anim**: writes an Anim file at the current cycle
+-* **h3d**: writes/updates the h3d file at the current cycle
+ * **d3plot**: converts any Anim files present in the run folder to d3plot (always converts all anim files present)
+ * **Close**: becomes available when job is completed, and closes the run window
+ 
+diff --git a/openradioss_gui/job_window.py b/openradioss_gui/job_window.py
+index 208fb49..8514a18 100644
+--- a/openradioss_gui/job_window.py
++++ b/openradioss_gui/job_window.py
+@@ -108,8 +108,6 @@ class JobWindow():
+         self.kill_button.pack(side=tk.LEFT, padx=5)
+         self.anim_button = ButtonWithHighlight(self.frame_control, text='Anim', command=self.anim_job, padx=30)
+         self.anim_button.pack(side=tk.LEFT, padx=5)
+-        self.h3d_button = ButtonWithHighlight(self.frame_control, text='h3d', command=self.h3d_job, padx=30)
+-        self.h3d_button.pack(side=tk.LEFT, padx=5)
+         if vd3penabled:
+             self.d3p_button = ButtonWithHighlight(self.frame_control, text='d3plot', command=self.d3p_job, padx=30)
+             self.d3p_button.pack(side=tk.LEFT, padx=5)
+@@ -174,17 +172,6 @@ class JobWindow():
+             f.write('/ANIM')
+             f.close()
+ 
+-    # ------------------------------------------------
+-    # H3D button : Write H3D File
+-    # ------------------------------------------------
+-    def h3d_job(self):
+-        if self.run_number == 0:
+-            messagebox.showinfo('Starter Phase', 'Job is still in starter phase.\nCannot write H3D State')
+-        else:
+-            f = open(self.job_dir + '/' + self.job_name+"_"+str( self.run_number).zfill(4)+ '.ctl', mode='w')
+-            f.write('/H3D')
+-            f.close()
+-
+     # -----------------------------------------------------
+     # D3Plot button : Convert Current Anim Files to d3plot
+     # -----------------------------------------------------
+@@ -257,7 +244,6 @@ class JobWindow():
+             self.stop_button['state'] = 'disable'
+             self.kill_button['state'] = 'disable'
+             self.anim_button['state'] = 'disable'
+-            self.h3d_button['state'] = 'disable'
+             if vd3penabled:
+                     self.d3p_button['state'] = 'disable'
+ 
+@@ -283,7 +269,6 @@ class JobWindow():
+                     self.stop_button['state'] = 'active'
+                     self.kill_button['state'] = 'active'
+                     self.anim_button['state'] = 'active'
+-                    self.h3d_button['state'] = 'active'
+                     if vd3penabled:
+                         self.d3p_button['state'] = 'active'
+ 
+@@ -375,7 +360,6 @@ class JobWindow():
+         self.stop_button['state'] = 'disable'
+         self.kill_button['state'] = 'disable'
+         self.anim_button['state'] = 'disable'
+-        self.h3d_button['state'] = 'disable'
+         if vd3penabled:
+             self.d3p_button['state'] = 'disable'
+         # Enable 'Close' button and 'X' button after job finishes
+diff --git a/openradioss_gui/runopenradioss.py b/openradioss_gui/runopenradioss.py
+index ff4ba76..7d78f5b 100644
+--- a/openradioss_gui/runopenradioss.py
++++ b/openradioss_gui/runopenradioss.py
+@@ -198,18 +198,16 @@ class RunOpenRadioss():
+         if current_platform == "Linux" and cpu != 'aarch64':
+              # linux64_gf / X86-64
+              LD_LIBRARY_PATH = ":".join([
+-                    os.path.join(OPENRADIOSS_PATH, "extlib", "h3d", "lib", "linux64"),
+-                    os.path.join(OPENRADIOSS_PATH, "extlib", "hm_reader", "linux64") ])
++                    os.path.join(OPENRADIOSS_PATH, "exec"),
++                    os.path.join(OPENRADIOSS_PATH, "extlib", "runtime", "linux64") ])
+ 
+              additional_paths_linux = [
+-                    os.path.join(OPENRADIOSS_PATH, "extlib", "hm_reader", "linux64"),
++                    os.path.join(OPENRADIOSS_PATH, "extlib", "runtime", "linux64"),
+                     os.path.join("/", "opt", "openmpi", "bin") ]
+ 
+-             RAD_H3D_PATH = os.path.join(OPENRADIOSS_PATH, "extlib", "h3d", "lib", "linux64")
+ 
+              custom_env["OPENRADIOSS_PATH"] = OPENRADIOSS_PATH
+              custom_env["RAD_CFG_PATH"] = RAD_CFG_PATH
+-             custom_env["RAD_H3D_PATH"] = RAD_H3D_PATH
+              custom_env["OMP_STACKSIZE"] = KMP_STACKSIZE
+              custom_env["OMP_NUM_THREADS"] = OMP_NUM_THREADS
+ 
+@@ -224,14 +222,13 @@ class RunOpenRadioss():
+         if current_platform == "Linux" and cpu == 'aarch64':
+              # linuxa64 / ARM64
+              LD_LIBRARY_PATH = ":".join([
+-                    os.path.join(OPENRADIOSS_PATH, "extlib", "h3d", "lib", "linuxa64"),
+-                    os.path.join(OPENRADIOSS_PATH, "extlib", "hm_reader", "linuxa64"),
++                    os.path.join(OPENRADIOSS_PATH, "exec"),
++                    os.path.join(OPENRADIOSS_PATH, "extlib", "runtime", "linuxa64"),
+                     os.path.join(OPENRADIOSS_PATH, "extlib", "ArmFlang_runtime", "linuxa64") ])
+ 
+ 
+              custom_env["OPENRADIOSS_PATH"] = OPENRADIOSS_PATH
+              custom_env["RAD_CFG_PATH"] = RAD_CFG_PATH
+-             custom_env["RAD_H3D_PATH"] = RAD_H3D_PATH
+              custom_env["OMP_NUM_THREADS"] = OMP_NUM_THREADS
+ 
+              if "LD_LIBRARY_PATH" in custom_env :
+@@ -244,14 +241,12 @@ class RunOpenRadioss():
+              KMP_AFFINITY = "disabled"
+         # Add paths to PATH environment variable for windows
+              additional_paths_win = [
+-                   os.path.join(OPENRADIOSS_PATH, "extlib", "hm_reader", "win64"),
++                   os.path.join(OPENRADIOSS_PATH, "exec"),
+                    os.path.join(OPENRADIOSS_PATH, "extlib", "intelOneAPI_runtime", "win64") ]
+ 
+-             RAD_H3D_PATH =  os.path.join(OPENRADIOSS_PATH, "extlib", "h3d", "lib", "win64")
+ 
+              custom_env["OPENRADIOSS_PATH"] = OPENRADIOSS_PATH
+              custom_env["RAD_CFG_PATH"] = RAD_CFG_PATH
+-             custom_env["RAD_H3D_PATH"] = RAD_H3D_PATH
+              custom_env["KMP_STACKSIZE"] = KMP_STACKSIZE
+              custom_env["OMP_NUM_THREADS"] = OMP_NUM_THREADS
+              custom_env["KMP_AFFINITY"] = KMP_AFFINITY
+@@ -267,7 +262,7 @@ class RunOpenRadioss():
+     # --------------------------------------------------------------
+     def delete_previous_results(self):
+    
+-       extensions_to_delete = [".h3d", "_[0-9][0-9][0-9][0-9].out", "_[0-9][0-9][0-9][0-9].ctl", "_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].rst",
++       extensions_to_delete = ["_[0-9][0-9][0-9][0-9].out", "_[0-9][0-9][0-9][0-9].ctl", "_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].rst",
+                                "T[0-9][0-9]", "T[0-9][0-9].csv", "A[0-9][0-9][0-9]", "A[0-9][0-9][0-9][0-9]",
+                                "A[0-9][0-9][0-9].vtk", "A[0-9][0-9][0-9][0-9].vtk", '.tmp']
+ 

@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "engine_sha256": "8c0a46f3820dafa6329ea241fd26da1616cee8a3afa1520ef8c361a78b2de652",
+  "cases": [
+    {
+      "case": "schedule",
+      "exit_code": 2
+    },
+    {
+      "case": "scalar",
+      "exit_code": 2
+    },
+    {
+      "case": "report-html",
+      "exit_code": 2
+    },
+    {
+      "case": "report-mvw",
+      "exit_code": 2
+    },
+    {
+      "case": "stop-sensor",
+      "exit_code": 2
+    },
+    {
+      "case": "native",
+      "exit_code": 2
+    },
+    {
+      "case": "include",
+      "exit_code": 2
+    },
+    {
+      "case": "embedded-report",
+      "exit_code": 2
+    },
+    {
+      "case": "fvmbag1",
+      "exit_code": 2
+    },
+    {
+      "case": "fvmbag2",
+      "exit_code": 2
+    },
+    {
+      "case": "pskid",
+      "exit_code": 2
+    },
+    {
+      "case": "native-report-animation-history",
+      "status": "passed"
+    },
+    {
+      "case": "native-checksums-ignore-retired-file",
+      "status": "passed"
+    },
+    {
+      "case": "without-animation",
+      "status": "passed",
+      "max_history_difference": 0.0
+    },
+    {
+      "case": "control-file",
+      "exit_code": 2
+    }
+  ]
+}

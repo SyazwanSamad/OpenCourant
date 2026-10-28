@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "whitespace_lines_fixed": 1,
+  "diff_check_passed": true,
+  "changed_python_files_parsed": 15,
+  "changed_workflows_parsed": 6,
+  "binaries": [
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45873664,
+      "sha256": "577e634e743767efbbba7eacbab4ccf5ddc8fa2bf3bce6e272c1668dd939093a",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 131674624,
+      "sha256": "7b416dc02ea0755c9e68b62c3bd927ba2e5440b0d379bc115e5e0a890f06ec0e",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 139902464,
+      "sha256": "bf02df781a8788a1da516fb89667752de42dbd826253a040a1895c94367eca9f",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17495552,
+      "sha256": "7bf1ce7e92340be7ccd6b90dfa0a72965b030b7abb26a71478c2cfab9d61785d",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/starter_win64_sp.exe",
+      "bytes": 45444096,
+      "sha256": "52f907d31f0319d9e6719df61ca083d39ad790326d8b04a5bed3f02a42906e3a",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64_sp.exe",
+      "bytes": 139739648,
+      "sha256": "8c0a46f3820dafa6329ea241fd26da1616cee8a3afa1520ef8c361a78b2de652",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64_impi_sp.exe",
+      "bytes": 147019776,
+      "sha256": "753f4dbe3bc7b749f44ca37f2e86bbae34034957ed2f493f1dddb9ca54ca9de9",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    }
+  ],
+  "build_graphs": [
+    {
+      "path": "cbuild_dependency_stage6/clean-starter/compile_commands.json",
+      "sha256": "ed09dae0d16516b955d6448bf2a9b5902903ad9177dcce4a64c84b552eb3df5f",
+      "compilation_units": 2701,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_ninja/compile_commands.json",
+      "sha256": "f88adb6a474ac5706ae5b682efda3f8670d21429a085e60d59fb3acc84e62c89",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_impi_ninja/compile_commands.json",
+      "sha256": "c74391bede01916f162157378c9c0ed4a1447c245e1ff4966be8efb6ed111592",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "cbuild_dependency_stage7/starter-sp/compile_commands.json",
+      "sha256": "47416f7c72d062bbafa3478a9f0e19fff64680279e5b95974976df75d90d3078",
+      "compilation_units": 2701,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "cbuild_dependency_stage7/engine-sp/compile_commands.json",
+      "sha256": "bd0d97493776ad9d9b31896ff1e49c1ef7f82a132d4b7211f350c96fb0486951",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "cbuild_dependency_stage7/engine-sp-impi/compile_commands.json",
+      "sha256": "11d6465051ed02372aa1981a9cf8bd1eb661c284ccdb35560ef21972b77e8739",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    }
+  ],
+  "limit": "PE import/export and embedded SDK library-name inspection; no loaded-module snapshot or package/cache absence assertion. Package/cache/payload evidence is recorded separately; this audit covers Windows DP/SP SMP/MPI."
+}

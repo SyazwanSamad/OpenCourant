@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "repository": "https://github.com/SyazwanSamad/extlib",
+  "tag": "v82-openreader-1",
+  "release": "https://github.com/SyazwanSamad/extlib/releases/tag/v82-openreader-1",
+  "metadata_commit": "07d6faee9a79c7126c5b3c65f3e895fd09044753",
+  "assets": [
+    {
+      "name": "extlib.zip",
+      "bytes": 26112105,
+      "sha256": "72831a1b3e95910e20e24cceb6fb6c4295cfab1fade01144f2cee53c603442a3",
+      "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/extlib.zip",
+      "server_digest_verified": true,
+      "unauthenticated_download_verified": true
+    },
+    {
+      "name": "extlib.manifest.json",
+      "bytes": 678388,
+      "sha256": "3e84b6898d50281e3dd586aa82300e032cf073103be24d8de659520b1024db9e",
+      "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/extlib.manifest.json",
+      "server_digest_verified": true,
+      "unauthenticated_download_verified": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 166,
+      "sha256": "06f36d865c5cb4a3f50e753667d37d7911a59a87668005258a776ed01de0d392",
+      "url": "https://github.com/SyazwanSamad/extlib/releases/download/v82-openreader-1/SHA256SUMS",
+      "server_digest_verified": true,
+      "unauthenticated_download_verified": true
+    }
+  ],
+  "published_metadata_matches_pin": true,
+  "public_downloads_verified": true
+}

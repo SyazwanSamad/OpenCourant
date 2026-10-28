@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "path": "cbuild_dependency_baseline_20261028/reference_binaries.zip",
+  "before_sha256": "dd3c047dd8dca982777760cb6d655750e2dc929976013c6c607f330a6b878cb0",
+  "after_sha256": "78a3049786a58d8dd1b4e59b54b2be7a57769081a53e19c8bb0c3af18e3818c9",
+  "removed_entries": [
+    {
+      "path": "extlib/hm_reader/win64/hm_reader_win64.dll",
+      "bytes": 8589824,
+      "sha256": "54dea015c6e776b9f5519bb8a31ae2f5a8fe506315e9ea393cee439c9dc869c1"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dreader.dll",
+      "bytes": 804208,
+      "sha256": "b3de1e636d2c290a8c2e95f50a6dff7036af03cb8dfae62522f986d994e01836"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dwriter.dll",
+      "bytes": 672384,
+      "sha256": "cbe2ef4362095e1d952d17b69c0f6a023c830500595ce00d137365f7f741e483"
+    },
+    {
+      "path": "extlib/hm_reader/win64/hm_reader_win64.lib",
+      "bytes": 119158,
+      "sha256": "2a7da874a4265134523a25bca4ac36b95ca065cb0f0cdd039b940bb0418a7018"
+    },
+    {
+      "path": "extlib/hm_reader/win64/libapr-1.lib",
+      "bytes": 103936,
+      "sha256": "885bacec44f0ed5a8ca1c91ce691596aa855429fc98ab53a09b40911b2ae89c3"
+    },
+    {
+      "path": "extlib/hm_reader/win64/libapr-1.dll",
+      "bytes": 183808,
+      "sha256": "a165557741cd95d899a9af74dd2794850772e8ecb882b353e5a0f8e5317f2720"
+    },
+    {
+      "path": "extlib/license/hm_reader_license.txt",
+      "bytes": 669,
+      "sha256": "3d2495ca0797ff3026ccff155a856d6ed3cc72e436a8ec0734616a3b0c736d9d"
+    },
+    {
+      "path": "extlib/license/h3d_license.txt",
+      "bytes": 664,
+      "sha256": "3ebf2afc79179a69bc41689ff360f2861227653f8c2abe44758708213e6b70ff"
+    }
+  ],
+  "retained_entries": [
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 8445440,
+      "sha256": "3256215482b1d32d4195e3112b9a12550117bf3e3f7fae8fad12f8cc36aacdcd"
+    },
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45917696,
+      "sha256": "55c6825302d2f33ef189b8a6db68f9b8ab1193ff0d0509f65d0315dad090a9ec"
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 136658944,
+      "sha256": "2a0baa77fbb3d9c4ececec76cac8294a196cd18ef0d11c6d0e95a2e60945b7db"
+    },
+    {
+      "path": "cbuild_dependency_baseline_20261028/binaries/driver-openreader.exe",
+      "bytes": 1182208,
+      "sha256": "b19b36447488b755dc569d2d80845527d74a03b1fdab1ef05427be15e3dc73c1"
+    },
+    {
+      "path": "cbuild_dependency_baseline_20261028/binaries/driver-v82.exe",
+      "bytes": 1182208,
+      "sha256": "cecca462d50f3c084d5cb189abc5543da8a84587cf68f0bbd5b3e217eecda8d9"
+    },
+    {
+      "path": "cbuild_dependency_baseline_20261028/binaries/starter-openreader.exe",
+      "bytes": 46060032,
+      "sha256": "1ae932c51258de5af4e998942b30a4737e983a5a6e67b9df36aa58001f635e24"
+    },
+    {
+      "path": "cbuild_dependency_baseline_20261028/binaries/starter-v82.exe",
+      "bytes": 46060032,
+      "sha256": "95d7ea91a7986af496a072aa0b8db8c52ea08836be94b5909a2bce97790d8360"
+    }
+  ],
+  "retained_bytes_unchanged": true,
+  "note": "The historical Stage 1 manifest retains the original archive digest as provenance; this ignored local archive has been sanitized in Stage 6."
+}

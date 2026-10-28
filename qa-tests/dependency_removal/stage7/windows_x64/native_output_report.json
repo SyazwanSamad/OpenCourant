@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "solid",
+      "family": "STATE",
+      "files": [
+        "rigid_0001.sta",
+        "rigid_0002.sta",
+        "rigid_0003.sta"
+      ],
+      "invalid_exit_code": 2
+    },
+    {
+      "case": "shell",
+      "family": "DYNAIN",
+      "files": [
+        "test_torsion_orthstrain_shell_0001.dynain",
+        "test_torsion_orthstrain_shell_0002.dynain",
+        "test_torsion_orthstrain_shell_0003.dynain"
+      ],
+      "invalid_exit_code": 2
+    }
+  ]
+}

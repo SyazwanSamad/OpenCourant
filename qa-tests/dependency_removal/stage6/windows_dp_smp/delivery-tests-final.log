@@ -1,0 +1,4 @@
+PASS required dependencies exclude retired SDKs and include OpenReader link inputs
+PASS pinned package/cache identity, stale SDK refresh, 16 invalid archives, rollback and recoverable failed rollback
+PASS Starter always builds/links OpenReader with dependency ordering and neutral adapters
+PASS Windows/Linux/ARM package guards require OpenReader/configuration/notices and reject retired payloads

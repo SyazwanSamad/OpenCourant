@@ -1,0 +1,639 @@
+[
+  {
+    "test": "1.03",
+    "deck": "miniqa/ALE2D/bar2_v41",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "BAR2V41B_0001.out_1x4.txt",
+        "1532855981"
+      ],
+      [
+        "BAR2V41B_0001.out_2x2.txt",
+        "-2024759124"
+      ],
+      [
+        "BAR2V41B_0001.out_4x1.txt",
+        "1149669035"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/ALE2D/bar2_v41",
+      "-test_id",
+      "1.03",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.05",
+    "deck": "miniqa/CRASH/crashtriangles",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "TRITUBV4_0001.out_1x4.txt",
+        "-1187082728"
+      ],
+      [
+        "TRITUBV4_0001.out_2x2.txt",
+        "-1099457676"
+      ],
+      [
+        "TRITUBV4_0001.out_4x1.txt",
+        "-2021092306"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/CRASH/crashtriangles",
+      "-test_id",
+      "1.05",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.06",
+    "deck": "miniqa/CRASH/crashsection/box1_42",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "BOX1BL_0001.out_1x4.txt",
+        "-649544391"
+      ],
+      [
+        "BOX1BL_0001.out_2x2.txt",
+        "317504356"
+      ],
+      [
+        "BOX1BL_0001.out_4x1.txt",
+        "548063111"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/CRASH/crashsection/box1_42",
+      "-test_id",
+      "1.06",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.16",
+    "deck": "miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "FOAM_V10_0001.out_1x4.txt",
+        "1580046045"
+      ],
+      [
+        "FOAM_V10_0001.out_2x2.txt",
+        "-542411364"
+      ],
+      [
+        "FOAM_V10_0001.out_4x1.txt",
+        "1893552196"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/LOIS/FOAM/FOAM429/input_100/isolid_101",
+      "-test_id",
+      "1.16",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.19",
+    "deck": "miniqa/LOIS/LOI13/solide",
+    "exit_code": 1,
+    "checksums": [
+      [
+        "MODELE_0001.out_1x4.txt",
+        "873476603"
+      ],
+      [
+        "MODELE_0001.out_2x2.txt",
+        "873476603"
+      ],
+      [
+        "MODELE_0001.out_4x1.txt",
+        "429586137"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/LOIS/LOI13/solide",
+      "-test_id",
+      "1.19",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.32",
+    "deck": "miniqa/LOIS/LOI68/cisaillement/test1/input_51",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "CISA12_0001.out_1x4.txt",
+        "-34041713"
+      ],
+      [
+        "CISA12_0001.out_2x2.txt",
+        "-782405735"
+      ],
+      [
+        "CISA12_0001.out_4x1.txt",
+        "-782405735"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/LOIS/LOI68/cisaillement/test1/input_51",
+      "-test_id",
+      "1.32",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.34",
+    "deck": "miniqa/onefile_rad",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "CRA2AV4_0001.out_1x4.txt",
+        "-1299182798"
+      ],
+      [
+        "CRA2AV4_0001.out_2x2.txt",
+        "-249681298"
+      ],
+      [
+        "CRA2AV4_0001.out_4x1.txt",
+        "-380751879"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/onefile_rad",
+      "-test_id",
+      "1.34",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.38",
+    "deck": "miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42",
+    "exit_code": 1,
+    "checksums": [
+      [
+        "FILE_0001.out_1x4.txt",
+        "2064163690"
+      ],
+      [
+        "FILE_0001.out_2x2.txt",
+        "2064163690"
+      ],
+      [
+        "FILE_0001.out_4x1.txt",
+        "-952328444"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/REFERENCE_STATE_FILES/REFSTA/SOLIDES/law42",
+      "-test_id",
+      "1.38",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.44",
+    "deck": "miniqa/RESTART/cra2",
+    "exit_code": 1,
+    "checksums": [
+      [
+        "CRA2V44_0002.out_1x4.txt",
+        "-1418079440"
+      ],
+      [
+        "CRA2V44_0002.out_2x2.txt",
+        "-1418079440"
+      ],
+      [
+        "CRA2V44_0002.out_4x1.txt",
+        "203953438"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/RESTART/cra2",
+      "-test_id",
+      "1.44",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.48",
+    "deck": "miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "CONV_ELS_0001.out_1x4.txt",
+        "1839000665"
+      ],
+      [
+        "CONV_ELS_0001.out_2x2.txt",
+        "-1682835978"
+      ],
+      [
+        "CONV_ELS_0001.out_4x1.txt",
+        "-1682835978"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/SOLIDES/nv_elts/poutre_flex/flexion/H101",
+      "-test_id",
+      "1.48",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.51",
+    "deck": "miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "CONV_ELS_0001.out_1x4.txt",
+        "-849074924"
+      ],
+      [
+        "CONV_ELS_0001.out_2x2.txt",
+        "987375640"
+      ],
+      [
+        "CONV_ELS_0001.out_4x1.txt",
+        "642015244"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/SOLIDES/nv_elts/poutre_flex/flexion/HSEPH",
+      "-test_id",
+      "1.51",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.55",
+    "deck": "miniqa/SUBMODEL/update_v_100/PLOAD",
+    "exit_code": 1,
+    "checksums": [
+      [
+        "BOXBEAM_SUB_0001.out_1x4.txt",
+        "1219982999"
+      ],
+      [
+        "BOXBEAM_SUB_0001.out_2x2.txt",
+        "1219982999"
+      ],
+      [
+        "BOXBEAM_SUB_0001.out_4x1.txt",
+        "1463523113"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/SUBMODEL/update_v_100/PLOAD",
+      "-test_id",
+      "1.55",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  },
+  {
+    "test": "1.71",
+    "deck": "miniqa/LOIS/LEAK_MAT/run2_LAW58_quads",
+    "exit_code": 2,
+    "checksums": [
+      [
+        "RBPLI_0001.out_1x4.txt",
+        "14204535"
+      ],
+      [
+        "RBPLI_0001.out_2x2.txt",
+        "1249372705"
+      ],
+      [
+        "RBPLI_0001.out_4x1.txt",
+        "-17305548"
+      ]
+    ],
+    "command": [
+      "C:\\Python\\Python311\\python.exe",
+      "C:\\Programming\\OpenCourant\\qa-tests\\qa_tools\\or_execute.py",
+      "-deck_dir",
+      "miniqa/LOIS/LEAK_MAT/run2_LAW58_quads",
+      "-test_id",
+      "1.71",
+      "-arch",
+      "win64",
+      "-mpi",
+      "impi",
+      "-prec",
+      "dp",
+      "-np",
+      "4",
+      "-nt",
+      "1",
+      "-stdout",
+      "0",
+      "-keep",
+      "1",
+      "-qa_type",
+      "pon",
+      "-pon_string",
+      "1x4,2x2,4x1",
+      "-starter",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\starter_win64",
+      "-engine",
+      "C:\\Programming\\OpenCourant\\cbuild_dependency_stage7\\pre-stage5\\engine_win64_impi"
+    ]
+  }
+]

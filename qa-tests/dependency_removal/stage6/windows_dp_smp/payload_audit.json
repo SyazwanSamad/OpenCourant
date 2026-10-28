@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "source_sha256": "2d0365018e67dd4813e6a2cf2ebf19d00d4771aa1aeb9b9706b7ea45fbb56982",
+  "archive_sha256": "72831a1b3e95910e20e24cceb6fb6c4295cfab1fade01144f2cee53c603442a3",
+  "archive_bytes": 26112105,
+  "reproducible_archive": true,
+  "retained_entries": 3327,
+  "retained_component_bytes_unchanged": true,
+  "retained_notices": [
+    "extlib/license/boost_license.txt",
+    "extlib/license/cpp-btree_license.txt",
+    "extlib/license/dtoa_license.txt",
+    "extlib/license/exprtk_license.txt",
+    "extlib/license/fdlibm_license.txt",
+    "extlib/license/lapack_license.txt",
+    "extlib/license/md5_license.txt",
+    "extlib/license/metis_license.txt",
+    "extlib/license/openthreads_license.txt",
+    "extlib/license/phmap_license.txt",
+    "extlib/license/zlib_license.txt"
+  ],
+  "removed_archive_entries": [
+    "extlib/h3d/includes/h3d_values.h",
+    "extlib/h3d/includes/h3dpublic_defs.h",
+    "extlib/h3d/includes/h3dpublic_export.h",
+    "extlib/h3d/includes/h3dpublic_import.h",
+    "extlib/h3d/lib/linux64/libh3dreader.so",
+    "extlib/h3d/lib/linux64/libh3dwriter.so",
+    "extlib/h3d/lib/linuxa64/libh3dreader.so",
+    "extlib/h3d/lib/linuxa64/libh3dwriter.so",
+    "extlib/h3d/lib/win64/h3dreader.dll",
+    "extlib/h3d/lib/win64/h3dwriter.dll",
+    "extlib/h3d/h3d_license.txt",
+    "extlib/license/apr_license.txt",
+    "extlib/license/h3d_license.txt",
+    "extlib/license/hm_reader_license.txt",
+    "extlib/hm_reader/linux64/libapr-1.so.0",
+    "extlib/hm_reader/linux64/libapr-1.so",
+    "extlib/hm_reader/linux64/libhm_reader_linux64.so",
+    "extlib/hm_reader/linuxa64/libapr-1.so.0",
+    "extlib/hm_reader/linuxa64/libapr-1.so",
+    "extlib/hm_reader/linuxa64/libhm_reader_linuxa64.so",
+    "extlib/hm_reader/win64/hm_reader_win64.exp",
+    "extlib/hm_reader/win64/hm_reader_win64.lib",
+    "extlib/hm_reader/win64/libapr-1.dll",
+    "extlib/hm_reader/win64/hm_reader_win64.dll",
+    "extlib/hm_reader/win64/libapr-1.lib"
+  ],
+  "local_sdk_files_before_cleanup": [
+    {
+      "path": "extlib/h3d/h3d_license.txt",
+      "bytes": 648,
+      "sha256": "b58e09256f25a5d1a5a5c56d7f43c1a1830268a870439beaf23c070cfef9c1cf"
+    },
+    {
+      "path": "extlib/h3d/includes/h3d_values.h",
+      "bytes": 2846,
+      "sha256": "9f3384b2cfcf840d86f32211bf405f74973a7743eed3d18fb4426d05be88069a"
+    },
+    {
+      "path": "extlib/h3d/includes/h3dpublic_defs.h",
+      "bytes": 30152,
+      "sha256": "ec92ee398f774aac95139e0c286c3886e2bf99d002b0167440313dba95b00b7f"
+    },
+    {
+      "path": "extlib/h3d/includes/h3dpublic_export.h",
+      "bytes": 42438,
+      "sha256": "974fd46ae30266bce41302d37591ea0e78f1bb65f6de1b7483dd4319e5f8022b"
+    },
+    {
+      "path": "extlib/h3d/includes/h3dpublic_import.h",
+      "bytes": 61070,
+      "sha256": "7e66aac3b329c22650aa83dab68c4241048cae2402293a2836ccacf94c92bc45"
+    },
+    {
+      "path": "extlib/h3d/lib/linux64/libh3dreader.so",
+      "bytes": 1221408,
+      "sha256": "a354831384a676d6e4c0ad8d6edccb6e6d0acadd4f878c9f0afd49f8274ba4d8"
+    },
+    {
+      "path": "extlib/h3d/lib/linux64/libh3dwriter.so",
+      "bytes": 1028184,
+      "sha256": "9975a8faf57853a06237a370cd3b8c76479ebf59fb41edc9ff95b6e1fd8bb675"
+    },
+    {
+      "path": "extlib/h3d/lib/linuxa64/libh3dreader.so",
+      "bytes": 1161152,
+      "sha256": "bc735dcefa6e15c4174a2600e4bc628606983b810bb8f1f1f942684108a438cd"
+    },
+    {
+      "path": "extlib/h3d/lib/linuxa64/libh3dwriter.so",
+      "bytes": 998560,
+      "sha256": "6316215d7c21596b8537847f4d307d66618edb6b5b17f19e4a07c7e22b455bb6"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dreader.dll",
+      "bytes": 804208,
+      "sha256": "b3de1e636d2c290a8c2e95f50a6dff7036af03cb8dfae62522f986d994e01836"
+    },
+    {
+      "path": "extlib/h3d/lib/win64/h3dwriter.dll",
+      "bytes": 672384,
+      "sha256": "cbe2ef4362095e1d952d17b69c0f6a023c830500595ce00d137365f7f741e483"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linux64/libapr-1.so",
+      "bytes": 911046,
+      "sha256": "f76d9796e59b675cb374fc3f3403f7878bdcb348e4c6f8af017c3dc3046be89c"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linux64/libapr-1.so.0",
+      "bytes": 911046,
+      "sha256": "f76d9796e59b675cb374fc3f3403f7878bdcb348e4c6f8af017c3dc3046be89c"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linux64/libhm_reader_linux64.so",
+      "bytes": 17805984,
+      "sha256": "5c9c46b12a155853598970f7668b1cc29f654be3d0066de6db4f574789331afb"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linuxa64/libapr-1.so",
+      "bytes": 1243584,
+      "sha256": "36a13bb6a416b5c47247aee49f1d820e0353511c095132970688c6bba6355902"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linuxa64/libapr-1.so.0",
+      "bytes": 1243584,
+      "sha256": "36a13bb6a416b5c47247aee49f1d820e0353511c095132970688c6bba6355902"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/linuxa64/libhm_reader_linuxa64.so",
+      "bytes": 15963160,
+      "sha256": "72a1e9fece07205faee598987f11480bad822fbeac492ad250dc49dd19403f99"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/win64/hm_reader_win64.dll",
+      "bytes": 8589824,
+      "sha256": "54dea015c6e776b9f5519bb8a31ae2f5a8fe506315e9ea393cee439c9dc869c1"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/win64/hm_reader_win64.exp",
+      "bytes": 69682,
+      "sha256": "2314a2b724ce7074899e620fb2e18e8bc91fbfecaee5372374a9926adc794a2e"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/win64/hm_reader_win64.lib",
+      "bytes": 119158,
+      "sha256": "2a7da874a4265134523a25bca4ac36b95ca065cb0f0cdd039b940bb0418a7018"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/win64/libapr-1.dll",
+      "bytes": 183808,
+      "sha256": "a165557741cd95d899a9af74dd2794850772e8ecb882b353e5a0f8e5317f2720"
+    },
+    {
+      "path": "cbuild_dependency_stage3/reference_payload/win64/libapr-1.lib",
+      "bytes": 103936,
+      "sha256": "885bacec44f0ed5a8ca1c91ce691596aa855429fc98ab53a09b40911b2ae89c3"
+    }
+  ]
+}

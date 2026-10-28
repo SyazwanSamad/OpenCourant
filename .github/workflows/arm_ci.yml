@@ -151,9 +151,9 @@ jobs:
         with:
           name: extlib-linuxa64.zip
 
-      - name: Unzip extlib
+      - name: Validate and extract pinned extlib
         run: |
-          unzip extlib.zip -x "extlib/hm_reader/*"
+          python3 Compiling_tools/script/load_extlib.py
 
       - name: Running qa
         run: |

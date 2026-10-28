@@ -193,7 +193,7 @@ def run(args):
             print(f'PASS LS-DYNA {fixture.name}/profile-{version}', flush=True)
         if args.starter:
             environment.update(RAD_CFG_PATH=str(ROOT / 'hm_cfg_files'), OMP_NUM_THREADS='1',
-                               KMP_STACKSIZE='400m', RAD_H3D_PATH=str(ROOT / 'extlib/h3d/lib/win64'))
+                               KMP_STACKSIZE='400m')
             smoke = work / 'accelerometer'
             shutil.copytree(ROOT / 'qa-tests/miniqa/ACCELEROMETRES/data', smoke)
             result = subprocess.run([str(args.starter), '-i', 'ACCELERO_0000.rad', '-np', '1'],

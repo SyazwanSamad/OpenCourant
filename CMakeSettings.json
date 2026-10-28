@@ -2,8 +2,7 @@
   "environments": [
     {
       "RAD_CFG_PATH": "${projectDir}\\hm_cfg_files",
-      "PATH": "${projectDir}\\exec;${env.PATH}",
-      "RAD_H3D_PATH": "${projectDir}\\extlib\\h3d\\lib\\win64"
+      "PATH": "${projectDir}\\exec;${env.PATH}"
     }
   ],
   "configurations": [

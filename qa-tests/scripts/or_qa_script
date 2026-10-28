@@ -17,6 +17,13 @@
 # Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # Copyright>
 # Copyright>
+# Copyright>        OpenCourant
+# Copyright>        Copyright (C) 2026 OpenCourant contributors
+# Copyright>
+# Copyright>        Modified by the OpenCourant project, 2026.
+# Copyright>        Modifications are licensed under the GNU Affero General Public
+# Copyright>        License, version 3 or (at your option) any later version.
+# Copyright>
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
@@ -286,10 +293,6 @@ $doslines        = 0 ; #1- do checks for non-ASCII files
 $scratch_count   = 0 ; # count scratch files present
 $filelist{"Leftover files"} = "(last example)";
 $filelist_bad{"Non-ASCII files"} = "(last example)";
-$h3dtoxmlexec    = "";
-$local_h3d_xml     = "run.h3d_xml";
-$local_h3d_extract = "run.h3d_extract";
-@h3d_extract_file  = ();
 #-------------------------
 # filenames allowed after the run without warning (these are qa specific,
 #   solver specific will come from or_QA.constants options
@@ -360,10 +363,8 @@ if ( $uname =~ /Linux/ ) {
    chomp ($muname);
    if ( $muname =~ /i686/ ) {
      $dplatform="linux32";  
-     $h3dtoxmlexec    ="./h3dtoxml_Linux_I.exe";
    }elsif ( $muname =~ /x86_64/ ) {
      $dplatform="linux64";  
-     $h3dtoxmlexec    ="./h3dtoxml_Linux_I.exe";
    }elsif ( $muname =~ /ia64/ ) {
      $dplatform="linuxia64"; 
    }else {   
@@ -1094,7 +1095,6 @@ $list_of_crashed      = "";
 $no_sig_failures      = 0 ;
 $list_sig_failures    = "" ;
 $last_sig_failure     = "";
-@h3dfiles             = () ; #list of h3d files to be checked
 # init mark setup
 if ( $running_double_check <= 0 ) {
     $speed = substr($run_mark,0,1);
@@ -1887,20 +1887,8 @@ while (<$infile>) {
       push (@alternate_extract_file , $t) ;
       $have_extract2 ++;
       # &out_file (     "  alternate  extract file = @alternate_extract_file\n" ) ;
-   } elsif (/^\s*h3dfiles\s+(\S.*\S)\s*$/i) {
-      $t = $1 ; 
-      @h3dfiles=split(/ /,$t);
-      # &out_file (     "  h3dfiles  file = @h3dfiles\n" ) ;
-   } elsif (/^\s*h3dextract\s+(\S.*\S)\s*$/i) {
-      $t = $1 ; 
-      $original_h3d_extract_file = $t ;
-      $base_h3d_extract_file = $original_h3d_extract_file; 
-      push (@h3d_extract_file , $t) ;
-      # &out_file (     "  h3d extract file = @h3d_extract_file\n" ) ;
-   } elsif (/^\s*h3dextract2\s+(\S.*\S)\s*$/i) {
-      $t = $1 ; 
-      push (@h3d_extract_file , $t) ;
-      # &out_file (     "  h3d extract file = @h3d_extract_file\n" ) ;
+   } elsif (/^\s*h3d(?:files|extract2?)\s+/i) {
+      die "H3D QA extraction has been removed; use native output assertions.\n";
    } elsif (/^\s*title\s+(\S.*\S)\s*$/i) {
        if ( $selfref_pass < 2 ) {
      $out_buffer .= "  *** $1\n" ;
@@ -3340,71 +3328,6 @@ sub go {
           $out_buffer .= "      =======>>> $full_test_id: Differences found - QA test failed.\n" ;
           goto FAILURE ;
 
-        }elsif($#h3dfiles>=0 && $#h3d_extract_file >= 0 && $h3dtoxmlexec ){
-    #
-    #     Testing h3d extract file if needed
-    #        
-          if(! -f $h3dtoxmlexec){
-            print "      $h3dtoxmlexec does not exist!\n";
-            goto FAILURE;
-          }
-            
-          open ( NEW_H3DEXTRACT, "> $local_h3d_extract" ) ;
-          $h3dlinenumber=0;
-          foreach $ih3dfile (@h3dfiles) {
-            if(! -f $ih3dfile){
-              print "      $ih3dfile is not created\n";
-              goto FAILURE;
-            }
-
-            system("$h3dtoxmlexec $ih3dfile $local_h3d_xml >> $qa_screen 2>&1");
-            #system("$h3dtoxmlexec $ih3dfile $local_h3d_xml");
-
-            if(! -f $local_h3d_xml ){
-                $out_buffer .= "      =======>>> $full_test_id: $local_h3d_xml not found - QA test failed.\n" ;
-                goto FAILURE ;
-            }
-            open (NEW_XML, "< $local_h3d_xml") || die "$! $local_h3d_xml" ;
-            while ($h3dline=<NEW_XML>) {
-              #print "$h3dline";
-              chomp ($h3dline) ;
-              if($h3dline =~ /^\s*<DataSetDataInfo ID=\"(\d+)\" DataSize=\"(\d+)\" Data=\"(.*)\" \/>\s*$/){
-                #<DataSetDataInfo ID="1" DataSize="3" Data="0.000000E+00,0.000000E+00,0.000000E+00" />
-                $datasetid=$1;
-                @datasetdata=split(/,/,$3);
-                $iline=0;
-                foreach $idata (@datasetdata) {
-                  $iline++;
-                  $h3dlinenumber++;
-                  #print "$h3dlinenumber $datasetid $idata\n";
-                  print NEW_H3DEXTRACT "$h3dlinenumber DataSet${datasetid}_${iline} $idata\n";
-                }
-              }
-            }
-            close(NEW_XML);
-          } 
-          close ( NEW_H3DEXTRACT );
-
-          #goto compare again
-          $base_extract_file=$base_h3d_extract_file;
-          $original_extract_file=pop(@h3d_extract_file);
-          $extract_file = $local_h3d_extract;
-          if (! $extract_file) {
-              $out_buffer .= "      **No h3d extract file found !!\n";
-              $no_original_extract_file = 1 ;
-          } else {
-              $no_original_extract_file = 0 ;
-          }
-
-          if (! -f $original_extract_file){
-        $out_buffer .= "      **Specified extract file $original_extract_file does not exist!!\n\n" ;
-        $no_original_extract_file = 1 ;
-          }
-
-          @h3dfiles    = () ; 
-          #$out_buffer .= "trying: \"$original_extract_file\"\n" ;
-          goto RESET_EXTRACT;
-
         } else {
         #        
         #     QA test passed
@@ -3934,7 +3857,7 @@ $ctim = ( $usercpu + $systemcpu ); # just to fool the warnings
 # remove files:
 #  fileclean 4: clean up at the end of all qa
 if ( $save_out_files == 0 ) {
-    unlink <*.html>, <*.h3d>, <*.igs>, <*.log> ;
+    unlink <*.html>, <*.igs>, <*.log> ;
     system ("touch run_bah ossmooth.err") ;
     unlink <run_*>,<runA*>,<runT*>, "ossmooth.err" ;
 }
@@ -5451,8 +5374,6 @@ sub start_test {
     $listing_file = "";
     $diff_buffer = "";
     @alternate_extract_file = () ;
-    @h3dfiles    = () ; 
-    @h3d_extract_file =();
     $infinity = 0;
     @local_keywords = ('all');
     @p4_local_files = ();
@@ -6516,9 +6437,6 @@ sub run_in_dir {
     if ( -f "or_QA.constants.local" ) {
   system "cp -f or_QA.constants.local $newdir/" ;
     }
-    if ( $h3dtoxmlexec && -f $h3dtoxmlexec ) {
-  system "cp -f $h3dtoxmlexec $newdir/" ;
-    }
     if ( $exec_script ) {
   system "cp -f $exec_script $newdir/" ;
     }
@@ -6765,7 +6683,6 @@ sub check_ascii {
   $filelist{$i} = $id;
   #  if ( $i eq "run.hgdata" ) { next; }
   if ( $i =~ /^run.*oss$/ )  { next; } # because of ATAG
-  if ( $i =~ /^run.*h3d\d*$/ )  { next; } #h3d10...
   if ( $i =~ /^run.*res$/ )  { next; }
   if ( $i =~ /^run.*eigv$/ ) { next; }
   if ( $i =~ /^run.*dmg$/ )  { next; }
@@ -6960,8 +6877,6 @@ sub check_new_files {
                         qx(gzip -f $file); $file=$file.".gz"; 
                       } 
 
-                      # XXXXXX take h3d files into account when creating reference files
-                      if ($file =~ /.h3d$/ and $create_ref > 3) { $i_copy=1 }
                       # END XXXXXX
 
                     }

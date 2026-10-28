@@ -1,0 +1,3 @@
+PASS shared scalar arithmetic matches pre-refactor bodies; no H3D calculation dependencies
+PASS geometry/contact/reduction, parser, Python registration/packing/synchronization bodies preserved
+PASS Python uses neutral APIs; H3D SDK and writer source trees are absent

@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "whitespace_lines_fixed": 0,
+  "diff_check_passed": true,
+  "changed_python_files_parsed": 10,
+  "changed_workflows_parsed": 6,
+  "binaries": [
+    {
+      "path": "exec/starter_win64.exe",
+      "bytes": 45873664,
+      "sha256": "577e634e743767efbbba7eacbab4ccf5ddc8fa2bf3bce6e272c1668dd939093a",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64.exe",
+      "bytes": 131674624,
+      "sha256": "7b416dc02ea0755c9e68b62c3bd927ba2e5440b0d379bc115e5e0a890f06ec0e",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/engine_win64_impi.exe",
+      "bytes": 139902464,
+      "sha256": "bf02df781a8788a1da516fb89667752de42dbd826253a040a1895c94367eca9f",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    },
+    {
+      "path": "exec/open_reader_win64.dll",
+      "bytes": 17495552,
+      "sha256": "2c95f722e5b4a83e4e703eac2a9102a39edb584d4a21e5f5e3fcab6f767b4482",
+      "sdk_library_names_absent": true,
+      "sdk_imports_exports_absent": true
+    }
+  ],
+  "build_graphs": [
+    {
+      "path": "cbuild_dependency_stage6/clean-starter/compile_commands.json",
+      "sha256": "ed09dae0d16516b955d6448bf2a9b5902903ad9177dcce4a64c84b552eb3df5f",
+      "compilation_units": 2701,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_ninja/compile_commands.json",
+      "sha256": "f88adb6a474ac5706ae5b682efda3f8670d21429a085e60d59fb3acc84e62c89",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    },
+    {
+      "path": "engine/cbuild_engine_win64_impi_ninja/compile_commands.json",
+      "sha256": "c74391bede01916f162157378c9c0ed4a1447c245e1ff4966be8efb6ed111592",
+      "compilation_units": 3598,
+      "sdk_sources_and_include_paths_absent": true
+    }
+  ],
+  "limit": "PE imports/exports and embedded SDK names plus build-graph audit. Runtime module inspection is recorded separately in package_runtime_report.json; Linux/ARM execution remains unverified."
+}

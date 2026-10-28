@@ -15,6 +15,13 @@
 # Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # Copyright>
 # Copyright>
+# Copyright>        OpenCourant
+# Copyright>        Copyright (C) 2026 OpenCourant contributors
+# Copyright>
+# Copyright>        Modified by the OpenCourant project, 2026.
+# Copyright>        Modifications are licensed under the GNU Affero General Public
+# Copyright>        License, version 3 or (at your option) any later version.
+# Copyright>
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
@@ -191,7 +198,7 @@ def verify_integer_tolerance(word,ref,res,test_json):
 #    Abs_tolerance  : Absolute Tolerance diff between Result & run must be in Range 
 # ----------------------------------------------------------------------------------
   if (test_json == []):
-    return 0
+    return 0,' ---- Tol : abs(Ref-Run)==0'
   
   tol_word='TOL_'+word
   entry=test_json
@@ -209,7 +216,7 @@ def verify_integer_tolerance(word,ref,res,test_json):
        if (diff < itol):
          return 1,string
        else:
-         string=' ---- Tol : abs(Ref-Run)<Tol : ',str(diff),' > ',str(itol)
+         string=' ---- Tol : abs(Ref-Run)<Tol : '+str(diff)+' > '+str(itol)
          return 0,string
     else:
       string=' ---- Tol : abs(Ref-Run)==0'
@@ -347,7 +354,7 @@ def compare(words,reference,results,test_json,default_tol,prec):
 
 
 def last_checksum(outputfile):
-  checksum='0'
+  checksum=None
 
   file=open(outputfile,"r")
 
@@ -362,4 +369,6 @@ def last_checksum(outputfile):
             break
 
   file.close()
+  if checksum is None:
+    raise ValueError('No CHECKSUM found in '+str(outputfile))
   return checksum

@@ -1,0 +1,34 @@
+[
+  {
+    "starter": "current",
+    "engine": "current",
+    "starter_exit": 0,
+    "engine_exit": 0,
+    "nan_in_listing": true,
+    "normal": true
+  },
+  {
+    "starter": "current",
+    "engine": "pre-stage5",
+    "starter_exit": 0,
+    "engine_exit": 0,
+    "nan_in_listing": true,
+    "normal": true
+  },
+  {
+    "starter": "pre-stage5",
+    "engine": "current",
+    "starter_exit": 0,
+    "engine_exit": 0,
+    "nan_in_listing": true,
+    "normal": true
+  },
+  {
+    "starter": "pre-stage5",
+    "engine": "pre-stage5",
+    "starter_exit": 0,
+    "engine_exit": 0,
+    "nan_in_listing": true,
+    "normal": true
+  }
+]

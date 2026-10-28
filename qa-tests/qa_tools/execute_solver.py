@@ -15,6 +15,13 @@
 # Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # Copyright>
 # Copyright>
+# Copyright>        OpenCourant
+# Copyright>        Copyright (C) 2026 OpenCourant contributors
+# Copyright>
+# Copyright>        Modified by the OpenCourant project, 2026.
+# Copyright>        Modifications are licensed under the GNU Affero General Public
+# Copyright>        License, version 3 or (at your option) any later version.
+# Copyright>
 # Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 # Copyright>        See COPYRIGHT.md at the root of the repository for the full
 # Copyright>        copyright and attribution statement.
@@ -209,7 +216,7 @@ def get_engine_command(engine,mpi,engine_input,np):
   if (arch == 'win64'):
     redirect=' > engine_output.log  2>&1'
     if (mpi =='impi' ):
-      command='mpiexec -delegate -np '+str(np)+' ' + engine + ' -i '+engine_input + redirect
+      command='mpiexec -localonly -np '+str(np)+' ' + engine + ' -i '+engine_input + redirect
     else:
       command=engine + ' -i '+engine_input + redirect
   else:
