@@ -34,10 +34,13 @@ empty/filled parts, canaries, fixed-width padding/truncation, zero capacity,
 selection/iterator preservation, reload, and failure without stale entities.
 The expected paths and memberships come directly from the generated fixtures.
 
-Twenty-seven loading checks cover both native entry points, profile 2612,
+Thirty-five loading checks cover both native entry points, profile 2612,
 IRIGID preservation, bad/missing configuration and input, keyword initialization,
 structured-ALE rejection in root/includes, comments, the accelerometer restart,
 and default Starter conversion of mode 1 and connected/disconnected mode 2.
+Missing properties, including ID zero, are fatal even on empty unused parts.
+Native and keyword controls verify both empty and active parts fail without a
+restart; an empty part with a defined property remains accepted.
 Four contact checks cover typed groups, converted sets used as surfaces and
 lines, selection preservation, reload, and a complete TYPE25 Starter restart.
 

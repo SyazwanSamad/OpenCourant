@@ -1,0 +1,67 @@
+{
+  "captured_utc": "2026-10-29T19:39:04.349734+00:00",
+  "base_commit": "739d039692c54d0e5d0a2b09221efb15a4fb62f5",
+  "platform": "Windows x64 DP SMP",
+  "policy": "Missing properties are fatal for all parts, including empty unused parts.",
+  "input_sha256": "c10c736204da2e454f7d8844420cfae400c35f59b551e7056d8d0621f07e6356",
+  "original_input_unchanged": true,
+  "part_id": 111,
+  "property_id": 0,
+  "case_results": {
+    "before": {
+      "errors": [],
+      "warnings": [
+        "178"
+      ],
+      "restart_bytes": 471798
+    },
+    "after": {
+      "errors": [
+        "178"
+      ],
+      "warnings": [],
+      "restart_bytes": 0
+    },
+    "fixed_empty": {
+      "errors": [],
+      "warnings": [],
+      "restart_bytes": 471798
+    },
+    "active_bad": {
+      "errors": [
+        "178"
+      ],
+      "warnings": [
+        "178"
+      ],
+      "restart_bytes": 0
+    },
+    "without_empty": {
+      "errors": [],
+      "warnings": [],
+      "restart_bytes": 470958
+    }
+  },
+  "after_starter_exit_code": 2,
+  "fixed_empty_starter_exit_code": 0,
+  "sha256": {
+    "starter\\source\\model\\assembling\\hm_read_part.F": "d2c651b594f0dff63b2f58dc5b7b130f18c8ff4d292be8f85984fd90bd816d83",
+    "qa-tests\\reader\\test_model_loading.py": "b253f247cb562c1c4c5f84100e4392bfbba82e344a6e9034bab2b6499b704408",
+    "exec\\starter_win64.exe": "3e88f023fd19925498b8ed4716189b2bb92a20e146d73c5f0c89b849af99517e"
+  },
+  "new_regression_cases": 8,
+  "engine_runs": 0,
+  "local_logs": "cbuild_cross_section/validation.log",
+  "status": "passed",
+  "previous_policy": "Missing properties were warnings on empty unused parts.",
+  "existing_regressions": {
+    "api_exports": 84,
+    "query_groups": 2,
+    "loading_cases": 35,
+    "contact_cases": 4,
+    "rigid_snapshots": 14,
+    "rigid_lifecycle_cases": 32,
+    "bounds_checked_starter_cases": 30,
+    "status": "passed"
+  }
+}

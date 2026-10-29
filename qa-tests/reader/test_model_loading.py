@@ -118,6 +118,48 @@ def configuration(target, version):
 ''', encoding='utf-8')
 
 
+def part_property_checks(args, work, environment):
+    keyword = ('*KEYWORD\n*NODE\n1,0,0,0\n2,1,0,0\n3,1,1,0\n4,0,1,0\n'
+               '*ELEMENT_SHELL\n1,1,1,2,3,4\n*PART\nactive\n1,1,1\n'
+               '*SECTION_SHELL\n1,16,0.8333,5\n1,1,1,1\n*MAT_ELASTIC\n1,1,100,0.3\n*END\n')
+    for kind in ['native', 'keyword']:
+        for name, property_id, active in [('empty-zero', 0, False), ('empty-missing', 999, False),
+                                          ('empty-valid', 1, False), ('active-missing', 999, True)]:
+            folder = work / (kind + '-' + name)
+            folder.mkdir()
+            if kind == 'native':
+                shutil.copy(DATA / 'common.inc', folder)
+                deck = (DATA / 'ordinary_zero.rad').read_text()
+                if active:
+                    deck = deck.replace('         1         1         0', '       999         1         0')
+                else:
+                    deck = deck.replace('/END', f'/PART/20\nempty\n{property_id:10d}{1:10d}\n/END')
+                filename = 'case_0000.rad'
+            else:
+                deck = keyword.replace('1,1,1\n*SECTION', '1,999,1\n*SECTION') if active else keyword
+                if not active:
+                    deck = deck.replace('*END', f'*PART\nempty\n20,{property_id},1\n*END')
+                filename = 'case.k'
+            (folder / filename).write_text(deck)
+            result = subprocess.run([str(args.starter), '-i', filename, '-np', '1'], cwd=folder,
+                                    env=environment, capture_output=True, text=True, timeout=60)
+            output = result.stdout + result.stderr
+            listing = (folder / 'case_0000.out').read_text(errors='replace')
+            bad = property_id != 1
+            assert result.returncode == (2 if bad else 0), (kind, name, output[-2500:])
+            assert 'forrtl: severe' not in output.lower(), output
+            assert any(p.stat().st_size for p in folder.glob('*.rst')) == (not bad), (kind, name)
+            if bad:
+                assert re.search(r'^ERROR ID\s*:\s*178\s*$', listing, re.M), listing[-2500:]
+                # Keyword conversion represents an unresolved section as property zero.
+                missing_id = 0 if kind == 'keyword' else property_id
+                assert f'PROPERTY ID={missing_id} DOES NOT EXIST' in listing, (kind, name, listing[-2500:])
+                assert '0 ERROR(S)' not in listing and 'NORMAL TERMINATION' not in listing
+            else:
+                assert '0 ERROR(S)' in listing
+            print(f'PASS Starter {kind}/{name} property validation', flush=True)
+
+
 def run(args):
     with tempfile.TemporaryDirectory(prefix='opencourant-loading-') as temporary:
         work = Path(temporary)
@@ -231,6 +273,7 @@ def run(args):
                 assert '0 ERROR(S)' in listing and any(p.stat().st_size for p in folder.glob('*.rst'))
                 assert int(re.search(r'NRBODY:[^\n]*?\s(\d+)\s*$', listing, re.M).group(1)) == bodies
                 print(f'PASS default Starter rigid conversion {name}', flush=True)
+            part_property_checks(args, work, environment)
 
 
 def main():

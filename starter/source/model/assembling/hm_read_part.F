@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -211,11 +218,7 @@ C--------------------------------------------------
         IF(IPID == 0) THEN
            IPID=1
            IGTYP=0
-           IF(IS_FILLED) THEN
-             CALL ANCMSG(MSGID=178,MSGTYPE=MSGERROR,ANMODE=ANINFO,I1=ID,C1=TITR,I2=PID)
-           ELSE
-             CALL ANCMSG(MSGID=178,MSGTYPE=MSGWARNING,ANMODE=ANINFO,I1=ID,C1=TITR,I2=PID)
-           ENDIF
+           CALL ANCMSG(MSGID=178,MSGTYPE=MSGERROR,ANMODE=ANINFO,I1=ID,C1=TITR,I2=PID)
            TITR1=' '
         ELSE
             CALL FRETITL2(TITR1,IGEO(NPROPGI-LTITR+1,IPID),LTITR)
