@@ -1,0 +1,38 @@
+#RADIOSS STARTER
+# OpenCourant reader regression fixture; AGPL-3.0-or-later.
+/BEGIN
+ordinary_zero
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+#include common.inc
+/SHELL/10
+         1         1         2         3         4
+/PART/10
+part 10
+         1         1         0                   0         0
+/MAT/LAW132/1
+material counter control
+                   1
+                 100                 100                 100
+                  40                  40                  40
+                 0.2                 0.2                 0.2
+                   1                   1                   1                   1                   1
+                 100                 100                 100                 100                 100
+                   1                   1                 100                 100
+                   1                   1                   1                   1
+         1
+                   1                   1                   1
+                   1                   1                   1
+                   1                   1                   1                   1                   1
+                   1                   1                   1                   1                   1
+                   1                   0
+/FUNCT/1
+first
+                   0                   0
+                   1                   1
+/FUNCT/1
+duplicate
+                   0                   0
+                   1                   2
+/END

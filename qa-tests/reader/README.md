@@ -46,6 +46,23 @@ The include-count ABI remains
 one-based, fixed-width, space-padded, and truncated to capacity; invalid indices
 return blanks. Reload/failure clears saved keyword paths.
 
+## Shared keyword tables and error preservation
+
+```powershell
+python qa-tests/reader/test_shared_tables.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe --output cbuild_shared_tables
+```
+
+Use a fresh output directory. Nine cases check commented inline tables, explicit
+references, includes, genuine duplicates (identical and different data), missing
+material functions, and prior-error preservation in LAW123/125/132. The two-curve,
+two-material fixtures check exact converted samples and references. Reload checks
+cover keyword-to-native, native-to-keyword and empty-model replacement. The three
+additional material controls deliberately emit a later property-compatibility
+error and require both that error and the earlier duplicate to remain counted.
+The Windows CI job runs these standard-library Reader/Starter checks.
+
+See [the repair and validation record](../../doc/OpenReader_shared_table_fix_plan.md).
+
 ## RADIOSS parameters
 
 ```powershell

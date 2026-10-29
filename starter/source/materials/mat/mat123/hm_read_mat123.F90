@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -96,6 +103,7 @@
           !-----------------------------------------------
           !   L o c a l   V a r i a b l e s
           !-----------------------------------------------
+          integer :: copy_status
           integer ilaw,tab_sc,tab_ena,         &
             tab_enkink,tab_enb,tab_ent,tab_enl,func_sl,func_xt,func_xc, &
             func_yt,func_yc,nfunc,i,j,ierror,ndim,npt, npt_new
@@ -459,7 +467,8 @@
                   call mat_table_table_copy(                                       &                                    
                   matparam%table(i)  ,ifunc(1),matparam%title,matparam%mat_id , &
                   x1scale  ,x2scale   ,x3scale  ,x4scale  ,                        &             
-                  yscale(1)  ,ntable    ,table    ,ierr    )
+                  yscale(1)  ,ntable    ,table    ,copy_status    )
+                  if (copy_status /= 0) return
                endif
             else  ! functions
                j= i-6
@@ -473,7 +482,8 @@
                   x2vect(:) = zero
                   call func_table_copy(matparam%table(i),matparam%title ,matparam%mat_id  ,     &
                   nfunc   ,ifunc   ,x2vect  ,x1scale ,x2scale  ,yscale  ,     &
-                  ntable  ,table   ,ierr    )
+                  ntable  ,table   ,copy_status    )
+                  if (copy_status /= 0) return
                endif
             endif
           enddo

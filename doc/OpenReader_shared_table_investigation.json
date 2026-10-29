@@ -1,0 +1,293 @@
+{
+  "captured_utc": "2026-10-29T03:37:33.313487+00:00",
+  "source_commit": "d871244fbad74fb1eeb4589b99cd4294a416faf2",
+  "platform": "Windows x64 DP SMP, one Starter process",
+  "input": {
+    "path": "C:\\PROJECT\\RADIOSS_CAR_LSDYNA_DUMMY\\FINAL_RUN_8-8-2026\\RUN_3_OPENCOURANT\\local_study_error_table\\qa_mat181_commontable.k",
+    "sha256": "904d9cf404340f674ddb3ce1b09487b304f4577ec4450c6704cdfe8678667a9a",
+    "materials": [
+      {
+        "id": 93500009,
+        "table_id": 95400015,
+        "header_line": 84
+      },
+      {
+        "id": 93600009,
+        "table_id": 95400015,
+        "header_line": 91
+      }
+    ],
+    "tables": [
+      {
+        "id": 95400015,
+        "header_line": 98,
+        "rates": [
+          0.1,
+          1.0,
+          10.0,
+          100.0,
+          1000.0
+        ]
+      }
+    ],
+    "curves": [
+      {
+        "id": 95400016,
+        "header_line": 120,
+        "points": 48
+      },
+      {
+        "id": 95400017,
+        "header_line": 185,
+        "points": 48
+      },
+      {
+        "id": 95400018,
+        "header_line": 250,
+        "points": 48
+      },
+      {
+        "id": 95400019,
+        "header_line": 315,
+        "points": 48
+      },
+      {
+        "id": 95400020,
+        "header_line": 380,
+        "points": 48
+      }
+    ]
+  },
+  "binary_sha256": {
+    "exec\\open_reader_win64.dll": "79fda83fe61f123dd001c6bc9beed3aa29abb1d162fef48680e8fc9cf4bc3432",
+    "exec\\starter_win64.exe": "521a31ef95d23ddc641119e1b039a6b524e73ea69ca101ba16636fad59820d2a"
+  },
+  "converted_curve_samples_equal": true,
+  "converted_unique_function_ids": [
+    "95400016",
+    "95400017",
+    "95400018",
+    "95400019",
+    "95400020",
+    "95400021",
+    "95400022",
+    "95400023",
+    "95400024",
+    "95400025",
+    "95400026",
+    "95400027",
+    "95400028",
+    "95400029",
+    "95400030"
+  ],
+  "engine_runs": 0,
+  "cases": [
+    {
+      "case": "original",
+      "input_sha256": "252788a88efa218713a9a263dae3ae3e1054adb04355bc9310b22681b3ce5082",
+      "converted_function_count": 20,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [
+          "79",
+          "79",
+          "79",
+          "79",
+          "79"
+        ],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 379850
+      }
+    },
+    {
+      "case": "single_material",
+      "input_sha256": "75937b9cbb1fd297459074c1716ef256f7aed009da3b66db1fcc17fbf60b03a9",
+      "converted_function_count": 15,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [
+          "79",
+          "79",
+          "79",
+          "79",
+          "79"
+        ],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 344714
+      }
+    },
+    {
+      "case": "unreferenced_table",
+      "input_sha256": "b364acde59566c87df5c368030e8a8b4846f6d5383b1c3e031e2b0ec9ed5ef8a",
+      "converted_function_count": 10,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ]
+    },
+    {
+      "case": "distinct_tables",
+      "input_sha256": "f373cd0b99564ac15e60136b83515464263c4e2fad4c3880e09d4ae11d95ab9d",
+      "converted_function_count": 20,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [
+          "79",
+          "79",
+          "79",
+          "79",
+          "79"
+        ],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 382214
+      }
+    },
+    {
+      "case": "explicit_table",
+      "input_sha256": "8f2a7c5c12a37905391c3728ddb2e66e2e1a15bf9774f8968fe7f361e8744f13",
+      "converted_function_count": 15,
+      "duplicate_ids": [],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 368290
+      }
+    },
+    {
+      "case": "inline_elastic",
+      "input_sha256": "8f1e77abdb7b1a557feb2fc6079055dd4d055000ffb44fd394c2e58e186f3050",
+      "converted_function_count": 10,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ],
+      "starter": {
+        "exit_code": 2,
+        "error_ids": [
+          "79",
+          "79",
+          "79",
+          "79",
+          "79"
+        ],
+        "normal_termination": false,
+        "summary_zero_errors": false,
+        "restart_bytes": 0
+      }
+    },
+    {
+      "case": "genuine_duplicate",
+      "input_sha256": "7c44416fc331278c91f9077355a99e665a32427e2bd863b6f7e9812edf8d22a9",
+      "converted_function_count": 16,
+      "duplicate_ids": [
+        95400016
+      ],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [
+          "79"
+        ],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 369130
+      }
+    },
+    {
+      "case": "comment_free_inline",
+      "input_sha256": "1d3052c4e87cfcad12fa29ba494a5f6b50374f102cb8e5efea67ed91ecdec6c0",
+      "converted_function_count": 15,
+      "duplicate_ids": [],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 368290
+      }
+    },
+    {
+      "case": "plain_curves_inline",
+      "input_sha256": "ace39cffddf921c80f9c91b1a1f62415f2fe24b46be936405d5875d443486c0a",
+      "converted_function_count": 20,
+      "duplicate_ids": [
+        95400016,
+        95400017,
+        95400018,
+        95400019,
+        95400020
+      ],
+      "starter": {
+        "exit_code": 0,
+        "error_ids": [
+          "79",
+          "79",
+          "79",
+          "79",
+          "79"
+        ],
+        "normal_termination": true,
+        "summary_zero_errors": true,
+        "restart_bytes": 379850
+      }
+    }
+  ],
+  "local_artifacts": "cbuild_mat181_investigation/",
+  "original_materials_after_conversion": [
+    {
+      "id": 93500009,
+      "NL": 6,
+      "functions": [
+        95400021,
+        95400022,
+        95400023,
+        95400024,
+        95400025,
+        95400025
+      ]
+    },
+    {
+      "id": 93600009,
+      "NL": 6,
+      "functions": [
+        95400026,
+        95400027,
+        95400028,
+        95400029,
+        95400030,
+        95400030
+      ]
+    }
+  ]
+}

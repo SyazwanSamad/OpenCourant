@@ -511,6 +511,22 @@ static bool RadiossblkInitCFGKernel()
 }
 
 static std::vector<IMECPreObject *> pre_obj_lst[HCDI_OBJ_TYPE_HC_MAX];
+
+static void ClearPreobjects()
+{
+    std::set<IMECPreObject *> objects, children;
+    for (const auto& list : pre_obj_lst)
+        for (IMECPreObject *object : list)
+        {
+            if (!object) continue;
+            objects.insert(object);
+            for (IMECPreObject *child : object->GetSubobject()) children.insert(child);
+        }
+    // Converted adhesive objects are also indexed separately; their parent owns deletion.
+    for (IMECPreObject *object : objects)
+        if (!children.count(object)) delete object;
+    for (auto& list : pre_obj_lst) list.clear();
+}
 static set<pair<sdi::EntityType, unsigned int>> usedGroups;
 
 #include <MODEL_IO/solverCDR.h>
@@ -540,11 +556,7 @@ sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
     CommonDataReaderCFG reader(model, "radioss", rad_version, "", true);
 
     // This reader exposes one current model; reloading must replace its entities.
-    for(auto& objects : pre_obj_lst)
-    {
-        for(IMECPreObject *object : objects) delete object;
-        objects.clear();
-    }
+    ClearPreobjects();
     try
     {
         reader.ReadModel(filename, pre_obj_lst);
@@ -631,6 +643,7 @@ sdi::ModelViewEdit* RadiossblkNewModel()
     radiossblkmessages.clear();
     if(!RadiossblkReadMessageFile() || !RadiossblkInitCFGKernel()) return nullptr;
 
+    ClearPreobjects();
     // Create root preobject
     IMECPreObject *pObj = HCDI_GetPreObjectHandle("", "#include", "", 0, 0);
     if(nullptr != pObj)

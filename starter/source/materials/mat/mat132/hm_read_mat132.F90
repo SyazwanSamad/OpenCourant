@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -89,6 +96,7 @@
           !-----------------------------------------------
           !   L o c a l   V a r i a b l e s
           !-----------------------------------------------
+          integer :: copy_status
           integer i,ilaw,func_sc,         &
             func_gxc,func_gxt,func_gyt,func_gyc,func_sl,func_xt,func_xc, &
             func_yt,func_yc,nfunc,func_gsl,func_xt0,func_xc0,          &
@@ -487,7 +495,8 @@
             if(ifunc(1) > 0) then
               call func_table_copy(matparam%table(i),matparam%title ,matparam%mat_id  ,     &
                 nfunc   ,ifunc   ,x2vect  ,x1scale ,x2scale  ,yscale  ,     &
-                ntable  ,table   ,ierr    )
+                ntable  ,table   ,copy_status    )
+              if (copy_status /= 0) return
             endif
           enddo
           !

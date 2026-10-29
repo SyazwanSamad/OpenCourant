@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -99,6 +106,7 @@
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
 !-----------------------------------------------
+          integer :: copy_status
           real(kind=WP) ::                                                       &
             nu,rate(maxfunc+1),hys,rho0,rhor,bulk,fcut,yfac(maxfunc+1),          &
             yfac_unl,shape,gs,e,x1scale,x2scale,dx,dy,dydx,sgl,sw,st,gdamp,      &
@@ -265,7 +273,8 @@
           yfac(1:nl) = yfac(1:nl)*areafac
           call func_table_copy(table_mat(1) ,titr      ,mat_id ,nl        ,      &
             ifunc(1:nl)  ,rate(1:nl),x1scale,x2scale   ,      &
-            yfac(1:nl)   ,ntable    ,table  ,ierr      )
+            yfac(1:nl)   ,ntable    ,table  ,copy_status      )
+          if (copy_status /= 0) return
 !
           ! --> Spline interpolation, smoothing, ensure monotonicity and go
           !     through the origin (0,0)
@@ -404,7 +413,8 @@
             ifunc(nl+1) = ifunc_unload
             call func_table_copy(table_mat(2) ,titr      ,mat_id   ,1        ,   &
               ifunc(nl+1)  ,rate(nl+1),x1scale  ,x2scale  ,   &
-              yfac(nl+1)   ,ntable    ,table    ,ierr     )
+              yfac(nl+1)   ,ntable    ,table    ,copy_status     )
+            if (copy_status /= 0) return
 !
             !< Ensure the closed loop between quasi-static loading and unloading curves
             call my_alloc(x_out2, nout, "x_out2")

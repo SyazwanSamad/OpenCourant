@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -241,7 +248,8 @@ void MECIReadModelBase::updateSubKeywordRead(const char* keyword) const
     MvComponentFilePositions_t* a_comp_file_pos = NULL;
 
     int cur_file_indx = GetCurrentFileIndex();
-    _HC_LONG cur_loc = GetCurrentLocation();
+    // Match the consumed header, after readBuffer has skipped preceding comments.
+    _HC_LONG cur_loc = GetPreviousLocation();
     a_comp_file_pos = a_header_positions.findType(keyword);
     int index_component = -1;
     int index_file = -1;

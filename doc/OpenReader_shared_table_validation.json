@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "captured_utc": "2026-10-29T03:59:00.380667+00:00",
+  "base_commit": "d871244fbad74fb1eeb4589b99cd4294a416faf2",
+  "working_tree_changes": true,
+  "platform": "Windows x64 DP SMP",
+  "engine_runs": 0,
+  "original_input_sha256": "904d9cf404340f674ddb3ce1b09487b304f4577ec4450c6704cdfe8678667a9a",
+  "original_input_unchanged": true,
+  "unique_converted_functions": 15,
+  "listed_samples_equal_to_before": true,
+  "material_references_equal_to_before": true,
+  "original_starter_exit": 0,
+  "genuine_duplicate_starter_exit": 2,
+  "genuine_duplicate_restart_bytes": 0,
+  "table_cases": [
+    {
+      "case": "inline",
+      "starter_exit": 0,
+      "functions": 6
+    },
+    {
+      "case": "explicit",
+      "starter_exit": 0,
+      "functions": 6
+    },
+    {
+      "case": "include",
+      "starter_exit": 0,
+      "functions": 6
+    },
+    {
+      "case": "duplicate",
+      "starter_exit": 2,
+      "functions": 7
+    },
+    {
+      "case": "identical_duplicate",
+      "starter_exit": 2,
+      "functions": 7
+    },
+    {
+      "case": "missing",
+      "starter_exit": 2,
+      "functions": 6
+    },
+    {
+      "case": "law123",
+      "starter_exit": 2,
+      "errors": [
+        "79",
+        "3047"
+      ]
+    },
+    {
+      "case": "law125",
+      "starter_exit": 2,
+      "errors": [
+        "79",
+        "3047"
+      ]
+    },
+    {
+      "case": "law132",
+      "starter_exit": 2,
+      "errors": [
+        "79",
+        "3047"
+      ]
+    }
+  ],
+  "parameter_gate": "passed, six cases and shared-format controls",
+  "sha256": {
+    "reader/source/cfgio/MODEL_IO/meci_data_reader.cpp": "fce10b9f08ee787c79ecccd37ac964c79498d3cd25d99028f1413172900ebac1",
+    "reader/source/cfgio/MODEL_IO/meci_read_model_base.cpp": "d59ab9ec86bb78ebf58a6ee6efefc8bb828c953bd215840f0a308421707d1472",
+    "reader/source/io/model_readers/radioss/radiossblk/radiossblk.cxx": "136ae2d5c35647956409e560dbcc8b090cd9ba0070b188da713a11237f5e3f35",
+    "starter/source/materials/mat/mat088/hm_read_mat88.F90": "01744ee85c6b2c17c97f1786367fc7f36cf1c3f7cf9940cdd6d6053ffcba5d0e",
+    "starter/source/materials/mat/mat123/hm_read_mat123.F90": "1c78c7de5145473d4cc554bbb88dab9f1c7d90153bf5c8a6f8707a594600b1db",
+    "starter/source/materials/mat/mat125/hm_read_mat125.F90": "bd941c1980a351ff2dbb57af1dbe0336aac7820b43e831a6ea68d20922f1e7b4",
+    "starter/source/materials/mat/mat132/hm_read_mat132.F90": "32a4cb291155a4355e28d2b9a05cafba5b8ba1df0cf3c3aeab9dbbc424872c90",
+    "qa-tests/reader/test_shared_tables.py": "b89477db1a4545e6189cadab056e755e9a274127d25c8cd7739718a70a48aa6b",
+    "qa-tests/reader/shared_tables/law123.rad": "9bcecd5112f4356831ed7aca72691998531762b6dfe484e2b341d88d2e67a119",
+    "qa-tests/reader/shared_tables/law125.rad": "5c65b9c8a236cc9afae5c41c7c3177bcb7d62aca181bfecd7deb0e7b6d290683",
+    "qa-tests/reader/shared_tables/law132.rad": "bacee6428a85cf7ec03a7a1f47bdce805a1c1938fe56053272ddfdace71b0845",
+    "exec/open_reader_win64.dll": "51b1026146a92619ca6df34ffc8d6c8ca79aa934bbbbc23956ff70aeb5f0582f",
+    "exec/starter_win64.exe": "64128f9b71fc7e29fe61b82ae95fdb9599872a211e56c615f228e6d308f189ee"
+  },
+  "logs": [
+    "cbuild_mat181_investigation/verified.log",
+    "cbuild_mat181_investigation/verified-model/",
+    "cbuild_mat181_investigation/verified-tables/"
+  ],
+  "existing_regressions": {
+    "api_exports": 84,
+    "query_groups": 2,
+    "loading_cases": 27,
+    "contact_cases": 4,
+    "rigid_snapshots": 14,
+    "rigid_lifecycle_cases": 32,
+    "starter_integration_cases": 30,
+    "status": "passed"
+  }
+}

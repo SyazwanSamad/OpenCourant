@@ -684,13 +684,13 @@ bool MECIDataReader::readNextCard(const PseudoFileFormatCard_t *card_format_p,
       if (object_p->GetHeaderLine() == "" && !issubobjreader)
           myReadContext_p->unreadBuffer();
 
-      if (issubobjreader)
+      a_ok = readHeaderCard(card_format_p, object_p, model_p, descr_p, -1, 0, &a_do_continue);
+      if (a_ok && issubobjreader)
       {
           const string& a_otype_str = MV_get_type((obj_type_e)object_p->GetEntityType());
           myReadContext_p->updateSubKeywordRead(a_otype_str.c_str());
       }
 
-      a_ok = readHeaderCard(card_format_p, object_p, model_p, descr_p, -1, 0, &a_do_continue);
     }
     break;
   case CARD_PREREAD: 
