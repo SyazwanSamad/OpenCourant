@@ -97,15 +97,20 @@ static const IDescriptor * GlobalModelSDIGetDescriptor(unsigned int index, const
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void GlobalModelSDISelectionStart(const sdiString& keyword)
 {
-    if(g_pSelection) delete g_pSelection;
-    g_pSelection = new SelectionRead(g_pModelViewSDI, keyword);
-    g_pEntity = &(*(*g_pSelection));
+    delete g_pSelection;
+    g_pSelection = NULL;
+    g_pEntity = NULL;
+    if(g_pModelViewSDI)
+    {
+        g_pSelection = new SelectionRead(g_pModelViewSDI, keyword);
+        if(g_pSelection->Count()) g_pEntity = &(*(*g_pSelection));
+    }
     g_vpDescr.resize(0);
 }
 
 void GlobalModelSDISelectionCount(unsigned int *pCount)
 {
-    if(g_pSelection && pCount) *pCount = g_pSelection->Count();
+    if(pCount) *pCount = g_pSelection ? g_pSelection->Count() : 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

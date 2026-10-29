@@ -1,0 +1,88 @@
+#RADIOSS STARTER
+# OpenCourant numerical regression; AGPL-3.0-or-later.
+/BEGIN
+rigid
+      2612         0
+                  kg                   m                   s
+                  kg                   m                   s
+#include material.inc
+/PROP/SOLID/1
+one integration point brick
+         1         0         0         0         0         0         0         0                   0
+                   0                   0                   0
+                   0         1
+/NODE
+         1                   0                   0                   0
+         2                   1                   0                   0
+         3                   1                   1                   0
+         4                   0                   1                   0
+         5                   0                   0                   1
+         6                   1                   0                   1
+         7                   1                   1                   1
+         8                   0                   1                   1
+         9                 0.5                 0.5                 0.5
+/BRICK/10
+         1         1         2         3         4         5         6         7         8
+/GRNOD/NODE/1
+all nodes
+         1         2         3         4         5         6         7         8         9
+/GRNOD/NODE/2
+main node
+         9
+/SKEW/FIX/5
+ninety degree local axes
+                 0.5                 0.5                 0.5
+                  -1                   0                   0
+                   0                   0                   1
+/PART/10/0
+rigid cube
+         1         1         0                   0         0
+/GRNOD/NODE/3
+body secondary nodes
+         1         2         3         4         5         6         7         8
+/RBODY/1/0
+explicit rigid cube
+         9         0         0         2                   0         3         0         1         0
+                   0                   0                   0
+                   0                   0                   0
+         0         2
+/FUNCT/1
+unit force
+                   0                   1
+                   1                   1
+/CLOAD/1
+unit main-node force
+         1         X         0         0         2                             1                   1
+/TH/NODE/1
+nodes
+X         Y         Z         VX        VY        VZ        
+         1         0n1
+         2         0n2
+         3         0n3
+         4         0n4
+         5         0n5
+         6         0n6
+         7         0n7
+         8         0n8
+/TH/RBODY/2
+body
+X         Y         Z         VX        VY        VZ        MASS      IXX       IYY       IZZ       
+         1
+/TH/RBODY/3
+rotation
+RX        RY        RZ        VRX       VRY       VRZ       
+         1
+/MAT/LAW1/3
+outside before
+                   1
+                6000                 0.3
+//SUBMODEL/2/0
+parameter scope
+         0
+#include local.inc
+//ENDSUB
+/MAT/LAW1/4
+outside after
+                   1
+                6000                 0.3
+/END

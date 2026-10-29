@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -109,6 +116,13 @@ IParameter::Type ParameterPOImp::GetType() const
     }
     return (IParameter::Type)atype;
 }
+
+int ParameterPOImp::GetStringLength() const
+{
+    if (!pCurParameterObj) return 0;
+    int index = pCurParameterObj->GetIndex(IMECPreObject::ATY_SINGLE, IMECPreObject::VTY_INT, "PARAM_LENGTH");
+    return index < 0 ? 0 : pCurParameterObj->GetIntValue(index);
+}
 IParameter::Keywordtype ParameterPOImp::GetKeywordType() const
 {
     return IParameter::REGULAR;
@@ -139,7 +153,7 @@ void ParameterPOImp::SetExpressionValue(double value)
         }
         else if(TYPE_INTEGER_EXPRESSION == type)
         {
-            pCurParameterObj->AddIntValue(cur_paramvaldoubleskey.c_str(), (int) value);
+            pCurParameterObj->AddIntValue(cur_paramvalintskey.c_str(), (int) value);
         }
     }
 }
@@ -195,13 +209,13 @@ IParameter* ModelFactoryReaderPO::GetParameterObject(const char* param_str, cons
 
     size_t a_nb_objects = a_vec.size();
     if(!a_nb_objects)
-        return parameter_obj;
+        return nullptr;
 
     const char* kftype = a_vec[0]->GetKernelFullType();
     IDescriptor* pdescrp = HCDI_GetDescriptorHandle(kftype);
 
     if (!pdescrp)
-        return parameter_obj;
+        return nullptr;
 
     string paramname_skey = GetAttribNameFromDrawable(pdescrp, cdr::g_AttribParamName);
 
@@ -210,7 +224,7 @@ IParameter* ModelFactoryReaderPO::GetParameterObject(const char* param_str, cons
 
     int first_indx = get_paramname_beginindex(a_vec, 0, (int)a_vec.size() - 1, param_str, (int)a_vec.size(), paramname_skey, scope_skey);
     if (first_indx < 0 || first_indx >= a_nb_objects)
-        return parameter_obj;
+        return nullptr;
 
     IMECPreObject* found = nullptr;
     size_t j = a_nb_objects;
@@ -270,6 +284,7 @@ IParameter* ModelFactoryReaderPO::GetParameterObject(const char* param_str, cons
         else if(first_indx)
             break;
     }
+    if (!found) return nullptr;
     parameter_obj->SetCurParameterObj(found);
 
     if(j > 0 && j < a_nb_objects && a_vec[j] && a_vec[j]->GetKernelFullType() &&
@@ -307,9 +322,18 @@ void ModelFactoryReaderPO::EvaluateExpressionParameters(const MECMsgManager* pMs
         const char* paramname = obj->GetStringValue(paramname_skey.c_str());
         const IExpressionEvaluator* pBaseEvaluator = GetBaseExpressionEvaluator();
         int fileIndex = obj->GetFileIndex();
+        IParameter *parameter = GetParameterObject(paramname, fileIndex);
+        if (!parameter || (parameter->GetType() != IParameter::TYPE_INTEGER_EXPRESSION &&
+                           parameter->GetType() != IParameter::TYPE_DOUBLE_EXPRESSION))
+            continue;
         MECIModelFactoryParameterEvaluator parameterEvaluator(this, fileIndex, pBaseEvaluator, pMsgManager);
-        double value;
-        parameterEvaluator.GetValue(paramname, value);
+        double value = 0;
+        if (!parameterEvaluator.GetValue(paramname, value))
+        {
+            const char *source = obj->GetStringValue("_PARAMETER_SOURCE");
+            throw std::runtime_error(std::string(source ? source : "input") +
+                ": Cannot evaluate parameter '" + paramname + "'");
+        }
     }
 }
 

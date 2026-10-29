@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -46,6 +53,7 @@
 #include <cmath>
 #include <assert.h>
 #include <regex>
+#include <stdexcept>
 
 #define BufferSize 2560
 
@@ -543,6 +551,7 @@ bool MECIDataReader::readObjectData (const PseudoFileFormat_t *format_p,
                                      int                       offset_card_ind0)
 {
     setObject (object_p); 
+    myParameterModel_p = model_p;
   
     bool                a_ok       = true;
     const fileformat_t *a_format_p = (const fileformat_t *)format_p;
@@ -1537,6 +1546,7 @@ bool MECIDataReader::readNextSingleCard(
 {
     if (NULL == object_p) return false;
     setObject (object_p); 
+    myParameterModel_p = model_p;
     
     bool a_ok = true;
 
@@ -1638,7 +1648,65 @@ char * MECIDataReader::readBuffer(bool do_check_eof,int nb_chars, bool skip_comm
         a_line_Buffer = myReadContext_p->readBuffer(do_check_eof,nb_chars);        
     }while (mySyntaxInfos_p->isComment(a_line_Buffer));
     mySyntaxInfos_p->updateLineFormatType(a_line_Buffer);
+    if (a_line_Buffer && strchr(a_line_Buffer, '&') && myParameterModel_p && myObject_p &&
+        !mySyntaxInfos_p->isHeader(a_line_Buffer) &&
+        mySyntaxInfos_p->getAppMode() == HCDI_SOLVER_RADIOSS &&
+        myObject_p->GetEntityType() != HCDI_OBJ_TYPE_PARAMETERS &&
+        // Preserve bitwise operators in embedded Python function bodies.
+        !strstr(myObject_p->GetKernelFullType(), "FUNCT_PYTHON"))
+    {
+        myParameterLine = expandRadiossParameters(a_line_Buffer, myParameterModel_p, myObject_p);
+        myParameterLine.resize(std::max(myParameterLine.size(), size_t(BufferSize)), ' ');
+        return &myParameterLine[0];
+    }
     return a_line_Buffer ;
+}
+
+std::string MECIDataReader::expandRadiossParameters(const char *line, void *model_p,
+                                                   IMECPreObject *object_p) const
+{
+    std::string result(line);
+    if (!model_p || !object_p || mySyntaxInfos_p->getAppMode() != HCDI_SOLVER_RADIOSS ||
+        object_p->GetEntityType() == HCDI_OBJ_TYPE_PARAMETERS)
+        return result;
+    MECIModelFactory *model = static_cast<MECIModelFactory *>(model_p);
+    size_t pos = 0;
+    while ((pos = result.find('&', pos)) != std::string::npos)
+    {
+        size_t end = pos + 1;
+        while (end < result.size() && ((result[end] >= 'A' && result[end] <= 'Z') ||
+               (result[end] >= 'a' && result[end] <= 'z') ||
+               (result[end] >= '0' && result[end] <= '9') || result[end] == '_'))
+            ++end;
+          if (end == pos + 1) { ++pos; continue; }
+        std::string name = result.substr(pos + 1, end - pos - 1);
+        IParameter *parameter = model->GetParameterObject(name.c_str(), object_p->GetFileIndex());
+        if (!parameter)
+        {
+            const char *file = myReadContext_p->getCurrentFullName();
+            throw std::runtime_error(std::string(file ? file : "input") + ":" +
+                std::to_string(myReadContext_p->getCurrentLine()) + ": Unknown parameter '" + name + "'");
+        }
+        if (parameter->GetType() != IParameter::TYPE_STRING)
+        {
+            pos = end;
+            continue;
+        }
+        std::string text = parameter->GetStringValue();
+        // RADIOSS text length describes the replacement width, including leading spaces.
+        int length = parameter->GetStringLength();
+        if (length < 0 || length > 100)
+            throw std::runtime_error("Invalid text parameter length for '" + name + "'");
+        if (length > 0) text.resize(size_t(length), ' ');
+        bool stitched = end < result.size() && result[end] == '$';
+        size_t consumed = end - pos + (stitched ? 1 : 0);
+        if (length > 0 && !stitched)
+            consumed = std::max(consumed, size_t(length));
+        consumed = std::min(consumed, result.size() - pos);
+        result.replace(pos, consumed, text);
+        pos += text.size();
+    }
+    return result;
 }
 
 bool MECIDataReader::readSingleCard(const PseudoFileFormatCard_t *card_format_p,
@@ -2039,7 +2107,10 @@ bool MECIDataReader::readHeaderCard(const PseudoFileFormatCard_t *card_format_p,
     if(a_card==NULL )
         return false;
     
-    strcpy(aa_card, a_card);
+    std::string parameter_header = expandRadiossParameters(a_card, model_p, object_p);
+    if (parameter_header.size() >= sizeof(aa_card))
+        throw std::runtime_error("Parameter expansion exceeds keyword header length");
+    strcpy(aa_card, parameter_header.c_str());
     a_card = aa_card;
 
     myReadContext_p->killNLEnd(a_card);

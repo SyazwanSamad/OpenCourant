@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -82,6 +89,7 @@ public: /** @name Read data. NB: All public read... methods have to call setObje
 	virtual int getNbFreeLines(int nb_token = 0, char **token = NULL);
     /// Reads the next line, skipping comments
     virtual char* readBuffer(bool do_check_eof = true, int nb_chars = -1, bool skip_comment = true) const;
+    std::string expandRadiossParameters(const char *line, void *model_p, IMECPreObject *object_p) const;
 public: /** @name check cell and/or card(public) */
     //@{
     /// Check if parameter is used for the cell
@@ -396,6 +404,8 @@ protected:
     int myNoParametersFlag = -1;
     bool                       myCanReadAgainFlag = false;
 private:
+    void *myParameterModel_p = nullptr;
+    mutable std::string myParameterLine;
     int                        myLineLength;
     DataReaderUpdateManager_t *myUpdateManager_p;
     IMECPreObject             *myObject_p;

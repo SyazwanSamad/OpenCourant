@@ -1,0 +1,14 @@
+#RADIOSS ENGINE
+/VERS/2026
+/RUN/rigid/1
+                 0.1
+/PRINT/-100
+/DT
+0.01 0.0
+/DTIX
+0.0001 0.0001
+/TFILE/4
+               0.001
+/ANIM/DT
+                   0                 0.1
+/ANIM/VECT/VEL

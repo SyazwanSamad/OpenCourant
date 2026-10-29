@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -142,17 +149,17 @@ void printAllParameters(const char *outfilename)
             logFile << "*\n";
             logFile << "*      " << entities->GetName().c_str() << "\n";
             sdiValue val;
-            entities->GetValue(sdiIdentifier("ParName"), val);
+            entities->GetValue(sdiIdentifier("PARAM_NAME"), val);
             sdiString ParName;
-            val.GetValue(ParName);
+            if (!val.GetValue(ParName)) { logFile << "* ERROR: Invalid parameter ParName\n"; return; }
             char valstr[500];
             int Ivalue = 0;
             if(keyword.find("REAL") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Rvalue"), val);
-                double Rvalue;
-                val.GetValue(Rvalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                double Rvalue = 0;
+                if (!val.GetValue(Rvalue)) { logFile << "* ERROR: Invalid parameter Rvalue\n"; return; }
                 sprintf(valstr, "%lg", Rvalue);
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -160,8 +167,8 @@ void printAllParameters(const char *outfilename)
             else if(keyword.find("INT") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Ivalue"), val);
-                val.GetValue(Ivalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                if (!val.GetValue(Ivalue)) { logFile << "* ERROR: Invalid parameter Ivalue\n"; return; }
                 sprintf(valstr, "%d", Ivalue);
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -169,12 +176,12 @@ void printAllParameters(const char *outfilename)
             else // should be TEXT
             {
                 sdiValue valText, valLength;
-                entities->GetValue(sdiIdentifier("Length"), valLength);
-                int Length;
+                entities->GetValue(sdiIdentifier("PARAM_LENGTH"), valLength);
+                int Length = 0;
                 valLength.GetValue(Length);
-                entities->GetValue(sdiIdentifier("Text"), valText);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), valText);
                 sdiString Text;
-                valText.GetValue(Text);
+                if (!valText.GetValue(Text)) { logFile << "* ERROR: Invalid parameter Text\n"; return; }
                 sprintf(valstr, "%s", Text.c_str());
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -195,9 +202,9 @@ void printAllParameters(const char *outfilename)
             const sdiString& keyword = entities->GetKeyword();
             logFile << "*\n";
             sdiValue val;
-            entities->GetValue(sdiIdentifier("ParName"), val);
+            entities->GetValue(sdiIdentifier("PARAM_NAME"), val);
             sdiString ParName;
-            val.GetValue(ParName);
+            if (!val.GetValue(ParName)) { logFile << "* ERROR: Invalid parameter ParName\n"; return; }
             char valstr[500];
             int Ivalue = 0;
 
@@ -209,27 +216,27 @@ void printAllParameters(const char *outfilename)
             if(keyword.find("REAL") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Rvalue"), val);
-                double Rvalue;
-                val.GetValue(Rvalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                double Rvalue = 0;
+                if (!val.GetValue(Rvalue)) { logFile << "* ERROR: Invalid parameter Rvalue\n"; return; }
                 sprintf(valstr, "%lg", Rvalue);
             }
             else if(keyword.find("INT") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Ivalue"), val);
-                val.GetValue(Ivalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                if (!val.GetValue(Ivalue)) { logFile << "* ERROR: Invalid parameter Ivalue\n"; return; }
                 sprintf(valstr, "%d", Ivalue);
             }
             else // should be TEXT
             {
                 sdiValue valText, valLength;
-                entities->GetValue(sdiIdentifier("Length"), valLength);
-                int Length;
+                entities->GetValue(sdiIdentifier("PARAM_LENGTH"), valLength);
+                int Length = 0;
                 valLength.GetValue(Length);
-                entities->GetValue(sdiIdentifier("Text"), valText);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), valText);
                 sdiString Text;
-                valText.GetValue(Text);
+                if (!valText.GetValue(Text)) { logFile << "* ERROR: Invalid parameter Text\n"; return; }
                 sprintf(valstr, "%s", Text.c_str());
             }
 
@@ -338,17 +345,17 @@ void printAllParameters(const char *outfilename)
             logFile << "*\n";
             logFile << "*      " << entities->GetName().c_str() << "\n";
             sdiValue val;
-            entities->GetValue(sdiIdentifier("ParName"), val);
+            entities->GetValue(sdiIdentifier("PARAM_NAME"), val);
             sdiString ParName;
-            val.GetValue(ParName);
+            if (!val.GetValue(ParName)) { logFile << "* ERROR: Invalid parameter ParName\n"; return; }
             char valstr[500];
             int Ivalue = 0;
             if(keyword.find("REAL") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Rvalue"), val);
-                double Rvalue;
-                val.GetValue(Rvalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                double Rvalue = 0;
+                if (!val.GetValue(Rvalue)) { logFile << "* ERROR: Invalid parameter Rvalue\n"; return; }
                 sprintf(valstr, "%lg", Rvalue);
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -356,8 +363,8 @@ void printAllParameters(const char *outfilename)
             else if(keyword.find("INT") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Ivalue"), val);
-                val.GetValue(Ivalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                if (!val.GetValue(Ivalue)) { logFile << "* ERROR: Invalid parameter Ivalue\n"; return; }
                 sprintf(valstr, "%d", Ivalue);
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -365,12 +372,12 @@ void printAllParameters(const char *outfilename)
             else // should be TEXT
             {
                 sdiValue valText, valLength;
-                entities->GetValue(sdiIdentifier("Length"), valLength);
-                int Length;
+                entities->GetValue(sdiIdentifier("PARAM_LENGTH"), valLength);
+                int Length = 0;
                 valLength.GetValue(Length);
-                entities->GetValue(sdiIdentifier("Text"), valText);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), valText);
                 sdiString Text;
-                valText.GetValue(Text);
+                if (!valText.GetValue(Text)) { logFile << "* ERROR: Invalid parameter Text\n"; return; }
                 sprintf(valstr, "%s", Text.c_str());
                 logFile << "*              REFERENCE . . . = " << ParName.c_str() << "\n";
                 logFile << "*              VALUE. .  . . . = " << valstr << "\n";
@@ -388,9 +395,9 @@ void printAllParameters(const char *outfilename)
             const sdiString& keyword = entities->GetKeyword();
             logFile << "*\n";
             sdiValue val;
-            entities->GetValue(sdiIdentifier("ParName"), val);
+            entities->GetValue(sdiIdentifier("PARAM_NAME"), val);
             sdiString ParName;
-            val.GetValue(ParName);
+            if (!val.GetValue(ParName)) { logFile << "* ERROR: Invalid parameter ParName\n"; return; }
             char valstr[500];
             int Ivalue = 0;
 
@@ -402,27 +409,27 @@ void printAllParameters(const char *outfilename)
             if(keyword.find("REAL") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Rvalue"), val);
-                double Rvalue;
-                val.GetValue(Rvalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                double Rvalue = 0;
+                if (!val.GetValue(Rvalue)) { logFile << "* ERROR: Invalid parameter Rvalue\n"; return; }
                 sprintf(valstr, "%lg", Rvalue);
             }
             else if(keyword.find("INT") != keyword.npos)
             {
                 sdiValue val;
-                entities->GetValue(sdiIdentifier("Ivalue"), val);
-                val.GetValue(Ivalue);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), val);
+                if (!val.GetValue(Ivalue)) { logFile << "* ERROR: Invalid parameter Ivalue\n"; return; }
                 sprintf(valstr, "%d", Ivalue);
             }
             else // should be TEXT
             {
                 sdiValue valText, valLength;
-                entities->GetValue(sdiIdentifier("Length"), valLength);
-                int Length;
+                entities->GetValue(sdiIdentifier("PARAM_LENGTH"), valLength);
+                int Length = 0;
                 valLength.GetValue(Length);
-                entities->GetValue(sdiIdentifier("Text"), valText);
+                entities->GetValue(sdiIdentifier("PARAM_VALUE"), valText);
                 sdiString Text;
-                valText.GetValue(Text);
+                if (!valText.GetValue(Text)) { logFile << "* ERROR: Invalid parameter Text\n"; return; }
                 sprintf(valstr, "%s", Text.c_str());
             }
 
@@ -530,6 +537,7 @@ CDECL void cpp_print_parameters_(char *name, int *size)
     }
     cname[*size]='\0';
     printAllParameters(cname);
+    free(cname);
 }
 
 CDECL void CPP_PRINT_PARAMETERS(char *name, int *size)

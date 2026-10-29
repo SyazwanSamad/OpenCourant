@@ -520,6 +520,7 @@ extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkReadModel(const char *filename)
 {
     usedGroups.clear();
+    radiossblkmessages.clear();
     if(!RadiossblkReadMessageFile() || !RadiossblkInitCFGKernel()) return nullptr;
 
     FILE* input = fopen(filename, "rb");
@@ -627,6 +628,7 @@ extern "C" RADIOSSBLK_DECLS
 sdi::ModelViewEdit* RadiossblkNewModel()
 {
     usedGroups.clear();
+    radiossblkmessages.clear();
     if(!RadiossblkReadMessageFile() || !RadiossblkInitCFGKernel()) return nullptr;
 
     // Create root preobject

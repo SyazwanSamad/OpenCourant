@@ -1,0 +1,83 @@
+{
+  "source_commit": "184be37ac10066237cc624dda44a41f5eb78f1a6",
+  "reader_sha256": "7bf1ce7e92340be7ccd6b90dfa0a72965b030b7abb26a71478c2cfab9d61785d",
+  "reader_cases": [
+    {
+      "case": "baseline",
+      "exit_code": 0,
+      "output": "LOADED baseline\n{\"case\": \"baseline\", \"mats\": [{\"id\": 1, \"E\": 210000000000.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    },
+    {
+      "case": "real",
+      "exit_code": 0,
+      "output": "LOADED real\n{\"case\": \"real\", \"mats\": [{\"id\": 1, \"E\": 12345.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    },
+    {
+      "case": "integer",
+      "exit_code": 0,
+      "output": "LOADED integer\n{\"case\": \"integer\", \"mats\": [{\"id\": 1, \"E\": 210000000000.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 1}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    },
+    {
+      "case": "real_expr",
+      "exit_code": 0,
+      "output": "LOADED real_expr\n{\"case\": \"real_expr\", \"mats\": [{\"id\": 1, \"E\": 12345.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    },
+    {
+      "case": "int_expr",
+      "exit_code": 1,
+      "output": "LOADED int_expr\n{\"case\": \"int_expr\", \"mats\": [{\"id\": 1, \"E\": 210000000000.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\nFAIL int_expr AssertionError(('int_expr', [{'id': 10, 'IRIGID': 0}]))\n"
+    },
+    {
+      "case": "text",
+      "exit_code": 1,
+      "output": "LOADED text\n{\"case\": \"text\", \"mats\": [{\"id\": 1, \"E\": 210000000000.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"&LABEL\", \"Title\": \"\"}}\nFAIL text AssertionError({'TITLE': '', 'name': '&LABEL', 'Title': ''})\n"
+    },
+    {
+      "case": "negated",
+      "exit_code": 0,
+      "output": "LOADED negated\n{\"case\": \"negated\", \"mats\": [{\"id\": 1, \"E\": 12345.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    },
+    {
+      "case": "undefined",
+      "exit_code": 1,
+      "output": "LOADED undefined\n{\"case\": \"undefined\", \"mats\": [{\"id\": 1, \"E\": 0.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\nFAIL undefined AssertionError(('undefined', [{'id': 1, 'E': 0.0, 'Rho': None, 'Nu': None}]))\n"
+    },
+    {
+      "case": "local",
+      "exit_code": 0,
+      "output": "LOADED local\n{\"case\": \"local\", \"mats\": [{\"id\": 1, \"E\": 12345.0, \"Rho\": null, \"Nu\": null}, {\"id\": 2, \"E\": 24690.0, \"Rho\": null, \"Nu\": null}], \"parts\": [{\"id\": 10, \"IRIGID\": 0}], \"titles\": {\"TITLE\": \"\", \"name\": \"elastic\", \"Title\": \"\"}}\n"
+    }
+  ],
+  "starter_cases": [
+    {
+      "case": "baseline",
+      "exit_code": 0,
+      "restart_exists": true,
+      "error_tail": ""
+    },
+    {
+      "case": "real",
+      "exit_code": 3,
+      "restart_exists": false,
+      "error_tail": "                                                 **\n**                                                                    **\n**                                                                    **\n**                  Windows 64 bits, Intel compiler                   **\n**                      Double Precision Version                      **\n**                                                                    **\n**                                                                    **\n**                                                                    **\n************************************************************************\n** OpenCourant Software                                               **\n** COPYRIGHT (C) 2026 Siemens                                         **\n** Licensed under GNU Affero General Public License.                  **\n** See License file.                                                  **\n************************************************************************\n \n ** ERROR TRAPPED : REPORT TO LISTING FILE\n\nERROR ID :    760\n\n\n RADIOSS STOP DUE TO INPUT ERROR\n"
+    },
+    {
+      "case": "integer",
+      "exit_code": 0,
+      "restart_exists": true,
+      "error_tail": ""
+    },
+    {
+      "case": "real_expr",
+      "exit_code": 3,
+      "restart_exists": false,
+      "error_tail": "                                                 **\n**                                                                    **\n**                                                                    **\n**                  Windows 64 bits, Intel compiler                   **\n**                      Double Precision Version                      **\n**                                                                    **\n**                                                                    **\n**                                                                    **\n************************************************************************\n** OpenCourant Software                                               **\n** COPYRIGHT (C) 2026 Siemens                                         **\n** Licensed under GNU Affero General Public License.                  **\n** See License file.                                                  **\n************************************************************************\n \n ** ERROR TRAPPED : REPORT TO LISTING FILE\n\nERROR ID :    760\n\n\n RADIOSS STOP DUE TO INPUT ERROR\n"
+    },
+    {
+      "case": "int_expr",
+      "exit_code": 2,
+      "restart_exists": false,
+      "error_tail": "MENT GROUPS                                                                       \n .. RIGID BODIES                                                                         \n .. ELEMENT BUFFER INITIALIZATION                                                        \n .. GEOMETRY PLOT FILE                                                                   \n .. ERROR ==> NO RESTART FILE                                                            \n  \n------------------------------------------------------------------------\n  \n                   ** COMPUTE TIME INFORMATION **\n  \n EXECUTION STARTED      :      2026/10/28  22:44:12\n EXECUTION COMPLETED    :      2026/10/28  22:44:13\n  \n ELAPSED TIME...........=          0.52 s\n                               00:00:00\n  \n------------------------------------------------------------------------\n\n\n\n     ERROR TERMINATION                  \n     ------------------                                                                  \n              1 ERROR(S)            \n              0 WARNING(S)          \n\n\n\n\nPLEASE CHECK LISTING FILE FOR FURTHER DETAILS\n\n\n"
+    }
+  ]
+}

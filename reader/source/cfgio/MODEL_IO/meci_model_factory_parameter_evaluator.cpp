@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -45,6 +52,9 @@ bool MECIModelFactoryParameterEvaluator::GetValue(const char* name, double& valu
         value = iparam_obj->GetDoubleValue();
     else if(type == IParameter::TYPE_INTEGER || type == IParameter::TYPE_INTEGER_EXPRESSION)
         value = (double) iparam_obj->GetIntValue();
+
+    else
+        return false;
 
     // if parameter expression value == 0 assume it is not evaluated and evaluate
     if(0 == value &&

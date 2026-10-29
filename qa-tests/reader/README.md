@@ -46,6 +46,33 @@ The include-count ABI remains
 one-based, fixed-width, space-padded, and truncated to capacity; invalid indices
 return blanks. Reload/failure clears saved keyword paths.
 
+## RADIOSS parameters
+
+```powershell
+python qa-tests/reader/test_parameters.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe --output cbuild_parameters
+python qa-tests/reader/test_parameters.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe --engine exec/engine_win64.exe --output cbuild_parameters_physics
+```
+
+Use a fresh output directory. The literal/parameterized pair covers `INTEGER`,
+`REAL`, `INT_EXPR`, `REAL_EXPR` and `TEXT` together. Checks include expression
+chains, header IDs, local/global include scope, zero/negative values, `-&NAME`,
+TEXT length zero/fixed width, a numeric card supplied by TEXT and `&LABEL$ suffix`
+in a title. Names are case-sensitive; expressions use the in-tree ExprTk evaluator.
+Complete Templex compatibility is outside this repair.
+
+Four generated invalid variants check missing references/arguments, syntax and
+cycles. Reader failures must report a file/line, clear entities and allow the next
+valid load. Starter must fail without a usable restart. One LS-DYNA control checks
+resolved integer/real/expression node fields; embedded Python bitwise operators
+and standalone title ampersands remain literal. No parameter-preserving LS-DYNA
+export is required by this test.
+
+The optional Engine check performs exactly two simulations, using existing mass,
+inertia, motion and energy assertions and comparing all paired histories without
+changing tolerances. [Parameter fixtures and evidence](parameters/README.md)
+describe the bounded Windows DP SMP validation. The Windows CI job runs the
+reader/Starter portion; Engine checks remain local.
+
 ## Rigid-part conversion
 
 ```powershell

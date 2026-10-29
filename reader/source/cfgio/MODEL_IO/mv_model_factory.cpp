@@ -15,6 +15,13 @@
 //Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //Copyright>
 //Copyright>
+//Copyright>        OpenCourant
+//Copyright>        Copyright (C) 2026 OpenCourant contributors
+//Copyright>
+//Copyright>        Modified by the OpenCourant project, 2026.
+//Copyright>        Modifications are licensed under the GNU Affero General Public
+//Copyright>        License, version 3 or (at your option) any later version.
+//Copyright>
 //Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
@@ -35,6 +42,7 @@
 #include <MODEL_IO/hcioi_utils.h>
 #include "mec_msg_manager.h"
 #include "mv_model_factory.h"
+#include <stdexcept>
 
 
 
@@ -288,6 +296,8 @@ double MvModelFactory_t::GetFloatParameter(const char *param_str, const int file
 {
     double a_value = 0.0;
     IParameter *iparam_obj = GetParameterObject(param_str, file_index, ent_ptr);
+    if (!iparam_obj)
+        throw std::runtime_error(std::string("Unknown parameter '") + param_str + "'");
     if (iparam_obj)
     {
         IParameter::Type type = iparam_obj->GetType();
@@ -304,6 +314,8 @@ string MvModelFactory_t::GetTextParameter(const char *param_str, const int file_
 {
     string a_value;
     IParameter *iparam_obj = GetParameterObject(param_str, file_index);
+    if (!iparam_obj)
+        throw std::runtime_error(std::string("Unknown parameter '") + param_str + "'");
     if (iparam_obj && iparam_obj->GetType() == IParameter::TYPE_STRING)
         a_value = iparam_obj->GetStringValue();
     return a_value;

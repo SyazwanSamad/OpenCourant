@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "literal",
+      "reader": "passed",
+      "starter_exit_code": 0,
+      "physics": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "parameterized",
+      "reader": "passed",
+      "starter_exit_code": 0,
+      "physics": {
+        "mass": 1.0,
+        "center": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "inertia": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "samples": 100,
+        "final_time": 0.0989999994635582,
+        "max_distance_error": 5.960464477539063e-08,
+        "max_position_error": 5.9407472718930876e-08,
+        "max_energy_error": 4.1577219445088076e-10
+      }
+    },
+    {
+      "case": "missing",
+      "reader": "passed",
+      "starter_exit_code": 2
+    },
+    {
+      "case": "argument",
+      "reader": "passed",
+      "starter_exit_code": 2
+    },
+    {
+      "case": "syntax",
+      "reader": "passed",
+      "starter_exit_code": 2
+    },
+    {
+      "case": "cycle",
+      "reader": "passed",
+      "starter_exit_code": 2
+    }
+  ],
+  "engine_runs": 2,
+  "sha256": {
+    "exec\\open_reader_win64.dll": "79fda83fe61f123dd001c6bc9beed3aa29abb1d162fef48680e8fc9cf4bc3432",
+    "exec\\starter_win64.exe": "521a31ef95d23ddc641119e1b039a6b524e73ea69ca101ba16636fad59820d2a",
+    "exec\\engine_win64.exe": "7b416dc02ea0755c9e68b62c3bd927ba2e5440b0d379bc115e5e0a890f06ec0e",
+    "qa-tests\\reader\\parameters\\compatibility.key": "f6d5d0c438857a44fd807ee53275bfe3c42c9bc7de601fe1074bd03cd004f613",
+    "qa-tests\\reader\\parameters\\literal\\local.inc": "3bbecac1424c8de58d4c1ae297e03d84aaceec2da94916e6df341b9ada50ca23",
+    "qa-tests\\reader\\parameters\\literal\\material.inc": "10b34d36a976f6cf1b5ae08473118e50f11a10f855b8ec3170ae276411db972e",
+    "qa-tests\\reader\\parameters\\literal\\rigid_0000.rad": "f53ee06a20efbd9e6848ccdcfcf7fd4fc10d5c21f52e4564fcb5f9ba8756a613",
+    "qa-tests\\reader\\parameters\\literal\\rigid_0001.rad": "6bc8acc95dbd77925e443296f9501093dfcd0cb7de08aa8c8332906bbec5e8d9",
+    "qa-tests\\reader\\parameters\\parameterized\\local.inc": "6d79f764835f86002fa3bb8a9e83c1f8e0987ce4b4066b8890aecfb444b5d326",
+    "qa-tests\\reader\\parameters\\parameterized\\material.inc": "9e1a241e92dc219b1c0fdc70c35990f4f525f66c3d34d7b9b3f16fb05d3a3b1f",
+    "qa-tests\\reader\\parameters\\parameterized\\rigid_0000.rad": "50ff1b29af79256f9ec5e2a8aa8c69df9ccef11e7fd7dce3ad2729c1b11946cc",
+    "qa-tests\\reader\\parameters\\parameterized\\rigid_0001.rad": "6bc8acc95dbd77925e443296f9501093dfcd0cb7de08aa8c8332906bbec5e8d9"
+  },
+  "shared_reader_controls": "passed"
+}

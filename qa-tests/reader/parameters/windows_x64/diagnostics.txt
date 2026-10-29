@@ -1,0 +1,24 @@
+missing
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\missing\material.inc:24: Unknown parameter 'MISSING'
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\missing\rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+starter: OpenReader: material.inc:24: Unknown parameter 'MISSING'
+starter: OpenReader: rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+
+argument
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\argument\rigid_0000.rad:16: Cannot evaluate parameter 'YOUNG'
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\argument\rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+starter: OpenReader: rigid_0000.rad:16: Cannot evaluate parameter 'YOUNG'
+starter: OpenReader: rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+
+syntax
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\syntax\rigid_0000.rad:16: Cannot evaluate parameter 'YOUNG'
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\syntax\rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+starter: OpenReader: rigid_0000.rad:16: Cannot evaluate parameter 'YOUNG'
+starter: OpenReader: rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+
+cycle
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\cycle\rigid_0000.rad:13: Cannot evaluate parameter 'FUNCID'
+reader: OpenReader: C:\Programming\OpenCourant\cbuild_parameter_fix\validation-final\cycle\rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+starter: OpenReader: rigid_0000.rad:13: Cannot evaluate parameter 'FUNCID'
+starter: OpenReader: rigid_0000.rad: Model loading failed; check reader configuration diagnostics
+

@@ -1284,6 +1284,12 @@ bool HWCFGReader::readObjectData(const PseudoFileFormat_t* format_p,  IMECPreObj
     //a_pre_object_p->AddIntValue("HAS_OPTION_INERTIA", 1);
 
     char* line = NULL;
+    if (mySyntaxInfo->getAppMode() == HCDI_SOLVER_RADIOSS &&
+        object_p->GetEntityType() == HCDI_OBJ_TYPE_PARAMETERS && GetCurrentFilePtr())
+    {
+        std::string source = std::string(GetCurrentFilePtr()->GetFullName()) + ":" + std::to_string(GetPreviousLine());
+        object_p->AddStringValue("_PARAMETER_SOURCE", source.c_str());
+    }
     if (cur_index > 0)
     {
         line = readBuffer();
@@ -1303,6 +1309,11 @@ bool HWCFGReader::readObjectData(const PseudoFileFormat_t* format_p,  IMECPreObj
     }
 
     a_ok = myDataReader->readObjectData(format_p, object_p, model_p, descr_p, card_ind0);
+    if (a_ok && object_p->GetTitle() && strchr(object_p->GetTitle(), '&'))
+    {
+        std::string title = myDataReader->expandRadiossParameters(object_p->GetTitle(), model_p, object_p);
+        object_p->SetTitle(title.c_str());
+    }
     myDataReader->setSkipHeaderCardReadingState(false);
     return a_ok;
 }//End -- HWCFGReader::readObjectData

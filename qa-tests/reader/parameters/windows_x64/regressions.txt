@@ -1,0 +1,120 @@
+PASS 84 reader APIs, all four export spellings; 11 local C/C++ calls; no external reader
+PASS open_reader_win64.dll: exports, selection, native/keyword includes, bounds, parts, reload
+PASS open_reader_win64.dll: submodel include/part queries
+PASS ordinary/cpp_build_model
+PASS ordinary/cpp_build_model_inc
+PASS rigid-field/cpp_build_model
+PASS rigid-field/cpp_build_model_inc
+PASS unsupported-profile/cpp_build_model
+PASS unsupported-profile/cpp_build_model_inc
+PASS broken-configuration/cpp_build_model
+PASS broken-configuration/cpp_build_model_inc
+PASS missing-configuration/cpp_build_model
+PASS missing-configuration/cpp_build_model_inc
+PASS missing-input/cpp_build_model
+PASS missing-input/cpp_build_model_inc
+PASS structured-ale/cpp_build_model
+PASS structured-ale/cpp_build_model_inc
+PASS structured-ale-include/cpp_build_model
+PASS structured-ale-include/cpp_build_model_inc
+PASS comment-only/cpp_build_model
+PASS comment-only/cpp_build_model_inc
+PASS LS-DYNA empty.k/profile-2612
+PASS LS-DYNA empty.k/profile-9999
+PASS LS-DYNA absent.k/profile-2612
+PASS Starter accelerometer smoke
+PASS Starter configuration-error
+PASS Starter structured-ale
+PASS default Starter rigid conversion single
+PASS default Starter rigid conversion flag_two_single
+PASS default Starter rigid conversion disconnected_two
+PASS open_reader_win64.dll: contact group use
+PASS open_reader_win64.dll: native group use
+PASS open_reader_win64.dll: reload group use
+PASS Starter TYPE25 ALL-minus-part-set contact restart
+PASS disconnected_one (frozen reference)
+PASS disconnected_two (frozen reference)
+PASS empty (frozen reference)
+PASS existing (frozen reference)
+PASS explicit_fields (frozen reference)
+PASS flag_negative (frozen reference)
+PASS flag_three (frozen reference)
+PASS flag_two_single (frozen reference)
+PASS mixed (frozen reference)
+PASS no_parts (frozen reference)
+PASS ordinary_missing (frozen reference)
+PASS ordinary_zero (frozen reference)
+PASS shared (frozen reference)
+PASS single (frozen reference)
+PASS repeat-reload
+PASS without-evaluation
+PASS reload-without-evaluation
+PASS changed-parts
+PASS changed-after-create
+PASS deleted-part
+PASS missing-reference
+PASS mode2-repeat
+PASS mode2-flag
+PASS solid (frozen v82 snapshot, explicit units retained)
+PASS include_fields (frozen v82 snapshot, explicit units retained)
+PASS submodel_units (frozen v82 snapshot, explicit units retained)
+PASS different_offsets (frozen v82 snapshot, explicit units retained)
+PASS two_submodels (frozen v82 snapshot, explicit units retained)
+PASS mode2 flag_two_single (full node sets and ownership)
+PASS mode2 disconnected_two (full node sets and ownership)
+PASS mode2 vertex (full node sets and ownership)
+PASS mode2 edge (full node sets and ownership)
+PASS mode2 reverse (full node sets and ownership)
+PASS mode2 empty (full node sets and ownership)
+PASS mode2 solid (full node sets and ownership)
+PASS mode2 shared (full node sets and ownership)
+PASS mode2 existing (full node sets and ownership)
+PASS mode2 mixed (full node sets and ownership)
+PASS mode2 include_fields (full node sets and ownership)
+PASS mode2 different_offsets (full node sets and ownership)
+PASS mode2 submodel_units (full node sets and ownership)
+PASS mode2 two_submodels (full node sets and ownership)
+PASS mode2 sh3n (full node sets and ownership)
+PASS mode2 truss (full node sets and ownership)
+PASS mode2 beam (full node sets and ownership)
+PASS mode2 tetra4 (full node sets and ownership)
+ifx: command line warning #10120: overriding '/O2' with '/Od'
+ifx: command line warning #10120: overriding '/O2' with '/Od'
+ifx: command line warning #10120: overriding '/O2' with '/Od'
+C:\Programming\OpenCourant\starter\source\constraints\general\rbody\rbody_part_modif.F90(570): remark #6536: All symbols from this module are already visible due to another USE; the ONLY clause will have no effect. Rename clauses, if any, will be honored.   [SUBMODEL_MOD]
+          use submodel_mod
+--------------^
+ifx: command line warning #10120: overriding '/O2' with '/Od'
+ifx: command line warning #10120: overriding '/O2' with '/Od'
+ifx: command line warning #10006: ignoring unknown option '/STACK:1500000000'
+PASS isolated integration builds
+PASS connectivity, main nodes, and indexed selection: existing
+PASS connectivity, main nodes, and indexed selection: explicit_fields
+PASS connectivity, main nodes, and indexed selection: interleaved
+PASS connectivity, main nodes, and indexed selection: lagmul
+PASS connectivity, main nodes, and indexed selection: lagmul_missing_node
+PASS connectivity, main nodes, and indexed selection: submodel_missing_node
+PASS connectivity, main nodes, and indexed selection: flag_two_single
+PASS connectivity, main nodes, and indexed selection: disconnected_two
+PASS helper rejection: no-selected-body
+PASS helper rejection: negative-position
+PASS helper rejection: past-end-position
+PASS bounds-checked Fortran: openreader/no_parts
+PASS bounds-checked Fortran: openreader/mixed
+PASS bounds-checked Fortran: openreader/interleaved
+PASS bounds-checked Fortran: openreader/lagmul
+PASS bounds-checked Fortran: openreader/submodel_missing_node
+PASS bounds-checked Fortran: openreader/flag_two_single
+PASS bounds-checked Fortran: openreader/disconnected_two
+PASS ordering rejection: openreader/missing-id
+PASS ordering rejection: openreader/duplicate-id
+PASS full Starter: openreader/single
+PASS full Starter: openreader/mixed
+PASS full Starter: openreader/existing
+PASS full Starter: openreader/shared
+PASS full Starter: openreader/interleaved
+PASS full Starter: openreader/lagmul
+PASS full Starter: openreader/explicit_fields
+PASS full Starter: openreader/explicit-rota
+PASS full Starter: openreader/flag_two_single
+PASS full Starter: openreader/disconnected_two
