@@ -677,7 +677,8 @@ bool MECIDataReader::readNextCard(const PseudoFileFormatCard_t *card_format_p,
     break;
   case CARD_HEADER:
     {
-      if (getSkipHeaderCardReadingState())
+      // Continued records still need the options from their cached keyword header.
+      if (getSkipHeaderCardReadingState() && object_p->GetHeaderLine().empty())
           return true;
 
       bool issubobjreader = getIsSubobjectReader();

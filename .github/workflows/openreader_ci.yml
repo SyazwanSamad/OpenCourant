@@ -53,6 +53,8 @@ jobs:
           if errorlevel 1 exit /b 1
           python qa-tests/reader/test_model_loading.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
           if errorlevel 1 exit /b 1
+          python qa-tests/reader/test_shared_headers.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
+          if errorlevel 1 exit /b 1
           python qa-tests/reader/test_contact_groups.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
           if errorlevel 1 exit /b 1
           python qa-tests/reader/test_parameters.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe --output cbuild_parameter_ci

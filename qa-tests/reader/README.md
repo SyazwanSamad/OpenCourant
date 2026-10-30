@@ -18,6 +18,7 @@ python qa-tests/dependency_removal/test_reader_build.py
 python qa-tests/reader/test_starter_api.py --reader exec/open_reader_win64.dll
 python qa-tests/reader/test_model_queries.py --reader exec/open_reader_win64.dll
 python qa-tests/reader/test_model_loading.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
+python qa-tests/reader/test_shared_headers.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
 python qa-tests/reader/test_contact_groups.py --reader exec/open_reader_win64.dll --starter exec/starter_win64.exe
 ```
 
@@ -43,6 +44,10 @@ Native and keyword controls verify both empty and active parts fail without a
 restart; an empty part with a defined property remains accepted.
 Four contact checks cover typed groups, converted sets used as surfaces and
 lines, selection preservation, reload, and a complete TYPE25 Starter restart.
+Eight shared-header checks use two generated cross-section planes with distinct
+geometry, both under one keyword and under separate keywords. Direct keyword
+and native-include loading verify exact section geometry, generated node
+coordinates, the following keyword, and successful Starter restarts.
 
 The include-count ABI remains
 `cpp_get_number_of_include_files(int *is_dyna, int *count)`. Indexed lookup is
