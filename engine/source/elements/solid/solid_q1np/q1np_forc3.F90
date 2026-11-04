@@ -15,6 +15,13 @@
 !Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 !Copyright>
 !Copyright>
+!Copyright>        OpenCourant
+!Copyright>        Copyright (C) 2026 OpenCourant contributors
+!Copyright>
+!Copyright>        Modified by the OpenCourant project, 2026.
+!Copyright>        Modifications are licensed under the GNU Affero General Public
+!Copyright>        License, version 3 or (at your option) any later version.
+!Copyright>
 !Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 !Copyright>        See COPYRIGHT.md at the root of the repository for the full
 !Copyright>        copyright and attribution statement.
@@ -55,10 +62,10 @@
 !||    timer_mod                 ../engine/source/system/timer_mod.F90
 !||====================================================================
       SUBROUTINE Q1NP_FORC3(TIMERS, OUTPUT, ELBUF_STR, PM, GEO, IXS, IGEO, X, A, V, W, FV, ALE_CONNECT, IPARG, TF, NPF, &
-     & BUFMAT, PARTSAV, NPART, NLOC_DMG, STIFN, OFFSET, IPARTS, NEL, DT2T, NELTST, ITYPTST, IPM, ITASK, GRESAV, GRTH, &
-     & IGRTH, MSSA, DMELS, TABLE, IPRI, MAT_ELEM, NG, SVIS, GLOB_THERM, SNPC, NUMGEO, NUMNOD, NUMELS, NUMELQ, NGROUP, &
+     & BUFMAT, NLOC_DMG, STIFN, OFFSET, NEL, DT2T, NELTST, ITYPTST, IPM, ITASK, &
+     & MSSA, DMELS, TABLE, IPRI, MAT_ELEM, NG, SVIS, GLOB_THERM, SNPC, NUMGEO, NUMNOD, NUMELS, NUMELQ, NGROUP, &
      & SBUFMAT, STF, NUMMAT, NTABLE, NSVOIS, IRESP, IDEL7NOK, MAXFUNC, USERL_AVAIL, IMON_MAT, IMPL_S, IDYNA, IDTMIN, DT, &
-     & SENSORS, MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL, NPARG, NPROPG, NPROPGI, NPROPM, NPROPMI, NPSAV, TT, &
+     & SENSORS, MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL, NPARG, NPROPG, NPROPGI, NPROPM, NPROPMI, TT, &
      & DT1)
   !-----------------------------------------------
   !   M o d u l e s
@@ -115,7 +122,6 @@
       INTEGER,            INTENT(IN)    :: NPROPGI
       INTEGER,            INTENT(IN)    :: NPROPM
       INTEGER,            INTENT(IN)    :: NPROPMI
-      INTEGER,            INTENT(IN)    :: NPSAV
       INTEGER,            INTENT(IN)    :: MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL
       real(kind=WP),      INTENT(IN)    :: TT, DT1
       INTEGER,            INTENT(IN)    :: SNPC
@@ -136,17 +142,15 @@
       INTEGER,            INTENT(IN)    :: IMPL_S
       INTEGER,            INTENT(IN)    :: IDYNA
       INTEGER,            INTENT(IN)    :: IDTMIN(102)
-      INTEGER,            INTENT(IN)    :: NEL, ITASK, NPART
+      INTEGER,            INTENT(IN)    :: NEL, ITASK
       INTEGER,            INTENT(INOUT) :: NELTST, ITYPTST
       INTEGER,            INTENT(IN)    :: OFFSET, IPRI
       INTEGER,            INTENT(INOUT) :: IDEL7NOK
       INTEGER,            INTENT(IN)    :: NPF(SNPC)
-      INTEGER,            INTENT(IN)    :: IPARTS(*) !SIZE NEL?
       INTEGER,            INTENT(IN)    :: IPM(NPROPMI,NUMMAT)
       INTEGER,            INTENT(IN)    :: IXS(NIXS,NUMELS)
       INTEGER,            INTENT(IN)    :: IPARG(NPARG,NGROUP)
       INTEGER,            INTENT(IN)    :: IGEO(NPROPGI,NUMGEO)
-      INTEGER,            INTENT(INOUT) :: IGRTH(*), GRTH(*)
       real(kind=WP),            INTENT(INOUT) :: PM(NPROPM,NUMMAT)
       real(kind=WP),            INTENT(INOUT) :: GEO(NPROPG,NUMGEO)
       real(kind=WP),            INTENT(IN)    :: X(3,NUMNOD)
@@ -157,8 +161,6 @@
       real(kind=WP),            INTENT(INOUT) :: TF(STF)
       real(kind=WP),            INTENT(INOUT) :: BUFMAT(SBUFMAT)
       real(kind=WP),            INTENT(INOUT) :: FV(*) !SIZE NFUNCT (global); framework array, kept assumed-size
-      real(kind=WP),            INTENT(INOUT) :: PARTSAV(NPSAV,NPART)
-      real(kind=WP),            INTENT(INOUT) :: GRESAV(*)
       real(kind=WP),            INTENT(INOUT) :: DT2T
       real(kind=WP),            INTENT(INOUT) :: MSSA(*)
       real(kind=WP),            INTENT(INOUT) :: DMELS(*)

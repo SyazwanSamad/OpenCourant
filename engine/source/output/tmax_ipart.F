@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -30,7 +37,7 @@ Copyright>        copyright and attribution statement.
 !||    names_and_titles_mod   ../common_source/modules/names_and_titles_mod.F
 !||    outmax_mod             ../common_source/modules/outmax_mod.F
 !||====================================================================
-      SUBROUTINE TMAX_IPART(IPARG, IPART, IPARTS, IPARTC, IPARTG)
+      SUBROUTINE TMAX_IPART(IPARG, IPARTS, IPARTC, IPARTG)
 C-----------------------------------------------
 C   M o d u l e s
 C----------------------------------------------- 
@@ -54,7 +61,6 @@ C-----------------------------------------------
 C   D u m m y   A r g u m e n t s
 C-----------------------------------------------
       INTEGER, DIMENSION(NPARG,NGROUP) ,INTENT(IN):: IPARG
-      INTEGER, DIMENSION(LIPART1,NPART),INTENT(IN):: IPART
       INTEGER ,DIMENSION(NUMELS),INTENT(IN):: IPARTS
       INTEGER ,DIMENSION(NUMELC),INTENT(IN):: IPARTC
       INTEGER ,DIMENSION(NUMELTG),INTENT(IN):: IPARTG

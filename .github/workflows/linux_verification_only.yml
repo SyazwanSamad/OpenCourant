@@ -1,0 +1,53 @@
+name: Linux Verification Only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  RADIOSS_SHA_HEADER: ${{ github.sha }}
+
+jobs:
+  build_linux:
+    name: ${{ matrix.binary }} / ${{ matrix.precision }} / ${{ matrix.mpi }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/opencourant/linux64-bld-qa:ompi4.1.2
+    strategy:
+      fail-fast: false
+      matrix:
+        binary: [starter, engine]
+        precision: [dp, sp]
+        mpi: [smp, ompi]
+        exclude:
+          - binary: starter
+            mpi: ompi
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          lfs: 'false'
+
+      - name: Build Linux binaries
+        shell: bash
+        run: |
+          source /root/.bashrc
+          chmod +x Compiling_tools/script/* "${{ matrix.binary }}/build_script.sh"
+          mkdir -p exec
+          mpi_opts=()
+          if [ "${{ matrix.mpi }}" = ompi ]; then
+            mpi_opts=(-mpi=ompi)
+          fi
+          cd "${{ matrix.binary }}"
+          ./build_script.sh -release -arch=linux64_gf -prec=${{ matrix.precision }} -nt=4 -static-link "${mpi_opts[@]}"
+          cd ..
+          test -n "$(find exec -maxdepth 1 -type f -executable -print -quit)"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: linux-verification-${{ matrix.binary }}-${{ matrix.precision }}-${{ matrix.mpi }}
+          path: exec
+          if-no-files-found: error

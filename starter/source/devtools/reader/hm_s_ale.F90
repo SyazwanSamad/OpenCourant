@@ -29,11 +29,8 @@
 module hm_s_ale_mod
   implicit none
 contains
-  subroutine hm_s_ale(nsubmod,lsubmodel,input_modification)
-    use submodel_mod, only : submodel_data
+  subroutine hm_s_ale(input_modification)
     use input_modification_mod, only : input_modif_
-    integer, intent(in) :: nsubmod
-    type(submodel_data), intent(in) :: lsubmodel(nsubmod)
     type(input_modif_), intent(inout) :: input_modification
     integer :: count
     call hm_option_count('/ALE/STRUCTURED_MESH', count)

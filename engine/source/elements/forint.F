@@ -15,6 +15,13 @@ Copyright>        You should have received a copy of the GNU Affero General Publ
 Copyright>        along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright>
 Copyright>
+Copyright>        OpenCourant
+Copyright>        Copyright (C) 2026 OpenCourant contributors
+Copyright>
+Copyright>        Modified by the OpenCourant project, 2026.
+Copyright>        Modifications are licensed under the GNU Affero General Public
+Copyright>        License, version 3 or (at your option) any later version.
+Copyright>
 Copyright>        This file is part of OpenCourant, a fork of OpenRadioss.
 Copyright>        See COPYRIGHT.md at the root of the repository for the full
 Copyright>        copyright and attribution statement.
@@ -389,11 +396,11 @@ C-------------------------
 C             Q1NP replacement for tagged HEX8 solids.
 C-------------------------
       CALL Q1NP_FORC3(TIMERS, OUTPUT, ELBUF_TAB(NG), PM, GEO, IXS, IGEO, X, A, V, W, FV, ALE_CONNECT, IPARG, TF, NPC,
-     . BUFMAT, PARTSAV, NPART, NLOC_DMG, STIFN, OFFSET, IPARTS(NF1), NEL, DT2T, NELTST, ITYPTST, IPM, ITASK, GRESAV,
-     . GRTH, IGRTH(NF1), MSSA(NF1), DMELS(NF1), TABLE, IPRI, MAT_ELEM, NG, SVIS, GLOB_THERM, SNPC, NUMGEO, NUMNOD,
+     . BUFMAT, NLOC_DMG, STIFN, OFFSET, NEL, DT2T, NELTST, ITYPTST, IPM, ITASK,
+     . MSSA(NF1), DMELS(NF1), TABLE, IPRI, MAT_ELEM, NG, SVIS, GLOB_THERM, SNPC, NUMGEO, NUMNOD,
      . NUMELS, NUMELQ, NGROUP, SBUFMAT, STF, NUMMAT, NTABLE, NSVOIS, IRESP, IDEL7NOK, MAXFUNC, USERL_AVAIL, IMON_MAT,
      . impl_s, idyna, IDTMIN, DT, SENSORS, MTN, ISMSTR, JLAG, JEUL, JALE, JCVT, JSPH, JPLASOL, NPARG, NPROPG, NPROPGI,
-     . NPROPM, NPROPMI, NPSAV, TT, DT1)
+     . NPROPM, NPROPMI, TT, DT1)
 C            
           ELSEIF(ISOLNOD==4.AND.(ISROT==0.OR.ISROT==3))THEN
 C---------
