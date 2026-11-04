@@ -1,6 +1,6 @@
 name: PR Merge CI MAIN
 
-# Post-merge CI for the main branch. Runs on GitHub-hosted runners inside
+# Manually dispatched full CI. Runs on GitHub-hosted runners inside
 # the OpenCourant build image (ghcr.io/opencourant/linux64-bld-qa, built
 # from https://github.com/OpenCourant/ci-images). This replaces the
 # Altair-internal registry, self-hosted runners, mail relay, Perforce sync
@@ -13,11 +13,6 @@ name: PR Merge CI MAIN
 # Restore them once OpenCourant has Windows build infrastructure.
 
 on:
-
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 env:
@@ -31,7 +26,7 @@ jobs:
   # must match one of the canonical variants (see COPYRIGHT.md and
   # scripts/copyright/check_headers.py).
   check_headers:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -47,7 +42,7 @@ jobs:
           --require-fork-point
 
   build_linux:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: ubuntu-latest
     container:
       image: "ghcr.io/opencourant/linux64-bld-qa:ompi4.1.2"
@@ -242,7 +237,7 @@ jobs:
           fi
 
   build_windows:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     # windows-2022: the VS2026 STL on windows-latest requires Clang 20+,
     # while icx 2025.0 is Clang 19-based (error STL1000).
     # SMP and Intel MPI (impi) variants.
@@ -398,7 +393,7 @@ jobs:
           "
 
   build_linuxa64:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: ubuntu-24.04-arm
     container:
       image: "ghcr.io/opencourant/linuxa64-bld-qa:ompi4.1.2"
@@ -565,7 +560,7 @@ jobs:
           fi
 
   cleanup_artifacts:
-    if: ${{ always() && github.repository_owner == 'OpenCourant' }}
+    if: ${{ always() && github.repository_owner == 'SyazwanSamad' }}
     needs: [qa_linux, qa_windows, qa_linuxa64]
     runs-on: ubuntu-latest
     permissions:

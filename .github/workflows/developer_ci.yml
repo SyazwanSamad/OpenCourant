@@ -1,19 +1,22 @@
 name: Developer CI
 
 on:
-
-  pull_request:
-    # Skip PRs targeting the sandbox branch and any sandbox/* branch, plus workflow-only changes
-    branches-ignore:
-      - sandbox
-      - 'sdb/**'
-    paths-ignore:
-      - '.github/workflows/**'
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull request number to check'
+        required: true
+        type: string
+      base_branch:
+        description: 'Pull request base branch'
+        required: true
+        default: main
+        type: string
 
 env:
   QA_TIMEOUT_PER_TEST: 150
-  # The commit of the PR to embed it in the build tag
-  RADIOSS_SHA_HEADER: ${{ github.event.pull_request.head.sha }}
+  # The workflow commit to embed in the build tag
+  RADIOSS_SHA_HEADER: ${{ github.sha }}
 
 # CI runs on GitHub-hosted runners inside the OpenCourant build image
 # (ghcr.io/opencourant/linux64-bld-qa, built from
@@ -34,10 +37,10 @@ jobs:
       - name: Detect workflow changes
         run: |
           # fetch base branch
-          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1
+          git fetch origin ${{ inputs.base_branch }} --depth=1
 
           # list changed files in the PR
-          changed=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }})
+          changed=$(git diff --name-only origin/${{ inputs.base_branch }})
           echo "Files changed in this PR:"
           echo "$changed"
           echo "-----"
@@ -71,12 +74,12 @@ jobs:
       - name: Check changed files carry the modification notice
         run: >
           python3 scripts/copyright/check_headers.py
-          --changed "origin/${{ github.event.pull_request.base.ref }}"
+          --changed "origin/${{ inputs.base_branch }}"
           --require-fork-point
 
   build-for-qa:
     needs: guard
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
 
     runs-on: ubuntu-latest
 
@@ -110,11 +113,11 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: 'false'
-          ref: refs/pull/${{ github.event.number }}/merge
+          ref: refs/pull/${{ inputs.pr_number }}/merge
 
       - name: Running build
         run: |
-          echo "Running using ref: refs/pull/${{ github.event.number }}/merge"
+          echo "Running using ref: refs/pull/${{ inputs.pr_number }}/merge"
 
           mpi_opts=''
           if [ ! -z ${{ matrix.mpi }} ]
@@ -156,7 +159,7 @@ jobs:
 
   build:
     needs: guard
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
 
     runs-on: ubuntu-latest
 
@@ -191,11 +194,11 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: 'false'
-          ref: refs/pull/${{ github.event.number }}/merge
+          ref: refs/pull/${{ inputs.pr_number }}/merge
 
       - name: Running build
         run: |
-          echo "Running using ref: refs/pull/${{ github.event.number }}/merge"
+          echo "Running using ref: refs/pull/${{ inputs.pr_number }}/merge"
 
           mpi_opts=''
           if [ ! -z ${{ matrix.mpi }} ]
@@ -263,7 +266,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           lfs: 'false'
-          ref: refs/pull/${{ github.event.number }}/merge
+          ref: refs/pull/${{ inputs.pr_number }}/merge
 
       - name: Clean local exe dir
         run: |

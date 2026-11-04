@@ -1,9 +1,6 @@
 name: Update Headers CI
 
 on:
-  # push:
-  schedule:
-    - cron: '0 1 * * *'
   workflow_dispatch:
 
 env:
@@ -15,7 +12,7 @@ env:
 jobs:
 
   upd_headers:
-    if: ${{ github.repository_owner == 'OpenRadioss' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
 
     # DEV ONLY # runs-on: ["dev_update_headers"]
     runs-on: ["update_headers"]

@@ -38,7 +38,7 @@ jobs:
   # Resolve the tag to deliver: use the given existing tag, or create
   # latest-YYYYMMDD on the current commit.
   set_tag:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.resolve.outputs.tag }}
@@ -1424,7 +1424,7 @@ jobs:
           docker buildx imagetools inspect ${HUB_IMAGE}:${TAG}
 
   cleanup_artifacts:
-    if: ${{ always() && github.repository_owner == 'OpenCourant' }}
+    if: ${{ always() && github.repository_owner == 'SyazwanSamad' }}
     needs: [delivery, publish_manifest]
     runs-on: ubuntu-latest
     permissions:

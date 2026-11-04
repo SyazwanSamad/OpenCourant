@@ -2,27 +2,13 @@ name: OpenReader Windows CI
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - 'reader/**'
-      - 'starter/**'
-      - 'hm_cfg_files/**'
-      - 'qa-tests/reader/**'
-      - 'qa-tests/dependency_removal/**'
-      - 'qa-tests/qa_tools/**'
-      - 'qa-tests/miniqa/INTERF/INT_25/**'
-      - 'qa-tests/scripts/or_QA.files_1miniqa'
-      - 'Compiling_tools/**'
-      - 'EXTLIB_VERSION.json'
-      - '.github/workflows/openreader_ci.yml'
-      - '.github/actions/setup-oneapi-win/**'
 
 permissions:
   contents: read
 
 jobs:
   reader_windows:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: windows-2022
     timeout-minutes: 60
     steps:

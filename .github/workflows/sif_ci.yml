@@ -16,7 +16,7 @@ on:
 jobs:
 
   build_sif:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: ${{ matrix.runner }}
 
     strategy:

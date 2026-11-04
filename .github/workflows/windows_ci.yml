@@ -21,7 +21,7 @@ env:
 jobs:
 
   build_windows:
-    if: ${{ github.repository_owner == 'OpenCourant' }}
+    if: ${{ github.repository_owner == 'SyazwanSamad' }}
     runs-on: windows-2022
 
     strategy:
