@@ -183,7 +183,8 @@
           call spmd_allreduce(values, element%global%values, element%global%n, SPMD_MAX)
           deallocate(values)
           do i = 1, element%global%n
-            call python_update_elemental_entity(element%global%keyword(i)%result,element%global%values(i), element%global%user_ids(i))
+            call python_update_elemental_entity(element%global%keyword(i)%result, &
+                                                element%global%values(i), element%global%user_ids(i))
           end do
         end subroutine python_element_sync
 

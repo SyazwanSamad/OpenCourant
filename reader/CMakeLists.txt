@@ -25,6 +25,10 @@ endif()
 if(NOT TARGET extlib)
     add_custom_target(extlib ALL
         COMMAND ${PYTHON_EXEC} ${CMAKE_CURRENT_SOURCE_DIR}/../Compiling_tools/script/load_extlib.py
+        BYPRODUCTS
+            ${CMAKE_CURRENT_SOURCE_DIR}/../extlib/boost/boost_1_70_0/static/lib/win64/libboost_filesystem.lib
+            ${CMAKE_CURRENT_SOURCE_DIR}/../extlib/boost/boost_1_70_0/static/lib/linux64/libboost_filesystem.a
+            ${CMAKE_CURRENT_SOURCE_DIR}/../extlib/boost/boost_1_70_0/static/lib/linuxa64/libboost_filesystem.a
         COMMENT "Loading extlib libraries")
 endif()
 
