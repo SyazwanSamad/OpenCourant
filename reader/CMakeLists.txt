@@ -43,6 +43,11 @@ set(c_source_files "")
 
 include ( CMake_arch/CMake_${arch}.cmake )
 
+if(arch STREQUAL "linux64")
+    # The bundled x86-64 Boost filesystem archive uses the legacy libstdc++ string ABI.
+    add_compile_definitions("$<$<COMPILE_LANGUAGE:CXX>:_GLIBCXX_USE_CXX11_ABI=0>")
+endif()
+
 if (com STREQUAL "1")
     set (build_dir "cbuild_${arch}_c")
     set (DNC "-DDNC")
@@ -161,6 +166,10 @@ endif()
 foreach(reader_target solver_interface dyna2rad io sdi cfgio cfgkernel)
     add_dependencies(${reader_target}_${arch} extlib)
 endforeach()
+if(arch STREQUAL "linux64")
+    target_compile_definitions(${link_library_name} INTERFACE
+        "$<$<COMPILE_LANGUAGE:CXX>:_GLIBCXX_USE_CXX11_ABI=0>")
+endif()
 if(NOT CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(OPEN_READER_TARGET ${link_library_name} PARENT_SCOPE)
 endif()
