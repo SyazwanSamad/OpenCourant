@@ -128,6 +128,36 @@ def mode2_lifecycle(reader, mode):
         assert counts.values() == [1] and reader.count(b'/RBODY') == 1
 
 
+def legacy_material(reader):
+    data = HERE.parents[1] / 'miniqa/LOIS/LOI13/solide/data'
+    with tempfile.TemporaryDirectory() as temporary:
+        work = Path(temporary)
+        shutil.copytree(data, work, dirs_exist_ok=True)
+        source = (data / 'MODELE_0000.rad').read_text()
+        for keyword in ['RIGID', 'LAW13']:
+            fixture = work / 'MODELE_0000.rad'
+            fixture.write_text(source.replace('/MAT/RIGID/2', f'/MAT/{keyword}/2'))
+            actual = reader.snapshot(fixture)
+            assert actual['counts'] == [0, 1, 1, 1], (keyword, actual['counts'])
+            assert actual['mapping'] == [2, 4, 5] and actual['ids'] == [1, 2, 3], keyword
+            assert actual['existing_body_ids'] == [] and len(actual['bodies']) == 3, keyword
+            assert actual['added_main_nodes'] == [733, 734, 735], keyword
+            assert actual['main_nodes'] == [{'id': i, 'node_ID': 732+i} for i in range(1, 4)], keyword
+            reader.library.cpp_set_intv.argtypes = [TEXT, PINT, PINT, PBOOL]
+            reader.library.cpp_set_intv.restype = None
+            reader.select(b'PART')
+            for _ in range(4):
+                reader.library.cpp_option_next()
+                reader.library.cpp_set_intv(b'IRIGID', REF(INT(6)), REF(INT(0)), REF(ct.c_bool()))
+                assert reader.integer('IRIGID') == 0
+            counts, mapping, ids = GuardedArray(4), GuardedArray(3), GuardedArray(3)
+            reader.library.cpp_evaluate_rbodies_number_from_rigid_parts(counts.pointer)
+            reader.library.cpp_create_rbodies_from_rigid_parts(mapping.pointer, ids.pointer)
+            assert counts.values() == [0, 1, 1, 1], keyword
+            assert mapping.values() == [2, 4, 5] and ids.values() == [1, 2, 3], keyword
+            assert reader.count(b'/RBODY') == 3, 'Repeated conversion duplicated legacy rigid bodies'
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reader', required=True, type=lambda path: Path(path).resolve())
@@ -141,6 +171,8 @@ def main():
             args.output.write_text(json.dumps(snapshot, indent=2), encoding='utf-8')
         elif args.worker.startswith('mode2-'):
             mode2_lifecycle(reader, args.worker)
+        elif args.worker == 'legacy-material':
+            legacy_material(reader)
         else:
             lifecycle(reader, args.worker)
         return
@@ -167,6 +199,7 @@ def main():
             ('changed-after-create', 'parts changed after'),
             ('deleted-part', 'parts changed after'),
             ('missing-reference', 'references a missing'),
+            ('legacy-material', None),
             ('mode2-repeat', None),
             ('mode2-flag', 'parts changed after'),
         ]:

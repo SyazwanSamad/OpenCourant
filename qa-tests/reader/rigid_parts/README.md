@@ -16,7 +16,7 @@ reference results below. The earlier conclusion that v82 ignores mode 2 was wron
 
 | Input | v82 conversion result |
 | --- | --- |
-| Missing or zero `IRIGID` | No generated body. |
+| Missing or zero `IRIGID`, ordinary material | No generated body. |
 | `IRIGID=1` | One body per part. |
 | Disconnected shell regions in one part, `IRIGID=1` | One body, not one per connected region. |
 | Empty part, `IRIGID=1` | One body with a part-based set. Physical validity remains a Starter check. |
@@ -26,6 +26,12 @@ reference results below. The earlier conclusion that v82 ignores mode 2 was wron
 | Tested values `-1`, `3` | No generated bodies and no reader warning. This observation does not establish these as supported rigid modes. |
 | Input parts ordered 30, 20, 10, with part 20 ordinary | Part iteration is 10, 20, 30; counts are `[1, 0, 1]`; generated mapping is `[10, 30]`. |
 | Existing `/RBODY/100` and `/GRNOD/NODE/50` | Existing body is retained; generated bodies are 101 and 102, with generated sets 52 and 53 in this fixture. Do not infer a general set-ID allocation rule from this one example. |
+
+Legacy `/MAT/LAW13` and `/MAT/RIGID` materials imply mode-1 conversion when
+`IRIGID` is missing or zero. MiniQA 1.19's version-100 deck generates one body
+for each of parts 2, 4, and 5, with main nodes 733–735. The conversion regression
+checks both material aliases, an explicit zero flag, and repeated conversion
+without duplicate bodies. Explicit rigid modes retain their existing behavior.
 
 Each mode-1 generated body references a `/SET/GENERAL` with one `PART` clause containing
 the originating part ID. It does not store an explicit connectivity-node list.

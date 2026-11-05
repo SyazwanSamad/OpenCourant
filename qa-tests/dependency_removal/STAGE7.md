@@ -37,13 +37,16 @@ checksum across all three layouts.
 - **LAW13, `1.19`:** internal energy is NaN from the first printed cycle, despite
   normal termination. Time step, energy and external work also miss the reference.
   Both precisions and both launch modes fail. All four current/pre-Stage-5 DP
-  Starter/Engine pairings reproduce the NaN. It predates Stage 5 and is recorded
-  as a legacy compatibility failure. Altair lists LAW13 as obsolete since v13.0
-  and defines obsolete keywords as supported but no longer maintained; see
-  [the obsolete-keyword list](https://help.altair.com/hwsolvers/rad/topics/solvers/rad/obsolete_overview_starter_r.htm)
-  and [LAW13 reference](https://help.altair.com/hwsolvers/rad/topics/solvers/rad/mat_law13_rigid_starter_obsolete_r.htm).
-  This does not establish OpenCourant's support policy or authorize accepting NaN.
-  The test and its recorded result are retained; no solver change is made here.
+  Starter/Engine pairings reproduce the NaN. A 2026-11-05 follow-up identified
+  missing legacy rigid-material conversion in OpenReader: the version-100 deck
+  references `/MAT/RIGID` from parts 2, 4, and 5 without setting `IRIGID`.
+  HM Reader generates three bodies; OpenReader generated none. `ReadParts()` now
+  recognizes LAW13/RIGID material references when `IRIGID` is missing or zero
+  and uses the existing mode-1 conversion. The reader regression checks both
+  aliases, body mappings, main nodes, and repeated conversion. Targeted Windows
+  DP/SP SMP and two-rank MPI reruns pass MiniQA 1.19 with unchanged references
+  and tolerances. The frozen gate results above are retained; this finding does
+  not approve the remaining gates.
 - **EBCS/INIV, `1.59`:** DP mass error is `-1.85e-16` in SMP and `-3.701e-16`
   in MPI, against reference `-0.9946e-12`. The existing Python zero tolerance
   `5e-14` sends this near-zero comparison through its relative rule, which fails.
@@ -134,8 +137,8 @@ audit passes.
 
 ## Remaining release gates
 
-Resolve the active reference and parallel-checksum failures using the existing
-physical assertions, and record the compatibility decision for obsolete LAW13.
+Re-run the regression matrix after the LAW13 conversion repair and resolve the
+remaining reference and parallel-checksum failures using the existing physical assertions.
 Verify R2R external coupling, implicit/modal execution,
 external coupled/user-library execution and large-model performance. Hosted CI
 was not dispatched. Linux x64/ARM64 package/container/runtime checks remain

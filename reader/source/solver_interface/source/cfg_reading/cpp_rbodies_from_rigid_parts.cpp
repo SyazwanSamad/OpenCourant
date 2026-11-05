@@ -118,6 +118,19 @@ std::vector<RigidPart> ReadParts()
         sdiValue value;
         if(selection->GetValue(sdiIdentifier("IRIGID"), value))
             Require(value.GetValue(flag), "invalid /PART IRIGID type");
+        if(flag == 0)
+        {
+            sdiValue materialValue;
+            sdiValueEntity material;
+            HandleRead handle;
+            if(selection->GetValue(sdiIdentifier("mat_ID"), materialValue) &&
+               materialValue.GetValue(material) &&
+               Get_ModelViewSDI()->FindById("/MAT", material.GetId(), handle))
+            {
+                EntityRead entity(Get_ModelViewSDI(), handle);
+                if(entity.GetKeyword() == "/MAT/LAW13" || entity.GetKeyword() == "/MAT/RIGID") flag = 1;
+            }
+        }
         std::vector<sdiUIntList> regions;
         if(flag == 2) regions = ConnectedRegions(*selection);
         result.push_back({selection->GetHandle(), FortranId(selection->GetId()),
