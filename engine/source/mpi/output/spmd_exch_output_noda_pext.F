@@ -75,7 +75,7 @@ Copyright>        copyright and attribution statement.
 !                                                   Body
 ! ----------------------------------------------------------------------------------------------------------------------
       IF(TH_HAS_NODA_PEXT>0.OR.OUTPUT%DATA%ANIM_HAS_NODA_PEXT>0)THEN
-      IF(TRIGGER_ANIM.OR.TRIGGER_TH.OR.0)THEN
+      IF(TRIGGER_ANIM.OR.TRIGGER_TH)THEN
                 IF(NSPMD > 1)THEN
                   LENR = NODES%BOUNDARY_ADD(1,NSPMD+1)-NODES%BOUNDARY_ADD(1,1)
                   !exchange between domains which have common nodes
