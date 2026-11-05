@@ -30,14 +30,19 @@ file carries exactly one of three header variants (see COPYRIGHT.md):
 
   modified  Legacy notice + "Modified by the OpenCourant project"
             block + pointer.  Required for legacy files that have
-            been changed relative to `openradioss-final`.
+            been changed relative to `openradioss-final`, including
+            legacy code moved or copied to a new path.
 
   new       OpenCourant notice + pointer (no Siemens block).  Required
             for files that have no pre-fork ancestor.
 
-Telling the three apart needs the `openradioss-final` tag: it is what says
-whether a file has a pre-fork ancestor and whether its content has moved
-since.  Without the tag only the shape of a header can be checked, which
+A new path does not prove new authorship.  Repairs retain an existing
+legacy attribution and require the OpenCourant modification notice;
+genuinely new code without legacy attribution gets the new-file header.
+
+The `openradioss-final` tag supplies the baseline for paths present upstream
+and determines whether their content has changed.  Without the tag only
+the shape of a header can be checked, which
 silently lets a changed legacy file keep its `legacy` notice.  CI therefore
 passes --require-fork-point so a missing tag is a hard error rather than a
 warning.
@@ -352,7 +357,8 @@ def check_file(path, tag_files, current_year, require_current_year=False):
     variant, years, err = classify(header.content)
     if err:
         # Structure is broken; pick the right target from git facts.
-        if tag_files is not None and path not in tag_files:
+        if tag_files is not None and path not in tag_files \
+                and header.content[:1] != ["OpenRadioss"]:
             rep.error(err, ("new", str(current_year)))
         elif content_differs(FORK_POINT_TAG, path):
             rep.error(err, ("modified", str(current_year)))
@@ -367,9 +373,10 @@ def check_file(path, tag_files, current_year, require_current_year=False):
         if variant == "new" and in_tag:
             rep.error("has new-file header but exists in %s" % FORK_POINT_TAG,
                       ("modified", years or str(current_year)))
-        elif variant in ("legacy", "modified") and not in_tag:
-            rep.error("has legacy header but is absent from %s"
-                      % FORK_POINT_TAG, ("new", years or str(current_year)))
+        elif variant == "legacy" and not in_tag:
+            # A new path may contain moved or copied code; retain its attribution.
+            rep.error("legacy source at a new path lacks the OpenCourant "
+                      "modification notice", ("modified", str(current_year)))
         elif variant == "legacy" and content_differs(FORK_POINT_TAG, path):
             rep.error("content differs from %s but header lacks the "
                       "OpenCourant modification notice" % FORK_POINT_TAG,
