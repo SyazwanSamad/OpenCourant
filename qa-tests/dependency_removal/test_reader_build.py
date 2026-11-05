@@ -7,8 +7,11 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 from unittest.mock import patch
 from zipfile import ZipFile, ZipInfo
@@ -18,6 +21,23 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
+    expected_sha = subprocess.check_output(
+        ['git', 'log', '--no-merges', '-1', '--format=%H'], cwd=ROOT, text=True).strip()[:8]
+    # Force Git's ownership check even when the local checkout has the same owner.
+    git_env = dict(os.environ, GIT_TEST_ASSUME_DIFFERENT_OWNER='1', GIT_CONFIG_COUNT='1',
+                   GIT_CONFIG_KEY_0='safe.directory', GIT_CONFIG_VALUE_0='')
+    rejected = subprocess.run(['git', 'log', '-1', '--format=%H'], cwd=ROOT,
+                              env=git_env, capture_output=True, text=True)
+    assert rejected.returncode != 0 and 'dubious ownership' in rejected.stderr, rejected.stderr
+    with tempfile.TemporaryDirectory(prefix='reader-build-info-') as temporary:
+        header = Path(temporary) / 'chglt_id.h'
+        result = subprocess.run(
+            [sys.executable, str(ROOT / 'Compiling_tools/script/reader_info.py'), '-outfile=' + str(header)],
+            cwd=temporary, env=git_env, capture_output=True, text=True)
+        assert result.returncode == 0 and not result.stderr, result.stderr
+        assert '_' + expected_sha + '"' in header.read_text(), header.read_text()
+    print('PASS OpenReader build ID from an external build directory with different checkout ownership')
+
     manifest = json.loads((ROOT / 'EXTLIB_VERSION.json').read_text())
     assert not any('hm_reader' in name or 'h3d' in name for name in manifest['required_files'])
     for arch in ['win64', 'linux64', 'linuxa64']:

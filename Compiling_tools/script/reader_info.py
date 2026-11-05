@@ -4,9 +4,11 @@ import sys
 from datetime import datetime
 
 def get_sha():
-  my_repository = os.getcwd()
+  my_repository = os.path.realpath(os.path.join(os.path.dirname(__file__), '../..'))
   try:
-     sha1 = subprocess.check_output(['git', 'log', '--no-merges','-1','--format=%H' ], cwd=my_repository).decode('ascii').strip()
+     # Container builds can run as a different user from the checkout owner.
+     sha1 = subprocess.check_output(['git', '-c', 'safe.directory='+my_repository,
+                                    'log', '--no-merges','-1','--format=%H' ], cwd=my_repository).decode('ascii').strip()
   except : 
      sha1 = "00000000"
   return sha1[0:8]
