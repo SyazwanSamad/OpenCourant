@@ -115,5 +115,5 @@ public:
 };
 
 EXTERNC HCIO_DATA_DLL_API InputInfos *HCDIGetMECRadiossInfosPtr(int version);
-EXTERNC HCIO_DATA_DLL_API std::vector<std::string>& HCDIGetSubojectkeywordList();
+HCIO_DATA_DLL_API std::vector<std::string>& HCDIGetSubojectkeywordList();
 #endif //MECI_HCDI_MECI_INPUT_INFOS_H

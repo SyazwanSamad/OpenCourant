@@ -88,7 +88,7 @@ static const MvMsgArray_t &loc_get_msg_arrays(MvMsgType_e type) {
 
 /* --------- public functions implementation --------- */
 
-extern "C" const MvMsgArray_t& MV_get_msg_array(MvMsgType_e type) {
+const MvMsgArray_t& MV_get_msg_array(MvMsgType_e type) {
   return loc_get_msg_arrays(type);
 }
 

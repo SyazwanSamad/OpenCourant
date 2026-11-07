@@ -66,7 +66,7 @@ class ModelViewEdit;
 extern "C" DYNAKEY_DECLS
 sdi::ModelViewEdit* DynakeyReadModel(const char *filename);
 
-extern "C" DYNAKEY_DECLS
+DYNAKEY_DECLS
 DynakeyMessages& DynakeyGetMessages();
 
 #endif //! !defined(DYNAMAIN__INCLUDED_)

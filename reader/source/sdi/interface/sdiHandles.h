@@ -58,7 +58,7 @@ public:
 
     /// Default constructor, constructs an invalid handle.
     HandleRead()
-        : p_type(ENTITY_TYPE_NONE), p_index1(UINT_MAX), p_index2(UINT_MAX) {}
+        : p_index1(UINT_MAX), p_index2(UINT_MAX), p_type(ENTITY_TYPE_NONE) {}
 
     // Constructor using pointer (called by underlying DB)
     HandleRead(EntityType  type,
@@ -69,11 +69,11 @@ public:
     HandleRead(EntityType   type,
                unsigned int index1,
                unsigned int index2 = UINT_MAX)
-        : p_type(type), p_index1(index1), p_index2(index2) {}
+        : p_index1(index1), p_index2(index2), p_type(type) {}
 
     /// Copy constructor (also allows for creation of "read" entity handle from an "edit" handle).
     HandleRead(const HandleRead& other)
-        : p_type(other.p_type), p_ptr(other.p_ptr) {}
+        : p_ptr(other.p_ptr), p_type(other.p_type) {}
 
     /// Copy-construct general handle from any other handle type
     template <SpecializationType ETYPE>
@@ -312,21 +312,21 @@ class HandleEditT : public PARENT, public HandleEdit
 {
 public:
 
-    HandleEditT() : HandleRead(), HandleEdit(), PARENT() {}
+    HandleEditT() : HandleRead(), PARENT(), HandleEdit() {}
     //! with type checking (optional)
     HandleEditT(const HandleEdit& other, const ModelViewRead* pModelView) :
-        HandleRead((const HandleRead&) other), HandleEdit(other), PARENT(other, pModelView) {}
+        HandleRead((const HandleRead&) other), PARENT(other, pModelView), HandleEdit(other) {}
     HandleEditT(EntityType type, void* ptr, const ModelViewRead* pModelView) :
-        HandleRead(type, ptr), HandleEdit(type, ptr), PARENT(type, ptr, pModelView) {}
+        HandleRead(type, ptr), PARENT(type, ptr, pModelView), HandleEdit(type, ptr) {}
     //! without type checking
     HandleEditT(const HandleEdit& other) :
-        HandleRead((const HandleRead&) other), HandleEdit(other), PARENT(other) {}
+        HandleRead((const HandleRead&) other), PARENT(other), HandleEdit(other) {}
     HandleEditT(EntityType type, void* ptr) :
-        HandleRead(type, ptr), HandleEdit(type, ptr), PARENT(type, ptr) {}
+        HandleRead(type, ptr), PARENT(type, ptr), HandleEdit(type, ptr) {}
     HandleEditT(EntityType   type,
                 unsigned int index1,
                 unsigned int index2 = 0) :
-        HandleRead(type, index1, index2), HandleEdit(type, index1, index2), PARENT(type, index1, index2) {}
+        HandleRead(type, index1, index2), PARENT(type, index1, index2), HandleEdit(type, index1, index2) {}
 
     using PARENT::IsValid;
     using PARENT::GetType;

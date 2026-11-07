@@ -124,7 +124,7 @@ RADIOSSBLK_DECLS
 const std::vector<RadiossblkEntityReference>& RadiossblkGetEntityReferences(
     sdi::ModelViewRead *pModelView, const sdi::EntityType type, const unsigned int id);
 
-extern "C" RADIOSSBLK_DECLS
+RADIOSSBLK_DECLS
 const hwReaderMessageList& RadiossblkGetMessages();
 
 #endif //! !defined(RADIOSSBLK__INCLUDED_)

@@ -33,8 +33,6 @@ namespace sdiD2R
     {
     public:
         ConvertCurve(sdi::ModelViewRead* lsdynaModel, sdi::ModelViewEdit* radiossModel) :
-            p_DynaTblEntType(lsdynaModel->GetEntityType("*DEFINE_TABLE")),
-            p_RadTblEntType(radiossModel->GetEntityType("/TABLE")),
             ConvertEntity(
                 "*DEFINE_CURVE",
                 "/FUNCT",
@@ -43,6 +41,8 @@ namespace sdiD2R
                 lsdynaModel,
                 radiossModel
             ),
+            p_DynaTblEntType(lsdynaModel->GetEntityType("*DEFINE_TABLE")),
+            p_RadTblEntType(radiossModel->GetEntityType("/TABLE")),
             p_ConvertUtils(lsdynaModel, radiossModel)
         {
         }

@@ -323,9 +323,8 @@ public: /** @name Include files and components */
               myRelativeName(relative_name),
               myParentIndex(parent_index),
               myComponentIndex(a_comp_index),
-              myStatus(status_val), 
-              myIsInclude(isInclude),
-              myIsReferenced(isReferenced), 
+              myStatus(status_val),
+              myIsReferenced(isReferenced),
               include_type(0),
               pid(0),
               thick(0),
@@ -347,6 +346,7 @@ public: /** @name Include files and components */
               option(0),
               set_option(0),
               option_card(0),
+              myIsInclude(isInclude),
               incout(0),
               tranid(0)
           {

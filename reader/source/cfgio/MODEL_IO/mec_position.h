@@ -30,8 +30,8 @@ class HCIO_DATA_DLL_API CKeywordData {
 public:
     inline CKeywordData(_HC_LONG cur_line, _HC_LONG cur_location, int subdeckIdx = -1, string deckheader="", 
                         const CUserNameTypeInfo* headerdata = nullptr, int nlines=0, InputInfos::IdentifierValuePairList keyworddata = {}) 
-                        : myLine(cur_line), myLocation(cur_location), mySubdeckIdx(subdeckIdx), myLineCounts(nlines),
-                        myDeckHeader(deckheader),myHeaderData(headerdata), myKeywordCommentData(keyworddata) {}
+                        : myLine(cur_line), myLocation(cur_location), mySubdeckIdx(subdeckIdx), myKeywordCommentData(keyworddata),
+                        myHeaderData(headerdata), myDeckHeader(deckheader), myLineCounts(nlines) {}
 
     inline ~CKeywordData() {}
 public:

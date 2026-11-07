@@ -773,7 +773,6 @@ static bool HCDI_GetDimensionFromFeature(
             assert(pSFeature);
 
             int a_ind = 0;
-            bool a_found = false;
             while (a_ind <= pSFeature->getNbTests())
             {
                 dim_lst.push_back(make_pair(pSFeature->getConditionalDimension(a_ind), pSFeature->getConditionalArgVect(a_ind)));
@@ -972,7 +971,6 @@ static bool HCDI_GetDimensionFromFeature(
 static bool HCDI_GetDimension(const IDescriptor* pDescr, map<const IDescriptor *, map<const string, vector<pair<MvDimension_e, vector<string>>>>> &desc_dim_map, IdenKeyType keytype)
 {
     bool ret_type = false;
-    int domains = DOM_COMMON;
     int a_all_domains = HCDI_get_all_domains();
     MvDataFeatureList_t a_dfl;
     if (!pDescr)

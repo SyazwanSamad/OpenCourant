@@ -111,6 +111,8 @@ namespace cfgkernel
             case ValueType::BOOL:
                 myboolValue = other.myboolValue;
                 break;
+            case ValueType::NONE:
+                break;
             }
         }
 

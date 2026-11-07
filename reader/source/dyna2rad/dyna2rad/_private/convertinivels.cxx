@@ -881,7 +881,7 @@ void sdiD2R::ConvertInitialVelocity::HandleIrgidOption(const EntityRead& lsdIniv
     tempVal = sdiValue(clausesMax);
     radSetEdit.GetValue(sdiIdentifier("clausesmax"), tempVal);
     tempVal.GetValue(clausesMax);
-    if (lsdIRIGID < -2 && lsdIRIGID > 1)
+    if (lsdIRIGID < -2 || lsdIRIGID > 1)
     {
         // invalid irgid value warning
         return;

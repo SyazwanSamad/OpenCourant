@@ -81,7 +81,7 @@ public:
 
     //! Constructor
     ModelViewCFG(const SDITypeMapper& typemapper, const CFGKernel *pCFGKernel=nullptr) :
-        p_typemapper(typemapper), p_pCFGKernel(pCFGKernel)
+        p_pCFGKernel(pCFGKernel), p_typemapper(typemapper)
     {
         if(!p_pCFGKernel) p_pCFGKernel = MultiCFGKernelMgr::getInstance().GetCurrentCFGKernel();
     }

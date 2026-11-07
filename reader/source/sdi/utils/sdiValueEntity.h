@@ -343,12 +343,12 @@ inline sdiValueEntityType::sdiValueEntityType(const unsigned int typeNumeric, co
 {
 }
 inline sdiValueEntityType::sdiValueEntityType(const sdiString& typeNamed, const unsigned int subtypeNumeric)
-    : p_typeNamed(typeNamed), p_typeNumeric(0), p_subtypeNumeric(subtypeNumeric), p_topologyType(TOPOLOGY_TYPE_NONE)
+    : p_typeNumeric(0), p_subtypeNumeric(subtypeNumeric), p_typeNamed(typeNamed), p_topologyType(TOPOLOGY_TYPE_NONE)
 {
     assert(!typeNamed.empty());
 }
 inline sdiValueEntityType::sdiValueEntityType(const sdiString& typeNamed, const sdiString& subtypeNamed)
-    : p_typeNamed(typeNamed), p_typeNumeric(0), p_subtypeNumeric(0), p_subtypeNamed(subtypeNamed), p_topologyType(TOPOLOGY_TYPE_NONE)
+    : p_typeNumeric(0), p_subtypeNumeric(0), p_typeNamed(typeNamed), p_subtypeNamed(subtypeNamed), p_topologyType(TOPOLOGY_TYPE_NONE)
 {
     assert(!typeNamed.empty());
 }
@@ -362,12 +362,12 @@ inline sdiValueEntityType::sdiValueEntityType(const TopologyType topoType, const
 {
 }
 inline sdiValueEntityType::sdiValueEntityType(const TopologyType topoType, const sdiString& typeNamed, const unsigned int subtypeNumeric)
-    : p_typeNamed(typeNamed), p_typeNumeric(0), p_subtypeNumeric(subtypeNumeric), p_topologyType(topoType)
+    : p_typeNumeric(0), p_subtypeNumeric(subtypeNumeric), p_typeNamed(typeNamed), p_topologyType(topoType)
 {
     assert(!typeNamed.empty());
 }
 inline sdiValueEntityType::sdiValueEntityType(const TopologyType topoType, const sdiString& typeNamed, const sdiString& subtypeNamed)
-    : p_typeNamed(typeNamed), p_typeNumeric(0), p_subtypeNumeric(0), p_subtypeNamed(subtypeNamed), p_topologyType(topoType)
+    : p_typeNumeric(0), p_subtypeNumeric(0), p_typeNamed(typeNamed), p_subtypeNamed(subtypeNamed), p_topologyType(topoType)
 {
     assert(!typeNamed.empty());
 }

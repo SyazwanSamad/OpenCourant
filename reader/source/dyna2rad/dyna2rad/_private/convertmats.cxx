@@ -5218,6 +5218,9 @@ void ConvertMat::p_ConvertMatL183(const EntityRead& dynaMat, sdiString& destCard
             tempValue.GetValue(lsdSFO);
             lsdSFO = (lsdSFO == 0.0) ? 1.0 : lsdSFO;
 
+            // no unit scaling when SGL/SW/ST are zero
+            radSFA = lsdSFA;
+            radSFO = lsdSFO;
             if (lsdSGL != 0.0 && lsdSW != 0.0 && lsdST != 0.0)
             {
                 radSFA = lsdSFA / lsdSGL;

@@ -61,7 +61,7 @@ namespace sdiD2R
     )
     {
         attribT val;
-        bool isOk = GetValue(val, entity, dataname, row, column);
+        GetValue(val, entity, dataname, row, column);
 #ifdef _DEBUG
         LogParameterizedValue(entity, dataname, row, column, filename, line);
 #endif
@@ -77,7 +77,7 @@ namespace sdiD2R
         unsigned int row, unsigned int column)                                                \
     {                                                                                         \
         TYPE val = 0;                                                                         \
-        bool isOk = GetValue(val, entity, dataname, row, column);                             \
+        GetValue(val, entity, dataname, row, column);                             \
         return val;                                                                           \
     }
 
@@ -89,7 +89,7 @@ namespace sdiD2R
         unsigned int row, unsigned int column, const char* filename, int line)                \
     {                                                                                         \
         TYPE val = 0;                                                                         \
-        bool isOk = GetValue(val, entity, dataname, row, column);                             \
+        GetValue(val, entity, dataname, row, column);                             \
         LogParameterizedValue(entity, dataname, row, column, filename, line);                 \
         return val;                                                                           \
     }

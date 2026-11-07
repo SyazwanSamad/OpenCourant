@@ -57,19 +57,19 @@ public:
 
     void SetFileIndex(int fileindex);
     void ClearProcessedParameters();
-    int GetFileIndex() const;
-    int GetIntValue() const;
-    double GetDoubleValue() const;
-    std::string GetStringValue() const;
+    int GetFileIndex() const override;
+    int GetIntValue() const override;
+    double GetDoubleValue() const override;
+    std::string GetStringValue() const override;
     int GetStringLength() const override;
 
-    IParameter::Type GetType() const;
-    IParameter::Keywordtype GetKeywordType() const;
+    IParameter::Type GetType() const override;
+    IParameter::Keywordtype GetKeywordType() const override;
 
-    std::string GetName() const;
+    std::string GetName() const override;
 
-    virtual std::string GetExpression() const;
-    virtual void SetExpressionValue(double value);
+    virtual std::string GetExpression() const override;
+    virtual void SetExpressionValue(double value) override;
 
     void* GetPointer() { return nullptr; }
     void SetCurParameterObj(IMECPreObject* pobj)

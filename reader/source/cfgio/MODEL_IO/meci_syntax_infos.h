@@ -115,7 +115,7 @@ public: /** @name Constructors & destructor */
 public: /** @name Parsing */
     //@{
     /// Returns true, if the line is commented
-    virtual bool isComment(const char* buffer) const
+    virtual bool isComment(const char* buffer) const override
     {
         if (buffer == NULL) return false;
        
@@ -127,37 +127,37 @@ public: /** @name Parsing */
         }
         return false;
     }
-    bool IsSupportedForNamedEntity() const
+    bool IsSupportedForNamedEntity() const override
     {
         return false;
     }
 
-    bool IsScalableFormat() const
+    bool IsScalableFormat() const override
     { 
         if ((getFormatType() != io_types::FORMAT_SHORT) && (myAppMode == HCDI_SOLVER_LSDYNA))
            return true; 
     
         return false;
     }
-    bool IsFormatSupportedForContinueNextLine() const 
+    bool IsFormatSupportedForContinueNextLine() const override 
     { 
         return false;
     }
 
-    virtual bool HasLengthReachedForNextLine(int len) const
+    virtual bool HasLengthReachedForNextLine(int len) const override
     {
         return false; 
     }
 
 
-    bool IsSpaceORContinueChars(const char* cp) const;
+    bool IsSpaceORContinueChars(const char* cp) const override;
 
 
     /// Returns true if the line is a header
-    virtual bool isHeader(const char* buffer, char** keyword_p = NULL) const;
+    virtual bool isHeader(const char* buffer, char** keyword_p = NULL) const override;
 
     /// if card has free format [a comma in the line]
-    virtual bool isFreeSizeCard(const char* buffer) const
+    virtual bool isFreeSizeCard(const char* buffer) const override
     {
         if (myfreeformat == '\0')
             return false;
@@ -165,15 +165,15 @@ public: /** @name Parsing */
         return (strchr(buffer, myfreeformat) != NULL);
         //return (strstr(buffer, &myfreeformat) != NULL);
     }
-    virtual const char* getHeader(int indx=0) const { return myheadersize ?  (*myheader)[indx] : nullptr; }
+    virtual const char* getHeader(int indx=0) const override { return myheadersize ?  (*myheader)[indx] : nullptr; }
     const std::vector<const char*> *getHeaderLst() const override { return myheader;  }
     //virtual const char* getComment() const { return mycomment; }
-    virtual char getFreeFormatSpecifier() const { return myfreeformat; }
-    virtual const int getCellLength() const { return myCellLength; }
-    virtual const int getLineLength() const { return myLineLength; }
-    virtual int getHeaderKeywordCellLength() const { return myHeaderKeyCellLength; }
+    virtual char getFreeFormatSpecifier() const override { return myfreeformat; }
+    virtual const int getCellLength() const override { return myCellLength; }
+    virtual const int getLineLength() const override { return myLineLength; }
+    virtual int getHeaderKeywordCellLength() const override { return myHeaderKeyCellLength; }
 
-    virtual int getHeaderSize(int indx = -1) const 
+    virtual int getHeaderSize(int indx = -1) const override 
     { 
         if (!myheaderlen || !myheadersize)
             return 0;
@@ -182,7 +182,7 @@ public: /** @name Parsing */
         return (*myheaderlen)[indx];
     }
 
-    virtual const char* getNormalisedHeader(const char* header) const
+    virtual const char* getNormalisedHeader(const char* header) const override
     {
         if (!myIsHeaderFromStart)
         {
@@ -204,26 +204,26 @@ public: /** @name Parsing */
     }
 
     //virtual int getCommentSize() const { return mycommentlen; }
-    virtual const char* getParameterSymbol() const { return myparameterSymbol; }
-    virtual void setApplicationMode(ApplicationMode_e mode) { myAppMode = mode; }
-    virtual ApplicationMode_e getAppMode() const { return myAppMode; }
-    const char* GetFormatSize(const char* fmt_p, bool is_free_size, int& fmt_size) const;
+    virtual const char* getParameterSymbol() const override { return myparameterSymbol; }
+    virtual void setApplicationMode(ApplicationMode_e mode) override { myAppMode = mode; }
+    virtual ApplicationMode_e getAppMode() const override { return myAppMode; }
+    const char* GetFormatSize(const char* fmt_p, bool is_free_size, int& fmt_size) const override;
 
-    int getInitialOffset() const { return myInitialOffset;  }
+    int getInitialOffset() const override { return myInitialOffset;  }
 
     void setFormatType(io_types::format_type_e fmt_type) { myBaseFormatType = fmt_type; }
-    void SetHeaderFromStart(bool fromStart) { myIsHeaderFromStart = fromStart; }
+    void SetHeaderFromStart(bool fromStart) override { myIsHeaderFromStart = fromStart; }
 
-    bool GetHeaderFromStartFlag() const { return myIsHeaderFromStart; }
+    bool GetHeaderFromStartFlag() const override { return myIsHeaderFromStart; }
 
-    char getHeaderSeparator() const { return myHeaderSeparator; }
+    char getHeaderSeparator() const override { return myHeaderSeparator; }
 
-    io_types::format_type_e getFormatType()  const;
+    io_types::format_type_e getFormatType()  const override;
 
-    io_types::format_type_e updateLineFormatType(const char* line);
+    io_types::format_type_e updateLineFormatType(const char* line) override;
 
-    io_types::format_type_e getFormatType(MECReadFile* fp);
-    virtual void updateFormatType(int subdeck_index, io_types::format_type_e fmt_type);
+    io_types::format_type_e getFormatType(MECReadFile* fp) override;
+    virtual void updateFormatType(int subdeck_index, io_types::format_type_e fmt_type) override;
 
     //@}
 

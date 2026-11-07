@@ -246,7 +246,6 @@ private:
         for(it = p_nextAvailableIdsOfIncludes.begin();
             it != p_nextAvailableIdsOfIncludes.end(); ++it)
         {
-            unsigned int nextAvailableId = it->second[etype];
             int offset = p_offsetsOfIncludes[it->first][etype];
             assert(it->second[etype] <= offsetVsNextAvailableId[offset]);
             it->second[etype] = offsetVsNextAvailableId[offset];

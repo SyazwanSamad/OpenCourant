@@ -33,7 +33,7 @@ class HCIO_DATA_DLL_API MECIReadContext : public MECMsgManager
 public: /** @name Constructors & destructor */
     //@{
 	/*Default constructor*/
-	MECIReadContext():myLineBuffer(NULL), myBufferNbChars(0), myLineNbChars(0) {}
+	MECIReadContext(): myBufferNbChars(0), myLineNbChars(0), myLineBuffer(NULL) {}
 	/** Constructor */
     MECIReadContext(int line_nb_chars, int buffer_nb_chars = -1);
     /** Destructor */

@@ -535,7 +535,7 @@ EXTERNC HC_DATA_DLL_API IDESCRIPTORHANDLE HCDI_GetDescriptorHandleFromFullType(c
 
 EXTERNC HC_DATA_DLL_API object_type_e HCDI_get_entitytype(const string &keyword);
 
-EXTERNC HC_DATA_DLL_API const string &HCDI_get_entitystringtype(int entity_type);
+HC_DATA_DLL_API const string &HCDI_get_entitystringtype(int entity_type);
 
 EXTERNC HC_DATA_DLL_API void HCDI_Close_Kernel();
 

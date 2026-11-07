@@ -19,6 +19,7 @@
 //Copyright>        See COPYRIGHT.md at the root of the repository for the full
 //Copyright>        copyright and attribution statement.
 #ifdef _WIN64
+    #undef CDECL // windows.h defines an empty CDECL
     #define CDECL __declspec(dllexport)
 #else 
     #define CDECL

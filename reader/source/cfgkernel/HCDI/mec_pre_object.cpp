@@ -2147,7 +2147,7 @@ char *MECPreObject::GetReport(const PseudoDescriptor_t *descr_p) const {
       a_skeyword_format=str_printf("[%%-%ds] = ",a_solvname_length_max);
   }
   // Input type
-  if (GetInputFullType() && GetInputFullType() != "")
+  if (GetInputFullType() && GetInputFullType()[0] != '\0')
   {
       a_report += str_printf(a_keyword_format.c_str(), "INPUT_FTYPE");
       for (i = 0; i < a_solvname_length_max; ++i) a_report += " ";

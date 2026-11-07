@@ -1006,7 +1006,7 @@ void sdiD2R::ConvertUtils::Convert1To1(const sdi::EntityRead& optionEntity, sdiS
     }
     else
     {
-        sdiString radiossOption = "/MAT/LAW" + OptionNumber;
+        sdiString radiossOption = "/MAT/LAW" + to_string(OptionNumber);
         
         HandleEdit radOptionHandleEdit;
         p_radiossModel->CreateEntity(radOptionHandleEdit, radiossOption,optionEntity.GetName(),newOptionId);

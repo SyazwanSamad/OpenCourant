@@ -71,7 +71,7 @@ void ConvertElem::ConvertEntities()
             sdiString destElem = elemKeysPair.second;
             unsigned int pid = elemSelect->GetComponentId();
             HandleRead partHRead;
-            if (p_lsdynaModel->FindById("*PART", pid, partHRead));
+            p_lsdynaModel->FindById("*PART", pid, partHRead);
             unsigned int nodeCount = elemSelect->GetNodeCount();
             sdiUIntList elemNodes;
             HandleElementEdit radElem;

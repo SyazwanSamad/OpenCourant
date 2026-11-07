@@ -959,8 +959,6 @@ public:
         
         // subsequent calls
         TSDIEntityDataPOArray<SPECIALIZATION_TYPE_ELEMENT>* pCurrentEntityData = static_cast<TSDIEntityDataPOArray<SPECIALIZATION_TYPE_ELEMENT>*>(this->p_pCurrentEntityData);
-        
-        unsigned int NumberOfEntities = 0;
 
         if(p_currentCacheIndex + 1 >= p_elemsCachePtrs.size() &&
            p_currentElemIndex + 1 >= p_elemsCachePtrs[p_currentCacheIndex]->size()) 
@@ -968,9 +966,6 @@ public:
             SetDataPointer(nullptr);
             return false;
         }
-
-        int idIndex = pCurrentEntityData->p_ptr->GetIndex(IMECPreObject::ATY_ARRAY, IMECPreObject::VTY_INT, "id");
-        NumberOfEntities = (unsigned int) pCurrentEntityData->p_ptr->GetNbValues(IMECPreObject::VTY_INT, idIndex);
 
         if(nullptr != pCurrentEntityData->p_ptr &&
            p_currentElemIndex + 1 < p_elemsCachePtrs[p_currentCacheIndex]->size())
@@ -1063,10 +1058,10 @@ public:
                 const CFGKernel *pCFGKernel=nullptr,
                 const sdiVector<sdiString>& keywordsMainAndSubobjects = sdiVector<sdiString>()) :
         ModelViewCFG(typemapper, pCFGKernel),
+        myTypeElementOwner(ENTITY_TYPE_NONE),
         p_preobjects(preobjects),
         p_nbPOTypes(nbPOTypes),
-        owningPreobjects(false),
-        myTypeElementOwner(ENTITY_TYPE_NONE)
+        owningPreobjects(false)
     {
         assert(p_preobjects && 0 < p_nbPOTypes);
         for(size_t i=0; i < HCDI_OBJ_TYPE_HC_MAX; ++i) p_isSorted[i] = SortNone;
@@ -1382,13 +1377,6 @@ public:
             if(!p_pElemsByCompsCache) 
             {
                 p_pElemsByCompsCache = new ElemsByCompsCache(p_preobjects[HCDI_OBJ_TYPE_ELEMS]);
-                
-                // Calculate total number of elements in cache
-                size_t totalElems = 0;
-                for(const auto& pair : *p_pElemsByCompsCache)
-                {
-                    totalElems += pair.second.size();
-                }
             }
 
             ElemCacheVectPtrs elemsCachePtrs;
@@ -2143,9 +2131,8 @@ public:
         SpecializationType SpecializationType = GetSpecializationType(handle.GetType());
         switch(SpecializationType)
         {
-        case SPECIALIZATION_TYPE_NODE: 
+        case SPECIALIZATION_TYPE_NODE:
         {
-            IMECPreObject* pObj = p_preobjects[HCDI_OBJ_TYPE_NODES][handle.GetIndex1()];
             //pObj->SetIntValue(0, handle.GetIndex2(), value.GetInt());
             // creer un nouvel objet de type sdiIdentifier et d ajouter index2 dedans
             //SetValueToPreObject sur une seule value dans un tableau ( il me faut le index2)
@@ -2344,7 +2331,6 @@ public:
         if(nullptr == pDescr) pDescr = GetDescriptor(pObj);
         if(nullptr == pDescr) return type; // shouldn't happen
         if(ppDescr) *ppDescr = pDescr;
-        bool isOk = false;
         if(END_ARGS == ikwd) ikwd = pDescr->getIKeyword(skwd);
         // this is a bit of a hack into hcdi "private" stuff, a clean API would be better
         const descriptor_t* cdescr_p = pDescr->getDescriptorPtr();
@@ -2688,12 +2674,12 @@ SDISelectionDataPO<SPECIALTYPE>::SDISelectionDataPO(const sdiString& keyword,
                                                     const Filter* pFilter,
                                                     bool testKeyword, unsigned int indexFirst) :
     SDISelectionData(SPECIALTYPE, pModelView),
-    p_index(UINT_MAX),
-    p_pCurrentEntityData(0),
     p_pre_obj_lst(pre_obj_lst),
+    p_index(UINT_MAX),
+    p_indexFirst(indexFirst),
+    p_pCurrentEntityData(0),
     p_keyword(keyword),
-    p_testKeyword(testKeyword),
-    p_indexFirst(indexFirst)
+    p_testKeyword(testKeyword)
 {
     assert(pModelView);
     if(pModelView)
@@ -3014,7 +3000,6 @@ bool ModelViewPO::GetValueFromPreObject(const IMECPreObject            *pObj,
             if(pvpSubDescr->size() < subobjects.size()) pvpSubDescr->resize(subobjects.size(), nullptr);
         }
 
-        size_t index = -1;
         size_t i = 0;
         while(i < subobjects.size())
         {
@@ -3385,7 +3370,6 @@ IMECPreObject * HCDIPreObjectGetSubobject(IMECPreObject* pObj, string& skeyword,
 {
     const vector<IMECPreObject *>& subobjects = pObj->GetSubobject();
 
-    size_t index = -1;
     for(size_t k = 0; k < subobjects.size(); ++k)
     {
         const IMECPreObject *pSubobject = subobjects[k];

@@ -292,15 +292,15 @@ private:
     char **myStrArray;
 };
 
-/** Gets the array containing the messages (for a given library) */
-HC_DATA_DLL_API const MvMsgArray_t& MV_get_msg_array(MvMsgType_e type);
-
 /** Gets the number of messages (of a given library) */
 int          MV_get_nb_msg(MvMsgType_e type);
 
 #ifdef __cplusplus
 }
 #endif
+
+/** Gets the array containing the messages (for a given library) */
+HC_DATA_DLL_API const MvMsgArray_t& MV_get_msg_array(MvMsgType_e type);
 
 /*@}*/
 

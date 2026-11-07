@@ -77,7 +77,7 @@ public:
     void SetHeaderStr(string str) { myheader = str; }
     //Set methods
 public:
-    void SetName(string name) { myName = myName; }
+    void SetName(string name) { myName = name; }
     void SetFileRelativeName(string rname) { myRelativeName = rname; }
     void SetSubmodelId(int Id) { submodelId = Id; }
 

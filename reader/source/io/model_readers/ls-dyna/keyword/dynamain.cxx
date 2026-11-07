@@ -110,7 +110,7 @@ sdi::ModelViewEdit* DynakeyReadModel(const char *filename)
     return pModelViewSDI;
 }
 
-extern "C" DYNAKEY_DECLS
+DYNAKEY_DECLS
 DynakeyMessages& DynakeyGetMessages()
 {
     return dynakeymessages;

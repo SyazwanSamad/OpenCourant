@@ -1146,7 +1146,7 @@ const std::vector<RadiossblkEntityReference>& RadiossblkGetEntityReferences(
 }
 
 
-extern "C" RADIOSSBLK_DECLS
+RADIOSSBLK_DECLS
 const hwReaderMessageList& RadiossblkGetMessages()
 {
     return radiossblkmessages;

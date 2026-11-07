@@ -48,7 +48,7 @@ class MECIModelFactory {
 public: /** @name Constructors & destructor */
     //@{
     /// Constructor
-    inline MECIModelFactory() :my_is_to_load(false), myCurrentOffsetPtr(NULL) 
+    inline MECIModelFactory() : myCurrentOffsetPtr(NULL), my_is_to_load(false) 
     {} 
     /// Destructor
     virtual ~MECIModelFactory()
